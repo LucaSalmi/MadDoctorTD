@@ -20,6 +20,12 @@ enum GameState: Int{
     
 }
 
+enum ActionState: Int{
+    
+    case none = 0, placeFoundation, placeTower, sellTower, upgradeTower 
+    
+}
+
 //Towers
 
 

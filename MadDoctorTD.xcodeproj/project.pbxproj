@@ -23,6 +23,7 @@
 		C839C6BB2821579F00F66043 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BA2821579F00F66043 /* Constants.swift */; };
 		C839C6BD2821586300F66043 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BC2821586300F66043 /* GameManager.swift */; };
 		C839C6BF282158C100F66043 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BE282158C100F66043 /* SoundManager.swift */; };
+		C839C6C128215B4800F66043 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C028215B4800F66043 /* InputManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		C839C6BA2821579F00F66043 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C839C6BC2821586300F66043 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		C839C6BE282158C100F66043 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		C839C6C028215B4800F66043 /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				C839C6BA2821579F00F66043 /* Constants.swift */,
 				C839C6BC2821586300F66043 /* GameManager.swift */,
 				C839C6BE282158C100F66043 /* SoundManager.swift */,
+				C839C6C028215B4800F66043 /* InputManager.swift */,
 			);
 			path = MadDoctorTD;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				C839C6BD2821586300F66043 /* GameManager.swift in Sources */,
 				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
 				C839C6BF282158C100F66043 /* SoundManager.swift in Sources */,
+				C839C6C128215B4800F66043 /* InputManager.swift in Sources */,
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
 				C839C6BB2821579F00F66043 /* Constants.swift in Sources */,
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
