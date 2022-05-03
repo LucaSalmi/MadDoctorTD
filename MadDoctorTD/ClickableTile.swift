@@ -31,9 +31,32 @@ class ClickableTile: SKSpriteNode{
             return
         }
         
-        print("Tile clicked at position: \(position)")
-        
         let gameScene = GameScene.instance!
+        
+        var adjecentFound = false
+        
+        var leftPosition = position
+        leftPosition.x -= 32
+        var rightPosition = position
+        rightPosition.x += 32
+        var topPosition = position
+        topPosition.y += 32
+        var bottomPosition = position
+        bottomPosition.y -= 32
+        
+        for node in gameScene.foundationPlatesNode.children {
+            let currentFoundationPlate = node as! FoundationPlate
+            if currentFoundationPlate.contains(leftPosition) || currentFoundationPlate.contains(rightPosition) ||
+                currentFoundationPlate.contains(topPosition) || currentFoundationPlate.contains(bottomPosition) {
+                
+                adjecentFound = true
+            }
+        }
+        
+        if !adjecentFound {
+            return
+        }
+        
         
         for i in 0..<gameScene.clickableTilesNode.children.count {
             
