@@ -15,7 +15,6 @@ struct MadDoctorTDApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            
         }
     }
 }
