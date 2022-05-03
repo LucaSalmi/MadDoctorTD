@@ -19,7 +19,7 @@ class ClickableTile: SKSpriteNode{
     
     init(position: CGPoint){
         
-        super.init(texture: nil, color: .clear, size: CGSize(width: 32, height: 32))
+        super.init(texture: nil, color: .clear, size: FoundationData.size)
         
         self.position = position
         

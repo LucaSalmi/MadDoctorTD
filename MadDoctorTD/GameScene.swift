@@ -15,6 +15,7 @@ class GameScene: SKScene {
     static var instance: GameScene? = nil
     
     var clickableTilesNode: SKNode = SKNode()
+    var foundationPlatesNode: SKNode = SKNode()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -25,6 +26,7 @@ class GameScene: SKScene {
         GameScene.instance = self
         
         setupClickableTiles()
+        setupStartFoundation()
         
     }
     
@@ -58,6 +60,17 @@ class GameScene: SKScene {
         
     }
     
+    private func setupStartFoundation() {
+        
+        let clickableTile1 = clickableTilesNode.children[55] as! ClickableTile
+        clickableTile1.containsFoundation = true
+        
+        let foundationPlate1 = FoundationPlate(position: clickableTile1.position)
+        foundationPlatesNode.addChild(foundationPlate1)
+        
+        addChild(foundationPlatesNode)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for touch in touches {
@@ -67,6 +80,9 @@ class GameScene: SKScene {
                 if node is ClickableTile {
                     let clickableTile = node as! ClickableTile
                     clickableTile.onClick()
+                }
+                if node is FoundationPlate {
+                    print("Foundation Plate clicked")
                 }
             }
         }

@@ -32,7 +32,7 @@
 		C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C9282161DF00F66043 /* ResearchView.swift */; };
 		C839C6CC2821621400F66043 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CB2821621400F66043 /* SettingsView.swift */; };
 		C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */; };
-		C839C6D028216CD400F66043 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CF28216CD400F66043 /* Foundation.swift */; };
+		C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CF28216CD400F66043 /* FoundationPlate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +62,7 @@
 		C839C6C9282161DF00F66043 /* ResearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchView.swift; sourceTree = "<group>"; };
 		C839C6CB2821621400F66043 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsExtension.swift; sourceTree = "<group>"; };
-		C839C6CF28216CD400F66043 /* Foundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
+		C839C6CF28216CD400F66043 /* FoundationPlate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationPlate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +117,7 @@
 				3359CCA52821596700878191 /* ClickableTile.swift */,
 				3359CCA3282157C500878191 /* MyTileSet.sks */,
 				C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */,
-				C839C6CF28216CD400F66043 /* Foundation.swift */,
+				C839C6CF28216CD400F66043 /* FoundationPlate.swift */,
 			);
 			path = MadDoctorTD;
 			sourceTree = "<group>";
@@ -220,7 +220,7 @@
 				C839C6AF2821352400F66043 /* Persistence.swift in Sources */,
 				C839C6BD2821586300F66043 /* GameManager.swift in Sources */,
 				C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */,
-				C839C6D028216CD400F66043 /* Foundation.swift in Sources */,
+				C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */,
 				C839C6CC2821621400F66043 /* SettingsView.swift in Sources */,
 				C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */,
 				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
