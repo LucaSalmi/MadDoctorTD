@@ -7,19 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3359CC9128214C9A00878191 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CC9028214C9A00878191 /* GameScene.sks */; };
+		3359CC9328214D8300878191 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9228214D8300878191 /* GameScene.swift */; };
+		3359CC9628214E2200878191 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9528214E2200878191 /* GameSceneView.swift */; };
+		3359CC9828214F1800878191 /* LabScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CC9728214F1800878191 /* LabScene.sks */; };
+		3359CC9A28214F4800878191 /* LabScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9928214F4800878191 /* LabScene.swift */; };
+		3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9B28214F6200878191 /* LabSceneView.swift */; };
 		C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A52821352200F66043 /* MadDoctorTDApp.swift */; };
 		C839C6A82821352200F66043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A72821352200F66043 /* ContentView.swift */; };
 		C839C6AA2821352400F66043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6A92821352400F66043 /* Assets.xcassets */; };
 		C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6AC2821352400F66043 /* Preview Assets.xcassets */; };
 		C839C6AF2821352400F66043 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6AE2821352400F66043 /* Persistence.swift */; };
 		C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C839C6B02821352400F66043 /* MadDoctorTD.xcdatamodeld */; };
+
 		E5CF53BA28214C2900B86A78 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF53B928214C2800B86A78 /* MainMenuView.swift */; };
 		E5CF53BC2821515400B86A78 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF53BB2821515400B86A78 /* SettingsView.swift */; };
 		E5CF53BE2821573400B86A78 /* LabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF53BD2821573400B86A78 /* LabMenuView.swift */; };
 		E5CF53C02821599700B86A78 /* ResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF53BF2821599700B86A78 /* ResearchView.swift */; };
+
+		C839C6B928214DC900F66043 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6B828214DC900F66043 /* AppManager.swift */; };
+		C839C6BB2821579F00F66043 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BA2821579F00F66043 /* Constants.swift */; };
+		C839C6BD2821586300F66043 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BC2821586300F66043 /* GameManager.swift */; };
+		C839C6BF282158C100F66043 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BE282158C100F66043 /* SoundManager.swift */; };
+		C839C6C128215B4800F66043 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C028215B4800F66043 /* InputManager.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3359CC9028214C9A00878191 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		3359CC9228214D8300878191 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		3359CC9528214E2200878191 /* GameSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
+		3359CC9728214F1800878191 /* LabScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LabScene.sks; sourceTree = "<group>"; };
+		3359CC9928214F4800878191 /* LabScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabScene.swift; sourceTree = "<group>"; };
+		3359CC9B28214F6200878191 /* LabSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneView.swift; sourceTree = "<group>"; };
 		C839C6A22821352200F66043 /* MadDoctorTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadDoctorTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C839C6A52821352200F66043 /* MadDoctorTDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadDoctorTDApp.swift; sourceTree = "<group>"; };
 		C839C6A72821352200F66043 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -27,10 +47,18 @@
 		C839C6AC2821352400F66043 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C839C6AE2821352400F66043 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C839C6B12821352400F66043 /* MadDoctorTD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MadDoctorTD.xcdatamodel; sourceTree = "<group>"; };
+
 		E5CF53B928214C2800B86A78 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		E5CF53BB2821515400B86A78 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E5CF53BD2821573400B86A78 /* LabMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabMenuView.swift; sourceTree = "<group>"; };
 		E5CF53BF2821599700B86A78 /* ResearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchView.swift; sourceTree = "<group>"; };
+
+		C839C6B828214DC900F66043 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
+		C839C6BA2821579F00F66043 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C839C6BC2821586300F66043 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		C839C6BE282158C100F66043 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		C839C6C028215B4800F66043 /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,12 +91,22 @@
 		C839C6A42821352200F66043 /* MadDoctorTD */ = {
 			isa = PBXGroup;
 			children = (
+
 				E5CF53B828214BFC00B86A78 /* Views */,
+
+				C839C6C328215D9200F66043 /* GameScenes */,
+				C839C6C228215D8700F66043 /* Views */,
+
 				C839C6A52821352200F66043 /* MadDoctorTDApp.swift */,
 				C839C6A72821352200F66043 /* ContentView.swift */,
 				C839C6A92821352400F66043 /* Assets.xcassets */,
 				C839C6AE2821352400F66043 /* Persistence.swift */,
 				C839C6B02821352400F66043 /* MadDoctorTD.xcdatamodeld */,
+				C839C6B828214DC900F66043 /* AppManager.swift */,
+				C839C6BA2821579F00F66043 /* Constants.swift */,
+				C839C6BC2821586300F66043 /* GameManager.swift */,
+				C839C6BE282158C100F66043 /* SoundManager.swift */,
+				C839C6C028215B4800F66043 /* InputManager.swift */,
 				C839C6AB2821352400F66043 /* Preview Content */,
 			);
 			path = MadDoctorTD;
@@ -82,6 +120,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+
 		E5CF53B828214BFC00B86A78 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,10 +128,30 @@
 				E5CF53BB2821515400B86A78 /* SettingsView.swift */,
 				E5CF53BD2821573400B86A78 /* LabMenuView.swift */,
 				E5CF53BF2821599700B86A78 /* ResearchView.swift */,
+
+		C839C6C228215D8700F66043 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
+
+		C839C6C328215D9200F66043 /* GameScenes */ = {
+			isa = PBXGroup;
+			children = (
+				3359CC9228214D8300878191 /* GameScene.swift */,
+				3359CC9528214E2200878191 /* GameSceneView.swift */,
+				3359CC9928214F4800878191 /* LabScene.swift */,
+				3359CC9B28214F6200878191 /* LabSceneView.swift */,
+				3359CC9028214C9A00878191 /* GameScene.sks */,
+				3359CC9728214F1800878191 /* LabScene.sks */,
+			);
+			path = GameScenes;
+			sourceTree = "<group>";
+		};
+
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,7 +210,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3359CC9828214F1800878191 /* LabScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
+				3359CC9128214C9A00878191 /* GameScene.sks in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,12 +224,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
 				E5CF53BA28214C2900B86A78 /* MainMenuView.swift in Sources */,
 				E5CF53BE2821573400B86A78 /* LabMenuView.swift in Sources */,
+
+				3359CC9328214D8300878191 /* GameScene.swift in Sources */,
+				3359CC9628214E2200878191 /* GameSceneView.swift in Sources */,
+
 				C839C6AF2821352400F66043 /* Persistence.swift in Sources */,
+				C839C6BD2821586300F66043 /* GameManager.swift in Sources */,
+				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
+				C839C6BF282158C100F66043 /* SoundManager.swift in Sources */,
+				C839C6C128215B4800F66043 /* InputManager.swift in Sources */,
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
+
 				E5CF53BC2821515400B86A78 /* SettingsView.swift in Sources */,
 				E5CF53C02821599700B86A78 /* ResearchView.swift in Sources */,
+
+				C839C6BB2821579F00F66043 /* Constants.swift in Sources */,
+				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
+				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
+
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
 			);
@@ -305,6 +381,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -334,6 +411,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
