@@ -10,6 +10,13 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
+    override func didMove(to view: SKView) {
+        
+        
+    }
     
 }

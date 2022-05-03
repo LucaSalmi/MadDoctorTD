@@ -13,6 +13,8 @@
 		3359CC9828214F1800878191 /* LabScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CC9728214F1800878191 /* LabScene.sks */; };
 		3359CC9A28214F4800878191 /* LabScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9928214F4800878191 /* LabScene.swift */; };
 		3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9B28214F6200878191 /* LabSceneView.swift */; };
+		3359CCA4282157C500878191 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CCA3282157C500878191 /* MyTileSet.sks */; };
+		3359CCA62821596700878191 /* ClickableTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CCA52821596700878191 /* ClickableTile.swift */; };
 		C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A52821352200F66043 /* MadDoctorTDApp.swift */; };
 		C839C6A82821352200F66043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A72821352200F66043 /* ContentView.swift */; };
 		C839C6AA2821352400F66043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6A92821352400F66043 /* Assets.xcassets */; };
@@ -29,6 +31,8 @@
 		3359CC9728214F1800878191 /* LabScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LabScene.sks; sourceTree = "<group>"; };
 		3359CC9928214F4800878191 /* LabScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabScene.swift; sourceTree = "<group>"; };
 		3359CC9B28214F6200878191 /* LabSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneView.swift; sourceTree = "<group>"; };
+		3359CCA3282157C500878191 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
+		3359CCA52821596700878191 /* ClickableTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTile.swift; sourceTree = "<group>"; };
 		C839C6A22821352200F66043 /* MadDoctorTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadDoctorTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C839C6A52821352200F66043 /* MadDoctorTDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadDoctorTDApp.swift; sourceTree = "<group>"; };
 		C839C6A72821352200F66043 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 				3359CC9728214F1800878191 /* LabScene.sks */,
 				3359CC9928214F4800878191 /* LabScene.swift */,
 				3359CC9B28214F6200878191 /* LabSceneView.swift */,
+				3359CCA3282157C500878191 /* MyTileSet.sks */,
+				3359CCA52821596700878191 /* ClickableTile.swift */,
 			);
 			path = MadDoctorTD;
 			sourceTree = "<group>";
@@ -155,6 +161,7 @@
 				3359CC9828214F1800878191 /* LabScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
 				3359CC9128214C9A00878191 /* GameScene.sks in Resources */,
+				3359CCA4282157C500878191 /* MyTileSet.sks in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +181,7 @@
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
 				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
+				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
