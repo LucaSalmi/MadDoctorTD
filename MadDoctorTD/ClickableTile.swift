@@ -25,12 +25,9 @@ class ClickableTile: SKSpriteNode{
     func onClick() {
         print("Tile clicked at position: \(position)")
         
-        if color == .red {
-            color = .clear
-        }
-        else {
-            color = .red
-        }
+        let communicator = GameSceneCommunicator.instance
+        communicator.currentTile = self
+        communicator.showFoundationMenu = true
     }
     
 }
