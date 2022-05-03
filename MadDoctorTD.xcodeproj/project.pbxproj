@@ -13,6 +13,7 @@
 		C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6AC2821352400F66043 /* Preview Assets.xcassets */; };
 		C839C6AF2821352400F66043 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6AE2821352400F66043 /* Persistence.swift */; };
 		C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C839C6B02821352400F66043 /* MadDoctorTD.xcdatamodeld */; };
+		C839C6B928214DC900F66043 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6B828214DC900F66043 /* AppManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		C839C6AC2821352400F66043 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C839C6AE2821352400F66043 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C839C6B12821352400F66043 /* MadDoctorTD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MadDoctorTD.xcdatamodel; sourceTree = "<group>"; };
+		C839C6B828214DC900F66043 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				C839C6A92821352400F66043 /* Assets.xcassets */,
 				C839C6AE2821352400F66043 /* Persistence.swift */,
 				C839C6B02821352400F66043 /* MadDoctorTD.xcdatamodeld */,
+				C839C6B828214DC900F66043 /* AppManager.swift */,
 				C839C6AB2821352400F66043 /* Preview Content */,
 			);
 			path = MadDoctorTD;
@@ -144,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C839C6AF2821352400F66043 /* Persistence.swift in Sources */,
+				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
@@ -281,6 +285,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,6 +315,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
