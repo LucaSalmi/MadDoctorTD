@@ -13,6 +13,10 @@
 		C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6AC2821352400F66043 /* Preview Assets.xcassets */; };
 		C839C6AF2821352400F66043 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6AE2821352400F66043 /* Persistence.swift */; };
 		C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C839C6B02821352400F66043 /* MadDoctorTD.xcdatamodeld */; };
+		E5CF53BA28214C2900B86A78 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF53B928214C2800B86A78 /* MainMenuView.swift */; };
+		E5CF53BC2821515400B86A78 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF53BB2821515400B86A78 /* SettingsView.swift */; };
+		E5CF53BE2821573400B86A78 /* LabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF53BD2821573400B86A78 /* LabMenuView.swift */; };
+		E5CF53C02821599700B86A78 /* ResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF53BF2821599700B86A78 /* ResearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +27,10 @@
 		C839C6AC2821352400F66043 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C839C6AE2821352400F66043 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C839C6B12821352400F66043 /* MadDoctorTD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MadDoctorTD.xcdatamodel; sourceTree = "<group>"; };
+		E5CF53B928214C2800B86A78 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		E5CF53BB2821515400B86A78 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E5CF53BD2821573400B86A78 /* LabMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabMenuView.swift; sourceTree = "<group>"; };
+		E5CF53BF2821599700B86A78 /* ResearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,7 @@
 		C839C6A42821352200F66043 /* MadDoctorTD */ = {
 			isa = PBXGroup;
 			children = (
+				E5CF53B828214BFC00B86A78 /* Views */,
 				C839C6A52821352200F66043 /* MadDoctorTDApp.swift */,
 				C839C6A72821352200F66043 /* ContentView.swift */,
 				C839C6A92821352400F66043 /* Assets.xcassets */,
@@ -71,6 +80,17 @@
 				C839C6AC2821352400F66043 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E5CF53B828214BFC00B86A78 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E5CF53B928214C2800B86A78 /* MainMenuView.swift */,
+				E5CF53BB2821515400B86A78 /* SettingsView.swift */,
+				E5CF53BD2821573400B86A78 /* LabMenuView.swift */,
+				E5CF53BF2821599700B86A78 /* ResearchView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,8 +163,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5CF53BA28214C2900B86A78 /* MainMenuView.swift in Sources */,
+				E5CF53BE2821573400B86A78 /* LabMenuView.swift in Sources */,
 				C839C6AF2821352400F66043 /* Persistence.swift in Sources */,
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
+				E5CF53BC2821515400B86A78 /* SettingsView.swift in Sources */,
+				E5CF53C02821599700B86A78 /* ResearchView.swift in Sources */,
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
 			);
@@ -203,7 +227,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -257,7 +281,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
