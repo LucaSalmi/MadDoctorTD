@@ -7,6 +7,11 @@
 import SwiftUI
 
 struct MainMenuView: View {
+    
+    
+    @ObservedObject var appManager = AppManager.appManager
+    
+    
     var body: some View {
         
         
@@ -16,14 +21,14 @@ struct MainMenuView: View {
                 .font(.largeTitle)
             
             Button {
-                // TODO: NEW GAME
+                appManager.state = .gameScene
             } label: {
                 Label("New Game", systemImage: "play.circle")
                 
             }.padding()
             
             Button {
-                // TODO: LOAD GAME
+                appManager.state = .gameScene
             } label: {
                 Label("Load Game", systemImage: "opticaldisc")
                 

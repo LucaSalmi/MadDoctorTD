@@ -23,9 +23,11 @@ struct ContentView: View {
             
             switch (appManager.state) {
             case AppState.startMenu:
-                Text("StartMenu")
+                MainMenuView()
             case AppState.gameScene:
                 GameSceneView()
+            case AppState.settingsMenu:
+                SettingsView()
             default:
                 LabSceneView()
             }
