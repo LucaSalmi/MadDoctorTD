@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 
 enum AppState: Int{
@@ -23,6 +24,23 @@ enum GameState: Int{
 enum ActionState: Int{
     
     case none = 0, placeFoundation, placeTower, sellTower, upgradeTower 
+    
+}
+
+struct PhysicsCategory{
+    
+    static let None: UInt32 = 0
+    static let All: UInt32 = 0xFFFFFFFF
+    static let Edge: UInt32 = 0b1
+    static let Foundation: UInt32 = 0b10
+    static let Enemy: UInt32 = 0b100
+    
+}
+
+struct FoundationData{
+    
+    static let size: CGSize = CGSize(width: 32, height: 32)
+    static let price: Int = 100
     
 }
 
