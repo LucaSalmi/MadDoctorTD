@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */; };
 		3359CC9128214C9A00878191 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CC9028214C9A00878191 /* GameScene.sks */; };
 		3359CC9328214D8300878191 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9228214D8300878191 /* GameScene.swift */; };
 		3359CC9628214E2200878191 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9528214E2200878191 /* GameSceneView.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneCommunicator.swift; sourceTree = "<group>"; };
 		3359CC9028214C9A00878191 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		3359CC9228214D8300878191 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		3359CC9528214E2200878191 /* GameSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
@@ -91,11 +93,6 @@
 			children = (
 				C839C6C42821617F00F66043 /* Views */,
 				C839C6A52821352200F66043 /* MadDoctorTDApp.swift */,
-				3359CC9228214D8300878191 /* GameScene.swift */,
-				3359CC9528214E2200878191 /* GameSceneView.swift */,
-				3359CC9928214F4800878191 /* LabScene.swift */,
-				3359CC9B28214F6200878191 /* LabSceneView.swift */,
-				3359CC9728214F1800878191 /* LabScene.sks */,
 				C839C6A72821352200F66043 /* ContentView.swift */,
 				C839C6A92821352400F66043 /* Assets.xcassets */,
 				C839C6AE2821352400F66043 /* Persistence.swift */,
@@ -109,12 +106,12 @@
 				3359CC9028214C9A00878191 /* GameScene.sks */,
 				3359CC9228214D8300878191 /* GameScene.swift */,
 				3359CC9528214E2200878191 /* GameSceneView.swift */,
+				3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */,
 				3359CC9728214F1800878191 /* LabScene.sks */,
 				3359CC9928214F4800878191 /* LabScene.swift */,
 				3359CC9B28214F6200878191 /* LabSceneView.swift */,
 				3359CCA52821596700878191 /* ClickableTile.swift */,
 				3359CCA3282157C500878191 /* MyTileSet.sks */,
-
 			);
 			path = MadDoctorTD;
 			sourceTree = "<group>";
@@ -227,6 +224,7 @@
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
 				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
+				3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */,
 				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
 			);

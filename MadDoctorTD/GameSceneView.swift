@@ -12,14 +12,37 @@ struct GameSceneView: View {
     
     var gameScene: SKScene
     
+    @ObservedObject var communicator = GameSceneCommunicator.instance
+    
     init() {
         gameScene = SKScene(fileNamed: "GameScene")!
         gameScene.scaleMode = .fill
     }
 
     var body: some View {
-        SpriteView(scene: gameScene)
-            .ignoresSafeArea()
+        ZStack {
+            SpriteView(scene: gameScene)
+                .ignoresSafeArea()
+            
+            if communicator.showFoundationMenu {
+                VStack {
+                    Text("Foundation menu")
+                    Button {
+                        communicator.currentTile!.color = .red
+                        communicator.showFoundationMenu = false
+                        communicator.currentTile = nil
+                    } label: {
+                        Text("Build foundation")
+                    }
+                    Button {
+                        communicator.showFoundationMenu = false
+                    } label: {
+                        Text("Cancel")
+                    }
+
+                }
+            }
+        }
     }
 
     
