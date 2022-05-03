@@ -13,10 +13,10 @@ enum AppState: Int{
     
 }
 
-class AppManager{
+class AppManager: ObservableObject{
     
     static var appManager = AppManager()
-    var state = AppState.startMenu
+    @Published var state = AppState.startMenu
     
     //SINGLETON
     private init(){}

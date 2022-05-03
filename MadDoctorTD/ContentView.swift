@@ -15,11 +15,41 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
+    
+    @ObservedObject var appManager = AppManager.appManager
 
     var body: some View {
-        HStack {
+        ZStack {
             
-
+            switch (appManager.state) {
+            case AppState.startMenu:
+                Text("StartMenu")
+            case AppState.gameScene:
+                GameSceneView()
+            default:
+                LabSceneView()
+            }
+            
+            VStack {
+                HStack {
+                    Button(action: {
+                        appManager.state = AppState.startMenu
+                    }, label: {
+                        Text("Start Menu")
+                    })
+                    Button(action: {
+                        appManager.state = AppState.gameScene
+                    }, label: {
+                        Text("Game")
+                    })
+                    Button(action: {
+                        appManager.state = AppState.labMenu
+                    }, label: {
+                        Text("Lab")
+                    })
+                }
+                Spacer()
+            }
             
         }
     }
