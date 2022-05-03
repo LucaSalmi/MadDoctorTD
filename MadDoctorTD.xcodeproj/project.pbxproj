@@ -24,6 +24,10 @@
 		C839C6BD2821586300F66043 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BC2821586300F66043 /* GameManager.swift */; };
 		C839C6BF282158C100F66043 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BE282158C100F66043 /* SoundManager.swift */; };
 		C839C6C128215B4800F66043 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C028215B4800F66043 /* InputManager.swift */; };
+		C839C6C62821619200F66043 /* LabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C52821619200F66043 /* LabMenuView.swift */; };
+		C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C7282161BA00F66043 /* MainMenuView.swift */; };
+		C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C9282161DF00F66043 /* ResearchView.swift */; };
+		C839C6CC2821621400F66043 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CB2821621400F66043 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,10 @@
 		C839C6BC2821586300F66043 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		C839C6BE282158C100F66043 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		C839C6C028215B4800F66043 /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
+		C839C6C52821619200F66043 /* LabMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabMenuView.swift; sourceTree = "<group>"; };
+		C839C6C7282161BA00F66043 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		C839C6C9282161DF00F66043 /* ResearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchView.swift; sourceTree = "<group>"; };
+		C839C6CB2821621400F66043 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +85,8 @@
 		C839C6A42821352200F66043 /* MadDoctorTD */ = {
 			isa = PBXGroup;
 			children = (
+				C839C6C42821617F00F66043 /* Views */,
 				C839C6C328215D9200F66043 /* GameScenes */,
-				C839C6C228215D8700F66043 /* Views */,
 				C839C6A52821352200F66043 /* MadDoctorTDApp.swift */,
 				C839C6A72821352200F66043 /* ContentView.swift */,
 				C839C6A92821352400F66043 /* Assets.xcassets */,
@@ -102,13 +110,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		C839C6C228215D8700F66043 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		C839C6C328215D9200F66043 /* GameScenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +121,17 @@
 				3359CC9728214F1800878191 /* LabScene.sks */,
 			);
 			path = GameScenes;
+			sourceTree = "<group>";
+		};
+		C839C6C42821617F00F66043 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C839C6C52821619200F66043 /* LabMenuView.swift */,
+				C839C6C7282161BA00F66043 /* MainMenuView.swift */,
+				C839C6C9282161DF00F66043 /* ResearchView.swift */,
+				C839C6CB2821621400F66043 /* SettingsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,15 +206,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */,
 				3359CC9328214D8300878191 /* GameScene.swift in Sources */,
 				3359CC9628214E2200878191 /* GameSceneView.swift in Sources */,
 				C839C6AF2821352400F66043 /* Persistence.swift in Sources */,
 				C839C6BD2821586300F66043 /* GameManager.swift in Sources */,
+				C839C6CC2821621400F66043 /* SettingsView.swift in Sources */,
+				C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */,
 				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
 				C839C6BF282158C100F66043 /* SoundManager.swift in Sources */,
 				C839C6C128215B4800F66043 /* InputManager.swift in Sources */,
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
 				C839C6BB2821579F00F66043 /* Constants.swift in Sources */,
+				C839C6C62821619200F66043 /* LabMenuView.swift in Sources */,
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
 				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
