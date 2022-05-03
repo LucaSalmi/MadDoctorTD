@@ -19,6 +19,7 @@
 		C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6AC2821352400F66043 /* Preview Assets.xcassets */; };
 		C839C6AF2821352400F66043 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6AE2821352400F66043 /* Persistence.swift */; };
 		C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C839C6B02821352400F66043 /* MadDoctorTD.xcdatamodeld */; };
+		C839C6B928214DC900F66043 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6B828214DC900F66043 /* AppManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		C839C6AC2821352400F66043 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C839C6AE2821352400F66043 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C839C6B12821352400F66043 /* MadDoctorTD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MadDoctorTD.xcdatamodel; sourceTree = "<group>"; };
+		C839C6B828214DC900F66043 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				C839C6A92821352400F66043 /* Assets.xcassets */,
 				C839C6AE2821352400F66043 /* Persistence.swift */,
 				C839C6B02821352400F66043 /* MadDoctorTD.xcdatamodeld */,
+				C839C6B828214DC900F66043 /* AppManager.swift */,
 				C839C6AB2821352400F66043 /* Preview Content */,
 				3359CC9028214C9A00878191 /* GameScene.sks */,
 				3359CC9228214D8300878191 /* GameScene.swift */,
@@ -166,6 +169,7 @@
 				3359CC9328214D8300878191 /* GameScene.swift in Sources */,
 				3359CC9628214E2200878191 /* GameSceneView.swift in Sources */,
 				C839C6AF2821352400F66043 /* Persistence.swift in Sources */,
+				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
 				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
@@ -305,6 +309,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -334,6 +339,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
