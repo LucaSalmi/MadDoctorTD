@@ -7,12 +7,6 @@
 
 import Foundation
 
-enum AppState: Int{
-    
-    case startMenu = 0 , labMenu, gameScene, researchMenu, settingsMenu
-    
-}
-
 class AppManager: ObservableObject{
     
     static var appManager = AppManager()
