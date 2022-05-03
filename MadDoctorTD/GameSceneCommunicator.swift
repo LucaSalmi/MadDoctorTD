@@ -17,4 +17,18 @@ class GameSceneCommunicator: ObservableObject {
     
     private init() {}
     
+    func buildFoundation() {
+        
+        currentTile!.containsFoundation = true
+        currentTile!.color = .red
+        currentTile = nil
+        
+    }
+    
+    func cancelFoundation() {
+        currentTile!.color = .clear
+        currentTile = nil
+        showFoundationMenu = false
+    }
+    
 }

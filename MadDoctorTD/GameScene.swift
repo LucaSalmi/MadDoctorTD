@@ -12,6 +12,8 @@ import SwiftUI
 
 class GameScene: SKScene {
     
+    static var instance: GameScene? = nil
+    
     var clickableTilesNode: SKNode = SKNode()
     
     required init?(coder aDecoder: NSCoder) {
@@ -19,6 +21,8 @@ class GameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
+        
+        GameScene.instance = self
         
         setupClickableTiles()
         

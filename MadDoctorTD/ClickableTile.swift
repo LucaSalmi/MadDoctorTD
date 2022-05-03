@@ -7,8 +7,11 @@
 
 import Foundation
 import SpriteKit
+import SwiftUI
 
 class ClickableTile: SKSpriteNode{
+    
+    var containsFoundation: Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -23,7 +26,26 @@ class ClickableTile: SKSpriteNode{
     }
     
     func onClick() {
+        
+        if GameSceneCommunicator.instance.showFoundationMenu || containsFoundation {
+            return
+        }
+        
         print("Tile clicked at position: \(position)")
+        
+        let gameScene = GameScene.instance!
+        
+        for i in 0..<gameScene.clickableTilesNode.children.count {
+            
+            let currentTile = gameScene.clickableTilesNode.children[i] as! ClickableTile
+            
+            if !currentTile.containsFoundation {
+                currentTile.color = .clear
+            }
+            
+        }
+        
+        color = .white
         
         let communicator = GameSceneCommunicator.instance
         communicator.currentTile = self
