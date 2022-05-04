@@ -16,7 +16,12 @@ class GameScene: SKScene {
     
     var clickableTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
+
+    var enemy: SKNode = SKNode()
+    var nodeGraph: GKObstacleGraph? = nil
+
     var towersNode: SKNode = SKNode()
+
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -28,7 +33,17 @@ class GameScene: SKScene {
         
         setupClickableTiles()
         setupStartFoundation()
+
+        enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
+        let obstacles = SKNode.obstacles(fromNodePhysicsBodies: foundationPlatesNode.children)
+        nodeGraph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 0.0)
+        let start = GKGraphNode()
+        enemy.position = clickableTilesNode.children[34].position
+        enemy.zPosition = 2
+        addChild(enemy)
+      
         addChild(towersNode)
+
         
     }
     
@@ -69,6 +84,14 @@ class GameScene: SKScene {
         
         let foundationPlate1 = FoundationPlate(position: clickableTile1.position, tile: clickableTile1)
         foundationPlatesNode.addChild(foundationPlate1)
+        let foundationPlate2 = FoundationPlate(position: CGPoint(x: foundationPlate1.position.x + foundationPlate1.size.width, y: foundationPlate1.position.y + foundationPlate1.size.height))
+        foundationPlatesNode.addChild(foundationPlate2)
+        let foundationPlate3 = FoundationPlate(position: CGPoint(x: foundationPlate2.position.x + foundationPlate1.size.width, y: foundationPlate2.position.y + foundationPlate1.size.height))
+        foundationPlatesNode.addChild(foundationPlate3)
+        let foundationPlate4 = FoundationPlate(position: CGPoint(x: foundationPlate3.position.x + foundationPlate1.size.width, y: foundationPlate3.position.y + foundationPlate1.size.height))
+        foundationPlatesNode.addChild(foundationPlate4)
+        let foundationPlate5 = FoundationPlate(position: CGPoint(x: foundationPlate4.position.x + foundationPlate1.size.width, y: foundationPlate4.position.y + foundationPlate1.size.height))
+        foundationPlatesNode.addChild(foundationPlate5)
         
         addChild(foundationPlatesNode)
     }
@@ -105,6 +128,9 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         
         //Update code
+        
+        let enem = enemy as! Enemy
+        enem.update(graph: nodeGraph!)
         
     }
     
