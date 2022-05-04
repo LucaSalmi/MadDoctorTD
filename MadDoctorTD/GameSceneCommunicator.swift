@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import GameplayKit
 
 class GameSceneCommunicator: ObservableObject {
     
@@ -31,9 +30,9 @@ class GameSceneCommunicator: ObservableObject {
         currentTile!.color = .clear
         
         
-
-        let foundation = FoundationPlate(position: currentTile!.position)
-        GameScene.instance!.foundationPlatesNode.addChild(foundation)        
+        let foundation = FoundationPlate(position: currentTile!.position, tile: currentTile!)
+        GameScene.instance!.foundationPlatesNode.addChild(foundation)
+        
         
         currentTile = nil
         showFoundationMenu = false
