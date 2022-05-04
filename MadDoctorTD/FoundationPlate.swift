@@ -16,9 +16,10 @@ class FoundationPlate: SKSpriteNode{
     
     init(position: CGPoint){
         
-        let texture: SKTexture? = nil
-        super.init(texture: texture, color: .red, size: FoundationData.size)
+        let texture: SKTexture = SKTexture(imageNamed: "clickable_tile")
+        super.init(texture: texture, color: .clear, size: FoundationData.size)
         name = "Foundation"
+        self.position = position
         zPosition = 1
         physicsBody = SKPhysicsBody(circleOfRadius: FoundationData.size.width/2)
         physicsBody?.categoryBitMask = PhysicsCategory.Foundation

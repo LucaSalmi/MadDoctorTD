@@ -28,14 +28,12 @@ struct GameSceneView: View {
                 VStack {
                     Text("Foundation menu")
                     Button {
-                        communicator.currentTile!.color = .red
-                        communicator.showFoundationMenu = false
-                        communicator.currentTile = nil
+                        communicator.buildFoundation()
                     } label: {
                         Text("Build foundation")
                     }
                     Button {
-                        communicator.showFoundationMenu = false
+                        communicator.cancelFoundation()
                     } label: {
                         Text("Cancel")
                     }
