@@ -18,7 +18,7 @@ class GameScene: SKScene {
     var foundationPlatesNode: SKNode = SKNode()
     var towersNode: SKNode = SKNode()
     var projectilesNode: SKNode = SKNode()
-    var projectilesPool = [Projectile]()
+    var gunProjectilesPool = [GunProjectile]()
     var enemiesNode: SKNode = SKNode()
     var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil

@@ -107,8 +107,7 @@ class Projectile: SKSpriteNode {
     }
     
     func destroy() {
-        GameScene.instance!.projectilesPool.append(self)
-        self.removeFromParent()
+        //OVERRIDE THIS IN SUBCLASSES!
     }
 
     func update() {

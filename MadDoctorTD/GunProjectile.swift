@@ -23,4 +23,11 @@ class GunProjectile: Projectile {
         
     }
     
+    override func destroy() {
+        
+        GameScene.instance!.gunProjectilesPool.append(self)
+        self.removeFromParent()
+        
+    }
+    
 }

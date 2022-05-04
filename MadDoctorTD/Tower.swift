@@ -87,14 +87,14 @@ class Tower: SKSpriteNode{
                 
             case ProjectileTypes.gunProjectile.rawValue:
                 
-                if gameScene.projectilesPool.isEmpty {
+                if gameScene.gunProjectilesPool.isEmpty {
                     let projectile = GunProjectile(position: self.position, target: currentTarget!)
                     gameScene.projectilesNode.addChild(projectile)
                 }
                 else {
                     //let projectile = GunProjectile(position: self.position, target: currentTarget!)
-                    let projectile = gameScene.projectilesPool[0]
-                    gameScene.projectilesPool.remove(at: 0)
+                    let projectile = gameScene.gunProjectilesPool[0]
+                    gameScene.gunProjectilesPool.remove(at: 0)
                     projectile.reuseFromPool(position: self.position, target: currentTarget!)
                     gameScene.projectilesNode.addChild(projectile)
                 }
