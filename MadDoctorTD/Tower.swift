@@ -46,8 +46,6 @@ class Tower: SKSpriteNode{
 
     private func findNewTarget() {
         
-        print("Searching for target...")
-        
         let gameScene = GameScene.instance!
         
         let enemies = gameScene.enemiesNode.children
@@ -73,7 +71,7 @@ class Tower: SKSpriteNode{
     }
     
     private func attackTarget() {
-        print("Attacking target: \(currentTarget!)")
+
 
         
         
@@ -90,7 +88,7 @@ class Tower: SKSpriteNode{
             if distance > attackRange {
                 currentTarget = nil
                 self.constraints = []
-                print("Target moved out of sight.")
+                print("Target out of sight.")
             }
             else {
                 let lookAtConstraint = SKConstraint.orient(to: currentTarget!,

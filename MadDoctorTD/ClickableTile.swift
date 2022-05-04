@@ -39,13 +39,13 @@ class ClickableTile: SKSpriteNode{
         var adjecentFound = false
         
         var leftPosition = position
-        leftPosition.x -= 32
+        leftPosition.x -= DefaultTileData.size.width
         var rightPosition = position
-        rightPosition.x += 32
+        rightPosition.x += DefaultTileData.size.width
         var topPosition = position
-        topPosition.y += 32
+        topPosition.y += DefaultTileData.size.height
         var bottomPosition = position
-        bottomPosition.y -= 32
+        bottomPosition.y -= DefaultTileData.size.height
         
         for node in gameScene.foundationPlatesNode.children {
             let currentFoundationPlate = node as! FoundationPlate

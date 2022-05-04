@@ -37,9 +37,13 @@ struct PhysicsCategory{
     
 }
 
+struct DefaultTileData {
+    static let size: CGSize = CGSize(width: 86, height: 86)
+}
+
 struct FoundationData{
     
-    static let size: CGSize = CGSize(width: 32, height: 32)
+    static let size: CGSize = DefaultTileData.size
     static let price: Int = 100
     
 }
@@ -52,8 +56,8 @@ enum TowerTypes: Int{
 
 struct TowerData {
     
-    static let size: CGSize = CGSize(width: 64, height: 64)
-    static let ATTACK_RANGE: CGFloat = CGFloat(150)
+    static let size: CGSize = CGSize(width: DefaultTileData.size.width*2, height: DefaultTileData.size.height*2)
+    static let ATTACK_RANGE: CGFloat = CGFloat(DefaultTileData.size.width * 3)
     
 }
 
@@ -64,7 +68,7 @@ struct TowerData {
 
 struct EnemiesData{
     
-    static let size: CGSize = CGSize(width: 32, height: 32)
+    static let size: CGSize = CGSize(width: 86, height: 86)
     static let baseHP: Int = 100
     static let baseSpeed: Double = 0.5
     
