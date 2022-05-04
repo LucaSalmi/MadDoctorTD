@@ -33,6 +33,7 @@
 		C839C6CC2821621400F66043 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CB2821621400F66043 /* SettingsView.swift */; };
 		C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */; };
 		C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CF28216CD400F66043 /* FoundationPlate.swift */; };
+		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
 		E5268CCC28226EF000F134A5 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCB28226EF000F134A5 /* Tower.swift */; };
 		E5268CCE2822707200F134A5 /* NormalGunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCD2822707200F134A5 /* NormalGunner.swift */; };
 		E5268CD02822708600F134A5 /* GunTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCF2822708600F134A5 /* GunTower.swift */; };
@@ -66,6 +67,7 @@
 		C839C6CB2821621400F66043 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsExtension.swift; sourceTree = "<group>"; };
 		C839C6CF28216CD400F66043 /* FoundationPlate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationPlate.swift; sourceTree = "<group>"; };
+		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		E5268CCB28226EF000F134A5 /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
 		E5268CCD2822707200F134A5 /* NormalGunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalGunner.swift; sourceTree = "<group>"; };
 		E5268CCF2822708600F134A5 /* GunTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunTower.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				C839C6CF28216CD400F66043 /* FoundationPlate.swift */,
 				E5268CCB28226EF000F134A5 /* Tower.swift */,
 				E5268CCF2822708600F134A5 /* GunTower.swift */,
+				C868AACD28229790003F91D0 /* Enemy.swift */,
 			);
 			path = MadDoctorTD;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				C839C6AF2821352400F66043 /* Persistence.swift in Sources */,
 				E5268CD02822708600F134A5 /* GunTower.swift in Sources */,
 				C839C6BD2821586300F66043 /* GameManager.swift in Sources */,
+				C868AACE28229790003F91D0 /* Enemy.swift in Sources */,
 				C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */,
 				C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */,
 				C839C6CC2821621400F66043 /* SettingsView.swift in Sources */,
