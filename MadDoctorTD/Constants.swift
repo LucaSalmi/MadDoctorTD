@@ -55,4 +55,11 @@ enum TowerTypes: Int{
 
 //Enemies
 
+struct EnemiesData{
+    
+    static let size: CGSize = CGSize(width: 32, height: 32)
+    static let baseHP: Int = 100
+    static let baseSpeed: Double = 2.0
+    
+}
 
