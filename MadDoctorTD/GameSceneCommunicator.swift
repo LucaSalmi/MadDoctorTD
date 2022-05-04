@@ -12,8 +12,15 @@ class GameSceneCommunicator: ObservableObject {
     static let instance = GameSceneCommunicator()
     
     @Published var showFoundationMenu: Bool = false
+    @Published var showTowerMenu: Bool = false
+    @Published var showUpgradeMenu: Bool = false
     
     var currentTile: ClickableTile? = nil
+    var currentFoundation: FoundationPlate? = nil
+    var currentTower: Tower? = nil
+    
+    
+    
     
     private init() {}
     
@@ -23,7 +30,7 @@ class GameSceneCommunicator: ObservableObject {
         currentTile!.color = .clear
         
         
-        let foundation = FoundationPlate(position: currentTile!.position)
+        let foundation = FoundationPlate(position: currentTile!.position, tile: currentTile!)
         GameScene.instance!.foundationPlatesNode.addChild(foundation)
         
         
@@ -32,12 +39,58 @@ class GameSceneCommunicator: ObservableObject {
         
     }
     
-    func cancelFoundation() {
+    func cancelFoundationBuild() {
         
         currentTile!.color = .clear
         currentTile = nil
         showFoundationMenu = false
         
+    }
+    
+    func buildTower(type: Int){
+        
+        currentFoundation!.hasTower = true
+        switch type{
+        
+        case TowerTypes.gunTower.rawValue:
+            let gunTower = GunTower(position: currentFoundation!.position, foundation: currentFoundation!)
+            GameScene.instance!.towersNode.addChild(gunTower)
+        
+        default:
+            print("Error building tower")
+        }
+        
+        cancelAllMenus()
+        
+    }
+    
+    
+    
+    func cancelAllMenus(){
+        currentFoundation = nil
+        showTowerMenu = false
+        currentTile?.color = .clear
+        currentTile = nil
+        showFoundationMenu = false
+        showUpgradeMenu = false
+        currentTower = nil
+    }
+    
+    func sellTower(){
+        
+        currentTower!.builtUponFoundation?.hasTower = false
+        currentTower!.removeFromParent()
+        
+        cancelAllMenus()
+        
+    }
+    
+    func sellFoundation(){
+        
+        currentFoundation!.builtUponTile?.containsFoundation = false
+        currentFoundation?.builtUponTile = nil
+        currentFoundation!.removeFromParent()
+        cancelAllMenus()
     }
     
 }

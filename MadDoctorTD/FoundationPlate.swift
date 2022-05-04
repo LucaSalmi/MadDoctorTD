@@ -10,12 +10,17 @@ import SpriteKit
 
 class FoundationPlate: SKSpriteNode{
     
+    var builtUponTile: ClickableTile?
+    var hasTower = false
+    
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
     
-    init(position: CGPoint){
+    init(position: CGPoint, tile: ClickableTile){
         
+        self.builtUponTile = tile
         let texture: SKTexture = SKTexture(imageNamed: "clickable_tile")
         super.init(texture: texture, color: .clear, size: FoundationData.size)
         name = "Foundation"
@@ -26,6 +31,22 @@ class FoundationPlate: SKSpriteNode{
         physicsBody?.collisionBitMask = PhysicsCategory.Enemy
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
+        
+    }
+    
+    func onClick(){
+        
+        
+        if hasTower {
+            return
+            
+        }
+        let communicator = GameSceneCommunicator.instance
+        communicator.cancelAllMenus()
+        
+        
+        communicator.currentFoundation = self
+        communicator.showTowerMenu = true
         
     }
     
