@@ -25,6 +25,18 @@ class GunProjectile: Projectile {
     
     override func destroy() {
         
+        let gameScene = GameScene.instance!
+        
+        SoundManager.playSFX(sfxName: SoundManager.gunProjectileImpactSFX)
+        
+        let particle = SKEmitterNode(fileNamed: "GunProjectileImpact")
+        particle!.position = position
+        particle!.zPosition = 5
+        gameScene.addChild(particle!)
+        gameScene.run(SKAction.wait(forDuration: 1)) {
+            gameScene.removeFromParent()
+        }
+        
         GameScene.instance!.gunProjectilesPool.append(self)
         self.removeFromParent()
         

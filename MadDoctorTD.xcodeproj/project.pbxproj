@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */; };
+		3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3311AB9028231156009DEEEC /* gun_projectile_impact.wav */; };
 		3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */; };
 		3320331A2822ABF500133BBA /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332033192822ABF500133BBA /* Projectile.swift */; };
 		3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320331C2822ACFA00133BBA /* GunProjectile.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GunProjectileImpact.sks; sourceTree = "<group>"; };
+		3311AB9028231156009DEEEC /* gun_projectile_impact.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gun_projectile_impact.wav; sourceTree = "<group>"; };
 		3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneCommunicator.swift; sourceTree = "<group>"; };
 		332033192822ABF500133BBA /* Projectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
 		3320331C2822ACFA00133BBA /* GunProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunProjectile.swift; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 				332033192822ABF500133BBA /* Projectile.swift */,
 				3320331C2822ACFA00133BBA /* GunProjectile.swift */,
 				C868AACD28229790003F91D0 /* Enemy.swift */,
+				3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */,
+				3311AB9028231156009DEEEC /* gun_projectile_impact.wav */,
 			);
 			path = MadDoctorTD;
 			sourceTree = "<group>";
@@ -219,9 +225,11 @@
 			files = (
 				3359CC9828214F1800878191 /* LabScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
+				3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */,
 				3359CC9128214C9A00878191 /* GameScene.sks in Resources */,
 				3359CCA4282157C500878191 /* MyTileSet.sks in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
+				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
