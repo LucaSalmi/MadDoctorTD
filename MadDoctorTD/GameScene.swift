@@ -17,7 +17,7 @@ class GameScene: SKScene {
     var clickableTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
     var towersNode: SKNode = SKNode()
-    var enemy: SKNode = SKNode()
+    //var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,13 +31,20 @@ class GameScene: SKScene {
         setupClickableTiles()
         setupStartFoundation()
         addChild(towersNode)
-        enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
+        
+        //enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
         let obstacles = SKNode.obstacles(fromNodePhysicsBodies: foundationPlatesNode.children)
         nodeGraph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 0.0)
-        let start = GKGraphNode()
-        enemy.position = clickableTilesNode.children[34].position
-        enemy.zPosition = 2
-        addChild(enemy)
+        
+        //enemy.position = clickableTilesNode.children[34].position
+        //enemy.zPosition = 2
+        //addChild(enemy)
+        //let enem = enemy as! Enemy
+        let enemy = EnemyEntity()
+        enemy.sprite.position = clickableTilesNode.children[34].position
+        enemy.sprite.zPosition = 2
+        addChild(enemy.sprite)
+        
     }
     
     private func setupClickableTiles() {
