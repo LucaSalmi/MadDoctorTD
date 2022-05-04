@@ -67,7 +67,7 @@ class GameScene: SKScene {
         let clickableTile1 = clickableTilesNode.children[55] as! ClickableTile
         clickableTile1.containsFoundation = true
         
-        let foundationPlate1 = FoundationPlate(position: clickableTile1.position)
+        let foundationPlate1 = FoundationPlate(position: clickableTile1.position, tile: clickableTile1)
         foundationPlatesNode.addChild(foundationPlate1)
         
         addChild(foundationPlatesNode)

@@ -42,7 +42,7 @@ struct GameSceneView: View {
             }
             if communicator.showTowerMenu{
                 
-                VStack {
+                VStack(spacing: 50) {
                     Text("Tower menu")
                     Button {
                         communicator.buildTower(type: TowerTypes.gunTower.rawValue)
@@ -50,12 +50,17 @@ struct GameSceneView: View {
                         Text("Build Gun Tower")
                     }
                     Button {
+                        communicator.sellFoundation()
+                    } label: {
+                        Text("Sell Foundation")
+                    }
+                    Button {
                         communicator.cancelAllMenus()
                     } label: {
                         Text("Cancel")
                     }
 
-                }
+                }.font(.title)
                 
             }
             if communicator.showUpgradeMenu{

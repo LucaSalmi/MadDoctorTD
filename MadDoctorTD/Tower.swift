@@ -11,13 +11,15 @@ import SpriteKit
 
 class Tower: SKSpriteNode{
     
+    var builtUponFoundation: FoundationPlate?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
     
-    init(position: CGPoint){
+    init(position: CGPoint, foundation: FoundationPlate){
         
+        self.builtUponFoundation = foundation
         let texture: SKTexture = SKTexture(imageNamed: "Sand_Grid_DownRightInterior")
         super.init(texture: texture, color: .clear, size: FoundationData.size)
         

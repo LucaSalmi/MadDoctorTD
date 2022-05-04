@@ -16,10 +16,10 @@ class GunTower: Tower{
         fatalError("use init()")
     }
     
-    override init(position: CGPoint){
+    override init(position: CGPoint, foundation: FoundationPlate){
         
         
-        super.init(position: position)
+        super.init(position: position, foundation: foundation)
         
         texture = SKTexture(imageNamed: "Sand_Grid_DownRightInterior")
     

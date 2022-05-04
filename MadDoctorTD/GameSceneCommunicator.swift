@@ -30,7 +30,7 @@ class GameSceneCommunicator: ObservableObject {
         currentTile!.color = .clear
         
         
-        let foundation = FoundationPlate(position: currentTile!.position)
+        let foundation = FoundationPlate(position: currentTile!.position, tile: currentTile!)
         GameScene.instance!.foundationPlatesNode.addChild(foundation)
         
         
@@ -53,7 +53,7 @@ class GameSceneCommunicator: ObservableObject {
         switch type{
         
         case TowerTypes.gunTower.rawValue:
-            let gunTower = GunTower(position: currentFoundation!.position)
+            let gunTower = GunTower(position: currentFoundation!.position, foundation: currentFoundation!)
             GameScene.instance!.towersNode.addChild(gunTower)
         
         default:
@@ -78,9 +78,19 @@ class GameSceneCommunicator: ObservableObject {
     
     func sellTower(){
         
+        currentTower!.builtUponFoundation?.hasTower = false
         currentTower!.removeFromParent()
+        
         cancelAllMenus()
         
+    }
+    
+    func sellFoundation(){
+        
+        currentFoundation!.builtUponTile?.containsFoundation = false
+        currentFoundation?.builtUponTile = nil
+        currentFoundation!.removeFromParent()
+        cancelAllMenus()
     }
     
 }
