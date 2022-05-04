@@ -7,6 +7,7 @@
 
 import Foundation
 import SpriteKit
+import GameplayKit
 
 class Enemy: SKSpriteNode{
     
@@ -26,9 +27,9 @@ class Enemy: SKSpriteNode{
         
     }
     
-    func update(){
+    func update(graph : GKObstacleGraph<GKGraphNode2D>){
         
-        
+        self.position = CGPoint(x: self.position.x, y: self.position.y + EnemiesData.baseSpeed)
         
         
     }
