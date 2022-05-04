@@ -24,7 +24,7 @@ struct GameSceneView: View {
             SpriteView(scene: gameScene)
                 .ignoresSafeArea()
             
-            if communicator.showFoundationMenu {
+            if communicator.showFoundationMenu{
                 VStack {
                     Text("Foundation menu")
                     Button {
@@ -33,9 +33,45 @@ struct GameSceneView: View {
                         Text("Build foundation")
                     }
                     Button {
-                        communicator.cancelFoundation()
+                        communicator.cancelFoundationBuild()
                     } label: {
                         Text("Cancel")
+                    }
+
+                }
+            }
+            if communicator.showTowerMenu{
+                
+                VStack(spacing: 50) {
+                    Text("Tower menu")
+                    Button {
+                        communicator.buildTower(type: TowerTypes.gunTower.rawValue)
+                    } label: {
+                        Text("Build Gun Tower")
+                    }
+                    Button {
+                        communicator.sellFoundation()
+                    } label: {
+                        Text("Sell Foundation")
+                    }
+                    Button {
+                        communicator.cancelAllMenus()
+                    } label: {
+                        Text("Cancel")
+                    }
+
+                }.font(.title)
+                
+            }
+            if communicator.showUpgradeMenu{
+                
+                VStack{
+                    Text("Upgrade menu")
+                    Button {
+                        communicator.sellTower()
+                        
+                    } label: {
+                        Text("Sell tower")
                     }
 
                 }

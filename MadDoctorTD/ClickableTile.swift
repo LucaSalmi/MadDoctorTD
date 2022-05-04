@@ -27,9 +27,12 @@ class ClickableTile: SKSpriteNode{
     
     func onClick() {
         
-        if GameSceneCommunicator.instance.showFoundationMenu || containsFoundation {
+        if containsFoundation {
             return
+            
         }
+        let communicator = GameSceneCommunicator.instance
+        communicator.cancelAllMenus()
         
         let gameScene = GameScene.instance!
         
@@ -70,7 +73,6 @@ class ClickableTile: SKSpriteNode{
         
         color = .white
         
-        let communicator = GameSceneCommunicator.instance
         communicator.currentTile = self
         communicator.showFoundationMenu = true
     }

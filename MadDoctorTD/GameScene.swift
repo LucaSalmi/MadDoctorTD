@@ -16,8 +16,12 @@ class GameScene: SKScene {
     
     var clickableTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
+
     var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
+
+    var towersNode: SKNode = SKNode()
+
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -29,6 +33,7 @@ class GameScene: SKScene {
         
         setupClickableTiles()
         setupStartFoundation()
+
         enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
         let obstacles = SKNode.obstacles(fromNodePhysicsBodies: foundationPlatesNode.children)
         nodeGraph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 0.0)
@@ -36,6 +41,9 @@ class GameScene: SKScene {
         enemy.position = clickableTilesNode.children[34].position
         enemy.zPosition = 2
         addChild(enemy)
+      
+        addChild(towersNode)
+
         
     }
     
@@ -74,7 +82,7 @@ class GameScene: SKScene {
         let clickableTile1 = clickableTilesNode.children[55] as! ClickableTile
         clickableTile1.containsFoundation = true
         
-        let foundationPlate1 = FoundationPlate(position: clickableTile1.position)
+        let foundationPlate1 = FoundationPlate(position: clickableTile1.position, tile: clickableTile1)
         foundationPlatesNode.addChild(foundationPlate1)
         let foundationPlate2 = FoundationPlate(position: CGPoint(x: foundationPlate1.position.x + foundationPlate1.size.width, y: foundationPlate1.position.y + foundationPlate1.size.height))
         foundationPlatesNode.addChild(foundationPlate2)
@@ -99,7 +107,14 @@ class GameScene: SKScene {
                     clickableTile.onClick()
                 }
                 if node is FoundationPlate {
+                    let foundationPlate = node as! FoundationPlate
+                    foundationPlate.onClick()
+                    
                     print("Foundation Plate clicked")
+                }
+                if node is Tower{
+                    let tower = node as! Tower
+                    tower.onClick()
                 }
             }
         }

@@ -44,8 +44,11 @@ struct FoundationData{
     
 }
 
-//Towers
 
+//Towers
+enum TowerTypes: Int{
+    case gunTower = 0
+}
 
 //Bullets
 

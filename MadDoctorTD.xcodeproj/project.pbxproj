@@ -34,6 +34,10 @@
 		C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */; };
 		C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CF28216CD400F66043 /* FoundationPlate.swift */; };
 		C868AACC2822738B003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACB2822738B003F91D0 /* Enemy.swift */; };
+		E5268CCC28226EF000F134A5 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCB28226EF000F134A5 /* Tower.swift */; };
+		E5268CCE2822707200F134A5 /* NormalGunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCD2822707200F134A5 /* NormalGunner.swift */; };
+		E5268CD02822708600F134A5 /* GunTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCF2822708600F134A5 /* GunTower.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +68,12 @@
 		C839C6CB2821621400F66043 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsExtension.swift; sourceTree = "<group>"; };
 		C839C6CF28216CD400F66043 /* FoundationPlate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationPlate.swift; sourceTree = "<group>"; };
-		C868AACB2822738B003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+
+		C868AACB2822738B003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };´
+		E5268CCB28226EF000F134A5 /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
+		E5268CCD2822707200F134A5 /* NormalGunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalGunner.swift; sourceTree = "<group>"; };
+		E5268CCF2822708600F134A5 /* GunTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunTower.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +90,7 @@
 		C839C6992821352200F66043 = {
 			isa = PBXGroup;
 			children = (
+				E5268CCD2822707200F134A5 /* NormalGunner.swift */,
 				C839C6A42821352200F66043 /* MadDoctorTD */,
 				C839C6A32821352200F66043 /* Products */,
 			);
@@ -119,8 +129,12 @@
 				3359CCA3282157C500878191 /* MyTileSet.sks */,
 				C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */,
 				C839C6CF28216CD400F66043 /* FoundationPlate.swift */,
+
 				C839C6AB2821352400F66043 /* Preview Content */,
 				C868AACB2822738B003F91D0 /* Enemy.swift */,
+
+				E5268CCB28226EF000F134A5 /* Tower.swift */,
+				E5268CCF2822708600F134A5 /* GunTower.swift */,
 			);
 			path = MadDoctorTD;
 			sourceTree = "<group>";
@@ -221,6 +235,7 @@
 				3359CC9328214D8300878191 /* GameScene.swift in Sources */,
 				3359CC9628214E2200878191 /* GameSceneView.swift in Sources */,
 				C839C6AF2821352400F66043 /* Persistence.swift in Sources */,
+				E5268CD02822708600F134A5 /* GunTower.swift in Sources */,
 				C839C6BD2821586300F66043 /* GameManager.swift in Sources */,
 				C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */,
 				C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */,
@@ -232,9 +247,11 @@
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
 				C839C6BB2821579F00F66043 /* Constants.swift in Sources */,
 				C868AACC2822738B003F91D0 /* Enemy.swift in Sources */,
+				E5268CCE2822707200F134A5 /* NormalGunner.swift in Sources */,
 				C839C6C62821619200F66043 /* LabMenuView.swift in Sources */,
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
 				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
+				E5268CCC28226EF000F134A5 /* Tower.swift in Sources */,
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
 				3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */,
 				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,
