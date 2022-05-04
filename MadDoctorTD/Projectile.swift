@@ -27,15 +27,11 @@ class Projectile: SKSpriteNode {
         super.init(texture: nil, color: .clear, size: ProjectileData.size)
         
         self.position = position
-        
         self.zPosition = 2
-        
         self.speed = ProjectileData.speed
-        
         let lookAtConstraint = SKConstraint.orient(to: target,
                                     offset: SKRange(constantValue: -CGFloat.pi / 2))
         self.constraints = [ lookAtConstraint ]
-        
         setDirection()
     }
     
@@ -56,7 +52,7 @@ class Projectile: SKSpriteNode {
             differenceY *= -1
         }
         
-        var differenceH = sqrt((differenceX*differenceX) + (differenceY*differenceY))
+        let differenceH = sqrt((differenceX*differenceX) + (differenceY*differenceY))
         
         differenceX /= differenceH
         differenceY /= differenceH
