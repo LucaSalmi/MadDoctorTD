@@ -87,9 +87,12 @@ class GameSceneCommunicator: ObservableObject {
     
     func sellFoundation(){
         
-        currentFoundation!.builtUponTile?.containsFoundation = false
-        currentFoundation?.builtUponTile = nil
-        currentFoundation!.removeFromParent()
+        if GameScene.instance!.foundationPlatesNode.children.count > 1 {
+            currentFoundation!.builtUponTile?.containsFoundation = false
+            currentFoundation?.builtUponTile = nil
+            currentFoundation!.removeFromParent()
+        }
+        
         cancelAllMenus()
     }
     
