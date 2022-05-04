@@ -25,7 +25,7 @@ class Tower: SKSpriteNode{
         
         self.builtUponFoundation = foundation
         let texture: SKTexture = SKTexture(imageNamed: "Sand_Grid_DownRightInterior")
-        super.init(texture: texture, color: .clear, size: FoundationData.size)
+        super.init(texture: texture, color: .clear, size: TowerData.size)
         
         name = "Tower"
         self.position = position

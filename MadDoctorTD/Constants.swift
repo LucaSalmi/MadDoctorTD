@@ -52,6 +52,7 @@ enum TowerTypes: Int{
 
 struct TowerData {
     
+    static let size: CGSize = CGSize(width: 64, height: 64)
     static let ATTACK_RANGE: CGFloat = CGFloat(150)
     
 }
