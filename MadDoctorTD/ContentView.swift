@@ -15,30 +15,44 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
+    
+    @ObservedObject var appManager = AppManager.appManager
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        ZStack {
+            
+            switch (appManager.state) {
+            case AppState.startMenu:
+                MainMenuView()
+            case AppState.gameScene:
+                GameSceneView()
+            case AppState.settingsMenu:
+                SettingsView()
+            default:
+                LabSceneView()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+            
+            VStack {
+                HStack {
+                    Button(action: {
+                        appManager.state = AppState.startMenu
+                    }, label: {
+                        Text("Start Menu")
+                    })
+                    Button(action: {
+                        appManager.state = AppState.gameScene
+                    }, label: {
+                        Text("Game")
+                    })
+                    Button(action: {
+                        appManager.state = AppState.labMenu
+                    }, label: {
+                        Text("Lab")
+                    })
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+                Spacer()
             }
-            Text("Select an item")
+            
         }
     }
 
