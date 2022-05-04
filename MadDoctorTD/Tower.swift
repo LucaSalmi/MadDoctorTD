@@ -74,10 +74,10 @@ class Tower: SKSpriteNode{
     
     private func attackTarget() {
         print("Attacking target: \(currentTarget!)")
+
         
-        let lookAtConstraint = SKConstraint.orient(to: currentTarget!,
-                                                   offset: SKRange(constantValue: -CGFloat.pi / 2))
-        self.constraints = [ lookAtConstraint ]
+        
+        
     }
     
     func update() {
@@ -89,9 +89,13 @@ class Tower: SKSpriteNode{
             let distance = position.distance(point: currentTarget!.position)
             if distance > attackRange {
                 currentTarget = nil
+                self.constraints = []
                 print("Target moved out of sight.")
             }
             else {
+                let lookAtConstraint = SKConstraint.orient(to: currentTarget!,
+                                            offset: SKRange(constantValue: -CGFloat.pi / 2))
+                self.constraints = [ lookAtConstraint ]
                 attackTarget()
             }
         }

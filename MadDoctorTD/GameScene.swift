@@ -33,7 +33,7 @@ class GameScene: SKScene {
         setupStartFoundation()
         addChild(towersNode)
         setupEnemies()
-        /*
+        
         enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
         let obstacles = SKNode.obstacles(fromNodePhysicsBodies: foundationPlatesNode.children)
         nodeGraph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 0.0)
@@ -41,7 +41,7 @@ class GameScene: SKScene {
         enemy.position = clickableTilesNode.children[34].position
         enemy.zPosition = 2
         addChild(enemy)
-         */
+        
     }
     
     private func setupEnemies(){
