@@ -88,8 +88,7 @@ class Tower: SKSpriteNode{
             case ProjectileTypes.gunProjectile.rawValue:
                 
                 let projectile = GunProjectile(position: self.position, target: currentTarget!)
-                gameScene?.projectilesNode.addChild(projectile)
-                
+                gameScene!.projectilesNode.addChild(projectile)
                 
             default:
                 print("Error: Could not find projectile type!")

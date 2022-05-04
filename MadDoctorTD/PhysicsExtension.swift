@@ -15,6 +15,17 @@ extension GameScene: SKPhysicsContactDelegate{
         let nodeA = contact.bodyA.node
         let nodeB = contact.bodyB.node
         
+        //print("nodeA = \(nodeA). nodeB = \(nodeB).")
+        
+        if nodeA is Projectile && nodeB is Enemy {
+            let projectile = nodeA as! Projectile
+            projectile.destroy()
+        }
+        if nodeB is Projectile && nodeA is Enemy {
+            let projectile = nodeB as! Projectile
+            projectile.destroy()
+        }
+        
     }
     
 }

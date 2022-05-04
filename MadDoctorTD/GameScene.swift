@@ -30,6 +30,8 @@ class GameScene: SKScene {
         
         GameScene.instance = self
         
+        physicsWorld.contactDelegate = self
+        
         setupClickableTiles()
         setupStartFoundation()
         addChild(towersNode)

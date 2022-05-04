@@ -28,8 +28,10 @@ class FoundationPlate: SKSpriteNode{
         zPosition = 1
         physicsBody = SKPhysicsBody(circleOfRadius: FoundationData.size.width/2)
         physicsBody?.categoryBitMask = PhysicsCategory.Foundation
-        physicsBody?.collisionBitMask = PhysicsCategory.Enemy
+        physicsBody?.collisionBitMask = 0
         physicsBody?.restitution = 0
+        physicsBody?.isDynamic = true
+        physicsBody?.friction = 0
         physicsBody?.allowsRotation = false
         
     }

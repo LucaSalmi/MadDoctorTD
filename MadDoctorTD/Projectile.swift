@@ -26,6 +26,7 @@ class Projectile: SKSpriteNode {
         
         super.init(texture: nil, color: .clear, size: ProjectileData.size)
         
+        self.name = "Projectile"
         self.position = position
         self.zPosition = 2
         self.speed = ProjectileData.speed
@@ -33,6 +34,21 @@ class Projectile: SKSpriteNode {
                                     offset: SKRange(constantValue: -CGFloat.pi / 2))
         self.constraints = [ lookAtConstraint ]
         setDirection()
+        
+        setupPhysicsBody()
+    }
+    
+    private func setupPhysicsBody() {
+        
+        physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
+        physicsBody?.categoryBitMask = PhysicsCategory.Projectile
+        physicsBody?.collisionBitMask = 0
+        physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
+        physicsBody?.restitution = 0
+        physicsBody?.isDynamic = true
+        physicsBody?.friction = 0
+        physicsBody?.allowsRotation = false
+        
     }
     
     private func setDirection() {
@@ -67,6 +83,10 @@ class Projectile: SKSpriteNode {
         direction.x = differenceX
         direction.y = differenceY
         
+    }
+    
+    func destroy() {
+        self.removeFromParent()
     }
 
     func update() {
