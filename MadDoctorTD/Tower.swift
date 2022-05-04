@@ -75,9 +75,9 @@ class Tower: SKSpriteNode{
     private func attackTarget() {
         print("Attacking target: \(currentTarget!)")
         
-        let lookAtConstraint = SKConstraint.orient(to: target,
+        let lookAtConstraint = SKConstraint.orient(to: currentTarget!,
                                                    offset: SKRange(constantValue: -CGFloat.pi / 2))
-        pointer.constraints = [ lookAtConstraint ]
+        self.constraints = [ lookAtConstraint ]
     }
     
     func update() {
