@@ -81,14 +81,25 @@ class Tower: SKSpriteNode{
         if currentFireRateTick <= 0 {
             
             
-            let gameScene = GameScene.instance
+            let gameScene = GameScene.instance!
             
             switch projectileType {
                 
             case ProjectileTypes.gunProjectile.rawValue:
                 
-                let projectile = GunProjectile(position: self.position, target: currentTarget!)
-                gameScene!.projectilesNode.addChild(projectile)
+                if gameScene.projectilesPool.isEmpty {
+                    let projectile = GunProjectile(position: self.position, target: currentTarget!)
+                    gameScene.projectilesNode.addChild(projectile)
+                }
+                else {
+                    //let projectile = GunProjectile(position: self.position, target: currentTarget!)
+                    let projectile = gameScene.projectilesPool[0]
+                    gameScene.projectilesPool.remove(at: 0)
+                    projectile.reuseFromPool(position: self.position, target: currentTarget!)
+                    gameScene.projectilesNode.addChild(projectile)
+                }
+                
+                
                 
             default:
                 print("Error: Could not find projectile type!")

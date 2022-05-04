@@ -10,9 +10,10 @@ import SpriteKit
 
 class Projectile: SKSpriteNode {
     
-    var currentTick = 5
+    let maxTick = 5
+    var currentTick = 0
     
-    let targetPoint: CGPoint
+    var targetPoint: CGPoint
     
     var direction: CGPoint = CGPoint(x: 0, y: 0)
 
@@ -22,20 +23,32 @@ class Projectile: SKSpriteNode {
     
     init(position: CGPoint, target: Enemy){
         
-        self.targetPoint = target.position
+        targetPoint = target.position
         
         super.init(texture: nil, color: .clear, size: ProjectileData.size)
         
-        self.name = "Projectile"
+        name = "Projectile"
         self.position = position
-        self.zPosition = 2
-        self.speed = ProjectileData.speed
-        let lookAtConstraint = SKConstraint.orient(to: target,
-                                    offset: SKRange(constantValue: -CGFloat.pi / 2))
-        self.constraints = [ lookAtConstraint ]
-        setDirection()
+        zPosition = 2
+        speed = ProjectileData.speed
         
         setupPhysicsBody()
+        
+        lookAtTarget(target: target)
+        
+        setDirection()
+        
+        currentTick = maxTick
+        
+    }
+    
+    func reuseFromPool(position: CGPoint, target: Enemy) {
+        targetPoint = target.position
+        self.position = position
+        lookAtTarget(target: target)
+        setDirection()
+        currentTick = maxTick
+        
     }
     
     private func setupPhysicsBody() {
@@ -51,7 +64,15 @@ class Projectile: SKSpriteNode {
         
     }
     
-    private func setDirection() {
+    func lookAtTarget(target: Enemy) {
+        let lookAtConstraint = SKConstraint.orient(to: target,
+                                    offset: SKRange(constantValue: -CGFloat.pi / 2))
+        self.constraints = [ lookAtConstraint ]
+    }
+    
+    func setDirection() {
+        
+        
         
         var differenceX = targetPoint.x - self.position.x
         var differenceY = targetPoint.y - self.position.y
@@ -86,6 +107,7 @@ class Projectile: SKSpriteNode {
     }
     
     func destroy() {
+        GameScene.instance!.projectilesPool.append(self)
         self.removeFromParent()
     }
 
