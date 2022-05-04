@@ -17,6 +17,8 @@ class GameScene: SKScene {
     var clickableTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
     var towersNode: SKNode = SKNode()
+    var enemy: SKNode = SKNode()
+    var nodeGraph: GKObstacleGraph? = nil
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
