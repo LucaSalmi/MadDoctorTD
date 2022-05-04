@@ -26,6 +26,17 @@ class Tower: SKSpriteNode{
         zPosition = 2
     
     }
+    
+    func onClick(){
+        
+        let communicator = GameSceneCommunicator.instance
+        communicator.cancelAllMenus()
+        
+        communicator.currentTower = self
+        
+        communicator.showUpgradeMenu = true
+        
+    }
 
     
     

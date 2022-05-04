@@ -50,13 +50,26 @@ struct GameSceneView: View {
                         Text("Build Gun Tower")
                     }
                     Button {
-                        communicator.hideTowerBuild()
+                        communicator.cancelAllMenus()
                     } label: {
                         Text("Cancel")
                     }
 
                 }
                 
+            }
+            if communicator.showUpgradeMenu{
+                
+                VStack{
+                    Text("Upgrade menu")
+                    Button {
+                        communicator.sellTower()
+                        
+                    } label: {
+                        Text("Sell tower")
+                    }
+
+                }
             }
         }
     }

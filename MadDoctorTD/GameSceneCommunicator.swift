@@ -13,9 +13,11 @@ class GameSceneCommunicator: ObservableObject {
     
     @Published var showFoundationMenu: Bool = false
     @Published var showTowerMenu: Bool = false
+    @Published var showUpgradeMenu: Bool = false
     
     var currentTile: ClickableTile? = nil
     var currentFoundation: FoundationPlate? = nil
+    var currentTower: Tower? = nil
     
     
     
@@ -58,15 +60,11 @@ class GameSceneCommunicator: ObservableObject {
             print("Error building tower")
         }
         
-        hideTowerBuild()
-        
+        cancelAllMenus()
         
     }
     
-    func hideTowerBuild(){
-        currentFoundation = nil
-        showTowerMenu = false
-    }
+    
     
     func cancelAllMenus(){
         currentFoundation = nil
@@ -74,6 +72,15 @@ class GameSceneCommunicator: ObservableObject {
         currentTile?.color = .clear
         currentTile = nil
         showFoundationMenu = false
+        showUpgradeMenu = false
+        currentTower = nil
+    }
+    
+    func sellTower(){
+        
+        currentTower!.removeFromParent()
+        cancelAllMenus()
+        
     }
     
 }

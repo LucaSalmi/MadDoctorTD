@@ -89,6 +89,10 @@ class GameScene: SKScene {
                     
                     print("Foundation Plate clicked")
                 }
+                if node is Tower{
+                    let tower = node as! Tower
+                    tower.onClick()
+                }
             }
         }
         
