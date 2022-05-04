@@ -18,3 +18,20 @@ extension GameScene: SKPhysicsContactDelegate{
     }
     
 }
+
+
+extension CGPoint {
+
+    /**
+    Calculates a distance to the given point.
+
+    :param: point - the point to calculate a distance to
+
+    :returns: distance between current and the given points
+    */
+    func distance(point: CGPoint) -> CGFloat {
+        let dx = self.x - point.x
+        let dy = self.y - point.y
+        return sqrt(dx * dx + dy * dy);
+    }
+}

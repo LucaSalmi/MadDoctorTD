@@ -17,6 +17,7 @@ class GameScene: SKScene {
     var clickableTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
     var towersNode: SKNode = SKNode()
+    var enemiesNode: SKNode = SKNode()
     var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
     
@@ -31,6 +32,8 @@ class GameScene: SKScene {
         setupClickableTiles()
         setupStartFoundation()
         addChild(towersNode)
+        setupEnemies()
+        /*
         enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
         let obstacles = SKNode.obstacles(fromNodePhysicsBodies: foundationPlatesNode.children)
         nodeGraph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 0.0)
@@ -38,6 +41,23 @@ class GameScene: SKScene {
         enemy.position = clickableTilesNode.children[34].position
         enemy.zPosition = 2
         addChild(enemy)
+         */
+    }
+    
+    private func setupEnemies(){
+        
+        
+        let enemy1 = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
+        enemy1.position = CGPoint(x: -64, y: -600)
+        enemy1.zPosition = 2
+        enemiesNode.addChild(enemy1)
+        
+        let enemy2 = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
+        enemy2.position = CGPoint(x: -64, y: -1000)
+        enemy2.zPosition = 2
+        enemiesNode.addChild(enemy2)
+        
+        addChild(enemiesNode)
     }
     
     private func setupClickableTiles() {
@@ -113,6 +133,17 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         
         //Update code
+        
+        for node in towersNode.children {
+            let tower = node as! Tower
+            tower.update()
+        }
+        
+        
+        for node in enemiesNode.children {
+            let enemy = node as! Enemy
+            enemy.update()
+        }
         
     }
     

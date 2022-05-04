@@ -21,7 +21,7 @@ class GunTower: Tower{
         
         super.init(position: position, foundation: foundation)
         
-        texture = SKTexture(imageNamed: "Sand_Grid_DownRightInterior")
+        texture = SKTexture(imageNamed: "gun_tower_online")
     
     }
     

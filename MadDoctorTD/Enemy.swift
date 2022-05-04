@@ -27,7 +27,7 @@ class Enemy: SKSpriteNode{
         
     }
     
-    func update(graph : GKObstacleGraph<GKGraphNode2D>){
+    func update(){
         
         self.position = CGPoint(x: self.position.x, y: self.position.y + EnemiesData.baseSpeed)
         

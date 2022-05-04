@@ -13,6 +13,10 @@ class Tower: SKSpriteNode{
     
     var builtUponFoundation: FoundationPlate?
     
+    var attackRange: CGFloat = TowerData.ATTACK_RANGE
+    
+    var currentTarget: Enemy? = nil
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -40,6 +44,60 @@ class Tower: SKSpriteNode{
         
     }
 
+    private func findNewTarget() {
+        
+        print("Searching for target...")
+        
+        let gameScene = GameScene.instance!
+        
+        let enemies = gameScene.enemiesNode.children
+        
+        var closestDistance = CGFloat(attackRange+1)
+        
+        
+        for node in enemies {
+            
+            let enemy = node as! Enemy
+            
+            let enemyDistance = position.distance(point: enemy.position)
+            
+            if enemyDistance < closestDistance {
+                closestDistance = enemyDistance
+                if enemyDistance <= attackRange {
+                    currentTarget = enemy
+                    print("Target found!")
+                }
+            }
+        }
+        
+    }
     
+    private func attackTarget() {
+        print("Attacking target: \(currentTarget!)")
+        
+        let lookAtConstraint = SKConstraint.orient(to: target,
+                                                   offset: SKRange(constantValue: -CGFloat.pi / 2))
+        pointer.constraints = [ lookAtConstraint ]
+    }
+    
+    func update() {
+        
+        if currentTarget == nil {
+            findNewTarget()
+        }
+        else {
+            let distance = position.distance(point: currentTarget!.position)
+            if distance > attackRange {
+                currentTarget = nil
+                print("Target moved out of sight.")
+            }
+            else {
+                attackTarget()
+            }
+        }
+        
+        
+        
+    }
     
 }
