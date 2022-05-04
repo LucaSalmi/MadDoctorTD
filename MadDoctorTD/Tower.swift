@@ -15,6 +15,11 @@ class Tower: SKSpriteNode{
     
     var attackRange: CGFloat = TowerData.ATTACK_RANGE
     
+    var projectileType: Int = ProjectileTypes.gunProjectile.rawValue
+    
+    var fireRate: Int = TowerData.FIRE_RATE
+    var currentFireRateTick: Int = 0
+    
     var currentTarget: Enemy? = nil
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,7 +34,7 @@ class Tower: SKSpriteNode{
         
         name = "Tower"
         self.position = position
-        zPosition = 2
+        zPosition = 3
     
     }
     
@@ -73,12 +78,35 @@ class Tower: SKSpriteNode{
     private func attackTarget() {
 
 
-        
+        if currentFireRateTick <= 0 {
+            
+            
+            let gameScene = GameScene.instance
+            
+            switch projectileType {
+                
+            case ProjectileTypes.gunProjectile.rawValue:
+                
+                let projectile = GunProjectile(position: self.position, target: currentTarget!)
+                gameScene?.projectilesNode.addChild(projectile)
+                
+                
+            default:
+                print("Error: Could not find projectile type!")
+                
+            }
+            
+            currentFireRateTick = fireRate
+        }
         
         
     }
     
     func update() {
+        
+        if currentFireRateTick > 0 {
+            currentFireRateTick -= 1
+        }
         
         if currentTarget == nil {
             findNewTarget()

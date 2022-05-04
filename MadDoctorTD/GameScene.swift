@@ -17,6 +17,7 @@ class GameScene: SKScene {
     var clickableTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
     var towersNode: SKNode = SKNode()
+    var projectilesNode: SKNode = SKNode()
     var enemiesNode: SKNode = SKNode()
     var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
@@ -32,6 +33,7 @@ class GameScene: SKScene {
         setupClickableTiles()
         setupStartFoundation()
         addChild(towersNode)
+        addChild(projectilesNode)
         setupEnemies()
         
         enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
@@ -137,6 +139,11 @@ class GameScene: SKScene {
         for node in towersNode.children {
             let tower = node as! Tower
             tower.update()
+        }
+        
+        for node in projectilesNode.children {
+            let projectile = node as! Projectile
+            projectile.update()
         }
         
         

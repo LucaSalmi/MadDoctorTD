@@ -22,6 +22,8 @@ class GunTower: Tower{
         super.init(position: position, foundation: foundation)
         
         texture = SKTexture(imageNamed: "gun_tower_online")
+        
+        projectileType = ProjectileTypes.gunProjectile.rawValue
     
     }
     
