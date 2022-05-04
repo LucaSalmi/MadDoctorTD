@@ -59,7 +59,7 @@ struct EnemiesData{
     
     static let size: CGSize = CGSize(width: 32, height: 32)
     static let baseHP: Int = 100
-    static let baseSpeed: Double = 2.0
+    static let baseSpeed: Float = 2.0
     
 }
 
