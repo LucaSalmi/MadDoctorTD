@@ -51,5 +51,12 @@ struct FoundationData{
 
 
 //Enemies
+struct EnemiesData{
+    
+    static let size: CGSize = CGSize(width: 32, height: 32)
+    static let baseHP: Int = 100
+    static let baseSpeed: Int = 32
+    
+}
 
 

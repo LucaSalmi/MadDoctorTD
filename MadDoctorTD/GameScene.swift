@@ -27,6 +27,10 @@ class GameScene: SKScene {
         
         setupClickableTiles()
         setupStartFoundation()
+//        let enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
+//        enemy.position = clickableTilesNode.children[54].position
+//        enemy.zPosition = 2
+//        addChild(enemy)
         
     }
     
