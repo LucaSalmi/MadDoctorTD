@@ -23,6 +23,8 @@ class GameScene: SKScene {
     var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
     
+    let player = Player()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -46,6 +48,9 @@ class GameScene: SKScene {
         enemy.position = clickableTilesNode.children[34].position
         enemy.zPosition = 2
         addChild(enemy)
+        
+        
+        
         
     }
     
