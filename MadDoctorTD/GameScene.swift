@@ -16,6 +16,7 @@ class GameScene: SKScene {
     
     var clickableTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
+    var towersNode: SKNode = SKNode()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -27,6 +28,7 @@ class GameScene: SKScene {
         
         setupClickableTiles()
         setupStartFoundation()
+        addChild(towersNode)
         
     }
     
@@ -82,6 +84,9 @@ class GameScene: SKScene {
                     clickableTile.onClick()
                 }
                 if node is FoundationPlate {
+                    let foundationPlate = node as! FoundationPlate
+                    foundationPlate.onClick()
+                    
                     print("Foundation Plate clicked")
                 }
             }

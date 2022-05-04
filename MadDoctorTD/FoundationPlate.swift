@@ -10,6 +10,8 @@ import SpriteKit
 
 class FoundationPlate: SKSpriteNode{
     
+    var hasTower = false
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -26,6 +28,22 @@ class FoundationPlate: SKSpriteNode{
         physicsBody?.collisionBitMask = PhysicsCategory.Enemy
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
+        
+    }
+    
+    func onClick(){
+        
+        
+        if hasTower {
+            return
+            
+        }
+        let communicator = GameSceneCommunicator.instance
+        communicator.cancelAllMenus()
+        
+        
+        communicator.currentFoundation = self
+        communicator.showTowerMenu = true
         
     }
     
