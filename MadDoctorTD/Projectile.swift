@@ -101,6 +101,12 @@ class Projectile: SKSpriteNode {
         self.position.x += (direction.x * speed)
         self.position.y += (direction.y * speed)
         
+        
+        if position.x > GameScene.instance!.size.width / 4 || position.x < (GameScene.instance!.size.width / 4) * -1 ||
+            position.y > GameScene.instance!.size.height / 4 || position.y < (GameScene.instance!.size.height / 4) * -1
+        {
+            destroy()
+        }
     }
     
 }
