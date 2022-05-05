@@ -119,13 +119,37 @@ class GameScene: SKScene {
     
     private func setupStartFoundation() {
         
-        let clickableTile1 = clickableTilesNode.children[55] as! ClickableTile
-        clickableTile1.containsFoundation = true
-        
-        let foundationPlate1 = FoundationPlate(position: clickableTile1.position, tile: clickableTile1)
-        foundationPlatesNode.addChild(foundationPlate1)
-        
+        foundationPlatesNode.name = "FoundationPlates"
         addChild(foundationPlatesNode)
+        
+        guard let startFoundationMap = childNode(withName: "start_foundation")as? SKTileMapNode else {
+            return
+        }
+        
+        for row in 0..<startFoundationMap.numberOfRows{
+            for column in 0..<startFoundationMap.numberOfColumns{
+                
+                guard let tile = tile(in: startFoundationMap, at: (column, row)) else {continue}
+                guard tile.userData?.object(forKey: "isFoundationPlate") != nil else {continue}
+                
+                let position = startFoundationMap.centerOfTile(atColumn: column, row: row)
+                
+                for node in clickableTilesNode.children {
+                    let clickableTile = node as! ClickableTile
+                    if clickableTile.contains(position) {
+                        
+                        let foundationPlate = FoundationPlate(position: position, tile: clickableTile, isStartingFoundation: true)
+                        
+                        foundationPlatesNode.addChild(foundationPlate)
+                        
+                        foundationPlate.updateFoundationsTexture()
+                    }
+                }
+                
+            }
+        }
+
+        startFoundationMap.removeFromParent()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

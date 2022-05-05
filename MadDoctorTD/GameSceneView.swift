@@ -68,6 +68,7 @@ struct GameSceneView: View {
                     } label: {
                         Text("Sell Foundation")
                     }.disabled(GameScene.instance!.isWaveActive ? true : false)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
                     Button {
                         communicator.cancelAllMenus()
                     } label: {
