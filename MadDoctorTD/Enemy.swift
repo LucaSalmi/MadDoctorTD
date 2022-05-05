@@ -156,7 +156,7 @@ class Enemy: SKSpriteNode{
         
         // Assemble a graph based on the obstacles. Provide a buffer radius so there is a bit of space between the
         // center of the player node and the edges of the obstacles.
-        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: Float(Float(EnemiesData.size.width)/1.2))
+        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: Float(Float(EnemiesData.size.width)*0.8))
         
         // Create a node for the user's current position, and the user's destination.
         let startNode = GKGraphNode2D(point: SIMD2<Float>(Float(player.position.x), Float(player.position.y)))

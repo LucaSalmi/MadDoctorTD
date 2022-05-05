@@ -27,24 +27,20 @@ class ClickableTile: SKSpriteNode{
     
     func onClick() {
         
-        if containsFoundation {
-            return
-            
-        }
-        
-        if isPathBlocked() {
-            print("Cannot build at this location. Path will be blocked!")
-            return
-        }
-        
         let gameScene = GameScene.instance!
         
         if gameScene.isWaveActive {
             return
         }
         
-        let communicator = GameSceneCommunicator.instance
-        communicator.cancelAllMenus()
+        if containsFoundation {
+            return
+        }
+        
+        if isPathBlocked() {
+            print("Cannot build at this location. Path will be blocked!")
+            return
+        }
         
         var adjecentFound = false
         
@@ -83,6 +79,7 @@ class ClickableTile: SKSpriteNode{
         
         color = .white
         
+        let communicator = GameSceneCommunicator.instance
         communicator.currentTile = self
         communicator.showFoundationMenu = true
     }

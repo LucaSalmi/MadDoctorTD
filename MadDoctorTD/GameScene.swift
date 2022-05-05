@@ -128,26 +128,31 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        for touch in touches {
-            let location = touch.location(in: self)
-            let touchedNode = self.nodes(at: location)
-            for node in touchedNode {
-                if node is ClickableTile {
-                    let clickableTile = node as! ClickableTile
-                    clickableTile.onClick()
-                }
-                if node is FoundationPlate {
-                    let foundationPlate = node as! FoundationPlate
-                    foundationPlate.onClick()
-                    
-                    print("Foundation Plate clicked")
-                }
-                if node is Tower{
-                    let tower = node as! Tower
-                    tower.onClick()
-                }
-            }
+        let communicator = GameSceneCommunicator.instance
+        communicator.cancelAllMenus()
+        
+        guard let touch = touches.first else {return}
+        
+        let location = touch.location(in: self)
+        let touchedNode = self.nodes(at: location)
+        
+        let node = touchedNode.first
+        
+        if node is ClickableTile {
+            let clickableTile = node as! ClickableTile
+            clickableTile.onClick()
         }
+        else if node is FoundationPlate {
+            let foundationPlate = node as! FoundationPlate
+            foundationPlate.onClick()
+            
+            print("Foundation Plate clicked")
+        }
+        else if node is Tower{
+            let tower = node as! Tower
+            tower.onClick()
+        }
+        
         
     }
     
