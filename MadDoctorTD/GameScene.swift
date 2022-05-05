@@ -76,12 +76,12 @@ class GameScene: SKScene {
         
         
         let enemy1 = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
-        enemy1.position = CGPoint(x: -64, y: -900)
+        enemy1.position = CGPoint(x: -64, y: -500)
         enemy1.zPosition = 2
         enemiesNode.addChild(enemy1)
         
         let enemy2 = StandardEnemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"))
-        enemy2.position = CGPoint(x: -64, y: -1000)
+        enemy2.position = CGPoint(x: -64, y: -300)
         enemy2.zPosition = 2
         enemiesNode.addChild(enemy2)
         
@@ -173,9 +173,10 @@ class GameScene: SKScene {
         
         if isWaveActive{
             
-            for enemy in enemiesNode.children{
+            for node in enemiesNode.children{
                 
-                GameScene.instance!.playerPathfinding.movePlayerToGoal(player: enemy)
+                let enemy = node as! Enemy
+                enemy.movePlayerToGoal()
                 
             }
             
