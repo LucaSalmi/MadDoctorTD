@@ -113,9 +113,9 @@ class FoundationPlate: SKSpriteNode{
             if leftFound != nil && topFound != nil{
                 texture = SKTexture(imageNamed: "F_tile_power_on_miss_right_n_bot")
             }
-            
-            //TODO:
+
         case 3:
+            
             if leftFound == nil {
                 if !isCenterFoundation {
                     print("DANNE: left missing!")
@@ -140,7 +140,9 @@ class FoundationPlate: SKSpriteNode{
                 }
                 texture = SKTexture(imageNamed: "F_tile_power_on_miss_bot")
             }
+            
         case 4:
+            
             texture = SKTexture(imageNamed: "F_tile_power_on")
             
         default:
