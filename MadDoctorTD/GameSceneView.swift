@@ -81,28 +81,34 @@ struct GameSceneView: View {
                 
                 VStack(spacing: 25){
                     Text("Upgrade menu")
+                    
+                    
                     Button {
-                        communicator.currentTower!.upgradeDamage()
+                        
+                        communicator.currentTower!.upgrade(upgradeType: .damage)
                     } label: {
                         Text("Upgrade damage")
                     }
                     Button {
-                        communicator.currentTower!.upgradeRange()
+                        communicator.currentTower!.upgrade(upgradeType: .range)
                     } label: {
                         Text("Upgrade range")
                     }
                     Button {
-                        communicator.currentTower!.upgradeAttackSpeed()
+                        communicator.currentTower!.upgrade(upgradeType: .firerate)
                     } label: {
                         Text("Upgrade attack speed")
                     }
                     Button {
                         communicator.sellTower()
+                        
                     } label: {
                         Text("Sell tower")
                     }
 
                 }.font(.title)
+                    .foregroundColor(communicator.currentTower!.upgradeCount <= TowerData.MAX_UPGRADE ? Color.white : Color.gray)
+                    
             }
         }
     }

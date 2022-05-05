@@ -48,7 +48,9 @@ struct FoundationData{
     static let price: Int = 100
     
 }
-
+enum UpgradeTypes: Int{
+    case damage = 0, range, firerate
+}
 
 //Towers
 enum TowerTypes: Int{
@@ -66,6 +68,9 @@ struct TowerData {
     static let UPGRADE_DAMAGE_BONUS_PCT: Double = 1.2
     static let UPGRADE_FIRE_RATE_REDUCTION_PCT: Double = 0.8
     static let UPGRADE_RANGE_BONUS_PCT: Double = 1.2
+    
+    static let MAX_UPGRADE: Int = 5
+    
     
 }
 
