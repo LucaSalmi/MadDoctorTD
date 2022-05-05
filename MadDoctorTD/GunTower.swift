@@ -25,6 +25,7 @@ class GunTower: Tower{
         
         projectileType = ProjectileTypes.gunProjectile.rawValue
     
+        attackDamage = Int(Double(attackDamage) * 0.8)
     }
     
 }

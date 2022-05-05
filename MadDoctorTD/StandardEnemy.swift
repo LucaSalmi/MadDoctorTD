@@ -10,7 +10,7 @@ import SpriteKit
 
 class StandardEnemy: Enemy{
     
-    var hp = EnemiesData.baseHP
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -26,16 +26,7 @@ class StandardEnemy: Enemy{
         super.update()
     }
     
-    override func getDamage(dmgValue: Int) {
-        
-        hp -= dmgValue
-        
-        if hp <= 0{
-            
-            self.removeFromParent()
-            
-        }
-    }
+    
     
     
     

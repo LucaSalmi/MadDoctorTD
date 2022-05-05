@@ -19,10 +19,15 @@ extension GameScene: SKPhysicsContactDelegate{
         
         if nodeA is Projectile && nodeB is Enemy {
             let projectile = nodeA as! Projectile
+            let enemy = nodeB as! Enemy
+            enemy.getDamage(dmgValue: projectile.attackDamage)
             projectile.destroy()
+            
         }
         if nodeB is Projectile && nodeA is Enemy {
             let projectile = nodeB as! Projectile
+            let enemy = nodeA as! Enemy
+            enemy.getDamage(dmgValue: projectile.attackDamage)
             projectile.destroy()
         }
         
