@@ -42,6 +42,7 @@ class Tower: SKSpriteNode{
     
     func onClick(){
         
+        displayRangeIndicator()
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
         
@@ -144,8 +145,20 @@ class Tower: SKSpriteNode{
                 attackTarget()
             }
         }
+    }
+    
+    func displayRangeIndicator(){
         
+        guard let gameScene = GameScene.instance else{return}
         
+        gameScene.rangeIndicator = SKShapeNode(circleOfRadius: attackRange)
+        gameScene.rangeIndicator!.name = "RangeIndicator"
+        gameScene.rangeIndicator!.fillColor = SKColor(.white.opacity(0.2))
+        
+        gameScene.rangeIndicator!.zPosition = 2
+        gameScene.rangeIndicator!.position = position
+        
+        GameScene.instance?.addChild(gameScene.rangeIndicator!)
         
     }
     
