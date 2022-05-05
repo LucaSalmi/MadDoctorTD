@@ -174,7 +174,7 @@ class GameScene: SKScene {
             for node in enemiesNode.children{
                 
                 let enemy = node as! Enemy
-                enemy.movePlayerToGoal()
+                enemy.update()
                 
             }
             
