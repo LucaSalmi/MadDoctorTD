@@ -23,7 +23,7 @@ class GameScene: SKScene {
     var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
     
-    let player = Player()
+    let playerPathfinding = PlayerPathfinding()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

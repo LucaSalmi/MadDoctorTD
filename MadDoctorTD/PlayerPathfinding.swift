@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class Player {
+class PlayerPathfinding {
     var moving: Bool = false
     
     func movePlayerToGoal() {
@@ -31,7 +31,7 @@ class Player {
         
         // Assemble a graph based on the obstacles. Provide a buffer radius so there is a bit of space between the
         // center of the player node and the edges of the obstacles.
-        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 25)
+        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 43)
         
         // Create a node for the user's current position, and the user's destination.
         let startNode = GKGraphNode2D(point: SIMD2<Float>(Float(player!.position.x), Float(player!.position.y)))
