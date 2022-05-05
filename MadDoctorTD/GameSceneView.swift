@@ -24,6 +24,16 @@ struct GameSceneView: View {
             SpriteView(scene: gameScene)
                 .ignoresSafeArea()
             
+            VStack {
+                Spacer()
+                Button {
+                    GameScene.instance!.playerPathfinding.movePlayerToGoal()
+                } label: {
+                    Text("MOVE!")
+                }
+
+            }
+            
             if communicator.showFoundationMenu{
                 VStack {
                     Text("Foundation menu")

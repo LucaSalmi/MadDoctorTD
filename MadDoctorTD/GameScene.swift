@@ -23,6 +23,8 @@ class GameScene: SKScene {
     var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
     
+    let playerPathfinding = PlayerPathfinding()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -43,6 +45,25 @@ class GameScene: SKScene {
         let obstacles = SKNode.obstacles(fromNodePhysicsBodies: foundationPlatesNode.children)
         nodeGraph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 0.0)
         
+
+        
+        
+        
+    }
+    
+    private func setupEnemies(){
+        
+        
+        let enemy1 = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
+        enemy1.position = CGPoint(x: -64, y: -600)
+        enemy1.zPosition = 2
+        enemiesNode.addChild(enemy1)
+        
+        let enemy2 = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
+        enemy2.position = CGPoint(x: -64, y: -1000)
+        enemy2.zPosition = 2
+        enemiesNode.addChild(enemy2)
+
         //enemy.position = clickableTilesNode.children[34].position
         //enemy.zPosition = 2
         //addChild(enemy)
@@ -51,6 +72,7 @@ class GameScene: SKScene {
         enemy.sprite.position = clickableTilesNode.children[34].position
         enemy.sprite.zPosition = 2
         addChild(enemy.sprite)
+
         
     }
     
