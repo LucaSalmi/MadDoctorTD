@@ -31,10 +31,20 @@ class ClickableTile: SKSpriteNode{
             return
             
         }
-        let communicator = GameSceneCommunicator.instance
-        communicator.cancelAllMenus()
+        
+        if isPathBlocked() {
+            print("Cannot build at this location. Path will be blocked!")
+            return
+        }
         
         let gameScene = GameScene.instance!
+        
+        if gameScene.isWaveActive {
+            return
+        }
+        
+        let communicator = GameSceneCommunicator.instance
+        communicator.cancelAllMenus()
         
         var adjecentFound = false
         
@@ -75,6 +85,31 @@ class ClickableTile: SKSpriteNode{
         
         communicator.currentTile = self
         communicator.showFoundationMenu = true
+    }
+    
+    private func isPathBlocked() -> Bool {
+        
+        var isBlocked = false
+        
+        let gameScene = GameScene.instance!
+        
+        let testFoundation = FoundationPlate(position: self.position, tile: self)
+        gameScene.foundationPlatesNode.addChild(testFoundation)
+        
+        let enemies = gameScene.enemiesNode.children
+        
+        for node in enemies {
+            let enemy = node as! Enemy
+            let movePoints = enemy.movePlayerToGoal()
+            enemy.moving = false
+            if movePoints.isEmpty {
+                isBlocked = true
+            }
+        }
+        
+        gameScene.foundationPlatesNode.removeChildren(in: [testFoundation])
+        
+        return isBlocked
     }
     
 }

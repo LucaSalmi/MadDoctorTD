@@ -67,7 +67,7 @@ class GameScene: SKScene {
             }
         }
         
-        edgesTileMap.removeFromParent()
+        //edgesTileMap.removeFromParent()
     }
     
     private func setupEnemies(){

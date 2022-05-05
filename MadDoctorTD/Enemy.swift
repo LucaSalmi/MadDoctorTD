@@ -134,12 +134,14 @@ class Enemy: SKSpriteNode{
     }
     
     
-    func movePlayerToGoal() {
+    func movePlayerToGoal() -> [CGPoint] {
+        
+        var newMovePoints = [CGPoint]()
         
         let gameScene = GameScene.instance!
         
         // Ensure the player doesn't move when they are already moving.
-        guard (!moving) else {return}
+        guard (!moving) else {return newMovePoints}
         
         // Find the player in the scene.
         
@@ -154,7 +156,7 @@ class Enemy: SKSpriteNode{
         
         // Assemble a graph based on the obstacles. Provide a buffer radius so there is a bit of space between the
         // center of the player node and the edges of the obstacles.
-        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: Float(Float(EnemiesData.size.width)))
+        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: Float(Float(EnemiesData.size.width)/1.2))
         
         // Create a node for the user's current position, and the user's destination.
         let startNode = GKGraphNode2D(point: SIMD2<Float>(Float(player.position.x), Float(player.position.y)))
@@ -168,12 +170,10 @@ class Enemy: SKSpriteNode{
         let path:[GKGraphNode] = graph.findPath(from: startNode, to: endNode)
         
         // If the path has 0 nodes, then a path could not be found, so return.
-        guard path.count > 0 else { moving = false; print("Error: Path array is empty. No clear path found!"); return }
+        guard path.count > 0 else { moving = false; print("Error: Path array is empty. No clear path found!"); return newMovePoints }
         
         // Create an array of actions that the player node can use to follow the path.
         //var actions = [SKAction]()
-        
-        var newMovePoints = [CGPoint]()
         
         for node:GKGraphNode in path {
             if let point2d = node as? GKGraphNode2D {
@@ -203,6 +203,8 @@ class Enemy: SKSpriteNode{
 //            // When the action completes, allow the player to move again.
 //            self.moving = false
 //        })
+        
+        return newMovePoints
     }
     
 //    private func getDuration(pointA:CGPoint,pointB:CGPoint,speed:CGFloat)->TimeInterval {
