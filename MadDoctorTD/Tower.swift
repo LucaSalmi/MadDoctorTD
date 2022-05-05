@@ -24,19 +24,25 @@ class Tower: SKSpriteNode{
     
     var currentTarget: Enemy? = nil
     
+    var towerTexture = SKSpriteNode()
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
     
-    init(position: CGPoint, foundation: FoundationPlate){
+    init(position: CGPoint, foundation: FoundationPlate, textureName: String){
         
         self.builtUponFoundation = foundation
-        let texture: SKTexture = SKTexture(imageNamed: "Sand_Grid_DownRightInterior")
-        super.init(texture: texture, color: .clear, size: TowerData.size)
+        towerTexture = SKSpriteNode(texture: SKTexture(imageNamed: textureName), color: .clear, size: TowerData.TEXTURE_SIZE)
+        super.init(texture: nil, color: .clear, size: TowerData.TILE_SIZE)
         
         name = "Tower"
         self.position = position
         zPosition = 3
+        
+        towerTexture.position = position
+        towerTexture.zPosition = 2
+        
     
     }
     
@@ -75,7 +81,6 @@ class Tower: SKSpriteNode{
                 }
             }
         }
-        
     }
     
     private func attackTarget() {
@@ -141,7 +146,7 @@ class Tower: SKSpriteNode{
             else {
                 let lookAtConstraint = SKConstraint.orient(to: currentTarget!,
                                             offset: SKRange(constantValue: -CGFloat.pi / 2))
-                self.constraints = [ lookAtConstraint ]
+                self.towerTexture.constraints = [ lookAtConstraint ]
                 attackTarget()
             }
         }

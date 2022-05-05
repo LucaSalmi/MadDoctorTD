@@ -16,13 +16,11 @@ class GunTower: Tower{
         fatalError("use init()")
     }
     
-    override init(position: CGPoint, foundation: FoundationPlate){
+    override init(position: CGPoint, foundation: FoundationPlate, textureName: String){
         
         
-        super.init(position: position, foundation: foundation)
-        
-        texture = SKTexture(imageNamed: "gun_tower_online")
-        
+        super.init(position: position, foundation: foundation, textureName: textureName)
+                
         projectileType = ProjectileTypes.gunProjectile.rawValue
     
         attackDamage = Int(Double(attackDamage) * 0.8)
