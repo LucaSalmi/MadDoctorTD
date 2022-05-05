@@ -79,10 +79,41 @@ class FoundationPlate: SKSpriteNode{
         switch numberOfAdjecentFound {
            
         case 1:
-            texture = SKTexture(imageNamed: "F_tile_power_on_connect_bot")
-            //TODO:
+            
+            if leftFound != nil{
+                texture = SKTexture(imageNamed: "F_tile_power_on_connect_left")
+            }
+            if rightFound != nil{
+                texture = SKTexture(imageNamed: "F_tile_power_on_connect_right")
+            }
+            if topFound != nil{
+                texture = SKTexture(imageNamed: "F_tile_power_on_connect_top")
+            }
+            if bottomFound != nil{
+                texture = SKTexture(imageNamed: "F_tile_power_on_connect_bot")
+            }
+            
         case 2:
-            texture = SKTexture(imageNamed: "F_tile_power_on_miss_top_n_left")
+            
+            if topFound != nil && bottomFound != nil{
+                texture = SKTexture(imageNamed: "F_tile_power_on_miss_right_n_left")
+            }
+            if rightFound != nil && leftFound != nil{
+                texture = SKTexture(imageNamed: "F_tile_power_on_miss_top_n_bot")
+            }
+            if topFound != nil && rightFound != nil{
+                texture = SKTexture(imageNamed: "F_tile_power_on_miss_left_n_bot")
+            }
+            if rightFound != nil && bottomFound != nil{
+                texture = SKTexture(imageNamed: "F_tile_power_on_miss_top_n_left")
+            }
+            if bottomFound != nil && leftFound != nil{
+                texture = SKTexture(imageNamed: "F_tile_power_on_miss_top_n_right")
+            }
+            if leftFound != nil && topFound != nil{
+                texture = SKTexture(imageNamed: "F_tile_power_on_miss_right_n_bot")
+            }
+            
             //TODO:
         case 3:
             if leftFound == nil {
