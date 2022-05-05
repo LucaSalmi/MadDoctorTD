@@ -15,6 +15,7 @@ class GameScene: SKScene {
     static var instance: GameScene? = nil
     
     var clickableTilesNode: SKNode = SKNode()
+    var edgesTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
     var towersNode: SKNode = SKNode()
     var projectilesNode: SKNode = SKNode()
@@ -22,6 +23,8 @@ class GameScene: SKScene {
     var enemiesNode: SKNode = SKNode()
     var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
+    
+    var isWaveActive: Bool = false
     
     let playerPathfinding = PlayerPathfinding()
     
@@ -36,20 +39,37 @@ class GameScene: SKScene {
         physicsWorld.contactDelegate = self
         
         setupClickableTiles()
+        setupEdges()
+        addChild(edgesTilesNode)
         setupStartFoundation()
         addChild(towersNode)
         addChild(projectilesNode)
         setupEnemies()
         addChild(enemiesNode)
         
-        //enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
-        let obstacles = SKNode.obstacles(fromNodePhysicsBodies: foundationPlatesNode.children)
-        nodeGraph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 0.0)
+    }
+    
+    private func setupEdges(){
         
+        guard let edgesTileMap = childNode(withName: "edge")as? SKTileMapNode else {
+            return
+        }
+        
+        for row in 0..<edgesTileMap.numberOfRows{
+            for column in 0..<edgesTileMap.numberOfColumns{
+                
+                guard let tile = tile(in: edgesTileMap, at: (column, row)) else {continue}
+                guard tile.userData?.object(forKey: "isEdge") != nil else {continue}
+                
+                let edge = Edge()
+                
+                edge.position = edgesTileMap.centerOfTile(atColumn: column, row: row)
+                edgesTilesNode.addChild(edge)
 
+            }
+        }
         
-        
-        
+        edgesTileMap.removeFromParent()
     }
     
     private func setupEnemies(){
@@ -151,10 +171,14 @@ class GameScene: SKScene {
             projectile.update()
         }
         
-        
-        for node in enemiesNode.children {
-            let enemy = node as! Enemy
-            enemy.update()
+        if isWaveActive{
+            
+            for enemy in enemiesNode.children{
+                
+                GameScene.instance!.playerPathfinding.movePlayerToGoal(player: enemy)
+                
+            }
+            
         }
         
     }

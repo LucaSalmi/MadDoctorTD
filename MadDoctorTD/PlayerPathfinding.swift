@@ -12,7 +12,7 @@ import GameplayKit
 class PlayerPathfinding {
     var moving: Bool = false
     
-    func movePlayerToGoal() {
+    func movePlayerToGoal(player: SKNode) {
         
         let gameScene = GameScene.instance!
         
@@ -21,20 +21,23 @@ class PlayerPathfinding {
         moving = true
         
         // Find the player in the scene.
-        let player = gameScene.childNode(withName: "player")
+        
+        //let player = gameScene.childNode(withName: "enemy")
         let goal = gameScene.childNode(withName: "goal")
         
         // Create an array of obstacles, which is every child node, apart from the player node.
-        let obstacles = SKNode.obstacles(fromNodeBounds: gameScene.foundationPlatesNode.children.filter({ (element ) -> Bool in
+        var obstacles = SKNode.obstacles(fromNodeBounds: gameScene.foundationPlatesNode.children.filter({ (element ) -> Bool in
             return element != player
         }))
+        let edges = SKNode.obstacles(fromNodeBounds: gameScene.edgesTilesNode.children)
+        obstacles.append(contentsOf: edges)
         
         // Assemble a graph based on the obstacles. Provide a buffer radius so there is a bit of space between the
         // center of the player node and the edges of the obstacles.
-        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 36)
+        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 0)
         
         // Create a node for the user's current position, and the user's destination.
-        let startNode = GKGraphNode2D(point: SIMD2<Float>(Float(player!.position.x), Float(player!.position.y)))
+        let startNode = GKGraphNode2D(point: SIMD2<Float>(Float(player.position.x), Float(player.position.y)))
         let endNode = GKGraphNode2D(point: SIMD2<Float>(Float(goal!.position.x), Float(goal!.position.y)))
         
         // Connect the two nodes just created to graph.
@@ -54,11 +57,11 @@ class PlayerPathfinding {
             if let point2d = node as? GKGraphNode2D {
                 let nextPoint = CGPoint(x: CGFloat(point2d.position.x), y: CGFloat(point2d.position.y))
                 let speed = CGFloat(300.0)
-                print("Player pos = \(player!.position). Next point = \(nextPoint)")
-                if player!.position == nextPoint {
+                print("Player pos = \(player.position). Next point = \(nextPoint)")
+                if player.position == nextPoint {
                     continue
                 }
-                var duration = getDuration(pointA: player!.position, pointB: nextPoint, speed: speed)
+                var duration = getDuration(pointA: player.position, pointB: nextPoint, speed: speed)
                 if duration <= 0.0 {
                     duration = 0.1
                 }
@@ -70,7 +73,7 @@ class PlayerPathfinding {
         
         // Convert those actions into a sequence action, then run it on the player node.
         let sequence = SKAction.sequence(actions)
-        player!.run(sequence, completion: { () -> Void in
+        player.run(sequence, completion: { () -> Void in
             // When the action completes, allow the player to move again.
             self.moving = false
         })

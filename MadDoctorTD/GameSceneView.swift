@@ -27,7 +27,10 @@ struct GameSceneView: View {
             VStack {
                 Spacer()
                 Button {
-                    GameScene.instance!.playerPathfinding.movePlayerToGoal()
+                    
+                    GameScene.instance?.isWaveActive = true
+                        
+                    
                 } label: {
                     Text("MOVE!")
                 }
