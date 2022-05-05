@@ -24,7 +24,7 @@ class FlyingEnemy: Enemy{
     }
     
     override func update() {
-        super.update()
+        //TODO: fly
     }
     
 }

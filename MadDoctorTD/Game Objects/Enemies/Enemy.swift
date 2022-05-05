@@ -18,7 +18,7 @@ class Enemy: SKSpriteNode{
     let goal = GameScene.instance!.childNode(withName: "goal")
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
-
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -40,8 +40,6 @@ class Enemy: SKSpriteNode{
     }
     
     func update(){
-        
-        //self.position = CGPoint(x: self.position.x, y: self.position.y + CGFloat(baseSpeed))
         
         if !self.moving {
             let _ = movePlayerToGoal()
@@ -183,13 +181,13 @@ class Enemy: SKSpriteNode{
                 if player.position == nextPoint {
                     continue
                 }
-//                var duration = getDuration(pointA: player.position, pointB: nextPoint, speed: baseSpeed)
-//                if duration <= 0.0 {
-//                    duration = 0.1
-//                }
-//                print("Duration = \(duration)")
-//                let action = SKAction.move(to: nextPoint, duration: duration)
-//                actions.append(action)
+                //                var duration = getDuration(pointA: player.position, pointB: nextPoint, speed: baseSpeed)
+                //                if duration <= 0.0 {
+                //                    duration = 0.1
+                //                }
+                //                print("Duration = \(duration)")
+                //                let action = SKAction.move(to: nextPoint, duration: duration)
+                //                actions.append(action)
                 
                 newMovePoints.append(nextPoint)
             }
@@ -198,23 +196,23 @@ class Enemy: SKSpriteNode{
         self.movePoints = newMovePoints
         self.moving = true
         
-//        // Convert those actions into a sequence action, then run it on the player node.
-//        let sequence = SKAction.sequence(actions)
-//        player.run(sequence, completion: { () -> Void in
-//            // When the action completes, allow the player to move again.
-//            self.moving = false
-//        })
+        //        // Convert those actions into a sequence action, then run it on the player node.
+        //        let sequence = SKAction.sequence(actions)
+        //        player.run(sequence, completion: { () -> Void in
+        //            // When the action completes, allow the player to move again.
+        //            self.moving = false
+        //        })
         
         return newMovePoints
     }
     
-//    private func getDuration(pointA:CGPoint,pointB:CGPoint,speed:CGFloat)->TimeInterval {
-//        let xDist = abs(pointA.x - pointB.x)
-//        let yDist = abs(pointA.y - pointB.y)
-//        let distance = sqrt((xDist * xDist) + (yDist * yDist));
-//
-//        let duration : TimeInterval = TimeInterval(distance/speed)
-//        return duration
-//    }
+    //    private func getDuration(pointA:CGPoint,pointB:CGPoint,speed:CGFloat)->TimeInterval {
+    //        let xDist = abs(pointA.x - pointB.x)
+    //        let yDist = abs(pointA.y - pointB.y)
+    //        let distance = sqrt((xDist * xDist) + (yDist * yDist));
+    //
+    //        let duration : TimeInterval = TimeInterval(distance/speed)
+    //        return duration
+    //    }
     
 }
