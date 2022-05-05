@@ -53,8 +53,9 @@ class GameSceneCommunicator: ObservableObject {
         switch type{
         
         case TowerTypes.gunTower.rawValue:
-            let gunTower = GunTower(position: currentFoundation!.position, foundation: currentFoundation!)
+            let gunTower = GunTower(position: currentFoundation!.position, foundation: currentFoundation!, textureName: "gun_tower_online")
             GameScene.instance!.towersNode.addChild(gunTower)
+            GameScene.instance!.addChild(gunTower.towerTexture)
         
         default:
             print("Error building tower")
@@ -80,6 +81,7 @@ class GameSceneCommunicator: ObservableObject {
         
         currentTower!.builtUponFoundation?.hasTower = false
         currentTower!.removeFromParent()
+        currentTower?.towerTexture.removeFromParent()
         
         cancelAllMenus()
         

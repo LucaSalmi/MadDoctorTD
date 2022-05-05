@@ -159,26 +159,12 @@ class GameScene: SKScene {
         }
         else if node is Tower{
             let tower = node as! Tower
-            displayRangeIndicator(tower: tower)
             tower.onClick()
         }
-        
-        
+
     }
     
-    func displayRangeIndicator(tower: Tower){
-        
-        
-        rangeIndicator = SKShapeNode(circleOfRadius: tower.attackRange)
-        rangeIndicator!.name = "RangeIndicator"
-        rangeIndicator!.fillColor = SKColor(.white.opacity(0.2))
-        
-        rangeIndicator!.zPosition = 2
-        rangeIndicator!.position = tower.position
-        
-        GameScene.instance?.addChild(rangeIndicator!)
-        
-    }
+
     
     func tile(in tileMap: SKTileMapNode, at coordinates: tileCoordinates) -> SKTileDefinition?{
         return tileMap.tileDefinition(atColumn: coordinates.column, row: coordinates.row)
