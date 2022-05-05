@@ -17,6 +17,7 @@ struct GameSceneView: View {
     init() {
         gameScene = SKScene(fileNamed: "GameScene")!
         gameScene.scaleMode = .aspectFit
+        communicator.cancelAllMenus()
     }
 
     var body: some View {
@@ -38,7 +39,7 @@ struct GameSceneView: View {
             }
             
             if communicator.showFoundationMenu{
-                VStack {
+                VStack(spacing: 25) {
                     Text("Foundation menu")
                     Button {
                         communicator.buildFoundation()
@@ -51,11 +52,11 @@ struct GameSceneView: View {
                         Text("Cancel")
                     }
 
-                }
+                }.font(.title)
             }
             if communicator.showTowerMenu{
                 
-                VStack(spacing: 50) {
+                VStack(spacing: 25) {
                     Text("Tower menu")
                     Button {
                         communicator.buildTower(type: TowerTypes.gunTower.rawValue)
@@ -78,16 +79,30 @@ struct GameSceneView: View {
             }
             if communicator.showUpgradeMenu{
                 
-                VStack{
+                VStack(spacing: 25){
                     Text("Upgrade menu")
                     Button {
+                        communicator.currentTower!.upgradeDamage()
+                    } label: {
+                        Text("Upgrade damage")
+                    }
+                    Button {
+                        communicator.currentTower!.upgradeRange()
+                    } label: {
+                        Text("Upgrade range")
+                    }
+                    Button {
+                        communicator.currentTower!.upgradeAttackSpeed()
+                    } label: {
+                        Text("Upgrade attack speed")
+                    }
+                    Button {
                         communicator.sellTower()
-                        
                     } label: {
                         Text("Sell tower")
                     }
 
-                }
+                }.font(.title)
             }
         }
     }
