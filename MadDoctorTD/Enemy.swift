@@ -43,7 +43,7 @@ class Enemy: SKSpriteNode{
         //self.position = CGPoint(x: self.position.x, y: self.position.y + CGFloat(baseSpeed))
         
         if !self.moving {
-            movePlayerToGoal()
+            let _ = movePlayerToGoal()
             return
         }
         
