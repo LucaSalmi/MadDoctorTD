@@ -19,6 +19,7 @@ class FlyingEnemy: Enemy{
         super.init(texture: texture, color: .clear)
         hp = EnemiesData.BASE_HP * Int(EnemiesData.FLY_HP_MODIFIER)
         speed = EnemiesData.BASE_SPEED * EnemiesData.FLY_SPEED_MODIFIER
+        waveSlotSize = EnemiesData.FLY_ENEMY_SLOT
         
     }
     

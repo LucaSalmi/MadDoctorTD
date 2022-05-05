@@ -100,5 +100,11 @@ struct EnemiesData{
     static let HEAVY_SPEED_MODIFIER: CGFloat = 0.80
     static let FLY_SPEED_MODIFIER: CGFloat = 0.80
     
+    static let STANDARD_ENEMY_SLOT = 1
+    static let HEAVY_ENEMY_SLOT = 2
+    static let FAST_ENEMY_SLOT = 1
+    static let FLY_ENEMY_SLOT = 1
+    
+    
 }
 

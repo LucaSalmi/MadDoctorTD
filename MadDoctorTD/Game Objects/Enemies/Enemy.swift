@@ -17,6 +17,7 @@ class Enemy: SKSpriteNode{
     var movePoints = [CGPoint]()
     let goal = GameScene.instance!.childNode(withName: "goal")
     var direction: CGPoint = CGPoint(x: 0, y: 0)
+    var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
 
     
     required init?(coder aDecoder: NSCoder) {
