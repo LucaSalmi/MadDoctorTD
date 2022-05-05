@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */; };
 		3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3311AB9028231156009DEEEC /* gun_projectile_impact.wav */; };
-		3311AB9328231F23009DEEEC /* PlayerPathfinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3311AB9228231F23009DEEEC /* PlayerPathfinding.swift */; };
 		3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */; };
 		3320331A2822ABF500133BBA /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332033192822ABF500133BBA /* Projectile.swift */; };
 		3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320331C2822ACFA00133BBA /* GunProjectile.swift */; };
@@ -40,6 +39,7 @@
 		C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CF28216CD400F66043 /* FoundationPlate.swift */; };
 		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
 		C8E693432823B26E00D0A661 /* StandardEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693422823B26E00D0A661 /* StandardEnemy.swift */; };
+		C8E693452823C38F00D0A661 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693442823C38F00D0A661 /* Edge.swift */; };
 		E5268CCC28226EF000F134A5 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCB28226EF000F134A5 /* Tower.swift */; };
 		E5268CCE2822707200F134A5 /* NormalGunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCD2822707200F134A5 /* NormalGunner.swift */; };
 		E5268CD02822708600F134A5 /* GunTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCF2822708600F134A5 /* GunTower.swift */; };
@@ -48,7 +48,6 @@
 /* Begin PBXFileReference section */
 		3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GunProjectileImpact.sks; sourceTree = "<group>"; };
 		3311AB9028231156009DEEEC /* gun_projectile_impact.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gun_projectile_impact.wav; sourceTree = "<group>"; };
-		3311AB9228231F23009DEEEC /* PlayerPathfinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPathfinding.swift; sourceTree = "<group>"; };
 		3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneCommunicator.swift; sourceTree = "<group>"; };
 		332033192822ABF500133BBA /* Projectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
 		3320331C2822ACFA00133BBA /* GunProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunProjectile.swift; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 		C839C6CF28216CD400F66043 /* FoundationPlate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationPlate.swift; sourceTree = "<group>"; };
 		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		C8E693422823B26E00D0A661 /* StandardEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardEnemy.swift; sourceTree = "<group>"; };
+		C8E693442823C38F00D0A661 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		E5268CCB28226EF000F134A5 /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
 		E5268CCD2822707200F134A5 /* NormalGunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalGunner.swift; sourceTree = "<group>"; };
 		E5268CCF2822708600F134A5 /* GunTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunTower.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 				C8E693422823B26E00D0A661 /* StandardEnemy.swift */,
 				3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */,
 				3311AB9028231156009DEEEC /* gun_projectile_impact.wav */,
-				3311AB9228231F23009DEEEC /* PlayerPathfinding.swift */,
+				C8E693442823C38F00D0A661 /* Edge.swift */,
 			);
 			path = MadDoctorTD;
 			sourceTree = "<group>";
@@ -250,10 +250,10 @@
 				3359CC9328214D8300878191 /* GameScene.swift in Sources */,
 				3359CC9628214E2200878191 /* GameSceneView.swift in Sources */,
 				C839C6AF2821352400F66043 /* Persistence.swift in Sources */,
-				3311AB9328231F23009DEEEC /* PlayerPathfinding.swift in Sources */,
 				E5268CD02822708600F134A5 /* GunTower.swift in Sources */,
 				C839C6BD2821586300F66043 /* GameManager.swift in Sources */,
 				C868AACE28229790003F91D0 /* Enemy.swift in Sources */,
+				C8E693452823C38F00D0A661 /* Edge.swift in Sources */,
 				C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */,
 				C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */,
 				C839C6CC2821621400F66043 /* SettingsView.swift in Sources */,
