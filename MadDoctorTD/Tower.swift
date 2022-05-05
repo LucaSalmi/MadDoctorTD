@@ -26,6 +26,9 @@ class Tower: SKSpriteNode{
     
     var towerTexture = SKSpriteNode()
     
+    var upgradeCount: Int = 1
+    
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -43,7 +46,7 @@ class Tower: SKSpriteNode{
         towerTexture.position = position
         towerTexture.zPosition = 2
         
-    
+        
     }
     
     func onClick(){
@@ -57,7 +60,7 @@ class Tower: SKSpriteNode{
         communicator.showUpgradeMenu = true
         
     }
-
+    
     private func findNewTarget() {
         
         let gameScene = GameScene.instance!
@@ -84,8 +87,8 @@ class Tower: SKSpriteNode{
     }
     
     private func attackTarget() {
-
-
+        
+        
         
         if currentFireRateTick <= 0 {
             
@@ -127,17 +130,29 @@ class Tower: SKSpriteNode{
         
     }
     
-    func upgradeDamage() {
-        attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
+    func upgrade(upgradeType : UpgradeTypes){
+        
+        if upgradeCount <= TowerData.MAX_UPGRADE{
+            
+            switch upgradeType {
+            case .damage:
+                attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
+            case .range:
+                attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
+                displayRangeIndicator()
+            case .firerate:
+                fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
+            }
+            
+            upgradeCount += 1
+            
+        }
+        
+        
+        
+        
     }
-    
-    func upgradeRange() {
-        attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
-    }
-    
-    func upgradeAttackSpeed() {
-        fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
-    }
+
     
     func update() {
         
@@ -157,7 +172,7 @@ class Tower: SKSpriteNode{
             }
             else {
                 let lookAtConstraint = SKConstraint.orient(to: currentTarget!,
-                                            offset: SKRange(constantValue: -CGFloat.pi / 2))
+                                                           offset: SKRange(constantValue: -CGFloat.pi / 2))
                 self.towerTexture.constraints = [ lookAtConstraint ]
                 attackTarget()
             }
@@ -167,6 +182,11 @@ class Tower: SKSpriteNode{
     func displayRangeIndicator(){
         
         guard let gameScene = GameScene.instance else{return}
+        
+        if gameScene.rangeIndicator != nil{
+            gameScene.rangeIndicator!.removeFromParent()
+            
+        }
         
         gameScene.rangeIndicator = SKShapeNode(circleOfRadius: attackRange)
         gameScene.rangeIndicator!.name = "RangeIndicator"
@@ -180,3 +200,5 @@ class Tower: SKSpriteNode{
     }
     
 }
+
+

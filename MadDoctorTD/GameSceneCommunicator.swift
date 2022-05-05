@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class GameSceneCommunicator: ObservableObject {
     
@@ -82,6 +83,7 @@ class GameSceneCommunicator: ObservableObject {
         currentTower!.builtUponFoundation?.hasTower = false
         currentTower!.removeFromParent()
         currentTower?.towerTexture.removeFromParent()
+        GameScene.instance?.rangeIndicator?.removeFromParent()
         
         cancelAllMenus()
         
