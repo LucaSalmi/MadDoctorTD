@@ -119,13 +119,8 @@ class GameScene: SKScene {
     
     private func setupStartFoundation() {
         
-//        let clickableTile1 = clickableTilesNode.children[55] as! ClickableTile
-//        clickableTile1.containsFoundation = true
-//
-//        let foundationPlate1 = FoundationPlate(position: clickableTile1.position, tile: clickableTile1)
-//        foundationPlatesNode.addChild(foundationPlate1)
-//
-//        addChild(foundationPlatesNode)
+        foundationPlatesNode.name = "FoundationPlates"
+        addChild(foundationPlatesNode)
         
         guard let startFoundationMap = childNode(withName: "start_foundation")as? SKTileMapNode else {
             return
@@ -142,6 +137,7 @@ class GameScene: SKScene {
                 for node in clickableTilesNode.children {
                     let clickableTile = node as! ClickableTile
                     if clickableTile.contains(position) {
+                        
                         let foundationPlate = FoundationPlate(position: position, tile: clickableTile, isStartingFoundation: true)
                         
                         foundationPlatesNode.addChild(foundationPlate)
@@ -150,16 +146,9 @@ class GameScene: SKScene {
                     }
                 }
                 
-                
-                
-                
-                
-                
             }
         }
-        
-        foundationPlatesNode.name = "FoundationPlates"
-        addChild(foundationPlatesNode)
+
         startFoundationMap.removeFromParent()
     }
     
