@@ -146,7 +146,7 @@ class GameScene: SKScene {
                         
                         foundationPlatesNode.addChild(foundationPlate)
                         
-                        foundation.updateFoundationsTexture()
+                        foundationPlate.updateFoundationsTexture()
                     }
                 }
                 
