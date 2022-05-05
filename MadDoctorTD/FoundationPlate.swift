@@ -10,6 +10,8 @@ import SpriteKit
 
 class FoundationPlate: SKSpriteNode{
     
+    let isStartingFoundation: Bool
+    
     var builtUponTile: ClickableTile?
     var hasTower = false
     
@@ -18,8 +20,9 @@ class FoundationPlate: SKSpriteNode{
         fatalError("use init()")
     }
     
-    init(position: CGPoint, tile: ClickableTile){
+    init(position: CGPoint, tile: ClickableTile, isStartingFoundation: Bool = false){
         
+        self.isStartingFoundation = isStartingFoundation
         self.builtUponTile = tile
         let texture: SKTexture = SKTexture(imageNamed: "F_tile_power_on")
         super.init(texture: texture, color: .clear, size: FoundationData.size)
@@ -33,6 +36,12 @@ class FoundationPlate: SKSpriteNode{
         physicsBody?.isDynamic = true
         physicsBody?.friction = 0
         physicsBody?.allowsRotation = false
+        
+    }
+    
+    func updateFoundationsTexture() {
+        
+        
         
     }
     

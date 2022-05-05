@@ -33,6 +33,7 @@ class GameSceneCommunicator: ObservableObject {
         let foundation = FoundationPlate(position: currentTile!.position, tile: currentTile!)
         GameScene.instance!.foundationPlatesNode.addChild(foundation)
         
+        foundation.updateFoundationsTexture()
         
         currentTile = nil
         showFoundationMenu = false
