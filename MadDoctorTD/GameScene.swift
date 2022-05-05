@@ -40,6 +40,7 @@ class GameScene: SKScene {
         addChild(towersNode)
         addChild(projectilesNode)
         setupEnemies()
+        addChild(enemiesNode)
         
         //enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
         let obstacles = SKNode.obstacles(fromNodePhysicsBodies: foundationPlatesNode.children)
@@ -55,24 +56,14 @@ class GameScene: SKScene {
         
         
         let enemy1 = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
-        enemy1.position = CGPoint(x: -64, y: -600)
+        enemy1.position = CGPoint(x: -64, y: -900)
         enemy1.zPosition = 2
         enemiesNode.addChild(enemy1)
         
-        let enemy2 = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
+        let enemy2 = StandardEnemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"))
         enemy2.position = CGPoint(x: -64, y: -1000)
         enemy2.zPosition = 2
         enemiesNode.addChild(enemy2)
-
-        //enemy.position = clickableTilesNode.children[34].position
-        //enemy.zPosition = 2
-        //addChild(enemy)
-        //let enem = enemy as! Enemy
-        let enemy = EnemyEntity()
-        enemy.sprite.position = clickableTilesNode.children[34].position
-        enemy.sprite.zPosition = 2
-        addChild(enemy.sprite)
-
         
     }
     

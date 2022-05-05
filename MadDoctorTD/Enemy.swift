@@ -12,7 +12,8 @@ import GameplayKit
 class Enemy: SKSpriteNode{
     
     var pathfindingAgent: EnemyEntity? = nil
-    
+    var baseHp = EnemiesData.baseHP
+    var baseSpeed = EnemiesData.baseSpeed
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -28,8 +29,6 @@ class Enemy: SKSpriteNode{
         physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
-        let entity = EnemyEntity()
-        pathfindingAgent = entity
         
         self.name = "Enemy"
         
@@ -37,24 +36,13 @@ class Enemy: SKSpriteNode{
     
     func update(){
         
-        //self.position = CGPoint(x: self.position.x, y: self.position.y + EnemiesData.baseSpeed)
+        self.position = CGPoint(x: self.position.x, y: self.position.y + CGFloat(baseSpeed))
         
         
     }
     
-    func getPathfinder() -> EnemyEntity{
-        
-        if pathfindingAgent != nil{
-            
-            return pathfindingAgent!
-            
-        }else{
-            
-            return EnemyEntity()
-            
-        }
-        
-    }
+    func getDamage(dmgValue: Int){}
+    
 }
 
 class EnemyAgent: GKAgent2D{
@@ -65,7 +53,7 @@ class EnemyAgent: GKAgent2D{
     
     override init(){
         super.init()
-        speed = EnemiesData.baseSpeed
+        speed = Float(EnemiesData.baseSpeed)
         let goal = GKGoal(toWander: 100)
         behavior = GKBehavior(goal: goal, weight: 100)
     }
@@ -99,11 +87,8 @@ class EnemyEntity: GKEntity{
         let node = GKSKNodeComponent(node: sprite)
         addComponent(node)
         agent.delegate = node
-        
-        
-        
+
     }
-    
 }
 
 
