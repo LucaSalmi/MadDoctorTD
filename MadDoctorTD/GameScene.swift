@@ -159,6 +159,7 @@ class GameScene: SKScene {
         }
         else if node is Tower{
             let tower = node as! Tower
+            displayRangeIndicator(tower: tower)
             tower.onClick()
         }
         
