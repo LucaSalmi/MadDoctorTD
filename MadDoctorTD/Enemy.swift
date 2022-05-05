@@ -11,9 +11,9 @@ import GameplayKit
 
 class Enemy: SKSpriteNode{
     
-    var baseSpeed = EnemiesData.baseSpeed
+    var baseSpeed = EnemiesData.BASE_SPEED
     var moving: Bool = false
-    var hp = EnemiesData.baseHP
+    var hp = EnemiesData.BASE_HP
     var movePoints = [CGPoint]()
     let goal = GameScene.instance!.childNode(withName: "goal")
     var direction: CGPoint = CGPoint(x: 0, y: 0)
@@ -26,7 +26,7 @@ class Enemy: SKSpriteNode{
     init(texture: SKTexture, color: UIColor){
         
         let tempColor = UIColor(.indigo)
-        super.init(texture: texture, color: tempColor, size: EnemiesData.size)
+        super.init(texture: texture, color: tempColor, size: EnemiesData.SIZE)
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         physicsBody?.collisionBitMask = PhysicsCategory.Foundation
@@ -156,7 +156,7 @@ class Enemy: SKSpriteNode{
         
         // Assemble a graph based on the obstacles. Provide a buffer radius so there is a bit of space between the
         // center of the player node and the edges of the obstacles.
-        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: Float(Float(EnemiesData.size.width)*0.8))
+        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: Float(Float(EnemiesData.SIZE.width)*0.8))
         
         // Create a node for the user's current position, and the user's destination.
         let startNode = GKGraphNode2D(point: SIMD2<Float>(Float(player.position.x), Float(player.position.y)))

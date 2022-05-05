@@ -66,7 +66,6 @@ class GameSceneCommunicator: ObservableObject {
     }
     
     
-    
     func cancelAllMenus(){
         currentFoundation = nil
         showTowerMenu = false

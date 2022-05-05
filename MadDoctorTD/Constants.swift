@@ -83,9 +83,17 @@ struct ProjectileData {
 
 struct EnemiesData{
     
-    static let size: CGSize = CGSize(width: 43, height: 43)
-    static let baseHP: Int = 100
-    static let baseSpeed: CGFloat = 1.0
+    static let SIZE: CGSize = CGSize(width: 43, height: 43)
+    static let BASE_HP: Int = 100
+    static let BASE_SPEED: CGFloat = 1.0
+    
+    static let FAST_HP_MODIFIER = 0.90
+    static let HEAVY_HP_MODIFIER = 2.0
+    static let FLY_HP_MODIFIER = 0.70
+    
+    static let FAST_SPEED_MODIFIER: CGFloat = 1.30
+    static let HEAVY_SPEED_MODIFIER: CGFloat = 0.80
+    static let FLY_SPEED_MODIFIER: CGFloat = 0.80
     
 }
 
