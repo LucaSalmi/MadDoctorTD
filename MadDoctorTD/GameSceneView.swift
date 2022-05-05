@@ -16,7 +16,7 @@ struct GameSceneView: View {
     
     init() {
         gameScene = SKScene(fileNamed: "GameScene")!
-        gameScene.scaleMode = .fill
+        gameScene.scaleMode = .aspectFit
     }
 
     var body: some View {

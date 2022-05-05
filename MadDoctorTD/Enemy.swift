@@ -25,11 +25,13 @@ class Enemy: SKSpriteNode{
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         physicsBody?.collisionBitMask = PhysicsCategory.Foundation
+        physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
         let entity = EnemyEntity()
         pathfindingAgent = entity
         
+        self.name = "Enemy"
         
     }
     

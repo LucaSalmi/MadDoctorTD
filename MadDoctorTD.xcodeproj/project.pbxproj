@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */; };
+		3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3311AB9028231156009DEEEC /* gun_projectile_impact.wav */; };
 		3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */; };
+		3320331A2822ABF500133BBA /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332033192822ABF500133BBA /* Projectile.swift */; };
+		3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320331C2822ACFA00133BBA /* GunProjectile.swift */; };
 		3359CC9128214C9A00878191 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CC9028214C9A00878191 /* GameScene.sks */; };
 		3359CC9328214D8300878191 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9228214D8300878191 /* GameScene.swift */; };
 		3359CC9628214E2200878191 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9528214E2200878191 /* GameSceneView.swift */; };
@@ -40,7 +44,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GunProjectileImpact.sks; sourceTree = "<group>"; };
+		3311AB9028231156009DEEEC /* gun_projectile_impact.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gun_projectile_impact.wav; sourceTree = "<group>"; };
 		3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneCommunicator.swift; sourceTree = "<group>"; };
+		332033192822ABF500133BBA /* Projectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
+		3320331C2822ACFA00133BBA /* GunProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunProjectile.swift; sourceTree = "<group>"; };
 		3359CC9028214C9A00878191 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		3359CC9228214D8300878191 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		3359CC9528214E2200878191 /* GameSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
@@ -129,7 +137,11 @@
 				C839C6CF28216CD400F66043 /* FoundationPlate.swift */,
 				E5268CCB28226EF000F134A5 /* Tower.swift */,
 				E5268CCF2822708600F134A5 /* GunTower.swift */,
+				332033192822ABF500133BBA /* Projectile.swift */,
+				3320331C2822ACFA00133BBA /* GunProjectile.swift */,
 				C868AACD28229790003F91D0 /* Enemy.swift */,
+				3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */,
+				3311AB9028231156009DEEEC /* gun_projectile_impact.wav */,
 			);
 			path = MadDoctorTD;
 			sourceTree = "<group>";
@@ -213,9 +225,11 @@
 			files = (
 				3359CC9828214F1800878191 /* LabScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
+				3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */,
 				3359CC9128214C9A00878191 /* GameScene.sks in Resources */,
 				3359CCA4282157C500878191 /* MyTileSet.sks in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
+				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +256,7 @@
 				C839C6C128215B4800F66043 /* InputManager.swift in Sources */,
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
 				C839C6BB2821579F00F66043 /* Constants.swift in Sources */,
+				3320331A2822ABF500133BBA /* Projectile.swift in Sources */,
 				E5268CCE2822707200F134A5 /* NormalGunner.swift in Sources */,
 				C839C6C62821619200F66043 /* LabMenuView.swift in Sources */,
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
@@ -250,6 +265,7 @@
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
 				3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */,
 				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,
+				3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

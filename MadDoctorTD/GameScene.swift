@@ -17,7 +17,10 @@ class GameScene: SKScene {
     var clickableTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
     var towersNode: SKNode = SKNode()
-    //var enemy: SKNode = SKNode()
+    var projectilesNode: SKNode = SKNode()
+    var gunProjectilesPool = [GunProjectile]()
+    var enemiesNode: SKNode = SKNode()
+    var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
     
     required init?(coder aDecoder: NSCoder) {
@@ -28,9 +31,13 @@ class GameScene: SKScene {
         
         GameScene.instance = self
         
+        physicsWorld.contactDelegate = self
+        
         setupClickableTiles()
         setupStartFoundation()
         addChild(towersNode)
+        addChild(projectilesNode)
+        setupEnemies()
         
         //enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
         let obstacles = SKNode.obstacles(fromNodePhysicsBodies: foundationPlatesNode.children)
@@ -120,6 +127,22 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         
         //Update code
+        
+        for node in towersNode.children {
+            let tower = node as! Tower
+            tower.update()
+        }
+        
+        for node in projectilesNode.children {
+            let projectile = node as! Projectile
+            projectile.update()
+        }
+        
+        
+        for node in enemiesNode.children {
+            let enemy = node as! Enemy
+            enemy.update()
+        }
         
     }
     

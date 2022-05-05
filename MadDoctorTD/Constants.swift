@@ -34,12 +34,17 @@ struct PhysicsCategory{
     static let Edge: UInt32 = 0b1
     static let Foundation: UInt32 = 0b10
     static let Enemy: UInt32 = 0b100
+    static let Projectile: UInt32 = 0b1000
     
+}
+
+struct DefaultTileData {
+    static let size: CGSize = CGSize(width: 86, height: 86)
 }
 
 struct FoundationData{
     
-    static let size: CGSize = CGSize(width: 32, height: 32)
+    static let size: CGSize = DefaultTileData.size
     static let price: Int = 100
     
 }
@@ -50,16 +55,31 @@ enum TowerTypes: Int{
     case gunTower = 0
 }
 
-//Bullets
+struct TowerData {
+    
+    static let size: CGSize = CGSize(width: DefaultTileData.size.width*2, height: DefaultTileData.size.height*2)
+    static let ATTACK_RANGE: CGFloat = CGFloat(DefaultTileData.size.width * 3)
+    static let FIRE_RATE: Int = 20
+    
+}
 
+//Bullets
+enum ProjectileTypes: Int {
+    case gunProjectile = 0
+}
+
+struct ProjectileData {
+    static let size: CGSize = CGSize(width: DefaultTileData.size.width * 0.5, height: DefaultTileData.size.height * 0.5)
+    static let speed: CGFloat = CGFloat(5.0)
+}
 
 //Enemies
 
 struct EnemiesData{
     
-    static let size: CGSize = CGSize(width: 32, height: 32)
+    static let size: CGSize = CGSize(width: 86, height: 86)
     static let baseHP: Int = 100
-    static let baseSpeed: Float = 2.0
+    static let baseSpeed: Double = 0.5
     
 }
 

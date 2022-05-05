@@ -21,15 +21,17 @@ class FoundationPlate: SKSpriteNode{
     init(position: CGPoint, tile: ClickableTile){
         
         self.builtUponTile = tile
-        let texture: SKTexture = SKTexture(imageNamed: "clickable_tile")
+        let texture: SKTexture = SKTexture(imageNamed: "Water_Grid_Center")
         super.init(texture: texture, color: .clear, size: FoundationData.size)
         name = "Foundation"
         self.position = position
         zPosition = 1
         physicsBody = SKPhysicsBody(circleOfRadius: FoundationData.size.width/2)
         physicsBody?.categoryBitMask = PhysicsCategory.Foundation
-        physicsBody?.collisionBitMask = PhysicsCategory.Enemy
+        physicsBody?.collisionBitMask = 0
         physicsBody?.restitution = 0
+        physicsBody?.isDynamic = true
+        physicsBody?.friction = 0
         physicsBody?.allowsRotation = false
         
     }

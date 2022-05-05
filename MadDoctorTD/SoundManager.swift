@@ -15,14 +15,18 @@ class SoundManager{
     static let bgmExtension = "mp3" // without . (dot)
     
     //Tracks name: String
-    
+    static let gunProjectileImpactSFX = "gun_projectile_impact"
     
     static var musicPlayer: AVAudioPlayer?
 
     
     static func playSFX(sfxName: String){
         
-        //TODO
+        guard let gameScene = GameScene.instance else { return }
+        
+        let sfx = sfxName + sfxExtension
+        let sfxAction = SKAction.playSoundFileNamed(sfx, waitForCompletion: false)
+        gameScene.run(sfxAction)
         
     }
     
