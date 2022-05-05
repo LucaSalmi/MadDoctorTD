@@ -18,6 +18,8 @@ class Tower: SKSpriteNode{
     var projectileType: Int = ProjectileTypes.gunProjectile.rawValue
     
     var fireRate: Int = TowerData.FIRE_RATE
+    var attackDamage: Int = TowerData.ATTACK_DAMAGE
+    
     var currentFireRateTick: Int = 0
     
     var currentTarget: Enemy? = nil
@@ -78,6 +80,7 @@ class Tower: SKSpriteNode{
     private func attackTarget() {
 
 
+        
         if currentFireRateTick <= 0 {
             
             
@@ -88,15 +91,21 @@ class Tower: SKSpriteNode{
             case ProjectileTypes.gunProjectile.rawValue:
                 
                 if gameScene.gunProjectilesPool.isEmpty {
-                    let projectile = GunProjectile(position: self.position, target: currentTarget!)
+                    let projectile = GunProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
                     gameScene.projectilesNode.addChild(projectile)
                 }
                 else {
+                    
+                    let index = gameScene.gunProjectilesPool.count-1
                     //let projectile = GunProjectile(position: self.position, target: currentTarget!)
-                    let projectile = gameScene.gunProjectilesPool[0]
-                    gameScene.gunProjectilesPool.remove(at: 0)
-                    projectile.reuseFromPool(position: self.position, target: currentTarget!)
-                    gameScene.projectilesNode.addChild(projectile)
+                    let projectile = gameScene.gunProjectilesPool[index]
+                    gameScene.gunProjectilesPool.remove(at: index)
+                    projectile.reuseFromPool(position: self.position, target: currentTarget!, attackDamage: attackDamage)
+                    
+                    if projectile.parent == nil{
+                        gameScene.projectilesNode.addChild(projectile)
+                        
+                    }
                 }
                 
                 
@@ -118,7 +127,7 @@ class Tower: SKSpriteNode{
             currentFireRateTick -= 1
         }
         
-        if currentTarget == nil {
+        if currentTarget == nil || currentTarget!.hp <= 0 {
             findNewTarget()
         }
         else {

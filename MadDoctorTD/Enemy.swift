@@ -15,6 +15,7 @@ class Enemy: SKSpriteNode{
     var baseSpeed = EnemiesData.baseSpeed
     var moving: Bool = false
 
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -42,7 +43,17 @@ class Enemy: SKSpriteNode{
         
     }
     
-    func getDamage(dmgValue: Int){}
+    func getDamage(dmgValue: Int){
+        
+        hp -= dmgValue
+        
+        if hp <= 0{
+            
+            self.removeFromParent()
+            
+        }
+        
+    }
     
     
     func movePlayerToGoal() {

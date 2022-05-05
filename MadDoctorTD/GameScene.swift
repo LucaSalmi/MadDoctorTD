@@ -74,9 +74,9 @@ class GameScene: SKScene {
     
     private func setupEnemies(){
         
-        
-        let enemy1 = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
-        enemy1.position = CGPoint(x: -64, y: -500)
+
+        let enemy1 = StandardEnemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"))
+        enemy1.position = CGPoint(x: -64, y: -900)
         enemy1.zPosition = 2
         enemiesNode.addChild(enemy1)
         
@@ -181,6 +181,7 @@ class GameScene: SKScene {
             }
             
         }
+        
         
     }
     
