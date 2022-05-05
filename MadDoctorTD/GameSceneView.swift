@@ -17,6 +17,7 @@ struct GameSceneView: View {
     init() {
         gameScene = SKScene(fileNamed: "GameScene")!
         gameScene.scaleMode = .aspectFit
+        communicator.cancelAllMenus()
     }
 
     var body: some View {
