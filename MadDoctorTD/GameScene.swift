@@ -24,8 +24,10 @@ class GameScene: SKScene {
     var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
     
+    var rangeIndicator: SKShapeNode?
+    
     var isWaveActive: Bool = false
-        
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -63,7 +65,7 @@ class GameScene: SKScene {
                 
                 edge.position = edgesTileMap.centerOfTile(atColumn: column, row: row)
                 edgesTilesNode.addChild(edge)
-
+                
             }
         }
         
@@ -103,7 +105,7 @@ class GameScene: SKScene {
                 
                 clickableTilesNode.addChild(clickableTile)
                 
-        
+                
                 
                 
             }
@@ -128,6 +130,12 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+
+        if rangeIndicator != nil{
+            rangeIndicator!.removeFromParent()
+            
+        }
+
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
         
@@ -141,6 +149,7 @@ class GameScene: SKScene {
         if node is ClickableTile {
             let clickableTile = node as! ClickableTile
             clickableTile.onClick()
+
         }
         else if node is FoundationPlate {
             let foundationPlate = node as! FoundationPlate
@@ -153,6 +162,20 @@ class GameScene: SKScene {
             tower.onClick()
         }
         
+        
+    }
+    
+    func displayRangeIndicator(tower: Tower){
+        
+        
+        rangeIndicator = SKShapeNode(circleOfRadius: tower.attackRange)
+        rangeIndicator!.name = "RangeIndicator"
+        rangeIndicator!.fillColor = SKColor(.white.opacity(0.2))
+        
+        rangeIndicator!.zPosition = 2
+        rangeIndicator!.position = tower.position
+        
+        GameScene.instance?.addChild(rangeIndicator!)
         
     }
     
