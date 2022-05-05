@@ -14,6 +14,7 @@ class Projectile: SKSpriteNode {
     var currentTick = 0
     
     var targetPoint: CGPoint
+    var attackDamage: Int
     
     var direction: CGPoint = CGPoint(x: 0, y: 0)
 
@@ -21,9 +22,10 @@ class Projectile: SKSpriteNode {
         fatalError("use init()")
     }
     
-    init(position: CGPoint, target: Enemy){
+    init(position: CGPoint, target: Enemy, attackDamage: Int){
         
         targetPoint = target.position
+        self.attackDamage = attackDamage
         
         super.init(texture: nil, color: .clear, size: ProjectileData.size)
         
@@ -42,7 +44,8 @@ class Projectile: SKSpriteNode {
         
     }
     
-    func reuseFromPool(position: CGPoint, target: Enemy) {
+    func reuseFromPool(position: CGPoint, target: Enemy, attackDamage: Int) {
+        self.attackDamage = attackDamage
         targetPoint = target.position
         self.position = position
         lookAtTarget(target: target)

@@ -14,6 +14,7 @@ class Enemy: SKSpriteNode{
     var pathfindingAgent: EnemyEntity? = nil
     var baseHp = EnemiesData.baseHP
     var baseSpeed = EnemiesData.baseSpeed
+    var hp = EnemiesData.baseHP
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -41,7 +42,17 @@ class Enemy: SKSpriteNode{
         
     }
     
-    func getDamage(dmgValue: Int){}
+    func getDamage(dmgValue: Int){
+        
+        hp -= dmgValue
+        
+        if hp <= 0{
+            
+            self.removeFromParent()
+            
+        }
+        
+    }
     
 }
 

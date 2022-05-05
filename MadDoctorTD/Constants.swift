@@ -60,6 +60,7 @@ struct TowerData {
     static let size: CGSize = CGSize(width: DefaultTileData.size.width*2, height: DefaultTileData.size.height*2)
     static let ATTACK_RANGE: CGFloat = CGFloat(DefaultTileData.size.width * 3)
     static let FIRE_RATE: Int = 20
+    static let ATTACK_DAMAGE: Int = 10
     
 }
 
