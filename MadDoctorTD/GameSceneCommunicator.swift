@@ -33,7 +33,7 @@ class GameSceneCommunicator: ObservableObject {
         let foundation = FoundationPlate(position: currentTile!.position, tile: currentTile!)
         GameScene.instance!.foundationPlatesNode.addChild(foundation)
         
-        foundation.updateFoundationsTexture()
+        foundation.updateFoundationsTexture(isCenterFoundation: true)
         
         currentTile = nil
         showFoundationMenu = false
@@ -90,8 +90,9 @@ class GameSceneCommunicator: ObservableObject {
         
         if GameScene.instance!.foundationPlatesNode.children.count > 1 {
             currentFoundation!.builtUponTile?.containsFoundation = false
-            currentFoundation?.builtUponTile = nil
+            currentFoundation!.builtUponTile = nil
             currentFoundation!.removeFromParent()
+            currentFoundation!.updateFoundationsTexture(isCenterFoundation: true, isSelling: true)
         }
         
         cancelAllMenus()
