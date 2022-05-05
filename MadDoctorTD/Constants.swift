@@ -62,6 +62,10 @@ struct TowerData {
     static let FIRE_RATE: Int = 20
     static let ATTACK_DAMAGE: Int = 10
     
+    static let UPGRADE_DAMAGE_BONUS_PCT: Double = 1.2
+    static let UPGRADE_FIRE_RATE_REDUCTION_PCT: Double = 0.8
+    static let UPGRADE_RANGE_BONUS_PCT: Double = 1.2
+    
 }
 
 //Bullets

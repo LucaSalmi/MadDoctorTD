@@ -121,6 +121,18 @@ class Tower: SKSpriteNode{
         
     }
     
+    func upgradeDamage() {
+        attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
+    }
+    
+    func upgradeRange() {
+        attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
+    }
+    
+    func upgradeAttackSpeed() {
+        fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
+    }
+    
     func update() {
         
         if currentFireRateTick > 0 {
