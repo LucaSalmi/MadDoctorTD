@@ -25,9 +25,7 @@ class GameScene: SKScene {
     var nodeGraph: GKObstacleGraph? = nil
     
     var isWaveActive: Bool = false
-    
-    let playerPathfinding = PlayerPathfinding()
-    
+        
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

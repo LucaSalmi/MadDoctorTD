@@ -11,9 +11,9 @@ import GameplayKit
 
 class Enemy: SKSpriteNode{
     
-    var baseHp = EnemiesData.baseHP
     var baseSpeed = EnemiesData.baseSpeed
     var moving: Bool = false
+    var hp = EnemiesData.baseHP
 
 
     
@@ -78,7 +78,7 @@ class Enemy: SKSpriteNode{
         
         // Assemble a graph based on the obstacles. Provide a buffer radius so there is a bit of space between the
         // center of the player node and the edges of the obstacles.
-        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 0)
+        let graph = GKObstacleGraph(obstacles: obstacles, bufferRadius: Float(Float(EnemiesData.size.width)/1.5))
         
         // Create a node for the user's current position, and the user's destination.
         let startNode = GKGraphNode2D(point: SIMD2<Float>(Float(player.position.x), Float(player.position.y)))
@@ -100,12 +100,11 @@ class Enemy: SKSpriteNode{
         for node:GKGraphNode in path {
             if let point2d = node as? GKGraphNode2D {
                 let nextPoint = CGPoint(x: CGFloat(point2d.position.x), y: CGFloat(point2d.position.y))
-                let speed = CGFloat(300.0)
-                print("Player pos = \(player.position). Next point = \(nextPoint)")
+                //print("Player pos = \(player.position). Next point = \(nextPoint)")
                 if player.position == nextPoint {
                     continue
                 }
-                var duration = getDuration(pointA: player.position, pointB: nextPoint, speed: speed)
+                var duration = getDuration(pointA: player.position, pointB: nextPoint, speed: baseSpeed)
                 if duration <= 0.0 {
                     duration = 0.1
                 }
@@ -114,7 +113,7 @@ class Enemy: SKSpriteNode{
                 actions.append(action)
             }
         }
-        
+        print("pathCount \(path.count)")
         // Convert those actions into a sequence action, then run it on the player node.
         let sequence = SKAction.sequence(actions)
         player.run(sequence, completion: { () -> Void in
