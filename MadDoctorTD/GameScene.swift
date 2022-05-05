@@ -41,14 +41,11 @@ class GameScene: SKScene {
         addChild(projectilesNode)
         setupEnemies()
         
-        enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
+        //enemy = Enemy(texture: SKTexture(imageNamed: "Cobblestone_Grid_Center"), color: .clear)
         let obstacles = SKNode.obstacles(fromNodePhysicsBodies: foundationPlatesNode.children)
         nodeGraph = GKObstacleGraph(obstacles: obstacles, bufferRadius: 0.0)
-        let start = GKGraphNode()
-        enemy.position = clickableTilesNode.children[34].position
-        enemy.zPosition = 2
-        addChild(enemy)
         
+
         
         
         
@@ -66,8 +63,17 @@ class GameScene: SKScene {
         enemy2.position = CGPoint(x: -64, y: -1000)
         enemy2.zPosition = 2
         enemiesNode.addChild(enemy2)
+
+        //enemy.position = clickableTilesNode.children[34].position
+        //enemy.zPosition = 2
+        //addChild(enemy)
+        //let enem = enemy as! Enemy
+        let enemy = EnemyEntity()
+        enemy.sprite.position = clickableTilesNode.children[34].position
+        enemy.sprite.zPosition = 2
+        addChild(enemy.sprite)
+
         
-        addChild(enemiesNode)
     }
     
     private func setupClickableTiles() {
