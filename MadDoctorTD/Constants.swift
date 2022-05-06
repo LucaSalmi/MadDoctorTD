@@ -54,7 +54,7 @@ enum UpgradeTypes: Int{
 
 //Towers
 enum TowerTypes: Int{
-    case gunTower = 0
+    case gunTower = 0, rapidFireTower
 }
 
 struct TowerData {
@@ -76,7 +76,7 @@ struct TowerData {
 
 //Bullets
 enum ProjectileTypes: Int {
-    case gunProjectile = 0
+    case gunProjectile = 0, rapidFireProjectile
 }
 
 struct ProjectileData {

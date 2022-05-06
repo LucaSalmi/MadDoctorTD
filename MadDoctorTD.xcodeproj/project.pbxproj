@@ -45,6 +45,7 @@
 		C8E693452823C38F00D0A661 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693442823C38F00D0A661 /* Edge.swift */; };
 		E5268CCC28226EF000F134A5 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCB28226EF000F134A5 /* Tower.swift */; };
 		E5268CD02822708600F134A5 /* GunTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCF2822708600F134A5 /* GunTower.swift */; };
+		E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD128250E5F00F134A5 /* RapidFireTower.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		C8E693442823C38F00D0A661 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		E5268CCB28226EF000F134A5 /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
 		E5268CCF2822708600F134A5 /* GunTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunTower.swift; sourceTree = "<group>"; };
+		E5268CD128250E5F00F134A5 /* RapidFireTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidFireTower.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			children = (
 				E5268CCF2822708600F134A5 /* GunTower.swift */,
 				E5268CCB28226EF000F134A5 /* Tower.swift */,
+				E5268CD128250E5F00F134A5 /* RapidFireTower.swift */,
 			);
 			path = Towers;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				C82C4D0A2824079600067858 /* FlyingEnemy.swift in Sources */,
 				C8E693432823B26E00D0A661 /* StandardEnemy.swift in Sources */,
 				C839C6C62821619200F66043 /* LabMenuView.swift in Sources */,
+				E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */,
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
 				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
 				E5268CCC28226EF000F134A5 /* Tower.swift in Sources */,

@@ -1,15 +1,14 @@
 //
-//  GunTower.swift
+//  RapidFireTower.swift
 //  MadDoctorTD
 //
-//  Created by Calle Höglund on 2022-05-04.
+//  Created by Calle Höglund on 2022-05-06.
 //
 
 import Foundation
 import SpriteKit
-import SwiftUI
 
-class GunTower: Tower{
+class RapidFireTower: Tower{
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -21,11 +20,13 @@ class GunTower: Tower{
         
         super.init(position: position, foundation: foundation, textureName: textureName)
                 
-        projectileType = ProjectileTypes.gunProjectile.rawValue
+        projectileType = ProjectileTypes.rapidFireProjectile.rawValue
     
-        attackDamage = Int(Double(attackDamage) * 0.8)
+        attackDamage = Int(Double(attackDamage) * 0.5)
         
-        //attackRange = attackRange * 0.1
+        fireRate = Int(Double(fireRate) * 0.1)
+        
+        attackRange = attackRange * 0.5
     }
     
 }

@@ -117,6 +117,16 @@ class Tower: SKSpriteNode{
                     }
                 }
                 
+            case ProjectileTypes.rapidFireProjectile.rawValue:
+                
+                let foundationOffset = builtUponFoundation!.size.width/4
+                
+                let projectile1 = GunProjectile(position: CGPoint(x: self.position.x + foundationOffset, y: self.position.y), target: currentTarget!, attackDamage: attackDamage)
+                gameScene.projectilesNode.addChild(projectile1)
+                
+                let projectile2 = GunProjectile(position: CGPoint(x: self.position.x - foundationOffset, y: self.position.y), target: currentTarget!, attackDamage: attackDamage)
+                gameScene.projectilesNode.addChild(projectile2)
+                
                 
                 
             default:
