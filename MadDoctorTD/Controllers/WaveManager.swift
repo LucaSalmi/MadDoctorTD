@@ -33,7 +33,7 @@ class WaveManager{
         
         var occupiedSlots = 0
         
-        for _ in 0...totalSlots{
+        while occupiedSlots < totalSlots{
             
             let chosen = RandomNumberGenerator.rNG(choises: choises)
             
@@ -41,38 +41,36 @@ class WaveManager{
                 
             case .standard:
                 
-                let enemy = StandardEnemy(texture: SKTexture(imageNamed: "slime animation 1"))
-                enemy.position = spawnPoint!
-                enemy.zPosition = 2
-                enemyArray.append(enemy)
+                let stEnemy = StandardEnemy(texture: SKTexture(imageNamed: "slime animation 1"))
+                stEnemy.position = spawnPoint!
+                stEnemy.zPosition = 2
+                enemyArray.append(stEnemy)
                 
             case .fast:
                 
-                let enemy = FastEnemy(texture: SKTexture(imageNamed: "wheelie 1"))
-                enemy.position = spawnPoint!
-                enemy.zPosition = 2
-                enemyArray.append(enemy)
+                let fEnemy = FastEnemy(texture: SKTexture(imageNamed: "wheelie 1"))
+                fEnemy.position = spawnPoint!
+                fEnemy.zPosition = 2
+                enemyArray.append(fEnemy)
                 
             case .heavy:
                 
-                let enemy = HeavyEnemy(texture: SKTexture(imageNamed: "ship 1"))
-                enemy.position = spawnPoint!
-                enemy.zPosition = 2
-                enemyArray.append(enemy)
+                let hEnemy = HeavyEnemy(texture: SKTexture(imageNamed: "ship 1"))
+                hEnemy.position = spawnPoint!
+                hEnemy.zPosition = 2
+                enemyArray.append(hEnemy)
                 
             case .flying:
                 
-                let enemy = FlyingEnemy(texture: SKTexture(imageNamed: "joystick"))
-                enemy.position = spawnPoint!
-                enemy.zPosition = 2
-                enemyArray.append(enemy)
+                let fEnemy = FlyingEnemy(texture: SKTexture(imageNamed: "joystick"))
+                fEnemy.position = spawnPoint!
+                fEnemy.zPosition = 2
+                enemyArray.append(fEnemy)
                 
             }
             
-            occupiedSlots += enemyArray.last?.waveSlotSize ?? 1
-            
-            if occupiedSlots >= totalSlots{
-                break
+            if !checkLimits(){
+                occupiedSlots += enemyArray.last?.waveSlotSize ?? 1
             }
         }
     }
@@ -83,6 +81,69 @@ class WaveManager{
         currentScene?.enemiesNode.addChild(toSpawn)
         enemyArray.removeFirst()
         
+    }
+    
+    func checkLimits() -> Bool{
+        
+        var flyCount = 0
+        var fastCount = 0
+        var heavyCount = 0
+        
+        var flyToRemove: Int? = nil
+        var heavyToRemove: Int? = nil
+        var fastToRemove: Int? = nil
+        
+        for obj in enemyArray{
+            
+            if obj is FastEnemy{
+                
+                fastCount += 1
+                print("found fast enemy")
+                if fastCount > WaveData.FAST_ENEMY_LIMIT{
+                    
+                    fastToRemove = enemyArray.firstIndex(of: obj)
+                    
+                }
+                
+            }else if obj is FlyingEnemy{
+                
+                flyCount += 1
+                
+                if flyCount > WaveData.FLY_ENEMY_LIMIT{
+                    
+                    flyToRemove = enemyArray.firstIndex(of: obj)
+                    
+                }
+                
+            }else if obj is HeavyEnemy{
+                
+                heavyCount += 1
+                
+                if heavyCount > WaveData.HEAVY_ENEMY_LIMIT{
+                    
+                    heavyToRemove = enemyArray.firstIndex(of: obj)
+                    
+                }
+            }
+        }
+        
+        var hasDeleted = false
+        
+        if flyToRemove != nil{
+            enemyArray.remove(at: flyToRemove!)
+            hasDeleted = true
+        }
+        if fastToRemove != nil{
+            enemyArray.remove(at: fastToRemove!)
+            hasDeleted = true
+        }
+        if heavyToRemove != nil{
+            enemyArray.remove(at: heavyToRemove!)
+            hasDeleted = true
+        }
+        
+        
+        return hasDeleted
     }
     
     
