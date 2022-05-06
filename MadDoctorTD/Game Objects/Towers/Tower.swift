@@ -124,8 +124,11 @@ class Tower: SKSpriteNode{
                 let projectile = GunProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
                 
                 if rapidFireTower.fireLeft{
+                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_power_on_left_barrel_fire")
+                    
                     projectile.texture = SKTexture(imageNamed: "speed_projectile_left")
                 }else{
+                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_power_on_right_barrel_fire")
                     projectile.texture = SKTexture(imageNamed: "speed_projectile_right")
                 }
                 rapidFireTower.fireLeft = !rapidFireTower.fireLeft
@@ -168,9 +171,6 @@ class Tower: SKSpriteNode{
             
         }
         
-        
-        
-        
     }
 
     
@@ -185,6 +185,13 @@ class Tower: SKSpriteNode{
         }
         
         if currentTarget == nil || currentTarget!.hp <= 0 {
+            if self is RapidFireTower{
+                let rapidFireTower = self as! RapidFireTower
+                
+                if !rapidFireTower.resetTexture{
+                    rapidFireTower.resetTexture = true
+                }
+            }
             findNewTarget()
         }
         else {
