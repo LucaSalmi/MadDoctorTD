@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */; };
+		3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3311AB9028231156009DEEEC /* gun_projectile_impact.wav */; };
 		3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */; };
+		3320331A2822ABF500133BBA /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332033192822ABF500133BBA /* Projectile.swift */; };
+		3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320331C2822ACFA00133BBA /* GunProjectile.swift */; };
 		3359CC9128214C9A00878191 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CC9028214C9A00878191 /* GameScene.sks */; };
 		3359CC9328214D8300878191 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9228214D8300878191 /* GameScene.swift */; };
 		3359CC9628214E2200878191 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9528214E2200878191 /* GameSceneView.swift */; };
@@ -16,6 +20,9 @@
 		3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9B28214F6200878191 /* LabSceneView.swift */; };
 		3359CCA4282157C500878191 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CCA3282157C500878191 /* MyTileSet.sks */; };
 		3359CCA62821596700878191 /* ClickableTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CCA52821596700878191 /* ClickableTile.swift */; };
+		C82C4D062824076B00067858 /* FastEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82C4D052824076B00067858 /* FastEnemy.swift */; };
+		C82C4D082824077900067858 /* HeavyEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82C4D072824077900067858 /* HeavyEnemy.swift */; };
+		C82C4D0A2824079600067858 /* FlyingEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82C4D092824079600067858 /* FlyingEnemy.swift */; };
 		C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A52821352200F66043 /* MadDoctorTDApp.swift */; };
 		C839C6A82821352200F66043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A72821352200F66043 /* ContentView.swift */; };
 		C839C6AA2821352400F66043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6A92821352400F66043 /* Assets.xcassets */; };
@@ -33,10 +40,24 @@
 		C839C6CC2821621400F66043 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CB2821621400F66043 /* SettingsView.swift */; };
 		C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */; };
 		C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CF28216CD400F66043 /* FoundationPlate.swift */; };
+		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
+		C897BC1D282510380085D093 /* WaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1C282510380085D093 /* WaveManager.swift */; };
+		C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1E282515260085D093 /* RandomNumberGenerator.swift */; };
+		C8E693432823B26E00D0A661 /* StandardEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693422823B26E00D0A661 /* StandardEnemy.swift */; };
+		C8E693452823C38F00D0A661 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693442823C38F00D0A661 /* Edge.swift */; };
+		E5268CCC28226EF000F134A5 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCB28226EF000F134A5 /* Tower.swift */; };
+		E5268CD02822708600F134A5 /* GunTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCF2822708600F134A5 /* GunTower.swift */; };
+		E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD128250E5F00F134A5 /* RapidFireTower.swift */; };
+		E5268CD4282537BD00F134A5 /* SniperTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD3282537BC00F134A5 /* SniperTower.swift */; };
+		E5268CD628253E6600F134A5 /* SniperProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD528253E6600F134A5 /* SniperProjectile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GunProjectileImpact.sks; sourceTree = "<group>"; };
+		3311AB9028231156009DEEEC /* gun_projectile_impact.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gun_projectile_impact.wav; sourceTree = "<group>"; };
 		3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneCommunicator.swift; sourceTree = "<group>"; };
+		332033192822ABF500133BBA /* Projectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
+		3320331C2822ACFA00133BBA /* GunProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunProjectile.swift; sourceTree = "<group>"; };
 		3359CC9028214C9A00878191 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		3359CC9228214D8300878191 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		3359CC9528214E2200878191 /* GameSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
@@ -45,6 +66,9 @@
 		3359CC9B28214F6200878191 /* LabSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneView.swift; sourceTree = "<group>"; };
 		3359CCA3282157C500878191 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		3359CCA52821596700878191 /* ClickableTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTile.swift; sourceTree = "<group>"; };
+		C82C4D052824076B00067858 /* FastEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastEnemy.swift; sourceTree = "<group>"; };
+		C82C4D072824077900067858 /* HeavyEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeavyEnemy.swift; sourceTree = "<group>"; };
+		C82C4D092824079600067858 /* FlyingEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingEnemy.swift; sourceTree = "<group>"; };
 		C839C6A22821352200F66043 /* MadDoctorTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadDoctorTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C839C6A52821352200F66043 /* MadDoctorTDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadDoctorTDApp.swift; sourceTree = "<group>"; };
 		C839C6A72821352200F66043 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +87,16 @@
 		C839C6CB2821621400F66043 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsExtension.swift; sourceTree = "<group>"; };
 		C839C6CF28216CD400F66043 /* FoundationPlate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationPlate.swift; sourceTree = "<group>"; };
+		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		C897BC1C282510380085D093 /* WaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveManager.swift; sourceTree = "<group>"; };
+		C897BC1E282515260085D093 /* RandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNumberGenerator.swift; sourceTree = "<group>"; };
+		C8E693422823B26E00D0A661 /* StandardEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardEnemy.swift; sourceTree = "<group>"; };
+		C8E693442823C38F00D0A661 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		E5268CCB28226EF000F134A5 /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
+		E5268CCF2822708600F134A5 /* GunTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunTower.swift; sourceTree = "<group>"; };
+		E5268CD128250E5F00F134A5 /* RapidFireTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidFireTower.swift; sourceTree = "<group>"; };
+		E5268CD3282537BC00F134A5 /* SniperTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SniperTower.swift; sourceTree = "<group>"; };
+		E5268CD528253E6600F134A5 /* SniperProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SniperProjectile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +110,92 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C82C4D0B28240D8900067858 /* Game Objects */ = {
+			isa = PBXGroup;
+			children = (
+				C839C6CF28216CD400F66043 /* FoundationPlate.swift */,
+				3359CCA52821596700878191 /* ClickableTile.swift */,
+				C8E693442823C38F00D0A661 /* Edge.swift */,
+				C82C4D0C28240DBA00067858 /* Towers */,
+				C82C4D0D28240DD100067858 /* Projectiles */,
+				C82C4D0E28240DE100067858 /* Enemies */,
+			);
+			path = "Game Objects";
+			sourceTree = "<group>";
+		};
+		C82C4D0C28240DBA00067858 /* Towers */ = {
+			isa = PBXGroup;
+			children = (
+				E5268CCB28226EF000F134A5 /* Tower.swift */,
+				E5268CCF2822708600F134A5 /* GunTower.swift */,
+				E5268CD128250E5F00F134A5 /* RapidFireTower.swift */,
+				E5268CD3282537BC00F134A5 /* SniperTower.swift */,
+			);
+			path = Towers;
+			sourceTree = "<group>";
+		};
+		C82C4D0D28240DD100067858 /* Projectiles */ = {
+			isa = PBXGroup;
+			children = (
+				332033192822ABF500133BBA /* Projectile.swift */,
+				3320331C2822ACFA00133BBA /* GunProjectile.swift */,
+				E5268CD528253E6600F134A5 /* SniperProjectile.swift */,
+			);
+			path = Projectiles;
+			sourceTree = "<group>";
+		};
+		C82C4D0E28240DE100067858 /* Enemies */ = {
+			isa = PBXGroup;
+			children = (
+				C868AACD28229790003F91D0 /* Enemy.swift */,
+				C8E693422823B26E00D0A661 /* StandardEnemy.swift */,
+				C82C4D052824076B00067858 /* FastEnemy.swift */,
+				C82C4D072824077900067858 /* HeavyEnemy.swift */,
+				C82C4D092824079600067858 /* FlyingEnemy.swift */,
+			);
+			path = Enemies;
+			sourceTree = "<group>";
+		};
+		C82C4D0F28240E0600067858 /* Game Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				3359CC9028214C9A00878191 /* GameScene.sks */,
+				3359CC9228214D8300878191 /* GameScene.swift */,
+				3359CC9528214E2200878191 /* GameSceneView.swift */,
+				3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */,
+				3359CC9728214F1800878191 /* LabScene.sks */,
+				3359CC9928214F4800878191 /* LabScene.swift */,
+				3359CC9B28214F6200878191 /* LabSceneView.swift */,
+			);
+			path = "Game Scenes";
+			sourceTree = "<group>";
+		};
+		C82C4D1028240E4300067858 /* Sound and Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				C839C6A92821352400F66043 /* Assets.xcassets */,
+				3359CCA3282157C500878191 /* MyTileSet.sks */,
+				3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */,
+				3311AB9028231156009DEEEC /* gun_projectile_impact.wav */,
+			);
+			path = "Sound and Graphics";
+			sourceTree = "<group>";
+		};
+		C82C4D1128240E6800067858 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C839C6B828214DC900F66043 /* AppManager.swift */,
+				C839C6BE282158C100F66043 /* SoundManager.swift */,
+				C839C6A72821352200F66043 /* ContentView.swift */,
+				C839C6BC2821586300F66043 /* GameManager.swift */,
+				C839C6C028215B4800F66043 /* InputManager.swift */,
+				C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */,
+				C897BC1C282510380085D093 /* WaveManager.swift */,
+				C897BC1E282515260085D093 /* RandomNumberGenerator.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		C839C6992821352200F66043 = {
 			isa = PBXGroup;
 			children = (
@@ -95,29 +215,16 @@
 		C839C6A42821352200F66043 /* MadDoctorTD */ = {
 			isa = PBXGroup;
 			children = (
+				C82C4D1128240E6800067858 /* Controllers */,
+				C82C4D1028240E4300067858 /* Sound and Graphics */,
+				C82C4D0F28240E0600067858 /* Game Scenes */,
+				C82C4D0B28240D8900067858 /* Game Objects */,
 				C839C6C42821617F00F66043 /* Views */,
 				C839C6A52821352200F66043 /* MadDoctorTDApp.swift */,
-				C839C6A72821352200F66043 /* ContentView.swift */,
-				C839C6A92821352400F66043 /* Assets.xcassets */,
 				C839C6AE2821352400F66043 /* Persistence.swift */,
 				C839C6B02821352400F66043 /* MadDoctorTD.xcdatamodeld */,
-				C839C6B828214DC900F66043 /* AppManager.swift */,
 				C839C6BA2821579F00F66043 /* Constants.swift */,
-				C839C6BC2821586300F66043 /* GameManager.swift */,
-				C839C6BE282158C100F66043 /* SoundManager.swift */,
-				C839C6C028215B4800F66043 /* InputManager.swift */,
 				C839C6AB2821352400F66043 /* Preview Content */,
-				3359CC9028214C9A00878191 /* GameScene.sks */,
-				3359CC9228214D8300878191 /* GameScene.swift */,
-				3359CC9528214E2200878191 /* GameSceneView.swift */,
-				3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */,
-				3359CC9728214F1800878191 /* LabScene.sks */,
-				3359CC9928214F4800878191 /* LabScene.swift */,
-				3359CC9B28214F6200878191 /* LabSceneView.swift */,
-				3359CCA52821596700878191 /* ClickableTile.swift */,
-				3359CCA3282157C500878191 /* MyTileSet.sks */,
-				C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */,
-				C839C6CF28216CD400F66043 /* FoundationPlate.swift */,
 			);
 			path = MadDoctorTD;
 			sourceTree = "<group>";
@@ -201,9 +308,11 @@
 			files = (
 				3359CC9828214F1800878191 /* LabScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
+				3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */,
 				3359CC9128214C9A00878191 /* GameScene.sks in Resources */,
 				3359CCA4282157C500878191 /* MyTileSet.sks in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
+				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,11 +325,16 @@
 			files = (
 				C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */,
 				3359CC9328214D8300878191 /* GameScene.swift in Sources */,
+				E5268CD4282537BD00F134A5 /* SniperTower.swift in Sources */,
 				3359CC9628214E2200878191 /* GameSceneView.swift in Sources */,
 				C839C6AF2821352400F66043 /* Persistence.swift in Sources */,
+				E5268CD02822708600F134A5 /* GunTower.swift in Sources */,
 				C839C6BD2821586300F66043 /* GameManager.swift in Sources */,
+				C868AACE28229790003F91D0 /* Enemy.swift in Sources */,
+				C8E693452823C38F00D0A661 /* Edge.swift in Sources */,
 				C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */,
 				C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */,
+				C82C4D062824076B00067858 /* FastEnemy.swift in Sources */,
 				C839C6CC2821621400F66043 /* SettingsView.swift in Sources */,
 				C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */,
 				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
@@ -228,12 +342,22 @@
 				C839C6C128215B4800F66043 /* InputManager.swift in Sources */,
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
 				C839C6BB2821579F00F66043 /* Constants.swift in Sources */,
+				3320331A2822ABF500133BBA /* Projectile.swift in Sources */,
+				C82C4D0A2824079600067858 /* FlyingEnemy.swift in Sources */,
+				C8E693432823B26E00D0A661 /* StandardEnemy.swift in Sources */,
 				C839C6C62821619200F66043 /* LabMenuView.swift in Sources */,
+				E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */,
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
+				E5268CD628253E6600F134A5 /* SniperProjectile.swift in Sources */,
 				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
+				E5268CCC28226EF000F134A5 /* Tower.swift in Sources */,
+				C82C4D082824077900067858 /* HeavyEnemy.swift in Sources */,
+				C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */,
+				C897BC1D282510380085D093 /* WaveManager.swift in Sources */,
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
 				3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */,
 				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,
+				3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
