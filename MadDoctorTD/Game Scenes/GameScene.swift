@@ -85,7 +85,7 @@ class GameScene: SKScene {
         enemy2.zPosition = 2
         enemiesNode.addChild(enemy2)
         
-        let enemy3 = HeavyEnemy(texture: SKTexture(imageNamed: "joystick"))
+        let enemy3 = HeavyEnemy(texture: SKTexture(imageNamed: "ship 1"))
         enemy3.position = CGPoint(x: 0, y: 600)
         enemy3.zPosition = 2
         enemiesNode.addChild(enemy3)
