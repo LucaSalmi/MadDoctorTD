@@ -21,6 +21,8 @@ class FastEnemy: Enemy{
         baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FAST_SPEED_MODIFIER
         waveSlotSize = EnemiesData.FAST_ENEMY_SLOT
         
+        startHp = hp
+        
     }
     
     override func update() {

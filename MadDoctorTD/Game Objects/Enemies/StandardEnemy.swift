@@ -17,7 +17,7 @@ class StandardEnemy: Enemy{
     init(texture: SKTexture){
         
         super.init(texture: texture, color: .clear)
-        
+        startHp = hp
     }
     
     override func update() {
