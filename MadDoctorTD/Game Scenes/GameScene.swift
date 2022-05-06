@@ -21,7 +21,7 @@ class GameScene: SKScene {
     var projectilesNode: SKNode = SKNode()
     var gunProjectilesPool = [GunProjectile]()
     var enemiesNode: SKNode = SKNode()
-    var enemy: SKNode = SKNode()
+    var pathfindingTestEnemy: Enemy?
     var nodeGraph: GKObstacleGraph? = nil
     var waveManager: WaveManager? = nil
     var spawnCounter = 0
@@ -78,6 +78,12 @@ class GameScene: SKScene {
     }
     
     private func setupEnemies(){
+        
+        //build phase pathfinding test
+        pathfindingTestEnemy = StandardEnemy(texture: SKTexture(imageNamed: "joystick"))
+        let spawnPoint = childNode(withName: "SpawnPoint")
+        pathfindingTestEnemy!.position = spawnPoint!.position
+        addChild(pathfindingTestEnemy!)
         
         enemyChoises.append(.standard)
         enemyChoises.append(.fast)
