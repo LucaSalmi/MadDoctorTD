@@ -86,7 +86,7 @@ class GameScene: SKScene {
         addChild(pathfindingTestEnemy!)
         
         enemyChoises.append(.standard)
-        enemyChoises.append(.fast)
+        enemyChoises.append(.flying)
         
         waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoises)
 

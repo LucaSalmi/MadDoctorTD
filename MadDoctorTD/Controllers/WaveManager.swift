@@ -62,9 +62,9 @@ class WaveManager{
                 
             case .flying:
                 
-                let fEnemy = FlyingEnemy(texture: SKTexture(imageNamed: "joystick"))
+                let fEnemy = FlyingEnemy(texture: SKTexture(imageNamed: "squid_animation_1"))
                 fEnemy.position = spawnPoint!
-                fEnemy.zPosition = 2
+                fEnemy.zPosition = 3
                 enemyArray.append(fEnemy)
                 
             }
