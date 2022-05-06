@@ -52,6 +52,7 @@ enum UpgradeTypes: Int{
     case damage = 0, range, firerate
 }
 
+
 //Towers
 enum TowerTypes: Int{
     case gunTower = 0
@@ -74,6 +75,7 @@ struct TowerData {
     
 }
 
+
 //Bullets
 enum ProjectileTypes: Int {
     case gunProjectile = 0
@@ -84,8 +86,8 @@ struct ProjectileData {
     static let speed: CGFloat = CGFloat(8.0)
 }
 
-//Enemies
 
+//Enemies
 struct EnemiesData{
     
     static let SIZE: CGSize = CGSize(width: 43, height: 43)
@@ -105,14 +107,14 @@ struct EnemiesData{
     static let FAST_ENEMY_SLOT = 1
     static let FLY_ENEMY_SLOT = 1
     
-    
 }
 
+//Waves
 struct WaveData{
     
     static let WAVE_STANDARD_SIZE = 30
-    static let SPAWN_STANDARD_TIMER = 60
-    
+    static let SPAWN_STANDARD_TIMER = 60 //Frames (1 second)
+    static let WAVE_START_TIME = 18000 //Frames (5 minutes)
     
 }
 

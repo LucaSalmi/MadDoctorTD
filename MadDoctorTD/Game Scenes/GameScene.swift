@@ -25,6 +25,7 @@ class GameScene: SKScene {
     var nodeGraph: GKObstacleGraph? = nil
     var waveManager: WaveManager? = nil
     var spawnCounter = 0
+    var waveStartCounter = 0
     
     var rangeIndicator: SKShapeNode?
     
@@ -47,6 +48,7 @@ class GameScene: SKScene {
         addChild(projectilesNode)
         setupEnemies()
         addChild(enemiesNode)
+        
         
     }
     
@@ -187,19 +189,7 @@ class GameScene: SKScene {
         
         //Update code
         
-        //Timer for spawning the next enemy in the wave
-        if isWaveActive{
-            
-            spawnCounter += 1
-            
-            if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER{
-                
-                if (waveManager?.enemyArray.count)! > 0{
-                    waveManager?.spawnEnemy()
-                }
-                spawnCounter = 0
-            }
-        }
+       timers()
         
         for node in towersNode.children {
             let tower = node as! Tower
@@ -221,9 +211,35 @@ class GameScene: SKScene {
             }
             
         }
-        
-        
     }
+    
+    //Timers for starting the wave and then spawn one enemy from the wave
+    func timers(){
+        
+        if !isWaveActive{
+            
+            waveStartCounter += 1
+            if waveStartCounter >= WaveData.WAVE_START_TIME{
+                
+                isWaveActive = true
+                
+            }
+            
+        }else{
+            
+            spawnCounter += 1
+            
+            if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER{
+                
+                if (waveManager?.enemyArray.count)! > 0{
+                    waveManager?.spawnEnemy()
+                }
+                spawnCounter = 0
+            }
+        }
+    }
+    
+    
     
 }
 

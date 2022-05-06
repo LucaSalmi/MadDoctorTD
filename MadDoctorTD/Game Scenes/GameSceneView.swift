@@ -29,9 +29,8 @@ struct GameSceneView: View {
                 Spacer()
                 Button {
                     
-                    GameScene.instance?.isWaveActive = true
+                    GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
                         
-                    
                 } label: {
                     Text("MOVE!")
                 }
