@@ -77,7 +77,7 @@ class GameScene: SKScene {
     
     private func setupEnemies(){
         
-        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard,.fast, .heavy])
+        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard,.fast])
 
     }
     

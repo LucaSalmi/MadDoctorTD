@@ -125,5 +125,9 @@ struct WaveData{
     static let SPAWN_STANDARD_TIMER = 60 //Frames (1 second)
     static let WAVE_START_TIME = 18000 //Frames (5 minutes)
     
+    static let FAST_ENEMY_LIMIT = 1
+    static let HEAVY_ENEMY_LIMIT = 5
+    static let FLY_ENEMY_LIMIT = 5
+    
 }
 
