@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import SpriteKit
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -19,6 +20,7 @@ struct ContentView: View {
     @ObservedObject var appManager = AppManager.appManager
 
     var body: some View {
+        
         ZStack {
             
             switch (appManager.state) {
@@ -54,6 +56,7 @@ struct ContentView: View {
             }
             
         }
+
     }
 
     private func addItem() {

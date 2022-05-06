@@ -23,6 +23,8 @@ class GameScene: SKScene {
     var enemiesNode: SKNode = SKNode()
     var enemy: SKNode = SKNode()
     var nodeGraph: GKObstacleGraph? = nil
+    var waveManager: WaveManager? = nil
+    var spawnCounter = 0
     
     var rangeIndicator: SKShapeNode?
     
@@ -35,7 +37,6 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         GameScene.instance = self
-        
         physicsWorld.contactDelegate = self
         
         setupClickableTiles()
@@ -74,22 +75,8 @@ class GameScene: SKScene {
     
     private func setupEnemies(){
         
+        waveManager = WaveManager(totalSlots: 30)
 
-        let enemy1 = StandardEnemy(texture: SKTexture(imageNamed: "slime animation 1"))
-        enemy1.position = CGPoint(x: 0, y: 400)
-        enemy1.zPosition = 2
-        enemiesNode.addChild(enemy1)
-        
-        let enemy2 = StandardEnemy(texture: SKTexture(imageNamed: "slime animation 1"))
-        enemy2.position = CGPoint(x: 0, y: 500)
-        enemy2.zPosition = 2
-        enemiesNode.addChild(enemy2)
-        
-        let enemy3 = HeavyEnemy(texture: SKTexture(imageNamed: "ship 1"))
-        enemy3.position = CGPoint(x: 0, y: 600)
-        enemy3.zPosition = 2
-        enemiesNode.addChild(enemy3)
-        
     }
     
     private func setupClickableTiles() {
@@ -202,6 +189,21 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         
         //Update code
+        
+        
+        if isWaveActive{
+            
+            spawnCounter += 1
+            
+            if spawnCounter == 60{
+                if (waveManager?.enemyArray.count)! > 0{
+                    waveManager?.spawnEnemy()
+                }
+                
+                spawnCounter = 0
+                
+            }
+        }
         
         for node in towersNode.children {
             let tower = node as! Tower
