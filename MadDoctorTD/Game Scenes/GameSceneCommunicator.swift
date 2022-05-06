@@ -66,7 +66,7 @@ class GameSceneCommunicator: ObservableObject {
             GameScene.instance!.addChild(rapidFireTower.towerTexture)
             
         case TowerTypes.sniperTower.rawValue:
-            let sniperTower = SniperTower(position: currentFoundation!.position, foundation: currentFoundation!, textureName: "gun_tower_offline")
+            let sniperTower = SniperTower(position: currentFoundation!.position, foundation: currentFoundation!, textureName: "sniper_tower_power_on")
             GameScene.instance!.towersNode.addChild(sniperTower)
             GameScene.instance!.addChild(sniperTower.towerTexture)
         
