@@ -11,6 +11,7 @@ import SpriteKit
 class RapidFireTower: Tower{
     
     var fireLeft = false
+    var resetTexture = false
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,6 +30,14 @@ class RapidFireTower: Tower{
         fireRate = Int(Double(fireRate) * 0.5)
         
         attackRange = attackRange * 0.5
+    }
+    
+    override func update() {
+        super.update()
+        if resetTexture{
+            resetTexture = false
+            towerTexture.texture = SKTexture(imageNamed: "speed_tower_power_on")
+        }
     }
     
 }
