@@ -18,7 +18,7 @@ class HeavyEnemy: Enemy{
         
         super.init(texture: texture, color: .clear)
         hp = EnemiesData.BASE_HP * Int(EnemiesData.HEAVY_HP_MODIFIER)
-        speed = EnemiesData.BASE_SPEED * EnemiesData.HEAVY_SPEED_MODIFIER
+        baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.HEAVY_SPEED_MODIFIER
         waveSlotSize = EnemiesData.HEAVY_ENEMY_SLOT
         
     }
