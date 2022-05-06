@@ -93,15 +93,11 @@ class ClickableTile: SKSpriteNode{
         let testFoundation = FoundationPlate(position: self.position, tile: self)
         gameScene.foundationPlatesNode.addChild(testFoundation)
         
-        let enemies = gameScene.enemiesNode.children
-        
-        for node in enemies {
-            let enemy = node as! Enemy
-            let movePoints = enemy.movePlayerToGoal()
-            enemy.moving = false
-            if movePoints.isEmpty {
-                isBlocked = true
-            }
+        let enemy = gameScene.pathfindingTestEnemy!
+        let movePoints = enemy.movePlayerToGoal()
+        enemy.moving = false
+        if movePoints.isEmpty {
+            isBlocked = true
         }
         
         gameScene.foundationPlatesNode.removeChildren(in: [testFoundation])
