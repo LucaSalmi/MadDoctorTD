@@ -30,7 +30,7 @@ class Enemy: SKSpriteNode{
         super.init(texture: texture, color: tempColor, size: EnemiesData.SIZE)
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody?.categoryBitMask = PhysicsCategory.Enemy
-        physicsBody?.collisionBitMask = PhysicsCategory.Foundation
+        physicsBody?.collisionBitMask = 0
         physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false

@@ -24,7 +24,13 @@ class FlyingEnemy: Enemy{
     }
     
     override func update() {
-        //TODO: fly
+        
+        if movePoints.count > 1 {
+            let finalPoint = movePoints[movePoints.count-1]
+            movePoints = [finalPoint]
+        }
+        
+        super.update()
     }
     
 }

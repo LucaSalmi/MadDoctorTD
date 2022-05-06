@@ -176,6 +176,10 @@ class Tower: SKSpriteNode{
     
     func update() {
         
+        if !builtUponFoundation!.isPowered {
+            return
+        }
+        
         if currentFireRateTick > 0 {
             currentFireRateTick -= 1
         }
