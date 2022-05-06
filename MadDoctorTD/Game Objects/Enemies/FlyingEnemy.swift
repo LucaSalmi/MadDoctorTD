@@ -21,6 +21,8 @@ class FlyingEnemy: Enemy{
         baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FLY_SPEED_MODIFIER
         waveSlotSize = EnemiesData.FLY_ENEMY_SLOT
         
+        startHp = hp
+        
     }
     
     override func update() {

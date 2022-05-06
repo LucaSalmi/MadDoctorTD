@@ -19,6 +19,11 @@ class Enemy: SKSpriteNode{
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
     
+    var progressBar = SKShapeNode()
+    var startHp = 0
+    
+    
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -36,10 +41,32 @@ class Enemy: SKSpriteNode{
         physicsBody?.allowsRotation = false
         
         self.name = "Enemy"
+        progressBar = SKShapeNode(rectOf: CGSize(width: hp, height: 10))
+        
+        progressBar.fillColor = .cyan
+        //progressBar.position = CGPoint(x: self.position.x, y: self.position.y + 10)
+        //self.addChild(progressBar)
+        GameScene.instance?.position = CGPoint(x: self.position.x, y: self.position.y + 10)
         
     }
     
     func update(){
+        
+        
+        if progressBar.parent != nil{
+            progressBar.removeFromParent()
+        }
+        
+        progressBar = SKShapeNode(rectOf: CGSize(width: hp, height: 20))
+        progressBar.fillColor = .cyan
+        progressBar.position = CGPoint(x: self.position.x, y: self.position.y + 30)
+        GameScene.instance?.addChild(progressBar)
+        //self.addChild(progressBar)
+        
+        //let hpPct = hp / startHp
+        
+        
+        
         
         if !self.moving {
             let _ = movePlayerToGoal()
@@ -109,6 +136,7 @@ class Enemy: SKSpriteNode{
         
         if hp <= 0{
             
+            progressBar.removeFromParent()
             self.removeFromParent()
             
         }
