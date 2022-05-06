@@ -35,7 +35,7 @@ class GameSceneCommunicator: ObservableObject {
         GameScene.instance!.foundationPlatesNode.addChild(foundation)
         
         updateFoundationPower()
-        foundation.updateFoundationsTexture(isCenterFoundation: true)
+        updateFoundationTexture()
         
         currentTile = nil
         showFoundationMenu = false
@@ -97,7 +97,7 @@ class GameSceneCommunicator: ObservableObject {
             currentFoundation!.builtUponTile = nil
             currentFoundation!.removeFromParent()
             updateFoundationPower()
-            currentFoundation!.updateFoundationsTexture(isCenterFoundation: true, isSelling: true)
+            updateFoundationTexture()
         }
         
         cancelAllMenus()
@@ -117,6 +117,17 @@ class GameSceneCommunicator: ObservableObject {
         startGrid1.checkIfPowered(gridStart: startGrid1)
         let startGrid2 = gameScene.foundationPlatesNode.children[3] as! FoundationPlate
         startGrid2.checkIfPowered(gridStart: startGrid2)
+        
+    }
+    
+    func updateFoundationTexture() {
+        
+        let gameScene = GameScene.instance!
+        
+        for node in gameScene.foundationPlatesNode.children {
+            let foundationPlate = node as! FoundationPlate
+            foundationPlate.updateFoundationsTexture()
+        }
         
     }
     

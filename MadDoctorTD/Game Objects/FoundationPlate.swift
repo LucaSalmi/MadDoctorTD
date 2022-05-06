@@ -42,7 +42,7 @@ class FoundationPlate: SKSpriteNode{
         
     }
     
-    func updateFoundationsTexture(isCenterFoundation: Bool = true, isSelling: Bool = false) {
+    func updateFoundationsTexture() {
         
         //Get adjecent points
         let leftPoint = CGPoint(x: self.position.x - (self.size.width), y: self.position.y)
@@ -84,79 +84,75 @@ class FoundationPlate: SKSpriteNode{
         case 1:
             
             if leftFound != nil{
-                texture = SKTexture(imageNamed: "F_tile_power_on_connect_left")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_connect_left")
+                : SKTexture(imageNamed: "F_tile_power_off_connect_left")
             }
             if rightFound != nil{
-                texture = SKTexture(imageNamed: "F_tile_power_on_connect_right")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_connect_right")
+                : SKTexture(imageNamed: "F_tile_power_off_connect_right")
             }
             if topFound != nil{
-                texture = SKTexture(imageNamed: "F_tile_power_on_connect_top")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_connect_top")
+                : SKTexture(imageNamed: "F_tile_power_off_connect_top")
             }
             if bottomFound != nil{
-                texture = SKTexture(imageNamed: "F_tile_power_on_connect_bot")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_connect_bot")
+                : SKTexture(imageNamed: "F_tile_power_off_connect_bot")
             }
             
         case 2:
             
             if topFound != nil && bottomFound != nil{
-                texture = SKTexture(imageNamed: "F_tile_power_on_miss_right_n_left")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_miss_right_n_left")
+                : SKTexture(imageNamed: "F_tile_power_off_miss_right_n_left")
             }
             if rightFound != nil && leftFound != nil{
-                texture = SKTexture(imageNamed: "F_tile_power_on_miss_top_n_bot")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_miss_top_n_bot")
+                : SKTexture(imageNamed: "F_tile_power_off_miss_top_n_bot")
             }
             if topFound != nil && rightFound != nil{
-                texture = SKTexture(imageNamed: "F_tile_power_on_miss_left_n_bot")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_miss_left_n_bot")
+                : SKTexture(imageNamed: "F_tile_power_off_miss_left_n_bot")
             }
             if rightFound != nil && bottomFound != nil{
-                texture = SKTexture(imageNamed: "F_tile_power_on_miss_top_n_left")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_miss_top_n_left")
+                : SKTexture(imageNamed: "F_tile_power_off_miss_top_n_left")
             }
             if bottomFound != nil && leftFound != nil{
-                texture = SKTexture(imageNamed: "F_tile_power_on_miss_top_n_right")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_miss_top_n_right")
+                : SKTexture(imageNamed: "F_tile_power_off_miss_top_n_right")
             }
             if leftFound != nil && topFound != nil{
-                texture = SKTexture(imageNamed: "F_tile_power_on_miss_right_n_bot")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_miss_right_n_bot")
+                : SKTexture(imageNamed: "F_tile_power_off_miss_right_n_bot")
             }
 
         case 3:
             
             if leftFound == nil {
-                if !isCenterFoundation {
-                    print("DANNE: left missing!")
-                }
-                texture = SKTexture(imageNamed: "F_tile_power_on_miss_left")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_miss_left")
+                : SKTexture(imageNamed: "F_tile_power_off_miss_left")
             }
             if rightFound == nil {
-                if !isCenterFoundation {
-                    print("DANNE: right missing!")
-                }
-                texture = SKTexture(imageNamed: "F_tile_power_on_miss_right")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_miss_right")
+                : SKTexture(imageNamed: "F_tile_power_off_miss_right")
             }
             if topFound == nil {
-                if !isCenterFoundation {
-                    print("DANNE: top missing!")
-                }
-                texture = SKTexture(imageNamed: "F_tile_power_on_miss_top")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_miss_top")
+                : SKTexture(imageNamed: "F_tile_power_off_miss_top")
             }
             if bottomFound == nil {
-                if !isCenterFoundation {
-                    print("DANNE: bottom missing!")
-                }
-                texture = SKTexture(imageNamed: "F_tile_power_on_miss_bot")
+                texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on_miss_bot")
+                : SKTexture(imageNamed: "F_tile_power_off_miss_bot")
             }
             
         case 4:
             
-            texture = SKTexture(imageNamed: "F_tile_power_on")
+            texture = isPowered ? SKTexture(imageNamed: "F_tile_power_on")
+            : SKTexture(imageNamed: "F_tile_power_off")
             
         default:
             texture = SKTexture(imageNamed: "F_tile_power_off_no_connection")
-        }
-        
-        if isCenterFoundation {
-            leftFound?.updateFoundationsTexture(isCenterFoundation: false)
-            rightFound?.updateFoundationsTexture(isCenterFoundation: false)
-            topFound?.updateFoundationsTexture(isCenterFoundation: false)
-            bottomFound?.updateFoundationsTexture(isCenterFoundation: false)
         }
         
     }
