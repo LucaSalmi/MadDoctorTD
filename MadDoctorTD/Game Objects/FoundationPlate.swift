@@ -15,6 +15,9 @@ class FoundationPlate: SKSpriteNode{
     var builtUponTile: ClickableTile?
     var hasTower = false
     
+    var isPowered = true
+    var isPoweredChecked = false
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -160,6 +163,7 @@ class FoundationPlate: SKSpriteNode{
     
     func onClick(){
         
+        print("isPowered = \(isPowered)")
         
         if hasTower {
             return
@@ -173,5 +177,49 @@ class FoundationPlate: SKSpriteNode{
         communicator.showTowerMenu = true
         
     }
+    
+    func checkIfPowered(gridStart: FoundationPlate) {
+            
+            if self == gridStart {
+                isPoweredChecked = true
+            }
+            
+            isPowered = true
+            
+            //Get adjecent points
+            let leftPoint = CGPoint(x: self.position.x - (self.size.width), y: self.position.y)
+            let rightPoint = CGPoint(x: self.position.x + (self.size.width), y: self.position.y)
+            let bottomPoint = CGPoint(x: self.position.x, y: self.position.y - (self.size.height))
+            let topPoint = CGPoint(x: self.position.x, y: self.position.y + (self.size.height))
+            
+            var found = [FoundationPlate]()
+            
+            let foundationPlates = GameScene.instance!.foundationPlatesNode.children
+            for node in foundationPlates {
+                let foundationPlate = node as! FoundationPlate
+                
+                if foundationPlate.contains(leftPoint) {
+                    found.append(foundationPlate)
+                }
+                if foundationPlate.contains(rightPoint) {
+                    found.append(foundationPlate)
+                }
+                if foundationPlate.contains(topPoint) {
+                    found.append(foundationPlate)
+                }
+                if foundationPlate.contains(bottomPoint) {
+                    found.append(foundationPlate)
+                }
+            }
+            
+            for foundationPlate in found {
+                if !foundationPlate.isPoweredChecked {
+                    foundationPlate.isPoweredChecked = true
+                    foundationPlate.isPowered = true
+                    foundationPlate.checkIfPowered(gridStart: gridStart)
+                }
+            }
+            
+        }
     
 }
