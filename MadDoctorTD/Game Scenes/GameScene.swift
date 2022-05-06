@@ -30,6 +30,8 @@ class GameScene: SKScene {
     var rangeIndicator: SKShapeNode?
     
     var isWaveActive: Bool = false
+    var wavesCompleted = 0
+    var enemyChoises = [EnemyTypes]()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -77,7 +79,10 @@ class GameScene: SKScene {
     
     private func setupEnemies(){
         
-        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard,.fast])
+        enemyChoises.append(.standard)
+        enemyChoises.append(.fast)
+        
+        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoises)
 
     }
     
@@ -134,7 +139,6 @@ class GameScene: SKScene {
                         foundationPlate.updateFoundationsTexture()
                     }
                 }
-                
             }
         }
         
@@ -187,6 +191,7 @@ class GameScene: SKScene {
         return tileMap.tileDefinition(atColumn: coordinates.column, row: coordinates.row)
     }
     
+    
     override func update(_ currentTime: TimeInterval) {
         
         //Update code
@@ -236,6 +241,20 @@ class GameScene: SKScene {
                 }
                 spawnCounter = 0
             }
+        }
+    }
+    
+    
+    func progressDifficulty(){
+        
+        if wavesCompleted == 5{
+            enemyChoises.append(.heavy)
+            waveManager?.totalSlots += 5
+        }else if wavesCompleted == 10{
+            enemyChoises.append(.flying)
+            waveManager?.totalSlots += 10
+        }else if wavesCompleted == 15{
+            waveManager?.totalSlots += 15
         }
     }
     
