@@ -52,6 +52,12 @@ enum UpgradeTypes: Int{
     case damage = 0, range, firerate
 }
 
+enum EnemyTypes: Int{
+    
+    case standard = 0, fast, heavy, flying
+    
+}
+
 
 //Towers
 enum TowerTypes: Int{
@@ -111,6 +117,9 @@ struct EnemiesData{
 
 //Waves
 struct WaveData{
+    
+    //60 frames 1 second
+    //3600 frames 1 minute
     
     static let WAVE_STANDARD_SIZE = 30
     static let SPAWN_STANDARD_TIMER = 60 //Frames (1 second)

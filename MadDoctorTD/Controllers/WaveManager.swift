@@ -15,16 +15,16 @@ class WaveManager{
     var spawnPoint: CGPoint? = nil
     var enemyArray = [Enemy]()
     
-    init(totalSlots: Int){
+    init(totalSlots: Int, choises: [EnemyTypes]){
         
         currentScene = GameScene.instance
         spawnPoint = (currentScene?.childNode(withName: "SpawnPoint")!.position) ?? CGPoint(x: 0, y: 0)
         self.totalSlots = totalSlots
-        createWave()
+        createWave(choises)
     }
     
     
-    private func createWave(){
+    private func createWave(_ choises: [EnemyTypes]){
         
         if totalSlots < 0{
             
@@ -35,41 +35,34 @@ class WaveManager{
         
         for _ in 0...totalSlots{
             
-            let x = RandomNumberGenerator.rNG(start: 0, end: 3)
+            let chosen = RandomNumberGenerator.rNG(choises: choises)
             
-            switch x {
+            switch chosen {
                 
-            case 0:
+            case .standard:
                 
                 let enemy = StandardEnemy(texture: SKTexture(imageNamed: "slime animation 1"))
                 enemy.position = spawnPoint!
                 enemy.zPosition = 2
                 enemyArray.append(enemy)
                 
-            case 1:
+            case .fast:
                 
                 let enemy = FastEnemy(texture: SKTexture(imageNamed: "wheelie 1"))
                 enemy.position = spawnPoint!
                 enemy.zPosition = 2
                 enemyArray.append(enemy)
                 
-            case 2:
+            case .heavy:
                 
                 let enemy = HeavyEnemy(texture: SKTexture(imageNamed: "ship 1"))
                 enemy.position = spawnPoint!
                 enemy.zPosition = 2
                 enemyArray.append(enemy)
                 
-            case 3:
+            case .flying:
                 
                 let enemy = FlyingEnemy(texture: SKTexture(imageNamed: "joystick"))
-                enemy.position = spawnPoint!
-                enemy.zPosition = 2
-                enemyArray.append(enemy)
-                
-            default:
-                
-                let enemy = StandardEnemy(texture: SKTexture(imageNamed: "slime animation 1"))
                 enemy.position = spawnPoint!
                 enemy.zPosition = 2
                 enemyArray.append(enemy)

@@ -9,9 +9,10 @@ import Foundation
 
 struct RandomNumberGenerator{
     
-    static func rNG(start: Int, end: Int) -> Int{
+    static func rNG(choises: [EnemyTypes]) -> EnemyTypes{
         
-        return Int.random(in: start...end)
+        let x = Int.random(in: 0...choises.count - 1)
+        return choises[x]
         
     }
     

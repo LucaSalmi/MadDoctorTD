@@ -77,7 +77,7 @@ class GameScene: SKScene {
     
     private func setupEnemies(){
         
-        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE)
+        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard,.fast, .heavy])
 
     }
     
@@ -181,7 +181,6 @@ class GameScene: SKScene {
             let tower = node as! Tower
             tower.onClick()
         }
-
     }
     
 
@@ -212,9 +211,7 @@ class GameScene: SKScene {
                 
                 let enemy = node as! Enemy
                 enemy.update()
-                
             }
-            
         }
     }
     
