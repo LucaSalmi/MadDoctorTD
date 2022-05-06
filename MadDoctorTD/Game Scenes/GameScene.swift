@@ -93,8 +93,6 @@ class GameScene: SKScene {
                 guard let tile = tile(in: clickableTileMap, at: (column, row)) else {continue}
                 guard tile.userData?.object(forKey: "isClickableTile") != nil else {continue}
                 
-                
-                
                 let clickableTile = ClickableTile(position: clickableTileMap.centerOfTile(atColumn: column, row: row))
                 
                 clickableTilesNode.addChild(clickableTile)
