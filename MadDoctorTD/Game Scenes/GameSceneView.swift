@@ -64,10 +64,15 @@ struct GameSceneView: View {
                         Text("Build Gun Tower")
                     }
                     Button {
-                        //TODO: PUT BUTTON HERE
                         communicator.buildTower(type: TowerTypes.rapidFireTower.rawValue)
                     } label: {
                         Text("Build Rapid Fire Tower")
+                    }
+                    
+                    Button {
+                        communicator.buildTower(type: TowerTypes.sniperTower.rawValue)
+                    } label: {
+                        Text("Build Sniper Tower")
                     }
 
                     Button {

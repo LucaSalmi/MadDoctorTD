@@ -63,6 +63,11 @@ class GameSceneCommunicator: ObservableObject {
             let rapidFireTower = RapidFireTower(position: currentFoundation!.position, foundation: currentFoundation!, textureName: "speed_tower_power_on")
             GameScene.instance!.towersNode.addChild(rapidFireTower)
             GameScene.instance!.addChild(rapidFireTower.towerTexture)
+            
+        case TowerTypes.sniperTower.rawValue:
+            let sniperTower = SniperTower(position: currentFoundation!.position, foundation: currentFoundation!, textureName: "gun_tower_offline")
+            GameScene.instance!.towersNode.addChild(sniperTower)
+            GameScene.instance!.addChild(sniperTower.towerTexture)
         
         default:
             print("Error building tower")

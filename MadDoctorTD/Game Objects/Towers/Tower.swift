@@ -119,14 +119,24 @@ class Tower: SKSpriteNode{
                 
             case ProjectileTypes.rapidFireProjectile.rawValue:
                 
-                let foundationOffset = builtUponFoundation!.size.width/4
+                let rapidFireTower = self as! RapidFireTower
                 
-                let projectile1 = GunProjectile(position: CGPoint(x: self.position.x + foundationOffset, y: self.position.y), target: currentTarget!, attackDamage: attackDamage)
-                gameScene.projectilesNode.addChild(projectile1)
+                let projectile = GunProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
                 
-                let projectile2 = GunProjectile(position: CGPoint(x: self.position.x - foundationOffset, y: self.position.y), target: currentTarget!, attackDamage: attackDamage)
-                gameScene.projectilesNode.addChild(projectile2)
+                if rapidFireTower.fireLeft{
+                    projectile.texture = SKTexture(imageNamed: "speed_projectile_left")
+                }else{
+                    projectile.texture = SKTexture(imageNamed: "speed_projectile_right")
+                }
+                rapidFireTower.fireLeft = !rapidFireTower.fireLeft
+                gameScene.projectilesNode.addChild(projectile)
                 
+                
+                
+            case ProjectileTypes.sniperProjectile.rawValue:
+                
+                let projectile = SniperProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
+                gameScene.projectilesNode.addChild(projectile)
                 
                 
             default:

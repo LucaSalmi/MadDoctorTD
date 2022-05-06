@@ -54,7 +54,7 @@ enum UpgradeTypes: Int{
 
 //Towers
 enum TowerTypes: Int{
-    case gunTower = 0, rapidFireTower
+    case gunTower = 0, rapidFireTower, sniperTower
 }
 
 struct TowerData {
@@ -76,12 +76,15 @@ struct TowerData {
 
 //Bullets
 enum ProjectileTypes: Int {
-    case gunProjectile = 0, rapidFireProjectile
+    case gunProjectile = 0, rapidFireProjectile, sniperProjectile
 }
 
 struct ProjectileData {
     static let size: CGSize = CGSize(width: DefaultTileData.size.width * 0.5, height: DefaultTileData.size.height * 0.5)
     static let speed: CGFloat = CGFloat(8.0)
+    
+    static let SNIPER_MODIFIER: CGFloat = CGFloat(10.0)
+    
 }
 
 //Enemies
