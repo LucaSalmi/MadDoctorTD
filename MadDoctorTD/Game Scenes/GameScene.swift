@@ -139,6 +139,11 @@ class GameScene: SKScene {
                 
             }
         }
+        
+        for node in foundationPlatesNode.children {
+            let foundationPlate = node as! FoundationPlate
+            foundationPlate.updateFoundationsTexture()
+        }
 
         startFoundationMap.removeFromParent()
     }
