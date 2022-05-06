@@ -17,7 +17,7 @@ class FlyingEnemy: Enemy{
     init(texture: SKTexture){
         
         super.init(texture: texture, color: .clear)
-        hp = EnemiesData.BASE_HP * Int(EnemiesData.FLY_HP_MODIFIER)
+        hp = Int(Double(EnemiesData.BASE_HP) * (EnemiesData.FLY_HP_MODIFIER))
         baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FLY_SPEED_MODIFIER
         waveSlotSize = EnemiesData.FLY_ENEMY_SLOT
         
