@@ -126,8 +126,8 @@
 		C82C4D0C28240DBA00067858 /* Towers */ = {
 			isa = PBXGroup;
 			children = (
-				E5268CCF2822708600F134A5 /* GunTower.swift */,
 				E5268CCB28226EF000F134A5 /* Tower.swift */,
+				E5268CCF2822708600F134A5 /* GunTower.swift */,
 				E5268CD128250E5F00F134A5 /* RapidFireTower.swift */,
 				E5268CD3282537BC00F134A5 /* SniperTower.swift */,
 			);
