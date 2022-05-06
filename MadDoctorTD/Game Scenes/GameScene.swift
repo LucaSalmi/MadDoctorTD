@@ -156,6 +156,10 @@ class GameScene: SKScene {
         startFoundationMap.removeFromParent()
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        touchesBegan(touches, with: event)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
 
@@ -169,26 +173,37 @@ class GameScene: SKScene {
         
         guard let touch = touches.first else {return}
         
+        //let location = touch.location(in: self)
+        //let touchedNode = self.nodes(at: location)
+        
+        //guard let node = touchedNode.first else {return}
+        
         let location = touch.location(in: self)
-        let touchedNode = self.nodes(at: location)
+        let touchedNodes = nodes(at: location)
         
-        let node = touchedNode.first
-        
-        if node is ClickableTile {
-            let clickableTile = node as! ClickableTile
-            clickableTile.onClick()
-
-        }
-        else if node is FoundationPlate {
-            let foundationPlate = node as! FoundationPlate
-            foundationPlate.onClick()
+        for node in touchedNodes {
             
-            print("Foundation Plate clicked")
+            if node is Tower{
+                let tower = node as! Tower
+                tower.onClick()
+                break
+            }
+            else if node is FoundationPlate {
+                let foundationPlate = node as! FoundationPlate
+                foundationPlate.onClick()
+                break
+            }
+            else if node is ClickableTile {
+                let clickableTile = node as! ClickableTile
+                clickableTile.onClick()
+                break
+            }
+            
+            
+            
         }
-        else if node is Tower{
-            let tower = node as! Tower
-            tower.onClick()
-        }
+        
+        
     }
     
 
