@@ -75,7 +75,7 @@ class GameScene: SKScene {
     
     private func setupEnemies(){
         
-        waveManager = WaveManager(totalSlots: 30)
+        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE)
 
     }
     
@@ -96,10 +96,7 @@ class GameScene: SKScene {
                 let clickableTile = ClickableTile(position: clickableTileMap.centerOfTile(atColumn: column, row: row))
                 
                 clickableTilesNode.addChild(clickableTile)
-                
-                
-                
-                
+ 
             }
         }
         
@@ -190,18 +187,17 @@ class GameScene: SKScene {
         
         //Update code
         
-        
+        //Timer for spawning the next enemy in the wave
         if isWaveActive{
             
             spawnCounter += 1
             
-            if spawnCounter == 60{
+            if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER{
+                
                 if (waveManager?.enemyArray.count)! > 0{
                     waveManager?.spawnEnemy()
                 }
-                
                 spawnCounter = 0
-                
             }
         }
         

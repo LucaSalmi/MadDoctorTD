@@ -108,3 +108,11 @@ struct EnemiesData{
     
 }
 
+struct WaveData{
+    
+    static let WAVE_STANDARD_SIZE = 30
+    static let SPAWN_STANDARD_TIMER = 60
+    
+    
+}
+
