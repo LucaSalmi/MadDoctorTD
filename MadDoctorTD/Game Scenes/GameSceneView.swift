@@ -76,7 +76,7 @@ struct GameSceneView: View {
                         
                         Spacer()
                         
-                        Text("Current wave = ")
+                        Text("Current wave = \(gameManager.currentWave)")
                             .foregroundColor(.white)
                     }
                     Spacer()

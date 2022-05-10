@@ -14,7 +14,7 @@ class GameScene: SKScene {
     
     static var instance: GameScene? = nil
     
-    var clickableTilesNode: SKNode = SKNode()
+    
     var edgesTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
     var enemiesNode: SKNode = SKNode()
@@ -39,7 +39,8 @@ class GameScene: SKScene {
         GameScene.instance = self
         physicsWorld.contactDelegate = self
         
-        setupClickableTiles()
+        let _ = ClickableTileFactory()
+        addChild(ClickableTilesNodes.clickableTilesNode)
         
         setupEdges()
         addChild(edgesTilesNode)
@@ -97,31 +98,6 @@ class GameScene: SKScene {
 
     }
     
-    private func setupClickableTiles() {
-        
-        guard let clickableTileMap = childNode(withName: "clickable_tiles")as? SKTileMapNode else {
-            return
-        }
-        
-        for row in 0..<clickableTileMap.numberOfRows{
-            for column in 0..<clickableTileMap.numberOfColumns{
-                
-                guard let tile = tile(in: clickableTileMap, at: (column, row)) else {continue}
-                guard tile.userData?.object(forKey: "isClickableTile") != nil else {continue}
-                
-                let clickableTile = ClickableTile(position: clickableTileMap.centerOfTile(atColumn: column, row: row))
-                
-                clickableTilesNode.addChild(clickableTile)
- 
-            }
-        }
-        
-        clickableTilesNode.name = "ClickableTiles"
-        addChild(clickableTilesNode)
-        clickableTileMap.removeFromParent()
-        
-    }
-    
     private func setupStartFoundation() {
         
         foundationPlatesNode.name = "FoundationPlates"
@@ -139,7 +115,7 @@ class GameScene: SKScene {
                 
                 let position = startFoundationMap.centerOfTile(atColumn: column, row: row)
                 
-                for node in clickableTilesNode.children {
+                for node in ClickableTilesNodes.clickableTilesNode.children {
                     let clickableTile = node as! ClickableTile
                     if clickableTile.contains(position) {
                         
