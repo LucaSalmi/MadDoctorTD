@@ -168,12 +168,12 @@ class AoeProjectile: SKSpriteNode {
         currentDuration += 1
         
         if currentDuration < (travelDuration/2){
-            self.size.width += 1.5
-            self.size.height += 1.5
+            self.size.width += 0.5
+            self.size.height += 0.5
         }
         else{
-            self.size.width -= 1.5
-            self.size.height -= 1.5
+            self.size.width -= 0.5
+            self.size.height -= 0.5
         }
         
         

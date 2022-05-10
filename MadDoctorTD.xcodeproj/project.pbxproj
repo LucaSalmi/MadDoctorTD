@@ -50,6 +50,7 @@
 		C844A731282A6D5800FC42C9 /* ClickableTilesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A730282A6D5800FC42C9 /* ClickableTilesFactory.swift */; };
 		C844A733282A7FE500FC42C9 /* FoundationPlatesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A732282A7FE500FC42C9 /* FoundationPlatesFactory.swift */; };
 		C844A735282A88DA00FC42C9 /* SlimeEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A734282A88DA00FC42C9 /* SlimeEnemy.swift */; };
+		C844A737282A969600FC42C9 /* CannonExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = C844A736282A969600FC42C9 /* CannonExplosion.sks */; };
 		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
 		C897BC1D282510380085D093 /* WaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1C282510380085D093 /* WaveManager.swift */; };
 		C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1E282515260085D093 /* RandomNumberGenerator.swift */; };
@@ -109,6 +110,7 @@
 		C844A730282A6D5800FC42C9 /* ClickableTilesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTilesFactory.swift; sourceTree = "<group>"; };
 		C844A732282A7FE500FC42C9 /* FoundationPlatesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationPlatesFactory.swift; sourceTree = "<group>"; };
 		C844A734282A88DA00FC42C9 /* SlimeEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlimeEnemy.swift; sourceTree = "<group>"; };
+		C844A736282A969600FC42C9 /* CannonExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CannonExplosion.sks; sourceTree = "<group>"; };
 		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		C897BC1C282510380085D093 /* WaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveManager.swift; sourceTree = "<group>"; };
 		C897BC1E282515260085D093 /* RandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNumberGenerator.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				B35C2109282A632F009A748E /* sniper_bullet_fly_by_5.wav */,
 				B35C2111282A6EEE009A748E /* construction_sound_effect.wav */,
 				B35C2110282A6EEE009A748E /* finger_tap_boosted.wav */,
+				C844A736282A969600FC42C9 /* CannonExplosion.sks */,
 			);
 			path = "Sound and Graphics";
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C844A737282A969600FC42C9 /* CannonExplosion.sks in Resources */,
 				3359CC9828214F1800878191 /* LabScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
 				3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */,
