@@ -50,30 +50,10 @@ class GameSceneCommunicator: ObservableObject {
         
     }
     
-    func buildTower(type: Int){
+    func buildTower(type: TowerTypes){
         
         currentFoundation!.hasTower = true
-        switch type{
-        
-        case TowerTypes.gunTower.rawValue:
-            let gunTower = GunTower(position: currentFoundation!.position, foundation: currentFoundation!, textureName: "gun_tower_online")
-            GameScene.instance!.towersNode.addChild(gunTower)
-            GameScene.instance!.addChild(gunTower.towerTexture)
-            
-        case TowerTypes.rapidFireTower.rawValue:
-            let rapidFireTower = RapidFireTower(position: currentFoundation!.position, foundation: currentFoundation!, textureName: "speed_tower_power_on")
-            GameScene.instance!.towersNode.addChild(rapidFireTower)
-            GameScene.instance!.addChild(rapidFireTower.towerTexture)
-            
-        case TowerTypes.sniperTower.rawValue:
-            let sniperTower = SniperTower(position: currentFoundation!.position, foundation: currentFoundation!, textureName: "sniper_tower_power_on")
-            GameScene.instance!.towersNode.addChild(sniperTower)
-            GameScene.instance!.addChild(sniperTower.towerTexture)
-        
-        default:
-            print("Error building tower")
-        }
-        
+        TowerFactory(towerType: type).createTower(currentFoundation: currentFoundation!)
         cancelAllMenus()
         
     }

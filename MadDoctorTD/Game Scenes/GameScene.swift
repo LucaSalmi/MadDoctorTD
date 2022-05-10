@@ -17,7 +17,6 @@ class GameScene: SKScene {
     var clickableTilesNode: SKNode = SKNode()
     var edgesTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
-    var towersNode: SKNode = SKNode()
     var projectilesNode: SKNode = SKNode()
     var gunProjectilesPool = [GunProjectile]()
     var enemiesNode: SKNode = SKNode()
@@ -46,7 +45,11 @@ class GameScene: SKScene {
         setupEdges()
         addChild(edgesTilesNode)
         setupStartFoundation()
-        addChild(towersNode)
+        
+        //add towerNode and towerTextureNode to GameScene
+        addChild(TowerNode.towersNode)
+        addChild(TowerNode.towerTextureNode)
+        
         addChild(projectilesNode)
         setupEnemies()
         addChild(enemiesNode)
@@ -198,12 +201,7 @@ class GameScene: SKScene {
                 clickableTile.onClick()
                 break
             }
-            
-            
-            
         }
-        
-        
     }
     
 
@@ -219,7 +217,7 @@ class GameScene: SKScene {
         
        timers()
         
-        for node in towersNode.children {
+        for node in TowerNode.towersNode.children {
             let tower = node as! Tower
             tower.update()
         }
