@@ -16,6 +16,7 @@ class SoundManager{
     
     //Tracks name: String
     static let gunProjectileImpactSFX = "gun_projectile_impact"
+    static let sniperProjectileImpactSFX = "AWP_SOUND_EFFECT"
     
     static var musicPlayer: AVAudioPlayer?
 

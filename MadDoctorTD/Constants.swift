@@ -19,6 +19,7 @@ enum GameState: Int{
     
     case menus = 0 , build, wave, pause
     
+    
 }
 
 enum ActionState: Int{
@@ -89,9 +90,10 @@ enum ProjectileTypes: Int {
 
 struct ProjectileData {
     static let size: CGSize = CGSize(width: DefaultTileData.size.width * 0.5, height: DefaultTileData.size.height * 0.5)
+    //static let speed: CGFloat = CGFloat(8.0)
     static let speed: CGFloat = CGFloat(8.0)
     
-    static let SNIPER_MODIFIER: CGFloat = CGFloat(10.0)
+    static let SNIPER_MODIFIER: CGFloat = CGFloat(13.0)
     
 }
 
