@@ -14,11 +14,9 @@ class GameScene: SKScene {
     
     static var instance: GameScene? = nil
     
-    var clickableTilesNode: SKNode = SKNode()
+    
     var edgesTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
-    var projectilesNode: SKNode = SKNode()
-    var gunProjectilesPool = [GunProjectile]()
     var enemiesNode: SKNode = SKNode()
     var pathfindingTestEnemy: Enemy?
     var nodeGraph: GKObstacleGraph? = nil
@@ -41,16 +39,21 @@ class GameScene: SKScene {
         GameScene.instance = self
         physicsWorld.contactDelegate = self
         
-        setupClickableTiles()
+        let _ = ClickableTileFactory()
+        addChild(ClickableTilesNodes.clickableTilesNode)
+        
         setupEdges()
         addChild(edgesTilesNode)
+        
         setupStartFoundation()
         
         //add towerNode and towerTextureNode to GameScene
         addChild(TowerNode.towersNode)
         addChild(TowerNode.towerTextureNode)
         
-        addChild(projectilesNode)
+        //add ProjectilesNote to GameScene
+        addChild(ProjectileNodes.projectilesNode)
+        
         setupEnemies()
         addChild(enemiesNode)
         
@@ -95,31 +98,6 @@ class GameScene: SKScene {
 
     }
     
-    private func setupClickableTiles() {
-        
-        guard let clickableTileMap = childNode(withName: "clickable_tiles")as? SKTileMapNode else {
-            return
-        }
-        
-        for row in 0..<clickableTileMap.numberOfRows{
-            for column in 0..<clickableTileMap.numberOfColumns{
-                
-                guard let tile = tile(in: clickableTileMap, at: (column, row)) else {continue}
-                guard tile.userData?.object(forKey: "isClickableTile") != nil else {continue}
-                
-                let clickableTile = ClickableTile(position: clickableTileMap.centerOfTile(atColumn: column, row: row))
-                
-                clickableTilesNode.addChild(clickableTile)
- 
-            }
-        }
-        
-        clickableTilesNode.name = "ClickableTiles"
-        addChild(clickableTilesNode)
-        clickableTileMap.removeFromParent()
-        
-    }
-    
     private func setupStartFoundation() {
         
         foundationPlatesNode.name = "FoundationPlates"
@@ -137,7 +115,7 @@ class GameScene: SKScene {
                 
                 let position = startFoundationMap.centerOfTile(atColumn: column, row: row)
                 
-                for node in clickableTilesNode.children {
+                for node in ClickableTilesNodes.clickableTilesNode.children {
                     let clickableTile = node as! ClickableTile
                     if clickableTile.contains(position) {
                         
@@ -233,7 +211,8 @@ class GameScene: SKScene {
             tower.update()
         }
         
-        for node in projectilesNode.children {
+
+        for node in ProjectileNodes.projectilesNode.children {
             if node is Projectile{
                 let projectile = node as! Projectile
                 projectile.update()
@@ -253,6 +232,7 @@ class GameScene: SKScene {
                 enemy.update()
             }
         }
+        
     }
     
     //Timers for starting the wave and then spawn one enemy from the wave
@@ -261,6 +241,7 @@ class GameScene: SKScene {
         if !isWaveActive{
             
             waveStartCounter += 1
+            GameManager.instance.nextWaveCounter = waveStartCounter
             if waveStartCounter >= WaveData.WAVE_START_TIME{
                 
                 isWaveActive = true
@@ -278,6 +259,8 @@ class GameScene: SKScene {
                 }
                 spawnCounter = 0
             }
+            
+            waveManager!.update()
         }
     }
     

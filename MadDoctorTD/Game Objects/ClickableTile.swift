@@ -67,9 +67,9 @@ class ClickableTile: SKSpriteNode{
         }
         
         
-        for i in 0..<gameScene.clickableTilesNode.children.count {
+        for i in 0..<ClickableTilesNodes.clickableTilesNode.children.count {
             
-            let currentTile = gameScene.clickableTilesNode.children[i] as! ClickableTile
+            let currentTile = ClickableTilesNodes.clickableTilesNode.children[i] as! ClickableTile
             
             if !currentTile.containsFoundation {
                 currentTile.color = .clear

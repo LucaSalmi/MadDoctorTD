@@ -135,12 +135,12 @@ struct EnemiesData{
 //Waves
 struct WaveData{
     
+    static let LEVEL_WAVE_SIZE = 10
     //60 frames 1 second
     //3600 frames 1 minute
-    
-    static let WAVE_STANDARD_SIZE = 30
+    static let WAVE_STANDARD_SIZE = 10
     static let SPAWN_STANDARD_TIMER = 60 //Frames (1 second)
-    static let WAVE_START_TIME = 18000 //Frames (5 minutes)
+    static let WAVE_START_TIME = 1800 //Frames (30 seconds)
     
     static let FAST_ENEMY_LIMIT = 5
     static let HEAVY_ENEMY_LIMIT = 5
