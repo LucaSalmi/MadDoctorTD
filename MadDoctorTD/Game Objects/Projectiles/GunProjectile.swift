@@ -34,7 +34,7 @@ class GunProjectile: Projectile {
         particle!.zPosition = 5
         gameScene.addChild(particle!)
         gameScene.run(SKAction.wait(forDuration: 1)) {
-            gameScene.removeFromParent()
+            particle!.removeFromParent()
         }
         
         //TODO: TAKE THIS BACK FOR OBJECTPOOLING AND SOLVE BUG

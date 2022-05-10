@@ -18,7 +18,7 @@ class Edge : SKSpriteNode{
         
         //Texture Init
         
-        let size = DefaultTileData.size
+        let size = DefaultTileData.SIZE
             
         super.init(texture: nil, color: .clear, size: size)
         

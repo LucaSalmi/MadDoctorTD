@@ -13,9 +13,16 @@ struct GameSceneView: View {
     var gameScene: SKScene
     
     @ObservedObject var communicator = GameSceneCommunicator.instance
+    @ObservedObject var gameManager = GameManager.instance
     
     init() {
-        gameScene = SKScene(fileNamed: "GameScene")!
+        
+        if GameScene.instance == nil {
+            gameScene = SKScene(fileNamed: "GameScene")!
+        }
+        else {
+            gameScene = GameScene.instance!
+        }
         gameScene.scaleMode = .aspectFit
         communicator.cancelAllMenus()
     }
@@ -24,17 +31,72 @@ struct GameSceneView: View {
         ZStack {
             SpriteView(scene: gameScene)
                 .ignoresSafeArea()
+                .blur(radius: gameManager.isPaused ? 5 : 0)
             
             VStack {
-                Spacer()
-                Button {
+                
+                if gameManager.isPaused {
                     
-                    GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
+                    VStack(spacing: 20){
+                        SettingsView(title: "Paused")
                         
-                } label: {
-                    Text("MOVE!")
-                }
+                        Button {
+                            withAnimation{
+                                gameManager.isPaused = false
+                            }
+                            
+                        } label: {
+                            Text("Continue")
+                                .font(.title)
+                        }
 
+                    }.padding(50)
+                        .background(Color.white.opacity(0.5))
+                    
+                        
+                }
+                else {
+                    HStack {
+                        
+                        Text("$ = \(gameManager.currentMoney)")
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        
+                        Button {
+                            communicator.cancelAllMenus()
+                            withAnimation{
+                                gameManager.isPaused = true
+                            }
+                            
+                        } label: {
+                            Text("Pause")
+                        }
+
+                        
+                        Spacer()
+                        
+                        Text("Current wave = \(gameManager.currentWave)")
+                            .foregroundColor(.white)
+                    }
+                    Spacer()
+                    
+                    if ((WaveData.WAVE_START_TIME - 180)...(WaveData.WAVE_START_TIME - 5)).contains(gameManager.nextWaveCounter){
+                        Text("wave \(gameManager.currentWave) incoming...")
+                        .font(.title)
+                        .foregroundColor(.white)
+                    }
+                    
+                    Spacer()
+                    
+                    HStack {
+                        Button {
+                            GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
+                        } label: {
+                            Text("Start wave!")
+                        }
+                    }
+                }
             }
             
             if communicator.showFoundationMenu{
@@ -42,6 +104,11 @@ struct GameSceneView: View {
                     Text("Foundation menu")
                     Button {
                         communicator.buildFoundation()
+                        //SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
+                        SoundManager.playSFX(sfxName: SoundManager.foundationPlacementSFX)
+
+                        //ADD CODE FOR BUILDINGSOUND
+                        
                     } label: {
                         Text("Build foundation")
                     }
@@ -58,18 +125,25 @@ struct GameSceneView: View {
                 VStack(spacing: 25) {
                     Text("Tower menu")
                     Button {
-                        communicator.buildTower(type: TowerTypes.gunTower.rawValue)
+                        communicator.buildTower(type: TowerTypes.gunTower)
+                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Gun Tower")
                     }
                     Button {
-                        communicator.buildTower(type: TowerTypes.rapidFireTower.rawValue)
+                        communicator.buildTower(type: TowerTypes.rapidFireTower)
+                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Rapid Fire Tower")
                     }
-                    
                     Button {
-                        communicator.buildTower(type: TowerTypes.sniperTower.rawValue)
+                        communicator.buildTower(type: TowerTypes.cannonTower)
+                    } label: {
+                        Text("Build Cannon Tower")
+                    }
+                    Button {
+                        communicator.buildTower(type: TowerTypes.sniperTower)
+                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Sniper Tower")
                     }
@@ -94,20 +168,18 @@ struct GameSceneView: View {
                 VStack(spacing: 25){
                     Text("Upgrade menu")
                     
-                    
                     Button {
-                        
-                        communicator.currentTower!.upgrade(upgradeType: .damage)
+                        communicator.upgradeTower(upgradeType: .damage)
                     } label: {
                         Text("Upgrade damage")
                     }
                     Button {
-                        communicator.currentTower!.upgrade(upgradeType: .range)
+                        communicator.upgradeTower(upgradeType: .range)
                     } label: {
                         Text("Upgrade range")
                     }
                     Button {
-                        communicator.currentTower!.upgrade(upgradeType: .firerate)
+                        communicator.upgradeTower(upgradeType: .firerate)
                     } label: {
                         Text("Upgrade attack speed")
                     }

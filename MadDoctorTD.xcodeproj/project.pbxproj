@@ -20,9 +20,14 @@
 		3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9B28214F6200878191 /* LabSceneView.swift */; };
 		3359CCA4282157C500878191 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CCA3282157C500878191 /* MyTileSet.sks */; };
 		3359CCA62821596700878191 /* ClickableTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CCA52821596700878191 /* ClickableTile.swift */; };
-		C82C4D062824076B00067858 /* FastEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82C4D052824076B00067858 /* FastEnemy.swift */; };
-		C82C4D082824077900067858 /* HeavyEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82C4D072824077900067858 /* HeavyEnemy.swift */; };
-		C82C4D0A2824079600067858 /* FlyingEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82C4D092824079600067858 /* FlyingEnemy.swift */; };
+		B35C20FB282A45DB009A748E /* AWP_SOUND_EFFECT.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */; };
+		B35C210B282A6330009A748E /* sniper_bullet_fly_by_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */; };
+		B35C210C282A6330009A748E /* sniper_bullet_fly_by_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */; };
+		B35C210D282A6330009A748E /* sniper_bullet_fly_by_4.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2108282A632F009A748E /* sniper_bullet_fly_by_4.wav */; };
+		B35C210E282A6330009A748E /* sniper_bullet_fly_by_5.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2109282A632F009A748E /* sniper_bullet_fly_by_5.wav */; };
+		B35C210F282A6330009A748E /* sniper_bullet_fly_by_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C210A282A6330009A748E /* sniper_bullet_fly_by_3.wav */; };
+		B35C2112282A6EEE009A748E /* finger_tap_boosted.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2110282A6EEE009A748E /* finger_tap_boosted.wav */; };
+		B35C2113282A6EEE009A748E /* construction_sound_effect.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2111282A6EEE009A748E /* construction_sound_effect.wav */; };
 		C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A52821352200F66043 /* MadDoctorTDApp.swift */; };
 		C839C6A82821352200F66043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A72821352200F66043 /* ContentView.swift */; };
 		C839C6AA2821352400F66043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6A92821352400F66043 /* Assets.xcassets */; };
@@ -40,16 +45,26 @@
 		C839C6CC2821621400F66043 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CB2821621400F66043 /* SettingsView.swift */; };
 		C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */; };
 		C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CF28216CD400F66043 /* FoundationPlate.swift */; };
+		C844A72D282A46A300FC42C9 /* TowerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A72C282A46A300FC42C9 /* TowerFactory.swift */; };
+		C844A72F282A582800FC42C9 /* ProjectileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A72E282A582700FC42C9 /* ProjectileFactory.swift */; };
+		C844A731282A6D5800FC42C9 /* ClickableTilesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A730282A6D5800FC42C9 /* ClickableTilesFactory.swift */; };
+		C844A733282A7FE500FC42C9 /* FoundationPlatesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A732282A7FE500FC42C9 /* FoundationPlatesFactory.swift */; };
+		C844A735282A88DA00FC42C9 /* SlimeEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A734282A88DA00FC42C9 /* SlimeEnemy.swift */; };
+		C844A737282A969600FC42C9 /* CannonExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = C844A736282A969600FC42C9 /* CannonExplosion.sks */; };
+		C844A739282A982800FC42C9 /* EnemiesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A738282A982800FC42C9 /* EnemiesFactory.swift */; };
+		C844A73C282AA26C00FC42C9 /* SquidEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A73B282AA26C00FC42C9 /* SquidEnemy.swift */; };
 		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
 		C897BC1D282510380085D093 /* WaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1C282510380085D093 /* WaveManager.swift */; };
 		C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1E282515260085D093 /* RandomNumberGenerator.swift */; };
-		C8E693432823B26E00D0A661 /* StandardEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693422823B26E00D0A661 /* StandardEnemy.swift */; };
 		C8E693452823C38F00D0A661 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693442823C38F00D0A661 /* Edge.swift */; };
 		E5268CCC28226EF000F134A5 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCB28226EF000F134A5 /* Tower.swift */; };
 		E5268CD02822708600F134A5 /* GunTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCF2822708600F134A5 /* GunTower.swift */; };
 		E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD128250E5F00F134A5 /* RapidFireTower.swift */; };
 		E5268CD4282537BD00F134A5 /* SniperTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD3282537BC00F134A5 /* SniperTower.swift */; };
 		E5268CD628253E6600F134A5 /* SniperProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD528253E6600F134A5 /* SniperProjectile.swift */; };
+		E5836FF7282A621500EAF6E9 /* CannonTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FF6282A621500EAF6E9 /* CannonTower.swift */; };
+		E5836FF9282A652D00EAF6E9 /* AoeProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */; };
+		E5836FFB282A662000EAF6E9 /* CannonProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,9 +81,14 @@
 		3359CC9B28214F6200878191 /* LabSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneView.swift; sourceTree = "<group>"; };
 		3359CCA3282157C500878191 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		3359CCA52821596700878191 /* ClickableTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTile.swift; sourceTree = "<group>"; };
-		C82C4D052824076B00067858 /* FastEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastEnemy.swift; sourceTree = "<group>"; };
-		C82C4D072824077900067858 /* HeavyEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeavyEnemy.swift; sourceTree = "<group>"; };
-		C82C4D092824079600067858 /* FlyingEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingEnemy.swift; sourceTree = "<group>"; };
+		B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AWP_SOUND_EFFECT.wav; sourceTree = "<group>"; };
+		B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_2.wav; sourceTree = "<group>"; };
+		B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_1.wav; sourceTree = "<group>"; };
+		B35C2108282A632F009A748E /* sniper_bullet_fly_by_4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_4.wav; sourceTree = "<group>"; };
+		B35C2109282A632F009A748E /* sniper_bullet_fly_by_5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_5.wav; sourceTree = "<group>"; };
+		B35C210A282A6330009A748E /* sniper_bullet_fly_by_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_3.wav; sourceTree = "<group>"; };
+		B35C2110282A6EEE009A748E /* finger_tap_boosted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = finger_tap_boosted.wav; sourceTree = "<group>"; };
+		B35C2111282A6EEE009A748E /* construction_sound_effect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = construction_sound_effect.wav; sourceTree = "<group>"; };
 		C839C6A22821352200F66043 /* MadDoctorTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadDoctorTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C839C6A52821352200F66043 /* MadDoctorTDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadDoctorTDApp.swift; sourceTree = "<group>"; };
 		C839C6A72821352200F66043 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,16 +107,26 @@
 		C839C6CB2821621400F66043 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsExtension.swift; sourceTree = "<group>"; };
 		C839C6CF28216CD400F66043 /* FoundationPlate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationPlate.swift; sourceTree = "<group>"; };
+		C844A72C282A46A300FC42C9 /* TowerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerFactory.swift; sourceTree = "<group>"; };
+		C844A72E282A582700FC42C9 /* ProjectileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectileFactory.swift; sourceTree = "<group>"; };
+		C844A730282A6D5800FC42C9 /* ClickableTilesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTilesFactory.swift; sourceTree = "<group>"; };
+		C844A732282A7FE500FC42C9 /* FoundationPlatesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationPlatesFactory.swift; sourceTree = "<group>"; };
+		C844A734282A88DA00FC42C9 /* SlimeEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlimeEnemy.swift; sourceTree = "<group>"; };
+		C844A736282A969600FC42C9 /* CannonExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CannonExplosion.sks; sourceTree = "<group>"; };
+		C844A738282A982800FC42C9 /* EnemiesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemiesFactory.swift; sourceTree = "<group>"; };
+		C844A73B282AA26C00FC42C9 /* SquidEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquidEnemy.swift; sourceTree = "<group>"; };
 		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		C897BC1C282510380085D093 /* WaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveManager.swift; sourceTree = "<group>"; };
 		C897BC1E282515260085D093 /* RandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNumberGenerator.swift; sourceTree = "<group>"; };
-		C8E693422823B26E00D0A661 /* StandardEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardEnemy.swift; sourceTree = "<group>"; };
 		C8E693442823C38F00D0A661 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		E5268CCB28226EF000F134A5 /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
 		E5268CCF2822708600F134A5 /* GunTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunTower.swift; sourceTree = "<group>"; };
 		E5268CD128250E5F00F134A5 /* RapidFireTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidFireTower.swift; sourceTree = "<group>"; };
 		E5268CD3282537BC00F134A5 /* SniperTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SniperTower.swift; sourceTree = "<group>"; };
 		E5268CD528253E6600F134A5 /* SniperProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SniperProjectile.swift; sourceTree = "<group>"; };
+		E5836FF6282A621500EAF6E9 /* CannonTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonTower.swift; sourceTree = "<group>"; };
+		E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoeProjectile.swift; sourceTree = "<group>"; };
+		E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonProjectile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +146,7 @@
 				C839C6CF28216CD400F66043 /* FoundationPlate.swift */,
 				3359CCA52821596700878191 /* ClickableTile.swift */,
 				C8E693442823C38F00D0A661 /* Edge.swift */,
+				C844A72B282A468E00FC42C9 /* Factories */,
 				C82C4D0C28240DBA00067858 /* Towers */,
 				C82C4D0D28240DD100067858 /* Projectiles */,
 				C82C4D0E28240DE100067858 /* Enemies */,
@@ -130,6 +161,7 @@
 				E5268CCF2822708600F134A5 /* GunTower.swift */,
 				E5268CD128250E5F00F134A5 /* RapidFireTower.swift */,
 				E5268CD3282537BC00F134A5 /* SniperTower.swift */,
+				E5836FF6282A621500EAF6E9 /* CannonTower.swift */,
 			);
 			path = Towers;
 			sourceTree = "<group>";
@@ -140,6 +172,8 @@
 				332033192822ABF500133BBA /* Projectile.swift */,
 				3320331C2822ACFA00133BBA /* GunProjectile.swift */,
 				E5268CD528253E6600F134A5 /* SniperProjectile.swift */,
+				E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */,
+				E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */,
 			);
 			path = Projectiles;
 			sourceTree = "<group>";
@@ -148,10 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				C868AACD28229790003F91D0 /* Enemy.swift */,
-				C8E693422823B26E00D0A661 /* StandardEnemy.swift */,
-				C82C4D052824076B00067858 /* FastEnemy.swift */,
-				C82C4D072824077900067858 /* HeavyEnemy.swift */,
-				C82C4D092824079600067858 /* FlyingEnemy.swift */,
+				C844A734282A88DA00FC42C9 /* SlimeEnemy.swift */,
+				C844A73B282AA26C00FC42C9 /* SquidEnemy.swift */,
 			);
 			path = Enemies;
 			sourceTree = "<group>";
@@ -177,6 +209,15 @@
 				3359CCA3282157C500878191 /* MyTileSet.sks */,
 				3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */,
 				3311AB9028231156009DEEEC /* gun_projectile_impact.wav */,
+				B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */,
+				B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */,
+				B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */,
+				B35C210A282A6330009A748E /* sniper_bullet_fly_by_3.wav */,
+				B35C2108282A632F009A748E /* sniper_bullet_fly_by_4.wav */,
+				B35C2109282A632F009A748E /* sniper_bullet_fly_by_5.wav */,
+				B35C2111282A6EEE009A748E /* construction_sound_effect.wav */,
+				B35C2110282A6EEE009A748E /* finger_tap_boosted.wav */,
+				C844A736282A969600FC42C9 /* CannonExplosion.sks */,
 			);
 			path = "Sound and Graphics";
 			sourceTree = "<group>";
@@ -248,6 +289,18 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		C844A72B282A468E00FC42C9 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				C844A72C282A46A300FC42C9 /* TowerFactory.swift */,
+				C844A72E282A582700FC42C9 /* ProjectileFactory.swift */,
+				C844A730282A6D5800FC42C9 /* ClickableTilesFactory.swift */,
+				C844A732282A7FE500FC42C9 /* FoundationPlatesFactory.swift */,
+				C844A738282A982800FC42C9 /* EnemiesFactory.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -306,13 +359,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C844A737282A969600FC42C9 /* CannonExplosion.sks in Resources */,
 				3359CC9828214F1800878191 /* LabScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
 				3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */,
+				B35C210E282A6330009A748E /* sniper_bullet_fly_by_5.wav in Resources */,
 				3359CC9128214C9A00878191 /* GameScene.sks in Resources */,
+				B35C210D282A6330009A748E /* sniper_bullet_fly_by_4.wav in Resources */,
+				B35C20FB282A45DB009A748E /* AWP_SOUND_EFFECT.wav in Resources */,
+				B35C210C282A6330009A748E /* sniper_bullet_fly_by_1.wav in Resources */,
 				3359CCA4282157C500878191 /* MyTileSet.sks in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
+				B35C2112282A6EEE009A748E /* finger_tap_boosted.wav in Resources */,
 				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
+				B35C2113282A6EEE009A748E /* construction_sound_effect.wav in Resources */,
+				B35C210F282A6330009A748E /* sniper_bullet_fly_by_3.wav in Resources */,
+				B35C210B282A6330009A748E /* sniper_bullet_fly_by_2.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */,
+				C844A739282A982800FC42C9 /* EnemiesFactory.swift in Sources */,
 				3359CC9328214D8300878191 /* GameScene.swift in Sources */,
 				E5268CD4282537BD00F134A5 /* SniperTower.swift in Sources */,
 				3359CC9628214E2200878191 /* GameSceneView.swift in Sources */,
@@ -334,7 +397,6 @@
 				C8E693452823C38F00D0A661 /* Edge.swift in Sources */,
 				C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */,
 				C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */,
-				C82C4D062824076B00067858 /* FastEnemy.swift in Sources */,
 				C839C6CC2821621400F66043 /* SettingsView.swift in Sources */,
 				C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */,
 				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
@@ -343,22 +405,28 @@
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
 				C839C6BB2821579F00F66043 /* Constants.swift in Sources */,
 				3320331A2822ABF500133BBA /* Projectile.swift in Sources */,
-				C82C4D0A2824079600067858 /* FlyingEnemy.swift in Sources */,
-				C8E693432823B26E00D0A661 /* StandardEnemy.swift in Sources */,
+				C844A72D282A46A300FC42C9 /* TowerFactory.swift in Sources */,
+				C844A731282A6D5800FC42C9 /* ClickableTilesFactory.swift in Sources */,
 				C839C6C62821619200F66043 /* LabMenuView.swift in Sources */,
+				E5836FF9282A652D00EAF6E9 /* AoeProjectile.swift in Sources */,
 				E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */,
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
+				E5836FF7282A621500EAF6E9 /* CannonTower.swift in Sources */,
 				E5268CD628253E6600F134A5 /* SniperProjectile.swift in Sources */,
 				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
 				E5268CCC28226EF000F134A5 /* Tower.swift in Sources */,
-				C82C4D082824077900067858 /* HeavyEnemy.swift in Sources */,
+				E5836FFB282A662000EAF6E9 /* CannonProjectile.swift in Sources */,
+				C844A73C282AA26C00FC42C9 /* SquidEnemy.swift in Sources */,
 				C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */,
+				C844A733282A7FE500FC42C9 /* FoundationPlatesFactory.swift in Sources */,
 				C897BC1D282510380085D093 /* WaveManager.swift in Sources */,
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
 				3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */,
+				C844A72F282A582800FC42C9 /* ProjectileFactory.swift in Sources */,
 				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,
 				3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
+				C844A735282A88DA00FC42C9 /* SlimeEnemy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,7 +555,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MadDoctorTD/Preview Content\"";
-				DEVELOPMENT_TEAM = 3P2G45WJH3;
+				DEVELOPMENT_TEAM = 26Z2HANDGD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -517,7 +585,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MadDoctorTD/Preview Content\"";
-				DEVELOPMENT_TEAM = 3P2G45WJH3;
+				DEVELOPMENT_TEAM = 26Z2HANDGD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -15,7 +15,7 @@ class Tower: SKSpriteNode{
     
     var attackRange: CGFloat = TowerData.ATTACK_RANGE
     
-    var projectileType: Int = ProjectileTypes.gunProjectile.rawValue
+    var projectileType: ProjectileTypes = ProjectileTypes.gunProjectile
     
     var fireRate: Int = TowerData.FIRE_RATE
     var attackDamage: Int = TowerData.ATTACK_DAMAGE
@@ -62,13 +62,10 @@ class Tower: SKSpriteNode{
     }
     
     private func findNewTarget() {
-        
-        let gameScene = GameScene.instance!
-        
-        let enemies = gameScene.enemiesNode.children
+                
+        let enemies = EnemyNodes.enemiesNode.children
         
         var closestDistance = CGFloat(attackRange+1)
-        
         
         for node in enemies {
             
@@ -86,67 +83,32 @@ class Tower: SKSpriteNode{
         }
     }
     
-    private func attackTarget() {
-        
-        
+    func attackTarget() {
         
         if currentFireRateTick <= 0 {
             
             
-            let gameScene = GameScene.instance!
+            ProjectileFactory(firingTower: self).createProjectile()
             
-            switch projectileType {
-                
-            case ProjectileTypes.gunProjectile.rawValue:
-                
-                if gameScene.gunProjectilesPool.isEmpty {
-                    let projectile = GunProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
-                    gameScene.projectilesNode.addChild(projectile)
-                }
-                else {
-                    
-                    let index = gameScene.gunProjectilesPool.count-1
-                    //let projectile = GunProjectile(position: self.position, target: currentTarget!)
-                    let projectile = gameScene.gunProjectilesPool[index]
-                    gameScene.gunProjectilesPool.remove(at: index)
-                    projectile.reuseFromPool(position: self.position, target: currentTarget!, attackDamage: attackDamage)
-                    
-                    if projectile.parent == nil{
-                        gameScene.projectilesNode.addChild(projectile)
-                        
-                    }
-                }
-                
-            case ProjectileTypes.rapidFireProjectile.rawValue:
-                
-                let rapidFireTower = self as! RapidFireTower
-                
-                let projectile = GunProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
-                
-                if rapidFireTower.fireLeft{
-                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_power_on_left_barrel_fire")
-                    
-                    projectile.texture = SKTexture(imageNamed: "speed_projectile_left")
-                }else{
-                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_power_on_right_barrel_fire")
-                    projectile.texture = SKTexture(imageNamed: "speed_projectile_right")
-                }
-                rapidFireTower.fireLeft = !rapidFireTower.fireLeft
-                gameScene.projectilesNode.addChild(projectile)
-                
-                
-                
-            case ProjectileTypes.sniperProjectile.rawValue:
-                
-                let projectile = SniperProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
-                gameScene.projectilesNode.addChild(projectile)
-                
-                
-            default:
-                print("Error: Could not find projectile type!")
-                
-            }
             
+//                let gameScene = GameScene.instance!
+//                if gameScene.gunProjectilesPool.isEmpty {
+//                    
+//                    
+//                }
+//                else {
+//                    
+//                    let index = gameScene.gunProjectilesPool.count-1
+//                    //let projectile = GunProjectile(position: self.position, target: currentTarget!)
+//                    let projectile = gameScene.gunProjectilesPool[index]
+//                    gameScene.gunProjectilesPool.remove(at: index)
+//                    projectile.reuseFromPool(position: self.position, target: currentTarget!, attackDamage: attackDamage)
+//                    
+//                    if projectile.parent == nil{
+//                        gameScene.projectilesNode.addChild(projectile)
+//                        
+//                    }
+//                }
             currentFireRateTick = fireRate
         }
         
@@ -155,21 +117,17 @@ class Tower: SKSpriteNode{
     
     func upgrade(upgradeType : UpgradeTypes){
         
-        if upgradeCount <= TowerData.MAX_UPGRADE{
-            
-            switch upgradeType {
-            case .damage:
-                attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
-            case .range:
-                attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
-                displayRangeIndicator()
-            case .firerate:
-                fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
-            }
-            
-            upgradeCount += 1
-            
+        switch upgradeType {
+        case .damage:
+            attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
+        case .range:
+            attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
+            displayRangeIndicator()
+        case .firerate:
+            fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
         }
+        
+        upgradeCount += 1
         
     }
 

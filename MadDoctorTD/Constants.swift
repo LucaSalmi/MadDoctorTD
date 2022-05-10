@@ -19,6 +19,7 @@ enum GameState: Int{
     
     case menus = 0 , build, wave, pause
     
+    
 }
 
 enum ActionState: Int{
@@ -39,36 +40,43 @@ struct PhysicsCategory{
 }
 
 struct DefaultTileData {
-    static let size: CGSize = CGSize(width: 86, height: 86)
+    static let SIZE: CGSize = CGSize(width: 86, height: 86)
 }
 
 struct FoundationData{
     
-    static let size: CGSize = DefaultTileData.size
-    static let price: Int = 100
+    static let SIZE: CGSize = DefaultTileData.SIZE
+    
+    static let BASE_COST: Int = 25
+    static let REFOUND_FACTOR: Double = 0.8
     
 }
 enum UpgradeTypes: Int{
     case damage = 0, range, firerate
 }
 
+
 enum EnemyTypes: Int{
-    
     case standard = 0, fast, heavy, flying
-    
 }
+
+enum EnemyRaces: Int{
+    //expand this with more races because variety makes the world better!!! ;)
+    case slime = 0, squid
+}
+
 
 
 //Towers
 enum TowerTypes: Int{
-    case gunTower = 0, rapidFireTower, sniperTower
+    case gunTower = 0, rapidFireTower, sniperTower, cannonTower
 }
 
 struct TowerData {
     
-    static let TEXTURE_SIZE = CGSize(width: DefaultTileData.size.width*2, height: DefaultTileData.size.height*2)
-    static let TILE_SIZE: CGSize = CGSize(width: DefaultTileData.size.width, height: DefaultTileData.size.height)
-    static let ATTACK_RANGE: CGFloat = CGFloat(DefaultTileData.size.width * 3)
+    static let TEXTURE_SIZE = CGSize(width: DefaultTileData.SIZE.width*2, height: DefaultTileData.SIZE.height*2)
+    static let TILE_SIZE: CGSize = CGSize(width: DefaultTileData.SIZE.width, height: DefaultTileData.SIZE.height)
+    static let ATTACK_RANGE: CGFloat = CGFloat(DefaultTileData.SIZE.width * 3)
     static let FIRE_RATE: Int = 20
     static let ATTACK_DAMAGE: Int = 10
     
@@ -78,7 +86,10 @@ struct TowerData {
     
     static let MAX_UPGRADE: Int = 5
     
-    
+    static let BASE_COST: Int = 50
+    static let BASE_UPGRADE_COST: Int = 50
+    static let COST_MULTIPLIER_PER_LEVEL: Double = 1.5
+    static let REFOUND_FACTOR: Double = 0.8
 }
 
 
@@ -88,11 +99,19 @@ enum ProjectileTypes: Int {
 }
 
 struct ProjectileData {
-    static let size: CGSize = CGSize(width: DefaultTileData.size.width * 0.5, height: DefaultTileData.size.height * 0.5)
+    static let size: CGSize = CGSize(width: DefaultTileData.SIZE.width * 0.5, height: DefaultTileData.SIZE.height * 0.5)
+    //static let speed: CGFloat = CGFloat(8.0)
     static let speed: CGFloat = CGFloat(8.0)
     
-    static let SNIPER_MODIFIER: CGFloat = CGFloat(10.0)
+    static let SNIPER_MODIFIER: CGFloat = CGFloat(13.0)
     
+}
+
+struct AoeProjectileData{
+    
+    static let BLAST_RADIUS: CGFloat = CGFloat(75)
+    
+    static let TRAVEL_DURATION: CGFloat = CGFloat(240)
 }
 
 
@@ -116,21 +135,28 @@ struct EnemiesData{
     static let FAST_ENEMY_SLOT = 1
     static let FLY_ENEMY_SLOT = 1
     
+    static let BASE_KILL_VALUE = 10
+    
+    static let SLIME_ARMOUR_VALUE = 3
+    static let SQUID_ARMOUR_VALUE = 5
+    
 }
 
 //Waves
 struct WaveData{
     
+    static let LEVEL_WAVE_SIZE = 10
     //60 frames 1 second
     //3600 frames 1 minute
-    
-    static let WAVE_STANDARD_SIZE = 30
+    static let WAVE_STANDARD_SIZE = 10
     static let SPAWN_STANDARD_TIMER = 60 //Frames (1 second)
-    static let WAVE_START_TIME = 18000 //Frames (5 minutes)
+    static let WAVE_START_TIME = 1800 //Frames (30 seconds)
     
     static let FAST_ENEMY_LIMIT = 5
     static let HEAVY_ENEMY_LIMIT = 5
     static let FLY_ENEMY_LIMIT = 5
+    
+    static let INCOME_PER_WAVE = 500
     
 }
 

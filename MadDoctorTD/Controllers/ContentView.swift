@@ -29,11 +29,12 @@ struct ContentView: View {
             case AppState.gameScene:
                 GameSceneView()
             case AppState.settingsMenu:
-                SettingsView()
+                SettingsView(title: "Settings")
             default:
                 LabSceneView()
             }
             
+            /*
             VStack {
                 HStack {
                     Button(action: {
@@ -54,6 +55,7 @@ struct ContentView: View {
                 }
                 Spacer()
             }
+             */
             
         }
 

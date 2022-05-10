@@ -19,7 +19,7 @@ class ClickableTile: SKSpriteNode{
     
     init(position: CGPoint){
         
-        super.init(texture: nil, color: .clear, size: FoundationData.size)
+        super.init(texture: nil, color: .clear, size: FoundationData.SIZE)
         
         self.position = position
         
@@ -45,15 +45,15 @@ class ClickableTile: SKSpriteNode{
         var adjecentFound = false
         
         var leftPosition = position
-        leftPosition.x -= DefaultTileData.size.width
+        leftPosition.x -= DefaultTileData.SIZE.width
         var rightPosition = position
-        rightPosition.x += DefaultTileData.size.width
+        rightPosition.x += DefaultTileData.SIZE.width
         var topPosition = position
-        topPosition.y += DefaultTileData.size.height
+        topPosition.y += DefaultTileData.SIZE.height
         var bottomPosition = position
-        bottomPosition.y -= DefaultTileData.size.height
+        bottomPosition.y -= DefaultTileData.SIZE.height
         
-        for node in gameScene.foundationPlatesNode.children {
+        for node in FoundationPlateNodes.foundationPlatesNode.children {
             let currentFoundationPlate = node as! FoundationPlate
             if currentFoundationPlate.contains(leftPosition) || currentFoundationPlate.contains(rightPosition) ||
                 currentFoundationPlate.contains(topPosition) || currentFoundationPlate.contains(bottomPosition) {
@@ -67,14 +67,13 @@ class ClickableTile: SKSpriteNode{
         }
         
         
-        for i in 0..<gameScene.clickableTilesNode.children.count {
+        for i in 0..<ClickableTilesNodes.clickableTilesNode.children.count {
             
-            let currentTile = gameScene.clickableTilesNode.children[i] as! ClickableTile
+            let currentTile = ClickableTilesNodes.clickableTilesNode.children[i] as! ClickableTile
             
             if !currentTile.containsFoundation {
                 currentTile.color = .clear
             }
-            
         }
         
         color = .white
@@ -91,18 +90,20 @@ class ClickableTile: SKSpriteNode{
         let gameScene = GameScene.instance!
         
         let testFoundation = FoundationPlate(position: self.position, tile: self)
-        gameScene.foundationPlatesNode.addChild(testFoundation)
+        FoundationPlateNodes.foundationPlatesNode.addChild(testFoundation)
         
         let enemy = gameScene.pathfindingTestEnemy!
-        let movePoints = enemy.movePlayerToGoal()
-        enemy.moving = false
+        let movePoints = enemy.getMovePoints()
         if movePoints.isEmpty {
             isBlocked = true
         }
+        else {
+            enemy.movePoints = movePoints
+            print("Enemy movepoints = \(enemy.movePoints.count)")
+        }
         
-        gameScene.foundationPlatesNode.removeChildren(in: [testFoundation])
+        FoundationPlateNodes.foundationPlatesNode.removeChildren(in: [testFoundation])
         
         return isBlocked
     }
-    
 }

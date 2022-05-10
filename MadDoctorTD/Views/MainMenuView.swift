@@ -36,6 +36,7 @@ struct MainMenuView: View {
             
             Button {
                 //TODO: GO TO SETTINGS HERE.
+                appManager.state = .settingsMenu
             } label: {
                 Label("Settings", systemImage: "gearshape.circle")
             }.padding()
