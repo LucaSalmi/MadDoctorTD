@@ -31,6 +31,7 @@ struct GameSceneView: View {
         ZStack {
             SpriteView(scene: gameScene)
                 .ignoresSafeArea()
+                .blur(radius: gameManager.isPaused ? 5 : 0)
             
             VStack {
                 
@@ -38,8 +39,12 @@ struct GameSceneView: View {
                     
                     VStack(spacing: 20){
                         SettingsView(title: "Paused")
+                        
                         Button {
-                            gameManager.isPaused = false
+                            withAnimation{
+                                gameManager.isPaused = false
+                            }
+                            
                         } label: {
                             Text("Continue")
                                 .font(.title)
@@ -60,7 +65,10 @@ struct GameSceneView: View {
                         
                         Button {
                             communicator.cancelAllMenus()
-                            gameManager.isPaused = true
+                            withAnimation{
+                                gameManager.isPaused = true
+                            }
+                            
                         } label: {
                             Text("Pause")
                         }

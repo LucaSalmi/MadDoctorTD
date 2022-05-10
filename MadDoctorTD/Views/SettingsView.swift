@@ -9,7 +9,8 @@ import SwiftUI
 struct SettingsView: View {
     
     var title: String
-    
+    @ObservedObject var appManager = AppManager.appManager
+    @ObservedObject var gameManager = GameManager.instance
     @State private var soundFxOn = true
     @State private var musicOn = true
     
@@ -23,6 +24,16 @@ struct SettingsView: View {
             
             Toggle("Music", isOn: $musicOn)
             
+            if !gameManager.isPaused{
+                
+                Button {
+                    appManager.state = .startMenu
+                } label: {
+                    Text("Return")
+                        .font(.title)
+                }
+
+            }
             
             if musicOn {
                 //TODO: Turn on music here.
