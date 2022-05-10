@@ -15,7 +15,6 @@ class WaveManager{
     //var totalEnemiesOfWave: Int = 0
     var waveNumber: Int = 1
     var spawnPoint: CGPoint? = nil
-    var enemyArray = [Enemy]()
     var waveCreated = false
     
     init(totalSlots: Int, choises: [EnemyTypes], enemyRace: EnemyRaces){
@@ -23,11 +22,11 @@ class WaveManager{
         currentScene = GameScene.instance
         spawnPoint = (currentScene?.childNode(withName: "SpawnPoint")!.position) ?? CGPoint(x: 0, y: 0)
         self.totalSlots = totalSlots
-        createWave(choises: choises, enemyrace: .slime)
+        createWave(choises: choises, enemyRace: .slime)
     }
     
     
-    private func createWave(choises: [EnemyTypes], enemyrace: EnemyRaces){
+    private func createWave(choises: [EnemyTypes], enemyRace: EnemyRaces){
         
         if totalSlots < 0{
             
@@ -40,20 +39,13 @@ class WaveManager{
             
             let chosen = RandomNumberGenerator.rNG(choises: choises)
             
-            switch enemyrace {
-                
-            case .slime:
-                
-                let stEnemy = SlimeEnemy(enemyType: chosen)
-                stEnemy.position = spawnPoint!
-                stEnemy.zPosition = 2
-                enemyArray.append(stEnemy)
-                
-            }
-            
+            let enemy = EnemyFactory().createEnemy(enemyRace: enemyRace, enemyType: chosen)
+            enemy.position = spawnPoint!
+            enemy.zPosition = 2
+            EnemyNodes.enemyArray.append(enemy)
             
             if !checkLimits(){
-                occupiedSlots += enemyArray.last?.waveSlotSize ?? 1
+                occupiedSlots += EnemyNodes.enemyArray.last?.waveSlotSize ?? 1
                 
             }
         }
@@ -69,9 +61,9 @@ class WaveManager{
     
     func spawnEnemy(){
         
-        guard let toSpawn = enemyArray.first else{return}
-        currentScene?.enemiesNode.addChild(toSpawn)
-        enemyArray.removeFirst()
+        guard let toSpawn = EnemyNodes.enemyArray.first else{return}
+        EnemyNodes.enemiesNode.addChild(toSpawn)
+        EnemyNodes.enemyArray.removeFirst()
         
     }
     
@@ -86,7 +78,7 @@ class WaveManager{
         var heavyToRemove: Int? = nil
         var fastToRemove: Int? = nil
         
-        for obj in enemyArray{
+        for obj in EnemyNodes.enemyArray{
             
             let type = obj.enemyType
             
@@ -96,7 +88,7 @@ class WaveManager{
                 print("found fast enemy")
                 if fastCount > WaveData.FAST_ENEMY_LIMIT{
                     
-                    fastToRemove = enemyArray.firstIndex(of: obj)
+                    fastToRemove = EnemyNodes.enemyArray.firstIndex(of: obj)
                     
                 }
                 
@@ -106,7 +98,7 @@ class WaveManager{
                 
                 if flyCount > WaveData.FLY_ENEMY_LIMIT{
                     
-                    flyToRemove = enemyArray.firstIndex(of: obj)
+                    flyToRemove = EnemyNodes.enemyArray.firstIndex(of: obj)
                     
                 }
                 
@@ -116,7 +108,7 @@ class WaveManager{
                 
                 if heavyCount > WaveData.HEAVY_ENEMY_LIMIT{
                     
-                    heavyToRemove = enemyArray.firstIndex(of: obj)
+                    heavyToRemove = EnemyNodes.enemyArray.firstIndex(of: obj)
                     
                 }
             }
@@ -125,15 +117,15 @@ class WaveManager{
         var hasDeleted = false
         
         if flyToRemove != nil{
-            enemyArray.remove(at: flyToRemove!)
+            EnemyNodes.enemyArray.remove(at: flyToRemove!)
             hasDeleted = true
         }
         if fastToRemove != nil{
-            enemyArray.remove(at: fastToRemove!)
+            EnemyNodes.enemyArray.remove(at: fastToRemove!)
             hasDeleted = true
         }
         if heavyToRemove != nil{
-            enemyArray.remove(at: heavyToRemove!)
+            EnemyNodes.enemyArray.remove(at: heavyToRemove!)
             hasDeleted = true
         }
         
@@ -142,7 +134,7 @@ class WaveManager{
     
     func checkWinCondition(){
         
-        if GameScene.instance!.enemiesNode.children.count == 0 && enemyArray.count == 0 {
+        if EnemyNodes.enemiesNode.children.count == 0 && EnemyNodes.enemyArray.count == 0 {
             
             print("wave cleared")
             waveNumber += 1
@@ -157,7 +149,7 @@ class WaveManager{
                 print("Level 1 completed")
             }
             else {
-                createWave(choises: [.standard,.fast], enemyrace: .slime)
+                createWave(choises: [.standard,.fast], enemyRace: .slime)
             }
             
         }

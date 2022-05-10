@@ -143,7 +143,7 @@ class Enemy: SKSpriteNode{
             print("KILL VALUE = \(GameManager.instance.currentMoney)")
             progressBar.removeFromParent()
             self.removeFromParent()
-            print("Current enemy wave count = \(GameScene.instance!.enemiesNode.children.count)")
+            print("Current enemy wave count = \(EnemyNodes.enemiesNode.children.count)")
             
         }
         

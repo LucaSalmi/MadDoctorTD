@@ -131,9 +131,8 @@ class AoeProjectile: SKSpriteNode {
     func findEnemiesInRadius() -> [Enemy]{
         var enemies = [Enemy]()
         
-        let instance = GameScene.instance!
         
-        let enemyNode = instance.enemiesNode
+        let enemyNode = EnemyNodes.enemiesNode
         
         for node in enemyNode.children{
             let enemy = node as! Enemy
