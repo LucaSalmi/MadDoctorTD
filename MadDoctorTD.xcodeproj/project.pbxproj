@@ -20,6 +20,7 @@
 		3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9B28214F6200878191 /* LabSceneView.swift */; };
 		3359CCA4282157C500878191 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CCA3282157C500878191 /* MyTileSet.sks */; };
 		3359CCA62821596700878191 /* ClickableTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CCA52821596700878191 /* ClickableTile.swift */; };
+		B35C20F9282997D8009A748E /* AWP_SOUND_EFFECT.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C20F8282997D8009A748E /* AWP_SOUND_EFFECT.wav */; };
 		C82C4D062824076B00067858 /* FastEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82C4D052824076B00067858 /* FastEnemy.swift */; };
 		C82C4D082824077900067858 /* HeavyEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82C4D072824077900067858 /* HeavyEnemy.swift */; };
 		C82C4D0A2824079600067858 /* FlyingEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82C4D092824079600067858 /* FlyingEnemy.swift */; };
@@ -66,6 +67,7 @@
 		3359CC9B28214F6200878191 /* LabSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneView.swift; sourceTree = "<group>"; };
 		3359CCA3282157C500878191 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		3359CCA52821596700878191 /* ClickableTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTile.swift; sourceTree = "<group>"; };
+		B35C20F8282997D8009A748E /* AWP_SOUND_EFFECT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = AWP_SOUND_EFFECT.wav; path = ../../../../Downloads/AWP_SOUND_EFFECT.wav; sourceTree = "<group>"; };
 		C82C4D052824076B00067858 /* FastEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastEnemy.swift; sourceTree = "<group>"; };
 		C82C4D072824077900067858 /* HeavyEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeavyEnemy.swift; sourceTree = "<group>"; };
 		C82C4D092824079600067858 /* FlyingEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingEnemy.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				3359CCA3282157C500878191 /* MyTileSet.sks */,
 				3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */,
 				3311AB9028231156009DEEEC /* gun_projectile_impact.wav */,
+				B35C20F8282997D8009A748E /* AWP_SOUND_EFFECT.wav */,
 			);
 			path = "Sound and Graphics";
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
 				3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */,
 				3359CC9128214C9A00878191 /* GameScene.sks in Resources */,
+				B35C20F9282997D8009A748E /* AWP_SOUND_EFFECT.wav in Resources */,
 				3359CCA4282157C500878191 /* MyTileSet.sks in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
 				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
