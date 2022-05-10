@@ -39,6 +39,7 @@ struct GameSceneView: View {
                     
                     VStack(spacing: 20){
                         SettingsView(title: "Paused")
+                        
                         Button {
                             withAnimation{
                                 gameManager.isPaused = false
