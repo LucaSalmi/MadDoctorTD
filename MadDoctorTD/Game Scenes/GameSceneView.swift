@@ -36,27 +36,19 @@ struct GameSceneView: View {
                 
                 if gameManager.isPaused {
                     
-                    VStack {
-                        Spacer()
-                        
-                        HStack {
-                            
-                            Spacer()
-                            
-                            Button {
-                                gameManager.isPaused = false
-                            } label: {
-                                Text("Resume")
-                            }.frame(width: 300, height: 200)
-                                .background(.gray)
-                                .foregroundColor(.black)
-                            
-                            Spacer()
-
+                    VStack(spacing: 20){
+                        SettingsView(title: "Paused")
+                        Button {
+                            gameManager.isPaused = false
+                        } label: {
+                            Text("Continue")
+                                .font(.title)
                         }
+
+                    }.padding(50)
+                        .background(Color.white.opacity(0.5))
+                    
                         
-                        Spacer()
-                    }
                 }
                 else {
                     HStack {

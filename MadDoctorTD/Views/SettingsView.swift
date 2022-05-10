@@ -8,24 +8,21 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    var title: String
+    
     @State private var soundFxOn = true
     @State private var musicOn = true
     
     var body: some View {
         VStack(spacing: 40){
             
-            Text("Settings")
+            Text(title)
                 .font(.largeTitle)
             
             Toggle("SFX", isOn: $soundFxOn)
             
             Toggle("Music", isOn: $musicOn)
             
-            Button {
-                //TODO: Return action here.
-            } label: {
-                Label("Return", systemImage: "arrow.backward.circle")
-            }
             
             if musicOn {
                 //TODO: Turn on music here.
