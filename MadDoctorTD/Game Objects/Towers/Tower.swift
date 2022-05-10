@@ -86,7 +86,7 @@ class Tower: SKSpriteNode{
         }
     }
     
-    private func attackTarget() {
+    func attackTarget() {
         
         
         

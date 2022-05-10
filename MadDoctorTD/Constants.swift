@@ -64,7 +64,7 @@ enum EnemyTypes: Int{
 
 //Towers
 enum TowerTypes: Int{
-    case gunTower = 0, rapidFireTower, sniperTower
+    case gunTower = 0, rapidFireTower, sniperTower, cannonTower
 }
 
 struct TowerData {
@@ -100,6 +100,11 @@ struct ProjectileData {
     
     static let SNIPER_MODIFIER: CGFloat = CGFloat(13.0)
     
+}
+
+struct AoeProjectileData{
+    
+    static let BLAST_RADIUS: CGFloat = CGFloat(50)
 }
 
 

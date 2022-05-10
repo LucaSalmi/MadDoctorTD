@@ -122,7 +122,11 @@ struct GameSceneView: View {
                     } label: {
                         Text("Build Rapid Fire Tower")
                     }
-                    
+                    Button {
+                        communicator.buildTower(type: TowerTypes.cannonTower)
+                    } label: {
+                        Text("Build Cannon Tower")
+                    }
                     Button {
                         communicator.buildTower(type: TowerTypes.sniperTower)
                     } label: {
