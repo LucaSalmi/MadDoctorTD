@@ -22,7 +22,7 @@ class Enemy: SKSpriteNode{
     var progressBar = SKShapeNode()
     var startHp = 0
     
-    
+    var killValue = EnemiesData.BASE_KILL_VALUE
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -136,6 +136,8 @@ class Enemy: SKSpriteNode{
         
         if hp <= 0{
             
+            GameManager.instance.currentMoney += self.killValue
+            print("KILL VALUE = \(GameManager.instance.currentMoney)")
             progressBar.removeFromParent()
             self.removeFromParent()
             

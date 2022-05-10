@@ -9,10 +9,10 @@ import Foundation
 
 class GameManager: ObservableObject{
     
-    static var gameManager = GameManager()
+    static var instance = GameManager()
     
     //Variables
-    
+    @Published var currentMoney: Int = 2500
     
     //SINGLETON
     private init(){}

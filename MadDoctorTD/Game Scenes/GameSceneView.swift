@@ -13,9 +13,16 @@ struct GameSceneView: View {
     var gameScene: SKScene
     
     @ObservedObject var communicator = GameSceneCommunicator.instance
+    @ObservedObject var gameManager = GameManager.instance
     
     init() {
-        gameScene = SKScene(fileNamed: "GameScene")!
+        
+        if GameScene.instance == nil {
+            gameScene = SKScene(fileNamed: "GameScene")!
+        }
+        else {
+            gameScene = GameScene.instance!
+        }
         gameScene.scaleMode = .aspectFit
         communicator.cancelAllMenus()
     }
@@ -26,15 +33,26 @@ struct GameSceneView: View {
                 .ignoresSafeArea()
             
             VStack {
-                Spacer()
-                Button {
+                
+                HStack {
                     
-                    GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
-                        
-                } label: {
-                    Text("MOVE!")
+                    Text("$ = \(gameManager.currentMoney)")
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    Button {
+                        GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
+                    } label: {
+                        Text("Start wave!")
+                    }
+                    
+                    Spacer()
+                    
+                    Text("Current wave = ")
+                        .foregroundColor(.white)
                 }
-
+                Spacer()
             }
             
             if communicator.showFoundationMenu{
@@ -94,20 +112,18 @@ struct GameSceneView: View {
                 VStack(spacing: 25){
                     Text("Upgrade menu")
                     
-                    
                     Button {
-                        
-                        communicator.currentTower!.upgrade(upgradeType: .damage)
+                        communicator.upgradeTower(upgradeType: .damage)
                     } label: {
                         Text("Upgrade damage")
                     }
                     Button {
-                        communicator.currentTower!.upgrade(upgradeType: .range)
+                        communicator.upgradeTower(upgradeType: .range)
                     } label: {
                         Text("Upgrade range")
                     }
                     Button {
-                        communicator.currentTower!.upgrade(upgradeType: .firerate)
+                        communicator.upgradeTower(upgradeType: .firerate)
                     } label: {
                         Text("Upgrade attack speed")
                     }

@@ -40,13 +40,15 @@ struct PhysicsCategory{
 }
 
 struct DefaultTileData {
-    static let size: CGSize = CGSize(width: 86, height: 86)
+    static let SIZE: CGSize = CGSize(width: 86, height: 86)
 }
 
 struct FoundationData{
     
-    static let size: CGSize = DefaultTileData.size
-    static let price: Int = 100
+    static let SIZE: CGSize = DefaultTileData.SIZE
+    
+    static let BASE_COST: Int = 25
+    static let REFOUND_FACTOR: Double = 0.8
     
 }
 enum UpgradeTypes: Int{
@@ -67,9 +69,9 @@ enum TowerTypes: Int{
 
 struct TowerData {
     
-    static let TEXTURE_SIZE = CGSize(width: DefaultTileData.size.width*2, height: DefaultTileData.size.height*2)
-    static let TILE_SIZE: CGSize = CGSize(width: DefaultTileData.size.width, height: DefaultTileData.size.height)
-    static let ATTACK_RANGE: CGFloat = CGFloat(DefaultTileData.size.width * 3)
+    static let TEXTURE_SIZE = CGSize(width: DefaultTileData.SIZE.width*2, height: DefaultTileData.SIZE.height*2)
+    static let TILE_SIZE: CGSize = CGSize(width: DefaultTileData.SIZE.width, height: DefaultTileData.SIZE.height)
+    static let ATTACK_RANGE: CGFloat = CGFloat(DefaultTileData.SIZE.width * 3)
     static let FIRE_RATE: Int = 20
     static let ATTACK_DAMAGE: Int = 10
     
@@ -79,7 +81,10 @@ struct TowerData {
     
     static let MAX_UPGRADE: Int = 5
     
-    
+    static let BASE_COST: Int = 50
+    static let BASE_UPGRADE_COST: Int = 50
+    static let COST_MULTIPLIER_PER_LEVEL: Double = 1.5
+    static let REFOUND_FACTOR: Double = 0.8
 }
 
 
@@ -89,7 +94,7 @@ enum ProjectileTypes: Int {
 }
 
 struct ProjectileData {
-    static let size: CGSize = CGSize(width: DefaultTileData.size.width * 0.5, height: DefaultTileData.size.height * 0.5)
+    static let size: CGSize = CGSize(width: DefaultTileData.SIZE.width * 0.5, height: DefaultTileData.SIZE.height * 0.5)
     //static let speed: CGFloat = CGFloat(8.0)
     static let speed: CGFloat = CGFloat(8.0)
     
@@ -117,6 +122,8 @@ struct EnemiesData{
     static let HEAVY_ENEMY_SLOT = 2
     static let FAST_ENEMY_SLOT = 1
     static let FLY_ENEMY_SLOT = 1
+    
+    static let BASE_KILL_VALUE = 10
     
 }
 
