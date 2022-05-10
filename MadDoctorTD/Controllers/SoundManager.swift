@@ -17,10 +17,11 @@ class SoundManager{
     //Tracks name: String
     static let gunProjectileImpactSFX = "gun_projectile_impact"
     static let sniperProjectileImpactSFX = "AWP_SOUND_EFFECT"
+    static let buildingPlacementSFX = "construction_sound_effect"
+    static let foundationPlacementSFX = "finger_tap_boosted"
     
     static var musicPlayer: AVAudioPlayer?
 
-    
     static func playSFX(sfxName: String){
         
         guard let gameScene = GameScene.instance else { return }
