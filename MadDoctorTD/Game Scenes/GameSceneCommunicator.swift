@@ -27,9 +27,16 @@ class GameSceneCommunicator: ObservableObject {
     
     func buildFoundation() {
         
+        let price = FoundationData.BASE_COST
+        if price > GameManager.instance.currentMoney {
+            return
+        }
+        else {
+            GameManager.instance.currentMoney -= price
+        }
+        
         currentTile!.containsFoundation = true
         currentTile!.color = .clear
-        
         
         let foundation = FoundationPlate(position: currentTile!.position, tile: currentTile!)
         GameScene.instance!.foundationPlatesNode.addChild(foundation)
@@ -52,9 +59,44 @@ class GameSceneCommunicator: ObservableObject {
     
     func buildTower(type: TowerTypes){
         
+        let price = TowerData.BASE_COST
+        if price > GameManager.instance.currentMoney {
+            return
+        }
+        else {
+            GameManager.instance.currentMoney -= price
+        }
+        
         currentFoundation!.hasTower = true
         TowerFactory(towerType: type).createTower(currentFoundation: currentFoundation!)
         cancelAllMenus()
+        
+    }
+    
+    func upgradeTower(upgradeType: UpgradeTypes) {
+        
+        if currentTower!.upgradeCount > TowerData.MAX_UPGRADE{
+            return
+        }
+        
+        let upgradeCostMultipler = Double(currentTower!.upgradeCount) * TowerData.COST_MULTIPLIER_PER_LEVEL
+        let upgradeCost = Int(Double(TowerData.BASE_UPGRADE_COST) * upgradeCostMultipler)
+        
+        if upgradeCost > GameManager.instance.currentMoney {
+            return
+        }
+        else {
+            GameManager.instance.currentMoney -= upgradeCost
+        }
+        
+        switch upgradeType {
+        case .damage:
+            currentTower!.upgrade(upgradeType: .damage)
+        case .range:
+            currentTower!.upgrade(upgradeType: .range)
+        case .firerate:
+            currentTower!.upgrade(upgradeType: .firerate)
+        }
         
     }
     
@@ -71,10 +113,20 @@ class GameSceneCommunicator: ObservableObject {
     
     func sellTower(){
         
-        currentTower!.builtUponFoundation?.hasTower = false
+        var totalPayed: Int = 0
+        totalPayed += TowerData.BASE_COST
+        for upgradeCount in 1...(currentTower!.upgradeCount-1) {
+            let upgradeCostMultipler = Double(upgradeCount) * TowerData.COST_MULTIPLIER_PER_LEVEL
+            let upgradeCost = Int(Double(TowerData.BASE_UPGRADE_COST) * upgradeCostMultipler)
+            totalPayed += upgradeCost
+        }
+        let refund = Int(Double(totalPayed) * TowerData.REFOUND_FACTOR)
+        GameManager.instance.currentMoney += refund
+        
+        currentTower!.builtUponFoundation!.hasTower = false
         currentTower!.removeFromParent()
-        currentTower?.towerTexture.removeFromParent()
-        GameScene.instance?.rangeIndicator?.removeFromParent()
+        currentTower!.towerTexture.removeFromParent()
+        GameScene.instance!.rangeIndicator?.removeFromParent()
         
         cancelAllMenus()
         
@@ -83,6 +135,10 @@ class GameSceneCommunicator: ObservableObject {
     func sellFoundation(){
         
         if GameScene.instance!.foundationPlatesNode.children.count > 1 {
+            
+            let refund = Int(Double(FoundationData.BASE_COST) * FoundationData.REFOUND_FACTOR)
+            GameManager.instance.currentMoney += refund
+            
             currentFoundation!.builtUponTile?.containsFoundation = false
             currentFoundation!.builtUponTile = nil
             currentFoundation!.removeFromParent()

@@ -34,6 +34,7 @@ struct ContentView: View {
                 LabSceneView()
             }
             
+            /*
             VStack {
                 HStack {
                     Button(action: {
@@ -54,6 +55,7 @@ struct ContentView: View {
                 }
                 Spacer()
             }
+             */
             
         }
 

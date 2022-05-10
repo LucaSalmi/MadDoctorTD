@@ -28,11 +28,11 @@ class FoundationPlate: SKSpriteNode{
         self.isStartingFoundation = isStartingFoundation
         self.builtUponTile = tile
         let texture: SKTexture = SKTexture(imageNamed: "F_tile_power_on")
-        super.init(texture: texture, color: .clear, size: FoundationData.size)
+        super.init(texture: texture, color: .clear, size: FoundationData.SIZE)
         name = "Foundation"
         self.position = position
         zPosition = 1
-        physicsBody = SKPhysicsBody(circleOfRadius: FoundationData.size.width/2)
+        physicsBody = SKPhysicsBody(circleOfRadius: FoundationData.SIZE.width/2)
         physicsBody?.categoryBitMask = PhysicsCategory.Foundation
         physicsBody?.collisionBitMask = 0
         physicsBody?.restitution = 0
