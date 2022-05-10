@@ -62,13 +62,10 @@ class Tower: SKSpriteNode{
     }
     
     private func findNewTarget() {
-        
-        let gameScene = GameScene.instance!
-        
-        let enemies = gameScene.enemiesNode.children
+                
+        let enemies = EnemyNodes.enemiesNode.children
         
         var closestDistance = CGFloat(attackRange+1)
-        
         
         for node in enemies {
             

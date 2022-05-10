@@ -17,7 +17,6 @@ class GameScene: SKScene {
     
     var edgesTilesNode: SKNode = SKNode()
     
-    var enemiesNode: SKNode = SKNode()
     var pathfindingTestEnemy: Enemy?
     var nodeGraph: GKObstacleGraph? = nil
     var waveManager: WaveManager? = nil
@@ -58,7 +57,7 @@ class GameScene: SKScene {
         addChild(ProjectileNodes.projectilesNode)
         
         setupEnemies()
-        addChild(enemiesNode)
+        addChild(EnemyNodes.enemiesNode)
         
         
     }
@@ -89,7 +88,6 @@ class GameScene: SKScene {
     private func setupEnemies(){
         
         //build phase pathfinding test
-        //pathfindingTestEnemy = StandardEnemy(texture: SKTexture(imageNamed: "joystick"))
         pathfindingTestEnemy = Enemy(texture: SKTexture(imageNamed: "joystick"), color: .clear)
         let spawnPoint = childNode(withName: "SpawnPoint")
         pathfindingTestEnemy!.position = spawnPoint!.position
@@ -193,7 +191,7 @@ class GameScene: SKScene {
         
         if isWaveActive{
             
-            for node in enemiesNode.children{
+            for node in EnemyNodes.enemiesNode.children{
                 
                 let enemy = node as! Enemy
                 enemy.update()
@@ -221,7 +219,7 @@ class GameScene: SKScene {
             
             if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER{
                 
-                if (waveManager?.enemyArray.count)! > 0{
+                if (EnemyNodes.enemyArray.count) > 0{
                     waveManager?.spawnEnemy()
                 }
                 spawnCounter = 0
