@@ -53,7 +53,7 @@ class ClickableTile: SKSpriteNode{
         var bottomPosition = position
         bottomPosition.y -= DefaultTileData.SIZE.height
         
-        for node in gameScene.foundationPlatesNode.children {
+        for node in FoundationPlateNodes.foundationPlatesNode.children {
             let currentFoundationPlate = node as! FoundationPlate
             if currentFoundationPlate.contains(leftPosition) || currentFoundationPlate.contains(rightPosition) ||
                 currentFoundationPlate.contains(topPosition) || currentFoundationPlate.contains(bottomPosition) {
@@ -74,7 +74,6 @@ class ClickableTile: SKSpriteNode{
             if !currentTile.containsFoundation {
                 currentTile.color = .clear
             }
-            
         }
         
         color = .white
@@ -91,7 +90,7 @@ class ClickableTile: SKSpriteNode{
         let gameScene = GameScene.instance!
         
         let testFoundation = FoundationPlate(position: self.position, tile: self)
-        gameScene.foundationPlatesNode.addChild(testFoundation)
+        FoundationPlateNodes.foundationPlatesNode.addChild(testFoundation)
         
         let enemy = gameScene.pathfindingTestEnemy!
         let movePoints = enemy.movePlayerToGoal()
@@ -100,9 +99,8 @@ class ClickableTile: SKSpriteNode{
             isBlocked = true
         }
         
-        gameScene.foundationPlatesNode.removeChildren(in: [testFoundation])
+        FoundationPlateNodes.foundationPlatesNode.removeChildren(in: [testFoundation])
         
         return isBlocked
     }
-    
 }
