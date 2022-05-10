@@ -42,6 +42,7 @@
 		C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */; };
 		C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6CF28216CD400F66043 /* FoundationPlate.swift */; };
 		C844A72D282A46A300FC42C9 /* TowerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A72C282A46A300FC42C9 /* TowerFactory.swift */; };
+		C844A72F282A582800FC42C9 /* ProjectileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A72E282A582700FC42C9 /* ProjectileFactory.swift */; };
 		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
 		C897BC1D282510380085D093 /* WaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1C282510380085D093 /* WaveManager.swift */; };
 		C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1E282515260085D093 /* RandomNumberGenerator.swift */; };
@@ -91,6 +92,7 @@
 		C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsExtension.swift; sourceTree = "<group>"; };
 		C839C6CF28216CD400F66043 /* FoundationPlate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationPlate.swift; sourceTree = "<group>"; };
 		C844A72C282A46A300FC42C9 /* TowerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerFactory.swift; sourceTree = "<group>"; };
+		C844A72E282A582700FC42C9 /* ProjectileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectileFactory.swift; sourceTree = "<group>"; };
 		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		C897BC1C282510380085D093 /* WaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveManager.swift; sourceTree = "<group>"; };
 		C897BC1E282515260085D093 /* RandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNumberGenerator.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				C844A72C282A46A300FC42C9 /* TowerFactory.swift */,
+				C844A72E282A582700FC42C9 /* ProjectileFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				C897BC1D282510380085D093 /* WaveManager.swift in Sources */,
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
 				3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */,
+				C844A72F282A582800FC42C9 /* ProjectileFactory.swift in Sources */,
 				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,
 				3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,

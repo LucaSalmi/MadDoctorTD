@@ -17,8 +17,6 @@ class GameScene: SKScene {
     var clickableTilesNode: SKNode = SKNode()
     var edgesTilesNode: SKNode = SKNode()
     var foundationPlatesNode: SKNode = SKNode()
-    var projectilesNode: SKNode = SKNode()
-    var gunProjectilesPool = [GunProjectile]()
     var enemiesNode: SKNode = SKNode()
     var pathfindingTestEnemy: Enemy?
     var nodeGraph: GKObstacleGraph? = nil
@@ -42,15 +40,19 @@ class GameScene: SKScene {
         physicsWorld.contactDelegate = self
         
         setupClickableTiles()
+        
         setupEdges()
         addChild(edgesTilesNode)
+        
         setupStartFoundation()
         
         //add towerNode and towerTextureNode to GameScene
         addChild(TowerNode.towersNode)
         addChild(TowerNode.towerTextureNode)
         
-        addChild(projectilesNode)
+        //add ProjectilesNote to GameScene
+        addChild(ProjectileNodes.projectilesNode)
+        
         setupEnemies()
         addChild(enemiesNode)
         
@@ -222,7 +224,7 @@ class GameScene: SKScene {
             tower.update()
         }
         
-        for node in projectilesNode.children {
+        for node in ProjectileNodes.projectilesNode.children {
             let projectile = node as! Projectile
             projectile.update()
         }

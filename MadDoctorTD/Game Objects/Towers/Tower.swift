@@ -15,7 +15,7 @@ class Tower: SKSpriteNode{
     
     var attackRange: CGFloat = TowerData.ATTACK_RANGE
     
-    var projectileType: Int = ProjectileTypes.gunProjectile.rawValue
+    var projectileType: ProjectileTypes = ProjectileTypes.gunProjectile
     
     var fireRate: Int = TowerData.FIRE_RATE
     var attackDamage: Int = TowerData.ATTACK_DAMAGE
@@ -93,59 +93,27 @@ class Tower: SKSpriteNode{
         if currentFireRateTick <= 0 {
             
             
-            let gameScene = GameScene.instance!
+            ProjectileFactory(firingTower: self).createProjectile()
             
-            switch projectileType {
-                
-            case ProjectileTypes.gunProjectile.rawValue:
-                
-                if gameScene.gunProjectilesPool.isEmpty {
-                    let projectile = GunProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
-                    gameScene.projectilesNode.addChild(projectile)
-                }
-                else {
-                    
-                    let index = gameScene.gunProjectilesPool.count-1
-                    //let projectile = GunProjectile(position: self.position, target: currentTarget!)
-                    let projectile = gameScene.gunProjectilesPool[index]
-                    gameScene.gunProjectilesPool.remove(at: index)
-                    projectile.reuseFromPool(position: self.position, target: currentTarget!, attackDamage: attackDamage)
-                    
-                    if projectile.parent == nil{
-                        gameScene.projectilesNode.addChild(projectile)
-                        
-                    }
-                }
-                
-            case ProjectileTypes.rapidFireProjectile.rawValue:
-                
-                let rapidFireTower = self as! RapidFireTower
-                
-                let projectile = GunProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
-                
-                if rapidFireTower.fireLeft{
-                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_power_on_left_barrel_fire")
-                    
-                    projectile.texture = SKTexture(imageNamed: "speed_projectile_left")
-                }else{
-                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_power_on_right_barrel_fire")
-                    projectile.texture = SKTexture(imageNamed: "speed_projectile_right")
-                }
-                rapidFireTower.fireLeft = !rapidFireTower.fireLeft
-                gameScene.projectilesNode.addChild(projectile)
-                
-                
-                
-            case ProjectileTypes.sniperProjectile.rawValue:
-                
-                let projectile = SniperProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
-                gameScene.projectilesNode.addChild(projectile)
-                
-                
-            default:
-                print("Error: Could not find projectile type!")
-                
-            }
+            
+//                let gameScene = GameScene.instance!
+//                if gameScene.gunProjectilesPool.isEmpty {
+//                    
+//                    
+//                }
+//                else {
+//                    
+//                    let index = gameScene.gunProjectilesPool.count-1
+//                    //let projectile = GunProjectile(position: self.position, target: currentTarget!)
+//                    let projectile = gameScene.gunProjectilesPool[index]
+//                    gameScene.gunProjectilesPool.remove(at: index)
+//                    projectile.reuseFromPool(position: self.position, target: currentTarget!, attackDamage: attackDamage)
+//                    
+//                    if projectile.parent == nil{
+//                        gameScene.projectilesNode.addChild(projectile)
+//                        
+//                    }
+//                }
             
             currentFireRateTick = fireRate
         }

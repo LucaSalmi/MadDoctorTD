@@ -26,7 +26,7 @@ class SniperTower: Tower{
         
         super.init(position: position, foundation: foundation, textureName: textureName)
                 
-        projectileType = ProjectileTypes.sniperProjectile.rawValue
+        projectileType = ProjectileTypes.sniperProjectile
     
         attackDamage = Int(Double(attackDamage) * 10)
         

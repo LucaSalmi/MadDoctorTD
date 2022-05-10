@@ -23,7 +23,7 @@ class RapidFireTower: Tower{
         
         super.init(position: position, foundation: foundation, textureName: textureName)
                 
-        projectileType = ProjectileTypes.rapidFireProjectile.rawValue
+        projectileType = ProjectileTypes.rapidFireProjectile
     
         attackDamage = Int(Double(attackDamage) * 0.5)
         
