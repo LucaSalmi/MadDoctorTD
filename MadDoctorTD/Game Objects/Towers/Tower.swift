@@ -88,11 +88,8 @@ class Tower: SKSpriteNode{
     
     private func attackTarget() {
         
-        
-        
         if currentFireRateTick <= 0 {
-            
-            
+
             let gameScene = GameScene.instance!
             
             switch projectileType {
@@ -102,6 +99,9 @@ class Tower: SKSpriteNode{
                 if gameScene.gunProjectilesPool.isEmpty {
                     let projectile = GunProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
                     gameScene.projectilesNode.addChild(projectile)
+                    //ADD CODE for sniper firing here
+
+                    
                 }
                 else {
                     
@@ -140,7 +140,7 @@ class Tower: SKSpriteNode{
                 
                 let projectile = SniperProjectile(position: self.position, target: currentTarget!, attackDamage: attackDamage)
                 gameScene.projectilesNode.addChild(projectile)
-                
+                //ADD CODE FOR SNIPER FIRING
                 
             default:
                 print("Error: Could not find projectile type!")
