@@ -39,6 +39,7 @@ class SlimeEnemy: Enemy{
             hp = Int(Double(EnemiesData.BASE_HP) * (EnemiesData.HEAVY_HP_MODIFIER))
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.HEAVY_SPEED_MODIFIER
             waveSlotSize = EnemiesData.HEAVY_ENEMY_SLOT
+            armorValue = 2
             
         case .fast:
             

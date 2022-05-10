@@ -19,6 +19,7 @@ class Enemy: SKSpriteNode{
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
     var enemyType: EnemyTypes = .standard
+    var armorValue: Int = 0
     
     var progressBar = SKShapeNode()
     var startHp = 0
@@ -134,7 +135,7 @@ class Enemy: SKSpriteNode{
     
     func getDamage(dmgValue: Int){
         
-        hp -= dmgValue
+        hp -= (dmgValue - armorValue)
         
         if hp <= 0{
             
