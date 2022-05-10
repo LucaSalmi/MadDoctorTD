@@ -93,10 +93,13 @@ class ClickableTile: SKSpriteNode{
         FoundationPlateNodes.foundationPlatesNode.addChild(testFoundation)
         
         let enemy = gameScene.pathfindingTestEnemy!
-        let movePoints = enemy.movePlayerToGoal()
-        enemy.moving = false
+        let movePoints = enemy.getMovePoints()
         if movePoints.isEmpty {
             isBlocked = true
+        }
+        else {
+            enemy.movePoints = movePoints
+            print("Enemy movepoints = \(enemy.movePoints.count)")
         }
         
         FoundationPlateNodes.foundationPlatesNode.removeChildren(in: [testFoundation])
