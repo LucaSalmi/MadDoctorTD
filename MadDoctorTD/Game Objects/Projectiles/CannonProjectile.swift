@@ -24,9 +24,18 @@ class CannonProjectile: AoeProjectile{
     }
     
     override func destroy() {
-        self.removeFromParent()
+        
         print("self removed")
         //Spawn explosion here
+        let enemies = findEnemiesInRadius()
+        
+        for enemy in enemies {
+            enemy.getDamage(dmgValue: attackDamage)
+        }
+        
+        self.removeFromParent()
+        
+        
     }
     
     

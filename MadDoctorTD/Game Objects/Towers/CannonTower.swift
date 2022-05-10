@@ -48,7 +48,7 @@ class CannonTower: Tower{
         
         
         
-        print(distance)
+//        print(distance)
         
         
         

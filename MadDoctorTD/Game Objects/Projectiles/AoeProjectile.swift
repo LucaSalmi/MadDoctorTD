@@ -18,6 +18,10 @@ class AoeProjectile: SKSpriteNode {
     
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     
+    var travelDuration = AoeProjectileData.TRAVEL_DURATION
+    var currentDuration = CGFloat(0)
+    
+    var startPosition: CGPoint
     var blastRadius: CGFloat = AoeProjectileData.BLAST_RADIUS
 
     required init?(coder aDecoder: NSCoder) {
@@ -28,6 +32,7 @@ class AoeProjectile: SKSpriteNode {
         
         targetPoint = target.position
         self.attackDamage = attackDamage
+        startPosition = position
         
         super.init(texture: nil, color: .clear, size: ProjectileData.size)
         
@@ -43,15 +48,19 @@ class AoeProjectile: SKSpriteNode {
         
         currentTick = maxTick
         
+        speed = self.position.distance(point: targetPoint) / travelDuration
+        
     }
     
     func reuseFromPool(position: CGPoint, target: Enemy, attackDamage: Int) {
         self.attackDamage = attackDamage
         targetPoint = target.position
         self.position = position
+        startPosition = position
         lookAtTarget(target: target)
         setDirection()
         currentTick = maxTick
+        speed = self.position.distance(point: targetPoint) / travelDuration
         
     }
     
@@ -99,11 +108,11 @@ class AoeProjectile: SKSpriteNode {
     
     private func hasReachedTargetPoint() -> Bool{
         
-        let leftSide = targetPoint.x - self.size.width/2
-        let rightSide = targetPoint.x + self.size.width/2
+        let leftSide = targetPoint.x - self.size.width/4
+        let rightSide = targetPoint.x + self.size.width/4
         
-        let topSide = targetPoint.y + self.size.height/2
-        let botSide = targetPoint.y - self.size.height/2
+        let topSide = targetPoint.y + self.size.height/4
+        let botSide = targetPoint.y - self.size.height/4
         
         if self.position.x > leftSide && self.position.x < rightSide{
             if self.position.y > botSide && self.position.y < topSide{
@@ -119,10 +128,29 @@ class AoeProjectile: SKSpriteNode {
         
     }
     
-//    func findEnemiesInRadius() -> [Enemy]{
-//        //var enemies = []
-//
-//    }
+    func findEnemiesInRadius() -> [Enemy]{
+        var enemies = [Enemy]()
+        
+        let instance = GameScene.instance!
+        
+        let enemyNode = instance.enemiesNode
+        
+        for node in enemyNode.children{
+            let enemy = node as! Enemy
+            
+            let enemyDistance = self.position.distance(point: enemy.position)
+            
+            if enemyDistance <= blastRadius{
+                enemies.append(enemy)
+            }
+            
+            
+        }
+        
+        
+        return enemies
+        
+    }
 
     func update() {
         
@@ -135,6 +163,19 @@ class AoeProjectile: SKSpriteNode {
         
         self.position.x += (direction.x * speed)
         self.position.y += (direction.y * speed)
+        
+        
+        currentDuration += 1
+        
+        if currentDuration < (travelDuration/2){
+            self.size.width += 1.5
+            self.size.height += 1.5
+        }
+        else{
+            self.size.width -= 1.5
+            self.size.height -= 1.5
+        }
+        
         
         if hasReachedTargetPoint(){
             self.destroy()
