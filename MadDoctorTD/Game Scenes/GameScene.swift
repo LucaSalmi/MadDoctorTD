@@ -160,11 +160,19 @@ class GameScene: SKScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if GameManager.instance.isPaused {
+            return
+        }
+        
         touchesBegan(touches, with: event)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        if GameManager.instance.isPaused {
+            return
+        }
 
         if rangeIndicator != nil{
             rangeIndicator!.removeFromParent()
@@ -214,6 +222,9 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         
         //Update code
+        if GameManager.instance.isPaused {
+            return
+        }
         
        timers()
         
