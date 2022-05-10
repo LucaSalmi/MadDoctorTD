@@ -163,6 +163,7 @@ class WaveManager{
             
             print("wave cleared")
             waveNumber += 1
+            GameManager.instance.currentWave = waveNumber
             waveCreated = false
             currentScene!.waveStartCounter = 600
             currentScene!.isWaveActive = false
