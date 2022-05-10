@@ -32,6 +32,16 @@ class CannonProjectile: AoeProjectile{
         for enemy in enemies {
             enemy.getDamage(dmgValue: attackDamage)
         }
+        let gameScene = GameScene.instance!
+        
+        let particle = SKEmitterNode(fileNamed: "CannonExplosion")
+        particle!.position = position
+        particle!.zPosition = 5
+        gameScene.addChild(particle!)
+        
+        gameScene.run(SKAction.wait(forDuration: 1)) {
+            particle!.removeFromParent()
+        }
         
         self.removeFromParent()
         

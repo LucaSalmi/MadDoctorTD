@@ -104,7 +104,7 @@ struct ProjectileData {
 
 struct AoeProjectileData{
     
-    static let BLAST_RADIUS: CGFloat = CGFloat(50)
+    static let BLAST_RADIUS: CGFloat = CGFloat(75)
     
     static let TRAVEL_DURATION: CGFloat = CGFloat(240)
 }

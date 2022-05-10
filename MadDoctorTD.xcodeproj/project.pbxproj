@@ -54,6 +54,7 @@
 		C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1E282515260085D093 /* RandomNumberGenerator.swift */; };
 		C8E693432823B26E00D0A661 /* StandardEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693422823B26E00D0A661 /* StandardEnemy.swift */; };
 		C8E693452823C38F00D0A661 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693442823C38F00D0A661 /* Edge.swift */; };
+		E50A1695282A894800E6625C /* CannonExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = E50A1694282A894800E6625C /* CannonExplosion.sks */; };
 		E5268CCC28226EF000F134A5 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCB28226EF000F134A5 /* Tower.swift */; };
 		E5268CD02822708600F134A5 /* GunTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCF2822708600F134A5 /* GunTower.swift */; };
 		E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD128250E5F00F134A5 /* RapidFireTower.swift */; };
@@ -113,6 +114,7 @@
 		C897BC1E282515260085D093 /* RandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNumberGenerator.swift; sourceTree = "<group>"; };
 		C8E693422823B26E00D0A661 /* StandardEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardEnemy.swift; sourceTree = "<group>"; };
 		C8E693442823C38F00D0A661 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		E50A1694282A894800E6625C /* CannonExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CannonExplosion.sks; sourceTree = "<group>"; };
 		E5268CCB28226EF000F134A5 /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
 		E5268CCF2822708600F134A5 /* GunTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunTower.swift; sourceTree = "<group>"; };
 		E5268CD128250E5F00F134A5 /* RapidFireTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidFireTower.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				B35C210A282A6330009A748E /* sniper_bullet_fly_by_3.wav */,
 				B35C2108282A632F009A748E /* sniper_bullet_fly_by_4.wav */,
 				B35C2109282A632F009A748E /* sniper_bullet_fly_by_5.wav */,
+				E50A1694282A894800E6625C /* CannonExplosion.sks */,
 			);
 			path = "Sound and Graphics";
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E50A1695282A894800E6625C /* CannonExplosion.sks in Resources */,
 				3359CC9828214F1800878191 /* LabScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
 				3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */,
