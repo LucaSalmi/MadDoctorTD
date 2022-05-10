@@ -40,15 +40,6 @@ struct GameSceneView: View {
                     VStack(spacing: 20){
                         SettingsView(title: "Paused")
                         
-                        Button {
-                            withAnimation{
-                                gameManager.isPaused = false
-                            }
-                            
-                        } label: {
-                            Text("Continue")
-                                .font(.title)
-                        }
 
                     }.padding(50)
                         .background(Color.white.opacity(0.5))
