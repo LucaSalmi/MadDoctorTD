@@ -138,7 +138,7 @@ class Enemy: SKSpriteNode{
             
             progressBar.removeFromParent()
             self.removeFromParent()
-            WaveManager.totalEnemiesOfWave -= 1
+            print("Current enemy wave count = \(GameScene.instance!.enemiesNode.children.count)")
             
         }
         

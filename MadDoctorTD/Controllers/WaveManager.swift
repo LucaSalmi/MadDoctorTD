@@ -12,7 +12,7 @@ class WaveManager{
     
     var currentScene: GameScene? = nil
     var totalSlots: Int = 0
-    static var totalEnemiesOfWave: Int = 0
+    //var totalEnemiesOfWave: Int = 0
     var waveNumber: Int = 1
     var spawnPoint: CGPoint? = nil
     var enemyArray = [Enemy]()
@@ -72,20 +72,18 @@ class WaveManager{
                 
             }
             
-            WaveManager.totalEnemiesOfWave += 1
-            print("totalEnemies: \(WaveManager.totalEnemiesOfWave)")
-            
             if !checkLimits(){
                 occupiedSlots += enemyArray.last?.waveSlotSize ?? 1
                 
                 
             }
         }
+        print("totalEnemies: \(enemyArray.count)")
         waveCreated = true
     }
     
     func update(){
-        winCondition()
+        checkWinCondition()
     }
     
     func spawnEnemy(){
@@ -159,18 +157,23 @@ class WaveManager{
         return hasDeleted
     }
     
-    func winCondition(){
-        print("enemies left\(WaveManager.totalEnemiesOfWave )")
-        if WaveManager.totalEnemiesOfWave == 0 && waveCreated{
+    func checkWinCondition(){
+        
+        if GameScene.instance!.enemiesNode.children.count == 0 && enemyArray.count == 0 {
+            
             print("wave cleared")
             waveNumber += 1
             waveCreated = false
-            currentScene!.waveStartCounter = 1200
+            currentScene!.waveStartCounter = 600
             currentScene!.isWaveActive = false
-            createWave([.standard,.fast])
+            
+            print("Current wave number = \(waveNumber)")
             
             if waveNumber > 5 {
                 print("Level 1 completed")
+            }
+            else {
+                createWave([.standard,.fast])
             }
             
         }
