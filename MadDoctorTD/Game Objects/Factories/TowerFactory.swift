@@ -52,6 +52,7 @@ class SniperTowerFactory: TowerFactoryProtocol{
 
 
 protocol TowerCreator{
+    
     func createTower(currentFoundation: FoundationPlate)
     
 }
@@ -76,16 +77,19 @@ protocol TowerCreator{
                 TowerNode.towerArray.append(tower)
                 
             case .rapidFireTower:
+                
                 let tower = RapidFireTowerFactory().createTower(currentFoundation: currentFoundation)
                 TowerNode.towersNode.addChild(tower)
                 TowerNode.towerTextureNode.addChild(tower.towerTexture)
                 TowerNode.towerArray.append(tower)
                 
             case .sniperTower:
+                
                 let tower = SniperTowerFactory().createTower(currentFoundation: currentFoundation)
                 TowerNode.towersNode.addChild(tower)
                 TowerNode.towerTextureNode.addChild(tower.towerTexture)
                 TowerNode.towerArray.append(tower)
+                
             }
         }
     }
