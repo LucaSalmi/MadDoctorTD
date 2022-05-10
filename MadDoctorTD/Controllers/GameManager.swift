@@ -12,6 +12,7 @@ class GameManager: ObservableObject{
     static var instance = GameManager()
     
     //Variables
+    @Published var isPaused: Bool = false
     @Published var currentMoney: Int = 2500
     
     //SINGLETON

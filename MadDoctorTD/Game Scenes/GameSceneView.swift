@@ -34,25 +34,62 @@ struct GameSceneView: View {
             
             VStack {
                 
-                HStack {
+                if gameManager.isPaused {
                     
-                    Text("$ = \(gameManager.currentMoney)")
-                        .foregroundColor(.white)
-                    
-                    Spacer()
-                    
-                    Button {
-                        GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
-                    } label: {
-                        Text("Start wave!")
+                    VStack {
+                        Spacer()
+                        
+                        HStack {
+                            
+                            Spacer()
+                            
+                            Button {
+                                gameManager.isPaused = false
+                            } label: {
+                                Text("Resume")
+                            }.frame(width: 300, height: 200)
+                                .background(.gray)
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+
+                        }
+                        
+                        Spacer()
+                    }
+                }
+                else {
+                    HStack {
+                        
+                        Text("$ = \(gameManager.currentMoney)")
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        
+                        Button {
+                            communicator.cancelAllMenus()
+                            gameManager.isPaused = true
+                        } label: {
+                            Text("Pause")
+                        }
+
+                        
+                        Spacer()
+                        
+                        Text("Current wave = ")
+                            .foregroundColor(.white)
                     }
                     
                     Spacer()
                     
-                    Text("Current wave = ")
-                        .foregroundColor(.white)
+                    HStack {
+                        Button {
+                            GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
+                        } label: {
+                            Text("Start wave!")
+                        }
+                    }
                 }
-                Spacer()
             }
             
             if communicator.showFoundationMenu{
