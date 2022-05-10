@@ -233,6 +233,7 @@ class GameScene: SKScene {
         if !isWaveActive{
             
             waveStartCounter += 1
+            GameManager.instance.nextWaveCounter = waveStartCounter
             if waveStartCounter >= WaveData.WAVE_START_TIME{
                 
                 isWaveActive = true
