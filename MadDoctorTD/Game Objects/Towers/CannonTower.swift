@@ -21,7 +21,7 @@ class CannonTower: Tower{
         
         super.init(position: position, foundation: foundation, textureName: textureName)
         
-        projectileType = ProjectileTypes.sniperProjectile.rawValue
+        projectileType = ProjectileTypes.sniperProjectile
         
         attackDamage = Int(Double(attackDamage) * 10)
         
@@ -40,7 +40,7 @@ class CannonTower: Tower{
             let projectile = CannonProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
             
             
-            instance.projectilesNode.addChild(projectile)
+            ProjectileNodes.projectilesNode.addChild(projectile)
             currentFireRateTick = fireRate
         }
         
