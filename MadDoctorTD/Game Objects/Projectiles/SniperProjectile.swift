@@ -31,7 +31,8 @@ class SniperProjectile: Projectile {
         
         //SoundManager.playSFX(sfxName: SoundManager.gunProjectileImpactSFX)
 
-        SoundManager.playSFX(sfxName: SoundManager.sniperProjectileImpactSFX)
+        //SoundManager.playSFX(sfxName: SoundManager.sniperProjectileImpactSFX)
+        SoundManager.playSniperSFX()
         
         let particle = SKEmitterNode(fileNamed: "GunProjectileImpact")
         particle!.position = position

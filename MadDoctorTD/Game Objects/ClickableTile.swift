@@ -19,7 +19,7 @@ class ClickableTile: SKSpriteNode{
     
     init(position: CGPoint){
         
-        super.init(texture: nil, color: .clear, size: FoundationData.size)
+        super.init(texture: nil, color: .clear, size: FoundationData.SIZE)
         
         self.position = position
         
@@ -45,13 +45,13 @@ class ClickableTile: SKSpriteNode{
         var adjecentFound = false
         
         var leftPosition = position
-        leftPosition.x -= DefaultTileData.size.width
+        leftPosition.x -= DefaultTileData.SIZE.width
         var rightPosition = position
-        rightPosition.x += DefaultTileData.size.width
+        rightPosition.x += DefaultTileData.SIZE.width
         var topPosition = position
-        topPosition.y += DefaultTileData.size.height
+        topPosition.y += DefaultTileData.SIZE.height
         var bottomPosition = position
-        bottomPosition.y -= DefaultTileData.size.height
+        bottomPosition.y -= DefaultTileData.SIZE.height
         
         for node in gameScene.foundationPlatesNode.children {
             let currentFoundationPlate = node as! FoundationPlate

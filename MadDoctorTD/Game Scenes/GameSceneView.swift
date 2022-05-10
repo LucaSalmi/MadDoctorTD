@@ -13,9 +13,16 @@ struct GameSceneView: View {
     var gameScene: SKScene
     
     @ObservedObject var communicator = GameSceneCommunicator.instance
+    @ObservedObject var gameManager = GameManager.instance
     
     init() {
-        gameScene = SKScene(fileNamed: "GameScene")!
+        
+        if GameScene.instance == nil {
+            gameScene = SKScene(fileNamed: "GameScene")!
+        }
+        else {
+            gameScene = GameScene.instance!
+        }
         gameScene.scaleMode = .aspectFit
         communicator.cancelAllMenus()
     }
@@ -26,15 +33,63 @@ struct GameSceneView: View {
                 .ignoresSafeArea()
             
             VStack {
-                Spacer()
-                Button {
+                
+                if gameManager.isPaused {
                     
-                    GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
+                    VStack {
+                        Spacer()
                         
-                } label: {
-                    Text("MOVE!")
-                }
+                        HStack {
+                            
+                            Spacer()
+                            
+                            Button {
+                                gameManager.isPaused = false
+                            } label: {
+                                Text("Resume")
+                            }.frame(width: 300, height: 200)
+                                .background(.gray)
+                                .foregroundColor(.black)
+                            
+                            Spacer()
 
+                        }
+                        
+                        Spacer()
+                    }
+                }
+                else {
+                    HStack {
+                        
+                        Text("$ = \(gameManager.currentMoney)")
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        
+                        Button {
+                            communicator.cancelAllMenus()
+                            gameManager.isPaused = true
+                        } label: {
+                            Text("Pause")
+                        }
+
+                        
+                        Spacer()
+                        
+                        Text("Current wave = ")
+                            .foregroundColor(.white)
+                    }
+                    
+                    Spacer()
+                    
+                    HStack {
+                        Button {
+                            GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
+                        } label: {
+                            Text("Start wave!")
+                        }
+                    }
+                }
             }
             
             if communicator.showFoundationMenu{
@@ -94,20 +149,18 @@ struct GameSceneView: View {
                 VStack(spacing: 25){
                     Text("Upgrade menu")
                     
-                    
                     Button {
-                        
-                        communicator.currentTower!.upgrade(upgradeType: .damage)
+                        communicator.upgradeTower(upgradeType: .damage)
                     } label: {
                         Text("Upgrade damage")
                     }
                     Button {
-                        communicator.currentTower!.upgrade(upgradeType: .range)
+                        communicator.upgradeTower(upgradeType: .range)
                     } label: {
                         Text("Upgrade range")
                     }
                     Button {
-                        communicator.currentTower!.upgrade(upgradeType: .firerate)
+                        communicator.upgradeTower(upgradeType: .firerate)
                     } label: {
                         Text("Upgrade attack speed")
                     }

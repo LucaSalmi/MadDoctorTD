@@ -88,8 +88,6 @@ class Tower: SKSpriteNode{
     
     private func attackTarget() {
         
-        
-        
         if currentFireRateTick <= 0 {
             
             
@@ -114,7 +112,6 @@ class Tower: SKSpriteNode{
 //                        
 //                    }
 //                }
-            
             currentFireRateTick = fireRate
         }
         
@@ -123,21 +120,17 @@ class Tower: SKSpriteNode{
     
     func upgrade(upgradeType : UpgradeTypes){
         
-        if upgradeCount <= TowerData.MAX_UPGRADE{
-            
-            switch upgradeType {
-            case .damage:
-                attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
-            case .range:
-                attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
-                displayRangeIndicator()
-            case .firerate:
-                fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
-            }
-            
-            upgradeCount += 1
-            
+        switch upgradeType {
+        case .damage:
+            attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
+        case .range:
+            attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
+            displayRangeIndicator()
+        case .firerate:
+            fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
         }
+        
+        upgradeCount += 1
         
     }
 

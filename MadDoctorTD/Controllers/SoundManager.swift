@@ -30,6 +30,18 @@ class SoundManager{
         gameScene.run(sfxAction)
         
     }
+
+    static func playSniperSFX() {
+
+        guard let gameScene = GameScene.instance else { return }
+
+        let rand = Int.random(in:1...5)
+        let sniperSound = SKAction.playSoundFileNamed("sniper_bullet_fly_by_\(rand)", waitForCompletion: false)
+
+        gameScene.run(sniperSound)
+        print("Sniper fired! 8^)")
+        
+    }
     
     static func playBGM(bgmName: String){
         
