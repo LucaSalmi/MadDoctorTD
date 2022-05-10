@@ -211,9 +211,17 @@ class GameScene: SKScene {
             tower.update()
         }
         
+
         for node in ProjectileNodes.projectilesNode.children {
-            let projectile = node as! Projectile
-            projectile.update()
+            if node is Projectile{
+                let projectile = node as! Projectile
+                projectile.update()
+            }
+            else{
+                let aoeProjectile = node as! AoeProjectile
+                aoeProjectile.update()
+            }
+            
         }
         
         if isWaveActive{

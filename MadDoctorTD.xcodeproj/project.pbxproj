@@ -59,6 +59,9 @@
 		E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD128250E5F00F134A5 /* RapidFireTower.swift */; };
 		E5268CD4282537BD00F134A5 /* SniperTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD3282537BC00F134A5 /* SniperTower.swift */; };
 		E5268CD628253E6600F134A5 /* SniperProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD528253E6600F134A5 /* SniperProjectile.swift */; };
+		E5836FF7282A621500EAF6E9 /* CannonTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FF6282A621500EAF6E9 /* CannonTower.swift */; };
+		E5836FF9282A652D00EAF6E9 /* AoeProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */; };
+		E5836FFB282A662000EAF6E9 /* CannonProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +118,9 @@
 		E5268CD128250E5F00F134A5 /* RapidFireTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidFireTower.swift; sourceTree = "<group>"; };
 		E5268CD3282537BC00F134A5 /* SniperTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SniperTower.swift; sourceTree = "<group>"; };
 		E5268CD528253E6600F134A5 /* SniperProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SniperProjectile.swift; sourceTree = "<group>"; };
+		E5836FF6282A621500EAF6E9 /* CannonTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonTower.swift; sourceTree = "<group>"; };
+		E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoeProjectile.swift; sourceTree = "<group>"; };
+		E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonProjectile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +155,7 @@
 				E5268CCF2822708600F134A5 /* GunTower.swift */,
 				E5268CD128250E5F00F134A5 /* RapidFireTower.swift */,
 				E5268CD3282537BC00F134A5 /* SniperTower.swift */,
+				E5836FF6282A621500EAF6E9 /* CannonTower.swift */,
 			);
 			path = Towers;
 			sourceTree = "<group>";
@@ -159,6 +166,8 @@
 				332033192822ABF500133BBA /* Projectile.swift */,
 				3320331C2822ACFA00133BBA /* GunProjectile.swift */,
 				E5268CD528253E6600F134A5 /* SniperProjectile.swift */,
+				E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */,
+				E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */,
 			);
 			path = Projectiles;
 			sourceTree = "<group>";
@@ -389,11 +398,14 @@
 				C8E693432823B26E00D0A661 /* StandardEnemy.swift in Sources */,
 				C844A731282A6D5800FC42C9 /* ClickableTilesFactory.swift in Sources */,
 				C839C6C62821619200F66043 /* LabMenuView.swift in Sources */,
+				E5836FF9282A652D00EAF6E9 /* AoeProjectile.swift in Sources */,
 				E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */,
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,
+				E5836FF7282A621500EAF6E9 /* CannonTower.swift in Sources */,
 				E5268CD628253E6600F134A5 /* SniperProjectile.swift in Sources */,
 				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
 				E5268CCC28226EF000F134A5 /* Tower.swift in Sources */,
+				E5836FFB282A662000EAF6E9 /* CannonProjectile.swift in Sources */,
 				C82C4D082824077900067858 /* HeavyEnemy.swift in Sources */,
 				C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */,
 				C897BC1D282510380085D093 /* WaveManager.swift in Sources */,

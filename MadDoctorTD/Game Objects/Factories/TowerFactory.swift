@@ -46,6 +46,16 @@ class SniperTowerFactory: TowerFactoryProtocol{
     }
 }
 
+class CannonTowerFactory: TowerFactoryProtocol{
+    
+    func createTower(currentFoundation: FoundationPlate) -> Tower{
+        
+        let cannonTower = CannonTower(position: currentFoundation.position, foundation: currentFoundation, textureName: "sniper_tower_power_on")
+        return cannonTower
+        
+    }
+}
+
 
 protocol TowerCreator{
     
@@ -86,6 +96,14 @@ protocol TowerCreator{
                 TowerNode.towerTextureNode.addChild(tower.towerTexture)
                 TowerNode.towerArray.append(tower)
                 
+            case .cannonTower:
+                let tower = CannonTowerFactory().createTower(currentFoundation: currentFoundation)
+                TowerNode.towersNode.addChild(tower)
+                TowerNode.towerTextureNode.addChild(tower.towerTexture)
+                TowerNode.towerArray.append(tower)
+                
             }
+            
+        
         }
     }
