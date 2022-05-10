@@ -26,18 +26,15 @@ class GunTowerFactory: TowerFactoryProtocol{
     
     func createTower(currentFoundation: FoundationPlate) -> Tower{
         
-        let gunTower = GunTower(position: currentFoundation.position, foundation: currentFoundation, textureName: "gun_tower_online")
-        return gunTower
+        return GunTower(position: currentFoundation.position, foundation: currentFoundation, textureName: "gun_tower_online")
     }
-    
 }
 
 class RapidFireTowerFactory: TowerFactoryProtocol{
     
     func createTower(currentFoundation: FoundationPlate) -> Tower{
         
-        let rapidFireTower = RapidFireTower(position: currentFoundation.position, foundation: currentFoundation, textureName: "speed_tower_power_on")
-        return rapidFireTower
+        return RapidFireTower(position: currentFoundation.position, foundation: currentFoundation, textureName: "speed_tower_power_on")
     }
 }
 
@@ -45,8 +42,7 @@ class SniperTowerFactory: TowerFactoryProtocol{
     
     func createTower(currentFoundation: FoundationPlate) -> Tower{
         
-        let sniperTower = SniperTower(position: currentFoundation.position, foundation: currentFoundation, textureName: "sniper_tower_power_on")
-        return sniperTower
+        return SniperTower(position: currentFoundation.position, foundation: currentFoundation, textureName: "sniper_tower_power_on")
     }
 }
 

@@ -21,7 +21,7 @@ class GunTower: Tower{
         
         super.init(position: position, foundation: foundation, textureName: textureName)
                 
-        projectileType = ProjectileTypes.gunProjectile.rawValue
+        projectileType = ProjectileTypes.gunProjectile
     
         attackDamage = Int(Double(attackDamage) * 0.8)
         
