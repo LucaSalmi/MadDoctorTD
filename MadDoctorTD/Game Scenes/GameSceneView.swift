@@ -104,6 +104,11 @@ struct GameSceneView: View {
                     Text("Foundation menu")
                     Button {
                         communicator.buildFoundation()
+                        //SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
+                        SoundManager.playSFX(sfxName: SoundManager.foundationPlacementSFX)
+
+                        //ADD CODE FOR BUILDINGSOUND
+                        
                     } label: {
                         Text("Build foundation")
                     }
@@ -121,11 +126,13 @@ struct GameSceneView: View {
                     Text("Tower menu")
                     Button {
                         communicator.buildTower(type: TowerTypes.gunTower)
+                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Gun Tower")
                     }
                     Button {
                         communicator.buildTower(type: TowerTypes.rapidFireTower)
+                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Rapid Fire Tower")
                     }
@@ -136,6 +143,7 @@ struct GameSceneView: View {
                     }
                     Button {
                         communicator.buildTower(type: TowerTypes.sniperTower)
+                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Sniper Tower")
                     }
