@@ -14,6 +14,7 @@ class GameManager: ObservableObject{
     //Variables
     @Published var isPaused: Bool = false
     @Published var currentMoney: Int = 2500
+    @Published var nextWaveCounter: Int = 0
     
     //SINGLETON
     private init(){}
