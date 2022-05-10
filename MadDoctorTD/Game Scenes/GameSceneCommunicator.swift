@@ -38,8 +38,7 @@ class GameSceneCommunicator: ObservableObject {
         currentTile!.containsFoundation = true
         currentTile!.color = .clear
         
-        let foundation = FoundationPlate(position: currentTile!.position, tile: currentTile!)
-        GameScene.instance!.foundationPlatesNode.addChild(foundation)
+        FoundationPlateFactory().createFoundationPlate(position: currentTile!.position, tile: currentTile!, isStartingFoundation: false)
         
         updateFoundationPower()
         updateFoundationTexture()
@@ -134,7 +133,7 @@ class GameSceneCommunicator: ObservableObject {
     
     func sellFoundation(){
         
-        if GameScene.instance!.foundationPlatesNode.children.count > 1 {
+        if FoundationPlateNodes.foundationPlatesNode.children.count > 1 {
             
             let refund = Int(Double(FoundationData.BASE_COST) * FoundationData.REFOUND_FACTOR)
             GameManager.instance.currentMoney += refund
@@ -151,26 +150,22 @@ class GameSceneCommunicator: ObservableObject {
     
     func updateFoundationPower() {
         
-        let gameScene = GameScene.instance!
-        
-        for node in gameScene.foundationPlatesNode.children {
+        for node in FoundationPlateNodes.foundationPlatesNode.children {
             let foundationPlate = node as! FoundationPlate
             foundationPlate.isPowered = false
             foundationPlate.isPoweredChecked = false
         }
         
-        let startGrid1 = gameScene.foundationPlatesNode.children[0] as! FoundationPlate
+        let startGrid1 = FoundationPlateNodes.foundationPlatesNode.children[0] as! FoundationPlate
         startGrid1.checkIfPowered(gridStart: startGrid1)
-        let startGrid2 = gameScene.foundationPlatesNode.children[3] as! FoundationPlate
+        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[3] as! FoundationPlate
         startGrid2.checkIfPowered(gridStart: startGrid2)
         
     }
     
     func updateFoundationTexture() {
         
-        let gameScene = GameScene.instance!
-        
-        for node in gameScene.foundationPlatesNode.children {
+        for node in FoundationPlateNodes.foundationPlatesNode.children {
             let foundationPlate = node as! FoundationPlate
             foundationPlate.updateFoundationsTexture()
         }

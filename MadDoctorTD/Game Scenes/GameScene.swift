@@ -16,7 +16,7 @@ class GameScene: SKScene {
     
     
     var edgesTilesNode: SKNode = SKNode()
-    var foundationPlatesNode: SKNode = SKNode()
+    
     var enemiesNode: SKNode = SKNode()
     var pathfindingTestEnemy: Enemy?
     var nodeGraph: GKObstacleGraph? = nil
@@ -45,7 +45,8 @@ class GameScene: SKScene {
         setupEdges()
         addChild(edgesTilesNode)
         
-        setupStartFoundation()
+        FoundationPlateFactory().setupStartPlates()
+        addChild(FoundationPlateNodes.foundationPlatesNode)
         
         //add towerNode and towerTextureNode to GameScene
         addChild(TowerNode.towersNode)
@@ -96,45 +97,6 @@ class GameScene: SKScene {
         
         waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoises)
 
-    }
-    
-    private func setupStartFoundation() {
-        
-        foundationPlatesNode.name = "FoundationPlates"
-        addChild(foundationPlatesNode)
-        
-        guard let startFoundationMap = childNode(withName: "start_foundation")as? SKTileMapNode else {
-            return
-        }
-        
-        for row in 0..<startFoundationMap.numberOfRows{
-            for column in 0..<startFoundationMap.numberOfColumns{
-                
-                guard let tile = tile(in: startFoundationMap, at: (column, row)) else {continue}
-                guard tile.userData?.object(forKey: "isFoundationPlate") != nil else {continue}
-                
-                let position = startFoundationMap.centerOfTile(atColumn: column, row: row)
-                
-                for node in ClickableTilesNodes.clickableTilesNode.children {
-                    let clickableTile = node as! ClickableTile
-                    if clickableTile.contains(position) {
-                        
-                        let foundationPlate = FoundationPlate(position: position, tile: clickableTile, isStartingFoundation: true)
-                        
-                        foundationPlatesNode.addChild(foundationPlate)
-                        
-                        foundationPlate.updateFoundationsTexture()
-                    }
-                }
-            }
-        }
-        
-        for node in foundationPlatesNode.children {
-            let foundationPlate = node as! FoundationPlate
-            foundationPlate.updateFoundationsTexture()
-        }
-
-        startFoundationMap.removeFromParent()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

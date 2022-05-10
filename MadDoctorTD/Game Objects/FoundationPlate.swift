@@ -57,7 +57,7 @@ class FoundationPlate: SKSpriteNode{
         
         var numberOfAdjecentFound = 0
         
-        let foundationPlates = GameScene.instance!.foundationPlatesNode.children
+        let foundationPlates = FoundationPlateNodes.foundationPlatesNode.children
         for node in foundationPlates {
             let foundationPlate = node as! FoundationPlate
             
@@ -190,7 +190,7 @@ class FoundationPlate: SKSpriteNode{
             
             var found = [FoundationPlate]()
             
-            let foundationPlates = GameScene.instance!.foundationPlatesNode.children
+            let foundationPlates = FoundationPlateNodes.foundationPlatesNode.children
             for node in foundationPlates {
                 let foundationPlate = node as! FoundationPlate
                 

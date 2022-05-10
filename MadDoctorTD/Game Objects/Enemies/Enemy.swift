@@ -178,7 +178,7 @@ class Enemy: SKSpriteNode{
         let player = self
         
         // Create an array of obstacles, which is every child node, apart from the player node.
-        var obstacles = SKNode.obstacles(fromNodeBounds: gameScene.foundationPlatesNode.children.filter({ (element ) -> Bool in
+        var obstacles = SKNode.obstacles(fromNodeBounds: FoundationPlateNodes.foundationPlatesNode.children.filter({ (element ) -> Bool in
             return element != player
         }))
         let edges = SKNode.obstacles(fromNodeBounds: gameScene.edgesTilesNode.children)
