@@ -137,6 +137,7 @@ class WaveManager{
         if EnemyNodes.enemiesNode.children.count == 0 && EnemyNodes.enemyArray.count == 0 {
             
             print("wave cleared")
+            GameManager.instance.currentMoney += WaveData.INCOME_PER_WAVE
             waveNumber += 1
             GameManager.instance.currentWave = waveNumber
             waveCreated = false

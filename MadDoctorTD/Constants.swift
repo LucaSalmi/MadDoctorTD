@@ -153,5 +153,7 @@ struct WaveData{
     static let HEAVY_ENEMY_LIMIT = 5
     static let FLY_ENEMY_LIMIT = 5
     
+    static let INCOME_PER_WAVE = 500
+    
 }
 
