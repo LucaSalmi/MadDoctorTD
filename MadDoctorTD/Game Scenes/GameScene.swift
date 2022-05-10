@@ -39,12 +39,14 @@ class GameScene: SKScene {
         GameScene.instance = self
         physicsWorld.contactDelegate = self
         
+        //creates and adds clickable tiles to GameScene
         let _ = ClickableTileFactory()
         addChild(ClickableTilesNodes.clickableTilesNode)
         
         setupEdges()
         addChild(edgesTilesNode)
         
+        //creates start foundations and adds the node to the GameScene
         FoundationPlateFactory().setupStartPlates()
         addChild(FoundationPlateNodes.foundationPlatesNode)
         
@@ -87,15 +89,18 @@ class GameScene: SKScene {
     private func setupEnemies(){
         
         //build phase pathfinding test
-        pathfindingTestEnemy = StandardEnemy(texture: SKTexture(imageNamed: "joystick"))
+        //pathfindingTestEnemy = StandardEnemy(texture: SKTexture(imageNamed: "joystick"))
+        pathfindingTestEnemy = Enemy(texture: SKTexture(imageNamed: "joystick"), color: .clear)
         let spawnPoint = childNode(withName: "SpawnPoint")
         pathfindingTestEnemy!.position = spawnPoint!.position
         addChild(pathfindingTestEnemy!)
         
         enemyChoises.append(.standard)
         enemyChoises.append(.flying)
+        enemyChoises.append(.heavy)
+        enemyChoises.append(.fast)
         
-        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoises)
+        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoises, enemyRace: .slime)
 
     }
     

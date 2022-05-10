@@ -18,16 +18,16 @@ class WaveManager{
     var enemyArray = [Enemy]()
     var waveCreated = false
     
-    init(totalSlots: Int, choises: [EnemyTypes]){
+    init(totalSlots: Int, choises: [EnemyTypes], enemyRace: EnemyRaces){
         
         currentScene = GameScene.instance
         spawnPoint = (currentScene?.childNode(withName: "SpawnPoint")!.position) ?? CGPoint(x: 0, y: 0)
         self.totalSlots = totalSlots
-        createWave(choises)
+        createWave(choises: choises, enemyrace: .slime)
     }
     
     
-    private func createWave(_ choises: [EnemyTypes]){
+    private func createWave(choises: [EnemyTypes], enemyrace: EnemyRaces){
         
         if totalSlots < 0{
             
@@ -40,51 +40,32 @@ class WaveManager{
             
             let chosen = RandomNumberGenerator.rNG(choises: choises)
             
-            switch chosen {
+            switch enemyrace {
                 
-            case .standard:
+            case .slime:
                 
-                let stEnemy = StandardEnemy(texture: SKTexture(imageNamed: "slime animation 1"))
+                let stEnemy = SlimeEnemy(enemyType: chosen)
                 stEnemy.position = spawnPoint!
                 stEnemy.zPosition = 2
                 enemyArray.append(stEnemy)
                 
-            case .fast:
-                
-                let fEnemy = FastEnemy(texture: SKTexture(imageNamed: "wheelie 1"))
-                fEnemy.position = spawnPoint!
-                fEnemy.zPosition = 2
-                enemyArray.append(fEnemy)
-                
-            case .heavy:
-                
-                let hEnemy = HeavyEnemy(texture: SKTexture(imageNamed: "ship 1"))
-                hEnemy.position = spawnPoint!
-                hEnemy.zPosition = 2
-                enemyArray.append(hEnemy)
-                
-            case .flying:
-                
-                let fEnemy = FlyingEnemy(texture: SKTexture(imageNamed: "squid_animation_1"))
-                fEnemy.position = spawnPoint!
-                fEnemy.zPosition = 3
-                enemyArray.append(fEnemy)
-                
             }
+            
             
             if !checkLimits(){
                 occupiedSlots += enemyArray.last?.waveSlotSize ?? 1
                 
-                
             }
         }
-        print("totalEnemies: \(enemyArray.count)")
+        
         waveCreated = true
     }
+    
     
     func update(){
         checkWinCondition()
     }
+    
     
     func spawnEnemy(){
         
@@ -93,6 +74,7 @@ class WaveManager{
         enemyArray.removeFirst()
         
     }
+    
     
     func checkLimits() -> Bool{
         
@@ -106,7 +88,9 @@ class WaveManager{
         
         for obj in enemyArray{
             
-            if obj is FastEnemy{
+            let type = obj.enemyType
+            
+            if type == .fast {
                 
                 fastCount += 1
                 print("found fast enemy")
@@ -116,7 +100,7 @@ class WaveManager{
                     
                 }
                 
-            }else if obj is FlyingEnemy{
+            }else if type == .flying{
                 
                 flyCount += 1
                 
@@ -126,7 +110,7 @@ class WaveManager{
                     
                 }
                 
-            }else if obj is HeavyEnemy{
+            }else if type == .heavy{
                 
                 heavyCount += 1
                 
@@ -153,7 +137,6 @@ class WaveManager{
             hasDeleted = true
         }
         
-        
         return hasDeleted
     }
     
@@ -174,7 +157,7 @@ class WaveManager{
                 print("Level 1 completed")
             }
             else {
-                createWave([.standard,.fast])
+                createWave(choises: [.standard,.fast], enemyrace: .slime)
             }
             
         }

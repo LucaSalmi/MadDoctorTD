@@ -55,11 +55,16 @@ enum UpgradeTypes: Int{
     case damage = 0, range, firerate
 }
 
+
 enum EnemyTypes: Int{
-    
     case standard = 0, fast, heavy, flying
-    
 }
+
+enum EnemyRaces: Int{
+    //expand this with more races because variety makes the world better!!! ;)
+    case slime = 0
+}
+
 
 
 //Towers

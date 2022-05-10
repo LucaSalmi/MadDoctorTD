@@ -18,6 +18,7 @@ class Enemy: SKSpriteNode{
     let goal = GameScene.instance!.childNode(withName: "goal")
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
+    var enemyType: EnemyTypes = .standard
     
     var progressBar = SKShapeNode()
     var startHp = 0
@@ -52,6 +53,13 @@ class Enemy: SKSpriteNode{
     
     func update(){
         
+        if self.enemyType == .flying{
+            
+            if movePoints.count > 1 {
+                let finalPoint = movePoints[movePoints.count-1]
+                movePoints = [finalPoint]
+            }
+        }
         
         if progressBar.parent != nil{
             progressBar.removeFromParent()
@@ -61,12 +69,6 @@ class Enemy: SKSpriteNode{
         progressBar.fillColor = .cyan
         progressBar.position = CGPoint(x: self.position.x, y: self.position.y + 30)
         GameScene.instance?.addChild(progressBar)
-        //self.addChild(progressBar)
-        
-        //let hpPct = hp / startHp
-        
-        
-        
         
         if !self.moving {
             let _ = movePlayerToGoal()
