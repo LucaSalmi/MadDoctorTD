@@ -82,7 +82,7 @@ struct GameSceneView: View {
                     Spacer()
                     
                     if ((WaveData.WAVE_START_TIME - 180)...(WaveData.WAVE_START_TIME - 5)).contains(gameManager.nextWaveCounter){
-                    Text("wave # incoming...")
+                        Text("wave \(gameManager.currentWave) incoming...")
                         .font(.title)
                         .foregroundColor(.white)
                     }

@@ -46,7 +46,7 @@ class Enemy: SKSpriteNode{
         progressBar.fillColor = .cyan
         //progressBar.position = CGPoint(x: self.position.x, y: self.position.y + 10)
         //self.addChild(progressBar)
-        GameScene.instance?.position = CGPoint(x: self.position.x, y: self.position.y + 10)
+        //GameScene.instance?.position = CGPoint(x: self.position.x, y: self.position.y + 10)
         
     }
     
