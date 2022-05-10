@@ -58,18 +58,18 @@ struct GameSceneView: View {
                 VStack(spacing: 25) {
                     Text("Tower menu")
                     Button {
-                        communicator.buildTower(type: TowerTypes.gunTower.rawValue)
+                        communicator.buildTower(type: TowerTypes.gunTower)
                     } label: {
                         Text("Build Gun Tower")
                     }
                     Button {
-                        communicator.buildTower(type: TowerTypes.rapidFireTower.rawValue)
+                        communicator.buildTower(type: TowerTypes.rapidFireTower)
                     } label: {
                         Text("Build Rapid Fire Tower")
                     }
                     
                     Button {
-                        communicator.buildTower(type: TowerTypes.sniperTower.rawValue)
+                        communicator.buildTower(type: TowerTypes.sniperTower)
                     } label: {
                         Text("Build Sniper Tower")
                     }
