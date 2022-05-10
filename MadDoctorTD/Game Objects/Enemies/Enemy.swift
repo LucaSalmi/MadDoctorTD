@@ -12,10 +12,9 @@ import GameplayKit
 class Enemy: SKSpriteNode{
     
     var baseSpeed = EnemiesData.BASE_SPEED
-    var moving: Bool = false
+    var isMoving: Bool = false
     var hp = EnemiesData.BASE_HP
     var movePoints = [CGPoint]()
-    let goal = GameScene.instance!.childNode(withName: "goal")
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
     var enemyType: EnemyTypes = .standard
@@ -25,7 +24,6 @@ class Enemy: SKSpriteNode{
     var startHp = 0
     
     var killValue = EnemiesData.BASE_KILL_VALUE
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -54,6 +52,11 @@ class Enemy: SKSpriteNode{
     
     func update(){
         
+        if !isMoving {
+            movePoints = GameScene.instance!.pathfindingTestEnemy!.movePoints
+            isMoving = true
+        }
+        
         if self.enemyType == .flying{
             
             if movePoints.count > 1 {
@@ -70,11 +73,6 @@ class Enemy: SKSpriteNode{
         progressBar.fillColor = .cyan
         progressBar.position = CGPoint(x: self.position.x, y: self.position.y + 30)
         GameScene.instance?.addChild(progressBar)
-        
-        if !self.moving {
-            let _ = movePlayerToGoal()
-            return
-        }
         
         if movePoints.isEmpty {
             return
@@ -167,18 +165,16 @@ class Enemy: SKSpriteNode{
     }
     
     
-    func movePlayerToGoal() -> [CGPoint] {
+    func getMovePoints() -> [CGPoint] {
         
         var newMovePoints = [CGPoint]()
         
         let gameScene = GameScene.instance!
         
-        // Ensure the player doesn't move when they are already moving.
-        guard (!moving) else {return newMovePoints}
-        
         // Find the player in the scene.
         
         let player = self
+        let goal = GameScene.instance!.childNode(withName: "goal")
         
         // Create an array of obstacles, which is every child node, apart from the player node.
         var obstacles = SKNode.obstacles(fromNodeBounds: FoundationPlateNodes.foundationPlatesNode.children.filter({ (element ) -> Bool in
@@ -203,7 +199,7 @@ class Enemy: SKSpriteNode{
         let path:[GKGraphNode] = graph.findPath(from: startNode, to: endNode)
         
         // If the path has 0 nodes, then a path could not be found, so return.
-        guard path.count > 0 else { moving = false; print("Error: Path array is empty. No clear path found!"); return newMovePoints }
+        guard path.count > 0 else { print("Error: Path array is empty. No clear path found!"); return newMovePoints }
         
         // Create an array of actions that the player node can use to follow the path.
         //var actions = [SKAction]()
@@ -226,9 +222,6 @@ class Enemy: SKSpriteNode{
                 newMovePoints.append(nextPoint)
             }
         }
-        
-        self.movePoints = newMovePoints
-        self.moving = true
         
         //        // Convert those actions into a sequence action, then run it on the player node.
         //        let sequence = SKAction.sequence(actions)

@@ -93,12 +93,15 @@ class GameScene: SKScene {
         pathfindingTestEnemy = Enemy(texture: SKTexture(imageNamed: "joystick"), color: .clear)
         let spawnPoint = childNode(withName: "SpawnPoint")
         pathfindingTestEnemy!.position = spawnPoint!.position
+        pathfindingTestEnemy!.movePoints = pathfindingTestEnemy!.getMovePoints()
         addChild(pathfindingTestEnemy!)
         
         enemyChoises.append(.standard)
         enemyChoises.append(.flying)
         enemyChoises.append(.heavy)
         enemyChoises.append(.fast)
+        
+        print("Pathfinding enemy = \(pathfindingTestEnemy)")
         
         waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoises, enemyRace: .slime)
 
