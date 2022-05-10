@@ -138,6 +138,7 @@ class Enemy: SKSpriteNode{
             
             progressBar.removeFromParent()
             self.removeFromParent()
+            WaveManager.totalEnemiesOfWave -= 1
             
         }
         

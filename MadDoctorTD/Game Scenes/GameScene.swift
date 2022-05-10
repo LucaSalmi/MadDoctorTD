@@ -237,6 +237,7 @@ class GameScene: SKScene {
                 enemy.update()
             }
         }
+        waveManager?.update()
     }
     
     //Timers for starting the wave and then spawn one enemy from the wave
