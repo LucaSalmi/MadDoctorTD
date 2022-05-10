@@ -1,5 +1,5 @@
 //
-//  SlimeEnemy.swift
+//  SquidEnemy.swift
 //  MadDoctorTD
 //
 //  Created by Luca Salmi on 2022-05-10.
@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-class SlimeEnemy: Enemy{
+class SquidEnemy: Enemy{
     
     var placeholderTexture: SKTexture = SKTexture(imageNamed: "joystick")
     
@@ -24,6 +24,7 @@ class SlimeEnemy: Enemy{
             
         case .standard:
             
+            //change with right asset
             texture = SKTexture(imageNamed: "slime animation 1")
             
         case .flying:
@@ -35,15 +36,15 @@ class SlimeEnemy: Enemy{
             
         case .heavy:
             
-            texture = SKTexture(imageNamed: "ship 1")
+            //texture = SKTexture(imageNamed: "ship 1")
             hp = Int(Double(EnemiesData.BASE_HP) * (EnemiesData.HEAVY_HP_MODIFIER))
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.HEAVY_SPEED_MODIFIER
             waveSlotSize = EnemiesData.HEAVY_ENEMY_SLOT
-            armorValue = EnemiesData.SLIME_ARMOUR_VALUE
+            armorValue = EnemiesData.SQUID_ARMOUR_VALUE
             
         case .fast:
             
-            texture = SKTexture(imageNamed: "wheelie 1")
+            //texture = SKTexture(imageNamed: "wheelie 1")
             hp = Int(Double(EnemiesData.BASE_HP) * (EnemiesData.FAST_HP_MODIFIER))
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FAST_SPEED_MODIFIER
             waveSlotSize = EnemiesData.FAST_ENEMY_SLOT
@@ -58,6 +59,5 @@ class SlimeEnemy: Enemy{
     override func update() {
         super.update()
     }
-    
     
 }

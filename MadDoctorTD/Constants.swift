@@ -62,7 +62,7 @@ enum EnemyTypes: Int{
 
 enum EnemyRaces: Int{
     //expand this with more races because variety makes the world better!!! ;)
-    case slime = 0
+    case slime = 0, squid
 }
 
 
@@ -136,6 +136,9 @@ struct EnemiesData{
     static let FLY_ENEMY_SLOT = 1
     
     static let BASE_KILL_VALUE = 10
+    
+    static let SLIME_ARMOUR_VALUE = 3
+    static let SQUID_ARMOUR_VALUE = 5
     
 }
 

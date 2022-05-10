@@ -98,9 +98,7 @@ class GameScene: SKScene {
         enemyChoises.append(.flying)
         enemyChoises.append(.heavy)
         enemyChoises.append(.fast)
-        
-        print("Pathfinding enemy = \(pathfindingTestEnemy)")
-        
+
         waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoises, enemyRace: .slime)
 
     }

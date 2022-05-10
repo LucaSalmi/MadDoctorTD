@@ -52,6 +52,7 @@
 		C844A735282A88DA00FC42C9 /* SlimeEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A734282A88DA00FC42C9 /* SlimeEnemy.swift */; };
 		C844A737282A969600FC42C9 /* CannonExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = C844A736282A969600FC42C9 /* CannonExplosion.sks */; };
 		C844A739282A982800FC42C9 /* EnemiesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A738282A982800FC42C9 /* EnemiesFactory.swift */; };
+		C844A73C282AA26C00FC42C9 /* SquidEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A73B282AA26C00FC42C9 /* SquidEnemy.swift */; };
 		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
 		C897BC1D282510380085D093 /* WaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1C282510380085D093 /* WaveManager.swift */; };
 		C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1E282515260085D093 /* RandomNumberGenerator.swift */; };
@@ -113,6 +114,7 @@
 		C844A734282A88DA00FC42C9 /* SlimeEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlimeEnemy.swift; sourceTree = "<group>"; };
 		C844A736282A969600FC42C9 /* CannonExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CannonExplosion.sks; sourceTree = "<group>"; };
 		C844A738282A982800FC42C9 /* EnemiesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemiesFactory.swift; sourceTree = "<group>"; };
+		C844A73B282AA26C00FC42C9 /* SquidEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquidEnemy.swift; sourceTree = "<group>"; };
 		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		C897BC1C282510380085D093 /* WaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveManager.swift; sourceTree = "<group>"; };
 		C897BC1E282515260085D093 /* RandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNumberGenerator.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			children = (
 				C868AACD28229790003F91D0 /* Enemy.swift */,
 				C844A734282A88DA00FC42C9 /* SlimeEnemy.swift */,
+				C844A73B282AA26C00FC42C9 /* SquidEnemy.swift */,
 			);
 			path = Enemies;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */,
 				E5268CCC28226EF000F134A5 /* Tower.swift in Sources */,
 				E5836FFB282A662000EAF6E9 /* CannonProjectile.swift in Sources */,
+				C844A73C282AA26C00FC42C9 /* SquidEnemy.swift in Sources */,
 				C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */,
 				C844A733282A7FE500FC42C9 /* FoundationPlatesFactory.swift in Sources */,
 				C897BC1D282510380085D093 /* WaveManager.swift in Sources */,

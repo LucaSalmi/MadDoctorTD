@@ -19,6 +19,7 @@ class Enemy: SKSpriteNode{
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
     var enemyType: EnemyTypes = .standard
     var armorValue: Int = 0
+    var isAttacker = false
     
     var progressBar = SKShapeNode()
     var startHp = 0

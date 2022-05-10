@@ -43,6 +43,11 @@ class EnemyFactory: EnemyCreator{
         case .slime:
             
             return SlimeFactory().createEnemy(enemyType: enemyType)
+            
+        case .squid:
+            //TO DO replace with right factory
+            return SlimeFactory().createEnemy(enemyType: enemyType)
+            
         }
         
     }
