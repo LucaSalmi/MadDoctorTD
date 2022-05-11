@@ -30,8 +30,10 @@ struct ContentView: View {
                 GameSceneView()
             case AppState.settingsMenu:
                 SettingsView(title: "Settings")
-            default:
+            case AppState.labMenu:
                 LabSceneView()
+            default:
+                MainMenuView()
             }
             
             /*

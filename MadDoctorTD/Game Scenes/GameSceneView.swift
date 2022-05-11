@@ -28,6 +28,7 @@ struct GameSceneView: View {
     }
 
     var body: some View {
+
         ZStack {
             SpriteView(scene: gameScene)
                 .ignoresSafeArea()
@@ -77,16 +78,21 @@ struct GameSceneView: View {
                     }
                     Spacer()
                     
-                    if ((WaveData.WAVE_START_TIME - 180)...(WaveData.WAVE_START_TIME - 5)).contains(gameManager.nextWaveCounter){
-                        Text("wave \(gameManager.currentWave) incoming...")
-                        .font(.title)
-                        .foregroundColor(.white)
-                    }
+                    //TODO: DISPLAY ALERT WHEN NEW WAVE IS INCOMMING!
                     
                     Spacer()
                     
                     if communicator.isBuildPhase {
                         HStack {
+                            
+                            Button {
+                                AppManager.appManager.state = .labMenu
+                            } label: {
+                                Text("Research")
+                            }
+
+                            Spacer()
+                            
                             Button {
                                 GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
                                 communicator.isBuildPhase = false
@@ -195,6 +201,7 @@ struct GameSceneView: View {
                     
             }
         }
+        
     }
 
     
