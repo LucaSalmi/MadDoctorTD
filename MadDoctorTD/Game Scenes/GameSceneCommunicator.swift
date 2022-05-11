@@ -126,6 +126,12 @@ class GameSceneCommunicator: ObservableObject {
         currentTower!.builtUponFoundation!.hasTower = false
         currentTower!.removeFromParent()
         currentTower!.towerTexture.removeFromParent()
+        
+        if currentTower! is SniperTower{
+            let sniperTower = currentTower as! SniperTower
+            sniperTower.sniperLegs.removeFromParent()
+        }
+        
         GameScene.instance!.rangeIndicator?.removeFromParent()
         
         cancelAllMenus()

@@ -36,7 +36,7 @@ class RapidFireTower: Tower{
         super.update()
         if resetTexture{
             resetTexture = false
-            towerTexture.texture = SKTexture(imageNamed: "speed_tower_power_on")
+            towerTexture.texture = SKTexture(imageNamed: "speed_tower")
         }
     }
     
