@@ -23,11 +23,11 @@ class SoundManager{
     //BGMusic
 
     static let MainThemeBackgroundMusic = "mad_td_theme"
-    static let filteredMainThemeBackgroundMusic = "filtered_theme_song_no_fizz."
+    static let filteredMainThemeBackgroundMusic = "filtered_theme_song_no_fizz"
     
     static var musicPlayer: AVAudioPlayer!
 
-    static func playSFX(sfxName: String){
+    static func playSFX(sfxName: String, sfxExtension: String = SoundManager.sfxExtension){
         
         guard let gameScene = GameScene.instance else { return }
         let gameManager = GameManager.instance
@@ -54,44 +54,34 @@ class SoundManager{
         let rand = Int.random(in:1...7)
         let mortarSwoosh = "mortar_swoosh\(rand)."
 
-        playBGM(bgmName: mortarSwoosh)
+        playSFX(sfxName: mortarSwoosh, sfxExtension: SoundManager.bgmExtension)
 
     }
     
-    static func playBGM(bgmName: String){
-
-        guard let gameScene = GameScene.instance else { return }
-        let gameManager = GameManager.instance
-        if !gameManager.isSfxOn{
-            return
-        }
-
-        let sfx = bgmName + bgmExtension
-        let sfxAction = SKAction.playSoundFileNamed(sfx, waitForCompletion: false)
-        gameScene.run(sfxAction)
+    static func playBGM(bgmString: String) {
         
-    }
-
-    static func playBackgroundMusic() {
-
-        let url = Bundle.main.url(forResource: "filtered_theme_song_no_fizz", withExtension: "mp3")
-
-        guard url != nil else {
+        musicPlayer?.stop()
+        
+        if !GameManager.instance.isMusicOn {
             return
         }
-
+        
+        let bgm = Bundle.main.path(forResource: bgmString, ofType: SoundManager.bgmExtension)
+        
         do {
-            musicPlayer = try AVAudioPlayer(contentsOf: url!)
-            musicPlayer.numberOfLoops = -1
-            musicPlayer?.play()
+            let url = URL(fileURLWithPath: bgm!)
+            musicPlayer = try AVAudioPlayer(contentsOf: url)
+            
         } catch {
-            print("error playing Music")
+            
         }
+        musicPlayer!.play()
+        musicPlayer!.numberOfLoops = -1
     }
     
     static func stopMusic(){
         
-        //TODO
+        musicPlayer?.stop()
         
     }
 }
