@@ -14,6 +14,7 @@ class GameScene: SKScene {
     
     static var instance: GameScene? = nil
     
+    var myCamera: SKCameraNode? = nil
     
     var edgesTilesNode: SKNode = SKNode()
     
@@ -38,12 +39,16 @@ class GameScene: SKScene {
         GameScene.instance = self
         physicsWorld.contactDelegate = self
         
+        
+        
         //creates and adds clickable tiles to GameScene
         let _ = ClickableTileFactory()
         addChild(ClickableTilesNodes.clickableTilesNode)
         
         setupEdges()
         addChild(edgesTilesNode)
+        
+        setupCamera()
         
         //creates start foundations and adds the node to the GameScene
         FoundationPlateFactory().setupStartPlates()
@@ -59,6 +64,26 @@ class GameScene: SKScene {
         setupEnemies()
         addChild(EnemyNodes.enemiesNode)
         
+        
+    }
+    
+    private func setupCamera(){
+        
+        myCamera = self.camera
+        let backgroundMap = (childNode(withName: "background") as! SKTileMapNode)
+        
+        let xInset = min((view?.bounds.width)!/2*camera!.xScale, backgroundMap.frame.width/2)
+        let yInset = min((view?.bounds.height)!/2*camera!.yScale, backgroundMap.frame.height/2)
+        
+        let constrainRect = backgroundMap.frame.insetBy(dx: xInset, dy: yInset)
+        
+        let xRange = SKRange(lowerLimit: constrainRect.minX/2, upperLimit: constrainRect.maxX/2)
+        let yRange = SKRange(lowerLimit: constrainRect.minY/1.5, upperLimit: constrainRect.maxY)
+        
+        let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
+        edgeConstraint.referenceNode = backgroundMap
+        
+        myCamera!.constraints = [edgeConstraint]
         
     }
     
@@ -82,7 +107,7 @@ class GameScene: SKScene {
             }
         }
         
-        //edgesTileMap.removeFromParent()
+        edgesTileMap.removeFromParent()
     }
     
     private func setupEnemies(){
@@ -109,7 +134,12 @@ class GameScene: SKScene {
             return
         }
         
-        touchesBegan(touches, with: event)
+        let touch : UITouch = touches.first!
+        let positionInScene = touch.location(in: self)
+        let previousPosition = touch.previousLocation(in: self)
+        let translation = CGPoint(x: (positionInScene.x) - (previousPosition.x), y: (positionInScene.y) - (previousPosition.y))
+        panForTranslation(translation)
+        //touchesBegan(touches, with: event)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -244,7 +274,12 @@ class GameScene: SKScene {
         }
     }
     
-    
+
+    func panForTranslation(_ translation: CGPoint) {
+        let position = myCamera!.position
+        let aNewPosition = CGPoint(x: position.x - translation.x, y: position.y - translation.y)
+        myCamera!.position = aNewPosition
+    }
     
 }
 
