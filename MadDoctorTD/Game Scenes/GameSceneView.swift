@@ -25,6 +25,7 @@ struct GameSceneView: View {
         }
         gameScene.scaleMode = .aspectFit
         communicator.cancelAllMenus()
+
     }
 
     var body: some View {
@@ -83,6 +84,8 @@ struct GameSceneView: View {
                     HStack {
                         Button {
                             GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
+                            //SoundManager.playBGM(bgmName: SoundManager.filteredMainThemeBackgroundMusic)
+                            SoundManager.playBackgroundMusic()
                         } label: {
                             Text("Start wave!")
                         }

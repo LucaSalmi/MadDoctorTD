@@ -23,8 +23,9 @@ class SoundManager{
     //BGMusic
 
     static let MainThemeBackgroundMusic = "mad_td_theme"
+    static let filteredMainThemeBackgroundMusic = "filtered_theme_song_no_fizz."
     
-    static var musicPlayer: AVAudioPlayer?
+    static var musicPlayer: AVAudioPlayer!
 
     static func playSFX(sfxName: String){
         
@@ -69,6 +70,22 @@ class SoundManager{
         let sfxAction = SKAction.playSoundFileNamed(sfx, waitForCompletion: false)
         gameScene.run(sfxAction)
         
+    }
+
+    static func playBackgroundMusic() {
+
+        let url = Bundle.main.url(forResource: "filtered_theme_song_no_fizz", withExtension: "mp3")
+
+        guard url != nil else {
+            return
+        }
+
+        do {
+            musicPlayer = try AVAudioPlayer(contentsOf: url!)
+            musicPlayer?.play()
+        } catch {
+            print("error playing Music")
+        }
     }
     
     static func stopMusic(){
