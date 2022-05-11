@@ -15,13 +15,11 @@ class GameSceneCommunicator: ObservableObject {
     @Published var showFoundationMenu: Bool = false
     @Published var showTowerMenu: Bool = false
     @Published var showUpgradeMenu: Bool = false
+    @Published var isBuildPhase: Bool = true
     
     var currentTile: ClickableTile? = nil
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil
-    
-    
-    
     
     private init() {}
     
@@ -98,8 +96,7 @@ class GameSceneCommunicator: ObservableObject {
         }
         
     }
-    
-    
+
     func cancelAllMenus(){
         currentFoundation = nil
         showTowerMenu = false
@@ -114,17 +111,28 @@ class GameSceneCommunicator: ObservableObject {
         
         var totalPayed: Int = 0
         totalPayed += TowerData.BASE_COST
-        for upgradeCount in 1...(currentTower!.upgradeCount-1) {
-            let upgradeCostMultipler = Double(upgradeCount) * TowerData.COST_MULTIPLIER_PER_LEVEL
-            let upgradeCost = Int(Double(TowerData.BASE_UPGRADE_COST) * upgradeCostMultipler)
-            totalPayed += upgradeCost
+        if currentTower!.upgradeCount > 1{
+            
+            for upgradeCount in 1...(currentTower!.upgradeCount - 1) {
+                
+                let upgradeCostMultipler = Double(upgradeCount) * TowerData.COST_MULTIPLIER_PER_LEVEL
+                let upgradeCost = Int(Double(TowerData.BASE_UPGRADE_COST) * upgradeCostMultipler)
+                totalPayed += upgradeCost
+            }
         }
+        
         let refund = Int(Double(totalPayed) * TowerData.REFOUND_FACTOR)
         GameManager.instance.currentMoney += refund
         
         currentTower!.builtUponFoundation!.hasTower = false
         currentTower!.removeFromParent()
         currentTower!.towerTexture.removeFromParent()
+        
+        if currentTower! is SniperTower{
+            let sniperTower = currentTower as! SniperTower
+            sniperTower.sniperLegs.removeFromParent()
+        }
+        
         GameScene.instance!.rangeIndicator?.removeFromParent()
         
         cancelAllMenus()
@@ -169,7 +177,5 @@ class GameSceneCommunicator: ObservableObject {
             let foundationPlate = node as! FoundationPlate
             foundationPlate.updateFoundationsTexture()
         }
-        
     }
-    
 }

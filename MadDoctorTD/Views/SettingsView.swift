@@ -11,8 +11,7 @@ struct SettingsView: View {
     var title: String
     @ObservedObject var appManager = AppManager.appManager
     @ObservedObject var gameManager = GameManager.instance
-    @State private var soundFxOn = true
-    @State private var musicOn = true
+    
     
     var body: some View {
         VStack(spacing: 40){
@@ -20,28 +19,28 @@ struct SettingsView: View {
             Text(title)
                 .font(.largeTitle)
             
-            Toggle("SFX", isOn: $soundFxOn)
+            Toggle("Music", isOn: $gameManager.isMusicOn)
             
-            Toggle("Music", isOn: $musicOn)
+            Toggle("SFX", isOn: $gameManager.isSfxOn)
             
-            if !gameManager.isPaused{
+            
                 
                 Button {
-                    appManager.state = .startMenu
+                    if !gameManager.isPaused{
+                        appManager.state = .startMenu
+                    }else{
+                        gameManager.isPaused = false
+                    }
+                    
                 } label: {
                     Text("Return")
                         .font(.title)
                 }
 
-            }
+                
             
-            if musicOn {
-                //TODO: Turn on music here.
-            }
             
-            if soundFxOn{
-                //TODO: Turn on sound here.
-            }
+            
 
         }
         .toggleStyle(.button)

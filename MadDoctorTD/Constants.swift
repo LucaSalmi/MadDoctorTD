@@ -74,7 +74,8 @@ enum TowerTypes: Int{
 
 struct TowerData {
     
-    static let TEXTURE_SIZE = CGSize(width: DefaultTileData.SIZE.width*2, height: DefaultTileData.SIZE.height*2)
+    static let TEXTURE_SIZE = CGSize(width: DefaultTileData.SIZE.width*1.2, height: DefaultTileData.SIZE.height*1.2)
+    static let POWER_OFF_SIZE = CGSize(width: DefaultTileData.SIZE.width*1.2, height: DefaultTileData.SIZE.height*1.2)
     static let TILE_SIZE: CGSize = CGSize(width: DefaultTileData.SIZE.width, height: DefaultTileData.SIZE.height)
     static let ATTACK_RANGE: CGFloat = CGFloat(DefaultTileData.SIZE.width * 3)
     static let FIRE_RATE: Int = 20
@@ -145,12 +146,12 @@ struct EnemiesData{
 //Waves
 struct WaveData{
     
-    static let LEVEL_WAVE_SIZE = 10
+    static let LEVEL_WAVE_SIZE = 5
     //60 frames 1 second
     //3600 frames 1 minute
-    static let WAVE_STANDARD_SIZE = 10
-    static let SPAWN_STANDARD_TIMER = 60 //Frames (1 second)
-    static let WAVE_START_TIME = 1800 //Frames (30 seconds)
+    static let WAVE_STANDARD_SIZE = 5
+    static let SPAWN_STANDARD_TIMER = 60 //60 frames = 1 second
+    static let WAVE_START_TIME = 900 //900 frames = 15 seconds
     
     static let FAST_ENEMY_LIMIT = 5
     static let HEAVY_ENEMY_LIMIT = 5

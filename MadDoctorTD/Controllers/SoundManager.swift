@@ -10,7 +10,7 @@ import GameplayKit
 import AVFAudio
 
 class SoundManager{
-    
+
     static let sfxExtension = ".wav" // with . (dot)
     static let bgmExtension = "mp3" // without . (dot)
     
@@ -19,13 +19,21 @@ class SoundManager{
     static let sniperProjectileImpactSFX = "AWP_SOUND_EFFECT"
     static let buildingPlacementSFX = "construction_sound_effect"
     static let foundationPlacementSFX = "finger_tap_boosted"
-    
-    static var musicPlayer: AVAudioPlayer?
 
-    static func playSFX(sfxName: String){
+    //BGMusic
+
+    static let MainThemeBackgroundMusic = "mad_td_theme"
+    static let filteredMainThemeBackgroundMusic = "filtered_theme_song_no_fizz"
+    
+    static var musicPlayer: AVAudioPlayer!
+
+    static func playSFX(sfxName: String, sfxExtension: String = SoundManager.sfxExtension){
         
         guard let gameScene = GameScene.instance else { return }
-        
+        let gameManager = GameManager.instance
+        if !gameManager.isSfxOn{
+            return
+        }
         let sfx = sfxName + sfxExtension
         let sfxAction = SKAction.playSoundFileNamed(sfx, waitForCompletion: false)
         gameScene.run(sfxAction)
@@ -34,25 +42,46 @@ class SoundManager{
 
     static func playSniperSFX() {
 
-        guard let gameScene = GameScene.instance else { return }
-
         let rand = Int.random(in:1...5)
-        let sniperSound = SKAction.playSoundFileNamed("sniper_bullet_fly_by_\(rand)", waitForCompletion: false)
-
-        gameScene.run(sniperSound)
-        print("Sniper fired! 8^)")
+        let sniperSound = "sniper_bullet_fly_by_\(rand)"
         
+        playSFX(sfxName: sniperSound)
+
+    }
+
+    static func playMortarSwooshSFX() {
+
+        let rand = Int.random(in:1...7)
+        let mortarSwoosh = "mortar_swoosh\(rand)."
+
+        playSFX(sfxName: mortarSwoosh, sfxExtension: SoundManager.bgmExtension)
+
     }
     
-    static func playBGM(bgmName: String){
+    static func playBGM(bgmString: String) {
         
-        //TODO
+        musicPlayer?.stop()
         
+        if !GameManager.instance.isMusicOn {
+            return
+        }
+        
+        let bgm = Bundle.main.path(forResource: bgmString, ofType: SoundManager.bgmExtension)
+        
+        do {
+            let url = URL(fileURLWithPath: bgm!)
+            musicPlayer = try AVAudioPlayer(contentsOf: url)
+            
+        } catch {
+            
+        }
+        musicPlayer!.play()
+        musicPlayer!.numberOfLoops = -1
     }
     
     static func stopMusic(){
         
-        //TODO
+        musicPlayer?.stop()
         
     }
 }

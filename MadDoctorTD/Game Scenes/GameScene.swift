@@ -9,25 +9,23 @@ import Foundation
 import GameplayKit
 import SpriteKit
 import SwiftUI
+import UIKit
 
 class GameScene: SKScene {
     
     static var instance: GameScene? = nil
     
+    //    var myCamera: SKCameraNode? = nil
+    var previousCameraScale = CGFloat()
     
+
     var edgesTilesNode: SKNode = SKNode()
     
     var pathfindingTestEnemy: Enemy?
     var nodeGraph: GKObstacleGraph? = nil
     var waveManager: WaveManager? = nil
-    var spawnCounter = 0
-    var waveStartCounter = 0
     
     var rangeIndicator: SKShapeNode?
-    
-    var isWaveActive: Bool = false
-    var wavesCompleted = 0
-    var enemyChoises = [EnemyTypes]()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -35,8 +33,14 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
+        if GameScene.instance != nil {
+            return
+        }
+        
         GameScene.instance = self
         physicsWorld.contactDelegate = self
+        
+        
         
         //creates and adds clickable tiles to GameScene
         let _ = ClickableTileFactory()
@@ -44,6 +48,8 @@ class GameScene: SKScene {
         
         setupEdges()
         addChild(edgesTilesNode)
+        
+        setupCamera()
         
         //creates start foundations and adds the node to the GameScene
         FoundationPlateFactory().setupStartPlates()
@@ -59,6 +65,30 @@ class GameScene: SKScene {
         setupEnemies()
         addChild(EnemyNodes.enemiesNode)
         
+        
+    }
+    
+    private func setupCamera(){
+        
+        let myCamera = self.camera
+        let backgroundMap = (childNode(withName: "background") as! SKTileMapNode)
+        
+        let xInset = min((view?.bounds.width)!/2*camera!.xScale, backgroundMap.frame.width/2)
+        let yInset = min((view?.bounds.height)!/2*camera!.yScale, backgroundMap.frame.height/2)
+        
+        let constrainRect = backgroundMap.frame.insetBy(dx: xInset, dy: yInset)
+        
+        let xRange = SKRange(lowerLimit: constrainRect.minX/2, upperLimit: constrainRect.maxX/2)
+        let yRange = SKRange(lowerLimit: constrainRect.minY/1.5, upperLimit: constrainRect.maxY)
+        
+        let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
+        edgeConstraint.referenceNode = backgroundMap
+        
+        myCamera!.constraints = [edgeConstraint]
+        
+        let pinchGesture = UIPinchGestureRecognizer()
+        pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
+        view?.addGestureRecognizer(pinchGesture)
         
     }
     
@@ -82,7 +112,7 @@ class GameScene: SKScene {
             }
         }
         
-        //edgesTileMap.removeFromParent()
+        edgesTileMap.removeFromParent()
     }
     
     private func setupEnemies(){
@@ -94,13 +124,14 @@ class GameScene: SKScene {
         pathfindingTestEnemy!.movePoints = pathfindingTestEnemy!.getMovePoints()
         addChild(pathfindingTestEnemy!)
         
-        enemyChoises.append(.standard)
-        enemyChoises.append(.flying)
-        enemyChoises.append(.heavy)
-        enemyChoises.append(.fast)
-
-        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoises, enemyRace: .slime)
-
+        var enemyChoices = [EnemyTypes]()
+        
+        enemyChoices.append(.standard)
+        enemyChoices.append(.flying)
+        enemyChoices.append(.heavy)
+        enemyChoices.append(.fast)
+        
+        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoices, enemyRace: .slime)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -109,7 +140,12 @@ class GameScene: SKScene {
             return
         }
         
-        touchesBegan(touches, with: event)
+        let touch : UITouch = touches.first!
+        let positionInScene = touch.location(in: self)
+        let previousPosition = touch.previousLocation(in: self)
+        let translation = CGPoint(x: (positionInScene.x) - (previousPosition.x), y: (positionInScene.y) - (previousPosition.y))
+        panForTranslation(translation)
+        //touchesBegan(touches, with: event)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -117,12 +153,12 @@ class GameScene: SKScene {
         if GameManager.instance.isPaused {
             return
         }
-
+        
         if rangeIndicator != nil{
             rangeIndicator!.removeFromParent()
             
         }
-
+        
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
         
@@ -156,7 +192,7 @@ class GameScene: SKScene {
         }
     }
     
-
+    
     
     func tile(in tileMap: SKTileMapNode, at coordinates: tileCoordinates) -> SKTileDefinition?{
         return tileMap.tileDefinition(atColumn: coordinates.column, row: coordinates.row)
@@ -169,15 +205,13 @@ class GameScene: SKScene {
         if GameManager.instance.isPaused {
             return
         }
-        
-       timers()
-        
+
         for node in TowerNode.towersNode.children {
             let tower = node as! Tower
             tower.update()
         }
         
-
+        
         for node in ProjectileNodes.projectilesNode.children {
             if node is Projectile{
                 let projectile = node as! Projectile
@@ -190,7 +224,9 @@ class GameScene: SKScene {
             
         }
         
-        if isWaveActive{
+        if !GameSceneCommunicator.instance.isBuildPhase {
+            
+            waveManager!.update()
             
             for node in EnemyNodes.enemiesNode.children{
                 
@@ -200,51 +236,35 @@ class GameScene: SKScene {
         }
         
     }
+
     
-    //Timers for starting the wave and then spawn one enemy from the wave
-    func timers(){
-        
-        if !isWaveActive{
-            
-            waveStartCounter += 1
-            GameManager.instance.nextWaveCounter = waveStartCounter
-            if waveStartCounter >= WaveData.WAVE_START_TIME{
-                
-                isWaveActive = true
-                
-            }
-            
-        }else{
-            
-            spawnCounter += 1
-            
-            if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER{
-                
-                if (EnemyNodes.enemyArray.count) > 0{
-                    waveManager?.spawnEnemy()
-                }
-                spawnCounter = 0
-            }
-            
-            waveManager!.update()
-        }
+    func panForTranslation(_ translation: CGPoint) {
+        let position = camera!.position
+        let aNewPosition = CGPoint(x: position.x - translation.x, y: position.y - translation.y)
+        camera!.position = aNewPosition
     }
     
-    
-    func progressDifficulty(){
-        
-        if wavesCompleted == 5{
-            enemyChoises.append(.heavy)
-            waveManager?.totalSlots += 5
-        }else if wavesCompleted == 10{
-            enemyChoises.append(.flying)
-            waveManager?.totalSlots += 10
-        }else if wavesCompleted == 15{
-            waveManager?.totalSlots += 15
+    @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
+        guard let camera = self.camera else {
+            return
         }
+        
+        if sender.state == .began {
+            
+            previousCameraScale = camera.xScale
+        }
+        
+        let newCameraScale = previousCameraScale * 1 / sender.scale
+        
+        if newCameraScale < 0.5 || newCameraScale > 1.3{
+            
+                return
+            
+        }
+        
+        camera.setScale(newCameraScale)
+        
     }
-    
-    
     
 }
 

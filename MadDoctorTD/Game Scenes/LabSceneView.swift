@@ -13,12 +13,28 @@ struct LabSceneView: View {
     var labScene: SKScene
     
     init() {
-        labScene = SKScene(fileNamed: "LabScene")!
+        if LabScene.instance == nil {
+            labScene = SKScene(fileNamed: "LabScene")!
+        }
+        else {
+            labScene = LabScene.instance!
+        }
         labScene.scaleMode = .fill
     }
 
     var body: some View {
-        SpriteView(scene: labScene)
-            .ignoresSafeArea()
+        ZStack {
+            SpriteView(scene: labScene)
+                .ignoresSafeArea()
+            
+            VStack {
+                Button {
+                    AppManager.appManager.state = .gameScene
+                } label: {
+                    Text("Return")
+                }
+
+            }
+        }
     }
 }

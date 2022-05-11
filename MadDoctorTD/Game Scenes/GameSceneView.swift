@@ -25,9 +25,11 @@ struct GameSceneView: View {
         }
         gameScene.scaleMode = .aspectFit
         communicator.cancelAllMenus()
+
     }
 
     var body: some View {
+
         ZStack {
             SpriteView(scene: gameScene)
                 .ignoresSafeArea()
@@ -41,14 +43,11 @@ struct GameSceneView: View {
                         SettingsView(title: "Paused")
                         
                         Button {
-                            withAnimation{
-                                gameManager.isPaused = false
-                            }
-                            
+                            AppManager.appManager.state = .startMenu
                         } label: {
-                            Text("Continue")
-                                .font(.title)
+                            Text("Main Menu")
                         }
+                        
 
                     }.padding(50)
                         .background(Color.white.opacity(0.5))
@@ -72,7 +71,6 @@ struct GameSceneView: View {
                         } label: {
                             Text("Pause")
                         }
-
                         
                         Spacer()
                         
@@ -81,19 +79,30 @@ struct GameSceneView: View {
                     }
                     Spacer()
                     
-                    if ((WaveData.WAVE_START_TIME - 180)...(WaveData.WAVE_START_TIME - 5)).contains(gameManager.nextWaveCounter){
-                        Text("wave \(gameManager.currentWave) incoming...")
-                        .font(.title)
-                        .foregroundColor(.white)
-                    }
+                    //TODO: DISPLAY ALERT WHEN NEW WAVE IS INCOMMING!
                     
                     Spacer()
                     
-                    HStack {
-                        Button {
-                            GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
-                        } label: {
-                            Text("Start wave!")
+                    if communicator.isBuildPhase {
+                        HStack {
+                            
+                            Button {
+                                AppManager.appManager.state = .labMenu
+                            } label: {
+                                Text("Research")
+                            }
+
+                            Spacer()
+                            
+                            Button {
+                                GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
+                                communicator.isBuildPhase = false
+                                GameScene.instance!.waveManager!.shouldCreateWave = true
+                                SoundManager.playBGM(bgmString: SoundManager.filteredMainThemeBackgroundMusic)
+                            } label: {
+                                Text("READY!")
+                            }
+
                         }
                     }
                 }
@@ -152,7 +161,7 @@ struct GameSceneView: View {
                         communicator.sellFoundation()
                     } label: {
                         Text("Sell Foundation")
-                    }.disabled(GameScene.instance!.isWaveActive ? true : false)
+                    }.disabled(communicator.isBuildPhase ? false : true)
                         .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
                     Button {
                         communicator.cancelAllMenus()
@@ -195,6 +204,7 @@ struct GameSceneView: View {
                     
             }
         }
+        
     }
 
     
