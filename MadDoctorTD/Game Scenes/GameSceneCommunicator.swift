@@ -114,11 +114,16 @@ class GameSceneCommunicator: ObservableObject {
         
         var totalPayed: Int = 0
         totalPayed += TowerData.BASE_COST
-        for upgradeCount in 1...(currentTower!.upgradeCount-1) {
-            let upgradeCostMultipler = Double(upgradeCount) * TowerData.COST_MULTIPLIER_PER_LEVEL
-            let upgradeCost = Int(Double(TowerData.BASE_UPGRADE_COST) * upgradeCostMultipler)
-            totalPayed += upgradeCost
+        if currentTower!.upgradeCount > 1{
+            
+            for upgradeCount in 1...(currentTower!.upgradeCount - 1) {
+                
+                let upgradeCostMultipler = Double(upgradeCount) * TowerData.COST_MULTIPLIER_PER_LEVEL
+                let upgradeCost = Int(Double(TowerData.BASE_UPGRADE_COST) * upgradeCostMultipler)
+                totalPayed += upgradeCost
+            }
         }
+        
         let refund = Int(Double(totalPayed) * TowerData.REFOUND_FACTOR)
         GameManager.instance.currentMoney += refund
         
