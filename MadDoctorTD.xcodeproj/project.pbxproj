@@ -28,6 +28,15 @@
 		B35C210F282A6330009A748E /* sniper_bullet_fly_by_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C210A282A6330009A748E /* sniper_bullet_fly_by_3.wav */; };
 		B35C2112282A6EEE009A748E /* finger_tap_boosted.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2110282A6EEE009A748E /* finger_tap_boosted.wav */; };
 		B35C2113282A6EEE009A748E /* construction_sound_effect.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2111282A6EEE009A748E /* construction_sound_effect.wav */; };
+		B35C2115282B972B009A748E /* mad_td_theme.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2114282B972B009A748E /* mad_td_theme.wav */; };
+		B35C211D282BC07C009A748E /* mortar_swoosh3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C2116282BC07B009A748E /* mortar_swoosh3.mp3 */; };
+		B35C211E282BC07C009A748E /* mortar_swoosh5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C2117282BC07B009A748E /* mortar_swoosh5.mp3 */; };
+		B35C211F282BC07C009A748E /* mortar_swoosh4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C2118282BC07C009A748E /* mortar_swoosh4.mp3 */; };
+		B35C2120282BC07C009A748E /* mortar_swoosh1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C2119282BC07C009A748E /* mortar_swoosh1.mp3 */; };
+		B35C2121282BC07C009A748E /* mortar_swoosh6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C211A282BC07C009A748E /* mortar_swoosh6.mp3 */; };
+		B35C2122282BC07C009A748E /* mortar_swoosh7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C211B282BC07C009A748E /* mortar_swoosh7.mp3 */; };
+		B35C2123282BC07C009A748E /* mortar_swoosh2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C211C282BC07C009A748E /* mortar_swoosh2.mp3 */; };
+		B35C212F282BE83C009A748E /* filtered_theme_song_no_fizz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C212E282BE838009A748E /* filtered_theme_song_no_fizz.mp3 */; };
 		C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A52821352200F66043 /* MadDoctorTDApp.swift */; };
 		C839C6A82821352200F66043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A72821352200F66043 /* ContentView.swift */; };
 		C839C6AA2821352400F66043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6A92821352400F66043 /* Assets.xcassets */; };
@@ -62,6 +71,10 @@
 		E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD128250E5F00F134A5 /* RapidFireTower.swift */; };
 		E5268CD4282537BD00F134A5 /* SniperTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD3282537BC00F134A5 /* SniperTower.swift */; };
 		E5268CD628253E6600F134A5 /* SniperProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD528253E6600F134A5 /* SniperProjectile.swift */; };
+		E57BA9E7282B9819001BCD99 /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E57BA9E6282B9819001BCD99 /* StartScene.sks */; };
+		E57BA9E9282B9885001BCD99 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57BA9E8282B9885001BCD99 /* StartScene.swift */; };
+		E57BA9ED282B9922001BCD99 /* StartSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57BA9EC282B9922001BCD99 /* StartSceneView.swift */; };
+		E57BA9EF282B9CD2001BCD99 /* StartSceneCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57BA9EE282B9CD2001BCD99 /* StartSceneCommunicator.swift */; };
 		E5836FF7282A621500EAF6E9 /* CannonTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FF6282A621500EAF6E9 /* CannonTower.swift */; };
 		E5836FF9282A652D00EAF6E9 /* AoeProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */; };
 		E5836FFB282A662000EAF6E9 /* CannonProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */; };
@@ -89,6 +102,15 @@
 		B35C210A282A6330009A748E /* sniper_bullet_fly_by_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_3.wav; sourceTree = "<group>"; };
 		B35C2110282A6EEE009A748E /* finger_tap_boosted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = finger_tap_boosted.wav; sourceTree = "<group>"; };
 		B35C2111282A6EEE009A748E /* construction_sound_effect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = construction_sound_effect.wav; sourceTree = "<group>"; };
+		B35C2114282B972B009A748E /* mad_td_theme.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mad_td_theme.wav; sourceTree = "<group>"; };
+		B35C2116282BC07B009A748E /* mortar_swoosh3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mortar_swoosh3.mp3; sourceTree = "<group>"; };
+		B35C2117282BC07B009A748E /* mortar_swoosh5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mortar_swoosh5.mp3; sourceTree = "<group>"; };
+		B35C2118282BC07C009A748E /* mortar_swoosh4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mortar_swoosh4.mp3; sourceTree = "<group>"; };
+		B35C2119282BC07C009A748E /* mortar_swoosh1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mortar_swoosh1.mp3; sourceTree = "<group>"; };
+		B35C211A282BC07C009A748E /* mortar_swoosh6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mortar_swoosh6.mp3; sourceTree = "<group>"; };
+		B35C211B282BC07C009A748E /* mortar_swoosh7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mortar_swoosh7.mp3; sourceTree = "<group>"; };
+		B35C211C282BC07C009A748E /* mortar_swoosh2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mortar_swoosh2.mp3; sourceTree = "<group>"; };
+		B35C212E282BE838009A748E /* filtered_theme_song_no_fizz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = filtered_theme_song_no_fizz.mp3; sourceTree = "<group>"; };
 		C839C6A22821352200F66043 /* MadDoctorTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadDoctorTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C839C6A52821352200F66043 /* MadDoctorTDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadDoctorTDApp.swift; sourceTree = "<group>"; };
 		C839C6A72821352200F66043 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -124,6 +146,10 @@
 		E5268CD128250E5F00F134A5 /* RapidFireTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidFireTower.swift; sourceTree = "<group>"; };
 		E5268CD3282537BC00F134A5 /* SniperTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SniperTower.swift; sourceTree = "<group>"; };
 		E5268CD528253E6600F134A5 /* SniperProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SniperProjectile.swift; sourceTree = "<group>"; };
+		E57BA9E6282B9819001BCD99 /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
+		E57BA9E8282B9885001BCD99 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
+		E57BA9EC282B9922001BCD99 /* StartSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneView.swift; sourceTree = "<group>"; };
+		E57BA9EE282B9CD2001BCD99 /* StartSceneCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneCommunicator.swift; sourceTree = "<group>"; };
 		E5836FF6282A621500EAF6E9 /* CannonTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonTower.swift; sourceTree = "<group>"; };
 		E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoeProjectile.swift; sourceTree = "<group>"; };
 		E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonProjectile.swift; sourceTree = "<group>"; };
@@ -192,12 +218,16 @@
 			isa = PBXGroup;
 			children = (
 				3359CC9028214C9A00878191 /* GameScene.sks */,
+				E57BA9E6282B9819001BCD99 /* StartScene.sks */,
 				3359CC9228214D8300878191 /* GameScene.swift */,
 				3359CC9528214E2200878191 /* GameSceneView.swift */,
 				3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */,
+				E57BA9EE282B9CD2001BCD99 /* StartSceneCommunicator.swift */,
 				3359CC9728214F1800878191 /* LabScene.sks */,
 				3359CC9928214F4800878191 /* LabScene.swift */,
 				3359CC9B28214F6200878191 /* LabSceneView.swift */,
+				E57BA9E8282B9885001BCD99 /* StartScene.swift */,
+				E57BA9EC282B9922001BCD99 /* StartSceneView.swift */,
 			);
 			path = "Game Scenes";
 			sourceTree = "<group>";
@@ -208,6 +238,14 @@
 				C839C6A92821352400F66043 /* Assets.xcassets */,
 				3359CCA3282157C500878191 /* MyTileSet.sks */,
 				3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */,
+				B35C212E282BE838009A748E /* filtered_theme_song_no_fizz.mp3 */,
+				B35C2119282BC07C009A748E /* mortar_swoosh1.mp3 */,
+				B35C211C282BC07C009A748E /* mortar_swoosh2.mp3 */,
+				B35C2116282BC07B009A748E /* mortar_swoosh3.mp3 */,
+				B35C2118282BC07C009A748E /* mortar_swoosh4.mp3 */,
+				B35C2117282BC07B009A748E /* mortar_swoosh5.mp3 */,
+				B35C211A282BC07C009A748E /* mortar_swoosh6.mp3 */,
+				B35C211B282BC07C009A748E /* mortar_swoosh7.mp3 */,
 				3311AB9028231156009DEEEC /* gun_projectile_impact.wav */,
 				B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */,
 				B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */,
@@ -217,6 +255,7 @@
 				B35C2109282A632F009A748E /* sniper_bullet_fly_by_5.wav */,
 				B35C2111282A6EEE009A748E /* construction_sound_effect.wav */,
 				B35C2110282A6EEE009A748E /* finger_tap_boosted.wav */,
+				B35C2114282B972B009A748E /* mad_td_theme.wav */,
 				C844A736282A969600FC42C9 /* CannonExplosion.sks */,
 			);
 			path = "Sound and Graphics";
@@ -359,21 +398,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B35C2115282B972B009A748E /* mad_td_theme.wav in Resources */,
+				B35C2123282BC07C009A748E /* mortar_swoosh2.mp3 in Resources */,
 				C844A737282A969600FC42C9 /* CannonExplosion.sks in Resources */,
 				3359CC9828214F1800878191 /* LabScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
 				3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */,
+				B35C2121282BC07C009A748E /* mortar_swoosh6.mp3 in Resources */,
 				B35C210E282A6330009A748E /* sniper_bullet_fly_by_5.wav in Resources */,
+				B35C211E282BC07C009A748E /* mortar_swoosh5.mp3 in Resources */,
+				B35C211F282BC07C009A748E /* mortar_swoosh4.mp3 in Resources */,
+				B35C211D282BC07C009A748E /* mortar_swoosh3.mp3 in Resources */,
 				3359CC9128214C9A00878191 /* GameScene.sks in Resources */,
 				B35C210D282A6330009A748E /* sniper_bullet_fly_by_4.wav in Resources */,
+				E57BA9E7282B9819001BCD99 /* StartScene.sks in Resources */,
 				B35C20FB282A45DB009A748E /* AWP_SOUND_EFFECT.wav in Resources */,
 				B35C210C282A6330009A748E /* sniper_bullet_fly_by_1.wav in Resources */,
 				3359CCA4282157C500878191 /* MyTileSet.sks in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
 				B35C2112282A6EEE009A748E /* finger_tap_boosted.wav in Resources */,
 				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
+				B35C2120282BC07C009A748E /* mortar_swoosh1.mp3 in Resources */,
 				B35C2113282A6EEE009A748E /* construction_sound_effect.wav in Resources */,
+				B35C2122282BC07C009A748E /* mortar_swoosh7.mp3 in Resources */,
 				B35C210F282A6330009A748E /* sniper_bullet_fly_by_3.wav in Resources */,
+				B35C212F282BE83C009A748E /* filtered_theme_song_no_fizz.mp3 in Resources */,
 				B35C210B282A6330009A748E /* sniper_bullet_fly_by_2.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,6 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */,
+				E57BA9E9282B9885001BCD99 /* StartScene.swift in Sources */,
 				C844A739282A982800FC42C9 /* EnemiesFactory.swift in Sources */,
 				3359CC9328214D8300878191 /* GameScene.swift in Sources */,
 				E5268CD4282537BD00F134A5 /* SniperTower.swift in Sources */,
@@ -398,6 +448,7 @@
 				C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */,
 				C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */,
 				C839C6CC2821621400F66043 /* SettingsView.swift in Sources */,
+				E57BA9ED282B9922001BCD99 /* StartSceneView.swift in Sources */,
 				C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */,
 				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
 				C839C6BF282158C100F66043 /* SoundManager.swift in Sources */,
@@ -406,6 +457,7 @@
 				C839C6BB2821579F00F66043 /* Constants.swift in Sources */,
 				3320331A2822ABF500133BBA /* Projectile.swift in Sources */,
 				C844A72D282A46A300FC42C9 /* TowerFactory.swift in Sources */,
+				E57BA9EF282B9CD2001BCD99 /* StartSceneCommunicator.swift in Sources */,
 				C844A731282A6D5800FC42C9 /* ClickableTilesFactory.swift in Sources */,
 				C839C6C62821619200F66043 /* LabMenuView.swift in Sources */,
 				E5836FF9282A652D00EAF6E9 /* AoeProjectile.swift in Sources */,

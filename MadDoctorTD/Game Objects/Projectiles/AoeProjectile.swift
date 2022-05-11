@@ -181,8 +181,10 @@ class AoeProjectile: SKSpriteNode {
             
         }
         
-        if position.x > GameScene.instance!.size.width / 2 || position.x < (GameScene.instance!.size.width / 2) * -1 ||
-            position.y > GameScene.instance!.size.height / 2 || position.y < (GameScene.instance!.size.height / 2) * -1
+        guard let worldEdge = GameScene.instance!.childNode(withName: "superBackground") else {return}
+        
+        if position.x > worldEdge.frame.size.width / 2 || position.x < (worldEdge.frame.size.width / 2) * -1 ||
+            position.y > worldEdge.frame.size.height / 2 || position.y < (worldEdge.frame.size.height / 2) * -1
         {
             destroy()
         }

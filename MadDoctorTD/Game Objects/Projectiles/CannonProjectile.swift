@@ -34,6 +34,8 @@ class CannonProjectile: AoeProjectile{
         }
         
         let gameScene = GameScene.instance!
+        
+       // SoundManager.playMortarSwooshSFX()
 
                 let particle = SKEmitterNode(fileNamed: "CannonExplosion")
                 particle!.position = position

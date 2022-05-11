@@ -25,6 +25,7 @@ struct GameSceneView: View {
         }
         gameScene.scaleMode = .aspectFit
         communicator.cancelAllMenus()
+
     }
 
     var body: some View {
@@ -97,9 +98,11 @@ struct GameSceneView: View {
                                 GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
                                 communicator.isBuildPhase = false
                                 GameScene.instance!.waveManager!.shouldCreateWave = true
+                                SoundManager.playBackgroundMusic()
                             } label: {
                                 Text("READY!")
                             }
+
                         }
                     }
                 }
