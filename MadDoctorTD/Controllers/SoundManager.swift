@@ -82,6 +82,7 @@ class SoundManager{
 
         do {
             musicPlayer = try AVAudioPlayer(contentsOf: url!)
+            musicPlayer.numberOfLoops = -1
             musicPlayer?.play()
         } catch {
             print("error playing Music")
