@@ -27,9 +27,7 @@ class ClickableTile: SKSpriteNode{
     
     func onClick() {
         
-        let gameScene = GameScene.instance!
-        
-        if gameScene.isWaveActive {
+        if !GameSceneCommunicator.instance.isBuildPhase {
             return
         }
         

@@ -40,6 +40,12 @@ struct GameSceneView: View {
                     VStack(spacing: 20){
                         SettingsView(title: "Paused")
                         
+                        Button {
+                            AppManager.appManager.state = .startMenu
+                        } label: {
+                            Text("Main Menu")
+                        }
+                        
 
                     }.padding(50)
                         .background(Color.white.opacity(0.5))
@@ -63,7 +69,6 @@ struct GameSceneView: View {
                         } label: {
                             Text("Pause")
                         }
-
                         
                         Spacer()
                         
@@ -80,11 +85,15 @@ struct GameSceneView: View {
                     
                     Spacer()
                     
-                    HStack {
-                        Button {
-                            GameScene.instance?.waveStartCounter = WaveData.WAVE_START_TIME
-                        } label: {
-                            Text("Start wave!")
+                    if communicator.isBuildPhase {
+                        HStack {
+                            Button {
+                                GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
+                                communicator.isBuildPhase = false
+                                GameScene.instance!.waveManager!.shouldCreateWave = true
+                            } label: {
+                                Text("READY!")
+                            }
                         }
                     }
                 }
@@ -143,7 +152,7 @@ struct GameSceneView: View {
                         communicator.sellFoundation()
                     } label: {
                         Text("Sell Foundation")
-                    }.disabled(GameScene.instance!.isWaveActive ? true : false)
+                    }.disabled(communicator.isBuildPhase ? false : true)
                         .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
                     Button {
                         communicator.cancelAllMenus()

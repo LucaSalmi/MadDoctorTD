@@ -15,6 +15,7 @@ class GameSceneCommunicator: ObservableObject {
     @Published var showFoundationMenu: Bool = false
     @Published var showTowerMenu: Bool = false
     @Published var showUpgradeMenu: Bool = false
+    @Published var isBuildPhase: Bool = true
     
     var currentTile: ClickableTile? = nil
     var currentFoundation: FoundationPlate? = nil

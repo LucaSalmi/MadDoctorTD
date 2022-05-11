@@ -13,16 +13,25 @@ class WaveManager{
     var currentScene: GameScene? = nil
     var totalSlots: Int = 0
     //var totalEnemiesOfWave: Int = 0
-    var waveNumber: Int = 1
+    var waveNumber: Int = 0
     var spawnPoint: CGPoint? = nil
-    var waveCreated = false
+    
+    var wavesCompleted = 0
+    var enemyChoises = [EnemyTypes]()
+    
+    var spawnCounter = 0
+    var waveStartCounter = 0
+    
+    let wavesPerLevel = 5
+    
+    var shouldCreateWave = false
     
     init(totalSlots: Int, choises: [EnemyTypes], enemyRace: EnemyRaces){
         
         currentScene = GameScene.instance
         spawnPoint = (currentScene?.childNode(withName: "SpawnPoint")!.position) ?? CGPoint(x: 0, y: 0)
         self.totalSlots = totalSlots
-        createWave(choises: choises, enemyRace: .slime)
+
     }
     
     
@@ -50,14 +59,13 @@ class WaveManager{
             }
         }
         
-        waveCreated = true
+        waveNumber += 1
+        GameManager.instance.currentWave = waveNumber
+        
+        if waveNumber % wavesPerLevel == 0 {
+            shouldCreateWave = false
+        }
     }
-    
-    
-    func update(){
-        checkWinCondition()
-    }
-    
     
     func spawnEnemy(){
         
@@ -132,30 +140,66 @@ class WaveManager{
         return hasDeleted
     }
     
-    func checkWinCondition(){
+    func progressDifficulty(){
         
-        if EnemyNodes.enemiesNode.children.count == 0 && EnemyNodes.enemyArray.count == 0 {
-            
-            print("wave cleared")
-            GameManager.instance.currentMoney += WaveData.INCOME_PER_WAVE
-            waveNumber += 1
-            GameManager.instance.currentWave = waveNumber
-            waveCreated = false
-            currentScene!.waveStartCounter = 600
-            currentScene!.isWaveActive = false
-            
-            print("Current wave number = \(waveNumber)")
-            
-            if waveNumber > 5 {
-                print("Level 1 completed")
-            }
-            else {
-                createWave(choises: [.standard,.fast], enemyRace: .slime)
-            }
-            
+        if wavesCompleted == 5{
+            enemyChoises.append(.heavy)
+            totalSlots += 5
+        }else if wavesCompleted == 10{
+            enemyChoises.append(.flying)
+            totalSlots += 10
+        }else if wavesCompleted == 15{
+            totalSlots += 15
         }
     }
     
+    /* UPDATE */
+    func update(){
+        
+        timers()
+        checkWinCondition()
+        
+    }
     
+    
+    //Timers for starting the wave and then spawn one enemy from the wave
+    func timers(){
+        
+        if shouldCreateWave {
+            waveStartCounter += 1
+            if waveStartCounter >= WaveData.WAVE_START_TIME {
+                
+                createWave(choises: [.standard,.fast], enemyRace: .slime)
+                
+                waveStartCounter = 0
+            }
+        }
+        
+        if (EnemyNodes.enemyArray.count) > 0 {
+            spawnCounter += 1
+            if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER {
+                spawnEnemy()
+                
+                spawnCounter = 0
+            }
+        }
+
+    }
+    
+    func checkWinCondition(){
+        
+        if waveNumber <= 0 {
+            return
+        }
+        
+        if (waveNumber % wavesPerLevel == 0) &&
+                (EnemyNodes.enemyArray.isEmpty && EnemyNodes.enemiesNode.children.isEmpty) {
+            print("Current level completed!")
+            GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
+            GameSceneCommunicator.instance.isBuildPhase = true
+        }
+
+        
+    }
     
 }
