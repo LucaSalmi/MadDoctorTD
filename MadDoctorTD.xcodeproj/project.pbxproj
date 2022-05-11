@@ -36,6 +36,7 @@
 		B35C2121282BC07C009A748E /* mortar_swoosh6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C211A282BC07C009A748E /* mortar_swoosh6.mp3 */; };
 		B35C2122282BC07C009A748E /* mortar_swoosh7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C211B282BC07C009A748E /* mortar_swoosh7.mp3 */; };
 		B35C2123282BC07C009A748E /* mortar_swoosh2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C211C282BC07C009A748E /* mortar_swoosh2.mp3 */; };
+		B35C212F282BE83C009A748E /* filtered_theme_song_no_fizz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C212E282BE838009A748E /* filtered_theme_song_no_fizz.mp3 */; };
 		C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A52821352200F66043 /* MadDoctorTDApp.swift */; };
 		C839C6A82821352200F66043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A72821352200F66043 /* ContentView.swift */; };
 		C839C6AA2821352400F66043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6A92821352400F66043 /* Assets.xcassets */; };
@@ -109,6 +110,7 @@
 		B35C211A282BC07C009A748E /* mortar_swoosh6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mortar_swoosh6.mp3; sourceTree = "<group>"; };
 		B35C211B282BC07C009A748E /* mortar_swoosh7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mortar_swoosh7.mp3; sourceTree = "<group>"; };
 		B35C211C282BC07C009A748E /* mortar_swoosh2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mortar_swoosh2.mp3; sourceTree = "<group>"; };
+		B35C212E282BE838009A748E /* filtered_theme_song_no_fizz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = filtered_theme_song_no_fizz.mp3; sourceTree = "<group>"; };
 		C839C6A22821352200F66043 /* MadDoctorTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadDoctorTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C839C6A52821352200F66043 /* MadDoctorTDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadDoctorTDApp.swift; sourceTree = "<group>"; };
 		C839C6A72821352200F66043 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				C839C6A92821352400F66043 /* Assets.xcassets */,
 				3359CCA3282157C500878191 /* MyTileSet.sks */,
 				3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */,
+				B35C212E282BE838009A748E /* filtered_theme_song_no_fizz.mp3 */,
 				B35C2119282BC07C009A748E /* mortar_swoosh1.mp3 */,
 				B35C211C282BC07C009A748E /* mortar_swoosh2.mp3 */,
 				B35C2116282BC07B009A748E /* mortar_swoosh3.mp3 */,
@@ -419,6 +422,7 @@
 				B35C2113282A6EEE009A748E /* construction_sound_effect.wav in Resources */,
 				B35C2122282BC07C009A748E /* mortar_swoosh7.mp3 in Resources */,
 				B35C210F282A6330009A748E /* sniper_bullet_fly_by_3.wav in Resources */,
+				B35C212F282BE83C009A748E /* filtered_theme_song_no_fizz.mp3 in Resources */,
 				B35C210B282A6330009A748E /* sniper_bullet_fly_by_2.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
