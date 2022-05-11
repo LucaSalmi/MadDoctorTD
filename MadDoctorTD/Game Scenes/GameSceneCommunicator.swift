@@ -20,9 +20,6 @@ class GameSceneCommunicator: ObservableObject {
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil
     
-    
-    
-    
     private init() {}
     
     func buildFoundation() {
@@ -98,8 +95,7 @@ class GameSceneCommunicator: ObservableObject {
         }
         
     }
-    
-    
+
     func cancelAllMenus(){
         currentFoundation = nil
         showTowerMenu = false
@@ -169,7 +165,5 @@ class GameSceneCommunicator: ObservableObject {
             let foundationPlate = node as! FoundationPlate
             foundationPlate.updateFoundationsTexture()
         }
-        
     }
-    
 }

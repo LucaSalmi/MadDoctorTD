@@ -37,13 +37,20 @@ struct MainMenuView: View {
             Button {
                 //TODO: GO TO SETTINGS HERE.
                 appManager.state = .settingsMenu
+
             } label: {
                 Label("Settings", systemImage: "gearshape.circle")
             }.padding()
-            
+
+            Button {
+                SoundManager.playSFX(sfxName: SoundManager.MainThemeBackgroundMusic)
+                print("Playing MainTheme..")
+            } label: {
+                Label("Play Music", systemImage: "music.note")
+            }
+
         }
         .font(.title)
-        
-        
+
     }
 }

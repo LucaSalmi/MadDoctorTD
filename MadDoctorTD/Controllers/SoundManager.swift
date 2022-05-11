@@ -10,8 +10,7 @@ import GameplayKit
 import AVFAudio
 
 class SoundManager{
-    
-    
+
     static let sfxExtension = ".wav" // with . (dot)
     static let bgmExtension = "mp3" // without . (dot)
     
@@ -20,6 +19,10 @@ class SoundManager{
     static let sniperProjectileImpactSFX = "AWP_SOUND_EFFECT"
     static let buildingPlacementSFX = "construction_sound_effect"
     static let foundationPlacementSFX = "finger_tap_boosted"
+
+    //BGMusic
+
+    static let MainThemeBackgroundMusic = "mad_td_theme"
     
     static var musicPlayer: AVAudioPlayer?
 
@@ -38,23 +41,33 @@ class SoundManager{
 
     static func playSniperSFX() {
 
-        
-
         let rand = Int.random(in:1...5)
         let sniperSound = "sniper_bullet_fly_by_\(rand)"
         
         playSFX(sfxName: sniperSound)
 
-        
-        
+    }
+
+    static func playMortarSwooshSFX() {
+
+        let rand = Int.random(in:1...7)
+        let mortarSwoosh = "mortar_swoosh\(rand)."
+
+        playBGM(bgmName: mortarSwoosh)
+
     }
     
     static func playBGM(bgmName: String){
+
+        guard let gameScene = GameScene.instance else { return }
         let gameManager = GameManager.instance
-        if !gameManager.isMusicOn{
+        if !gameManager.isSfxOn{
             return
         }
-        //TODO
+
+        let sfx = bgmName + bgmExtension
+        let sfxAction = SKAction.playSoundFileNamed(sfx, waitForCompletion: false)
+        gameScene.run(sfxAction)
         
     }
     
