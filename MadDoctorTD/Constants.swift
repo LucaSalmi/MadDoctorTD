@@ -74,7 +74,7 @@ enum TowerTypes: Int{
 
 struct TowerData {
     
-    static let TEXTURE_SIZE = CGSize(width: DefaultTileData.SIZE.width*2, height: DefaultTileData.SIZE.height*2)
+    static let TEXTURE_SIZE = CGSize(width: DefaultTileData.SIZE.width*1.2, height: DefaultTileData.SIZE.height*1.2)
     static let POWER_OFF_SIZE = CGSize(width: DefaultTileData.SIZE.width*1.2, height: DefaultTileData.SIZE.height*1.2)
     static let TILE_SIZE: CGSize = CGSize(width: DefaultTileData.SIZE.width, height: DefaultTileData.SIZE.height)
     static let ATTACK_RANGE: CGFloat = CGFloat(DefaultTileData.SIZE.width * 3)

@@ -69,12 +69,12 @@ class ProjectileFactory: ProjetileCreator{
             
             if rapidFireTower.fireLeft{
                 
-                rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_power_on_left_barrel_fire")
+                rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_left_fire")
                 projectile.texture = SKTexture(imageNamed: "speed_projectile_left")
                 
             }else{
                 
-                rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_power_on_right_barrel_fire")
+                rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_right_fire")
                 projectile.texture = SKTexture(imageNamed: "speed_projectile_right")
                 
             }
