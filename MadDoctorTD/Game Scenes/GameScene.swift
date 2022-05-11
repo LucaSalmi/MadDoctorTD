@@ -9,12 +9,14 @@ import Foundation
 import GameplayKit
 import SpriteKit
 import SwiftUI
+import UIKit
 
 class GameScene: SKScene {
     
     static var instance: GameScene? = nil
     
-    var myCamera: SKCameraNode? = nil
+    //    var myCamera: SKCameraNode? = nil
+    var previousCameraScale = CGFloat()
     
     var edgesTilesNode: SKNode = SKNode()
     
@@ -69,7 +71,7 @@ class GameScene: SKScene {
     
     private func setupCamera(){
         
-        myCamera = self.camera
+        let myCamera = self.camera
         let backgroundMap = (childNode(withName: "background") as! SKTileMapNode)
         
         let xInset = min((view?.bounds.width)!/2*camera!.xScale, backgroundMap.frame.width/2)
@@ -84,6 +86,10 @@ class GameScene: SKScene {
         edgeConstraint.referenceNode = backgroundMap
         
         myCamera!.constraints = [edgeConstraint]
+        
+        let pinchGesture = UIPinchGestureRecognizer()
+        pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
+        view?.addGestureRecognizer(pinchGesture)
         
     }
     
@@ -123,9 +129,9 @@ class GameScene: SKScene {
         enemyChoises.append(.flying)
         enemyChoises.append(.heavy)
         enemyChoises.append(.fast)
-
+        
         waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoises, enemyRace: .slime)
-
+        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -147,12 +153,12 @@ class GameScene: SKScene {
         if GameManager.instance.isPaused {
             return
         }
-
+        
         if rangeIndicator != nil{
             rangeIndicator!.removeFromParent()
             
         }
-
+        
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
         
@@ -186,7 +192,7 @@ class GameScene: SKScene {
         }
     }
     
-
+    
     
     func tile(in tileMap: SKTileMapNode, at coordinates: tileCoordinates) -> SKTileDefinition?{
         return tileMap.tileDefinition(atColumn: coordinates.column, row: coordinates.row)
@@ -200,14 +206,14 @@ class GameScene: SKScene {
             return
         }
         
-       timers()
+        timers()
         
         for node in TowerNode.towersNode.children {
             let tower = node as! Tower
             tower.update()
         }
         
-
+        
         for node in ProjectileNodes.projectilesNode.children {
             if node is Projectile{
                 let projectile = node as! Projectile
@@ -274,11 +280,33 @@ class GameScene: SKScene {
         }
     }
     
-
+    
     func panForTranslation(_ translation: CGPoint) {
-        let position = myCamera!.position
+        let position = camera!.position
         let aNewPosition = CGPoint(x: position.x - translation.x, y: position.y - translation.y)
-        myCamera!.position = aNewPosition
+        camera!.position = aNewPosition
+    }
+    
+    @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
+        guard let camera = self.camera else {
+            return
+        }
+        
+        if sender.state == .began {
+            
+            previousCameraScale = camera.xScale
+        }
+        
+        let newCameraScale = previousCameraScale * 1 / sender.scale
+        
+        if newCameraScale < 0.5 || newCameraScale > 1.3{
+            
+                return
+            
+        }
+        
+        camera.setScale(newCameraScale)
+        
     }
     
 }
