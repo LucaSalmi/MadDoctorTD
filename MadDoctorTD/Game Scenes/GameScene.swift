@@ -18,25 +18,24 @@ class GameScene: SKScene {
     //    var myCamera: SKCameraNode? = nil
     var previousCameraScale = CGFloat()
     
+
     var edgesTilesNode: SKNode = SKNode()
     
     var pathfindingTestEnemy: Enemy?
     var nodeGraph: GKObstacleGraph? = nil
     var waveManager: WaveManager? = nil
-    var spawnCounter = 0
-    var waveStartCounter = 0
     
     var rangeIndicator: SKShapeNode?
-    
-    var isWaveActive: Bool = false
-    var wavesCompleted = 0
-    var enemyChoises = [EnemyTypes]()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     override func didMove(to view: SKView) {
+        
+        if GameScene.instance != nil {
+            return
+        }
         
         GameScene.instance = self
         physicsWorld.contactDelegate = self
@@ -125,13 +124,14 @@ class GameScene: SKScene {
         pathfindingTestEnemy!.movePoints = pathfindingTestEnemy!.getMovePoints()
         addChild(pathfindingTestEnemy!)
         
-        enemyChoises.append(.standard)
-        enemyChoises.append(.flying)
-        enemyChoises.append(.heavy)
-        enemyChoises.append(.fast)
+        var enemyChoices = [EnemyTypes]()
         
-        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoises, enemyRace: .slime)
+        enemyChoices.append(.standard)
+        enemyChoices.append(.flying)
+        enemyChoices.append(.heavy)
+        enemyChoices.append(.fast)
         
+        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoices, enemyRace: .slime)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -205,9 +205,7 @@ class GameScene: SKScene {
         if GameManager.instance.isPaused {
             return
         }
-        
-        timers()
-        
+
         for node in TowerNode.towersNode.children {
             let tower = node as! Tower
             tower.update()
@@ -226,7 +224,9 @@ class GameScene: SKScene {
             
         }
         
-        if isWaveActive{
+        if !GameSceneCommunicator.instance.isBuildPhase {
+            
+            waveManager!.update()
             
             for node in EnemyNodes.enemiesNode.children{
                 
@@ -236,50 +236,7 @@ class GameScene: SKScene {
         }
         
     }
-    
-    //Timers for starting the wave and then spawn one enemy from the wave
-    func timers(){
-        
-        if !isWaveActive{
-            
-            waveStartCounter += 1
-            GameManager.instance.nextWaveCounter = waveStartCounter
-            if waveStartCounter >= WaveData.WAVE_START_TIME{
-                
-                isWaveActive = true
-                
-            }
-            
-        }else{
-            
-            spawnCounter += 1
-            
-            if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER{
-                
-                if (EnemyNodes.enemyArray.count) > 0{
-                    waveManager?.spawnEnemy()
-                }
-                spawnCounter = 0
-            }
-            
-            waveManager!.update()
-        }
-    }
-    
-    
-    func progressDifficulty(){
-        
-        if wavesCompleted == 5{
-            enemyChoises.append(.heavy)
-            waveManager?.totalSlots += 5
-        }else if wavesCompleted == 10{
-            enemyChoises.append(.flying)
-            waveManager?.totalSlots += 10
-        }else if wavesCompleted == 15{
-            waveManager?.totalSlots += 15
-        }
-    }
-    
+
     
     func panForTranslation(_ translation: CGPoint) {
         let position = camera!.position
