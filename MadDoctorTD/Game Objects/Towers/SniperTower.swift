@@ -43,9 +43,8 @@ class SniperTower: Tower{
         
         GameScene.instance?.addChild(sniperLegs)
         
-        
-        
-        
     }
+    
+    
     
 }
