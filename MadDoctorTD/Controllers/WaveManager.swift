@@ -197,6 +197,7 @@ class WaveManager{
             print("Current level completed!")
             GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
             GameSceneCommunicator.instance.isBuildPhase = true
+            SoundManager.stopMusic()
         }
 
         
