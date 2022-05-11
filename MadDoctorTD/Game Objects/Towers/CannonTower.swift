@@ -29,8 +29,6 @@ class CannonTower: Tower{
         
         attackRange = attackRange * 1.5
         
-        
-        
     }
     
     override func attackTarget(){
@@ -39,20 +37,13 @@ class CannonTower: Tower{
         if currentFireRateTick <= 0 {
             let projectile = CannonProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
             
-            
+            SoundManager.playMortarSwooshSFX()
             ProjectileNodes.projectilesNode.addChild(projectile)
             currentFireRateTick = fireRate
         }
         
         distance = CGPointDistanceSquared(from: position, to: currentTarget!.position)
-        
-        
-        
-//        print(distance)
-        
-        
-        
-        
+
     }
     
     func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat{

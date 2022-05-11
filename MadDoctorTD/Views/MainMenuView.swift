@@ -55,6 +55,6 @@ struct MainMenuView: View {
         
         }
         
-        
+
     }
 }
