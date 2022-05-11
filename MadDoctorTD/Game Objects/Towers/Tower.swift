@@ -25,6 +25,7 @@ class Tower: SKSpriteNode{
     var currentTarget: Enemy? = nil
     
     var towerTexture = SKSpriteNode()
+    var noPowerTexture = SKSpriteNode()
     
     var upgradeCount: Int = 1
     
@@ -37,6 +38,12 @@ class Tower: SKSpriteNode{
         
         self.builtUponFoundation = foundation
         towerTexture = SKSpriteNode(texture: SKTexture(imageNamed: textureName), color: .clear, size: TowerData.TEXTURE_SIZE)
+        
+        noPowerTexture = SKSpriteNode(texture: SKTexture(imageNamed: "no_power_symbol"), color: .clear, size: TowerData.POWER_OFF_SIZE)
+        
+        GameScene.instance!.addChild(noPowerTexture)
+        
+        
         super.init(texture: nil, color: .clear, size: TowerData.TILE_SIZE)
         
         name = "Tower"
@@ -135,8 +142,14 @@ class Tower: SKSpriteNode{
     func update() {
         
         if !builtUponFoundation!.isPowered {
+            noPowerTexture.position = position
+            noPowerTexture.zPosition = 3
+            noPowerTexture.texture = SKTexture(imageNamed: "no_power_symbol")
+            
             return
         }
+        
+        noPowerTexture.texture = nil
         
         if currentFireRateTick > 0 {
             currentFireRateTick -= 1

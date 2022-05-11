@@ -24,8 +24,8 @@ struct MainMenuView: View {
                         .font(.largeTitle)
                     
                     Button {
-                        communicator.animateDoors = true
-                        //appManager.state = .gameScene
+                        //communicator.animateDoors = true
+                        appManager.state = .gameScene
                     } label: {
                         Label("New Game", systemImage: "play.circle")
                         
