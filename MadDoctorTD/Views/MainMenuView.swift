@@ -10,47 +10,51 @@ struct MainMenuView: View {
     
     
     @ObservedObject var appManager = AppManager.appManager
-    
+    @ObservedObject var communicator = StartSceneCommunicator.instance
     
     var body: some View {
         
-        
-        VStack{
-            
-            Text("Mad TD")
-                .font(.largeTitle)
-            
-            Button {
-                appManager.state = .gameScene
-            } label: {
-                Label("New Game", systemImage: "play.circle")
+        ZStack{
+            StartSceneView()
                 
-            }.padding()
-            
-            Button {
-                appManager.state = .gameScene
-            } label: {
-                Label("Load Game", systemImage: "opticaldisc")
-                
-            }.padding()
-            
-            Button {
-                //TODO: GO TO SETTINGS HERE.
-                appManager.state = .settingsMenu
-
-            } label: {
-                Label("Settings", systemImage: "gearshape.circle")
-            }.padding()
-
-            Button {
-                SoundManager.playSFX(sfxName: SoundManager.MainThemeBackgroundMusic)
-                print("Playing MainTheme..")
-            } label: {
-                Label("Play Music", systemImage: "music.note")
+            if !communicator.animateDoors{
+                VStack{
+                    
+                    Text("Mad TD")
+                        .font(.largeTitle)
+                    
+                    Button {
+                        //communicator.animateDoors = true
+                        appManager.state = .gameScene
+                    } label: {
+                        Label("New Game", systemImage: "play.circle")
+                        
+                    }.padding()
+                    
+                    Button {
+                        appManager.state = .gameScene
+                    } label: {
+                        Label("Load Game", systemImage: "opticaldisc")
+                        
+                    }.padding()
+                    
+                    Button {
+                        //TODO: GO TO SETTINGS HERE.
+                        appManager.state = .settingsMenu
+                    } label: {
+                        Label("Settings", systemImage: "gearshape.circle")
+                    }.padding()
+                    
+                }
+                .foregroundColor(.white)
+                .font(.title)
             }
-
+        
+            
+        
+        
         }
-        .font(.title)
+        
 
     }
 }
