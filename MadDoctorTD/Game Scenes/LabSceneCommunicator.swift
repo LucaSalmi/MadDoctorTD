@@ -11,8 +11,9 @@ import SwiftUI
 class LabSceneCommunicator: ObservableObject{
     
     @Published var selectedTowerType: TowerTypes = .gunTower
-    
     @Published var selectedTowerImage = "blast_tower"
+    
+    @Published var selectedTreeButtonId: String = "1"
     
     static let instance = LabSceneCommunicator()
     

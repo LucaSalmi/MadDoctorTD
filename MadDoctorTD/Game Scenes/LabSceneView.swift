@@ -12,6 +12,8 @@ struct LabSceneView: View {
     
     var labScene: SKScene
     
+    @ObservedObject var gameManager = GameManager.instance
+    
     static var imageWidth: CGFloat = 0
     static var imageHeight: CGFloat = 0
     
@@ -34,6 +36,8 @@ struct LabSceneView: View {
                 .ignoresSafeArea()
             
             VStack {
+                
+                Text("Research Points: \(gameManager.researchPoints)")
                 
                 TopArea()
                 
@@ -115,96 +119,94 @@ struct MiddleArea: View {
         VStack {
             
             HStack {
-                
-                ZStack {
-                    SkillTreeBox()
-                    Button(action: {
-                        //code
-                    }, label: {
+             
+                Button(action: {
+                    communicator.selectedTreeButtonId = "1"
+                }, label: {
+                    ZStack {
+                        LabButtonImage("clickable_tile", "1")
                         Image(communicator.selectedTowerImage)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                    })
-                }
-                
-                
+                    }
+                })
                 
             }
             
             HStack {
-                
-                ZStack {
-                    SkillTreeBox()
-                    Button(action: {
-                        //code
-                    }, label: {
+                    
+                Button {
+                    communicator.selectedTreeButtonId = "2"
+                } label: {
+                    ZStack {
+                        LabButtonImage("clickable_tile", "2")
                         Text("2")
-                    })
+                    }
                 }
-                
+
             }
             
             HStack {
                 
                 VStack {
                     
-                    ZStack {
-                        SkillTreeBox()
-                        Button(action: {
-                            //code
-                        }, label: {
+                    Button {
+                        communicator.selectedTreeButtonId = "3a"
+                    } label: {
+                        ZStack {
+                            LabButtonImage("clickable_tile", "3a")
                             Text("3a")
-                        })
+                        }
                     }
                     
-                    ZStack {
-                        SkillTreeBox()
-                        Button(action: {
-                            //code
-                        }, label: {
+                    Button {
+                        communicator.selectedTreeButtonId = "3b"
+                    } label: {
+                        ZStack {
+                            LabButtonImage("clickable_tile", "3b")
                             Text("3b")
-                        })
+                        }
                     }
                     
                 }
                 
                 VStack {
                     
-                    ZStack {
-                        SkillTreeBox()
-                        Button(action: {
-                            //code
-                        }, label: {
+                    Button {
+                        communicator.selectedTreeButtonId = "4a"
+                    } label: {
+                        ZStack {
+                            LabButtonImage("clickable_tile", "4a")
                             Text("4a")
-                        })
+                        }
                     }
                     
-                    ZStack {
-                        SkillTreeBox()
-                        Button(action: {
-                            //code
-                        }, label: {
+                    Button {
+                        communicator.selectedTreeButtonId = "4b"
+                    } label: {
+                        ZStack {
+                            LabButtonImage("clickable_tile", "4b")
                             Text("4b")
-                        })
+                        }
                     }
                     
                 }
                 
                 VStack {
                     
-                    ZStack {
-                        SkillTreeBox()
-                        Button(action: {
-                            //code
-                        }, label: {
+                    Button {
+                        communicator.selectedTreeButtonId = "5a"
+                    } label: {
+                        ZStack {
+                            LabButtonImage("clickable_tile", "5a")
                             Text("5a")
-                        })
+                        }
                     }
                     
                     ZStack {
-                        SkillTreeBox()
+                        LabButtonImage("clickable_tile", "5b")
                         Button(action: {
-                            //code
+                            communicator.selectedTreeButtonId = "5b"
                         }, label: {
                             Text("5b")
                         })
@@ -237,7 +239,7 @@ struct BotArea: View {
             Spacer()
             
             Button {
-                print("TODO...")
+                applyResearch()
             } label: {
                 Text("Research")
             }
@@ -248,16 +250,71 @@ struct BotArea: View {
 
     }
     
+    func applyResearch() {
+        let gameManager = GameManager.instance
+        if gameManager.researchPoints <= 0 {
+            return
+        }
+        
+        let communicator = LabSceneCommunicator.instance
+        
+        switch communicator.selectedTowerType {
+            
+        case .gunTower:
+            switch communicator.selectedTreeButtonId {
+            case "1":
+                print("Already unlocked!")
+            default:
+                print("not implemented")
+            }
+        case .rapidFireTower:
+            switch communicator.selectedTreeButtonId {
+            case "1":
+                gameManager.rapidFireTowerUnlocked = true
+                gameManager.researchPoints -= 1
+            default:
+                print("not implemented")
+            }
+        case .sniperTower:
+            switch communicator.selectedTreeButtonId {
+            case "1":
+                gameManager.sniperTowerUnlocked = true
+                gameManager.researchPoints -= 1
+            default:
+                print("not implemented")
+            }
+        default:
+            switch communicator.selectedTreeButtonId {
+            case "1":
+                gameManager.cannonTowerUnlocked = true
+                gameManager.researchPoints -= 1
+            default:
+                print("not implemented")
+            }
+        }
+    }
+    
 }
 
-struct SkillTreeBox: View {
+struct LabButtonImage: View {
+    
+    @ObservedObject var communicator = LabSceneCommunicator.instance
+    
+    let imageString: String
+    let id: String
+    
+    init(_ _imageString: String, _ _id: String) {
+        id = _id
+        imageString = _imageString
+    }
     
     var body: some View {
         
-        Image("clickable_tile")
+        Image(imageString)
             .resizable()
             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-
+            .background(communicator.selectedTreeButtonId == id ? .white : .black)
+            .opacity(communicator.selectedTreeButtonId == id ? 1.0 : 0.5)
     }
     
 }
