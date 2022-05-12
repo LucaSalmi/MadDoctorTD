@@ -28,6 +28,7 @@ struct LabSceneView: View {
         
         LabSceneView.imageWidth = UIScreen.main.bounds.width * 0.15
         LabSceneView.imageHeight = LabSceneView.imageWidth
+        //SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
     }
 
     var body: some View {
@@ -68,6 +69,8 @@ struct TopArea: View {
             
             Button {
                 communicator.selectType(type: .gunTower)
+                SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, sfxExtension: SoundManager.bgmExtension)
+                print("gunTower button pressed")
             } label: {
                 Image("blast_tower")
                     .resizable()
@@ -76,6 +79,8 @@ struct TopArea: View {
             
             Button {
                 communicator.selectType(type: .rapidFireTower)
+                SoundManager.playSFX(sfxName: SoundManager.buttonTwoSFX, sfxExtension: SoundManager.bgmExtension)
+                print("rapidFire button pressed")
             } label: {
                 Image("speed_tower")
                     .resizable()
@@ -84,6 +89,8 @@ struct TopArea: View {
             
             Button {
                 communicator.selectType(type: .sniperTower)
+                SoundManager.playSFX(sfxName: SoundManager.buttonThreeSFX, sfxExtension: SoundManager.bgmExtension)
+                print("sniperTower button pressed")
             } label: {
                 ZStack {
                     Image("sniper_tower_static_legs")
@@ -97,6 +104,8 @@ struct TopArea: View {
             
             Button {
                 communicator.selectType(type: .cannonTower)
+                SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, sfxExtension: SoundManager.bgmExtension)
+                print("cannonTower button pressed")
             } label: {
                 Image("cannon_tower")
                     .resizable()
