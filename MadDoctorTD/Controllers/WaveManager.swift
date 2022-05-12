@@ -26,6 +26,8 @@ class WaveManager{
     
     var shouldCreateWave = false
     
+    var numberOfAttackers = 0
+    
     init(totalSlots: Int, choises: [EnemyTypes], enemyRace: EnemyRaces){
         
         currentScene = GameScene.instance
@@ -46,12 +48,22 @@ class WaveManager{
         
         while occupiedSlots < totalSlots{
             
-            let chosen = RandomNumberGenerator.rNG(choises: choises)
+            let chosen = RandomNumberGenerator.enemyTypesRNG(choises: choises)
             
             let enemy = EnemyFactory().createEnemy(enemyRace: enemyRace, enemyType: chosen)
             enemy.position = spawnPoint!
             enemy.zPosition = 2
             EnemyNodes.enemyArray.append(enemy)
+            
+            if numberOfAttackers < WaveData.MAX_ATTACKER_NUMBER {
+                
+                if RandomNumberGenerator.isAttackerRNG(maxRange: 10, limitForTrue: 5){
+                    
+                    numberOfAttackers += 1
+                    enemy.isAttacker = true
+                    enemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Foundation
+                }
+            }
             
             if !checkLimits(){
                 occupiedSlots += EnemyNodes.enemyArray.last?.waveSlotSize ?? 1
@@ -65,6 +77,8 @@ class WaveManager{
         if waveNumber % wavesPerLevel == 0 {
             shouldCreateWave = false
         }
+        
+        numberOfAttackers = 0
     }
     
     func spawnEnemy(){
@@ -93,10 +107,14 @@ class WaveManager{
             if type == .fast {
                 
                 fastCount += 1
-                print("found fast enemy")
+
                 if fastCount > WaveData.FAST_ENEMY_LIMIT{
                     
                     fastToRemove = EnemyNodes.enemyArray.firstIndex(of: obj)
+                    
+                    if obj.isAttacker{
+                        numberOfAttackers -= 1
+                    }
                     
                 }
                 
@@ -108,6 +126,10 @@ class WaveManager{
                     
                     flyToRemove = EnemyNodes.enemyArray.firstIndex(of: obj)
                     
+                    if obj.isAttacker{
+                        numberOfAttackers -= 1
+                    }
+                    
                 }
                 
             }else if type == .heavy{
@@ -117,6 +139,10 @@ class WaveManager{
                 if heavyCount > WaveData.HEAVY_ENEMY_LIMIT{
                     
                     heavyToRemove = EnemyNodes.enemyArray.firstIndex(of: obj)
+                    
+                    if obj.isAttacker{
+                        numberOfAttackers -= 1
+                    }
                     
                 }
             }

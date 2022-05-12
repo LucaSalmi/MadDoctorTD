@@ -86,8 +86,15 @@ struct GameSceneView: View {
                     if communicator.isBuildPhase {
                         HStack {
                             
+                            Spacer()
+                            
                             Button {
                                 AppManager.appManager.state = .labMenu
+                                //SoundManager.stopMusic()
+                            
+                                //SoundManager.playSFX(sfxName: SoundManager.switchToResearchRoomSFX, sfxExtension: SoundManager.bgmExtension)
+                                SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
+
                             } label: {
                                 Text("Research")
                             }
@@ -98,10 +105,14 @@ struct GameSceneView: View {
                                 GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
                                 communicator.isBuildPhase = false
                                 GameScene.instance!.waveManager!.shouldCreateWave = true
-                                SoundManager.playBGM(bgmString: SoundManager.filteredMainThemeBackgroundMusic)
+                                //SoundManager.playBGM(bgmString: SoundManager.filteredMainThemeBackgroundMusic)
+                                SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
+                                
                             } label: {
                                 Text("READY!")
                             }
+                            
+                            Spacer()
 
                         }
                     }
@@ -135,27 +146,24 @@ struct GameSceneView: View {
                     Text("Tower menu")
                     Button {
                         communicator.buildTower(type: TowerTypes.gunTower)
-                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Gun Tower")
                     }
                     Button {
                         communicator.buildTower(type: TowerTypes.rapidFireTower)
-                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Rapid Fire Tower")
-                    }
+                    }.disabled(gameManager.rapidFireTowerUnlocked ? false : true)
                     Button {
                         communicator.buildTower(type: TowerTypes.cannonTower)
                     } label: {
                         Text("Build Cannon Tower")
-                    }
+                    }.disabled(gameManager.cannonTowerUnlocked ? false : true)
                     Button {
                         communicator.buildTower(type: TowerTypes.sniperTower)
-                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Sniper Tower")
-                    }
+                    }.disabled(gameManager.sniperTowerUnlocked ? false : true)
 
                     Button {
                         communicator.sellFoundation()

@@ -49,6 +49,7 @@ struct FoundationData{
     
     static let BASE_COST: Int = 25
     static let REFOUND_FACTOR: Double = 0.8
+    static let BASE_HP = 100
     
 }
 enum UpgradeTypes: Int{
@@ -101,6 +102,8 @@ enum ProjectileTypes: Int {
 
 struct ProjectileData {
     static let size: CGSize = CGSize(width: DefaultTileData.SIZE.width * 0.5, height: DefaultTileData.SIZE.height * 0.5)
+    
+    static let CANNON_BALL_SIZE: CGSize = CGSize(width: DefaultTileData.SIZE.width * 0.2, height: DefaultTileData.SIZE.height * 0.2)
     //static let speed: CGFloat = CGFloat(8.0)
     static let speed: CGFloat = CGFloat(8.0)
     
@@ -141,6 +144,9 @@ struct EnemiesData{
     static let SLIME_ARMOUR_VALUE = 3
     static let SQUID_ARMOUR_VALUE = 5
     
+    static let BASE_ATTACK_POWER_VALUE = 20
+    static let BASE_ATTACK_SPEED_VALUE = 60 //in frames per second
+    
 }
 
 //Waves
@@ -158,6 +164,8 @@ struct WaveData{
     static let FLY_ENEMY_LIMIT = 5
     
     static let INCOME_PER_WAVE = 500
+    
+    static let MAX_ATTACKER_NUMBER = 3
     
 }
 

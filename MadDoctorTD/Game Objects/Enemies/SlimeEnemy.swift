@@ -58,6 +58,22 @@ class SlimeEnemy: Enemy{
     override func update() {
         super.update()
     }
+
+//    override func getDamage(dmgValue: Int){
+//
+//        hp -= (dmgValue - armorValue)
+//
+//        if hp <= 0{
+//
+//            GameManager.instance.currentMoney += self.killValue
+//            print("KILL VALUE for SLIME = \(GameManager.instance.currentMoney)")
+//            progressBar.removeFromParent()
+//            self.removeFromParent()
+//            SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX )
+//
+//        }
+//
+//    }
     
     
 }

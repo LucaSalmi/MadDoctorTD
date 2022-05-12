@@ -56,6 +56,8 @@ class GameSceneCommunicator: ObservableObject {
     
     func buildTower(type: TowerTypes){
         
+        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
+        
         let price = TowerData.BASE_COST
         if price > GameManager.instance.currentMoney {
             return
@@ -146,11 +148,8 @@ class GameSceneCommunicator: ObservableObject {
             let refund = Int(Double(FoundationData.BASE_COST) * FoundationData.REFOUND_FACTOR)
             GameManager.instance.currentMoney += refund
             
-            currentFoundation!.builtUponTile?.containsFoundation = false
-            currentFoundation!.builtUponTile = nil
-            currentFoundation!.removeFromParent()
-            updateFoundationPower()
-            updateFoundationTexture()
+            currentFoundation?.onDestroy()
+            
         }
         
         cancelAllMenus()

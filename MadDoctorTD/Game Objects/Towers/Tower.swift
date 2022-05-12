@@ -146,9 +146,6 @@ class Tower: SKSpriteNode{
 
     
     func update() {
-        print(noPowerTexture.alpha)
-        print(noPowerTexture.position)
-        
         
         if !builtUponFoundation!.isPowered {
             if noPowerTexture.alpha != 1{
@@ -210,6 +207,17 @@ class Tower: SKSpriteNode{
         GameScene.instance?.addChild(gameScene.rangeIndicator!)
         
     }
+    
+    func onDestroy(){
+        
+        self.removeFromParent()
+        self.towerTexture.removeFromParent()
+        self.noPowerTexture.removeFromParent()
+        
+    }
+    
+    
+    
     
 }
 

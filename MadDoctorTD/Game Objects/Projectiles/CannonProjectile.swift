@@ -18,13 +18,14 @@ class CannonProjectile: AoeProjectile{
         
         super.init(position: position, target: target, attackDamage: attackDamage)
         
-        texture = SKTexture(imageNamed: "test_projectile")
+        texture = SKTexture(imageNamed: "cannon_projectile")
+        
 
         
     }
     
     override func destroy() {
-        
+        super.destroy()
         print("self removed")
         //Spawn explosion here
         let enemies = findEnemiesInRadius()
@@ -36,7 +37,7 @@ class CannonProjectile: AoeProjectile{
         let gameScene = GameScene.instance!
         
        // SoundManager.playMortarSwooshSFX()
-
+        SoundManager.playSFX(sfxName: SoundManager.cannonTowerImpactSFX, sfxExtension: SoundManager.bgmExtension)
                 let particle = SKEmitterNode(fileNamed: "CannonExplosion")
                 particle!.position = position
                 particle!.zPosition = 5

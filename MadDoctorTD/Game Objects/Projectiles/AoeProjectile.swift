@@ -23,6 +23,10 @@ class AoeProjectile: SKSpriteNode {
     
     var startPosition: CGPoint
     var blastRadius: CGFloat = AoeProjectileData.BLAST_RADIUS
+    
+    var projectileShadow: SKSpriteNode
+    
+    var sizeDifference: CGFloat = 30.0
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -33,8 +37,18 @@ class AoeProjectile: SKSpriteNode {
         targetPoint = target.position
         self.attackDamage = attackDamage
         startPosition = position
+        projectileShadow = SKSpriteNode(texture: SKTexture(imageNamed: "canon_shadow"), color: .clear, size: ProjectileData.CANNON_BALL_SIZE)
         
-        super.init(texture: nil, color: .clear, size: ProjectileData.size)
+        projectileShadow.size.width += sizeDifference
+        projectileShadow.size.height += sizeDifference
+        
+        projectileShadow.alpha = 0.8
+        
+        GameScene.instance!.addChild(projectileShadow)
+        
+        super.init(texture: nil, color: .clear, size: ProjectileData.CANNON_BALL_SIZE)
+        
+        
         
         name = "AoeProjectile"
         self.position = position
@@ -49,6 +63,8 @@ class AoeProjectile: SKSpriteNode {
         currentTick = maxTick
         
         speed = self.position.distance(point: targetPoint) / travelDuration
+        
+        
         
     }
     
@@ -125,6 +141,7 @@ class AoeProjectile: SKSpriteNode {
     
     func destroy() {
         //OVERRIDE THIS IN SUBCLASSES!
+        projectileShadow.removeFromParent()
         
     }
     
@@ -163,16 +180,33 @@ class AoeProjectile: SKSpriteNode {
         self.position.x += (direction.x * speed)
         self.position.y += (direction.y * speed)
         
+        projectileShadow.position = self.position
+        
         
         currentDuration += 1
         
         if currentDuration < (travelDuration/2){
             self.size.width += 0.5
             self.size.height += 0.5
+        
+            print("SIZE: \(self.size.width)")
+            
+            projectileShadow.size.width += 1
+            projectileShadow.size.height += 1
+            
+            projectileShadow.alpha -= 0.005
+            
+            print("SIZE: \(projectileShadow.size.width)")
+            
         }
         else{
             self.size.width -= 0.5
             self.size.height -= 0.5
+            
+            projectileShadow.size.width -= 1
+            projectileShadow.size.height -= 1
+            
+            projectileShadow.alpha += 0.005
         }
         
         

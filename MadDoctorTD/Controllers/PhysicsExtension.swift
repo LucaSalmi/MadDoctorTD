@@ -15,7 +15,6 @@ extension GameScene: SKPhysicsContactDelegate{
         let nodeA = contact.bodyA.node
         let nodeB = contact.bodyB.node
         
-        //print("nodeA = \(nodeA). nodeB = \(nodeB).")
         
         if nodeA is Projectile && nodeB is Enemy {
             let projectile = nodeA as! Projectile
@@ -31,8 +30,37 @@ extension GameScene: SKPhysicsContactDelegate{
             projectile.destroy()
         }
         
+        
+        if nodeA is Enemy && nodeB is FoundationPlate {
+            
+            let enemy = nodeA as! Enemy
+            let foundation = nodeB as! FoundationPlate
+            
+            enemy.precedentTargetPosition = nil
+            
+            enemy.attackTarget = foundation
+            
+            if enemy.precedentTargetPosition == nil{
+                enemy.precedentTargetPosition = foundation.position
+            }
+            
+        }
+        if nodeA is FoundationPlate && nodeB is Enemy{
+            
+            let enemy = nodeB as! Enemy
+            let foundation = nodeA as! FoundationPlate
+            
+            enemy.precedentTargetPosition = nil
+            
+            enemy.attackTarget = foundation
+            
+            if enemy.precedentTargetPosition == nil{
+                enemy.precedentTargetPosition = foundation.position
+            }
+            
+        }
+        
     }
-    
 }
 
 

@@ -24,7 +24,9 @@ class StartScene: SKScene{
         
         doorOne = self.childNode(withName: "DoorOne")
         doorTwo = self.childNode(withName: "DoorTwo")
-        
+
+        print("GAME STARTED")
+        SoundManager.playBGMsfxExtension(bgmString: SoundManager.airlockDoorsTheme)
         
     }
     
@@ -34,8 +36,8 @@ class StartScene: SKScene{
             return
         }
         
-        doorOne?.position.x -= 5
-        doorTwo?.position.x += 5
+        doorOne?.position.x -= 3.5
+        doorTwo?.position.x += 3.5
         
         if doorOne!.position.x + doorOne!.frame.size.width/2 < -self.size.width/2{
             communicator.animateDoors = false
@@ -44,8 +46,5 @@ class StartScene: SKScene{
         
     }
     
-    
-    
-    
-    
+
 }

@@ -32,12 +32,12 @@ class CannonTower: Tower{
     }
     
     override func attackTarget(){
-        
-        
+
         if currentFireRateTick <= 0 {
             let projectile = CannonProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
             
-            SoundManager.playMortarSwooshSFX()
+            //SoundManager.playMortarSwooshSFX()
+            SoundManager.playSFX(sfxName: SoundManager.cannonShotFiredSFX, sfxExtension: SoundManager.bgmExtension)
             ProjectileNodes.projectilesNode.addChild(projectile)
             currentFireRateTick = fireRate
         }
