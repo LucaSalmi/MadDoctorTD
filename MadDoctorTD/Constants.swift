@@ -123,7 +123,7 @@ struct AoeProjectileData{
 struct EnemiesData{
     
     static let SIZE: CGSize = CGSize(width: 43, height: 43)
-    static let BASE_HP: Int = 1000
+    static let BASE_HP: Int = 100
     static let BASE_SPEED: CGFloat = 1.0
     
     static let FAST_HP_MODIFIER = 0.90

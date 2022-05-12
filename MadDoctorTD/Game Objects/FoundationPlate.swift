@@ -234,6 +234,11 @@ class FoundationPlate: SKSpriteNode{
             
             for node in TowerNode.towersNode.children{
                 
+                if node is SniperTower{
+                    let sniper = node as! SniperTower
+                    sniper.sniperLegs.removeFromParent()
+                }
+                
                 let tower = node as! Tower
                 
                 if tower.builtUponFoundation == self{
