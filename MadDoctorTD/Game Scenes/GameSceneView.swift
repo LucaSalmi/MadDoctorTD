@@ -86,6 +86,8 @@ struct GameSceneView: View {
                     if communicator.isBuildPhase {
                         HStack {
                             
+                            Spacer()
+                            
                             Button {
                                 AppManager.appManager.state = .labMenu
                             } label: {
@@ -102,6 +104,8 @@ struct GameSceneView: View {
                             } label: {
                                 Text("READY!")
                             }
+                            
+                            Spacer()
 
                         }
                     }
@@ -135,27 +139,24 @@ struct GameSceneView: View {
                     Text("Tower menu")
                     Button {
                         communicator.buildTower(type: TowerTypes.gunTower)
-                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Gun Tower")
                     }
                     Button {
                         communicator.buildTower(type: TowerTypes.rapidFireTower)
-                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Rapid Fire Tower")
-                    }
+                    }.disabled(gameManager.rapidFireTowerUnlocked ? false : true)
                     Button {
                         communicator.buildTower(type: TowerTypes.cannonTower)
                     } label: {
                         Text("Build Cannon Tower")
-                    }
+                    }.disabled(gameManager.cannonTowerUnlocked ? false : true)
                     Button {
                         communicator.buildTower(type: TowerTypes.sniperTower)
-                        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                     } label: {
                         Text("Build Sniper Tower")
-                    }
+                    }.disabled(gameManager.sniperTowerUnlocked ? false : true)
 
                     Button {
                         communicator.sellFoundation()

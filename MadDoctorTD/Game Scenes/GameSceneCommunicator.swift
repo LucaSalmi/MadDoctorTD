@@ -56,6 +56,8 @@ class GameSceneCommunicator: ObservableObject {
     
     func buildTower(type: TowerTypes){
         
+        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
+        
         let price = TowerData.BASE_COST
         if price > GameManager.instance.currentMoney {
             return

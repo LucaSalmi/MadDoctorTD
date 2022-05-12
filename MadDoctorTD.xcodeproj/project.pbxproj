@@ -20,6 +20,7 @@
 		3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9B28214F6200878191 /* LabSceneView.swift */; };
 		3359CCA4282157C500878191 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CCA3282157C500878191 /* MyTileSet.sks */; };
 		3359CCA62821596700878191 /* ClickableTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CCA52821596700878191 /* ClickableTile.swift */; };
+		33B86801282D08DA004AA4D4 /* LabSceneCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */; };
 		B35C20FB282A45DB009A748E /* AWP_SOUND_EFFECT.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */; };
 		B35C210B282A6330009A748E /* sniper_bullet_fly_by_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */; };
 		B35C210C282A6330009A748E /* sniper_bullet_fly_by_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */; };
@@ -94,6 +95,7 @@
 		3359CC9B28214F6200878191 /* LabSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneView.swift; sourceTree = "<group>"; };
 		3359CCA3282157C500878191 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		3359CCA52821596700878191 /* ClickableTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTile.swift; sourceTree = "<group>"; };
+		33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneCommunicator.swift; sourceTree = "<group>"; };
 		B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AWP_SOUND_EFFECT.wav; sourceTree = "<group>"; };
 		B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_2.wav; sourceTree = "<group>"; };
 		B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_1.wav; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				3359CC9728214F1800878191 /* LabScene.sks */,
 				3359CC9928214F4800878191 /* LabScene.swift */,
 				3359CC9B28214F6200878191 /* LabSceneView.swift */,
+				33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */,
 				E57BA9E8282B9885001BCD99 /* StartScene.swift */,
 				E57BA9EC282B9922001BCD99 /* StartSceneView.swift */,
 			);
@@ -445,6 +448,7 @@
 				C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */,
 				E57BA9E9282B9885001BCD99 /* StartScene.swift in Sources */,
 				C844A739282A982800FC42C9 /* EnemiesFactory.swift in Sources */,
+				33B86801282D08DA004AA4D4 /* LabSceneCommunicator.swift in Sources */,
 				3359CC9328214D8300878191 /* GameScene.swift in Sources */,
 				E5268CD4282537BD00F134A5 /* SniperTower.swift in Sources */,
 				3359CC9628214E2200878191 /* GameSceneView.swift in Sources */,

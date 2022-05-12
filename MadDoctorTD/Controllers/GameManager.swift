@@ -19,7 +19,12 @@ class GameManager: ObservableObject{
     
     @Published var isMusicOn: Bool = true
     @Published var isSfxOn: Bool = true
-
+    
+    @Published var researchPoints: Int = 1
+    
+    @Published var rapidFireTowerUnlocked: Bool = false
+    @Published var sniperTowerUnlocked: Bool = false
+    @Published var cannonTowerUnlocked: Bool = false
     
     //SINGLETON
     private init(){}
