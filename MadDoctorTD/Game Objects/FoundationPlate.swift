@@ -20,12 +20,26 @@ class FoundationPlate: SKSpriteNode{
     
     var hp = FoundationData.BASE_HP
     
+    var crackTexture: SKSpriteNode?
+    var warningTexture: SKSpriteNode?
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
     
     init(position: CGPoint, tile: ClickableTile, isStartingFoundation: Bool = false){
+        
+        
+        warningTexture = SKSpriteNode(imageNamed: "foundation_half_hp_warning")
+        warningTexture?.zPosition = 5
+        
+        
+        let rand = Int.random(in: 1..<4)
+        crackTexture = SKSpriteNode(imageNamed: "foundation_crack_\(rand)")
+        crackTexture?.zPosition = 2
+        
+        
         
         self.isStartingFoundation = isStartingFoundation
         self.builtUponTile = tile
@@ -42,6 +56,21 @@ class FoundationPlate: SKSpriteNode{
         physicsBody?.isDynamic = true
         physicsBody?.friction = 0
         physicsBody?.allowsRotation = false
+        
+        warningTexture?.position = self.position
+        crackTexture?.position = self.position
+        
+        warningTexture?.alpha = 0
+        
+        crackTexture?.alpha = 0
+        crackTexture?.size = self.size
+        GameScene.instance?.addChild(warningTexture!)
+        GameScene.instance?.addChild(crackTexture!)
+        
+        
+        
+        
+        
         
     }
     
@@ -227,6 +256,8 @@ class FoundationPlate: SKSpriteNode{
         
         if hp <= 0{
             
+            warningTexture?.removeFromParent()
+            crackTexture?.removeFromParent()
             self.removeFromParent()
             
             GameSceneCommunicator.instance.updateFoundationPower()
@@ -241,11 +272,29 @@ class FoundationPlate: SKSpriteNode{
                     tower.removeFromParent()
                     tower.towerTexture.removeFromParent()
                     
+                    
                 }
                 
             }
             
             return true
+        }
+        if hp < FoundationData.BASE_HP{
+            if crackTexture?.alpha != 1{
+                crackTexture?.alpha = 1
+                
+            }
+            
+        }
+        
+        if hp <= FoundationData.BASE_HP/2{
+            
+            if warningTexture?.alpha != 1{
+                warningTexture?.alpha = 1
+                
+            }
+            
+            
         }
         
         return false
