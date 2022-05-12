@@ -18,6 +18,8 @@ class FoundationPlate: SKSpriteNode{
     var isPowered = true
     var isPoweredChecked = false
     
+    var hp = 100
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -35,6 +37,7 @@ class FoundationPlate: SKSpriteNode{
         physicsBody = SKPhysicsBody(circleOfRadius: FoundationData.SIZE.width/2)
         physicsBody?.categoryBitMask = PhysicsCategory.Foundation
         physicsBody?.collisionBitMask = 0
+        physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
         physicsBody?.restitution = 0
         physicsBody?.isDynamic = true
         physicsBody?.friction = 0
@@ -215,7 +218,23 @@ class FoundationPlate: SKSpriteNode{
                     foundationPlate.checkIfPowered(gridStart: gridStart)
                 }
             }
-            
         }
+    
+    
+    func destroy(damageIn: Int) -> Bool{
+        
+        hp -= damageIn
+        
+        if hp <= 0{
+            
+            self.removeFromParent()
+            updateFoundationsTexture()
+            return true
+        }
+        
+        return false
+    }
+    
+    
     
 }

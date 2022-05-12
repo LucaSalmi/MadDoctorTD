@@ -30,9 +30,22 @@ extension GameScene: SKPhysicsContactDelegate{
             enemy.getDamage(dmgValue: projectile.attackDamage)
             projectile.destroy()
         }
+        if nodeA is Enemy && nodeB is FoundationPlate{
+            
+            let enemy = nodeA as! Enemy
+            let foundation = nodeB as! FoundationPlate
+            enemy.attackTarget = foundation
+            
+        }
+        if nodeA is FoundationPlate && nodeB is Enemy{
+            
+            let enemy = nodeB as! Enemy
+            let foundation = nodeA as! FoundationPlate
+            enemy.attackTarget = foundation
+            
+        }
         
     }
-    
 }
 
 

@@ -159,5 +159,7 @@ struct WaveData{
     
     static let INCOME_PER_WAVE = 500
     
+    static let MAX_ATTACKER_NUMBER = 3
+    
 }
 

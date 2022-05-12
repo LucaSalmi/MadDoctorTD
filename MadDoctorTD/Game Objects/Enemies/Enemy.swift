@@ -19,7 +19,12 @@ class Enemy: SKSpriteNode{
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
     var enemyType: EnemyTypes = .standard
     var armorValue: Int = 0
+    
     var isAttacker = false
+    var attackTarget: FoundationPlate? = nil
+    var attackPower: Int = 20
+    var attackSpeed: Int = 60
+    var attackCounter: Int = 0
     
     var progressBar = SKShapeNode()
     var startHp = 0
@@ -55,8 +60,8 @@ class Enemy: SKSpriteNode{
             movePoints = GameScene.instance!.pathfindingTestEnemy!.movePoints
             isMoving = true
         }
-        
-        if self.enemyType == .flying{
+                
+        if self.enemyType == .flying || self.isAttacker{
             
             if movePoints.count > 1 {
                 let finalPoint = movePoints[movePoints.count-1]
@@ -83,6 +88,13 @@ class Enemy: SKSpriteNode{
     
     private func move() {
         
+        if isAttacker && attackTarget != nil{
+            
+            attack()
+            return
+            
+        }
+        
         let nextPoint = movePoints[0]
         
         setDirection(targetPoint: nextPoint)
@@ -93,6 +105,28 @@ class Enemy: SKSpriteNode{
         if hasReachedPoint(point: nextPoint) {
             movePoints.remove(at: 0)
         }
+        
+    }
+    
+    private func attack(){
+        
+        if attackCounter >= attackSpeed{
+            
+            attackCounter = 0
+            
+            if attackTarget!.destroy(damageIn: self.attackPower){
+                
+                attackTarget = nil
+                
+            }
+            
+        }else{
+            
+            attackCounter += 1
+            
+        }
+        
+        
         
     }
     

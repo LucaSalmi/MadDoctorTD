@@ -244,6 +244,7 @@ class GameScene: SKScene {
         camera!.position = aNewPosition
     }
     
+    
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
         guard let camera = self.camera else {
             return
