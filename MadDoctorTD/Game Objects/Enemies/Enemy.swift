@@ -88,10 +88,27 @@ class Enemy: SKSpriteNode{
     
     private func move() {
         
-        if isAttacker && attackTarget != nil{
+        if isAttacker {
             
-            attack()
-            return
+            if attackTarget != nil{
+                
+                attack()
+                return
+                
+            }else{
+                
+                let targetPosition = findNextTarget()
+                
+                if targetPosition != nil{
+                    
+                    setDirection(targetPoint: targetPosition!)
+                    position.x += direction.x * baseSpeed
+                    position.y += direction.y * baseSpeed
+                    return
+                }
+                
+            }
+ 
             
         }
         
@@ -105,8 +122,8 @@ class Enemy: SKSpriteNode{
         if hasReachedPoint(point: nextPoint) {
             movePoints.remove(at: 0)
         }
-        
     }
+    
     
     private func attack(){
         
@@ -125,10 +142,23 @@ class Enemy: SKSpriteNode{
             attackCounter += 1
             
         }
-        
-        
-        
     }
+    
+    
+    private func findNextTarget() -> CGPoint?{
+        
+        for node in FoundationPlateNodes.foundationPlatesNode.children{
+            
+            if self.position.x + 86 == node.position.x || self.position.x - 86 == node.position.x {
+                
+                return node.position
+                
+            }
+        }
+        
+        return nil
+    }
+    
     
     private func setDirection(targetPoint: CGPoint) {
         
