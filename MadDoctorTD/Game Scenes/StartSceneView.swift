@@ -24,6 +24,7 @@ struct StartSceneView: View {
         SpriteView(scene: StartSceneView.startScene!)
             .ignoresSafeArea()        
     }
+        //.onAppear(perform: SoundManager.playBGM(bgmString: SoundManager.filteredMainThemeBackgroundMusic))
 }
 
 
