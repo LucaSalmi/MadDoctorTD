@@ -22,8 +22,9 @@ class Enemy: SKSpriteNode{
     
     var isAttacker = false
     var attackTarget: FoundationPlate? = nil
-    var attackPower: Int = 20
-    var attackSpeed: Int = 60
+    var precedentTargetPosition: CGPoint? = nil
+    var attackPower: Int = EnemiesData.BASE_ATTACK_POWER_VALUE
+    var attackSpeed: Int = EnemiesData.BASE_ATTACK_SPEED_VALUE
     var attackCounter: Int = 0
     
     var progressBar = SKShapeNode()
@@ -98,7 +99,6 @@ class Enemy: SKSpriteNode{
             }else{
                 
                 let targetPosition = findNextTarget()
-                
                 if targetPosition != nil{
                     
                     setDirection(targetPoint: targetPosition!)
@@ -106,10 +106,7 @@ class Enemy: SKSpriteNode{
                     position.y += direction.y * baseSpeed
                     return
                 }
-                
             }
- 
-            
         }
         
         let nextPoint = movePoints[0]
@@ -147,14 +144,18 @@ class Enemy: SKSpriteNode{
     
     private func findNextTarget() -> CGPoint?{
         
-        for node in FoundationPlateNodes.foundationPlatesNode.children{
+        if precedentTargetPosition != nil{
             
-            if self.position.x + 86 == node.position.x || self.position.x - 86 == node.position.x {
+            for node in FoundationPlateNodes.foundationPlatesNode.children{
                 
-                return node.position
-                
+                if precedentTargetPosition!.x + 86 == node.position.x || precedentTargetPosition!.x - 86 == node.position.x {
+                    
+                    return node.position
+                    
+                }
             }
         }
+        
         
         return nil
     }
@@ -295,14 +296,7 @@ class Enemy: SKSpriteNode{
         
         return newMovePoints
     }
+
     
-    //    private func getDuration(pointA:CGPoint,pointB:CGPoint,speed:CGFloat)->TimeInterval {
-    //        let xDist = abs(pointA.x - pointB.x)
-    //        let yDist = abs(pointA.y - pointB.y)
-    //        let distance = sqrt((xDist * xDist) + (yDist * yDist));
-    //
-    //        let duration : TimeInterval = TimeInterval(distance/speed)
-    //        return duration
-    //    }
     
 }

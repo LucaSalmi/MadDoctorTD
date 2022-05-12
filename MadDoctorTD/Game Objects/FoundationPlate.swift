@@ -18,7 +18,7 @@ class FoundationPlate: SKSpriteNode{
     var isPowered = true
     var isPoweredChecked = false
     
-    var hp = 100
+    var hp = FoundationData.BASE_HP
     
     
     required init?(coder aDecoder: NSCoder) {

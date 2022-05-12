@@ -49,6 +49,7 @@ struct FoundationData{
     
     static let BASE_COST: Int = 25
     static let REFOUND_FACTOR: Double = 0.8
+    static let BASE_HP = 100
     
 }
 enum UpgradeTypes: Int{
@@ -140,6 +141,9 @@ struct EnemiesData{
     
     static let SLIME_ARMOUR_VALUE = 3
     static let SQUID_ARMOUR_VALUE = 5
+    
+    static let BASE_ATTACK_POWER_VALUE = 20
+    static let BASE_ATTACK_SPEED_VALUE = 60 //in frames per second
     
 }
 
