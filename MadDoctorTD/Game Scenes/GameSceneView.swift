@@ -90,6 +90,11 @@ struct GameSceneView: View {
                             
                             Button {
                                 AppManager.appManager.state = .labMenu
+                                //SoundManager.stopMusic()
+                            
+                                //SoundManager.playSFX(sfxName: SoundManager.switchToResearchRoomSFX, sfxExtension: SoundManager.bgmExtension)
+                                SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
+
                             } label: {
                                 Text("Research")
                             }
