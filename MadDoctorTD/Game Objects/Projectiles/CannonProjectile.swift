@@ -18,13 +18,14 @@ class CannonProjectile: AoeProjectile{
         
         super.init(position: position, target: target, attackDamage: attackDamage)
         
-        texture = SKTexture(imageNamed: "test_projectile")
+        texture = SKTexture(imageNamed: "cannon_projectile")
+        
 
         
     }
     
     override func destroy() {
-        
+        super.destroy()
         print("self removed")
         //Spawn explosion here
         let enemies = findEnemiesInRadius()
