@@ -259,6 +259,7 @@ class FoundationPlate: SKSpriteNode{
             warningTexture?.removeFromParent()
             crackTexture?.removeFromParent()
             self.removeFromParent()
+            builtUponTile.self?.containsFoundation = false
             
             GameSceneCommunicator.instance.updateFoundationPower()
             GameSceneCommunicator.instance.updateFoundationTexture()
