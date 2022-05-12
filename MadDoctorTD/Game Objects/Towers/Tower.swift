@@ -146,9 +146,6 @@ class Tower: SKSpriteNode{
 
     
     func update() {
-        print(noPowerTexture.alpha)
-        print(noPowerTexture.position)
-        
         
         if !builtUponFoundation!.isPowered {
             if noPowerTexture.alpha != 1{
