@@ -107,7 +107,7 @@ class WaveManager{
             if type == .fast {
                 
                 fastCount += 1
-                print("found fast enemy")
+
                 if fastCount > WaveData.FAST_ENEMY_LIMIT{
                     
                     fastToRemove = EnemyNodes.enemyArray.firstIndex(of: obj)
