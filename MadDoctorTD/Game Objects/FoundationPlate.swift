@@ -250,12 +250,39 @@ class FoundationPlate: SKSpriteNode{
         }
     
     
-    func onDestroy(damageIn: Int) -> Bool{
+    func getDamage(damageIn: Int) -> Bool{
         
         hp -= damageIn
         
-        if hp <= 0{
+        if hp < FoundationData.BASE_HP{
             
+            if crackTexture?.alpha != 1{
+                crackTexture?.alpha = 1
+                
+            }
+        }
+        
+        if hp <= FoundationData.BASE_HP/2{
+            
+            if warningTexture?.alpha != 1{
+                warningTexture?.alpha = 1
+                
+            }
+        }
+        
+        if hp <= 0 {
+            
+            onDestroy()
+            return true
+            
+        }
+        
+        return false
+    }
+    
+    
+    func onDestroy() {
+        
             warningTexture?.removeFromParent()
             crackTexture?.removeFromParent()
             self.removeFromParent()
@@ -273,27 +300,7 @@ class FoundationPlate: SKSpriteNode{
                     tower.onDestroy()
                 }
             }
-            
-            return true
         }
-        if hp < FoundationData.BASE_HP{
-            if crackTexture?.alpha != 1{
-                crackTexture?.alpha = 1
-                
-            }
-        }
-        
-        if hp <= FoundationData.BASE_HP/2{
-            
-            if warningTexture?.alpha != 1{
-                warningTexture?.alpha = 1
-                
-            }
-        }
-        
-        return false
-    }
-    
     
     
 }
