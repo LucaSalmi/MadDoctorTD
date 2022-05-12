@@ -232,6 +232,19 @@ class FoundationPlate: SKSpriteNode{
             GameSceneCommunicator.instance.updateFoundationPower()
             GameSceneCommunicator.instance.updateFoundationTexture()
             
+            for node in TowerNode.towersNode.children{
+                
+                let tower = node as! Tower
+                
+                if tower.builtUponFoundation == self{
+                    
+                    tower.removeFromParent()
+                    tower.towerTexture.removeFromParent()
+                    
+                }
+                
+            }
+            
             return true
         }
         
