@@ -101,6 +101,8 @@ enum ProjectileTypes: Int {
 
 struct ProjectileData {
     static let size: CGSize = CGSize(width: DefaultTileData.SIZE.width * 0.5, height: DefaultTileData.SIZE.height * 0.5)
+    
+    static let CANNON_BALL_SIZE: CGSize = CGSize(width: DefaultTileData.SIZE.width * 0.2, height: DefaultTileData.SIZE.height * 0.2)
     //static let speed: CGFloat = CGFloat(8.0)
     static let speed: CGFloat = CGFloat(8.0)
     
