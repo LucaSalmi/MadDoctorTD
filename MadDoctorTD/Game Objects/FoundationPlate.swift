@@ -228,7 +228,10 @@ class FoundationPlate: SKSpriteNode{
         if hp <= 0{
             
             self.removeFromParent()
-            updateFoundationsTexture()
+            
+            GameSceneCommunicator.instance.updateFoundationPower()
+            GameSceneCommunicator.instance.updateFoundationTexture()
+            
             return true
         }
         
