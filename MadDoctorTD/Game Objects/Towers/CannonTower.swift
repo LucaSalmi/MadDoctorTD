@@ -32,8 +32,7 @@ class CannonTower: Tower{
     }
     
     override func attackTarget(){
-        
-        
+
         if currentFireRateTick <= 0 {
             let projectile = CannonProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
             

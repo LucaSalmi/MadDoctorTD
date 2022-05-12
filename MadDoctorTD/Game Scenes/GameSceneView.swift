@@ -98,7 +98,9 @@ struct GameSceneView: View {
                                 GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
                                 communicator.isBuildPhase = false
                                 GameScene.instance!.waveManager!.shouldCreateWave = true
-                                SoundManager.playBGM(bgmString: SoundManager.filteredMainThemeBackgroundMusic)
+                                //SoundManager.playBGM(bgmString: SoundManager.filteredMainThemeBackgroundMusic)
+                                SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
+                                
                             } label: {
                                 Text("READY!")
                             }

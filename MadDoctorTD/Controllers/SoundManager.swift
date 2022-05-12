@@ -20,10 +20,21 @@ class SoundManager{
     static let buildingPlacementSFX = "construction_sound_effect"
     static let foundationPlacementSFX = "finger_tap_boosted"
 
+
+    //DeathSounds
+
+    static let slimeDeathSFX = "slime_death4"
+
+
+    //AtmosphereSound
+
+    static let desertAmbience = "desert_custom_atmosphere"
+    
     //BGMusic
 
     static let MainThemeBackgroundMusic = "mad_td_theme"
     static let filteredMainThemeBackgroundMusic = "filtered_theme_song_no_fizz"
+    static let airlockDoorsTheme = "mad_td_airlock_theme"
     
     static var musicPlayer: AVAudioPlayer!
 
@@ -74,6 +85,27 @@ class SoundManager{
             
         } catch {
             
+        }
+        musicPlayer!.play()
+        musicPlayer!.numberOfLoops = -1
+    }
+
+    static func playBGMsfxExtension(bgmString: String) {
+
+        musicPlayer?.stop()
+
+        if !GameManager.instance.isMusicOn {
+            return
+        }
+
+        let bgm = Bundle.main.path(forResource: bgmString, ofType: SoundManager.sfxExtension)
+
+        do {
+            let url = URL(fileURLWithPath: bgm!)
+            musicPlayer = try AVAudioPlayer(contentsOf: url)
+
+        } catch {
+
         }
         musicPlayer!.play()
         musicPlayer!.numberOfLoops = -1
