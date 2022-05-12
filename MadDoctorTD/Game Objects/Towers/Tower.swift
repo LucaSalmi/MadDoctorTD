@@ -208,6 +208,17 @@ class Tower: SKSpriteNode{
         
     }
     
+    func onDestroy(){
+        
+        self.removeFromParent()
+        self.towerTexture.removeFromParent()
+        self.noPowerTexture.removeFromParent()
+        
+    }
+    
+    
+    
+    
 }
 
 

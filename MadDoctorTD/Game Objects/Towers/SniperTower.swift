@@ -45,6 +45,11 @@ class SniperTower: Tower{
         
     }
     
+    override func onDestroy() {
+        
+        self.sniperLegs.removeFromParent()
+        super.onDestroy()
+    }
     
     
 }

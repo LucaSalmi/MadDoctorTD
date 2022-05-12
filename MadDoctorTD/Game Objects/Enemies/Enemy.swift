@@ -128,7 +128,7 @@ class Enemy: SKSpriteNode{
             
             attackCounter = 0
             
-            if attackTarget!.destroy(damageIn: self.attackPower){
+            if attackTarget!.onDestroy(damageIn: self.attackPower){
                 
                 attackTarget = nil
                 

@@ -250,7 +250,7 @@ class FoundationPlate: SKSpriteNode{
         }
     
     
-    func destroy(damageIn: Int) -> Bool{
+    func onDestroy(damageIn: Int) -> Bool{
         
         hp -= damageIn
         
@@ -264,22 +264,13 @@ class FoundationPlate: SKSpriteNode{
             GameSceneCommunicator.instance.updateFoundationTexture()
             
             for node in TowerNode.towersNode.children{
-                
-                if node is SniperTower{
-                    let sniper = node as! SniperTower
-                    sniper.sniperLegs.removeFromParent()
-                }
-                
+                                
                 let tower = node as! Tower
                 
                 if tower.builtUponFoundation == self{
                     
-                    tower.removeFromParent()
-                    tower.towerTexture.removeFromParent()
-                    
-                    
+                    tower.onDestroy()
                 }
-                
             }
             
             return true
@@ -289,7 +280,6 @@ class FoundationPlate: SKSpriteNode{
                 crackTexture?.alpha = 1
                 
             }
-            
         }
         
         if hp <= FoundationData.BASE_HP/2{
@@ -298,8 +288,6 @@ class FoundationPlate: SKSpriteNode{
                 warningTexture?.alpha = 1
                 
             }
-            
-            
         }
         
         return false
