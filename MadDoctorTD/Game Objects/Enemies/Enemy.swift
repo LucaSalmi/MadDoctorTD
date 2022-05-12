@@ -19,7 +19,13 @@ class Enemy: SKSpriteNode{
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
     var enemyType: EnemyTypes = .standard
     var armorValue: Int = 0
+    
     var isAttacker = false
+    var attackTarget: FoundationPlate? = nil
+    var precedentTargetPosition: CGPoint? = nil
+    var attackPower: Int = EnemiesData.BASE_ATTACK_POWER_VALUE
+    var attackSpeed: Int = EnemiesData.BASE_ATTACK_SPEED_VALUE
+    var attackCounter: Int = 0
     
     var progressBar = SKShapeNode()
     var startHp = 0
@@ -55,8 +61,8 @@ class Enemy: SKSpriteNode{
             movePoints = GameScene.instance!.pathfindingTestEnemy!.movePoints
             isMoving = true
         }
-        
-        if self.enemyType == .flying{
+                
+        if self.enemyType == .flying || self.isAttacker{
             
             if movePoints.count > 1 {
                 let finalPoint = movePoints[movePoints.count-1]
@@ -83,6 +89,26 @@ class Enemy: SKSpriteNode{
     
     private func move() {
         
+        if isAttacker {
+            
+            if attackTarget != nil{
+                
+                attack()
+                return
+                
+            }else{
+                
+                let targetPosition = findNextTarget()
+                if targetPosition != nil{
+                    
+                    setDirection(targetPoint: targetPosition!)
+                    position.x += direction.x * baseSpeed
+                    position.y += direction.y * baseSpeed
+                    return
+                }
+            }
+        }
+        
         let nextPoint = movePoints[0]
         
         setDirection(targetPoint: nextPoint)
@@ -93,8 +119,47 @@ class Enemy: SKSpriteNode{
         if hasReachedPoint(point: nextPoint) {
             movePoints.remove(at: 0)
         }
-        
     }
+    
+    
+    private func attack(){
+        
+        if attackCounter >= attackSpeed{
+            
+            attackCounter = 0
+            
+            if attackTarget!.destroy(damageIn: self.attackPower){
+                
+                attackTarget = nil
+                
+            }
+            
+        }else{
+            
+            attackCounter += 1
+            
+        }
+    }
+    
+    
+    private func findNextTarget() -> CGPoint?{
+        
+        if precedentTargetPosition != nil{
+            
+            for node in FoundationPlateNodes.foundationPlatesNode.children{
+                
+                if precedentTargetPosition!.x + 86 == node.position.x || precedentTargetPosition!.x - 86 == node.position.x {
+                    
+                    return node.position
+                    
+                }
+            }
+        }
+        
+        
+        return nil
+    }
+    
     
     private func setDirection(targetPoint: CGPoint) {
         
@@ -231,14 +296,7 @@ class Enemy: SKSpriteNode{
         
         return newMovePoints
     }
+
     
-    //    private func getDuration(pointA:CGPoint,pointB:CGPoint,speed:CGFloat)->TimeInterval {
-    //        let xDist = abs(pointA.x - pointB.x)
-    //        let yDist = abs(pointA.y - pointB.y)
-    //        let distance = sqrt((xDist * xDist) + (yDist * yDist));
-    //
-    //        let duration : TimeInterval = TimeInterval(distance/speed)
-    //        return duration
-    //    }
     
 }
