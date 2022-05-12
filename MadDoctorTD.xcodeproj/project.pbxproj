@@ -80,6 +80,7 @@
 		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
 		C897BC1D282510380085D093 /* WaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1C282510380085D093 /* WaveManager.swift */; };
 		C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1E282515260085D093 /* RandomNumberGenerator.swift */; };
+		C8A23076282D4FFD00A4B8DA /* PhysicsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A23075282D4FFD00A4B8DA /* PhysicsUtils.swift */; };
 		C8E693452823C38F00D0A661 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693442823C38F00D0A661 /* Edge.swift */; };
 		E5268CCC28226EF000F134A5 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCB28226EF000F134A5 /* Tower.swift */; };
 		E5268CD02822708600F134A5 /* GunTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCF2822708600F134A5 /* GunTower.swift */; };
@@ -170,6 +171,7 @@
 		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		C897BC1C282510380085D093 /* WaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveManager.swift; sourceTree = "<group>"; };
 		C897BC1E282515260085D093 /* RandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNumberGenerator.swift; sourceTree = "<group>"; };
+		C8A23075282D4FFD00A4B8DA /* PhysicsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsUtils.swift; sourceTree = "<group>"; };
 		C8E693442823C38F00D0A661 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		E5268CCB28226EF000F134A5 /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
 		E5268CCF2822708600F134A5 /* GunTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunTower.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */,
 				C897BC1C282510380085D093 /* WaveManager.swift */,
 				C897BC1E282515260085D093 /* RandomNumberGenerator.swift */,
+				C8A23075282D4FFD00A4B8DA /* PhysicsUtils.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				C8E693452823C38F00D0A661 /* Edge.swift in Sources */,
 				C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */,
 				C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */,
+				C8A23076282D4FFD00A4B8DA /* PhysicsUtils.swift in Sources */,
 				C839C6CC2821621400F66043 /* SettingsView.swift in Sources */,
 				E57BA9ED282B9922001BCD99 /* StartSceneView.swift in Sources */,
 				C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */,

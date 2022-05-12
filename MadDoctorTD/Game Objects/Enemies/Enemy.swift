@@ -62,7 +62,7 @@ class Enemy: SKSpriteNode{
             isMoving = true
         }
                 
-        if self.enemyType == .flying || self.isAttacker{
+        if self.enemyType == .flying{
             
             if movePoints.count > 1 {
                 let finalPoint = movePoints[movePoints.count-1]
@@ -117,10 +117,27 @@ class Enemy: SKSpriteNode{
         position.y += direction.y * baseSpeed
         
         if hasReachedPoint(point: nextPoint) {
+            
+            if self.isAttacker{
+                
+                precedentTargetPosition = findCenterInTile()
+                precedentTargetPosition = findNextTarget()
+                
+            }
+            
             movePoints.remove(at: 0)
         }
     }
     
+    private func findCenterInTile() -> CGPoint{
+        
+        guard let foundationsMap = GameScene.instance!.childNode(withName: "background")as? SKTileMapNode else {
+            return self.position
+        }
+        
+        return PhysicsUtils.findCenterOfClosestTile(map: foundationsMap, object: self) ?? self.position
+        
+    }
     
     private func attack(){
         
