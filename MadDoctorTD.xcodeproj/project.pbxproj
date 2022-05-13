@@ -80,6 +80,7 @@
 		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
 		C897BC1D282510380085D093 /* WaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1C282510380085D093 /* WaveManager.swift */; };
 		C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1E282515260085D093 /* RandomNumberGenerator.swift */; };
+		C89DA1DB282E857D00364AB4 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89DA1DA282E857D00364AB4 /* GameOverView.swift */; };
 		C8A23076282D4FFD00A4B8DA /* PhysicsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A23075282D4FFD00A4B8DA /* PhysicsUtils.swift */; };
 		C8E693452823C38F00D0A661 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693442823C38F00D0A661 /* Edge.swift */; };
 		E5268CCC28226EF000F134A5 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCB28226EF000F134A5 /* Tower.swift */; };
@@ -171,6 +172,7 @@
 		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		C897BC1C282510380085D093 /* WaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveManager.swift; sourceTree = "<group>"; };
 		C897BC1E282515260085D093 /* RandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNumberGenerator.swift; sourceTree = "<group>"; };
+		C89DA1DA282E857D00364AB4 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		C8A23075282D4FFD00A4B8DA /* PhysicsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsUtils.swift; sourceTree = "<group>"; };
 		C8E693442823C38F00D0A661 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		E5268CCB28226EF000F134A5 /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				C839C6C7282161BA00F66043 /* MainMenuView.swift */,
 				C839C6C9282161DF00F66043 /* ResearchView.swift */,
 				C839C6CB2821621400F66043 /* SettingsView.swift */,
+				C89DA1DA282E857D00364AB4 /* GameOverView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,
 				3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
+				C89DA1DB282E857D00364AB4 /* GameOverView.swift in Sources */,
 				C844A735282A88DA00FC42C9 /* SlimeEnemy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -685,6 +689,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -715,6 +721,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

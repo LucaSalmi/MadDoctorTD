@@ -46,6 +46,43 @@ class GameSceneCommunicator: ObservableObject {
         
     }
     
+    func repairFoundation() {
+        
+        let missingHp: Int = currentFoundation!.maxHp - currentFoundation!.hp
+        
+        let price: Int = Int(Double(missingHp) * FoundationData.REPAIR_PRICE_PER_HP)
+        
+        if price > GameManager.instance.currentMoney  {
+            return
+        }
+        
+        GameManager.instance.currentMoney -= price
+        currentFoundation!.hp = currentFoundation!.maxHp
+        
+        currentFoundation!.warningTexture!.alpha = 0
+        currentFoundation!.crackTexture!.alpha = 0
+    }
+    
+    func upgradeFoundation() {
+        
+        if currentFoundation!.isStartingFoundation {
+            return
+        }
+        
+        if FoundationData.UPGRADE_PRICE > GameManager.instance.currentMoney {
+            return
+        }
+        
+        if currentFoundation!.hp < currentFoundation!.maxHp {
+            return
+        }
+        
+        currentFoundation!.maxHp = Int( Double(currentFoundation!.maxHp) * FoundationData.UPGRADE_HP_FACTOR )
+        
+        currentFoundation!.hp = currentFoundation!.maxHp
+        GameManager.instance.currentMoney -= FoundationData.UPGRADE_PRICE
+    }
+    
     func cancelFoundationBuild() {
         
         currentTile!.color = .clear
@@ -56,7 +93,7 @@ class GameSceneCommunicator: ObservableObject {
     
     func buildTower(type: TowerTypes){
         
-        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
+        SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX, scene: GameScene.instance!)
         
         let price = TowerData.BASE_COST
         if price > GameManager.instance.currentMoney {
@@ -100,13 +137,13 @@ class GameSceneCommunicator: ObservableObject {
     }
 
     func cancelAllMenus(){
-        currentFoundation = nil
+        //currentFoundation = nil
         showTowerMenu = false
         currentTile?.color = .clear
-        currentTile = nil
+        //currentTile = nil
         showFoundationMenu = false
         showUpgradeMenu = false
-        currentTower = nil
+        //currentTower = nil
     }
     
     func sellTower(){
@@ -165,7 +202,8 @@ class GameSceneCommunicator: ObservableObject {
         
         let startGrid1 = FoundationPlateNodes.foundationPlatesNode.children[0] as! FoundationPlate
         startGrid1.checkIfPowered(gridStart: startGrid1)
-        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[3] as! FoundationPlate
+        let nextIndexStart = FoundationPlateNodes.foundationPlatesNode.children.count / 2
+        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[nextIndexStart] as! FoundationPlate
         startGrid2.checkIfPowered(gridStart: startGrid2)
         
     }

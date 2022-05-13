@@ -24,6 +24,8 @@ class WaveManager{
     
     let wavesPerLevel = 5
     
+    var attackLevel = 3
+    
     var shouldCreateWave = false
     
     var numberOfAttackers = 0
@@ -41,10 +43,18 @@ class WaveManager{
         
         if totalSlots < 0{
             
-            totalSlots = 10
+            totalSlots = 5
+        }
+        if waveNumber == attackLevel + 1{
+            
+            attackLevel += 5
         }
         
         var occupiedSlots = 0
+        
+        totalSlots = 5 + waveNumber
+        
+        print("totalslots = \(totalSlots) - check 2")
         
         while occupiedSlots < totalSlots{
             
@@ -55,7 +65,9 @@ class WaveManager{
             enemy.zPosition = 2
             EnemyNodes.enemyArray.append(enemy)
             
-            if numberOfAttackers < WaveData.MAX_ATTACKER_NUMBER {
+            if numberOfAttackers < WaveData.MAX_ATTACKER_NUMBER && waveNumber == attackLevel {
+                
+                print("spawning atackunits: wave - \(waveNumber)")
                 
                 if RandomNumberGenerator.isAttackerRNG(maxRange: 10, limitForTrue: 5){
                     

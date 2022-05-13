@@ -23,7 +23,7 @@ struct GameSceneView: View {
         else {
             gameScene = GameScene.instance!
         }
-        gameScene.scaleMode = .aspectFit
+        gameScene.scaleMode = .aspectFill
         communicator.cancelAllMenus()
 
     }
@@ -53,9 +53,15 @@ struct GameSceneView: View {
                         .background(Color.white.opacity(0.5))
                     
                         
+                }else if GameManager.instance.isGameOver{
+                    
+                    GameOverView()
+                    
                 }
                 else {
                     HStack {
+                        
+                        Spacer()
                         
                         Text("$ = \(gameManager.currentMoney)")
                             .foregroundColor(.white)
@@ -71,6 +77,11 @@ struct GameSceneView: View {
                         } label: {
                             Text("Pause")
                         }
+                        
+                        Spacer()
+                        
+                        Text("Base HP = \(gameManager.baseHp)")
+                            .foregroundColor(.white)
                         
                         Spacer()
                         
@@ -90,9 +101,6 @@ struct GameSceneView: View {
                             
                             Button {
                                 AppManager.appManager.state = .labMenu
-                                //SoundManager.stopMusic()
-                            
-                                //SoundManager.playSFX(sfxName: SoundManager.switchToResearchRoomSFX, sfxExtension: SoundManager.bgmExtension)
                                 SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
 
                             } label: {
@@ -105,7 +113,7 @@ struct GameSceneView: View {
                                 GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
                                 communicator.isBuildPhase = false
                                 GameScene.instance!.waveManager!.shouldCreateWave = true
-                                //SoundManager.playBGM(bgmString: SoundManager.filteredMainThemeBackgroundMusic)
+                                GameSceneCommunicator.instance.cancelAllMenus()
                                 SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
                                 
                             } label: {
@@ -125,7 +133,7 @@ struct GameSceneView: View {
                     Button {
                         communicator.buildFoundation()
                         //SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
-                        SoundManager.playSFX(sfxName: SoundManager.foundationPlacementSFX)
+                        SoundManager.playSFX(sfxName: SoundManager.foundationPlacementSFX, scene: GameScene.instance!)
 
                         //ADD CODE FOR BUILDINGSOUND
                         
@@ -139,6 +147,7 @@ struct GameSceneView: View {
                     }
 
                 }.font(.title)
+                    .background(.black.opacity(0.5))
             }
             if communicator.showTowerMenu{
                 
@@ -165,6 +174,17 @@ struct GameSceneView: View {
                         Text("Build Sniper Tower")
                     }.disabled(gameManager.sniperTowerUnlocked ? false : true)
 
+                    //Foundation options:
+                    Button {
+                        communicator.repairFoundation()
+                    } label: {
+                        Text("Repair Foundation")
+                    }
+                    Button {
+                        communicator.upgradeFoundation()
+                    } label: {
+                        Text("Upgrade Foundation")
+                    }
                     Button {
                         communicator.sellFoundation()
                     } label: {
@@ -178,6 +198,7 @@ struct GameSceneView: View {
                     }
 
                 }.font(.title)
+                    .background(.black.opacity(0.5))
                 
             }
             if communicator.showUpgradeMenu{
@@ -206,9 +227,24 @@ struct GameSceneView: View {
                     } label: {
                         Text("Sell tower")
                     }
+                    
+                    //Foundation options:
+                    Button {
+                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
+                        communicator.repairFoundation()
+                    } label: {
+                        Text("Repair Foundation")
+                    }
+                    Button {
+                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
+                        communicator.upgradeFoundation()
+                    } label: {
+                        Text("Upgrade Foundation")
+                    }
 
                 }.font(.title)
                     .foregroundColor(communicator.currentTower!.upgradeCount <= TowerData.MAX_UPGRADE ? Color.white : Color.gray)
+                    .background(.black.opacity(0.5))
                     
             }
         }
