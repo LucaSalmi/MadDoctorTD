@@ -291,6 +291,9 @@ struct BotArea: View {
         case .rapidFireTower:
             switch communicator.selectedTreeButtonId {
             case "1":
+                if gameManager.rapidFireTowerUnlocked {
+                    return
+                }
                 gameManager.rapidFireTowerUnlocked = true
                 gameManager.researchPoints -= 1
             default:
@@ -299,6 +302,9 @@ struct BotArea: View {
         case .sniperTower:
             switch communicator.selectedTreeButtonId {
             case "1":
+                if gameManager.sniperTowerUnlocked {
+                    return
+                }
                 gameManager.sniperTowerUnlocked = true
                 gameManager.researchPoints -= 1
             default:
@@ -307,6 +313,9 @@ struct BotArea: View {
         default:
             switch communicator.selectedTreeButtonId {
             case "1":
+                if gameManager.cannonTowerUnlocked {
+                    return
+                }
                 gameManager.cannonTowerUnlocked = true
                 gameManager.researchPoints -= 1
             default:
