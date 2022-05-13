@@ -171,7 +171,7 @@ struct WaveData{
 
 struct PlayerData{
     
-    static let START_MONEY = 2500
+    static let START_MONEY = 2000
     static let BASE_HP = 3
     static let START_RESEARCH_POINTS = 3
     
