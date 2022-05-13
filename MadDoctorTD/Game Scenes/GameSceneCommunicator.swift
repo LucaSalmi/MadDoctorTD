@@ -165,7 +165,8 @@ class GameSceneCommunicator: ObservableObject {
         
         let startGrid1 = FoundationPlateNodes.foundationPlatesNode.children[0] as! FoundationPlate
         startGrid1.checkIfPowered(gridStart: startGrid1)
-        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[3] as! FoundationPlate
+        let nextIndexStart = FoundationPlateNodes.foundationPlatesNode.children.count / 2
+        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[nextIndexStart] as! FoundationPlate
         startGrid2.checkIfPowered(gridStart: startGrid2)
         
     }
