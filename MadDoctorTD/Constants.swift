@@ -47,7 +47,7 @@ struct FoundationData{
     
     static let SIZE: CGSize = DefaultTileData.SIZE
     
-    static let BASE_COST: Int = 25
+    static let BASE_COST: Int = 100
     static let REFOUND_FACTOR: Double = 0.8
     static let BASE_HP = 100
     
@@ -88,9 +88,9 @@ struct TowerData {
     
     static let MAX_UPGRADE: Int = 5
     
-    static let BASE_COST: Int = 50
-    static let BASE_UPGRADE_COST: Int = 50
-    static let COST_MULTIPLIER_PER_LEVEL: Double = 1.5
+    static let BASE_COST: Int = 500
+    static let BASE_UPGRADE_COST: Int = 100
+    static let COST_MULTIPLIER_PER_LEVEL: Double = 1.2
     static let REFOUND_FACTOR: Double = 0.8
 }
 
@@ -124,7 +124,7 @@ struct EnemiesData{
     
     static let SIZE: CGSize = CGSize(width: 43, height: 43)
     static let BASE_HP: Int = 100
-    static let BASE_SPEED: CGFloat = 1.0
+    static let BASE_SPEED: CGFloat = 1.5
     
     static let FAST_HP_MODIFIER = 0.90
     static let HEAVY_HP_MODIFIER = 2.0
@@ -139,10 +139,10 @@ struct EnemiesData{
     static let FAST_ENEMY_SLOT = 1
     static let FLY_ENEMY_SLOT = 1
     
-    static let BASE_KILL_VALUE = 10
+    static let BASE_KILL_VALUE = 25
     
-    static let SLIME_ARMOUR_VALUE = 3
-    static let SQUID_ARMOUR_VALUE = 5
+    static let SLIME_ARMOUR_VALUE = 2
+    static let SQUID_ARMOUR_VALUE = 3
     
     static let BASE_ATTACK_POWER_VALUE = 20
     static let BASE_ATTACK_SPEED_VALUE = 60 //in frames per second
@@ -163,7 +163,7 @@ struct WaveData{
     static let HEAVY_ENEMY_LIMIT = 5
     static let FLY_ENEMY_LIMIT = 5
     
-    static let INCOME_PER_WAVE = 500
+    static let INCOME_PER_WAVE = 100
     
     static let MAX_ATTACKER_NUMBER = 3
     

@@ -32,7 +32,7 @@ class SniperTower: Tower{
         
         attackDamage = Int(Double(attackDamage) * 5)
         
-        fireRate = Int(Double(fireRate) * 20)
+        fireRate = Int(Double(fireRate) * 15)
         
         attackRange = attackRange * 1.8
         

@@ -25,7 +25,7 @@ class CannonTower: Tower{
         
         attackDamage = Int(Double(attackDamage) * 4)
         
-        fireRate = Int(Double(fireRate) * 12)
+        fireRate = Int(Double(fireRate) * 9)
         
         attackRange = attackRange * 0.8
         
