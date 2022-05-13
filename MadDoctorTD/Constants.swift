@@ -51,6 +51,10 @@ struct FoundationData{
     static let REFOUND_FACTOR: Double = 0.8
     static let BASE_HP = 100
     
+    static let UPGRADE_HP_FACTOR: Double = 1.5
+    static let UPGRADE_PRICE: Int = 100
+    static let REPAIR_PRICE_PER_HP: Double = 0.5
+    
 }
 enum UpgradeTypes: Int{
     case damage = 0, range, firerate
@@ -173,7 +177,7 @@ struct WaveData{
 //Player + Economy
 struct PlayerData{
     
-    static let START_MONEY = 2000
+    static let START_MONEY = 20000 //2000
     static let BASE_HP = 3
     static let START_RESEARCH_POINTS = 3
 

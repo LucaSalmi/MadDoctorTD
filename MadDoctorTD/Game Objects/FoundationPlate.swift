@@ -19,6 +19,7 @@ class FoundationPlate: SKSpriteNode{
     var isPoweredChecked = false
     
     var hp = FoundationData.BASE_HP
+    var maxHp = FoundationData.BASE_HP
     
     var crackTexture: SKSpriteNode?
     var warningTexture: SKSpriteNode?
