@@ -39,6 +39,8 @@ struct LabSceneView: View {
             VStack {
                 
                 Text("Research Points: \(gameManager.researchPoints)")
+                    .foregroundColor(Color.white)
+                    .font(.title)
                 
                 TopArea()
                 
@@ -243,7 +245,12 @@ struct BotArea: View {
                 AppManager.appManager.state = .gameScene
             } label: {
                 Text("Return")
+                    .foregroundColor(Color.white)
+
             }
+            .frame(width: 120, height: 30)
+            .background(Color.blue)
+            .cornerRadius(15)
             
             Spacer()
             
@@ -251,7 +258,12 @@ struct BotArea: View {
                 applyResearch()
             } label: {
                 Text("Research")
+                    .foregroundColor(Color.white)
+
             }
+            .frame(width: 120, height: 30)
+            .background(Color.blue)
+            .cornerRadius(15)
             
             Spacer()
             
