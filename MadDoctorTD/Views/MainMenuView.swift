@@ -28,7 +28,7 @@ struct MainMenuView: View {
                             
                             GameManager.instance.isGameOver = true
                             GameManager.instance.isPaused = false
-                            GameScene.instance?.resetGameScene()
+                            GameScene.instance!.resetGameScene()
                             
                         }
                         appManager.state = .gameScene
@@ -54,6 +54,7 @@ struct MainMenuView: View {
                 }
                 .foregroundColor(.white)
                 .font(.title)
+                .shadow(color: .black, radius: 5, x: 0, y: 0)
             }
         
             
