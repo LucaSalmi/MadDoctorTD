@@ -61,6 +61,8 @@ struct GameSceneView: View {
                 else {
                     HStack {
                         
+                        Spacer()
+                        
                         Text("$ = \(gameManager.currentMoney)")
                             .foregroundColor(.white)
                         
@@ -75,6 +77,11 @@ struct GameSceneView: View {
                         } label: {
                             Text("Pause")
                         }
+                        
+                        Spacer()
+                        
+                        Text("Base HP = \(gameManager.baseHp)")
+                            .foregroundColor(.white)
                         
                         Spacer()
                         
