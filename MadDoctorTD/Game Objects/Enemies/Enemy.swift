@@ -223,7 +223,7 @@ class Enemy: SKSpriteNode{
             progressBar.removeFromParent()
             self.removeFromParent()
             print("Current enemy wave count = \(EnemyNodes.enemiesNode.children.count)")
-            SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX )
+            SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!)
         }
         
     }

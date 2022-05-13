@@ -20,6 +20,11 @@ struct SettingsView: View {
                 .font(.largeTitle)
             
             Toggle("Music", isOn: $gameManager.isMusicOn)
+                .onChange(of: gameManager.isMusicOn) { value in
+                    if !gameManager.isMusicOn {
+                        SoundManager.stopMusic()
+                    }
+                }
             
             Toggle("SFX", isOn: $gameManager.isSfxOn)
             

@@ -125,7 +125,7 @@ struct GameSceneView: View {
                     Button {
                         communicator.buildFoundation()
                         //SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
-                        SoundManager.playSFX(sfxName: SoundManager.foundationPlacementSFX)
+                        SoundManager.playSFX(sfxName: SoundManager.foundationPlacementSFX, scene: GameScene.instance!)
 
                         //ADD CODE FOR BUILDINGSOUND
                         
