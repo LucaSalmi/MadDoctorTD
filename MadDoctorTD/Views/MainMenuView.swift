@@ -24,7 +24,13 @@ struct MainMenuView: View {
                         .font(.largeTitle)
                     
                     Button {
-                        //communicator.animateDoors = true
+                        if GameScene.instance != nil{
+                            
+                            GameManager.instance.isGameOver = true
+                            GameManager.instance.isPaused = false
+                            GameScene.instance?.resetGameScene()
+                            
+                        }
                         appManager.state = .gameScene
                     } label: {
                         Label("New Game", systemImage: "play.circle")
