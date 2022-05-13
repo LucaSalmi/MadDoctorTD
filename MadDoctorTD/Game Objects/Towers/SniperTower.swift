@@ -30,11 +30,11 @@ class SniperTower: Tower{
         projectileType = ProjectileTypes.sniperProjectile
     
         
-        attackDamage = Int(Double(attackDamage) * 10)
+        attackDamage = Int(Double(attackDamage) * 5)
         
-        fireRate = Int(Double(fireRate) * 15)
+        fireRate = Int(Double(fireRate) * 20)
         
-        attackRange = attackRange * 1.5
+        attackRange = attackRange * 1.8
         
         sniperLegs = SKSpriteNode(texture: SKTexture(imageNamed: "sniper_tower_static_legs"), color: .clear, size: TowerData.TEXTURE_SIZE)
         

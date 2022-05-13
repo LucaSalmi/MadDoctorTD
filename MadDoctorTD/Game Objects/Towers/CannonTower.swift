@@ -23,11 +23,11 @@ class CannonTower: Tower{
         
         projectileType = ProjectileTypes.sniperProjectile
         
-        attackDamage = Int(Double(attackDamage) * 10)
+        attackDamage = Int(Double(attackDamage) * 4)
         
-        fireRate = Int(Double(fireRate) * 15)
+        fireRate = Int(Double(fireRate) * 12)
         
-        attackRange = attackRange * 1.5
+        attackRange = attackRange * 0.8
         
     }
     
