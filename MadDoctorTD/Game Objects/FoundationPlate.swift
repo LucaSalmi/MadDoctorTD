@@ -283,24 +283,27 @@ class FoundationPlate: SKSpriteNode{
     
     func onDestroy() {
         
-            warningTexture?.removeFromParent()
-            crackTexture?.removeFromParent()
-            self.removeFromParent()
-            builtUponTile.self?.containsFoundation = false
+        warningTexture?.removeFromParent()
+        crackTexture?.removeFromParent()
+        self.removeFromParent()
+        builtUponTile.self?.containsFoundation = false
+        
+        GameSceneCommunicator.instance.updateFoundationPower()
+        GameSceneCommunicator.instance.updateFoundationTexture()
+        
+        for node in TowerNode.towersNode.children{
+                            
+            let tower = node as! Tower
             
-            GameSceneCommunicator.instance.updateFoundationPower()
-            GameSceneCommunicator.instance.updateFoundationTexture()
-            
-            for node in TowerNode.towersNode.children{
-                                
-                let tower = node as! Tower
+            if tower.builtUponFoundation == self{
                 
-                if tower.builtUponFoundation == self{
-                    
-                    tower.onDestroy()
-                }
+                tower.onDestroy()
             }
         }
-    
+        
+        if !GameSceneCommunicator.instance.isBuildPhase {
+            GameScene.instance!.pathfindingTestEnemy!.updatePathfinding()
+        }
+    }
     
 }
