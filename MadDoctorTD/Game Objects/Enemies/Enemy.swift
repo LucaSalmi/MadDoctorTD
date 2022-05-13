@@ -15,6 +15,7 @@ class Enemy: SKSpriteNode{
     var isMoving: Bool = false
     var hp = EnemiesData.BASE_HP
     var movePoints = [CGPoint]()
+    var oldMovePoints = [CGPoint]()
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
     var enemyType: EnemyTypes = .standard
@@ -125,6 +126,7 @@ class Enemy: SKSpriteNode{
                 
             }
             
+            oldMovePoints.append(movePoints[0])
             movePoints.remove(at: 0)
         }
     }
@@ -316,6 +318,57 @@ class Enemy: SKSpriteNode{
         return newMovePoints
     }
 
-    
+    func updatePathfinding() {
+        
+        //Store old move points
+        let oldMovePoints = movePoints
+        
+        //Get new move points
+        movePoints = getMovePoints()
+        
+        var commonConnectingPoint = movePoints[0]
+        
+        for i in 0..<movePoints.count {
+            
+            if oldMovePoints.count-1 > i || movePoints.count-1 > i {
+                break
+            }
+            
+            if oldMovePoints[i].x == movePoints[i].x && oldMovePoints[i].y == movePoints[i].y {
+                commonConnectingPoint = oldMovePoints[i]
+            }
+            else {
+                break
+            }
+                
+        }
+        
+        for node in EnemyNodes.enemiesNode.children {
+            let enemy = node as! Enemy
+            
+            //If enemy has not reached new connecting point, it gets the new path
+            if enemy.movePoints.contains(commonConnectingPoint) {
+                enemy.movePoints = movePoints
+                
+                if enemy.oldMovePoints.isEmpty {
+                    continue
+                }
+                
+                for i in 0..<enemy.oldMovePoints.count {
+                    if enemy.movePoints.count-1 > i {
+                        break
+                    }
+                    if enemy.oldMovePoints[i].x == enemy.movePoints[i].x &&
+                            enemy.oldMovePoints[i].y == enemy.movePoints[i].y {
+                        
+                        enemy.movePoints.remove(at: i)
+                        
+                    }
+                        
+                }
+            }
+        }
+        
+    }
     
 }
