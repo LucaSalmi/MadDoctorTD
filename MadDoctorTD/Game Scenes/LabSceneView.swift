@@ -69,7 +69,7 @@ struct TopArea: View {
             
             Button {
                 communicator.selectType(type: .gunTower)
-                SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, sfxExtension: SoundManager.bgmExtension)
+                SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 print("gunTower button pressed")
             } label: {
                 Image("blast_tower")
@@ -79,7 +79,7 @@ struct TopArea: View {
             
             Button {
                 communicator.selectType(type: .rapidFireTower)
-                SoundManager.playSFX(sfxName: SoundManager.buttonTwoSFX, sfxExtension: SoundManager.bgmExtension)
+                SoundManager.playSFX(sfxName: SoundManager.buttonTwoSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 print("rapidFire button pressed")
             } label: {
                 Image("speed_tower")
@@ -89,7 +89,7 @@ struct TopArea: View {
             
             Button {
                 communicator.selectType(type: .sniperTower)
-                SoundManager.playSFX(sfxName: SoundManager.buttonThreeSFX, sfxExtension: SoundManager.bgmExtension)
+                SoundManager.playSFX(sfxName: SoundManager.buttonThreeSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 print("sniperTower button pressed")
             } label: {
                 ZStack {
@@ -104,7 +104,7 @@ struct TopArea: View {
             
             Button {
                 communicator.selectType(type: .cannonTower)
-                SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, sfxExtension: SoundManager.bgmExtension)
+                SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 print("cannonTower button pressed")
             } label: {
                 Image("cannon_tower")

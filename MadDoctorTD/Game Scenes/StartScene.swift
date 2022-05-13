@@ -26,7 +26,7 @@ class StartScene: SKScene{
         doorTwo = self.childNode(withName: "DoorTwo")
 
         print("GAME STARTED")
-        SoundManager.playBGMsfxExtension(bgmString: SoundManager.airlockDoorsTheme)
+        SoundManager.playBGM(bgmString: SoundManager.airlockDoorsTheme, bgmExtension: SoundManager.wavExtension)
         
     }
     

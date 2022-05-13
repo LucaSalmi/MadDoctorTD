@@ -37,7 +37,7 @@ class CannonTower: Tower{
             let projectile = CannonProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
             
             //SoundManager.playMortarSwooshSFX()
-            SoundManager.playSFX(sfxName: SoundManager.cannonShotFiredSFX, sfxExtension: SoundManager.bgmExtension)
+            SoundManager.playSFX(sfxName: SoundManager.cannonShotFiredSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             ProjectileNodes.projectilesNode.addChild(projectile)
             currentFireRateTick = fireRate
         }

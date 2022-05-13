@@ -11,8 +11,8 @@ import AVFAudio
 
 class SoundManager {
 
-    static let sfxExtension = ".wav" // with . (dot)
-    static let bgmExtension = "mp3" // without . (dot)
+    static let wavExtension = ".wav" // with . (dot)
+    static let mp3Extension = "mp3" // without . (dot)
     
     //Tracks name: String
     
@@ -50,16 +50,15 @@ class SoundManager {
     
     static var musicPlayer: AVAudioPlayer!
 
-    static func playSFX(sfxName: String, sfxExtension: String = SoundManager.sfxExtension) {
+    static func playSFX(sfxName: String, scene: SKScene, sfxExtension: String = SoundManager.wavExtension) {
         
-        guard let gameScene = GameScene.instance else { return }
         let gameManager = GameManager.instance
         if !gameManager.isSfxOn{
             return
         }
         let sfx = sfxName + sfxExtension
         let sfxAction = SKAction.playSoundFileNamed(sfx, waitForCompletion: false)
-        gameScene.run(sfxAction)
+        scene.run(sfxAction)
         
     }
 
@@ -68,7 +67,7 @@ class SoundManager {
         let rand = Int.random(in:1...5)
         let sniperSound = "sniper_bullet_fly_by_\(rand)"
         
-        playSFX(sfxName: sniperSound)
+        playSFX(sfxName: sniperSound, scene: GameScene.instance!)
 
     }
 
@@ -77,11 +76,11 @@ class SoundManager {
         let rand = Int.random(in:1...7)
         let mortarSwoosh = "mortar_swoosh\(rand)."
 
-        playSFX(sfxName: mortarSwoosh, sfxExtension: SoundManager.bgmExtension)
+        playSFX(sfxName: mortarSwoosh, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
 
     }
     
-    static func playBGM(bgmString: String) {
+    static func playBGM(bgmString: String, bgmExtension: String = SoundManager.mp3Extension) {
         
         musicPlayer?.stop()
         
@@ -89,7 +88,7 @@ class SoundManager {
             return
         }
         
-        let bgm = Bundle.main.path(forResource: bgmString, ofType: SoundManager.bgmExtension)
+        let bgm = Bundle.main.path(forResource: bgmString, ofType: bgmExtension)
         
         do {
             let url = URL(fileURLWithPath: bgm!)
@@ -97,27 +96,6 @@ class SoundManager {
             
         } catch {
             
-        }
-        musicPlayer!.play()
-        musicPlayer!.numberOfLoops = -1
-    }
-
-    static func playBGMsfxExtension(bgmString: String) {
-
-        musicPlayer?.stop()
-
-        if !GameManager.instance.isMusicOn {
-            return
-        }
-
-        let bgm = Bundle.main.path(forResource: bgmString, ofType: SoundManager.sfxExtension)
-
-        do {
-            let url = URL(fileURLWithPath: bgm!)
-            musicPlayer = try AVAudioPlayer(contentsOf: url)
-
-        } catch {
-
         }
         musicPlayer!.play()
         musicPlayer!.numberOfLoops = -1
