@@ -82,9 +82,12 @@ class Enemy: SKSpriteNode{
         progressBar = SKShapeNode(rectOf: CGSize(width: hp, height: 20))
         progressBar.fillColor = .cyan
         progressBar.position = CGPoint(x: self.position.x, y: self.position.y + 30)
-        GameScene.instance?.addChild(progressBar)
+        GameScene.instance?.hpBarsNode.addChild(progressBar)
         
         if movePoints.isEmpty {
+            GameManager.instance.getDamage()
+            progressBar.removeFromParent()
+            self.removeFromParent()
             return
         }
         

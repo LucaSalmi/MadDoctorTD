@@ -53,6 +53,10 @@ struct GameSceneView: View {
                         .background(Color.white.opacity(0.5))
                     
                         
+                }else if GameManager.instance.isGameOver{
+                    
+                    GameOverView()
+                    
                 }
                 else {
                     HStack {
@@ -90,9 +94,6 @@ struct GameSceneView: View {
                             
                             Button {
                                 AppManager.appManager.state = .labMenu
-                                //SoundManager.stopMusic()
-                            
-                                //SoundManager.playSFX(sfxName: SoundManager.switchToResearchRoomSFX, sfxExtension: SoundManager.bgmExtension)
                                 SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
 
                             } label: {
@@ -105,7 +106,7 @@ struct GameSceneView: View {
                                 GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
                                 communicator.isBuildPhase = false
                                 GameScene.instance!.waveManager!.shouldCreateWave = true
-                                //SoundManager.playBGM(bgmString: SoundManager.filteredMainThemeBackgroundMusic)
+                                GameSceneCommunicator.instance.cancelAllMenus()
                                 SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
                                 
                             } label: {
