@@ -27,10 +27,10 @@ class Enemy: SKSpriteNode{
     var attackPower: Int = EnemiesData.BASE_ATTACK_POWER_VALUE
     var attackSpeed: Int = EnemiesData.BASE_ATTACK_SPEED_VALUE
     var attackCounter: Int = 0
-    
-    var progressBar = SKShapeNode()
+
     var startHp = 0
     
+    var hpBar: SKSpriteNode?
     var killValue = EnemiesData.BASE_KILL_VALUE
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,6 +38,8 @@ class Enemy: SKSpriteNode{
     }
     
     init(texture: SKTexture, color: UIColor){
+        
+        
         
         let tempColor = UIColor(.indigo)
         super.init(texture: texture, color: tempColor, size: EnemiesData.SIZE)
@@ -52,15 +54,25 @@ class Enemy: SKSpriteNode{
             hp += GameScene.instance!.waveManager!.waveNumber * 5
         }
         
+        hpBar = SKSpriteNode(texture: SKTexture(imageNamed: "hp_bar_100"))
+        hpBar!.size.width = 70
+        hpBar!.size.height = 15
+        hpBar!.position = self.position
+        hpBar!.alpha = 0
+        GameScene.instance!.addChild(hpBar!)
         self.name = "Enemy"
-        progressBar = SKShapeNode(rectOf: CGSize(width: hp, height: 10))
-        
-        progressBar.fillColor = .cyan
 
     }
     
     
     func update(){
+        
+        if hpBar!.alpha < 1 {
+            hpBar!.alpha = 1
+        }
+        
+        hpBar!.position.x = self.position.x
+        hpBar!.position.y = self.position.y + 35
         
         if !isMoving {
             movePoints = GameScene.instance!.pathfindingTestEnemy!.movePoints
@@ -74,15 +86,6 @@ class Enemy: SKSpriteNode{
                 movePoints = [finalPoint]
             }
         }
-        
-        if progressBar.parent != nil{
-            progressBar.removeFromParent()
-        }
-        
-        progressBar = SKShapeNode(rectOf: CGSize(width: hp, height: 20))
-        progressBar.fillColor = .cyan
-        progressBar.position = CGPoint(x: self.position.x, y: self.position.y + 30)
-        GameScene.instance?.hpBarsNode.addChild(progressBar)
         
         if movePoints.isEmpty {
             GameManager.instance.getDamage()
@@ -229,13 +232,59 @@ class Enemy: SKSpriteNode{
         
         if hp <= 0{
             
+            hpBar!.removeFromParent()
+            
             GameManager.instance.currentMoney += self.killValue
             print("KILL VALUE = \(GameManager.instance.currentMoney)")
-            progressBar.removeFromParent()
+            
             self.removeFromParent()
             print("Current enemy wave count = \(EnemyNodes.enemiesNode.children.count)")
-            SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!)
+            SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+            
         }
+        
+        if hp <= Int(Double(EnemiesData.BASE_HP) * 0.1) {
+            //TODO: 10% HERE
+            hpBar!.texture = SKTexture(imageNamed: "hp_bar_10")
+        }
+        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.2){
+            //TODO: 20% HERE
+            hpBar?.texture = SKTexture(imageNamed: "hp_bar_20")
+        }
+        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.3){
+            //TODO: 30% HERE
+            hpBar?.texture = SKTexture(imageNamed: "hp_bar_30")
+        }
+        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.4){
+            //TODO: 40% HERE
+            hpBar?.texture = SKTexture(imageNamed: "hp_bar_40")
+        }
+        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.5){
+            //TODO: 50% HERE
+            hpBar?.texture = SKTexture(imageNamed: "hp_bar_50")
+        }
+        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.6){
+            //TODO: 60% HERE
+            hpBar?.texture = SKTexture(imageNamed: "hp_bar_60")
+        }
+        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.7){
+            //TODO: 70% HERE
+            hpBar?.texture = SKTexture(imageNamed: "hp_bar_70")
+        }
+        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.8){
+            //TODO: 80% HERE
+            hpBar?.texture = SKTexture(imageNamed: "hp_bar_80")
+        }
+        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.9){
+            //TODO: 90% HERE
+            hpBar!.texture = SKTexture(imageNamed: "hp_bar_90")
+        }
+        
+        
+        
+        
+        
+        
         
     }
     
