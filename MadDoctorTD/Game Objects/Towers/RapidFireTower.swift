@@ -25,7 +25,7 @@ class RapidFireTower: Tower{
                 
         projectileType = ProjectileTypes.rapidFireProjectile
     
-        attackDamage = Int(Double(attackDamage) * 0.5)
+        attackDamage = Int(Double(attackDamage) * 0.8)
         
         fireRate = Int(Double(fireRate) * 0.5)
         
