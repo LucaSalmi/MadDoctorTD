@@ -54,6 +54,7 @@ struct MainMenuView: View {
                 }
                 .foregroundColor(.white)
                 .font(.title)
+                .shadow(color: .black, radius: 5, x: 0, y: 0)
             }
         
             
