@@ -47,6 +47,10 @@ class Enemy: SKSpriteNode{
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
         
+        if GameScene.instance!.waveManager != nil{
+            hp += GameScene.instance!.waveManager!.waveNumber * 5
+        }
+        
         self.name = "Enemy"
         progressBar = SKShapeNode(rectOf: CGSize(width: hp, height: 10))
         

@@ -23,7 +23,11 @@ class GunTower: Tower{
                 
         projectileType = ProjectileTypes.gunProjectile
     
-        attackDamage = Int(Double(attackDamage) * 0.8)
+        attackDamage = Int(Double(attackDamage) * 1.2)
+        
+        fireRate = Int(Double(fireRate) * 1.2)
+        
+        attackRange = attackRange * 1
         
         //attackRange = attackRange * 0.1
     }
