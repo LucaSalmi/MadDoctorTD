@@ -167,8 +167,10 @@ class Enemy: SKSpriteNode{
                 
                 if precedentTargetPosition!.x + 86 == node.position.x || precedentTargetPosition!.x - 86 == node.position.x {
                     
-                    return node.position
-                    
+                    let plate = node as! FoundationPlate
+                    if !plate.isStartingFoundation{
+                        return node.position
+                    }
                 }
             }
         }
