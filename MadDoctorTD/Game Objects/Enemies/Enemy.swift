@@ -87,9 +87,10 @@ class Enemy: SKSpriteNode{
             }
         }
         
-        
-        
         if movePoints.isEmpty {
+            GameManager.instance.getDamage()
+            progressBar.removeFromParent()
+            self.removeFromParent()
             return
         }
         

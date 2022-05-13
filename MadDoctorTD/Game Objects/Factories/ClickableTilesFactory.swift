@@ -54,7 +54,7 @@ class ClickableTileFactory: ClickableTileCreator{
         }
         
         ClickableTilesNodes.clickableTilesNode.name = "ClickableTiles"
-        clickableTileMap.removeFromParent()
+        //clickableTileMap.removeFromParent()
         
     }
     
