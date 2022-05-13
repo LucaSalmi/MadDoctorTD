@@ -155,7 +155,6 @@ class GameScene: SKScene {
         let previousPosition = touch.previousLocation(in: self)
         let translation = CGPoint(x: (positionInScene.x) - (previousPosition.x), y: (positionInScene.y) - (previousPosition.y))
         panForTranslation(translation)
-        //touchesBegan(touches, with: event)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -173,11 +172,6 @@ class GameScene: SKScene {
         communicator.cancelAllMenus()
         
         guard let touch = touches.first else {return}
-        
-        //let location = touch.location(in: self)
-        //let touchedNode = self.nodes(at: location)
-        
-        //guard let node = touchedNode.first else {return}
         
         let location = touch.location(in: self)
         let touchedNodes = nodes(at: location)
@@ -210,7 +204,8 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         
-        //Update code
+        //Runs every frame
+        
         if GameManager.instance.isPaused || GameManager.instance.isGameOver{
             return
         }
