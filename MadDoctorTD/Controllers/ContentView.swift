@@ -60,6 +60,7 @@ struct ContentView: View {
              */
             
         }
+        .statusBar(hidden: true)
 
     }
 

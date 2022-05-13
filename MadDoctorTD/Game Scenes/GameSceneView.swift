@@ -23,7 +23,7 @@ struct GameSceneView: View {
         else {
             gameScene = GameScene.instance!
         }
-        gameScene.scaleMode = .aspectFit
+        gameScene.scaleMode = .aspectFill
         communicator.cancelAllMenus()
 
     }
@@ -147,6 +147,7 @@ struct GameSceneView: View {
                     }
 
                 }.font(.title)
+                    .background(.black.opacity(0.5))
             }
             if communicator.showTowerMenu{
                 
@@ -173,6 +174,17 @@ struct GameSceneView: View {
                         Text("Build Sniper Tower")
                     }.disabled(gameManager.sniperTowerUnlocked ? false : true)
 
+                    //Foundation options:
+                    Button {
+                        communicator.repairFoundation()
+                    } label: {
+                        Text("Repair Foundation")
+                    }
+                    Button {
+                        communicator.upgradeFoundation()
+                    } label: {
+                        Text("Upgrade Foundation")
+                    }
                     Button {
                         communicator.sellFoundation()
                     } label: {
@@ -186,6 +198,7 @@ struct GameSceneView: View {
                     }
 
                 }.font(.title)
+                    .background(.black.opacity(0.5))
                 
             }
             if communicator.showUpgradeMenu{
@@ -214,9 +227,24 @@ struct GameSceneView: View {
                     } label: {
                         Text("Sell tower")
                     }
+                    
+                    //Foundation options:
+                    Button {
+                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
+                        communicator.repairFoundation()
+                    } label: {
+                        Text("Repair Foundation")
+                    }
+                    Button {
+                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
+                        communicator.upgradeFoundation()
+                    } label: {
+                        Text("Upgrade Foundation")
+                    }
 
                 }.font(.title)
                     .foregroundColor(communicator.currentTower!.upgradeCount <= TowerData.MAX_UPGRADE ? Color.white : Color.gray)
+                    .background(.black.opacity(0.5))
                     
             }
         }
