@@ -28,7 +28,7 @@ struct MainMenuView: View {
                             
                             GameManager.instance.isGameOver = true
                             GameManager.instance.isPaused = false
-                            GameScene.instance?.resetGameScene()
+                            GameScene.instance!.resetGameScene()
                             
                         }
                         appManager.state = .gameScene
