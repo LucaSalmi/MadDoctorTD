@@ -129,6 +129,7 @@ class GameScene: SKScene {
         
         //build phase pathfinding test
         pathfindingTestEnemy = Enemy(texture: SKTexture(imageNamed: "joystick"), color: .clear)
+        pathfindingTestEnemy?.alpha = 0
         let spawnPoint = childNode(withName: "SpawnPoint")
         pathfindingTestEnemy!.position = spawnPoint!.position
         pathfindingTestEnemy!.movePoints = pathfindingTestEnemy!.getMovePoints()
