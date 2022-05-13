@@ -53,6 +53,8 @@ class FoundationPlateFactory: FoundationPlateCreator{
             return
         }
         
+        print("map found")
+        
         for row in 0..<startFoundationMap.numberOfRows{
             for column in 0..<startFoundationMap.numberOfColumns{
                 
@@ -78,7 +80,7 @@ class FoundationPlateFactory: FoundationPlateCreator{
             foundationPlate.updateFoundationsTexture()
         }
 
-        startFoundationMap.removeFromParent()
+        //startFoundationMap.removeFromParent()
         
     }
 }
