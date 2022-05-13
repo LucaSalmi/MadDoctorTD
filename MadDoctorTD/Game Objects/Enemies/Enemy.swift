@@ -59,7 +59,7 @@ class Enemy: SKSpriteNode{
         hpBar!.size.height = 15
         hpBar!.position = self.position
         hpBar!.alpha = 0
-        GameScene.instance!.addChild(hpBar!)
+        GameScene.instance!.hpBarsNode.addChild(hpBar!)
         self.name = "Enemy"
 
     }
@@ -89,7 +89,6 @@ class Enemy: SKSpriteNode{
         
         if movePoints.isEmpty {
             GameManager.instance.getDamage()
-            progressBar.removeFromParent()
             self.removeFromParent()
             return
         }
@@ -279,13 +278,6 @@ class Enemy: SKSpriteNode{
             //TODO: 90% HERE
             hpBar!.texture = SKTexture(imageNamed: "hp_bar_90")
         }
-        
-        
-        
-        
-        
-        
-        
     }
     
     private func hasReachedPoint(point: CGPoint) -> Bool {

@@ -81,15 +81,15 @@ class GameScene: SKScene {
     private func setupCamera(){
         
         let myCamera = self.camera
-        let backgroundMap = (childNode(withName: "background") as! SKTileMapNode)
+        let backgroundMap = (childNode(withName: "superBackground") as! SKTileMapNode)
         
-        let xInset = min((view?.bounds.width)!/2*camera!.xScale, backgroundMap.frame.width/2)
-        let yInset = min((view?.bounds.height)!/2*camera!.yScale, backgroundMap.frame.height/2)
+        let xInset = min((view?.bounds.width)!/2, backgroundMap.frame.width/2)
+        let yInset = min((view?.bounds.height)!/2, backgroundMap.frame.height/2)
         
         let constrainRect = backgroundMap.frame.insetBy(dx: xInset, dy: yInset)
         
-        let xRange = SKRange(lowerLimit: constrainRect.minX/2, upperLimit: constrainRect.maxX/2)
-        let yRange = SKRange(lowerLimit: constrainRect.minY/1.5, upperLimit: constrainRect.maxY)
+        let xRange = SKRange(lowerLimit: constrainRect.minX/4, upperLimit: constrainRect.maxX/4)
+        let yRange = SKRange(lowerLimit: constrainRect.minY/6, upperLimit: constrainRect.maxY/6)
         
         let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
         edgeConstraint.referenceNode = backgroundMap
