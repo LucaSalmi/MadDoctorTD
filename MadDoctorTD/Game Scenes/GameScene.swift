@@ -151,6 +151,21 @@ class GameScene: SKScene {
             return
         }
         
+        if GameSceneCommunicator.instance.foundationEditMode {
+            
+            guard let touch = touches.first else {return}
+            
+            let location = touch.location(in: self)
+            let touchedNode = nodes(at: location).first
+            
+            if touchedNode is ClickableTile {
+                let clickableTile = touchedNode as! ClickableTile
+                clickableTile.onClick()
+            }
+            
+            return
+        }
+        
         let touch : UITouch = touches.first!
         let positionInScene = touch.location(in: self)
         let previousPosition = touch.previousLocation(in: self)
