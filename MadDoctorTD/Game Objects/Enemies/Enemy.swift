@@ -64,6 +64,10 @@ class Enemy: SKSpriteNode{
 
     }
     
+    func changeTooAtkTexture() {
+        // overiding in subclasses for specific texrures (ex. slime_fast_atker...))
+    }
+    
     
     func update(){
         

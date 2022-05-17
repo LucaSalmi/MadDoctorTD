@@ -145,14 +145,7 @@ class GameScene: SKScene {
         pathfindingTestEnemy!.movePoints = pathfindingTestEnemy!.getMovePoints()
         addChild(pathfindingTestEnemy!)
         
-        var enemyChoices = [EnemyTypes]()
-        
-        enemyChoices.append(.standard)
-        enemyChoices.append(.flying)
-        enemyChoices.append(.heavy)
-        enemyChoices.append(.fast)
-        
-        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoices, enemyRace: .slime)
+        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard], enemyRace: .slime)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
