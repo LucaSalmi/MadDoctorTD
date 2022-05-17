@@ -28,6 +28,7 @@ class GameScene: SKScene {
     
     var rangeIndicator: SKShapeNode?
     
+    var clickableTileGridsNode = SKNode()
     var isMovingCamera = false
     
     required init?(coder aDecoder: NSCoder) {
@@ -79,8 +80,12 @@ class GameScene: SKScene {
         setupEnemies()
         addChild(EnemyNodes.enemiesNode)
         addChild(hpBarsNode)
+        
+        addChild(clickableTileGridsNode)
+
         addChild(towerIndicatorsNode)
         addChild(foundationIndicatorsNode)
+
     }
     
     private func setupCamera(){
@@ -155,7 +160,26 @@ class GameScene: SKScene {
         if GameManager.instance.isPaused {
             return
         }
-        isMovingCamera = true
+        
+        if GameSceneCommunicator.instance.foundationEditMode {
+            
+            guard let touch = touches.first else {return}
+            
+            let location = touch.location(in: self)
+            let touchedNodes = nodes(at: location)
+            
+            for touchedNode in touchedNodes {
+                if touchedNode is ClickableTile {
+                    let clickableTile = touchedNode as! ClickableTile
+                    clickableTile.onClick()
+                    break
+                }
+            }
+            
+            return
+            
+        }
+        
         let touch : UITouch = touches.first!
         let positionInScene = touch.location(in: self)
         let previousPosition = touch.previousLocation(in: self)
@@ -166,6 +190,10 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if GameManager.instance.isPaused {
+            return
+        }
+        
+        if GameSceneCommunicator.instance.foundationEditMode {
             return
         }
         
@@ -198,11 +226,13 @@ class GameScene: SKScene {
                 foundationPlate.onClick()
                 break
             }
+            /*
             else if node is ClickableTile {
                 let clickableTile = node as! ClickableTile
                 clickableTile.onClick()
                 break
             }
+             */
         }
     }
     
@@ -302,6 +332,7 @@ class GameScene: SKScene {
         GameManager.instance.currentWave = 0
         GameManager.instance.nextWaveCounter = 0
         
+        clickableTileGridsNode.removeFromParent()
     }
 
     
