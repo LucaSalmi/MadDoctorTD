@@ -16,7 +16,7 @@ class GameScene: SKScene {
     static var instance: GameScene? = nil
     
     var previousCameraScale = CGFloat()
-
+    
     var edgesTilesNode: SKNode = SKNode()
     var hpBarsNode: SKNode = SKNode()
     
@@ -31,6 +31,8 @@ class GameScene: SKScene {
     var touchingTower: SKSpriteNode? = nil
     
     var snappedToFoundation: FoundationPlate? = nil
+    
+    var uiNode = SKNode()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -51,10 +53,7 @@ class GameScene: SKScene {
         physicsWorld.contactDelegate = self
         gameSetup()
         
-        let uiScene = SKScene(fileNamed: "TowerMenuScene")
-        towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
-        towerUI!.removeFromParent()
-        self.camera!.addChild(towerUI!)
+        
         
         
         
@@ -90,6 +89,13 @@ class GameScene: SKScene {
         setupEnemies()
         addChild(EnemyNodes.enemiesNode)
         addChild(hpBarsNode)
+        
+        
+        let uiScene = SKScene(fileNamed: "TowerMenuScene")
+        towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
+        towerUI!.removeFromParent()
+        self.camera!.addChild(towerUI!)
+        self.addChild(uiNode)
         
     }
     
@@ -172,7 +178,7 @@ class GameScene: SKScene {
         if touchingTower != nil{
             
             touchingTower!.removeFromParent()
-            self.addChild(touchingTower!)
+            uiNode.addChild(touchingTower!)
             touchingTower?.position = location
             
             for node in FoundationPlateNodes.foundationPlatesNode.children{
@@ -223,6 +229,45 @@ class GameScene: SKScene {
             touchingTower!.position = gunTowerHub!.position
             
             
+        case "SpeedTower":
+            if snappedToFoundation != nil{
+                snappedToFoundation!.hasTower = true
+                TowerFactory(towerType: TowerTypes.rapidFireTower).createTower(currentFoundation: snappedToFoundation!)
+                GameManager.instance.currentMoney -= TowerData.BASE_COST
+                snappedToFoundation = nil
+            }
+            touchingTower!.removeFromParent()
+            towerUI?.addChild(touchingTower!)
+            
+            let gunTowerHub = towerUI?.childNode(withName: "SpeedTowerHub")
+            touchingTower!.position = gunTowerHub!.position
+            
+           
+        case "CannonTower":
+            if snappedToFoundation != nil{
+                snappedToFoundation!.hasTower = true
+                TowerFactory(towerType: TowerTypes.cannonTower).createTower(currentFoundation: snappedToFoundation!)
+                GameManager.instance.currentMoney -= TowerData.BASE_COST
+                snappedToFoundation = nil
+            }
+            touchingTower!.removeFromParent()
+            towerUI?.addChild(touchingTower!)
+            
+            let gunTowerHub = towerUI?.childNode(withName: "CannonTowerHub")
+            touchingTower!.position = gunTowerHub!.position
+            
+        case "SniperTower":
+            if snappedToFoundation != nil{
+                snappedToFoundation!.hasTower = true
+                TowerFactory(towerType: TowerTypes.sniperTower).createTower(currentFoundation: snappedToFoundation!)
+                GameManager.instance.currentMoney -= TowerData.BASE_COST
+                snappedToFoundation = nil
+            }
+            touchingTower!.removeFromParent()
+            towerUI?.addChild(touchingTower!)
+            
+            let gunTowerHub = towerUI?.childNode(withName: "SniperTowerHub")
+            touchingTower!.position = gunTowerHub!.position
             
         default:
             print("Error")
@@ -251,34 +296,63 @@ class GameScene: SKScene {
         let location = touch.location(in: self)
         let touchedNodes = nodes(at: location)
         
-        for node in touchedNodes {
+        guard let node = touchedNodes.first else{return}
+        
+        
+        if node.name == "GunTower"{
+            if TowerData.BASE_COST > GameManager.instance.currentMoney{
+                return
+            }
             
-            if node is Tower{
-                let tower = node as! Tower
-                tower.onClick()
-                break
-            }
-            else if node is FoundationPlate {
-                let foundationPlate = node as! FoundationPlate
-                foundationPlate.onClick()
-                break
-            }
-            else if node is ClickableTile {
-                let clickableTile = node as! ClickableTile
-                clickableTile.onClick()
-                break
-            }
-            else if node.name == "GunTower"{
-                if TowerData.BASE_COST > GameManager.instance.currentMoney{
-                    return
-                }
-                
-                touchingTower = node as? SKSpriteNode
-                touchingTower?.size = TowerData.TEXTURE_SIZE
-                
-                
-            }
+            touchingTower = node as? SKSpriteNode
+            touchingTower?.size = TowerData.TEXTURE_SIZE
+            
+            
         }
+        else if node.name == "SpeedTower"{
+            
+            if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.rapidFireTowerUnlocked{
+                return
+            }
+            
+            touchingTower = node as? SKSpriteNode
+            touchingTower?.size = TowerData.TEXTURE_SIZE
+        }
+        else if node.name == "CannonTower"{
+            
+            if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.cannonTowerUnlocked{
+                return
+            }
+            
+            touchingTower = node as? SKSpriteNode
+            touchingTower?.size = TowerData.TEXTURE_SIZE
+        }
+        else if node.name == "SniperTower"{
+            if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.sniperTowerUnlocked{
+                return
+            }
+            
+            touchingTower = node as? SKSpriteNode
+            touchingTower?.size = TowerData.TEXTURE_SIZE
+        }
+        
+        else if node is Tower{
+            let tower = node as! Tower
+            tower.onClick()
+            
+        }
+        else if node is FoundationPlate {
+            let foundationPlate = node as! FoundationPlate
+            foundationPlate.onClick()
+            
+        }
+        else if node is ClickableTile {
+            let clickableTile = node as! ClickableTile
+            clickableTile.onClick()
+            
+        }
+        
+        
     }
     
     
@@ -294,10 +368,16 @@ class GameScene: SKScene {
         if GameManager.instance.isPaused || GameManager.instance.isGameOver{
             return
         }
-
+        
         for node in TowerNode.towersNode.children {
             let tower = node as! Tower
             tower.update()
+        }
+        
+        if GameManager.instance.currentMoney < TowerData.BASE_COST{
+            for node in towerUI!.children{
+                node.alpha = 0.5
+            }
         }
         
         
@@ -367,8 +447,13 @@ class GameScene: SKScene {
         GameManager.instance.currentWave = 0
         GameManager.instance.nextWaveCounter = 0
         
+        //UI
+        self.camera!.removeAllChildren()
+        self.uiNode.removeFromParent()
+        
+        
     }
-
+    
     
     func panForTranslation(_ translation: CGPoint) {
         let position = camera!.position
@@ -391,7 +476,7 @@ class GameScene: SKScene {
         
         if newCameraScale < 0.5 || newCameraScale > 1.3{
             
-                return
+            return
             
         }
         
