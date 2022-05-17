@@ -142,9 +142,7 @@ struct GameSceneView: View {
                     }
                 }
             }
-            
-
-
+          
             if communicator.showTowerMenu{
                 
                 VStack(spacing: 25) {
