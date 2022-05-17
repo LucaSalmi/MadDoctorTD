@@ -166,58 +166,37 @@ struct GameSceneView: View {
                     .background(.black.opacity(0.5))
             }
 
-//            if communicator.showTowerMenu{
-//                
-//                VStack(spacing: 25) {
-//                    Text("Tower menu")
-//                    Button {
-//                        communicator.buildTower(type: TowerTypes.gunTower)
-//                    } label: {
-//                        Text("Build Gun Tower")
-//                    }
-//                    Button {
-//                        communicator.buildTower(type: TowerTypes.rapidFireTower)
-//                    } label: {
-//                        Text("Build Rapid Fire Tower")
-//                    }.disabled(gameManager.rapidFireTowerUnlocked ? false : true)
-//                    Button {
-//                        communicator.buildTower(type: TowerTypes.cannonTower)
-//                    } label: {
-//                        Text("Build Cannon Tower")
-//                    }.disabled(gameManager.cannonTowerUnlocked ? false : true)
-//                    Button {
-//                        communicator.buildTower(type: TowerTypes.sniperTower)
-//                    } label: {
-//                        Text("Build Sniper Tower")
-//                    }.disabled(gameManager.sniperTowerUnlocked ? false : true)
-//
-//                    //Foundation options:
-//                    Button {
-//                        communicator.repairFoundation()
-//                    } label: {
-//                        Text("Repair Foundation")
-//                    }.disabled(communicator.isBuildPhase ? false : true)
-//                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
-//                    Button {
-//                        communicator.upgradeFoundation()
-//                    } label: {
-//                        Text("Upgrade Foundation")
-//                    }.disabled(communicator.isBuildPhase ? false : true)
-//                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
-//                    Button {
-//                        communicator.sellFoundation()
-//                    } label: {
-//                        Text("Sell Foundation")
-//                    }.disabled(communicator.isBuildPhase ? false : true)
-//                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
-//                    Button {
-//                        communicator.cancelAllMenus()
-//                    } label: {
-//                        Text("Cancel")
-//                    }
-//
-//                }.font(.title)
-//                    .background(.black.opacity(0.5))
+            if communicator.showTowerMenu{
+                
+                VStack(spacing: 25) {
+
+                    //Foundation options:
+                    Button {
+                        communicator.repairFoundation()
+                    } label: {
+                        Text("Repair Foundation")
+                    }.disabled(communicator.isBuildPhase ? false : true)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
+                    Button {
+                        communicator.upgradeFoundation()
+                    } label: {
+                        Text("Upgrade Foundation")
+                    }.disabled(communicator.isBuildPhase ? false : true)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
+                    Button {
+                        communicator.sellFoundation()
+                    } label: {
+                        Text("Sell Foundation")
+                    }.disabled(communicator.isBuildPhase ? false : true)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
+                    Button {
+                        communicator.cancelAllMenus()
+                    } label: {
+                        Text("Cancel")
+                    }
+
+                }.font(.title)
+                    .background(.black.opacity(0.5))
 
                 
             }
@@ -272,4 +251,4 @@ struct GameSceneView: View {
     }
 
     
-
+}
