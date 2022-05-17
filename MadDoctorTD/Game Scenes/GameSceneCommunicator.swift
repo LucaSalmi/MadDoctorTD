@@ -21,6 +21,8 @@ class GameSceneCommunicator: ObservableObject {
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil
     
+    @Published var foundationEditMode: Bool = false
+    
     private init() {}
     
     func buildFoundation() {
