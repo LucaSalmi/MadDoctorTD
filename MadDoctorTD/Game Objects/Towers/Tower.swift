@@ -57,7 +57,7 @@ class Tower: SKSpriteNode{
         noPowerTexture.zPosition = self.zPosition + 1
         noPowerTexture.position = self.position
         noPowerTexture.alpha = 0
-        GameScene.instance!.addChild(noPowerTexture)
+        GameScene.instance!.towerIndicatorsNode.addChild(noPowerTexture)
         
         
     }
@@ -188,7 +188,7 @@ class Tower: SKSpriteNode{
             }
         }
     }
-    
+
     func onDestroy(){
         
         self.removeFromParent()

@@ -64,6 +64,10 @@ class Enemy: SKSpriteNode{
 
     }
     
+    func changeTooAtkTexture() {
+        // overiding in subclasses for specific texrures (ex. slime_fast_atker...))
+    }
+    
     
     func update(){
         
@@ -89,7 +93,9 @@ class Enemy: SKSpriteNode{
         
         if movePoints.isEmpty {
             GameManager.instance.getDamage()
+            self.hp = 0
             self.removeFromParent()
+            self.hpBar?.removeFromParent()
             return
         }
         
@@ -185,7 +191,6 @@ class Enemy: SKSpriteNode{
                 }
             }
         }
-        
         
         return nil
     }
@@ -394,6 +399,9 @@ class Enemy: SKSpriteNode{
         for node in EnemyNodes.enemiesNode.children {
             let enemy = node as! Enemy
             
+            if enemy.isAttacker{
+                return
+            }
             //If enemy has not reached new connecting point, it gets the new path
             if enemy.movePoints.contains(commonConnectingPoint) {
                 enemy.movePoints = movePoints
@@ -412,11 +420,11 @@ class Enemy: SKSpriteNode{
                         enemy.movePoints.remove(at: i)
                         
                     }
-                        
                 }
             }
         }
-        
     }
+    
+    
     
 }

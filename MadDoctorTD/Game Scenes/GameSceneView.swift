@@ -99,25 +99,41 @@ struct GameSceneView: View {
                             
                             Spacer()
                             
-                            Button {
-                                AppManager.appManager.state = .labMenu
-                                SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
+                            if !communicator.foundationEditMode {
+                                Button {
+                                    AppManager.appManager.state = .labMenu
+                                    SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
 
-                            } label: {
-                                Text("Research")
+                                } label: {
+                                    Text("Research")
+                                }
                             }
 
                             Spacer()
                             
                             Button {
-                                GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
-                                communicator.isBuildPhase = false
-                                GameScene.instance!.waveManager!.shouldCreateWave = true
-                                GameSceneCommunicator.instance.cancelAllMenus()
-                                SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
-                                
+                                communicator.foundationEditMode.toggle()
+                                if communicator.foundationEditMode == false {
+                                    communicator.confirmFoundationEdit()
+                                }
+                                communicator.toggleFoundationGrid()
                             } label: {
-                                Text("READY!")
+                                Text(communicator.foundationEditMode ? "Done" : "Edit")
+                            }
+                            
+                            Spacer()
+                            
+                            if !communicator.foundationEditMode {
+                                Button {
+                                    GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
+                                    communicator.isBuildPhase = false
+                                    GameScene.instance!.waveManager!.shouldCreateWave = true
+                                    GameSceneCommunicator.instance.cancelAllMenus()
+                                    SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
+                                    
+                                } label: {
+                                    Text("READY!")
+                                }
                             }
                             
                             Spacer()
@@ -149,58 +165,62 @@ struct GameSceneView: View {
                 }.font(.title)
                     .background(.black.opacity(0.5))
             }
-//            if communicator.showTowerMenu{
-//
-//                VStack(spacing: 25) {
-//                    Text("Tower menu")
-//                    Button {
-//                        communicator.buildTower(type: TowerTypes.gunTower)
-//                    } label: {
-//                        Text("Build Gun Tower")
-//                    }
-//                    Button {
-//                        communicator.buildTower(type: TowerTypes.rapidFireTower)
-//                    } label: {
-//                        Text("Build Rapid Fire Tower")
-//                    }.disabled(gameManager.rapidFireTowerUnlocked ? false : true)
-//                    Button {
-//                        communicator.buildTower(type: TowerTypes.cannonTower)
-//                    } label: {
-//                        Text("Build Cannon Tower")
-//                    }.disabled(gameManager.cannonTowerUnlocked ? false : true)
-//                    Button {
-//                        communicator.buildTower(type: TowerTypes.sniperTower)
-//                    } label: {
-//                        Text("Build Sniper Tower")
-//                    }.disabled(gameManager.sniperTowerUnlocked ? false : true)
-//
-//                    //Foundation options:
-//                    Button {
-//                        communicator.repairFoundation()
-//                    } label: {
-//                        Text("Repair Foundation")
-//                    }
-//                    Button {
-//                        communicator.upgradeFoundation()
-//                    } label: {
-//                        Text("Upgrade Foundation")
-//                    }
-//                    Button {
-//                        communicator.sellFoundation()
-//                    } label: {
-//                        Text("Sell Foundation")
-//                    }.disabled(communicator.isBuildPhase ? false : true)
-//                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
-//                    Button {
-//                        communicator.cancelAllMenus()
-//                    } label: {
-//                        Text("Cancel")
-//                    }
-//
-//                }.font(.title)
-//                    .background(.black.opacity(0.5))
+
+            if communicator.showTowerMenu{
                 
-            //}
+                VStack(spacing: 25) {
+                    Text("Tower menu")
+                    Button {
+                        communicator.buildTower(type: TowerTypes.gunTower)
+                    } label: {
+                        Text("Build Gun Tower")
+                    }
+                    Button {
+                        communicator.buildTower(type: TowerTypes.rapidFireTower)
+                    } label: {
+                        Text("Build Rapid Fire Tower")
+                    }.disabled(gameManager.rapidFireTowerUnlocked ? false : true)
+                    Button {
+                        communicator.buildTower(type: TowerTypes.cannonTower)
+                    } label: {
+                        Text("Build Cannon Tower")
+                    }.disabled(gameManager.cannonTowerUnlocked ? false : true)
+                    Button {
+                        communicator.buildTower(type: TowerTypes.sniperTower)
+                    } label: {
+                        Text("Build Sniper Tower")
+                    }.disabled(gameManager.sniperTowerUnlocked ? false : true)
+
+                    //Foundation options:
+                    Button {
+                        communicator.repairFoundation()
+                    } label: {
+                        Text("Repair Foundation")
+                    }.disabled(communicator.isBuildPhase ? false : true)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
+                    Button {
+                        communicator.upgradeFoundation()
+                    } label: {
+                        Text("Upgrade Foundation")
+                    }.disabled(communicator.isBuildPhase ? false : true)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
+                    Button {
+                        communicator.sellFoundation()
+                    } label: {
+                        Text("Sell Foundation")
+                    }.disabled(communicator.isBuildPhase ? false : true)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
+                    Button {
+                        communicator.cancelAllMenus()
+                    } label: {
+                        Text("Cancel")
+                    }
+
+                }.font(.title)
+                    .background(.black.opacity(0.5))
+
+                
+            }
             if communicator.showUpgradeMenu{
                 
                 VStack(spacing: 25){
