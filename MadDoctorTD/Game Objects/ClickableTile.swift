@@ -67,9 +67,9 @@ class ClickableTile: SKSpriteNode{
         for node in FoundationPlateNodes.foundationPlatesNode.children {
             let currentFoundationPlate = node as! FoundationPlate
             
-//            if !currentFoundationPlate.isPowered {
-//                continue
-//            }
+            if !currentFoundationPlate.isPowered {
+                continue
+            }
             
             if currentFoundationPlate.contains(leftPosition) || currentFoundationPlate.contains(rightPosition) ||
                 currentFoundationPlate.contains(topPosition) || currentFoundationPlate.contains(bottomPosition) {
