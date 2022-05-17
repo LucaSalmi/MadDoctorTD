@@ -99,6 +99,8 @@ class SlimeEnemy: Enemy{
             print("boss atker spawned")
             attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 20
             attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE / 4
+            killValue *= waveSlotSize
+            
         }
     }
     
