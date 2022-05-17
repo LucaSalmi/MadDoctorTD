@@ -62,7 +62,7 @@ enum UpgradeTypes: Int{
 
 
 enum EnemyTypes: Int{
-    case standard = 0, fast, heavy, flying
+    case standard = 0, fast, heavy, flying, boss
 }
 
 enum EnemyRaces: Int{
@@ -133,15 +133,18 @@ struct EnemiesData{
     static let FAST_HP_MODIFIER = 0.90
     static let HEAVY_HP_MODIFIER = 2.0
     static let FLY_HP_MODIFIER = 0.70
+    static let BOSS_HP_MODIFIER = 10.0
     
     static let FAST_SPEED_MODIFIER: CGFloat = 1.30
     static let HEAVY_SPEED_MODIFIER: CGFloat = 0.80
     static let FLY_SPEED_MODIFIER: CGFloat = 0.80
+    static let BOSS_SPEED_MODIFIER: CGFloat = 0.50
     
     static let STANDARD_ENEMY_SLOT = 1
     static let HEAVY_ENEMY_SLOT = 2
     static let FAST_ENEMY_SLOT = 1
     static let FLY_ENEMY_SLOT = 1
+    static let BOSS_ENEMY_SLOT = WaveData.LEVEL_WAVE_SIZE
     
     static let BASE_KILL_VALUE = 25
     

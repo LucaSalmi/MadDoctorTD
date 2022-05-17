@@ -49,6 +49,12 @@ class SquidEnemy: Enemy{
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FAST_SPEED_MODIFIER
             waveSlotSize = EnemiesData.FAST_ENEMY_SLOT
             
+        case .boss:
+            texture = SKTexture(imageNamed: "slime_boss_animation_1")
+            print("boss atker spawned")
+            attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 20
+            attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE / 4
+            
         }
 
         startHp = hp
