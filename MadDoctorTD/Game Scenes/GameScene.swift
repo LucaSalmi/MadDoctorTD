@@ -189,11 +189,13 @@ class GameScene: SKScene {
                 foundationPlate.onClick()
                 break
             }
+            /*
             else if node is ClickableTile {
                 let clickableTile = node as! ClickableTile
                 clickableTile.onClick()
                 break
             }
+             */
         }
     }
     
