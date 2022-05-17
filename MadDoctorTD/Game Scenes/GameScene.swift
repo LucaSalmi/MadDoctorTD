@@ -37,8 +37,8 @@ class GameScene: SKScene {
     var uiNode = SKNode()
 
     var clickableTileGridsNode = SKNode()
+    
     var isMovingCamera = false
-
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -313,10 +313,6 @@ class GameScene: SKScene {
             return
         }
         
-        if GameSceneCommunicator.instance.foundationEditMode {
-            return
-        }
-        
         if rangeIndicator != nil{
             rangeIndicator!.removeFromParent()
             
@@ -333,6 +329,11 @@ class GameScene: SKScene {
         
         let location = touch.location(in: self)
         let touchedNodes = nodes(at: location)
+        
+        if GameSceneCommunicator.instance.foundationEditMode {
+            communicator.editFoundationGrid(touchedNodes: touchedNodes)
+            return
+        }
         
         for node in touchedNodes {
             
@@ -535,7 +536,7 @@ class GameScene: SKScene {
         self.camera!.removeAllChildren()
         self.uiNode.removeFromParent()
         
-        
+        //Foundation edit mode
         clickableTileGridsNode.removeFromParent()
     }
     
