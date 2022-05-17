@@ -61,7 +61,7 @@ class WaveManager{
             attackLevel += 5
         }
         if waveNumber == attackLevel {
-            maximumAtkSpawn = waveNumber / 2 // 50 %
+            maximumAtkSpawn = waveNumber / 2 // 50 % 
         }else {
         maximumAtkSpawn = waveNumber/10 // 10%
         }
