@@ -334,82 +334,76 @@ class GameScene: SKScene {
         let location = touch.location(in: self)
         let touchedNodes = nodes(at: location)
         
-        guard let node = touchedNodes.first else{return}
-        
-        
-        
-        var uiTowerFound = false
-        
-        if node.name == "GunTower"{
-            if TowerData.BASE_COST > GameManager.instance.currentMoney{
-                return
+        for node in touchedNodes {
+            
+            var uiTowerFound = false
+            
+            if node.name == "GunTower"{
+                if TowerData.BASE_COST > GameManager.instance.currentMoney{
+                    return
+                }
+                uiTowerFound = true
+                
+                displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE, position: location)
+                touchingTower = node as? SKSpriteNode
+                touchingTower?.size = TowerData.TEXTURE_SIZE
+                
+                
+                
             }
-            uiTowerFound = true
-            
-            displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE, position: location)
-            touchingTower = node as? SKSpriteNode
-            touchingTower?.size = TowerData.TEXTURE_SIZE
-            
-            
-            
-        }
-        else if node.name == "SpeedTower"{
-            
-            if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.rapidFireTowerUnlocked{
-                return
+            else if node.name == "SpeedTower"{
+                
+                if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.rapidFireTowerUnlocked{
+                    return
+                }
+                uiTowerFound = true
+                
+                displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.5, position: location)
+                touchingTower = node as? SKSpriteNode
+                touchingTower?.size = TowerData.TEXTURE_SIZE
             }
-            uiTowerFound = true
-            
-            displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.5, position: location)
-            touchingTower = node as? SKSpriteNode
-            touchingTower?.size = TowerData.TEXTURE_SIZE
-        }
-        else if node.name == "CannonTower"{
-            
-            if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.cannonTowerUnlocked{
-                return
-            }
+            else if node.name == "CannonTower"{
+                
+                if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.cannonTowerUnlocked{
+                    return
+                }
 
-          uiTowerFound = true
-            
-            displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.8, position: location)
-            touchingTower = node as? SKSpriteNode
-            touchingTower?.size = TowerData.TEXTURE_SIZE
-        }
-        else if node.name == "SniperTower"{
-            if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.sniperTowerUnlocked{
-                return
+              uiTowerFound = true
+                
+                displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.8, position: location)
+                touchingTower = node as? SKSpriteNode
+                touchingTower?.size = TowerData.TEXTURE_SIZE
             }
-            uiTowerFound = true
+            else if node.name == "SniperTower"{
+                if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.sniperTowerUnlocked{
+                    return
+                }
+                uiTowerFound = true
+                
+                displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 1.8, position: location)
+                touchingTower = node as? SKSpriteNode
+                touchingTower?.size = TowerData.TEXTURE_SIZE
+            }
             
-            displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 1.8, position: location)
-            touchingTower = node as? SKSpriteNode
-            touchingTower?.size = TowerData.TEXTURE_SIZE
-        }
-        
-        else if node is Tower{
-            let tower = node as! Tower
-            tower.onClick()
+            else if node is Tower{
+                let tower = node as! Tower
+                tower.onClick()
+                
+            }
+            else if node is FoundationPlate {
+                let foundationPlate = node as! FoundationPlate
+                foundationPlate.onClick()
+                
+            }
             
-        }
-        else if node is FoundationPlate {
-            let foundationPlate = node as! FoundationPlate
-            foundationPlate.onClick()
-            
-        }
-        else if node is ClickableTile {
-            let clickableTile = node as! ClickableTile
-            clickableTile.onClick()
-            
-        }
-        
-        if uiTowerFound{
-            touchingTower!.removeFromParent()
-            uiNode.addChild(touchingTower!)
-            touchingTower?.position = location
+            if uiTowerFound{
+                touchingTower!.removeFromParent()
+                uiNode.addChild(touchingTower!)
+                touchingTower?.position = location
 
+            }
+            
         }
-        
         
     }
     

@@ -36,32 +36,6 @@ class GameSceneCommunicator: ObservableObject {
         
     }
     
-    func buildFoundation() {
-        
-        //TODO: REMOVE/REWORK THIS METHOD
-        return
-        
-        let price = FoundationData.BASE_COST
-        if price > GameManager.instance.currentMoney {
-            return
-        }
-        else {
-            GameManager.instance.currentMoney -= price
-        }
-        
-        currentTile!.containsFoundation = true
-        currentTile!.color = .clear
-        
-        FoundationPlateFactory().createFoundationPlate(position: currentTile!.position, tile: currentTile!, isStartingFoundation: false)
-        
-        updateFoundationPower()
-        updateFoundationTexture()
-        
-        currentTile = nil
-        showFoundationMenu = false
-        
-    }
-    
     func repairFoundation() {
         
         let missingHp: Int = currentFoundation!.maxHp - currentFoundation!.hp
