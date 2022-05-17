@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SpriteKit
 
 class GameSceneCommunicator: ObservableObject {
     
@@ -30,6 +31,7 @@ class GameSceneCommunicator: ObservableObject {
         
         let totalPrice = foundationsToAdd.count * FoundationData.BASE_COST
         GameManager.instance.currentMoney -= totalPrice
+        foundationsToAdd.removeAll()
         
     }
     
@@ -227,5 +229,21 @@ class GameSceneCommunicator: ObservableObject {
             let foundationPlate = node as! FoundationPlate
             foundationPlate.updateFoundationsTexture()
         }
+    }
+    
+    func toggleFoundationGrid() {
+        
+        for node in GameScene.instance!.clickableTileGridsNode.children {
+
+            let gridTexture = node as! SKSpriteNode
+            
+            if foundationEditMode {
+                gridTexture.alpha = 1
+            }
+            else {
+                gridTexture.alpha = 0
+            }
+        }
+        
     }
 }

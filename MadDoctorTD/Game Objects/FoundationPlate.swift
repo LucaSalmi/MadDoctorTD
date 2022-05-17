@@ -25,6 +25,7 @@ class FoundationPlate: SKSpriteNode{
     var warningTexture: SKSpriteNode?
     
     
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -35,12 +36,9 @@ class FoundationPlate: SKSpriteNode{
         warningTexture = SKSpriteNode(imageNamed: "foundation_half_hp_warning")
         warningTexture?.zPosition = 5
         
-        
         let rand = Int.random(in: 1..<4)
         crackTexture = SKSpriteNode(imageNamed: "foundation_crack_\(rand)")
         crackTexture?.zPosition = 2
-        
-        
         
         self.isStartingFoundation = isStartingFoundation
         self.builtUponTile = tile
@@ -65,13 +63,8 @@ class FoundationPlate: SKSpriteNode{
         
         crackTexture?.alpha = 0
         crackTexture?.size = self.size
-        GameScene.instance?.addChild(warningTexture!)
-        GameScene.instance?.addChild(crackTexture!)
-        
-        
-        
-        
-        
+        GameScene.instance?.addChild(warningTexture!) //TODO: Do not add nodes to game scene (add to a SKNode instead)
+        GameScene.instance?.addChild(crackTexture!) //TODO: Do not add nodes to game scene (add to a SKNode instead)
         
     }
     

@@ -26,6 +26,8 @@ class GameScene: SKScene {
     
     var rangeIndicator: SKShapeNode?
     
+    var clickableTileGridsNode = SKNode()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -76,6 +78,7 @@ class GameScene: SKScene {
         addChild(EnemyNodes.enemiesNode)
         addChild(hpBarsNode)
         
+        addChild(clickableTileGridsNode)
     }
     
     private func setupCamera(){
@@ -156,14 +159,18 @@ class GameScene: SKScene {
             guard let touch = touches.first else {return}
             
             let location = touch.location(in: self)
-            let touchedNode = nodes(at: location).first
+            let touchedNodes = nodes(at: location)
             
-            if touchedNode is ClickableTile {
-                let clickableTile = touchedNode as! ClickableTile
-                clickableTile.onClick()
+            for touchedNode in touchedNodes {
+                if touchedNode is ClickableTile {
+                    let clickableTile = touchedNode as! ClickableTile
+                    clickableTile.onClick()
+                    break
+                }
             }
             
             return
+            
         }
         
         let touch : UITouch = touches.first!
@@ -176,6 +183,10 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if GameManager.instance.isPaused {
+            return
+        }
+        
+        if GameSceneCommunicator.instance.foundationEditMode {
             return
         }
         
@@ -300,6 +311,7 @@ class GameScene: SKScene {
         GameManager.instance.currentWave = 0
         GameManager.instance.nextWaveCounter = 0
         
+        clickableTileGridsNode.removeFromParent()
     }
 
     
