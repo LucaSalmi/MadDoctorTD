@@ -39,11 +39,6 @@ class Tower: SKSpriteNode{
         self.builtUponFoundation = foundation
         towerTexture = SKSpriteNode(texture: SKTexture(imageNamed: textureName), color: .clear, size: TowerData.TEXTURE_SIZE)
         
-        
-        
-        
-        
-        
         super.init(texture: nil, color: .clear, size: TowerData.TILE_SIZE)
         
         name = "Tower"
@@ -72,6 +67,7 @@ class Tower: SKSpriteNode{
         communicator.currentTower = self
         
         communicator.showUpgradeMenu = true
+        communicator.showUpgradeMenuUI = true
         
     }
     

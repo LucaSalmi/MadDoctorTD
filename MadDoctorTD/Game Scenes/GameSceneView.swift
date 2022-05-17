@@ -143,6 +143,7 @@ struct GameSceneView: View {
                 }
             }
 
+            
             if communicator.showTowerMenu{
                 
                 VStack(spacing: 25) {
@@ -177,52 +178,52 @@ struct GameSceneView: View {
 
                 
             }
-            if communicator.showUpgradeMenu{
-                
-                VStack(spacing: 25){
-                    Text("Upgrade menu")
-                    
-                    Button {
-                        communicator.upgradeTower(upgradeType: .damage)
-                    } label: {
-                        Text("Upgrade damage")
-                    }
-                    Button {
-                        communicator.upgradeTower(upgradeType: .range)
-                    } label: {
-                        Text("Upgrade range")
-                    }
-                    Button {
-                        communicator.upgradeTower(upgradeType: .firerate)
-                    } label: {
-                        Text("Upgrade attack speed")
-                    }
-                    Button {
-                        communicator.sellTower()
-                        
-                    } label: {
-                        Text("Sell tower")
-                    }
-                    
-                    //Foundation options:
-                    Button {
-                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
-                        communicator.repairFoundation()
-                    } label: {
-                        Text("Repair Foundation")
-                    }
-                    Button {
-                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
-                        communicator.upgradeFoundation()
-                    } label: {
-                        Text("Upgrade Foundation")
-                    }
-
-                }.font(.title)
-                    .foregroundColor(communicator.currentTower!.upgradeCount <= TowerData.MAX_UPGRADE ? Color.white : Color.gray)
-                    .background(.black.opacity(0.5))
-                    
-            }
+//            if communicator.showUpgradeMenu{
+//                
+//                VStack(spacing: 25){
+//                    Text("Upgrade menu")
+//                    
+//                    Button {
+//                        communicator.upgradeTower(upgradeType: .damage)
+//                    } label: {
+//                        Text("Upgrade damage")
+//                    }
+//                    Button {
+//                        communicator.upgradeTower(upgradeType: .range)
+//                    } label: {
+//                        Text("Upgrade range")
+//                    }
+//                    Button {
+//                        communicator.upgradeTower(upgradeType: .firerate)
+//                    } label: {
+//                        Text("Upgrade attack speed")
+//                    }
+//                    Button {
+//                        communicator.sellTower()
+//                        
+//                    } label: {
+//                        Text("Sell tower")
+//                    }
+//                    
+//                    //Foundation options:
+//                    Button {
+//                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
+//                        communicator.repairFoundation()
+//                    } label: {
+//                        Text("Repair Foundation")
+//                    }
+//                    Button {
+//                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
+//                        communicator.upgradeFoundation()
+//                    } label: {
+//                        Text("Upgrade Foundation")
+//                    }
+//
+//                }.font(.title)
+//                    .foregroundColor(communicator.currentTower!.upgradeCount <= TowerData.MAX_UPGRADE ? Color.white : Color.gray)
+//                    .background(.black.opacity(0.5))
+//                    
+//            }
         }
         
     }

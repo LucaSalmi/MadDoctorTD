@@ -18,6 +18,10 @@ class GameSceneCommunicator: ObservableObject {
     @Published var showUpgradeMenu: Bool = false
     @Published var isBuildPhase: Bool = true
     
+    var showUpgradeMenuUI: Bool = false
+    var showTowerMenuUI: Bool = false
+    
+    
     var currentTile: ClickableTile? = nil
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil
@@ -221,4 +225,6 @@ class GameSceneCommunicator: ObservableObject {
         }
         
     }
+    
+    
 }

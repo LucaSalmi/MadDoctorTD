@@ -29,6 +29,8 @@ class GameScene: SKScene {
     var rangeIndicator: SKShapeNode?
     
     var towerUI: SKSpriteNode? = nil
+    var upgradeUI: SKSpriteNode? = nil
+    var towerImage: SKSpriteNode?
     
     var touchingTower: SKSpriteNode? = nil
     
@@ -103,7 +105,13 @@ class GameScene: SKScene {
         self.camera!.addChild(towerUI!)
         self.addChild(uiNode)
         
-
+        upgradeUI = uiScene!.childNode(withName: "UpgradeMenu") as? SKSpriteNode
+        upgradeUI?.removeFromParent()
+        towerImage = upgradeUI?.childNode(withName: "TowerLogo") as? SKSpriteNode
+        
+        
+        self.camera!.addChild(upgradeUI!)
+        
         addChild(clickableTileGridsNode)
 
         addChild(towerIndicatorsNode)
@@ -200,6 +208,7 @@ class GameScene: SKScene {
         }
         
         if touchingTower != nil{
+            
             
             
             touchingTower?.position = location
@@ -348,11 +357,12 @@ class GameScene: SKScene {
                     return
                 }
                 uiTowerFound = true
-                
+                towerImage?.texture = SKTexture(imageNamed: "blast_tower")
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE, position: location)
                 touchingTower = node as? SKSpriteNode
                 touchingTower?.size = TowerData.TEXTURE_SIZE
                 SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                
                 
                 
                 
@@ -363,6 +373,7 @@ class GameScene: SKScene {
                     return
                 }
                 uiTowerFound = true
+                towerImage?.texture = SKTexture(imageNamed: "speed_tower")
                 
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.5, position: location)
                 touchingTower = node as? SKSpriteNode
@@ -374,8 +385,9 @@ class GameScene: SKScene {
                 if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.cannonTowerUnlocked{
                     return
                 }
-
+                
               uiTowerFound = true
+                towerImage?.texture = SKTexture(imageNamed: "cannon_tower")
                 
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.8, position: location)
                 touchingTower = node as? SKSpriteNode
@@ -387,7 +399,7 @@ class GameScene: SKScene {
                     return
                 }
                 uiTowerFound = true
-                
+                towerImage?.texture = SKTexture(imageNamed: "sniper_tower_rotate")
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 1.8, position: location)
                 touchingTower = node as? SKSpriteNode
                 touchingTower?.size = TowerData.TEXTURE_SIZE
@@ -397,6 +409,9 @@ class GameScene: SKScene {
             else if node is Tower{
                 let tower = node as! Tower
                 tower.onClick()
+                
+                towerUI?.alpha = 0
+                upgradeUI?.alpha = 1
                 
             }
             else if node is FoundationPlate {
@@ -411,6 +426,9 @@ class GameScene: SKScene {
                 touchingTower?.position = location
 
             }
+            
+            
+            
             
         }
         
@@ -450,6 +468,7 @@ class GameScene: SKScene {
         for node in TowerNode.towersNode.children {
             let tower = node as! Tower
             tower.update()
+            
         }
         
         if GameManager.instance.currentMoney < TowerData.BASE_COST{
