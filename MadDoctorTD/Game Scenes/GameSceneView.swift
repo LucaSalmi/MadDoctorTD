@@ -195,12 +195,14 @@ struct GameSceneView: View {
                         communicator.repairFoundation()
                     } label: {
                         Text("Repair Foundation")
-                    }
+                    }.disabled(communicator.isBuildPhase ? false : true)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
                     Button {
                         communicator.upgradeFoundation()
                     } label: {
                         Text("Upgrade Foundation")
-                    }
+                    }.disabled(communicator.isBuildPhase ? false : true)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
                     Button {
                         communicator.sellFoundation()
                     } label: {

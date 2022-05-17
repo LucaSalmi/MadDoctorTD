@@ -416,10 +416,11 @@ class Enemy: SKSpriteNode{
                         enemy.movePoints.remove(at: i)
                         
                     }
-                        
                 }
             }
         }
     }
+    
+    
     
 }
