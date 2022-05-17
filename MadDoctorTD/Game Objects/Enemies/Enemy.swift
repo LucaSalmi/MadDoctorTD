@@ -247,39 +247,39 @@ class Enemy: SKSpriteNode{
             
         }
         
-        if hp <= Int(Double(EnemiesData.BASE_HP) * 0.1) {
+        if hp <= Int(Double(hp) * 0.1) {
             //TODO: 10% HERE
             hpBar!.texture = SKTexture(imageNamed: "hp_bar_10")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.2){
+        else if hp <= Int(Double(hp) * 0.2){
             //TODO: 20% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_20")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.3){
+        else if hp <= Int(Double(hp) * 0.3){
             //TODO: 30% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_30")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.4){
+        else if hp <= Int(Double(hp) * 0.4){
             //TODO: 40% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_40")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.5){
+        else if hp <= Int(Double(hp) * 0.5){
             //TODO: 50% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_50")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.6){
+        else if hp <= Int(Double(hp) * 0.6){
             //TODO: 60% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_60")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.7){
+        else if hp <= Int(Double(hp) * 0.7){
             //TODO: 70% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_70")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.8){
+        else if hp <= Int(Double(hp) * 0.8){
             //TODO: 80% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_80")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.9){
+        else if hp <= Int(Double(hp) * 0.9){
             //TODO: 90% HERE
             hpBar!.texture = SKTexture(imageNamed: "hp_bar_90")
         }

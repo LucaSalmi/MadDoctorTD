@@ -131,6 +131,7 @@ class Projectile: SKSpriteNode {
             position.y > worldEdge.frame.size.height / 2 || position.y < (worldEdge.frame.size.height / 2) * -1
         {
             destroy()
+            print("bullet removed")
         }
     }
     

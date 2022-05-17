@@ -24,6 +24,8 @@ class WaveManager{
     
     let wavesPerLevel = 5
     
+    var bossLevel = 5
+    
     var attackLevel = 6
     var unlockAttackers = false
     var attackSpawnChance = 1 // 10%
@@ -45,31 +47,43 @@ class WaveManager{
     
     private func createWave(choises: [EnemyTypes], enemyRace: EnemyRaces){
         
+        
+        waveNumber += 1
+        
         if totalSlots < 0{
             
             totalSlots = 5
         }
         
-        if waveNumber >= 6 { // level 6 is first atack wave
-            
+        if waveNumber >= 5 { // level 5 is first boss level
+            print("current wavenumber: \(waveNumber)")
             unlockAttackers = true
             
         }
+        if waveNumber == bossLevel + 1 {
+            bossLevel += 5
+        }
         
         if waveNumber == attackLevel + 1{
-            
             attackLevel += 5
         }
+        
         if waveNumber == attackLevel {
-            maximumAtkSpawn = waveNumber / 2 // 50 % 
-        }else {
+          
+            maximumAtkSpawn = waveNumber / 2 // 50 %
+        }
+        else {
+
         maximumAtkSpawn = waveNumber/10 // 10%
         }
        
         
         var occupiedSlots = 0
-        
-        totalSlots = 5 + waveNumber
+        if waveNumber == bossLevel {
+            totalSlots = EnemiesData.BOSS_ENEMY_SLOT
+        } else {
+            totalSlots = WaveData.LEVEL_WAVE_SIZE + waveNumber
+        }
         
         print("totalslots = \(totalSlots) - check 2")
         
@@ -93,13 +107,16 @@ class WaveManager{
             
             if numberOfAttackers < maximumAtkSpawn && unlockAttackers && enemy.enemyType != .flying{
                 
-                print("spawning atackunits: wave - \(waveNumber)")
+                print("spawning atackunits: wavenumber: \(waveNumber)")
                 
                 if waveNumber == attackLevel{
                     attackSpawnChance = 6 // 60%
                     if waveNumber >= 16{
                         attackSpawnChance = 7 // 70%
                     }
+                    
+                } else if waveNumber == bossLevel {
+                    attackSpawnChance = 10
                     
                 } else {
                     attackSpawnChance = 1
@@ -126,7 +143,7 @@ class WaveManager{
             }
         }
         
-        waveNumber += 1
+        print("Wavenumber:\(waveNumber)")
         GameManager.instance.currentWave = waveNumber
         
         if waveNumber % wavesPerLevel == 0 {
@@ -223,12 +240,16 @@ class WaveManager{
     
     func progressDifficulty(){
         
-        if waveNumber == 2{
+        if waveNumber == 1{
             enemyChoises.append(.fast)
-        }else if waveNumber == 3{
+        }else if waveNumber == 2{
             enemyChoises.append(.heavy)
-        }else if waveNumber == 4{
+        }else if waveNumber == 3{
             enemyChoises.append(.flying)
+        }else if waveNumber == bossLevel - 1{
+            
+            enemyChoises = [.boss]
+            
         }
     }
     

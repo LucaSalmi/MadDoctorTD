@@ -52,6 +52,14 @@ class SlimeEnemy: Enemy{
             waveSlotSize = EnemiesData.FAST_ENEMY_SLOT
             self.enemyType = .fast
             
+        case .boss:
+            
+            texture = SKTexture(imageNamed: "slime_boss_animation_1")
+            baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.BOSS_SPEED_MODIFIER
+            waveSlotSize = EnemiesData.BOSS_ENEMY_SLOT
+            hp = Int(Double(EnemiesData.BASE_HP) * (EnemiesData.BOSS_HP_MODIFIER) + (Double(EnemiesData.BASE_HP) * Double(waveSlotSize)))
+            self.enemyType = .boss
+            
         }
 
         startHp = hp
@@ -76,17 +84,27 @@ class SlimeEnemy: Enemy{
             
             texture = SKTexture(imageNamed: "slime_heavy_atker_animation_1")
             print("heavy atker spawned")
+            attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 2
+            attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE / 2
             
         case .fast:
             
             texture = SKTexture(imageNamed: "slime_fast_atker_animation_1")
             print("fast atker spawned")
+            attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 10
+            attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE / 4
             
+        case .boss:
+            texture = SKTexture(imageNamed: "slime_boss_animation_1")
+            print("boss atker spawned")
+            attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 20
+            attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE / 4
         }
     }
     
     
     override func update() {
+        
         super.update()
     }
 
