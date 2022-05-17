@@ -103,6 +103,29 @@ class Enemy: SKSpriteNode{
         
     }
     
+    private func seekAndDestroy(){
+        
+        let foundationPlates = FoundationPlateNodes.foundationPlatesNode.children
+        
+        var closestDistance = CGFloat(self.size.width * 2)
+        
+        for node in foundationPlates {
+            
+            let plate = node as! FoundationPlate
+            
+            let plateDistance = position.distance(point: plate.position)
+            
+            if plateDistance < closestDistance {
+                closestDistance = plateDistance
+                if plateDistance <= self.size.width {
+                    attackTarget = plate
+                    print("Target found!")
+                }
+            }
+        }
+        
+    }
+    
     private func move() {
         
         if isAttacker {
@@ -114,7 +137,9 @@ class Enemy: SKSpriteNode{
                 
             }else{
                 
-                let targetPosition = findNextTarget()
+                seekAndDestroy()
+                let targetPosition = attackTarget?.position
+                //let targetPosition = findNextTarget()
                 if targetPosition != nil{
                     
                     setDirection(targetPoint: targetPosition!)
