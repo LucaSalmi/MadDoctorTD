@@ -58,13 +58,7 @@ class GameScene: SKScene {
         GameScene.instance = self
         physicsWorld.contactDelegate = self
         gameSetup()
-        
-        
-        
-        
-        
-        
-        
+
     }
     
     func gameSetup(){
@@ -96,13 +90,11 @@ class GameScene: SKScene {
         addChild(EnemyNodes.enemiesNode)
         addChild(hpBarsNode)
         
-        
         let uiScene = SKScene(fileNamed: "TowerMenuScene")
         towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
         towerUI!.removeFromParent()
         self.camera!.addChild(towerUI!)
         self.addChild(uiNode)
-        
 
         addChild(clickableTileGridsNode)
 
