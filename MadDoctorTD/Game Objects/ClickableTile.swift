@@ -27,6 +27,9 @@ class ClickableTile: SKSpriteNode{
     
     func onClick() {
         
+        //TODO: REWORK THIS METHOD
+        return
+        
         if !GameSceneCommunicator.instance.isBuildPhase {
             return
         }
