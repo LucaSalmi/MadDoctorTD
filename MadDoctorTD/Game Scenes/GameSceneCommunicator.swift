@@ -23,16 +23,96 @@ class GameSceneCommunicator: ObservableObject {
     var currentTower: Tower? = nil
     
     @Published var foundationEditMode: Bool = false
-    @Published var foundationsToAdd = [FoundationPlate]()
+    var foundationDeleteMode = false
+    var blueprints = [FoundationPlate]()
     var secondIndexStart: Int = 8
+    
+    @Published var newFoundationTotalCost: Int = 0
     
     private init() {}
     
     func confirmFoundationEdit() {
         
-        let totalPrice = foundationsToAdd.count * FoundationData.BASE_COST
-        GameManager.instance.currentMoney -= totalPrice
-        foundationsToAdd.removeAll()
+        //let totalPrice = foundationsToAdd.count * FoundationData.BASE_COST
+        //GameManager.instance.currentMoney -= totalPrice
+        //foundationsToAdd.removeAll()
+        
+        if newFoundationTotalCost > GameManager.instance.currentMoney {
+            print("Too expensive")
+            return
+        }
+        
+        if isPathBlocked() {
+            print("Path is blocked")
+            return
+        }
+        
+        updateFoundationPower()
+        for blueprint in blueprints {
+            if !blueprint.isPowered {
+                print("Some blueprints are not connected")
+                return
+            }
+        }
+        
+        for blueprint in blueprints {
+            blueprint.alpha = 1
+        }
+        blueprints.removeAll()
+        
+        for clickNode in ClickableTilesNodes.clickableTilesNode.children {
+            let clickableTile = clickNode as! ClickableTile
+            clickableTile.containsBlueprint = nil
+        }
+        
+        GameManager.instance.currentMoney -= newFoundationTotalCost
+        newFoundationTotalCost = 0
+        
+        updateFoundationTexture()
+        
+        foundationEditMode = false
+        toggleFoundationGrid()
+    }
+    
+    private func isPathBlocked() -> Bool {
+        
+        var isBlocked = false
+        
+        let gameScene = GameScene.instance!
+        
+        let enemy = gameScene.pathfindingTestEnemy!
+        let movePoints = enemy.getMovePoints()
+        if movePoints.isEmpty {
+            isBlocked = true
+        }
+        else {
+            enemy.movePoints = movePoints
+            print("Enemy movepoints = \(enemy.movePoints.count)")
+        }
+        
+        return isBlocked
+    }
+    
+    func editFoundationGrid(touchedNodes: [SKNode]) {
+        
+        foundationDeleteMode = false
+        
+        for node in touchedNodes {
+            
+            if node is FoundationPlate {
+                foundationDeleteMode = true
+                print("delete = true")
+                break
+            }
+            
+            /*
+            else {
+                foundationDeleteMode = false
+                print("delete = false")
+                break
+            }
+             */
+        }
         
     }
     

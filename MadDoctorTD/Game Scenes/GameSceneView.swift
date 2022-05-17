@@ -63,8 +63,15 @@ struct GameSceneView: View {
                         
                         Spacer()
                         
-                        Text("$ = \(gameManager.currentMoney)")
-                            .foregroundColor(.white)
+                        VStack {
+                            Text("$ = \(gameManager.currentMoney)")
+                                .foregroundColor(.white)
+                            
+                            if communicator.foundationEditMode {
+                                Text("Price = \(communicator.newFoundationTotalCost)")
+                                    .foregroundColor(.white)
+                            }
+                        }
                         
                         Spacer()
                         
@@ -112,11 +119,15 @@ struct GameSceneView: View {
                             Spacer()
                             
                             Button {
-                                communicator.foundationEditMode.toggle()
-                                if communicator.foundationEditMode == false {
+                                
+                                if communicator.foundationEditMode {
                                     communicator.confirmFoundationEdit()
                                 }
-                                communicator.toggleFoundationGrid()
+                                else {
+                                    communicator.foundationEditMode = true
+                                    communicator.toggleFoundationGrid()
+                                }
+                                
                             } label: {
                                 Text(communicator.foundationEditMode ? "Done" : "Edit")
                             }

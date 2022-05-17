@@ -37,8 +37,8 @@ class GameScene: SKScene {
     var uiNode = SKNode()
 
     var clickableTileGridsNode = SKNode()
+    
     var isMovingCamera = false
-
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -58,13 +58,7 @@ class GameScene: SKScene {
         GameScene.instance = self
         physicsWorld.contactDelegate = self
         gameSetup()
-        
-        
-        
-        
-        
-        
-        
+
     }
     
     func gameSetup(){
@@ -96,13 +90,11 @@ class GameScene: SKScene {
         addChild(EnemyNodes.enemiesNode)
         addChild(hpBarsNode)
         
-        
         let uiScene = SKScene(fileNamed: "TowerMenuScene")
         towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
         towerUI!.removeFromParent()
         self.camera!.addChild(towerUI!)
         self.addChild(uiNode)
-        
 
         addChild(clickableTileGridsNode)
 
@@ -318,10 +310,6 @@ class GameScene: SKScene {
             return
         }
         
-        if GameSceneCommunicator.instance.foundationEditMode {
-            return
-        }
-        
         if rangeIndicator != nil{
             rangeIndicator!.removeFromParent()
             
@@ -338,6 +326,11 @@ class GameScene: SKScene {
         
         let location = touch.location(in: self)
         let touchedNodes = nodes(at: location)
+        
+        if GameSceneCommunicator.instance.foundationEditMode {
+            communicator.editFoundationGrid(touchedNodes: touchedNodes)
+            return
+        }
         
         for node in touchedNodes {
             
@@ -544,7 +537,7 @@ class GameScene: SKScene {
         self.camera!.removeAllChildren()
         self.uiNode.removeFromParent()
         
-        
+        //Foundation edit mode
         clickableTileGridsNode.removeFromParent()
     }
     

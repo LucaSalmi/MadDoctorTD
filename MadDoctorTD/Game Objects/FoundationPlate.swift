@@ -24,8 +24,6 @@ class FoundationPlate: SKSpriteNode{
     var crackTexture: SKSpriteNode?
     var warningTexture: SKSpriteNode?
     
-    
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -42,7 +40,7 @@ class FoundationPlate: SKSpriteNode{
         
         self.isStartingFoundation = isStartingFoundation
         self.builtUponTile = tile
-        let texture: SKTexture = SKTexture(imageNamed: "F_tile_power_on")
+        let texture: SKTexture = SKTexture(imageNamed: "F_tile_power_off_no_connection")
         super.init(texture: texture, color: .clear, size: FoundationData.SIZE)
         name = "Foundation"
         self.position = position
