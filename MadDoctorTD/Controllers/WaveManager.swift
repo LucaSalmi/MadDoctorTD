@@ -24,7 +24,10 @@ class WaveManager{
     
     let wavesPerLevel = 5
     
-    var attackLevel = 3
+    var attackLevel = 6
+    var unlockAttackers = false
+    var attackSpawnChance = 1 // 10%
+    var maximumAtkSpawn = 0
     
     var shouldCreateWave = false
     
@@ -33,6 +36,7 @@ class WaveManager{
     init(totalSlots: Int, choises: [EnemyTypes], enemyRace: EnemyRaces){
         
         currentScene = GameScene.instance
+        enemyChoises = choises
         spawnPoint = (currentScene?.childNode(withName: "SpawnPoint")!.position) ?? CGPoint(x: 0, y: 0)
         self.totalSlots = totalSlots
 
@@ -45,10 +49,23 @@ class WaveManager{
             
             totalSlots = 5
         }
+        
+        if waveNumber >= 6 { // level 6 is first atack wave
+            
+            unlockAttackers = true
+            
+        }
+        
         if waveNumber == attackLevel + 1{
             
             attackLevel += 5
         }
+        if waveNumber == attackLevel {
+            maximumAtkSpawn = waveNumber / 2 // 50 %
+        }else {
+        maximumAtkSpawn = waveNumber/10 // 10%
+        }
+       
         
         var occupiedSlots = 0
         
@@ -58,22 +75,47 @@ class WaveManager{
         
         while occupiedSlots < totalSlots{
             
-            let chosen = RandomNumberGenerator.enemyTypesRNG(choises: choises)
+            var chosen: EnemyTypes? = nil
             
-            let enemy = EnemyFactory().createEnemy(enemyRace: enemyRace, enemyType: chosen)
+            if choises.count > 1{
+                
+                chosen = RandomNumberGenerator.enemyTypesRNG(choises: choises)
+                
+            } else {
+                
+                chosen = choises[0]
+            }
+            
+            let enemy = EnemyFactory().createEnemy(enemyRace: enemyRace, enemyType: chosen!)
             enemy.position = spawnPoint!
             enemy.zPosition = 2
             EnemyNodes.enemyArray.append(enemy)
             
-            if numberOfAttackers < WaveData.MAX_ATTACKER_NUMBER && waveNumber == attackLevel {
+            if numberOfAttackers < maximumAtkSpawn && unlockAttackers && enemy.enemyType != .flying{
                 
                 print("spawning atackunits: wave - \(waveNumber)")
                 
-                if RandomNumberGenerator.isAttackerRNG(maxRange: 10, limitForTrue: 5){
+                if waveNumber == attackLevel{
+                    attackSpawnChance = 6 // 60%
+                    if waveNumber >= 16{
+                        attackSpawnChance = 7 // 70%
+                    }
+                    
+                } else {
+                    attackSpawnChance = 1
+                    
+                    if waveNumber > 16 {
+                        attackSpawnChance = 2 // 20
+                    }
+                }
+                
+                if RandomNumberGenerator.isAttackerRNG(maxRange: 10, limitForTrue: attackSpawnChance){
                     
                     numberOfAttackers += 1
                     enemy.isAttacker = true
                     enemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Foundation
+                    
+                    enemy.changeTooAtkTexture()
                 }
             }
             
@@ -180,14 +222,12 @@ class WaveManager{
     
     func progressDifficulty(){
         
-        if wavesCompleted == 5{
+        if waveNumber == 2{
+            enemyChoises.append(.fast)
+        }else if waveNumber == 3{
             enemyChoises.append(.heavy)
-            totalSlots += 5
-        }else if wavesCompleted == 10{
+        }else if waveNumber == 4{
             enemyChoises.append(.flying)
-            totalSlots += 10
-        }else if wavesCompleted == 15{
-            totalSlots += 15
         }
     }
     
@@ -206,8 +246,9 @@ class WaveManager{
         if shouldCreateWave {
             waveStartCounter += 1
             if waveStartCounter >= WaveData.WAVE_START_TIME {
-                
-                createWave(choises: [.standard,.fast], enemyRace: .slime)
+                progressDifficulty()
+                print(enemyChoises)
+                createWave(choises: enemyChoises , enemyRace: .slime)
                 
                 waveStartCounter = 0
             }

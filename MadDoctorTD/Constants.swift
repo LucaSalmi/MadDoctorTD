@@ -160,7 +160,7 @@ struct WaveData{
     //60 frames 1 second
     //3600 frames 1 minute
     static let WAVE_STANDARD_SIZE = 5
-    static let SPAWN_STANDARD_TIMER = 60 //60 frames = 1 second
+    static let SPAWN_STANDARD_TIMER = 40 //60 frames = 1 second
     static let WAVE_START_TIME = 900 //900 frames = 15 seconds
     
     static let FAST_ENEMY_LIMIT = 5
@@ -169,7 +169,7 @@ struct WaveData{
     
     static let INCOME_PER_WAVE = 100
     
-    static let MAX_ATTACKER_NUMBER = 3
+    static let MAX_ATTACKER_NUMBER = 1
     
 }
 
