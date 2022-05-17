@@ -24,6 +24,7 @@ class GameSceneCommunicator: ObservableObject {
     
     @Published var foundationEditMode: Bool = false
     @Published var foundationsToAdd = [FoundationPlate]()
+    var secondIndexStart: Int = 8
     
     private init() {}
     
@@ -181,6 +182,7 @@ class GameSceneCommunicator: ObservableObject {
         currentTower!.builtUponFoundation!.hasTower = false
         currentTower!.removeFromParent()
         currentTower!.towerTexture.removeFromParent()
+        currentTower?.noPowerTexture.removeFromParent()
         
         if currentTower! is SniperTower{
             let sniperTower = currentTower as! SniperTower
@@ -217,8 +219,7 @@ class GameSceneCommunicator: ObservableObject {
         
         let startGrid1 = FoundationPlateNodes.foundationPlatesNode.children[0] as! FoundationPlate
         startGrid1.checkIfPowered(gridStart: startGrid1)
-        let nextIndexStart = FoundationPlateNodes.foundationPlatesNode.children.count / 2
-        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[nextIndexStart] as! FoundationPlate
+        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[secondIndexStart] as! FoundationPlate
         startGrid2.checkIfPowered(gridStart: startGrid2)
         
     }

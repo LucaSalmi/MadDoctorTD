@@ -79,7 +79,7 @@ class FoundationPlateFactory: FoundationPlateCreator{
             let foundationPlate = node as! FoundationPlate
             foundationPlate.updateFoundationsTexture()
         }
-
+        GameSceneCommunicator.instance.secondIndexStart = FoundationPlateNodes.foundationPlatesNode.children.count/2
         //startFoundationMap.removeFromParent()
         
     }

@@ -19,6 +19,8 @@ class GameScene: SKScene {
 
     var edgesTilesNode: SKNode = SKNode()
     var hpBarsNode: SKNode = SKNode()
+    var towerIndicatorsNode: SKNode = SKNode()
+    var foundationIndicatorsNode: SKNode = SKNode()
     
     var pathfindingTestEnemy: Enemy?
     var nodeGraph: GKObstacleGraph? = nil
@@ -27,6 +29,7 @@ class GameScene: SKScene {
     var rangeIndicator: SKShapeNode?
     
     var clickableTileGridsNode = SKNode()
+    var isMovingCamera = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -79,6 +82,10 @@ class GameScene: SKScene {
         addChild(hpBarsNode)
         
         addChild(clickableTileGridsNode)
+
+        addChild(towerIndicatorsNode)
+        addChild(foundationIndicatorsNode)
+
     }
     
     private func setupCamera(){
@@ -195,6 +202,10 @@ class GameScene: SKScene {
             
         }
         
+        if isMovingCamera{
+            return
+        }
+        
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
         
@@ -278,23 +289,33 @@ class GameScene: SKScene {
         TowerNode.towersNode.removeFromParent()
         TowerNode.towerTextureNode.removeAllChildren()
         TowerNode.towerTextureNode.removeFromParent()
+        towerIndicatorsNode.removeAllChildren()
+        towerIndicatorsNode.removeFromParent()
+        
         //Enemies
         EnemyNodes.enemiesNode.removeAllChildren()
         EnemyNodes.enemiesNode.removeFromParent()
         EnemyNodes.enemyArray.removeAll()
+        
         //HP bars
         hpBarsNode.removeAllChildren()
         hpBarsNode.removeFromParent()
+        
         //Foundation
         FoundationPlateNodes.foundationPlatesNode.removeAllChildren()
         FoundationPlateNodes.foundationPlatesNode.removeFromParent()
+        foundationIndicatorsNode.removeAllChildren()
+        foundationIndicatorsNode.removeFromParent()
+        
         //ClickableTiles
         ClickableTilesNodes.clickableTilesNode.removeAllChildren()
         ClickableTilesNodes.clickableTilesNode.removeFromParent()
+        
         //Projectiles
         ProjectileNodes.projectilesNode.removeAllChildren()
         ProjectileNodes.projectilesNode.removeFromParent()
         ProjectileNodes.gunProjectilesPool.removeAll()
+        
         //Edge
         edgesTilesNode.removeAllChildren()
         edgesTilesNode.removeFromParent()
@@ -319,6 +340,7 @@ class GameScene: SKScene {
         let position = camera!.position
         let aNewPosition = CGPoint(x: position.x - translation.x, y: position.y - translation.y)
         camera!.position = aNewPosition
+        isMovingCamera = false
     }
     
     

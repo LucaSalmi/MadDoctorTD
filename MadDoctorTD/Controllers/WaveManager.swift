@@ -69,7 +69,7 @@ class WaveManager{
                 
                 print("spawning atackunits: wave - \(waveNumber)")
                 
-                if RandomNumberGenerator.isAttackerRNG(maxRange: 10, limitForTrue: 5){
+                if RandomNumberGenerator.isAttackerRNG(maxRange: 10, limitForTrue: 10){
                     
                     numberOfAttackers += 1
                     enemy.isAttacker = true
