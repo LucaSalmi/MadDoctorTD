@@ -25,6 +25,9 @@ class GameSceneCommunicator: ObservableObject {
     
     func buildFoundation() {
         
+        //TODO: REMOVE/REWORK THIS METHOD
+        return
+        
         let price = FoundationData.BASE_COST
         if price > GameManager.instance.currentMoney {
             return
