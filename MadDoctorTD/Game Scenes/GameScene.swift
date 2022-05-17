@@ -177,9 +177,9 @@ class GameScene: SKScene {
         
         if touchingTower != nil{
             
-            touchingTower!.removeFromParent()
-            uiNode.addChild(touchingTower!)
+            
             touchingTower?.position = location
+            rangeIndicator?.position = location
             
             for node in FoundationPlateNodes.foundationPlatesNode.children{
                 let foundationPlate = node as! FoundationPlate
@@ -187,6 +187,7 @@ class GameScene: SKScene {
                     if !foundationPlate.hasTower{
                         touchingTower?.position = foundationPlate.position
                         snappedToFoundation = foundationPlate
+                        rangeIndicator?.position = foundationPlate.position
                         break
                     }
                 }
@@ -209,9 +210,15 @@ class GameScene: SKScene {
         
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        
+        
         if touchingTower == nil{
             return
         }
+        
+        rangeIndicator?.removeFromParent()
+        rangeIndicator = nil
         
         switch touchingTower!.name{
         case "GunTower":
@@ -299,11 +306,16 @@ class GameScene: SKScene {
         guard let node = touchedNodes.first else{return}
         
         
+        
+        var uiTowerFound = false
+        
         if node.name == "GunTower"{
             if TowerData.BASE_COST > GameManager.instance.currentMoney{
                 return
             }
+            uiTowerFound = true
             
+            displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE, position: location)
             touchingTower = node as? SKSpriteNode
             touchingTower?.size = TowerData.TEXTURE_SIZE
             
@@ -314,6 +326,7 @@ class GameScene: SKScene {
             if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.rapidFireTowerUnlocked{
                 return
             }
+            uiTowerFound = true
             
             touchingTower = node as? SKSpriteNode
             touchingTower?.size = TowerData.TEXTURE_SIZE
@@ -323,6 +336,7 @@ class GameScene: SKScene {
             if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.cannonTowerUnlocked{
                 return
             }
+            uiTowerFound = true
             
             touchingTower = node as? SKSpriteNode
             touchingTower?.size = TowerData.TEXTURE_SIZE
@@ -331,6 +345,7 @@ class GameScene: SKScene {
             if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.sniperTowerUnlocked{
                 return
             }
+            uiTowerFound = true
             
             touchingTower = node as? SKSpriteNode
             touchingTower?.size = TowerData.TEXTURE_SIZE
@@ -352,6 +367,11 @@ class GameScene: SKScene {
             
         }
         
+        if uiTowerFound{
+            touchingTower!.removeFromParent()
+            uiNode.addChild(touchingTower!)
+        }
+        
         
     }
     
@@ -360,6 +380,23 @@ class GameScene: SKScene {
         return tileMap.tileDefinition(atColumn: coordinates.column, row: coordinates.row)
     }
     
+    func displayRangeIndicator(attackRange: CGFloat, position: CGPoint){
+        
+        if rangeIndicator != nil{
+            rangeIndicator!.removeFromParent()
+            
+        }
+        
+        rangeIndicator = SKShapeNode(circleOfRadius: attackRange)
+        rangeIndicator!.name = "RangeIndicator"
+        rangeIndicator!.fillColor = SKColor(.white.opacity(0.2))
+        
+        rangeIndicator!.zPosition = 2
+        rangeIndicator!.position = position
+        
+        addChild(rangeIndicator!)
+        
+    }
     
     override func update(_ currentTime: TimeInterval) {
         
@@ -376,7 +413,10 @@ class GameScene: SKScene {
         
         if GameManager.instance.currentMoney < TowerData.BASE_COST{
             for node in towerUI!.children{
-                node.alpha = 0.5
+                if node.alpha != 0.5{
+                    node.alpha = 0.5
+                }
+                
             }
         }
         

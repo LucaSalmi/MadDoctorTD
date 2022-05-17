@@ -64,7 +64,8 @@ class Tower: SKSpriteNode{
     
     func onClick(){
         
-        displayRangeIndicator()
+        
+        GameScene.instance!.displayRangeIndicator(attackRange: attackRange, position: self.position)
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
         
@@ -135,7 +136,7 @@ class Tower: SKSpriteNode{
             attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
         case .range:
             attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
-            displayRangeIndicator()
+            GameScene.instance!.displayRangeIndicator(attackRange: attackRange, position: self.position)
         case .firerate:
             fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
         }
@@ -186,26 +187,6 @@ class Tower: SKSpriteNode{
                 attackTarget()
             }
         }
-    }
-    
-    func displayRangeIndicator(){
-        
-        guard let gameScene = GameScene.instance else{return}
-        
-        if gameScene.rangeIndicator != nil{
-            gameScene.rangeIndicator!.removeFromParent()
-            
-        }
-        
-        gameScene.rangeIndicator = SKShapeNode(circleOfRadius: attackRange)
-        gameScene.rangeIndicator!.name = "RangeIndicator"
-        gameScene.rangeIndicator!.fillColor = SKColor(.white.opacity(0.2))
-        
-        gameScene.rangeIndicator!.zPosition = 2
-        gameScene.rangeIndicator!.position = position
-        
-        GameScene.instance?.addChild(gameScene.rangeIndicator!)
-        
     }
     
     func onDestroy(){
