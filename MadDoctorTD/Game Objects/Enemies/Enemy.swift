@@ -103,11 +103,11 @@ class Enemy: SKSpriteNode{
         
     }
     
-    private func seekAndDestroy(){
+    private func seekAndDestroy() -> CGPoint?{
         
         let foundationPlates = FoundationPlateNodes.foundationPlatesNode.children
         
-        var closestDistance = CGFloat(self.size.width * 2)
+        var closestDistance = CGFloat(self.size.width * 3)
         
         for node in foundationPlates {
             
@@ -117,12 +117,16 @@ class Enemy: SKSpriteNode{
             
             if plateDistance < closestDistance {
                 closestDistance = plateDistance
-                if plateDistance <= self.size.width {
-                    attackTarget = plate
-                    print("Target found!")
+                if plateDistance <= self.size.width * 3 {
+                    
+                    if !plate.isStartingFoundation{
+                        return plate.position
+                    }
                 }
             }
         }
+        
+        return nil
         
     }
     
@@ -137,8 +141,8 @@ class Enemy: SKSpriteNode{
                 
             }else{
                 
-                seekAndDestroy()
-                let targetPosition = attackTarget?.position
+                let targetPosition = seekAndDestroy()
+                print("Enemy targetPosition = \(targetPosition)")
                 //let targetPosition = findNextTarget()
                 if targetPosition != nil{
                     
@@ -159,12 +163,12 @@ class Enemy: SKSpriteNode{
         
         if hasReachedPoint(point: nextPoint) {
             
-            if self.isAttacker{
-                
-                precedentTargetPosition = findCenterInTile()
-                precedentTargetPosition = findNextTarget()
-                
-            }
+//            if self.isAttacker{
+//
+//                precedentTargetPosition = findCenterInTile()
+//                precedentTargetPosition = findNextTarget()
+//
+//            }
             
             oldMovePoints.append(movePoints[0])
             movePoints.remove(at: 0)
