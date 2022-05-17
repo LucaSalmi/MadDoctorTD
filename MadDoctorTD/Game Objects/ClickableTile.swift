@@ -12,6 +12,7 @@ import SwiftUI
 class ClickableTile: SKSpriteNode{
     
     var containsFoundation: Bool = false
+    var containsBlueprint: FoundationPlate? = nil
     
     var gridTexture: SKSpriteNode!
     
@@ -39,9 +40,38 @@ class ClickableTile: SKSpriteNode{
             return
         }
         
-        if containsFoundation {
+        if GameSceneCommunicator.instance.foundationDeleteMode {
+            
+            guard let blueprint = containsBlueprint else {return}
+            
+            print("deleting!")
+            
+            blueprint.removeFromParent()
+            let index = GameSceneCommunicator.instance.blueprints.firstIndex(of: blueprint)
+            if index != nil {
+                GameSceneCommunicator.instance.blueprints.remove(at: index!)
+            }
+            containsBlueprint = nil
+            
+            GameSceneCommunicator.instance.newFoundationTotalCost -= FoundationData.BASE_COST
+            
             return
         }
+        
+        if containsBlueprint == nil && !containsFoundation {
+            
+            
+            FoundationPlateFactory().createFoundationPlate(position: self.position, tile: self, isStartingFoundation: false)
+            let foundationBlueprint = FoundationPlateNodes.foundationPlatesNode.children[FoundationPlateNodes.foundationPlatesNode.children.count-1] as! FoundationPlate
+            foundationBlueprint.texture = SKTexture(imageNamed: "foundation_blueprint")
+            foundationBlueprint.alpha = 0.5
+            GameSceneCommunicator.instance.blueprints.append(foundationBlueprint)
+            self.containsBlueprint = foundationBlueprint
+            
+            GameSceneCommunicator.instance.newFoundationTotalCost += FoundationData.BASE_COST
+        }
+        
+        /*
         
         if FoundationData.BASE_COST > GameManager.instance.currentMoney {
             print("Can not afford")
@@ -109,6 +139,7 @@ class ClickableTile: SKSpriteNode{
         updateFoundationTexture()
         
         GameManager.instance.currentMoney -= FoundationData.BASE_COST
+         */
 
     }
     
