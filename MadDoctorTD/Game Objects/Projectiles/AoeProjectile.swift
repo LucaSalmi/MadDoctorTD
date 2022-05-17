@@ -188,13 +188,15 @@ class AoeProjectile: SKSpriteNode {
         if currentDuration < (travelDuration/2){
             self.size.width += 0.5
             self.size.height += 0.5
+            
+            
         
             print("SIZE: \(self.size.width)")
             
-            projectileShadow.size.width += 1
-            projectileShadow.size.height += 1
+
             
             projectileShadow.alpha -= 0.005
+            
             
             print("SIZE: \(projectileShadow.size.width)")
             
@@ -203,11 +205,12 @@ class AoeProjectile: SKSpriteNode {
             self.size.width -= 0.5
             self.size.height -= 0.5
             
-            projectileShadow.size.width -= 1
-            projectileShadow.size.height -= 1
-            
+
             projectileShadow.alpha += 0.005
         }
+        
+        
+        
         
         
         if hasReachedTargetPoint(){
