@@ -18,7 +18,7 @@ class SoundManager {
     
     static let gunProjectileImpactSFX = "gun_projectile_impact"
     static let sniperProjectileImpactSFX = "AWP_SOUND_EFFECT"
-    static let buildingPlacementSFX = "construction_sound_effect"
+    static let buildingPlacementSFX = "construction_sound_effect" 
     static let foundationPlacementSFX = "finger_tap_boosted"
     static let cannonShotFiredSFX = "cannon_shot_fired."
     static let cannonTowerImpactSFX = "cannon_tower_impact."
