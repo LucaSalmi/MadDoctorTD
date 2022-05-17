@@ -147,7 +147,7 @@ struct GameSceneView: View {
                 VStack(spacing: 25) {
                     Text("Foundation menu")
                     Button {
-                        communicator.buildFoundation()
+                       // communicator.buildFoundation()
                         //SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
                         SoundManager.playSFX(sfxName: SoundManager.foundationPlacementSFX, scene: GameScene.instance!)
 

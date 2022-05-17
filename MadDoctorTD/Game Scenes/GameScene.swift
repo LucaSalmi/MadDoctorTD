@@ -251,6 +251,8 @@ class GameScene: SKScene {
                 TowerFactory(towerType: TowerTypes.gunTower).createTower(currentFoundation: snappedToFoundation!)
                 GameManager.instance.currentMoney -= TowerData.BASE_COST
                 snappedToFoundation = nil
+                SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
+
             }
             touchingTower!.removeFromParent()
             towerUI?.addChild(touchingTower!)
@@ -265,6 +267,7 @@ class GameScene: SKScene {
                 TowerFactory(towerType: TowerTypes.rapidFireTower).createTower(currentFoundation: snappedToFoundation!)
                 GameManager.instance.currentMoney -= TowerData.BASE_COST
                 snappedToFoundation = nil
+                SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
             }
             touchingTower!.removeFromParent()
             towerUI?.addChild(touchingTower!)
@@ -279,6 +282,7 @@ class GameScene: SKScene {
                 TowerFactory(towerType: TowerTypes.cannonTower).createTower(currentFoundation: snappedToFoundation!)
                 GameManager.instance.currentMoney -= TowerData.BASE_COST
                 snappedToFoundation = nil
+                SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
             }
             touchingTower!.removeFromParent()
             towerUI?.addChild(touchingTower!)
@@ -292,6 +296,7 @@ class GameScene: SKScene {
                 TowerFactory(towerType: TowerTypes.sniperTower).createTower(currentFoundation: snappedToFoundation!)
                 GameManager.instance.currentMoney -= TowerData.BASE_COST
                 snappedToFoundation = nil
+                SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
             }
             touchingTower!.removeFromParent()
             towerUI?.addChild(touchingTower!)
@@ -347,6 +352,7 @@ class GameScene: SKScene {
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE, position: location)
                 touchingTower = node as? SKSpriteNode
                 touchingTower?.size = TowerData.TEXTURE_SIZE
+                SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 
                 
                 
@@ -361,6 +367,7 @@ class GameScene: SKScene {
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.5, position: location)
                 touchingTower = node as? SKSpriteNode
                 touchingTower?.size = TowerData.TEXTURE_SIZE
+                SoundManager.playSFX(sfxName: SoundManager.buttonTwoSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             }
             else if node.name == "CannonTower"{
                 
@@ -373,6 +380,7 @@ class GameScene: SKScene {
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.8, position: location)
                 touchingTower = node as? SKSpriteNode
                 touchingTower?.size = TowerData.TEXTURE_SIZE
+                SoundManager.playSFX(sfxName: SoundManager.buttonThreeSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             }
             else if node.name == "SniperTower"{
                 if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.sniperTowerUnlocked{
@@ -383,6 +391,7 @@ class GameScene: SKScene {
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 1.8, position: location)
                 touchingTower = node as? SKSpriteNode
                 touchingTower?.size = TowerData.TEXTURE_SIZE
+                SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             }
             
             else if node is Tower{
