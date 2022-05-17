@@ -187,7 +187,19 @@ class FoundationPlate: SKSpriteNode{
     
     func onClick(){
         
-        print("isPowered = \(isPowered)")
+
+        print("is starter = \(isStartingFoundation)")
+        
+        for plate in FoundationPlateNodes.foundationPlatesNode.children{
+            
+            let x = plate as! FoundationPlate
+            if x == self{
+                
+                print("array position = \(FoundationPlateNodes.foundationPlatesNode.children.firstIndex(of: plate))")
+                
+            }
+        }
+        
         
         if hasTower {
             return

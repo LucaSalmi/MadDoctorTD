@@ -142,30 +142,7 @@ struct GameSceneView: View {
                     }
                 }
             }
-            
-            if communicator.showFoundationMenu{
-                VStack(spacing: 25) {
-                    Text("Foundation menu")
-                    Button {
-                       // communicator.buildFoundation()
-                        //SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX)
-                        SoundManager.playSFX(sfxName: SoundManager.foundationPlacementSFX, scene: GameScene.instance!)
-
-                        //ADD CODE FOR BUILDINGSOUND
-                        
-                    } label: {
-                        Text("Build foundation")
-                    }
-                    Button {
-                        communicator.cancelFoundationBuild()
-                    } label: {
-                        Text("Cancel")
-                    }
-
-                }.font(.title)
-                    .background(.black.opacity(0.5))
-            }
-
+          
             if communicator.showTowerMenu{
                 
                 VStack(spacing: 25) {
