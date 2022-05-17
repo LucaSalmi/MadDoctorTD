@@ -189,16 +189,8 @@ class AoeProjectile: SKSpriteNode {
             self.size.width += 0.5
             self.size.height += 0.5
             
-            
-        
-            print("SIZE: \(self.size.width)")
-            
-
-            
             projectileShadow.alpha -= 0.005
             
-            
-            print("SIZE: \(projectileShadow.size.width)")
             
         }
         else{
@@ -208,9 +200,6 @@ class AoeProjectile: SKSpriteNode {
 
             projectileShadow.alpha += 0.005
         }
-        
-        
-        
         
         
         if hasReachedTargetPoint(){
