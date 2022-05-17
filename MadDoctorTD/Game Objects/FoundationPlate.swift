@@ -65,8 +65,9 @@ class FoundationPlate: SKSpriteNode{
         
         crackTexture?.alpha = 0
         crackTexture?.size = self.size
-        GameScene.instance?.addChild(warningTexture!)
-        GameScene.instance?.addChild(crackTexture!)
+        crackTexture?.zPosition = 2
+        GameScene.instance?.foundationIndicatorsNode.addChild(warningTexture!)
+        GameScene.instance?.foundationIndicatorsNode.addChild(crackTexture!)
         
         
         

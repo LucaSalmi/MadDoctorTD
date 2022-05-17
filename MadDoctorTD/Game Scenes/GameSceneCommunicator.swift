@@ -21,6 +21,8 @@ class GameSceneCommunicator: ObservableObject {
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil
     
+    var secondIndexStart: Int = 8
+    
     private init() {}
     
     func buildFoundation() {
@@ -202,8 +204,7 @@ class GameSceneCommunicator: ObservableObject {
         
         let startGrid1 = FoundationPlateNodes.foundationPlatesNode.children[0] as! FoundationPlate
         startGrid1.checkIfPowered(gridStart: startGrid1)
-        let nextIndexStart = FoundationPlateNodes.foundationPlatesNode.children.count / 2
-        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[nextIndexStart] as! FoundationPlate
+        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[secondIndexStart] as! FoundationPlate
         startGrid2.checkIfPowered(gridStart: startGrid2)
         
     }
