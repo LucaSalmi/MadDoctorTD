@@ -22,8 +22,16 @@ class GameSceneCommunicator: ObservableObject {
     var currentTower: Tower? = nil
     
     @Published var foundationEditMode: Bool = false
+    @Published var foundationsToAdd = [FoundationPlate]()
     
     private init() {}
+    
+    func confirmFoundationEdit() {
+        
+        let totalPrice = foundationsToAdd.count * FoundationData.BASE_COST
+        GameManager.instance.currentMoney -= totalPrice
+        
+    }
     
     func buildFoundation() {
         
