@@ -110,6 +110,14 @@ struct GameSceneView: View {
                             Spacer()
                             
                             Button {
+                                communicator.foundationEditMode.toggle()
+                            } label: {
+                                Text(communicator.foundationEditMode ? "Done" : "Edit")
+                            }
+                            
+                            Spacer()
+                            
+                            Button {
                                 GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
                                 communicator.isBuildPhase = false
                                 GameScene.instance!.waveManager!.shouldCreateWave = true
