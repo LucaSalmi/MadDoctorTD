@@ -225,7 +225,6 @@ class GameScene: SKScene {
             return
         }
 
-        let touch : UITouch = touches.first!
         let positionInScene = touch.location(in: self)
         let previousPosition = touch.previousLocation(in: self)
         let translation = CGPoint(x: (positionInScene.x) - (previousPosition.x), y: (positionInScene.y) - (previousPosition.y))
