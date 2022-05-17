@@ -165,6 +165,7 @@ struct GameSceneView: View {
                 }.font(.title)
                     .background(.black.opacity(0.5))
             }
+
             if communicator.showTowerMenu{
                 
                 VStack(spacing: 25) {
@@ -217,6 +218,7 @@ struct GameSceneView: View {
 
                 }.font(.title)
                     .background(.black.opacity(0.5))
+
                 
             }
             if communicator.showUpgradeMenu{
