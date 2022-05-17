@@ -95,6 +95,7 @@
 		E5836FF7282A621500EAF6E9 /* CannonTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FF6282A621500EAF6E9 /* CannonTower.swift */; };
 		E5836FF9282A652D00EAF6E9 /* AoeProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */; };
 		E5836FFB282A662000EAF6E9 /* CannonProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */; };
+		E5E965DE2833809700010B5A /* TowerMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E5E965DD2833809700010B5A /* TowerMenuScene.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +188,7 @@
 		E5836FF6282A621500EAF6E9 /* CannonTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonTower.swift; sourceTree = "<group>"; };
 		E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoeProjectile.swift; sourceTree = "<group>"; };
 		E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonProjectile.swift; sourceTree = "<group>"; };
+		E5E965DD2833809700010B5A /* TowerMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TowerMenuScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +265,7 @@
 				33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */,
 				E57BA9E8282B9885001BCD99 /* StartScene.swift */,
 				E57BA9EC282B9922001BCD99 /* StartSceneView.swift */,
+				E5E965DD2833809700010B5A /* TowerMenuScene.sks */,
 			);
 			path = "Game Scenes";
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				B35C2123282BC07C009A748E /* mortar_swoosh2.mp3 in Resources */,
 				C844A737282A969600FC42C9 /* CannonExplosion.sks in Resources */,
 				3359CC9828214F1800878191 /* LabScene.sks in Resources */,
+				E5E965DE2833809700010B5A /* TowerMenuScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
 				B35C213D282D39DB009A748E /* cannon_shot_fired.mp3 in Resources */,
 				3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */,

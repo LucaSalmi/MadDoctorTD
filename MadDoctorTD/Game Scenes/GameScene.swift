@@ -26,6 +26,12 @@ class GameScene: SKScene {
     
     var rangeIndicator: SKShapeNode?
     
+    var towerUI: SKSpriteNode? = nil
+    
+    var touchingTower: SKSpriteNode? = nil
+    
+    var snappedToFoundation: FoundationPlate? = nil
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -44,6 +50,15 @@ class GameScene: SKScene {
         GameScene.instance = self
         physicsWorld.contactDelegate = self
         gameSetup()
+        
+        let uiScene = SKScene(fileNamed: "TowerMenuScene")
+        towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
+        towerUI!.removeFromParent()
+        self.camera!.addChild(towerUI!)
+        
+        
+        
+        
         
     }
     
@@ -151,11 +166,70 @@ class GameScene: SKScene {
             return
         }
         
-        let touch : UITouch = touches.first!
+        guard let touch = touches.first else{return}
+        let location = touch.location(in: self)
+        
+        if touchingTower != nil{
+            
+            touchingTower!.removeFromParent()
+            self.addChild(touchingTower!)
+            touchingTower?.position = location
+            
+            for node in FoundationPlateNodes.foundationPlatesNode.children{
+                let foundationPlate = node as! FoundationPlate
+                if foundationPlate.contains(location){
+                    if !foundationPlate.hasTower{
+                        touchingTower?.position = foundationPlate.position
+                        snappedToFoundation = foundationPlate
+                        break
+                    }
+                }
+                else {
+                    snappedToFoundation = nil
+                    
+                }
+                
+            }
+            
+            return
+        }
+        
+        
         let positionInScene = touch.location(in: self)
         let previousPosition = touch.previousLocation(in: self)
         let translation = CGPoint(x: (positionInScene.x) - (previousPosition.x), y: (positionInScene.y) - (previousPosition.y))
         panForTranslation(translation)
+        
+        
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if touchingTower == nil{
+            return
+        }
+        
+        switch touchingTower!.name{
+        case "GunTower":
+            if snappedToFoundation != nil{
+                print("built tower woho")
+                snappedToFoundation!.hasTower = true
+                TowerFactory(towerType: TowerTypes.gunTower).createTower(currentFoundation: snappedToFoundation!)
+                GameManager.instance.currentMoney -= TowerData.BASE_COST
+                snappedToFoundation = nil
+            }
+            touchingTower!.removeFromParent()
+            towerUI?.addChild(touchingTower!)
+            
+            let gunTowerHub = towerUI?.childNode(withName: "GunTowerHub")
+            touchingTower!.position = gunTowerHub!.position
+            
+            
+            
+        default:
+            print("Error")
+        }
+        
+        touchingTower?.size = CGSize(width: 150, height: 150)
+        touchingTower = nil
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -193,6 +267,16 @@ class GameScene: SKScene {
                 let clickableTile = node as! ClickableTile
                 clickableTile.onClick()
                 break
+            }
+            else if node.name == "GunTower"{
+                if TowerData.BASE_COST > GameManager.instance.currentMoney{
+                    return
+                }
+                
+                touchingTower = node as? SKSpriteNode
+                touchingTower?.size = TowerData.TEXTURE_SIZE
+                
+                
             }
         }
     }
