@@ -57,7 +57,7 @@ class Tower: SKSpriteNode{
         noPowerTexture.zPosition = self.zPosition + 1
         noPowerTexture.position = self.position
         noPowerTexture.alpha = 0
-        GameScene.instance!.addChild(noPowerTexture)
+        GameScene.instance!.towerIndicatorsNode.addChild(noPowerTexture)
         
         
     }
@@ -204,7 +204,7 @@ class Tower: SKSpriteNode{
         gameScene.rangeIndicator!.zPosition = 2
         gameScene.rangeIndicator!.position = position
         
-        GameScene.instance?.addChild(gameScene.rangeIndicator!)
+        GameScene.instance?.towerIndicatorsNode.addChild(gameScene.rangeIndicator!)
         
     }
     

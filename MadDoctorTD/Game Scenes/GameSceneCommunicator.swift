@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SpriteKit
 
 class GameSceneCommunicator: ObservableObject {
     
@@ -21,9 +22,24 @@ class GameSceneCommunicator: ObservableObject {
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil
     
+    @Published var foundationEditMode: Bool = false
+    @Published var foundationsToAdd = [FoundationPlate]()
+    var secondIndexStart: Int = 8
+    
     private init() {}
     
+    func confirmFoundationEdit() {
+        
+        let totalPrice = foundationsToAdd.count * FoundationData.BASE_COST
+        GameManager.instance.currentMoney -= totalPrice
+        foundationsToAdd.removeAll()
+        
+    }
+    
     func buildFoundation() {
+        
+        //TODO: REMOVE/REWORK THIS METHOD
+        return
         
         let price = FoundationData.BASE_COST
         if price > GameManager.instance.currentMoney {
@@ -166,6 +182,7 @@ class GameSceneCommunicator: ObservableObject {
         currentTower!.builtUponFoundation!.hasTower = false
         currentTower!.removeFromParent()
         currentTower!.towerTexture.removeFromParent()
+        currentTower?.noPowerTexture.removeFromParent()
         
         if currentTower! is SniperTower{
             let sniperTower = currentTower as! SniperTower
@@ -202,8 +219,7 @@ class GameSceneCommunicator: ObservableObject {
         
         let startGrid1 = FoundationPlateNodes.foundationPlatesNode.children[0] as! FoundationPlate
         startGrid1.checkIfPowered(gridStart: startGrid1)
-        let nextIndexStart = FoundationPlateNodes.foundationPlatesNode.children.count / 2
-        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[nextIndexStart] as! FoundationPlate
+        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[secondIndexStart] as! FoundationPlate
         startGrid2.checkIfPowered(gridStart: startGrid2)
         
     }
@@ -214,5 +230,21 @@ class GameSceneCommunicator: ObservableObject {
             let foundationPlate = node as! FoundationPlate
             foundationPlate.updateFoundationsTexture()
         }
+    }
+    
+    func toggleFoundationGrid() {
+        
+        for node in GameScene.instance!.clickableTileGridsNode.children {
+
+            let gridTexture = node as! SKSpriteNode
+            
+            if foundationEditMode {
+                gridTexture.alpha = 1
+            }
+            else {
+                gridTexture.alpha = 0
+            }
+        }
+        
     }
 }

@@ -110,6 +110,7 @@ class WaveManager{
                 }
                 
                 if RandomNumberGenerator.isAttackerRNG(maxRange: 10, limitForTrue: attackSpawnChance){
+
                     
                     numberOfAttackers += 1
                     enemy.isAttacker = true

@@ -99,25 +99,41 @@ struct GameSceneView: View {
                             
                             Spacer()
                             
-                            Button {
-                                AppManager.appManager.state = .labMenu
-                                SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
+                            if !communicator.foundationEditMode {
+                                Button {
+                                    AppManager.appManager.state = .labMenu
+                                    SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
 
-                            } label: {
-                                Text("Research")
+                                } label: {
+                                    Text("Research")
+                                }
                             }
 
                             Spacer()
                             
                             Button {
-                                GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
-                                communicator.isBuildPhase = false
-                                GameScene.instance!.waveManager!.shouldCreateWave = true
-                                GameSceneCommunicator.instance.cancelAllMenus()
-                                SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
-                                
+                                communicator.foundationEditMode.toggle()
+                                if communicator.foundationEditMode == false {
+                                    communicator.confirmFoundationEdit()
+                                }
+                                communicator.toggleFoundationGrid()
                             } label: {
-                                Text("READY!")
+                                Text(communicator.foundationEditMode ? "Done" : "Edit")
+                            }
+                            
+                            Spacer()
+                            
+                            if !communicator.foundationEditMode {
+                                Button {
+                                    GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
+                                    communicator.isBuildPhase = false
+                                    GameScene.instance!.waveManager!.shouldCreateWave = true
+                                    GameSceneCommunicator.instance.cancelAllMenus()
+                                    SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
+                                    
+                                } label: {
+                                    Text("READY!")
+                                }
                             }
                             
                             Spacer()
@@ -179,12 +195,14 @@ struct GameSceneView: View {
                         communicator.repairFoundation()
                     } label: {
                         Text("Repair Foundation")
-                    }
+                    }.disabled(communicator.isBuildPhase ? false : true)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
                     Button {
                         communicator.upgradeFoundation()
                     } label: {
                         Text("Upgrade Foundation")
-                    }
+                    }.disabled(communicator.isBuildPhase ? false : true)
+                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
                     Button {
                         communicator.sellFoundation()
                     } label: {

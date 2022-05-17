@@ -19,12 +19,17 @@ class GameScene: SKScene {
 
     var edgesTilesNode: SKNode = SKNode()
     var hpBarsNode: SKNode = SKNode()
+    var towerIndicatorsNode: SKNode = SKNode()
+    var foundationIndicatorsNode: SKNode = SKNode()
     
     var pathfindingTestEnemy: Enemy?
     var nodeGraph: GKObstacleGraph? = nil
     var waveManager: WaveManager? = nil
     
     var rangeIndicator: SKShapeNode?
+    
+    var clickableTileGridsNode = SKNode()
+    var isMovingCamera = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -76,6 +81,11 @@ class GameScene: SKScene {
         addChild(EnemyNodes.enemiesNode)
         addChild(hpBarsNode)
         
+        addChild(clickableTileGridsNode)
+
+        addChild(towerIndicatorsNode)
+        addChild(foundationIndicatorsNode)
+
     }
     
     private func setupCamera(){
@@ -144,6 +154,25 @@ class GameScene: SKScene {
             return
         }
         
+        if GameSceneCommunicator.instance.foundationEditMode {
+            
+            guard let touch = touches.first else {return}
+            
+            let location = touch.location(in: self)
+            let touchedNodes = nodes(at: location)
+            
+            for touchedNode in touchedNodes {
+                if touchedNode is ClickableTile {
+                    let clickableTile = touchedNode as! ClickableTile
+                    clickableTile.onClick()
+                    break
+                }
+            }
+            
+            return
+            
+        }
+        
         let touch : UITouch = touches.first!
         let positionInScene = touch.location(in: self)
         let previousPosition = touch.previousLocation(in: self)
@@ -157,9 +186,17 @@ class GameScene: SKScene {
             return
         }
         
+        if GameSceneCommunicator.instance.foundationEditMode {
+            return
+        }
+        
         if rangeIndicator != nil{
             rangeIndicator!.removeFromParent()
             
+        }
+        
+        if isMovingCamera{
+            return
         }
         
         let communicator = GameSceneCommunicator.instance
@@ -182,11 +219,13 @@ class GameScene: SKScene {
                 foundationPlate.onClick()
                 break
             }
+            /*
             else if node is ClickableTile {
                 let clickableTile = node as! ClickableTile
                 clickableTile.onClick()
                 break
             }
+             */
         }
     }
     
@@ -243,23 +282,33 @@ class GameScene: SKScene {
         TowerNode.towersNode.removeFromParent()
         TowerNode.towerTextureNode.removeAllChildren()
         TowerNode.towerTextureNode.removeFromParent()
+        towerIndicatorsNode.removeAllChildren()
+        towerIndicatorsNode.removeFromParent()
+        
         //Enemies
         EnemyNodes.enemiesNode.removeAllChildren()
         EnemyNodes.enemiesNode.removeFromParent()
         EnemyNodes.enemyArray.removeAll()
+        
         //HP bars
         hpBarsNode.removeAllChildren()
         hpBarsNode.removeFromParent()
+        
         //Foundation
         FoundationPlateNodes.foundationPlatesNode.removeAllChildren()
         FoundationPlateNodes.foundationPlatesNode.removeFromParent()
+        foundationIndicatorsNode.removeAllChildren()
+        foundationIndicatorsNode.removeFromParent()
+        
         //ClickableTiles
         ClickableTilesNodes.clickableTilesNode.removeAllChildren()
         ClickableTilesNodes.clickableTilesNode.removeFromParent()
+        
         //Projectiles
         ProjectileNodes.projectilesNode.removeAllChildren()
         ProjectileNodes.projectilesNode.removeFromParent()
         ProjectileNodes.gunProjectilesPool.removeAll()
+        
         //Edge
         edgesTilesNode.removeAllChildren()
         edgesTilesNode.removeFromParent()
@@ -276,6 +325,7 @@ class GameScene: SKScene {
         GameManager.instance.currentWave = 0
         GameManager.instance.nextWaveCounter = 0
         
+        clickableTileGridsNode.removeFromParent()
     }
 
     
@@ -283,6 +333,7 @@ class GameScene: SKScene {
         let position = camera!.position
         let aNewPosition = CGPoint(x: position.x - translation.x, y: position.y - translation.y)
         camera!.position = aNewPosition
+        isMovingCamera = false
     }
     
     
