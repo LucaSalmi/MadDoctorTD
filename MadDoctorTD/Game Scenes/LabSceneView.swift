@@ -243,9 +243,11 @@ struct BotArea: View {
             
             Button {
                 AppManager.appManager.state = .gameScene
+                SoundManager.playBGM(bgmString: SoundManager.airlockDoorsTheme, bgmExtension: SoundManager.wavExtension)
             } label: {
                 Text("Return")
                     .foregroundColor(Color.white)
+
 
             }
             .frame(width: 120, height: 30)
@@ -294,6 +296,7 @@ struct BotArea: View {
                 if gameManager.rapidFireTowerUnlocked {
                     return
                 }
+                GameScene.instance!.towerUI!.childNode(withName: "SpeedTower")!.alpha = 1
                 gameManager.rapidFireTowerUnlocked = true
                 gameManager.researchPoints -= 1
             default:
@@ -305,6 +308,7 @@ struct BotArea: View {
                 if gameManager.sniperTowerUnlocked {
                     return
                 }
+                GameScene.instance!.towerUI!.childNode(withName: "SniperTower")!.alpha = 1
                 gameManager.sniperTowerUnlocked = true
                 gameManager.researchPoints -= 1
             default:
@@ -316,6 +320,7 @@ struct BotArea: View {
                 if gameManager.cannonTowerUnlocked {
                     return
                 }
+                GameScene.instance!.towerUI!.childNode(withName: "CannonTower")!.alpha = 1
                 gameManager.cannonTowerUnlocked = true
                 gameManager.researchPoints -= 1
             default:

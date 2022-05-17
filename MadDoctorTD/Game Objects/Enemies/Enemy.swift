@@ -64,6 +64,10 @@ class Enemy: SKSpriteNode{
 
     }
     
+    func changeTooAtkTexture() {
+        // overiding in subclasses for specific texrures (ex. slime_fast_atker...))
+    }
+    
     
     func update(){
         
@@ -89,13 +93,16 @@ class Enemy: SKSpriteNode{
         
         if movePoints.isEmpty {
             GameManager.instance.getDamage()
+            self.hp = 0
             self.removeFromParent()
+            self.hpBar?.removeFromParent()
             return
         }
         
         move()
         
     }
+    
     
     private func move() {
         
@@ -108,7 +115,7 @@ class Enemy: SKSpriteNode{
                 
             }else{
                 
-                let targetPosition = findNextTarget()
+                let targetPosition = seekAndDestroy()
                 if targetPosition != nil{
                     
                     setDirection(targetPoint: targetPosition!)
@@ -127,13 +134,6 @@ class Enemy: SKSpriteNode{
         position.y += direction.y * baseSpeed
         
         if hasReachedPoint(point: nextPoint) {
-            
-            if self.isAttacker{
-                
-                precedentTargetPosition = findCenterInTile()
-                precedentTargetPosition = findNextTarget()
-                
-            }
             
             oldMovePoints.append(movePoints[0])
             movePoints.remove(at: 0)
@@ -169,27 +169,32 @@ class Enemy: SKSpriteNode{
         }
     }
     
-    
-    private func findNextTarget() -> CGPoint?{
+    private func seekAndDestroy() -> CGPoint?{
         
-        if precedentTargetPosition != nil{
+        let foundationPlates = FoundationPlateNodes.foundationPlatesNode.children
+        
+        var closestDistance = CGFloat(self.size.width * 3)
+        
+        for node in foundationPlates {
             
-            for node in FoundationPlateNodes.foundationPlatesNode.children{
-                
-                if precedentTargetPosition!.x + 86 == node.position.x || precedentTargetPosition!.x - 86 == node.position.x {
+            let plate = node as! FoundationPlate
+            
+            let plateDistance = position.distance(point: plate.position)
+            
+            if plateDistance < closestDistance {
+                closestDistance = plateDistance
+                if plateDistance <= self.size.width * 3 {
                     
-                    let plate = node as! FoundationPlate
                     if !plate.isStartingFoundation{
-                        return node.position
+                        return plate.position
                     }
                 }
             }
         }
         
-        
         return nil
+        
     }
-    
     
     private func setDirection(targetPoint: CGPoint) {
         
@@ -242,39 +247,39 @@ class Enemy: SKSpriteNode{
             
         }
         
-        if hp <= Int(Double(EnemiesData.BASE_HP) * 0.1) {
+        if hp <= Int(Double(hp) * 0.1) {
             //TODO: 10% HERE
             hpBar!.texture = SKTexture(imageNamed: "hp_bar_10")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.2){
+        else if hp <= Int(Double(hp) * 0.2){
             //TODO: 20% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_20")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.3){
+        else if hp <= Int(Double(hp) * 0.3){
             //TODO: 30% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_30")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.4){
+        else if hp <= Int(Double(hp) * 0.4){
             //TODO: 40% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_40")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.5){
+        else if hp <= Int(Double(hp) * 0.5){
             //TODO: 50% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_50")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.6){
+        else if hp <= Int(Double(hp) * 0.6){
             //TODO: 60% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_60")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.7){
+        else if hp <= Int(Double(hp) * 0.7){
             //TODO: 70% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_70")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.8){
+        else if hp <= Int(Double(hp) * 0.8){
             //TODO: 80% HERE
             hpBar?.texture = SKTexture(imageNamed: "hp_bar_80")
         }
-        else if hp <= Int(Double(EnemiesData.BASE_HP) * 0.9){
+        else if hp <= Int(Double(hp) * 0.9){
             //TODO: 90% HERE
             hpBar!.texture = SKTexture(imageNamed: "hp_bar_90")
         }
@@ -394,6 +399,9 @@ class Enemy: SKSpriteNode{
         for node in EnemyNodes.enemiesNode.children {
             let enemy = node as! Enemy
             
+            if enemy.isAttacker{
+                return
+            }
             //If enemy has not reached new connecting point, it gets the new path
             if enemy.movePoints.contains(commonConnectingPoint) {
                 enemy.movePoints = movePoints
@@ -412,11 +420,11 @@ class Enemy: SKSpriteNode{
                         enemy.movePoints.remove(at: i)
                         
                     }
-                        
                 }
             }
         }
-        
     }
+    
+    
     
 }

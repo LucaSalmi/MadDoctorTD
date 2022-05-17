@@ -16,15 +16,29 @@ class GameScene: SKScene {
     static var instance: GameScene? = nil
     
     var previousCameraScale = CGFloat()
-
+    
     var edgesTilesNode: SKNode = SKNode()
     var hpBarsNode: SKNode = SKNode()
+    var towerIndicatorsNode: SKNode = SKNode()
+    var foundationIndicatorsNode: SKNode = SKNode()
     
     var pathfindingTestEnemy: Enemy?
     var nodeGraph: GKObstacleGraph? = nil
     var waveManager: WaveManager? = nil
     
     var rangeIndicator: SKShapeNode?
+    
+    var towerUI: SKSpriteNode? = nil
+    
+    var touchingTower: SKSpriteNode? = nil
+    
+    var snappedToFoundation: FoundationPlate? = nil
+    
+    var uiNode = SKNode()
+
+    var clickableTileGridsNode = SKNode()
+    
+    var isMovingCamera = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -44,7 +58,7 @@ class GameScene: SKScene {
         GameScene.instance = self
         physicsWorld.contactDelegate = self
         gameSetup()
-        
+
     }
     
     func gameSetup(){
@@ -76,6 +90,17 @@ class GameScene: SKScene {
         addChild(EnemyNodes.enemiesNode)
         addChild(hpBarsNode)
         
+        let uiScene = SKScene(fileNamed: "TowerMenuScene")
+        towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
+        towerUI!.removeFromParent()
+        self.camera!.addChild(towerUI!)
+        self.addChild(uiNode)
+
+        addChild(clickableTileGridsNode)
+
+        addChild(towerIndicatorsNode)
+        addChild(foundationIndicatorsNode)
+
     }
     
     private func setupCamera(){
@@ -135,14 +160,7 @@ class GameScene: SKScene {
         pathfindingTestEnemy!.movePoints = pathfindingTestEnemy!.getMovePoints()
         addChild(pathfindingTestEnemy!)
         
-        var enemyChoices = [EnemyTypes]()
-        
-        enemyChoices.append(.standard)
-        enemyChoices.append(.flying)
-        enemyChoices.append(.heavy)
-        enemyChoices.append(.fast)
-        
-        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: enemyChoices, enemyRace: .slime)
+        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard], enemyRace: .slime)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -151,11 +169,139 @@ class GameScene: SKScene {
             return
         }
         
-        let touch : UITouch = touches.first!
+        guard let touch = touches.first else{return}
+        let location = touch.location(in: self)
+      
+        if GameSceneCommunicator.instance.foundationEditMode {
+            
+            guard let touch = touches.first else {return}
+            
+            let location = touch.location(in: self)
+            let touchedNodes = nodes(at: location)
+            
+            for touchedNode in touchedNodes {
+                if touchedNode is ClickableTile {
+                    let clickableTile = touchedNode as! ClickableTile
+                    clickableTile.onClick()
+                    break
+                }
+            }
+            
+            return
+            
+        }
+        
+        if touchingTower != nil{
+            
+            
+            touchingTower?.position = location
+            rangeIndicator?.position = location
+            
+            for node in FoundationPlateNodes.foundationPlatesNode.children{
+                let foundationPlate = node as! FoundationPlate
+                if foundationPlate.contains(location){
+                    if !foundationPlate.hasTower{
+                        touchingTower?.position = foundationPlate.position
+                        snappedToFoundation = foundationPlate
+                        rangeIndicator?.position = foundationPlate.position
+                        break
+                    }
+                }
+                else {
+                    snappedToFoundation = nil
+                    
+                }
+                
+            }
+            
+            return
+        }
+
         let positionInScene = touch.location(in: self)
         let previousPosition = touch.previousLocation(in: self)
         let translation = CGPoint(x: (positionInScene.x) - (previousPosition.x), y: (positionInScene.y) - (previousPosition.y))
         panForTranslation(translation)
+        
+        
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        
+        
+        if touchingTower == nil{
+            return
+        }
+        
+        rangeIndicator?.removeFromParent()
+        rangeIndicator = nil
+        
+        switch touchingTower!.name{
+        case "GunTower":
+            if snappedToFoundation != nil{
+                print("built tower woho")
+                snappedToFoundation!.hasTower = true
+                TowerFactory(towerType: TowerTypes.gunTower).createTower(currentFoundation: snappedToFoundation!)
+                GameManager.instance.currentMoney -= TowerData.BASE_COST
+                snappedToFoundation = nil
+                SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
+
+            }
+            touchingTower!.removeFromParent()
+            towerUI?.addChild(touchingTower!)
+            
+            let gunTowerHub = towerUI?.childNode(withName: "GunTowerHub")
+            touchingTower!.position = gunTowerHub!.position
+            
+            
+        case "SpeedTower":
+            if snappedToFoundation != nil{
+                snappedToFoundation!.hasTower = true
+                TowerFactory(towerType: TowerTypes.rapidFireTower).createTower(currentFoundation: snappedToFoundation!)
+                GameManager.instance.currentMoney -= TowerData.BASE_COST
+                snappedToFoundation = nil
+                SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
+            }
+            touchingTower!.removeFromParent()
+            towerUI?.addChild(touchingTower!)
+            
+            let gunTowerHub = towerUI?.childNode(withName: "SpeedTowerHub")
+            touchingTower!.position = gunTowerHub!.position
+            
+           
+        case "CannonTower":
+            if snappedToFoundation != nil{
+                snappedToFoundation!.hasTower = true
+                TowerFactory(towerType: TowerTypes.cannonTower).createTower(currentFoundation: snappedToFoundation!)
+                GameManager.instance.currentMoney -= TowerData.BASE_COST
+                snappedToFoundation = nil
+                SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
+            }
+            touchingTower!.removeFromParent()
+            towerUI?.addChild(touchingTower!)
+            
+            let gunTowerHub = towerUI?.childNode(withName: "CannonTowerHub")
+            touchingTower!.position = gunTowerHub!.position
+            
+        case "SniperTower":
+            if snappedToFoundation != nil{
+                snappedToFoundation!.hasTower = true
+                TowerFactory(towerType: TowerTypes.sniperTower).createTower(currentFoundation: snappedToFoundation!)
+                GameManager.instance.currentMoney -= TowerData.BASE_COST
+                snappedToFoundation = nil
+                SoundManager.playSFX(sfxName: SoundManager.buildingPlacementSFX, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
+            }
+            touchingTower!.removeFromParent()
+            towerUI?.addChild(touchingTower!)
+            
+            let gunTowerHub = towerUI?.childNode(withName: "SniperTowerHub")
+            touchingTower!.position = gunTowerHub!.position
+            
+        default:
+            print("Error")
+        }
+        
+        touchingTower?.size = CGSize(width: 150, height: 150)
+        touchingTower = nil
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -169,6 +315,10 @@ class GameScene: SKScene {
             
         }
         
+        if isMovingCamera{
+            return
+        }
+        
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
         
@@ -177,24 +327,86 @@ class GameScene: SKScene {
         let location = touch.location(in: self)
         let touchedNodes = nodes(at: location)
         
+        if GameSceneCommunicator.instance.foundationEditMode {
+            communicator.editFoundationGrid(touchedNodes: touchedNodes)
+            return
+        }
+        
         for node in touchedNodes {
             
-            if node is Tower{
+            var uiTowerFound = false
+            
+            if node.name == "GunTower"{
+                if TowerData.BASE_COST > GameManager.instance.currentMoney{
+                    return
+                }
+                uiTowerFound = true
+                
+                displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE, position: location)
+                touchingTower = node as? SKSpriteNode
+                touchingTower?.size = TowerData.TEXTURE_SIZE
+                SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                
+                
+                
+            }
+            else if node.name == "SpeedTower"{
+                
+                if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.rapidFireTowerUnlocked{
+                    return
+                }
+                uiTowerFound = true
+                
+                displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.5, position: location)
+                touchingTower = node as? SKSpriteNode
+                touchingTower?.size = TowerData.TEXTURE_SIZE
+                SoundManager.playSFX(sfxName: SoundManager.buttonTwoSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+            }
+            else if node.name == "CannonTower"{
+                
+                if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.cannonTowerUnlocked{
+                    return
+                }
+
+              uiTowerFound = true
+                
+                displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.8, position: location)
+                touchingTower = node as? SKSpriteNode
+                touchingTower?.size = TowerData.TEXTURE_SIZE
+                SoundManager.playSFX(sfxName: SoundManager.buttonThreeSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+            }
+            else if node.name == "SniperTower"{
+                if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.sniperTowerUnlocked{
+                    return
+                }
+                uiTowerFound = true
+                
+                displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 1.8, position: location)
+                touchingTower = node as? SKSpriteNode
+                touchingTower?.size = TowerData.TEXTURE_SIZE
+                SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+            }
+            
+            else if node is Tower{
                 let tower = node as! Tower
                 tower.onClick()
-                break
+                
             }
             else if node is FoundationPlate {
                 let foundationPlate = node as! FoundationPlate
                 foundationPlate.onClick()
-                break
+                
             }
-            else if node is ClickableTile {
-                let clickableTile = node as! ClickableTile
-                clickableTile.onClick()
-                break
+            
+            if uiTowerFound{
+                touchingTower!.removeFromParent()
+                uiNode.addChild(touchingTower!)
+                touchingTower?.position = location
+
             }
+            
         }
+        
     }
     
     
@@ -202,6 +414,23 @@ class GameScene: SKScene {
         return tileMap.tileDefinition(atColumn: coordinates.column, row: coordinates.row)
     }
     
+    func displayRangeIndicator(attackRange: CGFloat, position: CGPoint){
+        
+        if rangeIndicator != nil{
+            rangeIndicator!.removeFromParent()
+            
+        }
+        
+        rangeIndicator = SKShapeNode(circleOfRadius: attackRange)
+        rangeIndicator!.name = "RangeIndicator"
+        rangeIndicator!.fillColor = SKColor(.white.opacity(0.2))
+        
+        rangeIndicator!.zPosition = 2
+        rangeIndicator!.position = position
+        
+        addChild(rangeIndicator!)
+        
+    }
     
     override func update(_ currentTime: TimeInterval) {
         
@@ -210,11 +439,22 @@ class GameScene: SKScene {
         if GameManager.instance.isPaused || GameManager.instance.isGameOver{
             return
         }
-
+        
         for node in TowerNode.towersNode.children {
             let tower = node as! Tower
             tower.update()
         }
+        
+        if GameManager.instance.currentMoney < TowerData.BASE_COST{
+            for node in towerUI!.children{
+                if node.alpha != 0.5{
+                    node.alpha = 0.5
+                }
+                
+            }
+        }
+        
+        
         
         
         for node in ProjectileNodes.projectilesNode.children {
@@ -250,23 +490,33 @@ class GameScene: SKScene {
         TowerNode.towersNode.removeFromParent()
         TowerNode.towerTextureNode.removeAllChildren()
         TowerNode.towerTextureNode.removeFromParent()
+        towerIndicatorsNode.removeAllChildren()
+        towerIndicatorsNode.removeFromParent()
+        
         //Enemies
         EnemyNodes.enemiesNode.removeAllChildren()
         EnemyNodes.enemiesNode.removeFromParent()
         EnemyNodes.enemyArray.removeAll()
+        
         //HP bars
         hpBarsNode.removeAllChildren()
         hpBarsNode.removeFromParent()
+        
         //Foundation
         FoundationPlateNodes.foundationPlatesNode.removeAllChildren()
         FoundationPlateNodes.foundationPlatesNode.removeFromParent()
+        foundationIndicatorsNode.removeAllChildren()
+        foundationIndicatorsNode.removeFromParent()
+        
         //ClickableTiles
         ClickableTilesNodes.clickableTilesNode.removeAllChildren()
         ClickableTilesNodes.clickableTilesNode.removeFromParent()
+        
         //Projectiles
         ProjectileNodes.projectilesNode.removeAllChildren()
         ProjectileNodes.projectilesNode.removeFromParent()
         ProjectileNodes.gunProjectilesPool.removeAll()
+        
         //Edge
         edgesTilesNode.removeAllChildren()
         edgesTilesNode.removeFromParent()
@@ -283,13 +533,20 @@ class GameScene: SKScene {
         GameManager.instance.currentWave = 0
         GameManager.instance.nextWaveCounter = 0
         
+        //UI
+        self.camera!.removeAllChildren()
+        self.uiNode.removeFromParent()
+        
+        //Foundation edit mode
+        clickableTileGridsNode.removeFromParent()
     }
-
+    
     
     func panForTranslation(_ translation: CGPoint) {
         let position = camera!.position
         let aNewPosition = CGPoint(x: position.x - translation.x, y: position.y - translation.y)
         camera!.position = aNewPosition
+        isMovingCamera = false
     }
     
     
@@ -307,7 +564,7 @@ class GameScene: SKScene {
         
         if newCameraScale < 0.5 || newCameraScale > 1.3{
             
-                return
+            return
             
         }
         

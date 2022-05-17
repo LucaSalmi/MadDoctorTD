@@ -16,7 +16,7 @@ class GameManager: ObservableObject{
     @Published var currentMoney: Int = PlayerData.START_MONEY
 
     @Published var nextWaveCounter: Int = 0
-    @Published var currentWave: Int = 0
+    @Published var currentWave: Int = 1
     
     @Published var isMusicOn: Bool = true
     @Published var isSfxOn: Bool = true

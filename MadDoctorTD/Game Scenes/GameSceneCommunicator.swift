@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SpriteKit
 
 class GameSceneCommunicator: ObservableObject {
     
@@ -21,28 +22,97 @@ class GameSceneCommunicator: ObservableObject {
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil
     
+    @Published var foundationEditMode: Bool = false
+    var foundationDeleteMode = false
+    var blueprints = [FoundationPlate]()
+    var secondIndexStart: Int = 8
+    
+    @Published var newFoundationTotalCost: Int = 0
+    
     private init() {}
     
-    func buildFoundation() {
+    func confirmFoundationEdit() {
         
-        let price = FoundationData.BASE_COST
-        if price > GameManager.instance.currentMoney {
+        //let totalPrice = foundationsToAdd.count * FoundationData.BASE_COST
+        //GameManager.instance.currentMoney -= totalPrice
+        //foundationsToAdd.removeAll()
+        
+        if newFoundationTotalCost > GameManager.instance.currentMoney {
+            print("Too expensive")
             return
         }
-        else {
-            GameManager.instance.currentMoney -= price
+        
+        if isPathBlocked() {
+            print("Path is blocked")
+            return
         }
         
-        currentTile!.containsFoundation = true
-        currentTile!.color = .clear
-        
-        FoundationPlateFactory().createFoundationPlate(position: currentTile!.position, tile: currentTile!, isStartingFoundation: false)
-        
         updateFoundationPower()
+        for blueprint in blueprints {
+            if !blueprint.isPowered {
+                print("Some blueprints are not connected")
+                return
+            }
+        }
+        
+        for blueprint in blueprints {
+            blueprint.alpha = 1
+        }
+        blueprints.removeAll()
+        
+        for clickNode in ClickableTilesNodes.clickableTilesNode.children {
+            let clickableTile = clickNode as! ClickableTile
+            clickableTile.containsBlueprint = nil
+        }
+        
+        GameManager.instance.currentMoney -= newFoundationTotalCost
+        newFoundationTotalCost = 0
+        
         updateFoundationTexture()
         
-        currentTile = nil
-        showFoundationMenu = false
+        foundationEditMode = false
+        toggleFoundationGrid()
+    }
+    
+    private func isPathBlocked() -> Bool {
+        
+        var isBlocked = false
+        
+        let gameScene = GameScene.instance!
+        
+        let enemy = gameScene.pathfindingTestEnemy!
+        let movePoints = enemy.getMovePoints()
+        if movePoints.isEmpty {
+            isBlocked = true
+        }
+        else {
+            enemy.movePoints = movePoints
+            print("Enemy movepoints = \(enemy.movePoints.count)")
+        }
+        
+        return isBlocked
+    }
+    
+    func editFoundationGrid(touchedNodes: [SKNode]) {
+        
+        foundationDeleteMode = false
+        
+        for node in touchedNodes {
+            
+            if node is FoundationPlate {
+                foundationDeleteMode = true
+                print("delete = true")
+                break
+            }
+            
+            /*
+            else {
+                foundationDeleteMode = false
+                print("delete = false")
+                break
+            }
+             */
+        }
         
     }
     
@@ -166,6 +236,7 @@ class GameSceneCommunicator: ObservableObject {
         currentTower!.builtUponFoundation!.hasTower = false
         currentTower!.removeFromParent()
         currentTower!.towerTexture.removeFromParent()
+        currentTower?.noPowerTexture.removeFromParent()
         
         if currentTower! is SniperTower{
             let sniperTower = currentTower as! SniperTower
@@ -202,8 +273,7 @@ class GameSceneCommunicator: ObservableObject {
         
         let startGrid1 = FoundationPlateNodes.foundationPlatesNode.children[0] as! FoundationPlate
         startGrid1.checkIfPowered(gridStart: startGrid1)
-        let nextIndexStart = FoundationPlateNodes.foundationPlatesNode.children.count / 2
-        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[nextIndexStart] as! FoundationPlate
+        let startGrid2 = FoundationPlateNodes.foundationPlatesNode.children[secondIndexStart] as! FoundationPlate
         startGrid2.checkIfPowered(gridStart: startGrid2)
         
     }
@@ -214,5 +284,21 @@ class GameSceneCommunicator: ObservableObject {
             let foundationPlate = node as! FoundationPlate
             foundationPlate.updateFoundationsTexture()
         }
+    }
+    
+    func toggleFoundationGrid() {
+        
+        for node in GameScene.instance!.clickableTileGridsNode.children {
+
+            let gridTexture = node as! SKSpriteNode
+            
+            if foundationEditMode {
+                gridTexture.alpha = 1
+            }
+            else {
+                gridTexture.alpha = 0
+            }
+        }
+        
     }
 }

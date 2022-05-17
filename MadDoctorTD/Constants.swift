@@ -62,7 +62,7 @@ enum UpgradeTypes: Int{
 
 
 enum EnemyTypes: Int{
-    case standard = 0, fast, heavy, flying
+    case standard = 0, fast, heavy, flying, boss
 }
 
 enum EnemyRaces: Int{
@@ -133,15 +133,18 @@ struct EnemiesData{
     static let FAST_HP_MODIFIER = 0.90
     static let HEAVY_HP_MODIFIER = 2.0
     static let FLY_HP_MODIFIER = 0.70
+    static let BOSS_HP_MODIFIER = 10.0
     
     static let FAST_SPEED_MODIFIER: CGFloat = 1.30
     static let HEAVY_SPEED_MODIFIER: CGFloat = 0.80
     static let FLY_SPEED_MODIFIER: CGFloat = 0.80
+    static let BOSS_SPEED_MODIFIER: CGFloat = 0.50
     
     static let STANDARD_ENEMY_SLOT = 1
     static let HEAVY_ENEMY_SLOT = 2
     static let FAST_ENEMY_SLOT = 1
     static let FLY_ENEMY_SLOT = 1
+    static let BOSS_ENEMY_SLOT = WaveData.LEVEL_WAVE_SIZE
     
     static let BASE_KILL_VALUE = 25
     
@@ -160,7 +163,7 @@ struct WaveData{
     //60 frames 1 second
     //3600 frames 1 minute
     static let WAVE_STANDARD_SIZE = 5
-    static let SPAWN_STANDARD_TIMER = 60 //60 frames = 1 second
+    static let SPAWN_STANDARD_TIMER = 40 //60 frames = 1 second
     static let WAVE_START_TIME = 900 //900 frames = 15 seconds
     
     static let FAST_ENEMY_LIMIT = 5
@@ -169,7 +172,7 @@ struct WaveData{
     
     static let INCOME_PER_WAVE = 100
     
-    static let MAX_ATTACKER_NUMBER = 3
+    static let MAX_ATTACKER_NUMBER = 1
     
 }
 
@@ -177,7 +180,7 @@ struct WaveData{
 //Player + Economy
 struct PlayerData{
     
-    static let START_MONEY = 20000 //2000
+    static let START_MONEY = 2000 //2000
     static let BASE_HP = 3
     static let START_RESEARCH_POINTS = 3
 
