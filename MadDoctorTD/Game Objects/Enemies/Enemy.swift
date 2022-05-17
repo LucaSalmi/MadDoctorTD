@@ -103,32 +103,6 @@ class Enemy: SKSpriteNode{
         
     }
     
-    private func seekAndDestroy() -> CGPoint?{
-        
-        let foundationPlates = FoundationPlateNodes.foundationPlatesNode.children
-        
-        var closestDistance = CGFloat(self.size.width * 3)
-        
-        for node in foundationPlates {
-            
-            let plate = node as! FoundationPlate
-            
-            let plateDistance = position.distance(point: plate.position)
-            
-            if plateDistance < closestDistance {
-                closestDistance = plateDistance
-                if plateDistance <= self.size.width * 3 {
-                    
-                    if !plate.isStartingFoundation{
-                        return plate.position
-                    }
-                }
-            }
-        }
-        
-        return nil
-        
-    }
     
     private func move() {
         
@@ -142,8 +116,6 @@ class Enemy: SKSpriteNode{
             }else{
                 
                 let targetPosition = seekAndDestroy()
-                print("Enemy targetPosition = \(targetPosition)")
-                //let targetPosition = findNextTarget()
                 if targetPosition != nil{
                     
                     setDirection(targetPoint: targetPosition!)
@@ -162,13 +134,6 @@ class Enemy: SKSpriteNode{
         position.y += direction.y * baseSpeed
         
         if hasReachedPoint(point: nextPoint) {
-            
-//            if self.isAttacker{
-//
-//                precedentTargetPosition = findCenterInTile()
-//                precedentTargetPosition = findNextTarget()
-//
-//            }
             
             oldMovePoints.append(movePoints[0])
             movePoints.remove(at: 0)
@@ -204,26 +169,32 @@ class Enemy: SKSpriteNode{
         }
     }
     
-    
-    private func findNextTarget() -> CGPoint?{
+    private func seekAndDestroy() -> CGPoint?{
         
-        if precedentTargetPosition != nil{
+        let foundationPlates = FoundationPlateNodes.foundationPlatesNode.children
+        
+        var closestDistance = CGFloat(self.size.width * 3)
+        
+        for node in foundationPlates {
             
-            for node in FoundationPlateNodes.foundationPlatesNode.children{
-                
-                if precedentTargetPosition!.x + 86 == node.position.x || precedentTargetPosition!.x - 86 == node.position.x {
+            let plate = node as! FoundationPlate
+            
+            let plateDistance = position.distance(point: plate.position)
+            
+            if plateDistance < closestDistance {
+                closestDistance = plateDistance
+                if plateDistance <= self.size.width * 3 {
                     
-                    let plate = node as! FoundationPlate
                     if !plate.isStartingFoundation{
-                        return node.position
+                        return plate.position
                     }
                 }
             }
         }
         
         return nil
+        
     }
-    
     
     private func setDirection(targetPoint: CGPoint) {
         
