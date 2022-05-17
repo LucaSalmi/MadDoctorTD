@@ -320,6 +320,7 @@ class GameScene: SKScene {
             touchingTower?.size = TowerData.TEXTURE_SIZE
             
             
+            
         }
         else if node.name == "SpeedTower"{
             
@@ -328,6 +329,7 @@ class GameScene: SKScene {
             }
             uiTowerFound = true
             
+            displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.5, position: location)
             touchingTower = node as? SKSpriteNode
             touchingTower?.size = TowerData.TEXTURE_SIZE
         }
@@ -338,6 +340,7 @@ class GameScene: SKScene {
             }
             uiTowerFound = true
             
+            displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.8, position: location)
             touchingTower = node as? SKSpriteNode
             touchingTower?.size = TowerData.TEXTURE_SIZE
         }
@@ -347,6 +350,7 @@ class GameScene: SKScene {
             }
             uiTowerFound = true
             
+            displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 1.8, position: location)
             touchingTower = node as? SKSpriteNode
             touchingTower?.size = TowerData.TEXTURE_SIZE
         }
@@ -370,6 +374,7 @@ class GameScene: SKScene {
         if uiTowerFound{
             touchingTower!.removeFromParent()
             uiNode.addChild(touchingTower!)
+            touchingTower?.position = location
         }
         
         
