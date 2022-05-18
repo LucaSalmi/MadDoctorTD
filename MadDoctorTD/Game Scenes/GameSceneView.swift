@@ -31,9 +31,10 @@ struct GameSceneView: View {
     var body: some View {
 
         ZStack {
-            SpriteView(scene: gameScene)
+            SpriteView(scene: gameScene, debugOptions: [.showsFPS, .showsNodeCount])
                 .ignoresSafeArea()
                 .blur(radius: gameManager.isPaused ? 5 : 0)
+                
             
             VStack {
                 
@@ -75,14 +76,23 @@ struct GameSceneView: View {
                         
                         Spacer()
                         
-                        Button {
-                            communicator.cancelAllMenus()
-                            withAnimation{
-                                gameManager.isPaused = true
+                        VStack {
+                            Button {
+                                communicator.cancelAllMenus()
+                                withAnimation{
+                                    gameManager.isPaused = true
+                                }
+                                
+                            } label: {
+                                Text("Pause")
                             }
                             
-                        } label: {
-                            Text("Pause")
+                            Button {
+                                print("Projectiles = \(ProjectileNodes.projectilesNode.children.count)")
+                                
+                            } label: {
+                                Text("Debug")
+                            }
                         }
                         
                         Spacer()

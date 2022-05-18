@@ -34,12 +34,13 @@ class SniperProjectile: Projectile {
         //SoundManager.playSFX(sfxName: SoundManager.sniperProjectileImpactSFX)
         SoundManager.playSniperSFX()
         
-        let particle = SKEmitterNode(fileNamed: "GunProjectileImpact")
-        particle!.position = position
-        particle!.zPosition = 5
-        gameScene.addChild(particle!)
-        gameScene.run(SKAction.wait(forDuration: 1)) {
-            gameScene.removeFromParent()
+        if let particle = SKEmitterNode(fileNamed: "GunProjectileImpact") {
+            particle.position = position
+            particle.zPosition = 5
+            gameScene.addChild(particle)
+            gameScene.run(SKAction.wait(forDuration: 1)) {
+                particle.removeFromParent()
+            }
         }
         
         //TODO: TAKE THIS BACK FOR OBJECTPOOLING AND SOLVE BUG
