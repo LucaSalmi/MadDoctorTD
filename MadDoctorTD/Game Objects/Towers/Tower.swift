@@ -33,6 +33,8 @@ class Tower: SKSpriteNode{
     var rangeUpgradeCount: Int = 0
     var rateOfFireUpgradeCount: Int = 0
     
+    var towerName = "Default Tower"
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -59,6 +61,9 @@ class Tower: SKSpriteNode{
         GameScene.instance!.towerIndicatorsNode.addChild(noPowerTexture)
         
         
+    }
+    func getName() -> String{
+        return self.towerName
     }
     
     func onClick() -> SKTexture{
