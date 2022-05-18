@@ -29,8 +29,8 @@ class Boss: Enemy{
         isAttacker = true
         self.enemyType = .boss
         self.alpha = 0
-        attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 20
-        attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE / 4
+        attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 2
+        attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE * 2
         baseSpeed = 1.5
         killValue *= waveSlotSize
         size.width *= 2
@@ -50,16 +50,17 @@ class Boss: Enemy{
             super.attack()
             
         }else{
+            
             nextMoveCount += 1
-        }
-        
-        if nextMoveCount <= 60{
-        
-            super.update()
             
-        }else if nextMoveCount >= 120{
+            if nextMoveCount <= 60{
             
-            nextMoveCount = 0
+                super.update()
+                
+            }else if nextMoveCount >= 120{
+                
+                nextMoveCount = 0
+            }
         }
     }
     

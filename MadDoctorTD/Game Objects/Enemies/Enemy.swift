@@ -99,6 +99,13 @@ class Enemy: SKSpriteNode{
             self.hp = 0
             self.removeFromParent()
             self.hpBar?.removeFromParent()
+            
+            if self.enemyType == .boss{
+                
+                let boss = self as! Boss
+                boss.bossTexture?.removeFromParent()
+                
+            }
             return
         }
         
@@ -109,7 +116,7 @@ class Enemy: SKSpriteNode{
     
     private func move() {
         
-        if isAttacker {
+        if isAttacker && enemyType != .boss {
             
             if attackTarget != nil{
                 
