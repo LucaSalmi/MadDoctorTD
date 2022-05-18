@@ -362,85 +362,81 @@ class GameScene: SKScene {
             }
             else{
                 
-                if node.name == "GunTower"{
+                switch node.name{
+                    
+                case "GunTower":
+                   
                     if TowerData.BASE_COST > GameManager.instance.currentMoney{
                         return
                     }
                     uiTowerFound = true
-                    
                     
                     displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE, position: location)
                     touchingTower = node as? SKSpriteNode
                     touchingTower?.size = TowerData.TEXTURE_SIZE
                     SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                     
-                    
-                    
-                    
-                }
-                else if node.name == "SpeedTower"{
+                case "SpeedTower":
                     
                     if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.rapidFireTowerUnlocked{
                         return
                     }
                     uiTowerFound = true
                     
-                    
-                    
                     displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.5, position: location)
                     touchingTower = node as? SKSpriteNode
                     touchingTower?.size = TowerData.TEXTURE_SIZE
                     SoundManager.playSFX(sfxName: SoundManager.buttonTwoSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                }
-                else if node.name == "CannonTower"{
+                    
+                case "CannonTower":
                     
                     if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.cannonTowerUnlocked{
                         return
                     }
                     
                     uiTowerFound = true
-                    
-                    
-                    
+                 
                     displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.8, position: location)
                     touchingTower = node as? SKSpriteNode
                     touchingTower?.size = TowerData.TEXTURE_SIZE
                     SoundManager.playSFX(sfxName: SoundManager.buttonThreeSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                }
-                else if node.name == "SniperTower"{
+                    
+                case "SniperTower":
+                    
                     if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.sniperTowerUnlocked{
                         return
                     }
                     uiTowerFound = true
-                    
-                    
-                    
+           
                     displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 1.8, position: location)
                     touchingTower = node as? SKSpriteNode
                     touchingTower?.size = TowerData.TEXTURE_SIZE
                     SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                }
-                else if node.name == "RateOfFireButton"{
+                    
+                case "RateOfFireButton":
                     
                     GameSceneCommunicator.instance.upgradeTower(upgradeType: .firerate)
                     return
-                }
-                else if node.name == "RangeButton"{
+                    
+                case "RangeButton":
                     
                     GameSceneCommunicator.instance.upgradeTower(upgradeType: .range)
                     return
-                }
-                else if node.name == "AttackButton"{
+                    
+                case "AttackButton":
+                    
                     GameSceneCommunicator.instance.upgradeTower(upgradeType: .damage)
                     return
-                }
-                else if node.name == "SellButton"{
+                    
+                case "SellButton":
+                    
                     GameSceneCommunicator.instance.sellTower()
-                }
-                
-                else if node is FoundationPlate {
-                    let foundationPlate = node as! FoundationPlate
-                    foundationPlate.onClick()
+                    
+                case .none:
+                    print("none")
+                    
+                case .some(_):
+                    print("some")
                     
                 }
                 
@@ -448,7 +444,6 @@ class GameScene: SKScene {
                     touchingTower!.removeFromParent()
                     uiNode.addChild(touchingTower!)
                     touchingTower?.position = location
-                    
                 }
                 
                 towerUI?.alpha = 1
@@ -456,7 +451,11 @@ class GameScene: SKScene {
                 
             }
             
-            
+            if node is FoundationPlate {
+                let foundationPlate = node as! FoundationPlate
+                foundationPlate.onClick()
+                
+            }
         }
         
     }

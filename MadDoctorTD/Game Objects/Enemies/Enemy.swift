@@ -178,7 +178,7 @@ class Enemy: SKSpriteNode{
         
         let foundationPlates = FoundationPlateNodes.foundationPlatesNode.children
         
-        var closestDistance = CGFloat(self.size.width * 3)
+        var closestDistance = CGFloat(self.size.width * 4)
         
         for node in foundationPlates {
             
@@ -188,7 +188,7 @@ class Enemy: SKSpriteNode{
             
             if plateDistance < closestDistance {
                 closestDistance = plateDistance
-                if plateDistance <= self.size.width * 3 {
+                if plateDistance <= self.size.width * 4 {
                     
                     if !plate.isStartingFoundation{
                         return plate.position

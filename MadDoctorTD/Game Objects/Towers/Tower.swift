@@ -50,7 +50,7 @@ class Tower: SKSpriteNode{
         zPosition = 3
         
         towerTexture.position = position
-        towerTexture.zPosition = 2
+        towerTexture.zPosition = 4
         
         noPowerTexture = SKSpriteNode(texture: SKTexture(imageNamed: "no_power_symbol"), color: .clear, size: TowerData.POWER_OFF_SIZE)
         noPowerTexture.zPosition = self.zPosition + 1
