@@ -105,6 +105,13 @@ class WaveManager{
             enemy.zPosition = 2
             EnemyNodes.enemyArray.append(enemy)
             
+            if enemy.enemyType == .boss {
+                
+                enemy.hpBar?.size.width = enemy.hpBar!.size.width * 2.0
+//                enemy.hpBar?.size.height = enemy.hpBar!.size.height * 2.0
+                
+            }
+            
             if numberOfAttackers < maximumAtkSpawn && unlockAttackers && enemy.enemyType != .flying{
                 
                 print("spawning atackunits: wavenumber: \(waveNumber)")
@@ -247,9 +254,9 @@ class WaveManager{
         }else if waveNumber == 3{
             enemyChoises.append(.flying)
         }else if waveNumber == bossLevel - 1{
-            
             enemyChoises = [.boss]
-            
+        } else {
+            enemyChoises = [.standard,.heavy,.flying,.fast]
         }
     }
     
