@@ -40,6 +40,8 @@ class GameScene: SKScene {
     var cannonTowerPrice: SKLabelNode?
     var sniperTowerPrice: SKLabelNode?
     
+    var towerPriceTags = [SKLabelNode]()
+    
     var rateOfFireImage: SKSpriteNode?
     var damageImage: SKSpriteNode?
     var rangeImage: SKSpriteNode?
@@ -129,6 +131,12 @@ class GameScene: SKScene {
         rapidTowerPrice?.text = "\(TowerData.BASE_COST)$"
         cannonTowerPrice?.text = "\(TowerData.BASE_COST)$"
         sniperTowerPrice?.text = "\(TowerData.BASE_COST)$"
+        
+        towerPriceTags.append(gunTowerPrice!)
+        towerPriceTags.append(rapidTowerPrice!)
+        towerPriceTags.append(cannonTowerPrice!)
+        towerPriceTags.append(sniperTowerPrice!)
+        
         
         
         
@@ -363,7 +371,8 @@ class GameScene: SKScene {
             return
         }
         
-        for node in touchedNodes {
+        guard let node = touchedNodes.first else{return}
+        //for node in touchedNodes {
             
             var uiTowerFound = false
             
@@ -479,7 +488,7 @@ class GameScene: SKScene {
                 upgradeUI?.alpha = 0
                 
             }
-        }
+        //}
         
     }
     
@@ -524,6 +533,10 @@ class GameScene: SKScene {
             for node in towerUI!.children{
                 if node.alpha != 0.5{
                     node.alpha = 0.5
+                    for tag in towerPriceTags {
+                        tag.fontColor = UIColor(Color.red)
+                    }
+                    
                 }
                 
             }
