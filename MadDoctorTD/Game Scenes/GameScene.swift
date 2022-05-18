@@ -432,6 +432,12 @@ class GameScene: SKScene {
                     
                     GameSceneCommunicator.instance.sellTower()
                     
+                    // to remove
+                case "Foundation":
+                    
+                    let foundationPlate = node as! FoundationPlate
+                    foundationPlate.onClick()
+                    
                 case .none:
                     print("none")
                     
@@ -448,12 +454,6 @@ class GameScene: SKScene {
                 
                 towerUI?.alpha = 1
                 upgradeUI?.alpha = 0
-                
-            }
-            
-            if node is FoundationPlate {
-                let foundationPlate = node as! FoundationPlate
-                foundationPlate.onClick()
                 
             }
         }
