@@ -33,6 +33,9 @@ class GameSceneCommunicator: ObservableObject {
     
     @Published var newFoundationTotalCost: Int = 0
     
+    @Published var openDoors: Bool = false
+    @Published var closeDoors: Bool = false
+    
     private init() {}
     
     func confirmFoundationEdit() {

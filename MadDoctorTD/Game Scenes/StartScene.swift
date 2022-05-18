@@ -16,6 +16,9 @@ class StartScene: SKScene{
     var doorOne: SKNode? = nil
     var doorTwo: SKNode? = nil
     
+    var startAnimationCount: Int = 600
+    var musicStarted: Bool = false
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -25,8 +28,13 @@ class StartScene: SKScene{
         doorOne = self.childNode(withName: "DoorOne")
         doorTwo = self.childNode(withName: "DoorTwo")
 
-        print("GAME STARTED")
-        SoundManager.playBGM(bgmString: SoundManager.airlockDoorsTheme, bgmExtension: SoundManager.wavExtension)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if startAnimationCount > 0 {
+            startAnimationCount = 0
+        }
         
     }
     
@@ -34,6 +42,16 @@ class StartScene: SKScene{
        
         if !communicator.animateDoors{
             return
+        }
+        
+        if startAnimationCount > 0 {
+            startAnimationCount -= 1
+            return
+        }
+        
+        if !musicStarted {
+            SoundManager.playBGM(bgmString: SoundManager.airlockDoorsTheme, bgmExtension: SoundManager.wavExtension)
+            musicStarted = true
         }
         
         doorOne?.position.x -= 3.5

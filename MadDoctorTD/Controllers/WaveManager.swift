@@ -306,6 +306,12 @@ class WaveManager{
             GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
             GameSceneCommunicator.instance.isBuildPhase = true
             SoundManager.stopMusic()
+            
+            //Door animation:
+            if let gameScene = currentScene {
+                GameSceneCommunicator.instance.openDoors = true
+                gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
+            }
         }
 
         
