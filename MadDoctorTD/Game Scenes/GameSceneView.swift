@@ -76,24 +76,15 @@ struct GameSceneView: View {
                         
                         Spacer()
                         
-                        VStack {
-                            Button {
-                                communicator.cancelAllMenus()
-                                withAnimation{
-                                    gameManager.isPaused = true
-                                }
-                                
-                            } label: {
-                                Text("Pause")
+                        Button {
+                            communicator.cancelAllMenus()
+                            withAnimation{
+                                gameManager.isPaused = true
                             }
                             
-                            Button {
-                                print("Projectiles = \(ProjectileNodes.projectilesNode.children.count)")
-                                
-                            } label: {
-                                Text("Debug")
-                            }
-                        }
+                        } label: {
+                            Text("Pause")
+                        }.disabled(communicator.foundationEditMode ? true : false)
                         
                         Spacer()
                         
