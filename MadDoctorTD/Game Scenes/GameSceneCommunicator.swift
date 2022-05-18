@@ -185,6 +185,9 @@ class GameSceneCommunicator: ObservableObject {
     
     func upgradeTower(upgradeType: UpgradeTypes) {
         
+        
+        GameScene.instance?.displayRangeIndicator(attackRange: currentTower!.attackRange, position: currentTower!.position)
+        
         if currentTower!.upgradeCount > TowerData.MAX_UPGRADE{
             return
         }

@@ -57,7 +57,7 @@ class Tower: SKSpriteNode{
         
     }
     
-    func onClick(){
+    func onClick() -> SKTexture{
         
         
         GameScene.instance!.displayRangeIndicator(attackRange: attackRange, position: self.position)
@@ -68,6 +68,9 @@ class Tower: SKSpriteNode{
         
         communicator.showUpgradeMenu = true
         communicator.showUpgradeMenuUI = true
+        
+        return towerTexture.texture!
+        
         
     }
     
