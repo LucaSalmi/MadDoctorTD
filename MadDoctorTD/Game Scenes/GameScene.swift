@@ -181,10 +181,15 @@ class GameScene: SKScene {
         
         if GameSceneCommunicator.instance.foundationEditMode {
             
-            let touchedNodes = nodes(at: location)
-            GameSceneCommunicator.instance.editFoundationTouchMove(touchedNodes: touchedNodes)
-            return
+            if touch.tapCount >= 2 {
+                panForTranslation(touch: touch)
+            }
+            else {
+                let touchedNodes = nodes(at: location)
+                GameSceneCommunicator.instance.editFoundationTouchMove(touchedNodes: touchedNodes)
+            }
             
+            return
         }
         
         if touchingTower != nil{
@@ -214,10 +219,8 @@ class GameScene: SKScene {
             return
         }
         
-        let positionInScene = touch.location(in: self)
-        let previousPosition = touch.previousLocation(in: self)
-        let translation = CGPoint(x: (positionInScene.x) - (previousPosition.x), y: (positionInScene.y) - (previousPosition.y))
-        panForTranslation(translation)
+        
+        panForTranslation(touch: touch)
         
         
     }
@@ -579,7 +582,13 @@ class GameScene: SKScene {
     }
     
     
-    func panForTranslation(_ translation: CGPoint) {
+    func panForTranslation(touch: UITouch) {
+        
+        
+        let positionInScene = touch.location(in: self)
+        let previousPosition = touch.previousLocation(in: self)
+        let translation = CGPoint(x: (positionInScene.x) - (previousPosition.x), y: (positionInScene.y) - (previousPosition.y))
+        
         let position = camera!.position
         let aNewPosition = CGPoint(x: position.x - translation.x, y: position.y - translation.y)
         camera!.position = aNewPosition
