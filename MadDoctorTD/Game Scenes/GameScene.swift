@@ -46,6 +46,11 @@ class GameScene: SKScene {
     
     var isMovingCamera = false
     
+    var doorOne: SKSpriteNode = SKSpriteNode()
+    var doorTwo: SKSpriteNode = SKSpriteNode()
+    let doorsAnimationTime: Int = 120
+    var doorsAnimationCount: Int = 0
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -118,6 +123,14 @@ class GameScene: SKScene {
         addChild(towerIndicatorsNode)
         addChild(foundationIndicatorsNode)
         
+        doorOne = childNode(withName: "doorOne") as! SKSpriteNode
+        doorOne.position.x = self.position.x - (doorOne.size.width/2)
+        doorTwo = childNode(withName: "doorTwo") as! SKSpriteNode
+        doorTwo.position.x = self.position.x + (doorTwo.size.width/2)
+        doorsAnimationCount = doorsAnimationTime
+        GameSceneCommunicator.instance.closeDoors = false
+        GameSceneCommunicator.instance.openDoors = true
+        
     }
     
     private func setupCamera(){
@@ -130,8 +143,10 @@ class GameScene: SKScene {
         
         let constrainRect = backgroundMap.frame.insetBy(dx: xInset, dy: yInset)
         
+        let yLowerLimit = constrainRect.minY/6
+        
         let xRange = SKRange(lowerLimit: constrainRect.minX/4, upperLimit: constrainRect.maxX/4)
-        let yRange = SKRange(lowerLimit: constrainRect.minY/6, upperLimit: constrainRect.maxY/6)
+        let yRange = SKRange(lowerLimit: yLowerLimit, upperLimit: constrainRect.maxY/6)
         
         let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
         edgeConstraint.referenceNode = backgroundMap
@@ -141,6 +156,8 @@ class GameScene: SKScene {
         let pinchGesture = UIPinchGestureRecognizer()
         pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
         view?.addGestureRecognizer(pinchGesture)
+        
+        myCamera!.position = CGPoint(x: 0, y: yLowerLimit)
         
     }
     
@@ -483,11 +500,42 @@ class GameScene: SKScene {
         
     }
     
+    private func animateDoors() {
+        
+        if GameSceneCommunicator.instance.openDoors {
+            doorOne.position.x -= 1
+            doorTwo.position.x += 1
+        }
+        
+        if GameSceneCommunicator.instance.closeDoors {
+            doorOne.position.x += 1
+            doorTwo.position.x -= 1
+        }
+        
+        doorsAnimationCount -= 1
+        if doorsAnimationCount <= 0 {
+            
+            //fail safe to reset doors position to orginal position
+            if GameSceneCommunicator.instance.closeDoors {
+                doorOne.position.x = self.position.x - (doorOne.size.width/2)
+                doorTwo.position.x = self.position.x + (doorTwo.size.width/2)
+            }
+            
+            GameSceneCommunicator.instance.closeDoors = false
+            GameSceneCommunicator.instance.openDoors = false
+        }
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         
         //Runs every frame
         
         if GameManager.instance.isPaused || GameManager.instance.isGameOver{
+            return
+        }
+        
+        if GameSceneCommunicator.instance.openDoors || GameSceneCommunicator.instance.closeDoors {
+            animateDoors()
             return
         }
         

@@ -111,7 +111,7 @@ struct GameSceneView: View {
                     
                     Spacer()
                     
-                    if communicator.isBuildPhase {
+                    if communicator.isBuildPhase && !communicator.openDoors {
                         HStack {
                             
                             Spacer()
@@ -146,12 +146,7 @@ struct GameSceneView: View {
                             
                             if !communicator.foundationEditMode {
                                 Button {
-                                    GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
-                                    communicator.isBuildPhase = false
-                                    GameScene.instance!.waveManager!.shouldCreateWave = true
-                                    GameSceneCommunicator.instance.cancelAllMenus()
-                                    SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
-                                    
+                                    startWavePhase()
                                 } label: {
                                     Text("READY!")
                                 }
@@ -249,5 +244,19 @@ struct GameSceneView: View {
         
     }
 
+    private func startWavePhase() {
+        
+        let gameScene = GameScene.instance!
+        
+        gameScene.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
+        communicator.isBuildPhase = false
+        gameScene.waveManager!.shouldCreateWave = true
+        GameSceneCommunicator.instance.cancelAllMenus()
+        SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
+        
+        //Door animations
+        gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
+        communicator.closeDoors = true
+    }
     
 }
