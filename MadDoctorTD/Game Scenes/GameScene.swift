@@ -174,19 +174,8 @@ class GameScene: SKScene {
       
         if GameSceneCommunicator.instance.foundationEditMode {
             
-            guard let touch = touches.first else {return}
-            
-            let location = touch.location(in: self)
             let touchedNodes = nodes(at: location)
-            
-            for touchedNode in touchedNodes {
-                if touchedNode is ClickableTile {
-                    let clickableTile = touchedNode as! ClickableTile
-                    clickableTile.onClick()
-                    break
-                }
-            }
-            
+            GameSceneCommunicator.instance.editFoundationTouchMove(touchedNodes: touchedNodes)
             return
             
         }
@@ -328,7 +317,7 @@ class GameScene: SKScene {
         let touchedNodes = nodes(at: location)
         
         if GameSceneCommunicator.instance.foundationEditMode {
-            communicator.editFoundationGrid(touchedNodes: touchedNodes)
+            communicator.editFoundationTouchStart(touchedNodes: touchedNodes)
             return
         }
         

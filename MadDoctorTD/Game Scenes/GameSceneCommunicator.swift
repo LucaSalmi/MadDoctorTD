@@ -93,7 +93,19 @@ class GameSceneCommunicator: ObservableObject {
         return isBlocked
     }
     
-    func editFoundationGrid(touchedNodes: [SKNode]) {
+    func editFoundationTouchMove(touchedNodes: [SKNode]) {
+        
+        for touchedNode in touchedNodes {
+            if touchedNode is ClickableTile {
+                let clickableTile = touchedNode as! ClickableTile
+                clickableTile.onClick()
+                break
+            }
+        }
+        
+    }
+    
+    func editFoundationTouchStart(touchedNodes: [SKNode]) {
         
         foundationDeleteMode = false
         
@@ -104,15 +116,9 @@ class GameSceneCommunicator: ObservableObject {
                 print("delete = true")
                 break
             }
-            
-            /*
-            else {
-                foundationDeleteMode = false
-                print("delete = false")
-                break
-            }
-             */
         }
+        
+        editFoundationTouchMove(touchedNodes: touchedNodes)
         
     }
     
