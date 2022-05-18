@@ -30,6 +30,7 @@ class GameScene: SKScene {
     
     var towerUI: SKSpriteNode? = nil
     var upgradeUI: SKSpriteNode? = nil
+    var buildButtonsUI: SKSpriteNode? = nil
     var towerImage: SKSpriteNode?
     var towerNameText: SKLabelNode?
     
@@ -120,7 +121,10 @@ class GameScene: SKScene {
         damageImage = upgradeUI?.childNode(withName: "AttackButton") as? SKSpriteNode
         rateOfFireImage = upgradeUI?.childNode(withName: "RateOfFireButton") as? SKSpriteNode
         rangeImage = upgradeUI?.childNode(withName: "RangeButton") as? SKSpriteNode
-        
+
+        buildButtonsUI = uiScene!.childNode(withName: "BuildButtons") as? SKSpriteNode
+        buildButtonsUI?.removeFromParent()
+        self.camera!.addChild(buildButtonsUI!)
         
         self.camera!.addChild(upgradeUI!)
         
@@ -469,6 +473,20 @@ class GameScene: SKScene {
                 else if node is FoundationPlate {
                     let foundationPlate = node as! FoundationPlate
                     foundationPlate.onClick()
+
+                case "BuildFoundationButton":
+                    print("Put old Edit Button here to build foundations")
+
+                    if communicator.foundationEditMode {
+                        communicator.confirmFoundationEdit()
+                    }
+                    else {
+                        communicator.foundationEditMode = true
+                        communicator.toggleFoundationGrid()
+                    }
+
+                case "BuildTowerButton":
+                    print("Put TowerMenu here")
                     
                 }
                 
