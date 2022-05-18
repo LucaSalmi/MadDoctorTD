@@ -450,6 +450,14 @@ class GameScene: SKScene {
                 case "BuildFoundationButton":
                     print("Put old Edit Button here to build foundations")
 
+                    if communicator.foundationEditMode {
+                        communicator.confirmFoundationEdit()
+                    }
+                    else {
+                        communicator.foundationEditMode = true
+                        communicator.toggleFoundationGrid()
+                    }
+
                 case "BuildTowerButton":
                     print("Put TowerMenu here")
                     
