@@ -27,6 +27,8 @@ class Enemy: SKSpriteNode{
     var attackPower: Int = EnemiesData.BASE_ATTACK_POWER_VALUE
     var attackSpeed: Int = EnemiesData.BASE_ATTACK_SPEED_VALUE
     var attackCounter: Int = 0
+    
+    var damageValue = EnemiesData.BASE_DAMAGE_VALUE
 
     var startHp = 0
     
@@ -38,8 +40,6 @@ class Enemy: SKSpriteNode{
     }
     
     init(texture: SKTexture, color: UIColor){
-        
-        
         
         let tempColor = UIColor(.indigo)
         super.init(texture: texture, color: tempColor, size: EnemiesData.SIZE)
@@ -55,16 +55,18 @@ class Enemy: SKSpriteNode{
         }
         
         hpBar = SKSpriteNode(texture: SKTexture(imageNamed: "hp_bar_100"))
+        
         hpBar!.size.width = 70
         hpBar!.size.height = 15
         hpBar!.position = self.position
         hpBar!.alpha = 0
+        hpBar!.zPosition = 50
         GameScene.instance!.hpBarsNode.addChild(hpBar!)
         self.name = "Enemy"
 
     }
     
-    func changeTooAtkTexture() {
+    func changeToAtkTexture() {
         // overiding in subclasses for specific texrures (ex. slime_fast_atker...))
     }
     
@@ -83,7 +85,7 @@ class Enemy: SKSpriteNode{
             isMoving = true
         }
                 
-        if self.enemyType == .flying{
+        if self.enemyType == .flying || self.enemyType == .boss{
             
             if movePoints.count > 1 {
                 let finalPoint = movePoints[movePoints.count-1]
@@ -92,10 +94,18 @@ class Enemy: SKSpriteNode{
         }
         
         if movePoints.isEmpty {
-            GameManager.instance.getDamage()
+            
+            GameManager.instance.getDamage(incomingDamage: self.damageValue)
             self.hp = 0
             self.removeFromParent()
             self.hpBar?.removeFromParent()
+            
+            if self.enemyType == .boss{
+                
+                let boss = self as! Boss
+                boss.bossTexture?.removeFromParent()
+                
+            }
             return
         }
         
@@ -106,7 +116,7 @@ class Enemy: SKSpriteNode{
     
     private func move() {
         
-        if isAttacker {
+        if isAttacker && enemyType != .boss {
             
             if attackTarget != nil{
                 
@@ -150,7 +160,7 @@ class Enemy: SKSpriteNode{
         
     }
     
-    private func attack(){
+    func attack(){
         
         if attackCounter >= attackSpeed{
             
@@ -173,7 +183,7 @@ class Enemy: SKSpriteNode{
         
         let foundationPlates = FoundationPlateNodes.foundationPlatesNode.children
         
-        var closestDistance = CGFloat(self.size.width * 3)
+        var closestDistance = CGFloat(self.size.width * 4)
         
         for node in foundationPlates {
             
@@ -183,7 +193,7 @@ class Enemy: SKSpriteNode{
             
             if plateDistance < closestDistance {
                 closestDistance = plateDistance
-                if plateDistance <= self.size.width * 3 {
+                if plateDistance <= self.size.width * 4 {
                     
                     if !plate.isStartingFoundation{
                         return plate.position
@@ -247,42 +257,54 @@ class Enemy: SKSpriteNode{
             
         }
         
-        if hp <= Int(Double(hp) * 0.1) {
-            //TODO: 10% HERE
-            hpBar!.texture = SKTexture(imageNamed: "hp_bar_10")
+        var hpLeft = 0
+        
+        let tenthHP = startHp / 10
+        if tenthHP > 0 {
+            hpLeft  =  hp / tenthHP
         }
-        else if hp <= Int(Double(hp) * 0.2){
-            //TODO: 20% HERE
-            hpBar?.texture = SKTexture(imageNamed: "hp_bar_20")
+        
+        if hpLeft == 0 {
+            hpLeft = 1
         }
-        else if hp <= Int(Double(hp) * 0.3){
-            //TODO: 30% HERE
-            hpBar?.texture = SKTexture(imageNamed: "hp_bar_30")
-        }
-        else if hp <= Int(Double(hp) * 0.4){
-            //TODO: 40% HERE
-            hpBar?.texture = SKTexture(imageNamed: "hp_bar_40")
-        }
-        else if hp <= Int(Double(hp) * 0.5){
-            //TODO: 50% HERE
-            hpBar?.texture = SKTexture(imageNamed: "hp_bar_50")
-        }
-        else if hp <= Int(Double(hp) * 0.6){
-            //TODO: 60% HERE
-            hpBar?.texture = SKTexture(imageNamed: "hp_bar_60")
-        }
-        else if hp <= Int(Double(hp) * 0.7){
-            //TODO: 70% HERE
-            hpBar?.texture = SKTexture(imageNamed: "hp_bar_70")
-        }
-        else if hp <= Int(Double(hp) * 0.8){
-            //TODO: 80% HERE
-            hpBar?.texture = SKTexture(imageNamed: "hp_bar_80")
-        }
-        else if hp <= Int(Double(hp) * 0.9){
-            //TODO: 90% HERE
-            hpBar!.texture = SKTexture(imageNamed: "hp_bar_90")
-        }
+        hpBar!.texture = SKTexture(imageNamed: "hp_bar_\(hpLeft)0")
+        
+//        if hp <= Int(Double(startHp) * 0.1) {
+//            //TODO: 10% HERE
+//            hpBar!.texture = SKTexture(imageNamed: "hp_bar_10")
+//        }
+//        else if hp <= Int(Double(startHp) * 0.2) {
+//            //TODO: 20% HERE
+//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_20")
+//        }
+//        else if hp <= Int(Double(startHp) * 0.3){
+//            //TODO: 30% HERE
+//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_30")
+//        }
+//        else if hp <= Int(Double(startHp) * 0.4){
+//            //TODO: 40% HERE
+//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_40")
+//        }
+//        else if hp <= Int(Double(startHp) * 0.5){
+//            //TODO: 50% HERE
+//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_50")
+//        }
+//        else if hp <= Int(Double(startHp) * 0.6){
+//            //TODO: 60% HERE
+//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_60")
+//        }
+//        else if hp <= Int(Double(startHp) * 0.7){
+//            //TODO: 70% HERE
+//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_70")
+//        }
+//        else if hp <= Int(Double(startHp) * 0.8){
+//            //TODO: 80% HERE
+//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_80")
+//        }
+//        else if hp <= Int(Double(startHp) * 0.9){
+//            //TODO: 90% HERE
+//            hpBar!.texture = SKTexture(imageNamed: "hp_bar_90")
+//        }
     }
     
     private func hasReachedPoint(point: CGPoint) -> Bool {
@@ -411,7 +433,7 @@ class Enemy: SKSpriteNode{
                 }
                 
                 for i in 0..<enemy.oldMovePoints.count {
-                    if enemy.movePoints.count-1 > i {
+                    if enemy.movePoints.count-1 > i || enemy.oldMovePoints.count-1 > i{
                         break
                     }
                     if enemy.oldMovePoints[i].x == enemy.movePoints[i].x &&

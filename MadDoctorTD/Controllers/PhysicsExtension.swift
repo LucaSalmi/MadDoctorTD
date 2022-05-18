@@ -60,6 +60,23 @@ extension GameScene: SKPhysicsContactDelegate{
             
         }
         
+        if nodeA is Boss && nodeB is FoundationPlate {
+            
+            let boss = nodeA as! Boss
+            let foundation = nodeB as! FoundationPlate
+                        
+            boss.attackTarget = foundation
+            
+        }
+        if nodeA is FoundationPlate && nodeB is Boss{
+            
+            let boss = nodeB as! Boss
+            let foundation = nodeA as! FoundationPlate
+            
+            boss.attackTarget = foundation
+                    
+        }
+        
     }
 }
 

@@ -31,9 +31,10 @@ struct GameSceneView: View {
     var body: some View {
 
         ZStack {
-            SpriteView(scene: gameScene)
+            SpriteView(scene: gameScene, debugOptions: [.showsFPS, .showsNodeCount])
                 .ignoresSafeArea()
                 .blur(radius: gameManager.isPaused ? 5 : 0)
+                
             
             VStack {
                 
@@ -83,7 +84,7 @@ struct GameSceneView: View {
                             
                         } label: {
                             Text("Pause")
-                        }
+                        }.disabled(communicator.foundationEditMode ? true : false)
                         
                         Spacer()
                         
@@ -101,7 +102,7 @@ struct GameSceneView: View {
                     
                     Spacer()
                     
-                    if communicator.isBuildPhase {
+                    if communicator.isBuildPhase && !communicator.openDoors {
                         HStack {
                             
                             Spacer()
@@ -136,12 +137,7 @@ struct GameSceneView: View {
                             
                             if !communicator.foundationEditMode {
                                 Button {
-                                    GameScene.instance!.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
-                                    communicator.isBuildPhase = false
-                                    GameScene.instance!.waveManager!.shouldCreateWave = true
-                                    GameSceneCommunicator.instance.cancelAllMenus()
-                                    SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
-                                    
+                                    startWavePhase()
                                 } label: {
                                     Text("READY!")
                                 }
@@ -154,6 +150,7 @@ struct GameSceneView: View {
                 }
             }
 
+            
             if communicator.showTowerMenu{
                 
                 VStack(spacing: 25) {
@@ -188,55 +185,71 @@ struct GameSceneView: View {
 
                 
             }
-            if communicator.showUpgradeMenu{
-                
-                VStack(spacing: 25){
-                    Text("Upgrade menu")
-                    
-                    Button {
-                        communicator.upgradeTower(upgradeType: .damage)
-                    } label: {
-                        Text("Upgrade damage")
-                    }
-                    Button {
-                        communicator.upgradeTower(upgradeType: .range)
-                    } label: {
-                        Text("Upgrade range")
-                    }
-                    Button {
-                        communicator.upgradeTower(upgradeType: .firerate)
-                    } label: {
-                        Text("Upgrade attack speed")
-                    }
-                    Button {
-                        communicator.sellTower()
-                        
-                    } label: {
-                        Text("Sell tower")
-                    }
-                    
-                    //Foundation options:
-                    Button {
-                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
-                        communicator.repairFoundation()
-                    } label: {
-                        Text("Repair Foundation")
-                    }
-                    Button {
-                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
-                        communicator.upgradeFoundation()
-                    } label: {
-                        Text("Upgrade Foundation")
-                    }
-
-                }.font(.title)
-                    .foregroundColor(communicator.currentTower!.upgradeCount <= TowerData.MAX_UPGRADE ? Color.white : Color.gray)
-                    .background(.black.opacity(0.5))
-                    
-            }
+//            if communicator.showUpgradeMenu{
+//                
+//                VStack(spacing: 25){
+//                    Text("Upgrade menu")
+//                    
+//                    Button {
+//                        communicator.upgradeTower(upgradeType: .damage)
+//                    } label: {
+//                        Text("Upgrade damage")
+//                    }
+//                    Button {
+//                        communicator.upgradeTower(upgradeType: .range)
+//                    } label: {
+//                        Text("Upgrade range")
+//                    }
+//                    Button {
+//                        communicator.upgradeTower(upgradeType: .firerate)
+//                    } label: {
+//                        Text("Upgrade attack speed")
+//                    }
+//                    Button {
+//                        communicator.sellTower()
+//                        
+//                    } label: {
+//                        Text("Sell tower")
+//                    }
+//                    
+//                    //Foundation options:
+//                    Button {
+//                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
+//                        communicator.repairFoundation()
+//                    } label: {
+//                        Text("Repair Foundation")
+//                    }
+//                    Button {
+//                        communicator.currentFoundation = communicator.currentTower!.builtUponFoundation
+//                        communicator.upgradeFoundation()
+//                    } label: {
+//                        Text("Upgrade Foundation")
+//                    }
+//
+//                }.font(.title)
+//                    .foregroundColor(communicator.currentTower!.upgradeCount <= TowerData.MAX_UPGRADE ? Color.white : Color.gray)
+//                    .background(.black.opacity(0.5))
+//                    
+//            }
         }
         
     }
 
+    private func startWavePhase() {
+        
+        let gameScene = GameScene.instance!
+        
+        gameScene.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
+        communicator.isBuildPhase = false
+        gameScene.waveManager!.shouldCreateWave = true
+        GameSceneCommunicator.instance.cancelAllMenus()
+        SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
+        
+        //Door animations
+        gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
+        communicator.closeDoors = true
+        
+        gameScene.moveCameraToPortal = true
+    }
     
 }

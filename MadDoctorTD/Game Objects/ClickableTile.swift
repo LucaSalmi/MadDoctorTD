@@ -46,6 +46,8 @@ class ClickableTile: SKSpriteNode{
             
             print("deleting!")
             
+            blueprint.warningTexture?.removeFromParent()
+            blueprint.crackTexture?.removeFromParent()
             blueprint.removeFromParent()
             let index = GameSceneCommunicator.instance.blueprints.firstIndex(of: blueprint)
             if index != nil {

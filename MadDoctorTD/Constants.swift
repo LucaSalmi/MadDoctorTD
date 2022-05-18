@@ -36,6 +36,7 @@ struct PhysicsCategory{
     static let Foundation: UInt32 = 0b10
     static let Enemy: UInt32 = 0b100
     static let Projectile: UInt32 = 0b1000
+    static let Boss: UInt32 = 0b10000
     
 }
 
@@ -154,6 +155,9 @@ struct EnemiesData{
     static let BASE_ATTACK_POWER_VALUE = 20
     static let BASE_ATTACK_SPEED_VALUE = 60 //in frames per second
     
+    static let BASE_DAMAGE_VALUE = 1
+    static let BOSS_DAMAGE_VALUE = 3
+    
 }
 
 //Waves
@@ -180,8 +184,8 @@ struct WaveData{
 //Player + Economy
 struct PlayerData{
     
-    static let START_MONEY = 2000 //2000
-    static let BASE_HP = 3
+    static let START_MONEY = 200000 //2500 //!2000
+    static let BASE_HP = 100 //3
     static let START_RESEARCH_POINTS = 3
 
 }

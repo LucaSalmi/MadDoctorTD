@@ -70,6 +70,7 @@ class FoundationPlateFactory: FoundationPlateCreator{
                         let plate = FoundationFactory().createFoundationPlate(position: position, tile: clickableTile, isStartingFoundation: true)
                         plate.updateFoundationsTexture()
                         FoundationPlateNodes.foundationPlatesNode.addChild(plate)
+                        clickableTile.position.y = -10000
                     }
                 }
             }

@@ -29,6 +29,12 @@ class Tower: SKSpriteNode{
     
     var upgradeCount: Int = 1
     
+    var damageUpgradeCount: Int = 0
+    var rangeUpgradeCount: Int = 0
+    var rateOfFireUpgradeCount: Int = 0
+    
+    var towerName = "Default Tower"
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -39,11 +45,6 @@ class Tower: SKSpriteNode{
         self.builtUponFoundation = foundation
         towerTexture = SKSpriteNode(texture: SKTexture(imageNamed: textureName), color: .clear, size: TowerData.TEXTURE_SIZE)
         
-        
-        
-        
-        
-        
         super.init(texture: nil, color: .clear, size: TowerData.TILE_SIZE)
         
         name = "Tower"
@@ -51,7 +52,7 @@ class Tower: SKSpriteNode{
         zPosition = 3
         
         towerTexture.position = position
-        towerTexture.zPosition = 2
+        towerTexture.zPosition = 4
         
         noPowerTexture = SKSpriteNode(texture: SKTexture(imageNamed: "no_power_symbol"), color: .clear, size: TowerData.POWER_OFF_SIZE)
         noPowerTexture.zPosition = self.zPosition + 1
@@ -61,8 +62,11 @@ class Tower: SKSpriteNode{
         
         
     }
+    func getName() -> String{
+        return self.towerName
+    }
     
-    func onClick(){
+    func onClick() -> SKTexture{
         
         
         GameScene.instance!.displayRangeIndicator(attackRange: attackRange, position: self.position)
@@ -72,6 +76,10 @@ class Tower: SKSpriteNode{
         communicator.currentTower = self
         
         communicator.showUpgradeMenu = true
+        communicator.showUpgradeMenuUI = true
+        
+        return towerTexture.texture!
+        
         
     }
     
@@ -134,11 +142,17 @@ class Tower: SKSpriteNode{
         switch upgradeType {
         case .damage:
             attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
+            damageUpgradeCount += 1
+            GameScene.instance?.damageImage?.texture = SKTexture(imageNamed: "damage_upgrade_\(damageUpgradeCount)")
         case .range:
             attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
             GameScene.instance!.displayRangeIndicator(attackRange: attackRange, position: self.position)
+            rangeUpgradeCount += 1
+            GameScene.instance?.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)")
         case .firerate:
             fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
+            rateOfFireUpgradeCount += 1
+            GameScene.instance?.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
         }
         
         upgradeCount += 1

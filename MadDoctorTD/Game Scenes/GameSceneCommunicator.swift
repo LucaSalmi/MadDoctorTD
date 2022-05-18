@@ -18,6 +18,10 @@ class GameSceneCommunicator: ObservableObject {
     @Published var showUpgradeMenu: Bool = false
     @Published var isBuildPhase: Bool = true
     
+    var showUpgradeMenuUI: Bool = false
+    var showTowerMenuUI: Bool = false
+    
+    
     var currentTile: ClickableTile? = nil
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil
@@ -28,6 +32,9 @@ class GameSceneCommunicator: ObservableObject {
     var secondIndexStart: Int = 8
     
     @Published var newFoundationTotalCost: Int = 0
+    
+    @Published var openDoors: Bool = false
+    @Published var closeDoors: Bool = false
     
     private init() {}
     
@@ -93,7 +100,19 @@ class GameSceneCommunicator: ObservableObject {
         return isBlocked
     }
     
-    func editFoundationGrid(touchedNodes: [SKNode]) {
+    func editFoundationTouchMove(touchedNodes: [SKNode]) {
+        
+        for touchedNode in touchedNodes {
+            if touchedNode is ClickableTile {
+                let clickableTile = touchedNode as! ClickableTile
+                clickableTile.onClick()
+                break
+            }
+        }
+        
+    }
+    
+    func editFoundationTouchStart(touchedNodes: [SKNode]) {
         
         foundationDeleteMode = false
         
@@ -104,15 +123,9 @@ class GameSceneCommunicator: ObservableObject {
                 print("delete = true")
                 break
             }
-            
-            /*
-            else {
-                foundationDeleteMode = false
-                print("delete = false")
-                break
-            }
-             */
         }
+        
+        editFoundationTouchMove(touchedNodes: touchedNodes)
         
     }
     
@@ -180,6 +193,9 @@ class GameSceneCommunicator: ObservableObject {
     }
     
     func upgradeTower(upgradeType: UpgradeTypes) {
+        
+        
+        GameScene.instance?.displayRangeIndicator(attackRange: currentTower!.attackRange, position: currentTower!.position)
         
         if currentTower!.upgradeCount > TowerData.MAX_UPGRADE{
             return
@@ -301,4 +317,6 @@ class GameSceneCommunicator: ObservableObject {
         }
         
     }
+    
+    
 }
