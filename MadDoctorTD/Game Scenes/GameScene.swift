@@ -30,6 +30,7 @@ class GameScene: SKScene {
     
     var towerUI: SKSpriteNode? = nil
     var upgradeUI: SKSpriteNode? = nil
+    var buildButtons: SKSpriteNode? = nil
     var towerImage: SKSpriteNode?
     
     var rateOfFireImage: SKSpriteNode?
@@ -109,8 +110,11 @@ class GameScene: SKScene {
         damageImage = upgradeUI?.childNode(withName: "AttackButton") as? SKSpriteNode
         rateOfFireImage = upgradeUI?.childNode(withName: "RateOfFireButton") as? SKSpriteNode
         rangeImage = upgradeUI?.childNode(withName: "RangeButton") as? SKSpriteNode
-        
-        
+
+        buildButtons = uiScene!.childNode(withName: "BuildButtons") as? SKSpriteNode
+        buildButtons?.removeFromParent()
+        self.camera!.addChild(buildButtons!)
+
         self.camera!.addChild(upgradeUI!)
         
         addChild(clickableTileGridsNode)
@@ -431,6 +435,14 @@ class GameScene: SKScene {
                 case "SellButton":
                     
                     GameSceneCommunicator.instance.sellTower()
+
+                case "BuildButton":
+
+                    print("Put EditButton here")
+
+                case "TowerButton":
+
+                    print("Enable TowerBuild menu here")
                     
                     // to remove
                 case "Foundation":
