@@ -257,6 +257,8 @@ struct GameSceneView: View {
         //Door animations
         gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
         communicator.closeDoors = true
+        
+        gameScene.moveCameraToPortal = true
     }
     
 }

@@ -51,6 +51,9 @@ class GameScene: SKScene {
     let doorsAnimationTime: Int = 120
     var doorsAnimationCount: Int = 0
     
+    var moveCameraToPortal: Bool = false
+    var portalPosition: CGPoint = CGPoint(x: 0, y: 0)
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -131,6 +134,8 @@ class GameScene: SKScene {
         GameSceneCommunicator.instance.closeDoors = false
         GameSceneCommunicator.instance.openDoors = true
         
+        moveCameraToPortal = false
+        
     }
     
     private func setupCamera(){
@@ -195,6 +200,8 @@ class GameScene: SKScene {
         addChild(pathfindingTestEnemy!)
         
         waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard], enemyRace: .slime)
+        
+        portalPosition = spawnPoint!.position
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -539,6 +546,18 @@ class GameScene: SKScene {
             return
         }
         
+        if moveCameraToPortal {
+            let cameraDirection = PhysicsUtils.getCameraDirection(camera: self.camera!, targetPoint: portalPosition)
+            PhysicsUtils.moveCameraToTargetPoint(camera: self.camera!, direction: cameraDirection)
+            
+            let portal = SKSpriteNode()
+            portal.position = portalPosition
+            portal.size = CGSize(width: 86, height: 400)
+            if portal.contains(camera!.position) {
+                moveCameraToPortal = false
+            }
+        }
+        
         for node in TowerNode.towersNode.children {
             let tower = node as! Tower
             tower.update()
@@ -644,6 +663,9 @@ class GameScene: SKScene {
     
     func panForTranslation(touch: UITouch) {
         
+        if moveCameraToPortal {
+            return
+        }
         
         let positionInScene = touch.location(in: self)
         let previousPosition = touch.previousLocation(in: self)
