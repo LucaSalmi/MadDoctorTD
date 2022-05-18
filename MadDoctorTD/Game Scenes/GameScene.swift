@@ -28,10 +28,17 @@ class GameScene: SKScene {
     
     var rangeIndicator: SKShapeNode?
     
+    //UI SK's
     var towerUI: SKSpriteNode? = nil
     var upgradeUI: SKSpriteNode? = nil
     var towerImage: SKSpriteNode?
     var towerNameText: SKLabelNode?
+    
+    //Price Labelnodes
+    var gunTowerPrice: SKLabelNode?
+    var rapidTowerPrice: SKLabelNode?
+    var cannonTowerPrice: SKLabelNode?
+    var sniperTowerPrice: SKLabelNode?
     
     var rateOfFireImage: SKSpriteNode?
     var damageImage: SKSpriteNode?
@@ -112,6 +119,17 @@ class GameScene: SKScene {
         damageImage = upgradeUI?.childNode(withName: "AttackButton") as? SKSpriteNode
         rateOfFireImage = upgradeUI?.childNode(withName: "RateOfFireButton") as? SKSpriteNode
         rangeImage = upgradeUI?.childNode(withName: "RangeButton") as? SKSpriteNode
+        
+        sniperTowerPrice = towerUI?.childNode(withName: "SniperTowerPrice") as? SKLabelNode
+        rapidTowerPrice = towerUI?.childNode(withName: "RapidTowerPrice") as? SKLabelNode
+        cannonTowerPrice = towerUI?.childNode(withName: "CannonTowerPrice") as? SKLabelNode
+        gunTowerPrice = towerUI?.childNode(withName: "GunTowerPrice") as? SKLabelNode
+        
+        gunTowerPrice?.text = "\(TowerData.BASE_COST)$"
+        rapidTowerPrice?.text = "\(TowerData.BASE_COST)$"
+        cannonTowerPrice?.text = "\(TowerData.BASE_COST)$"
+        sniperTowerPrice?.text = "\(TowerData.BASE_COST)$"
+        
         
         
         self.camera!.addChild(upgradeUI!)
@@ -313,7 +331,7 @@ class GameScene: SKScene {
             print("Error")
         }
         
-        touchingTower?.size = CGSize(width: 150, height: 150)
+        touchingTower?.size = CGSize(width: 90, height: 90)
         touchingTower = nil
     }
     
