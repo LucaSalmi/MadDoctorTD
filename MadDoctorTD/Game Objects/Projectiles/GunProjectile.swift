@@ -29,13 +29,15 @@ class GunProjectile: Projectile {
         
         SoundManager.playSFX(sfxName: SoundManager.gunProjectileImpactSFX, scene: GameScene.instance!)
         
-        let particle = SKEmitterNode(fileNamed: "GunProjectileImpact")
-        particle!.position = position
-        particle!.zPosition = 5
-        gameScene.addChild(particle!)
-        gameScene.run(SKAction.wait(forDuration: 1)) {
-            particle!.removeFromParent()
+        if let particle = SKEmitterNode(fileNamed: "GunProjectileImpact") {
+            particle.position = position
+            particle.zPosition = 5
+            gameScene.addChild(particle)
+            gameScene.run(SKAction.wait(forDuration: 1)) {
+                particle.removeFromParent()
+            }
         }
+        
         
         //TODO: TAKE THIS BACK FOR OBJECTPOOLING AND SOLVE BUG
         //TODO: bullets not spawning correctly

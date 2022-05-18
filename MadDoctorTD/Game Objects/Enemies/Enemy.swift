@@ -251,8 +251,13 @@ class Enemy: SKSpriteNode{
             SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             
         }
+        
+        var hpLeft = 0
+        
         let tenthHP = startHp / 10
-        var hpLeft  =  hp / tenthHP
+        if tenthHP > 0 {
+            hpLeft  =  hp / tenthHP
+        }
         
         if hpLeft == 0 {
             hpLeft = 1
