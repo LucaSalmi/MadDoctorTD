@@ -38,5 +38,53 @@ class PhysicsUtils{
         return nil
     }
     
+    static func moveCameraToTargetPoint(camera: SKCameraNode, direction: CGPoint) {
+        
+        //let direction = PhysicsUtils.getCameraDirection(camera: camera, targetPoint: targetPoint)
+        
+        let speed: CGFloat = CGFloat(10.0)
+        
+        camera.position.x += (speed * direction.x)
+        camera.position.y += (speed * direction.y)
+        
+    }
+    
+    static func getCameraDirection(camera: SKCameraNode, targetPoint: CGPoint) -> CGPoint {
+        
+        
+        
+        var differenceX = targetPoint.x - camera.position.x
+        var differenceY = targetPoint.y - camera.position.y
+        
+        var isNegativeX = false
+        if differenceX < 0 {
+            isNegativeX = true
+            differenceX *= -1
+        }
+        
+        var isNegativeY = false
+        if differenceY < 0 {
+            isNegativeY = true
+            differenceY *= -1
+        }
+        
+        let differenceH = sqrt((differenceX*differenceX) + (differenceY*differenceY))
+        
+        differenceX /= differenceH
+        differenceY /= differenceH
+        
+        if isNegativeX {
+            differenceX *= -1
+        }
+        if isNegativeY {
+            differenceY *= -1
+        }
+        
+        let directionX = differenceX
+        let directionY = differenceY
+        
+        return CGPoint(x: directionX, y: directionY)
+        
+    }
     
 }
