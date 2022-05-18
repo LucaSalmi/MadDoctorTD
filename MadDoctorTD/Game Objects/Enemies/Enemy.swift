@@ -97,7 +97,7 @@ class Enemy: SKSpriteNode{
         
         if movePoints.isEmpty {
             
-            GameManager.instance.getDamage(incomingDamage: damageValue)
+            GameManager.instance.getDamage(incomingDamage: self.damageValue)
             self.hp = 0
             self.removeFromParent()
             self.hpBar?.removeFromParent()
@@ -428,7 +428,7 @@ class Enemy: SKSpriteNode{
                 }
                 
                 for i in 0..<enemy.oldMovePoints.count {
-                    if enemy.movePoints.count-1 > i {
+                    if enemy.movePoints.count-1 > i || enemy.oldMovePoints.count-1 > i{
                         break
                     }
                     if enemy.oldMovePoints[i].x == enemy.movePoints[i].x &&
