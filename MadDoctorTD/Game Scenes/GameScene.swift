@@ -108,8 +108,6 @@ class GameScene: SKScene {
         upgradeUI = uiScene!.childNode(withName: "UpgradeMenu") as? SKSpriteNode
         upgradeUI?.removeFromParent()
         towerImage = upgradeUI?.childNode(withName: "TowerLogo") as? SKSpriteNode
-        
-        
         self.camera!.addChild(upgradeUI!)
         
         addChild(clickableTileGridsNode)
@@ -357,7 +355,9 @@ class GameScene: SKScene {
                     return
                 }
                 uiTowerFound = true
-                towerImage?.texture = SKTexture(imageNamed: "blast_tower")
+                
+                //towerImage?.texture = SKTexture(imageNamed: "blast_tower")
+                
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE, position: location)
                 touchingTower = node as? SKSpriteNode
                 touchingTower?.size = TowerData.TEXTURE_SIZE
@@ -373,7 +373,8 @@ class GameScene: SKScene {
                     return
                 }
                 uiTowerFound = true
-                towerImage?.texture = SKTexture(imageNamed: "speed_tower")
+                
+                //towerImage?.texture = SKTexture(imageNamed: "speed_tower")
                 
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.5, position: location)
                 touchingTower = node as? SKSpriteNode
@@ -387,7 +388,8 @@ class GameScene: SKScene {
                 }
                 
               uiTowerFound = true
-                towerImage?.texture = SKTexture(imageNamed: "cannon_tower")
+                
+                //towerImage?.texture = SKTexture(imageNamed: "cannon_tower")
                 
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.8, position: location)
                 touchingTower = node as? SKSpriteNode
@@ -399,7 +401,9 @@ class GameScene: SKScene {
                     return
                 }
                 uiTowerFound = true
-                towerImage?.texture = SKTexture(imageNamed: "sniper_tower_rotate")
+                
+                //towerImage?.texture = SKTexture(imageNamed: "sniper_tower_rotate")
+                
                 displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 1.8, position: location)
                 touchingTower = node as? SKSpriteNode
                 touchingTower?.size = TowerData.TEXTURE_SIZE
