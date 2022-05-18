@@ -154,6 +154,9 @@ struct EnemiesData{
     static let BASE_ATTACK_POWER_VALUE = 20
     static let BASE_ATTACK_SPEED_VALUE = 60 //in frames per second
     
+    static let BASE_DAMAGE_VALUE = 1
+    static let BOSS_DAMAGE_VALUE = 1
+    
 }
 
 //Waves

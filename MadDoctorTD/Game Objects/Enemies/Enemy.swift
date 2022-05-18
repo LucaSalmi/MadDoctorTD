@@ -27,6 +27,8 @@ class Enemy: SKSpriteNode{
     var attackPower: Int = EnemiesData.BASE_ATTACK_POWER_VALUE
     var attackSpeed: Int = EnemiesData.BASE_ATTACK_SPEED_VALUE
     var attackCounter: Int = 0
+    
+    var damageValue = EnemiesData.BASE_DAMAGE_VALUE
 
     var startHp = 0
     
@@ -92,7 +94,8 @@ class Enemy: SKSpriteNode{
         }
         
         if movePoints.isEmpty {
-            GameManager.instance.getDamage()
+            
+            GameManager.instance.getDamage(incomingDamage: damageValue)
             self.hp = 0
             self.removeFromParent()
             self.hpBar?.removeFromParent()

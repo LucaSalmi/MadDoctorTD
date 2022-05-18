@@ -34,9 +34,9 @@ class GameManager: ObservableObject{
     private init(){}
     
     
-    func getDamage(){
+    func getDamage(incomingDamage: Int){
         
-        baseHp -= 1
+        baseHp -= incomingDamage
         if baseHp <= 0{
             isGameOver = true
         }

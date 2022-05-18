@@ -58,6 +58,7 @@ class SlimeEnemy: Enemy{
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.BOSS_SPEED_MODIFIER
             waveSlotSize = EnemiesData.BOSS_ENEMY_SLOT
             hp = Int(Double(EnemiesData.BASE_HP) * (EnemiesData.BOSS_HP_MODIFIER) + (Double(EnemiesData.BASE_HP) * Double(waveSlotSize)))
+            damageValue = EnemiesData.BOSS_DAMAGE_VALUE
             self.enemyType = .boss
             
         }
