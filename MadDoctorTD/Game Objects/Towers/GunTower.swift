@@ -20,6 +20,8 @@ class GunTower: Tower{
         
         
         super.init(position: position, foundation: foundation, textureName: textureName)
+        
+        towerName = "Gun Tower"
                 
         projectileType = ProjectileTypes.gunProjectile
     

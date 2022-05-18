@@ -26,6 +26,8 @@ class SniperTower: Tower{
     override init(position: CGPoint, foundation: FoundationPlate, textureName: String){
         
         super.init(position: position, foundation: foundation, textureName: textureName)
+        
+        towerName = "Sniper Tower"
                 
         projectileType = ProjectileTypes.sniperProjectile
     

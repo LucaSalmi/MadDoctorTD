@@ -31,10 +31,12 @@ class GameScene: SKScene {
     var towerUI: SKSpriteNode? = nil
     var upgradeUI: SKSpriteNode? = nil
     var towerImage: SKSpriteNode?
+    var towerNameText: SKLabelNode?
     
     var rateOfFireImage: SKSpriteNode?
     var damageImage: SKSpriteNode?
     var rangeImage: SKSpriteNode?
+    
     
     var touchingTower: SKSpriteNode? = nil
     
@@ -105,6 +107,7 @@ class GameScene: SKScene {
         upgradeUI = uiScene!.childNode(withName: "UpgradeMenu") as? SKSpriteNode
         upgradeUI?.removeFromParent()
         towerImage = upgradeUI?.childNode(withName: "TowerLogo") as? SKSpriteNode
+        towerNameText = upgradeUI?.childNode(withName: "TowerText") as? SKLabelNode
         
         damageImage = upgradeUI?.childNode(withName: "AttackButton") as? SKSpriteNode
         rateOfFireImage = upgradeUI?.childNode(withName: "RateOfFireButton") as? SKSpriteNode
@@ -353,6 +356,8 @@ class GameScene: SKScene {
                 damageImage?.texture = SKTexture(imageNamed: "damage_upgrade_\(tower.damageUpgradeCount)")
                 rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(tower.rangeUpgradeCount)")
                 rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(tower.rateOfFireUpgradeCount)")
+                
+                towerNameText?.text = tower.getName()
                 
                 towerUI?.alpha = 0
                 upgradeUI?.alpha = 1
