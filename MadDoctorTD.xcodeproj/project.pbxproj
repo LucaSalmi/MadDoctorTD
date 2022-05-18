@@ -29,7 +29,6 @@
 		B35C210E282A6330009A748E /* sniper_bullet_fly_by_5.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2109282A632F009A748E /* sniper_bullet_fly_by_5.wav */; };
 		B35C210F282A6330009A748E /* sniper_bullet_fly_by_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C210A282A6330009A748E /* sniper_bullet_fly_by_3.wav */; };
 		B35C2112282A6EEE009A748E /* finger_tap_boosted.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2110282A6EEE009A748E /* finger_tap_boosted.wav */; };
-		B35C2113282A6EEE009A748E /* construction_sound_effect.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2111282A6EEE009A748E /* construction_sound_effect.wav */; };
 		B35C2115282B972B009A748E /* mad_td_theme.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2114282B972B009A748E /* mad_td_theme.wav */; };
 		B35C211D282BC07C009A748E /* mortar_swoosh3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C2116282BC07B009A748E /* mortar_swoosh3.mp3 */; };
 		B35C211E282BC07C009A748E /* mortar_swoosh5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C2117282BC07B009A748E /* mortar_swoosh5.mp3 */; };
@@ -433,7 +432,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					C839C6A12821352200F66043 = {
 						CreatedOnToolsVersion = 13.3.1;
@@ -499,7 +498,6 @@
 				B35C2120282BC07C009A748E /* mortar_swoosh1.mp3 in Resources */,
 				B35C2150282D44DC009A748E /* button_press_one.mp3 in Resources */,
 				B35C2157282D454D009A748E /* research_interface_atmosphere.mp3 in Resources */,
-				B35C2113282A6EEE009A748E /* construction_sound_effect.wav in Resources */,
 				B35C2122282BC07C009A748E /* mortar_swoosh7.mp3 in Resources */,
 				B35C2139282D00F0009A748E /* desert_custom_atmosphere.mp3 in Resources */,
 				B35C210F282A6330009A748E /* sniper_bullet_fly_by_3.wav in Resources */,
