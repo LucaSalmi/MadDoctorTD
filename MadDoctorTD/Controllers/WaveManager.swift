@@ -97,22 +97,26 @@ class WaveManager{
                 
             } else {
                 
-                chosen = choises[0]
+                if !choises.isEmpty{
+                    chosen = choises[0]
+                }
             }
             
-            let enemy = EnemyFactory().createEnemy(enemyRace: enemyRace, enemyType: chosen!)
-            enemy.position = spawnPoint!
-            enemy.zPosition = 2
-            EnemyNodes.enemyArray.append(enemy)
+            var enemy: Enemy? = nil
             
-            if enemy.enemyType == .boss {
-                
-                enemy.hpBar?.size.width = enemy.hpBar!.size.width * 2.0
-//                enemy.hpBar?.size.height = enemy.hpBar!.size.height * 2.0
-                
+            if chosen == .boss{
+                enemy = EnemyFactory().createBoss(enemyRace: enemyRace)
+            }else{
+                enemy = EnemyFactory().createEnemy(enemyRace: enemyRace, enemyType: chosen!)
             }
             
-            if numberOfAttackers < maximumAtkSpawn && unlockAttackers && enemy.enemyType != .flying{
+            if enemy == nil{return}
+            enemy!.position = spawnPoint!
+            enemy!.zPosition = 2
+            EnemyNodes.enemyArray.append(enemy!)
+            
+            
+            if numberOfAttackers < maximumAtkSpawn && unlockAttackers && enemy!.enemyType != .flying{
                 
                 print("spawning atackunits: wavenumber: \(waveNumber)")
                 
@@ -133,14 +137,14 @@ class WaveManager{
                     }
                 }
                 
-                if RandomNumberGenerator.isAttackerRNG(maxRange: 10, limitForTrue: attackSpawnChance){
+                if RandomNumberGenerator.isAttackerRNG(maxRange: 10, limitForTrue: attackSpawnChance) && enemy!.enemyType != .boss{
 
                     
                     numberOfAttackers += 1
-                    enemy.isAttacker = true
-                    enemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Foundation
+                    enemy!.isAttacker = true
+                    enemy!.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Foundation
                     
-                    enemy.changeTooAtkTexture()
+                    enemy!.changeToAtkTexture()
                 }
             }
             
@@ -163,6 +167,15 @@ class WaveManager{
     func spawnEnemy(){
         
         guard let toSpawn = EnemyNodes.enemyArray.first else{return}
+        
+        if toSpawn.enemyType == .boss{
+            
+            let boss = toSpawn as! Boss
+            boss.bossTexture?.position = boss.position
+            GameScene.instance!.addChild(boss.bossTexture!)
+            
+        }
+        
         EnemyNodes.enemiesNode.addChild(toSpawn)
         EnemyNodes.enemyArray.removeFirst()
         

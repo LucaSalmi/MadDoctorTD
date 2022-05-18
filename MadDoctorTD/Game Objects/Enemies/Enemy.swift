@@ -41,8 +41,6 @@ class Enemy: SKSpriteNode{
     
     init(texture: SKTexture, color: UIColor){
         
-        
-        
         let tempColor = UIColor(.indigo)
         super.init(texture: texture, color: tempColor, size: EnemiesData.SIZE)
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
@@ -68,7 +66,7 @@ class Enemy: SKSpriteNode{
 
     }
     
-    func changeTooAtkTexture() {
+    func changeToAtkTexture() {
         // overiding in subclasses for specific texrures (ex. slime_fast_atker...))
     }
     
@@ -87,7 +85,7 @@ class Enemy: SKSpriteNode{
             isMoving = true
         }
                 
-        if self.enemyType == .flying{
+        if self.enemyType == .flying || self.enemyType == .boss{
             
             if movePoints.count > 1 {
                 let finalPoint = movePoints[movePoints.count-1]
@@ -155,7 +153,7 @@ class Enemy: SKSpriteNode{
         
     }
     
-    private func attack(){
+    func attack(){
         
         if attackCounter >= attackSpeed{
             

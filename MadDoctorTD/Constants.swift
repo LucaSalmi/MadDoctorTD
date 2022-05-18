@@ -36,6 +36,7 @@ struct PhysicsCategory{
     static let Foundation: UInt32 = 0b10
     static let Enemy: UInt32 = 0b100
     static let Projectile: UInt32 = 0b1000
+    static let Boss: UInt32 = 0b10000
     
 }
 
