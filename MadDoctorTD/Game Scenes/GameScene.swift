@@ -38,6 +38,11 @@ class GameScene: SKScene {
     var damageImage: SKSpriteNode?
     var rangeImage: SKSpriteNode?
     
+    //Price Labelnodes
+    var gunTowerPrice: SKLabelNode?
+    var rapidTowerPrice: SKLabelNode?
+    var cannonTowerPrice: SKLabelNode?
+    var sniperTowerPrice: SKLabelNode?
     
     var touchingTower: SKSpriteNode? = nil
     
