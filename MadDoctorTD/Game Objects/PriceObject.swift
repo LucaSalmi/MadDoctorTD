@@ -76,7 +76,8 @@ class PriceObject: SKSpriteNode {
         if self.contains(targetNode.position) {
             onDestroy()
         }
-        
     }
+    
+    
     
 }

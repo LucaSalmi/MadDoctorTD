@@ -259,7 +259,7 @@ class Enemy: SKSpriteNode{
             var materialTarget = GameScene.instance!.camera!.position
             materialTarget.x -= 300
             materialTarget.y += 600
-            let bossDrop = DropObject(startPoint: self.position, targetPoint: materialTarget, bossTexture: (boss.bossTexture?.texture)!)
+            let bossDrop = DropObject(startPoint: self.position, targetPoint: materialTarget, bossTexture: (boss.bossTexture?.texture)!, materialType: .slime)
             GameScene.instance!.moneyNode.addChild(bossDrop)
             boss.bossTexture?.removeFromParent()
             
