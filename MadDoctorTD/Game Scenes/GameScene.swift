@@ -64,6 +64,8 @@ class GameScene: SKScene {
     var moveCameraToPortal: Bool = false
     var portalPosition: CGPoint = CGPoint(x: 0, y: 0)
     
+    var moneyNode: SKNode = SKNode()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -165,6 +167,7 @@ class GameScene: SKScene {
         
         moveCameraToPortal = false
         
+        addChild(moneyNode)
     }
     
     private func setupCamera(){
@@ -177,7 +180,7 @@ class GameScene: SKScene {
         
         let constrainRect = backgroundMap.frame.insetBy(dx: xInset, dy: yInset)
         
-        let yLowerLimit = constrainRect.minY/6
+        let yLowerLimit = constrainRect.minY/4
         
         let xRange = SKRange(lowerLimit: constrainRect.minX/4, upperLimit: constrainRect.maxX/4)
         let yRange = SKRange(lowerLimit: yLowerLimit, upperLimit: constrainRect.maxY/6)
@@ -634,10 +637,7 @@ class GameScene: SKScene {
                 
             }
         }
-        
-        
-        
-        
+
         for node in ProjectileNodes.projectilesNode.children {
             if node is Projectile{
                 let projectile = node as! Projectile
@@ -648,6 +648,11 @@ class GameScene: SKScene {
                 aoeProjectile.update()
             }
             
+        }
+        
+        for node in moneyNode.children {
+            let moneyObject = node as! MoneyObject
+            moneyObject.update()
         }
         
         if !GameSceneCommunicator.instance.isBuildPhase {
@@ -720,6 +725,10 @@ class GameScene: SKScene {
         
         //Foundation edit mode
         clickableTileGridsNode.removeFromParent()
+        
+        //Money
+        moneyNode.removeAllChildren()
+        moneyNode.removeFromParent()
     }
     
     
