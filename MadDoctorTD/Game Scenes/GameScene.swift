@@ -140,6 +140,11 @@ class GameScene: SKScene {
         cannonTowerPrice?.text = "\(TowerData.BASE_COST)$"
         sniperTowerPrice?.text = "\(TowerData.BASE_COST)$"
         
+        towerPriceTags.append(gunTowerPrice!)
+        towerPriceTags.append(rapidTowerPrice!)
+        towerPriceTags.append(cannonTowerPrice!)
+        towerPriceTags.append(sniperTowerPrice!)
+        
         addChild(clickableTileGridsNode)
         
         addChild(towerIndicatorsNode)
