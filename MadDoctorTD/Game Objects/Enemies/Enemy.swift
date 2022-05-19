@@ -240,20 +240,39 @@ class Enemy: SKSpriteNode{
         
     }
     
+    func onDestroy() {
+        
+        var moneyTarget = GameScene.instance!.camera!.position
+        moneyTarget.x -= 300
+        moneyTarget.y += 600
+        let moneyObject = MoneyObject(startPosition: self.position)
+        GameScene.instance!.moneyNode.addChild(moneyObject)
+        
+        hpBar!.removeFromParent()
+        
+        GameManager.instance.currentMoney += self.killValue
+        print("KILL VALUE = \(GameManager.instance.currentMoney)")
+        
+        if self.enemyType == .boss{
+            
+            let boss = self as! Boss
+            boss.bossTexture?.removeFromParent()
+            
+        }
+        
+        self.removeFromParent()
+        print("Current enemy wave count = \(EnemyNodes.enemiesNode.children.count)")
+        SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+        
+    }
+    
     func getDamage(dmgValue: Int){
         
         hp -= (dmgValue - armorValue)
         
         if hp <= 0{
             
-            hpBar!.removeFromParent()
-            
-            GameManager.instance.currentMoney += self.killValue
-            print("KILL VALUE = \(GameManager.instance.currentMoney)")
-            
-            self.removeFromParent()
-            print("Current enemy wave count = \(EnemyNodes.enemiesNode.children.count)")
-            SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+            onDestroy()
             
         }
         
