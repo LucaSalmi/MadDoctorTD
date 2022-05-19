@@ -24,11 +24,6 @@
 		3398938A28363B3C006B0374 /* PriceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398938928363B3C006B0374 /* PriceObject.swift */; };
 		33B86801282D08DA004AA4D4 /* LabSceneCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */; };
 		B30A1E6F2833CA3B007F86E5 /* construction_sound_effect.wav in Resources */ = {isa = PBXBuildFile; fileRef = B30A1E6E2833CA3B007F86E5 /* construction_sound_effect.wav */; };
-		B34EEA86283631FC00CE60C1 /* 3_MAD_TD_Theme_Party_In_The_Basement_Deep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEA85283631FC00CE60C1 /* 3_MAD_TD_Theme_Party_In_The_Basement_Deep.mp3 */; };
-		B34EEA8B2836381F00CE60C1 /* metal_tap_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEA872836381F00CE60C1 /* metal_tap_1.mp3 */; };
-		B34EEA8C2836381F00CE60C1 /* metal_tap_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEA882836381F00CE60C1 /* metal_tap_4.mp3 */; };
-		B34EEA8D2836381F00CE60C1 /* metal_tap_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEA892836381F00CE60C1 /* metal_tap_3.mp3 */; };
-		B34EEA8E2836381F00CE60C1 /* metal_tap_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEA8A2836381F00CE60C1 /* metal_tap_2.mp3 */; };
 		B35C20FB282A45DB009A748E /* AWP_SOUND_EFFECT.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */; };
 		B35C210B282A6330009A748E /* sniper_bullet_fly_by_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */; };
 		B35C210C282A6330009A748E /* sniper_bullet_fly_by_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */; };
@@ -124,11 +119,6 @@
 		3398938928363B3C006B0374 /* PriceObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceObject.swift; sourceTree = "<group>"; };
 		33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneCommunicator.swift; sourceTree = "<group>"; };
 		B30A1E6E2833CA3B007F86E5 /* construction_sound_effect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = construction_sound_effect.wav; sourceTree = "<group>"; };
-		B34EEA85283631FC00CE60C1 /* 3_MAD_TD_Theme_Party_In_The_Basement_Deep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 3_MAD_TD_Theme_Party_In_The_Basement_Deep.mp3; path = ../../../../../Downloads/3_MAD_TD_Theme_Party_In_The_Basement_Deep.mp3; sourceTree = "<group>"; };
-		B34EEA872836381F00CE60C1 /* metal_tap_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = metal_tap_1.mp3; path = "../../../../../Downloads/Metal Taps/metal_tap_1.mp3"; sourceTree = "<group>"; };
-		B34EEA882836381F00CE60C1 /* metal_tap_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = metal_tap_4.mp3; path = "../../../../../Downloads/Metal Taps/metal_tap_4.mp3"; sourceTree = "<group>"; };
-		B34EEA892836381F00CE60C1 /* metal_tap_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = metal_tap_3.mp3; path = "../../../../../Downloads/Metal Taps/metal_tap_3.mp3"; sourceTree = "<group>"; };
-		B34EEA8A2836381F00CE60C1 /* metal_tap_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = metal_tap_2.mp3; path = "../../../../../Downloads/Metal Taps/metal_tap_2.mp3"; sourceTree = "<group>"; };
 		B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AWP_SOUND_EFFECT.wav; sourceTree = "<group>"; };
 		B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_2.wav; sourceTree = "<group>"; };
 		B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_1.wav; sourceTree = "<group>"; };
@@ -390,11 +380,6 @@
 				B35C2132282CFE8F009A748E /* slime_death2.wav */,
 				B35C2130282CFE8E009A748E /* slime_death3.wav */,
 				B35C213E282D3DA7009A748E /* cannon_tower_impact.mp3 */,
-				B34EEA85283631FC00CE60C1 /* 3_MAD_TD_Theme_Party_In_The_Basement_Deep.mp3 */,
-				B34EEA872836381F00CE60C1 /* metal_tap_1.mp3 */,
-				B34EEA8A2836381F00CE60C1 /* metal_tap_2.mp3 */,
-				B34EEA892836381F00CE60C1 /* metal_tap_3.mp3 */,
-				B34EEA882836381F00CE60C1 /* metal_tap_4.mp3 */,
 				B35C2138282D00F0009A748E /* desert_custom_atmosphere.mp3 */,
 				B35C213C282D39DB009A748E /* cannon_shot_fired.mp3 */,
 				B35C2131282CFE8F009A748E /* slime_death4.wav */,
@@ -486,7 +471,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B34EEA8B2836381F00CE60C1 /* metal_tap_1.mp3 in Resources */,
 				B35C2115282B972B009A748E /* mad_td_theme.wav in Resources */,
 				B35C2134282CFE8F009A748E /* slime_death3.wav in Resources */,
 				B35C2152282D44DC009A748E /* button_press_two.mp3 in Resources */,
@@ -513,21 +497,17 @@
 				B35C210C282A6330009A748E /* sniper_bullet_fly_by_1.wav in Resources */,
 				B35C213B282D021B009A748E /* mad_td_airlock_theme.wav in Resources */,
 				3359CCA4282157C500878191 /* MyTileSet.sks in Resources */,
-				B34EEA86283631FC00CE60C1 /* 3_MAD_TD_Theme_Party_In_The_Basement_Deep.mp3 in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
 				B35C2155282D4546009A748E /* research_view_open.mp3 in Resources */,
 				B35C2112282A6EEE009A748E /* finger_tap_boosted.wav in Resources */,
 				B35C2137282CFE8F009A748E /* slime_death1.wav in Resources */,
 				B30A1E6F2833CA3B007F86E5 /* construction_sound_effect.wav in Resources */,
-				B34EEA8D2836381F00CE60C1 /* metal_tap_3.mp3 in Resources */,
 				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
 				B35C2153282D44DC009A748E /* button_press_three.mp3 in Resources */,
 				B35C2120282BC07C009A748E /* mortar_swoosh1.mp3 in Resources */,
-				B34EEA8E2836381F00CE60C1 /* metal_tap_2.mp3 in Resources */,
 				B35C2150282D44DC009A748E /* button_press_one.mp3 in Resources */,
 				B35C2157282D454D009A748E /* research_interface_atmosphere.mp3 in Resources */,
 				B35C2122282BC07C009A748E /* mortar_swoosh7.mp3 in Resources */,
-				B34EEA8C2836381F00CE60C1 /* metal_tap_4.mp3 in Resources */,
 				B35C2139282D00F0009A748E /* desert_custom_atmosphere.mp3 in Resources */,
 				B35C210F282A6330009A748E /* sniper_bullet_fly_by_3.wav in Resources */,
 				B35C212F282BE83C009A748E /* filtered_theme_song_no_fizz.mp3 in Resources */,
