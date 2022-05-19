@@ -420,6 +420,17 @@ class GameScene: SKScene {
             }
         }
         
+        for node in touchedNodes{
+            
+            if node.name == "RateOfFireButton" || node.name == "RangeButton" ||
+                node.name == "AttackButton"{
+                
+                upgradeTowerMenu(nodeName: node.name!)
+                return
+                
+            }
+        }
+        
         for node in touchedNodes {
             
             if node is Tower{
@@ -436,17 +447,6 @@ class GameScene: SKScene {
                 towerUI?.alpha = 0
                 upgradeUI?.alpha = 1
                 
-                return
-                
-            }
-        }
-        
-        for node in touchedNodes{
-            
-            if node.name == "RateOfFireButton" || node.name == "RangeButton" ||
-                node.name == "AttackButton"{
-                
-                upgradeTowerMenu(nodeName: node.name!)
                 return
                 
             }
