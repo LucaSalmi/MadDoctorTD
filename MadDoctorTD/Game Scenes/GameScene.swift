@@ -44,6 +44,8 @@ class GameScene: SKScene {
     var cannonTowerPrice: SKLabelNode?
     var sniperTowerPrice: SKLabelNode?
     
+    var towerPriceTags = [SKLabelNode]()
+    
     var touchingTower: SKSpriteNode? = nil
     
     var snappedToFoundation: FoundationPlate? = nil
