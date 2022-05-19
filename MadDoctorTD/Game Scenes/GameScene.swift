@@ -387,6 +387,16 @@ class GameScene: SKScene {
         let location = touch.location(in: self)
         let touchedNodes = nodes(at: location)
         
+        for node in touchedNodes {
+            
+            if node.name == "SellButton" || node.name == "BuildFoundationButton"
+                || node.name == "BuildTowerButton"{
+                
+                extraButtons(nodeName: node.name!)
+                return
+            }
+        }
+        
         if GameSceneCommunicator.instance.foundationEditMode {
             communicator.editFoundationTouchStart(touchedNodes: touchedNodes)
             return
@@ -439,17 +449,6 @@ class GameScene: SKScene {
                 upgradeTowerMenu(nodeName: node.name!)
                 return
                 
-            }
-        }
-        
-        
-        for node in touchedNodes {
-            
-            if node.name == "SellButton" || node.name == "BuildFoundationButton"
-                || node.name == "BuildTowerButton"{
-                
-                extraButtons(nodeName: node.name!)
-                return
             }
         }
         
