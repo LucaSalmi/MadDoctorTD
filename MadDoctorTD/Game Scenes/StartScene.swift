@@ -9,18 +9,19 @@ import Foundation
 import SpriteKit
 
 class StartScene: SKScene{
-    
+
     let appManager = AppManager.appManager
     let communicator = StartSceneCommunicator.instance
     
     var doorOne: SKNode? = nil
     var doorTwo: SKNode? = nil
     
-    var startAnimationCount: Int = 600
+    var startAnimationCount: Int = 60000
     var musicStarted: Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        SoundManager.playBGM(bgmString: SoundManager.DoorsTheme, bgmExtension: SoundManager.mp3Extension)
     }
     
     override func didMove(to view: SKView) {
@@ -31,11 +32,24 @@ class StartScene: SKScene{
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        if startAnimationCount > 0 {
-            startAnimationCount = 0
+
+        guard let touch = touches.first else {
+            return
         }
-        
+
+        let location = touch.location(in: self)
+        guard let node = nodes(at: location).first else {return}
+
+        if node.name == "DoorButton"{
+            // start menu scene
+            print("Start Menu Scene")
+            if startAnimationCount > 0 {
+                startAnimationCount = 0
+            }
+        } else {
+            SoundManager.playMetalTapSFX(scene: self)
+            print("Play metal tap sound")
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {

@@ -47,6 +47,7 @@ class SoundManager {
     static let MainThemeBackgroundMusic = "mad_td_theme"
     static let filteredMainThemeBackgroundMusic = "filtered_theme_song_no_fizz"
     static let airlockDoorsTheme = "mad_td_airlock_theme"
+    static let DoorsTheme = "3_MAD_TD_Theme_Party_In_The_Basement_Deep"
     
     static var musicPlayer: AVAudioPlayer!
 
@@ -68,6 +69,15 @@ class SoundManager {
         let sniperSound = "sniper_bullet_fly_by_\(rand)"
         
         playSFX(sfxName: sniperSound, scene: GameScene.instance!)
+
+    }
+
+    static func playMetalTapSFX(scene: StartScene) {
+
+        let rand = Int.random(in:1...4)
+        let metalTap = "metal_tap_\(rand)."
+
+        playSFX(sfxName: metalTap, scene: scene, sfxExtension: mp3Extension)
 
     }
 

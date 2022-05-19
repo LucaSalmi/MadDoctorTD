@@ -300,6 +300,7 @@ class WaveManager{
             spawnCounter += 1
             if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER {
                 spawnEnemy()
+                print("Enemies left in current wave \(EnemyNodes.enemyArray.count)")
                 
                 spawnCounter = 0
             }
