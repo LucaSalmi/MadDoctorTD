@@ -24,5 +24,10 @@ class DropObject: PriceObject{
         
     }
     
+    override func onDestroy() {
+        GameManager.instance.slimeMaterials += 1
+        super.onDestroy()
+    }
+    
     
 }
