@@ -73,8 +73,6 @@ class PriceObject: SKSpriteNode {
         self.position.x += (speed * direction.x)
         self.position.y += (speed * direction.y)
         
-        
-        
         if self.contains(targetNode.position) {
             onDestroy()
         }

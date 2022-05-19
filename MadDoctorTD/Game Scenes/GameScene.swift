@@ -595,7 +595,6 @@ class GameScene: SKScene {
         
         if rangeIndicator != nil{
             rangeIndicator!.removeFromParent()
-            
         }
         
         rangeIndicator = SKShapeNode(circleOfRadius: attackRange)
@@ -700,8 +699,18 @@ class GameScene: SKScene {
         }
         
         for node in moneyNode.children {
-            let moneyObject = node as! MoneyObject
-            moneyObject.update()
+            
+            if node is MoneyObject{
+                
+                let moneyObject = node as! MoneyObject
+                moneyObject.update()
+                
+            }else if node is DropObject{
+                
+                let drop = node as! DropObject
+                drop.update()
+            }
+            
         }
         
         if !GameSceneCommunicator.instance.isBuildPhase {
@@ -767,6 +776,14 @@ class GameScene: SKScene {
         //Wave
         GameManager.instance.currentWave = 0
         GameManager.instance.nextWaveCounter = 0
+        
+        //Boss
+        for child in self.children{
+            
+            if child.name == "BossTexture"{
+                child.removeFromParent()
+            }
+        }
         
         //UI
         self.camera!.removeAllChildren()
