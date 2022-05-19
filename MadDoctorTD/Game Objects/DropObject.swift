@@ -20,6 +20,7 @@ class DropObject: PriceObject{
         self.texture = bossTexture
         self.size.width /= 2
         self.size.height /= 2
+        self.speed = CGFloat(10.0)
         
     }
     
