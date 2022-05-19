@@ -135,6 +135,11 @@ class GameScene: SKScene {
         
         self.camera!.addChild(upgradeUI!)
         
+        sniperTowerPrice = towerUI?.childNode(withName: "SniperTowerPrice") as? SKLabelNode
+        rapidTowerPrice = towerUI?.childNode(withName: "RapidTowerPrice") as? SKLabelNode
+        cannonTowerPrice = towerUI?.childNode(withName: "CannonTowerPrice") as? SKLabelNode
+        gunTowerPrice = towerUI?.childNode(withName: "GunTowerPrice") as? SKLabelNode
+        
         gunTowerPrice?.text = "\(TowerData.BASE_COST)$"
         rapidTowerPrice?.text = "\(TowerData.BASE_COST)$"
         cannonTowerPrice?.text = "\(TowerData.BASE_COST)$"
