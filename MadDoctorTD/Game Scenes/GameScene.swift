@@ -584,6 +584,18 @@ class GameScene: SKScene {
             return
         }
         
+        if GameManager.instance.currentMoney < TowerData.BASE_COST{
+            for node in towerUI!.children{
+                if node.alpha != 0.5{
+                    node.alpha = 0.5
+                    for tag in towerPriceTags {
+                        tag.fontColor = UIColor(Color.red)
+                    }
+                }
+            }
+        }
+        
+        
         if moveCameraToPortal {
             let cameraDirection = PhysicsUtils.getCameraDirection(camera: self.camera!, targetPoint: portalPosition)
             PhysicsUtils.moveCameraToTargetPoint(camera: self.camera!, direction: cameraDirection)
