@@ -43,6 +43,7 @@ class GameScene: SKScene {
     var rapidTowerPrice: SKLabelNode?
     var cannonTowerPrice: SKLabelNode?
     var sniperTowerPrice: SKLabelNode?
+    var priceTag: SKLabelNode?
     
     var towerPriceTags = [SKLabelNode]()
     
@@ -141,11 +142,16 @@ class GameScene: SKScene {
         rapidTowerPrice = towerUI?.childNode(withName: "RapidTowerPrice") as? SKLabelNode
         cannonTowerPrice = towerUI?.childNode(withName: "CannonTowerPrice") as? SKLabelNode
         gunTowerPrice = towerUI?.childNode(withName: "GunTowerPrice") as? SKLabelNode
+        priceTag = uiScene?.childNode(withName: "PriceTag") as? SKLabelNode
+        priceTag?.removeFromParent()
+        uiNode.addChild(priceTag!)
         
-        gunTowerPrice?.text = "\(TowerData.BASE_COST)$"
-        rapidTowerPrice?.text = "\(TowerData.BASE_COST)$"
-        cannonTowerPrice?.text = "\(TowerData.BASE_COST)$"
-        sniperTowerPrice?.text = "\(TowerData.BASE_COST)$"
+        gunTowerPrice?.text = "$\(TowerData.BASE_COST)"
+        rapidTowerPrice?.text = "$\(TowerData.BASE_COST)"
+        cannonTowerPrice?.text = "$\(TowerData.BASE_COST)"
+        sniperTowerPrice?.text = "$\(TowerData.BASE_COST)"
+        priceTag?.text = "$\(TowerData.BASE_COST)"
+        
         
         towerPriceTags.append(gunTowerPrice!)
         towerPriceTags.append(rapidTowerPrice!)
@@ -265,6 +271,7 @@ class GameScene: SKScene {
             touchingTower?.position = location
             rangeIndicator?.position = location
             
+            
             for node in FoundationPlateNodes.foundationPlatesNode.children{
                 let foundationPlate = node as! FoundationPlate
                 if foundationPlate.contains(location){
@@ -280,7 +287,8 @@ class GameScene: SKScene {
                     
                 }
             }
-            
+            priceTag?.position.y = touchingTower!.position.y - 75
+            priceTag?.position.x = touchingTower!.position.x
             return
         }
         
@@ -295,6 +303,19 @@ class GameScene: SKScene {
         
         if touchingTower == nil{
             return
+        }
+        if snappedToFoundation != nil{
+            priceTag?.position.x = touchingTower!.position.x
+            priceTag?.position.y = touchingTower!.position.y + 50
+            priceTag?.alpha = 1
+            priceTag?.fontColor = UIColor(Color.red)
+        }
+        else{
+            priceTag?.alpha = 0
+        }
+        
+        for node in towerPriceTags{
+            node.alpha = 1
         }
         
         rangeIndicator?.removeFromParent()
@@ -366,7 +387,9 @@ class GameScene: SKScene {
         }
         
         touchingTower?.size = CGSize(width: 150, height: 150)
+        
         touchingTower = nil
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -410,10 +433,14 @@ class GameScene: SKScene {
                 
                 //call function that takes in name of node
                 if dragAndDropBuild(node: node, location: location){
-                    
+                    priceTag?.position.x = location.x
+                    priceTag?.position.y = location.y - 75
+                    priceTag?.alpha = 1
+                    priceTag?.fontColor = UIColor(Color.green)
                     touchingTower!.removeFromParent()
                     uiNode.addChild(touchingTower!)
                     touchingTower?.position = location
+                    
                 }
 
                 return
@@ -533,7 +560,7 @@ class GameScene: SKScene {
             if TowerData.BASE_COST > GameManager.instance.currentMoney{
                 return false
             }
-            
+            gunTowerPrice?.alpha = 0
             displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE, position: location)
             touchingTower = node as? SKSpriteNode
             touchingTower?.size = TowerData.TEXTURE_SIZE
@@ -543,7 +570,7 @@ class GameScene: SKScene {
             if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.rapidFireTowerUnlocked{
                 return false
             }
-            
+            rapidTowerPrice?.alpha = 0
             displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.5, position: location)
             touchingTower = node as? SKSpriteNode
             touchingTower?.size = TowerData.TEXTURE_SIZE
@@ -555,6 +582,7 @@ class GameScene: SKScene {
             if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.cannonTowerUnlocked{
                 return false
             }
+            cannonTowerPrice?.alpha = 0
             
             displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 0.8, position: location)
             touchingTower = node as? SKSpriteNode
@@ -566,6 +594,7 @@ class GameScene: SKScene {
             if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.sniperTowerUnlocked{
                 return false
             }
+            sniperTowerPrice?.alpha = 0
             
             displayRangeIndicator(attackRange: TowerData.ATTACK_RANGE * 1.8, position: location)
             touchingTower = node as? SKSpriteNode
@@ -657,6 +686,11 @@ class GameScene: SKScene {
                     }
                 }
             }
+        }
+        
+        if priceTag!.alpha > 0 && touchingTower == nil{
+            priceTag!.alpha -= 0.03
+            priceTag!.position.y += 1.5
         }
         
         
