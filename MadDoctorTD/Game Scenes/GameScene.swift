@@ -128,6 +128,11 @@ class GameScene: SKScene {
         
         self.camera!.addChild(upgradeUI!)
         
+        gunTowerPrice?.text = "\(TowerData.BASE_COST)$"
+        rapidTowerPrice?.text = "\(TowerData.BASE_COST)$"
+        cannonTowerPrice?.text = "\(TowerData.BASE_COST)$"
+        sniperTowerPrice?.text = "\(TowerData.BASE_COST)$"
+        
         addChild(clickableTileGridsNode)
         
         addChild(towerIndicatorsNode)
