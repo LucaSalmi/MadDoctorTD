@@ -1,33 +1,40 @@
 //
-//  Money.swift
+//  DropObject.swift
 //  MadDoctorTD
 //
-//  Created by Daniel Falkedal on 2022-05-19.
+//  Created by Luca Salmi on 2022-05-19.
 //
 
 import Foundation
 import SpriteKit
 
-class PriceObject: SKSpriteNode {
+class DropObject: SKSpriteNode{
     
+    var materialType: EnemyRaces? = nil
     let targetNode = SKSpriteNode()
-    
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
     
-    init(startPosition: CGPoint, targetPoint: CGPoint) {
-        super.init(texture: nil, color: .red, size: FoundationData.SIZE)
-        self.position = startPosition
-        self.speed = CGFloat(15.0)
+    init(startPoint: CGPoint, targetPoint: CGPoint, bossTexture: SKTexture, materialType: EnemyRaces){
+        
+        let size = CGSize(width: FoundationData.SIZE.width/2, height: FoundationData.SIZE.height/2)
+        super.init(texture: bossTexture, color: .clear, size: size)
+        self.texture = bossTexture
+        self.size.width /= 2
+        self.size.height /= 2
+        self.speed = CGFloat(10.0)
         self.zPosition = 5
+        self.position = startPoint
+        self.materialType = materialType
         
         targetNode.position = targetPoint
         targetNode.size = FoundationData.SIZE
         
         setDirection()
+        
     }
     
     func setDirection() {
@@ -65,6 +72,20 @@ class PriceObject: SKSpriteNode {
     }
     
     func onDestroy() {
+        
+        switch materialType{
+            
+        case .slime:
+            GameManager.instance.slimeMaterials += 1
+            
+        case .squid:
+            print("Squid")
+            
+        case .none:
+            print("none")
+    
+        }
+        
         self.removeFromParent()
     }
     
@@ -74,10 +95,12 @@ class PriceObject: SKSpriteNode {
         self.position.y += (speed * direction.y)
         
         if self.contains(targetNode.position) {
-            onDestroy()
+            //onDestroy()
+            if GameManager.instance.slimeMaterials <= 0{
+                GameScene.instance?.showNewMaterialMessage = true
+            }
         }
     }
-    
     
     
 }

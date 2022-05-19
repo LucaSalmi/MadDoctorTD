@@ -56,6 +56,7 @@ class GameScene: SKScene {
     var clickableTileGridsNode = SKNode()
     
     var isMovingCamera = false
+    var showNewMaterialMessage = false
     
     var doorOne: SKSpriteNode = SKSpriteNode()
     var doorTwo: SKSpriteNode = SKSpriteNode()
@@ -624,7 +625,6 @@ class GameScene: SKScene {
         
         if rangeIndicator != nil{
             rangeIndicator!.removeFromParent()
-            
         }
         
         rangeIndicator = SKShapeNode(circleOfRadius: attackRange)
@@ -667,6 +667,10 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         
         //Runs every frame
+        
+        if showNewMaterialMessage{
+            GameManager.instance.isPaused = true
+        }
         
         if GameManager.instance.isPaused || GameManager.instance.isGameOver{
             return
@@ -717,7 +721,6 @@ class GameScene: SKScene {
                 if node.alpha != 0.5{
                     node.alpha = 0.5
                 }
-                
             }
         }
 
@@ -730,12 +733,20 @@ class GameScene: SKScene {
                 let aoeProjectile = node as! AoeProjectile
                 aoeProjectile.update()
             }
-            
         }
         
         for node in moneyNode.children {
-            let moneyObject = node as! MoneyObject
-            moneyObject.update()
+            
+            if node is MoneyObject{
+                
+                let moneyObject = node as! MoneyObject
+                moneyObject.update()
+                
+            }else if node is DropObject{
+                
+                let drop = node as! DropObject
+                drop.update()
+            }
         }
         
         if !GameSceneCommunicator.instance.isBuildPhase {
@@ -802,6 +813,14 @@ class GameScene: SKScene {
         GameManager.instance.currentWave = 0
         GameManager.instance.nextWaveCounter = 0
         
+        //Boss
+        for child in self.children{
+            
+            if child.name == "BossTexture"{
+                child.removeFromParent()
+            }
+        }
+        
         //UI
         self.camera!.removeAllChildren()
         self.uiNode.removeFromParent()
@@ -853,6 +872,9 @@ class GameScene: SKScene {
         camera.setScale(newCameraScale)
         
     }
+    
+    
+    
     
 }
 

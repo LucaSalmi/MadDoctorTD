@@ -19,6 +19,7 @@ class Enemy: SKSpriteNode{
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
     var enemyType: EnemyTypes = .standard
+    var enemyRace: EnemyRaces? = nil
     var armorValue: Int = 0
     
     var isAttacker = false
@@ -256,6 +257,11 @@ class Enemy: SKSpriteNode{
         if self.enemyType == .boss{
             
             let boss = self as! Boss
+            var materialTarget = GameScene.instance!.camera!.position
+            materialTarget.x -= 300
+            materialTarget.y += 600
+            let bossDrop = DropObject(startPoint: self.position, targetPoint: materialTarget, bossTexture: (boss.bossTexture?.texture)!, materialType: .slime)
+            GameScene.instance!.moneyNode.addChild(bossDrop)
             boss.bossTexture?.removeFromParent()
             
         }
