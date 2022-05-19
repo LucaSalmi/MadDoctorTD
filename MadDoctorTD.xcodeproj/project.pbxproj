@@ -91,6 +91,8 @@
 		C8A23076282D4FFD00A4B8DA /* PhysicsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A23075282D4FFD00A4B8DA /* PhysicsUtils.swift */; };
 		C8A2F62A28351B6000D94CEE /* BossEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A2F62928351B6000D94CEE /* BossEnemy.swift */; };
 		C8E0591828365CED00BB2F9F /* DropObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E0591728365CED00BB2F9F /* DropObject.swift */; };
+		C8E0591C2836869F00BB2F9F /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E0591B2836869F00BB2F9F /* Dialogue.swift */; };
+		C8E0591E2836874B00BB2F9F /* SlimeMaterialObtainedDialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E0591D2836874B00BB2F9F /* SlimeMaterialObtainedDialogue.swift */; };
 		C8E693452823C38F00D0A661 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E693442823C38F00D0A661 /* Edge.swift */; };
 		E5268CCC28226EF000F134A5 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCB28226EF000F134A5 /* Tower.swift */; };
 		E5268CD02822708600F134A5 /* GunTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CCF2822708600F134A5 /* GunTower.swift */; };
@@ -194,6 +196,8 @@
 		C8A23075282D4FFD00A4B8DA /* PhysicsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsUtils.swift; sourceTree = "<group>"; };
 		C8A2F62928351B6000D94CEE /* BossEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossEnemy.swift; sourceTree = "<group>"; };
 		C8E0591728365CED00BB2F9F /* DropObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropObject.swift; sourceTree = "<group>"; };
+		C8E0591B2836869F00BB2F9F /* Dialogue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
+		C8E0591D2836874B00BB2F9F /* SlimeMaterialObtainedDialogue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlimeMaterialObtainedDialogue.swift; sourceTree = "<group>"; };
 		C8E693442823C38F00D0A661 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		E5268CCB28226EF000F134A5 /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
 		E5268CCF2822708600F134A5 /* GunTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunTower.swift; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 				C82C4D0C28240DBA00067858 /* Towers */,
 				C82C4D0D28240DD100067858 /* Projectiles */,
 				C82C4D0E28240DE100067858 /* Enemies */,
+				C8E0591F2836876E00BB2F9F /* OnScreenText */,
 			);
 			path = "Game Objects";
 			sourceTree = "<group>";
@@ -431,6 +436,15 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		C8E0591F2836876E00BB2F9F /* OnScreenText */ = {
+			isa = PBXGroup;
+			children = (
+				C8E0591B2836869F00BB2F9F /* Dialogue.swift */,
+				C8E0591D2836874B00BB2F9F /* SlimeMaterialObtainedDialogue.swift */,
+			);
+			path = OnScreenText;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -576,6 +590,7 @@
 				C844A731282A6D5800FC42C9 /* ClickableTilesFactory.swift in Sources */,
 				C839C6C62821619200F66043 /* LabMenuView.swift in Sources */,
 				E5836FF9282A652D00EAF6E9 /* AoeProjectile.swift in Sources */,
+				C8E0591E2836874B00BB2F9F /* SlimeMaterialObtainedDialogue.swift in Sources */,
 				C8E0591828365CED00BB2F9F /* DropObject.swift in Sources */,
 				E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */,
 				3398938A28363B3C006B0374 /* PriceObject.swift in Sources */,
@@ -590,6 +605,7 @@
 				C844A733282A7FE500FC42C9 /* FoundationPlatesFactory.swift in Sources */,
 				C897BC1D282510380085D093 /* WaveManager.swift in Sources */,
 				C839C6A82821352200F66043 /* ContentView.swift in Sources */,
+				C8E0591C2836869F00BB2F9F /* Dialogue.swift in Sources */,
 				3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */,
 				C844A72F282A582800FC42C9 /* ProjectileFactory.swift in Sources */,
 				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,

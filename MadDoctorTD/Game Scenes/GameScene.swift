@@ -56,7 +56,7 @@ class GameScene: SKScene {
     var clickableTileGridsNode = SKNode()
     
     var isMovingCamera = false
-    var showNewMaterialMessage = false
+    
     
     var doorOne: SKSpriteNode = SKSpriteNode()
     var doorTwo: SKSpriteNode = SKSpriteNode()
@@ -67,6 +67,9 @@ class GameScene: SKScene {
     var portalPosition: CGPoint = CGPoint(x: 0, y: 0)
     
     var moneyNode: SKNode = SKNode()
+    
+    var dialoguesNode: SKNode = SKNode()
+    var showNewMaterialMessage = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -175,6 +178,7 @@ class GameScene: SKScene {
         moveCameraToPortal = false
         
         addChild(moneyNode)
+        addChild(dialoguesNode)
     }
     
     private func setupCamera(){
@@ -669,7 +673,17 @@ class GameScene: SKScene {
         //Runs every frame
         
         if showNewMaterialMessage{
-            GameManager.instance.isPaused = true
+            
+            for node in dialoguesNode.children{
+                
+                let dialog = node as! Dialogue
+                dialog.update()
+                
+            }
+            
+            if dialoguesNode.children.count == 0{
+                showNewMaterialMessage = false
+            }
         }
         
         if GameManager.instance.isPaused || GameManager.instance.isGameOver{
