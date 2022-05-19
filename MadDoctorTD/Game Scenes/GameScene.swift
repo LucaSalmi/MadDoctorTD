@@ -55,6 +55,7 @@ class GameScene: SKScene {
     var clickableTileGridsNode = SKNode()
     
     var isMovingCamera = false
+    var showNewMaterialMessage = false
     
     var doorOne: SKSpriteNode = SKSpriteNode()
     var doorTwo: SKSpriteNode = SKSpriteNode()
@@ -638,6 +639,10 @@ class GameScene: SKScene {
         
         //Runs every frame
         
+        if showNewMaterialMessage{
+            GameManager.instance.isPaused = true
+        }
+        
         if GameManager.instance.isPaused || GameManager.instance.isGameOver{
             return
         }
@@ -682,7 +687,6 @@ class GameScene: SKScene {
                 if node.alpha != 0.5{
                     node.alpha = 0.5
                 }
-                
             }
         }
 
@@ -695,7 +699,6 @@ class GameScene: SKScene {
                 let aoeProjectile = node as! AoeProjectile
                 aoeProjectile.update()
             }
-            
         }
         
         for node in moneyNode.children {
@@ -710,7 +713,6 @@ class GameScene: SKScene {
                 let drop = node as! DropObject
                 drop.update()
             }
-            
         }
         
         if !GameSceneCommunicator.instance.isBuildPhase {
@@ -836,6 +838,9 @@ class GameScene: SKScene {
         camera.setScale(newCameraScale)
         
     }
+    
+    
+    
     
 }
 

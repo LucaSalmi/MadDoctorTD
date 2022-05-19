@@ -26,13 +26,17 @@ class SlimeFactory: EnemyFactoryProtocol{
     
     func createBoss() -> Enemy {
         
-        return Boss(texture: SKTexture(imageNamed: "slime_boss_animation_1"))
+        let boss = Boss(texture: SKTexture(imageNamed: "slime_boss_animation_1"))
+        boss.enemyRace = .slime
+        return boss
     }
     
     
     func createEnemy(enemyType: EnemyTypes) -> Enemy{
         
-        return SlimeEnemy(enemyType: enemyType)
+        let slime = SlimeEnemy(enemyType: enemyType)
+        slime.enemyRace = .slime
+        return slime
 
     }
 }

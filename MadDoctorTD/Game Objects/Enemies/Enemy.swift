@@ -19,6 +19,7 @@ class Enemy: SKSpriteNode{
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
     var enemyType: EnemyTypes = .standard
+    var enemyRace: EnemyRaces? = nil
     var armorValue: Int = 0
     
     var isAttacker = false

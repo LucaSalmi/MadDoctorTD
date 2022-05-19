@@ -95,7 +95,10 @@ class DropObject: SKSpriteNode{
         self.position.y += (speed * direction.y)
         
         if self.contains(targetNode.position) {
-            onDestroy()
+            //onDestroy()
+            if GameManager.instance.slimeMaterials <= 0{
+                GameScene.instance?.showNewMaterialMessage = true
+            }
         }
     }
     
