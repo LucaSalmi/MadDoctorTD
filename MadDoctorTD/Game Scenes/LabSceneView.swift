@@ -124,6 +124,7 @@ struct TopArea: View {
 struct MiddleArea: View {
     
     @ObservedObject var communicator = LabSceneCommunicator.instance
+    @ObservedObject var gameManager = GameManager.instance
     
     var body: some View {
         
@@ -135,10 +136,16 @@ struct MiddleArea: View {
                     communicator.selectedTreeButtonId = "1"
                 }, label: {
                     ZStack {
+                        
                         LabButtonImage("clickable_tile", "1")
                         Image(communicator.selectedTowerImage)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        Image("faded_button_layer")
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            .opacity(changeOpacity())
+                        
                     }
                 })
                 
@@ -229,6 +236,28 @@ struct MiddleArea: View {
             
         }
         
+    }
+    
+    func changeOpacity() -> Double{
+        
+        switch communicator.selectedTowerType{
+            
+        case .gunTower:
+            return 0.0
+        case .rapidFireTower:
+            if GameManager.instance.rapidFireTowerUnlocked{
+                return 0.0
+            }
+        case .sniperTower:
+            if GameManager.instance.sniperTowerUnlocked{
+                return 0.0
+            }
+        case .cannonTower:
+            if GameManager.instance.cannonTowerUnlocked{
+                return 0.0
+            }
+        }
+        return 1.3
     }
     
 }
