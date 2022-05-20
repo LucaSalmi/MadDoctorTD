@@ -278,7 +278,6 @@ struct MiddleArea: View {
     func buyUpgrade(){
         
         let answer = applyResearch()
-        print(answer)
         switch answer{
             
         case .researchPoints:
@@ -291,7 +290,6 @@ struct MiddleArea: View {
             error = ErrorInfo(title: "What?", description: "Somthing unexpected happened")
             
         }
-        print(error)
         
     }
     
