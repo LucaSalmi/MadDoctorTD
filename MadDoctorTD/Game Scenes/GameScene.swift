@@ -33,6 +33,8 @@ class GameScene: SKScene {
     var upgradeMenuToggle: SKSpriteNode?
     var foundationUI: SKSpriteNode? = nil
     var foundationMenuToggle: SKSpriteNode? = nil
+    var foundationRepairButton: SKSpriteNode?
+    var foundationUpgradeButton: SKSpriteNode?
     var sellFoundationButton: SKSpriteNode?
     var buildButtonsUI: SKSpriteNode? = nil
     var readyButton: SKSpriteNode?
@@ -141,6 +143,8 @@ class GameScene: SKScene {
         foundationMenuToggle = upgradeUI?.childNode(withName: "FoundationMenuToggle") as? SKSpriteNode
         upgradeMenuToggle = foundationUI?.childNode(withName: "UpgradeMenuToggle") as? SKSpriteNode
         sellFoundationButton = foundationUI?.childNode(withName: "SellFoundationButton") as? SKSpriteNode
+        foundationUpgradeButton = foundationUI?.childNode(withName: "UpgradeFoundation") as? SKSpriteNode
+        foundationRepairButton = foundationUI?.childNode(withName: "RepairFoundation") as? SKSpriteNode
         
         
         
@@ -453,10 +457,12 @@ class GameScene: SKScene {
                 switch node.name{
                     
                 case "UpgradeFoundation":
-                    print("upgraded foundation")
+                    communicator.upgradeFoundation()
                     
                 case "RepairFoundation":
-                    print("repaired foundation")
+                    
+                    communicator.repairFoundation()
+                    
                     
                 default: print("error")
                 }
@@ -569,6 +575,20 @@ class GameScene: SKScene {
         towerUI?.alpha = 0
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 1
+        let foundation = GameSceneCommunicator.instance.currentFoundation!
+        
+        if foundation.hp < foundation.maxHp{
+           
+            foundationRepairButton?.alpha = 1
+            
+            foundationUpgradeButton?.alpha = 0.7
+        }
+        else{
+            
+            foundationRepairButton?.alpha = 0.7
+            
+            foundationUpgradeButton?.alpha = 1
+        }
     }
     func hideAllMenus(){
         towerUI?.alpha = 0
@@ -596,8 +616,7 @@ class GameScene: SKScene {
             
             if communicator.foundationEditMode {
                 communicator.confirmFoundationEdit()
-                showTowerUI()
-                readyButton?.alpha = 1
+                
             }else{
                 communicator.foundationEditMode = true
                 communicator.toggleFoundationGrid()

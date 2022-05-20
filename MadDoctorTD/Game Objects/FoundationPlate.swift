@@ -185,6 +185,8 @@ class FoundationPlate: SKSpriteNode{
     
     func onClick(){
         
+        
+        
         if hasTower || !GameSceneCommunicator.instance.isBuildPhase{
             return
             
