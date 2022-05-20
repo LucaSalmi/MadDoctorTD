@@ -79,6 +79,8 @@ class GameSceneCommunicator: ObservableObject {
         
         foundationEditMode = false
         toggleFoundationGrid()
+        GameScene.instance!.showTowerUI()
+        GameScene.instance!.readyButton?.alpha = 1
     }
     
     private func isPathBlocked() -> Bool {
@@ -144,6 +146,8 @@ class GameSceneCommunicator: ObservableObject {
         
         currentFoundation!.warningTexture!.alpha = 0
         currentFoundation!.crackTexture!.alpha = 0
+        GameScene.instance!.foundationUpgradeButton?.alpha = 1
+        GameScene.instance!.foundationRepairButton?.alpha = 0.7
     }
     
     func upgradeFoundation() {
@@ -276,8 +280,27 @@ class GameSceneCommunicator: ObservableObject {
             
         }
         
+        
+        GameScene.instance?.showTowerUI()
         cancelAllMenus()
     }
+    func startWavePhase() {
+        
+        let gameScene = GameScene.instance!
+        
+        gameScene.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
+        GameSceneCommunicator.instance.isBuildPhase = false
+        gameScene.waveManager!.shouldCreateWave = true
+        GameSceneCommunicator.instance.cancelAllMenus()
+        SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
+        
+        //Door animations
+        gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
+        GameSceneCommunicator.instance.closeDoors = true
+        
+        gameScene.moveCameraToPortal = true
+    }
+    
     
     func updateFoundationPower() {
         

@@ -30,9 +30,15 @@ class GameScene: SKScene {
     
     var towerUI: SKSpriteNode? = nil
     var upgradeUI: SKSpriteNode? = nil
+    var upgradeMenuToggle: SKSpriteNode?
     var foundationUI: SKSpriteNode? = nil
     var foundationMenuToggle: SKSpriteNode? = nil
+    var foundationRepairButton: SKSpriteNode?
+    var foundationUpgradeButton: SKSpriteNode?
+    var sellFoundationButton: SKSpriteNode?
     var buildButtonsUI: SKSpriteNode? = nil
+    var readyButton: SKSpriteNode?
+    var buildFoundationButton: SKSpriteNode?
     var towerImage: SKSpriteNode?
     var towerNameText: SKLabelNode?
     
@@ -129,11 +135,19 @@ class GameScene: SKScene {
         self.camera!.addChild(towerUI!)
         self.addChild(uiNode)
         
+        
+        
         upgradeUI = uiScene!.childNode(withName: "UpgradeMenu") as? SKSpriteNode
         upgradeUI?.removeFromParent()
         towerImage = upgradeUI?.childNode(withName: "TowerLogo") as? SKSpriteNode
         towerNameText = upgradeUI?.childNode(withName: "TowerText") as? SKLabelNode
         foundationMenuToggle = upgradeUI?.childNode(withName: "FoundationMenuToggle") as? SKSpriteNode
+        upgradeMenuToggle = foundationUI?.childNode(withName: "UpgradeMenuToggle") as? SKSpriteNode
+        sellFoundationButton = foundationUI?.childNode(withName: "SellFoundationButton") as? SKSpriteNode
+        foundationUpgradeButton = foundationUI?.childNode(withName: "UpgradeFoundation") as? SKSpriteNode
+        foundationRepairButton = foundationUI?.childNode(withName: "RepairFoundation") as? SKSpriteNode
+        
+        
         
         damageImage = upgradeUI?.childNode(withName: "AttackButton") as? SKSpriteNode
         rateOfFireImage = upgradeUI?.childNode(withName: "RateOfFireButton") as? SKSpriteNode
@@ -143,6 +157,12 @@ class GameScene: SKScene {
         buildButtonsUI?.removeFromParent()
         self.camera!.addChild(buildButtonsUI!)
         
+        readyButton = buildButtonsUI?.childNode(withName: "ReadyButton") as? SKSpriteNode
+        readyButton?.removeFromParent()
+        buildButtonsUI?.addChild(readyButton!)
+        buildFoundationButton = buildButtonsUI?.childNode(withName: "BuildFoundationButton") as? SKSpriteNode
+        buildFoundationButton?.removeFromParent()
+        buildButtonsUI?.addChild(buildFoundationButton!)
         self.camera!.addChild(upgradeUI!)
         
         sniperTowerPrice = towerUI?.childNode(withName: "SniperTowerPrice") as? SKLabelNode
@@ -398,11 +418,12 @@ class GameScene: SKScene {
             print("Error")
         }
         
-        touchingTower?.size = CGSize(width: 150, height: 150)
+        touchingTower?.size = CGSize(width: 100, height: 100)
         
         touchingTower = nil
         
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -425,8 +446,8 @@ class GameScene: SKScene {
         
         for node in touchedNodes {
             
-            if node.name == "SellButton" || node.name == "BuildFoundationButton"
-                || node.name == "BuildTowerButton"{
+            if node.name == "SellTowerButton" || node.name == "SellFoundationButton" || node.name == "BuildFoundationButton"
+                || node.name == "BuildTowerButton" || node.name == "ReadyButton"{
                 
                 extraButtons(nodeName: node.name!)
                 return
@@ -436,6 +457,28 @@ class GameScene: SKScene {
         if GameSceneCommunicator.instance.foundationEditMode {
             communicator.editFoundationTouchStart(touchedNodes: touchedNodes)
             return
+        }
+        
+        for node in touchedNodes{
+            if node.name == "UpgradeFoundation" || node.name == "RepairFoundation"{
+                switch node.name{
+                    
+                case "UpgradeFoundation":
+                    communicator.upgradeFoundation()
+                    
+                case "RepairFoundation":
+                    
+                    communicator.repairFoundation()
+                    
+                    
+                default: print("error")
+                }
+                
+                return
+            }
+            
+            
+            
         }
         
         for node in touchedNodes {
@@ -485,30 +528,27 @@ class GameScene: SKScene {
             if node is Tower{
                 
                 let tower = node as! Tower
-                
-                towerImage?.texture = tower.onClick()
-                damageImage?.texture = SKTexture(imageNamed: "damage_upgrade_\(tower.damageUpgradeCount)")
-                rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(tower.rangeUpgradeCount)")
-                rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(tower.rateOfFireUpgradeCount)")
-                
-                towerNameText?.text = tower.getName()
-                
-                showUpgradeUI()
-                
+                tower.onClick()
+             
                 return
                 
             }
         }
         
-        for node in touchedNodes {
-            
-            if node is FoundationPlate {
+        if communicator.isBuildPhase{
+            for node in touchedNodes {
                 
-                let foundationPlate = node as! FoundationPlate
-                foundationPlate.onClick()
-                return
+                if node is FoundationPlate {
+                    
+                    
+                    let foundationPlate = node as! FoundationPlate
+                    foundationPlate.onClick()
+                    
+                    return
+                }
             }
         }
+        
         
         if upgradeUI?.alpha == 1{
             
@@ -516,26 +556,52 @@ class GameScene: SKScene {
         showTowerUI()
         
     }
+    
     func showTowerUI(){
         towerUI?.alpha = 1
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 0
+        
+        if GameSceneCommunicator.instance.isBuildPhase{
+            foundationMenuToggle?.alpha = 1
+        }
+        else{foundationMenuToggle?.alpha = 0}
     
     }
     func showUpgradeUI(){
         towerUI?.alpha = 0
         upgradeUI?.alpha = 1
         foundationUI?.alpha = 0
+        
+        
+        if GameSceneCommunicator.instance.isBuildPhase{
+            upgradeMenuToggle?.alpha = 1
+        }
     }
     func showFoundationUI(){
         towerUI?.alpha = 0
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 1
+        let foundation = GameSceneCommunicator.instance.currentFoundation!
+        
+        if foundation.hp < foundation.maxHp{
+           
+            foundationRepairButton?.alpha = 1
+            
+            foundationUpgradeButton?.alpha = 0.7
+        }
+        else{
+            
+            foundationRepairButton?.alpha = 0.7
+            
+            foundationUpgradeButton?.alpha = 1
+        }
     }
     func hideAllMenus(){
         towerUI?.alpha = 0
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 0
+        readyButton?.alpha = 0
     }
     
     
@@ -545,22 +611,35 @@ class GameScene: SKScene {
         
         switch nodeName{
             
-        case "SellButton":
+        case "SellTowerButton":
             GameSceneCommunicator.instance.sellTower()
+            
+        case "SellFoundationButton":
+            
+            GameSceneCommunicator.instance.sellFoundation()
             
         case "BuildFoundationButton":
             
+            
             if communicator.foundationEditMode {
                 communicator.confirmFoundationEdit()
-                showTowerUI()
+                
             }else{
                 communicator.foundationEditMode = true
                 communicator.toggleFoundationGrid()
                 hideAllMenus()
+                
             }
             
         case "BuildTowerButton":
             print("Put TowerMenu here")
+            
+        case "ReadyButton":
+            communicator.startWavePhase()
+            showTowerUI()
+            readyButton?.alpha = 0
+            buildFoundationButton?.alpha = 0
+            upgradeMenuToggle?.alpha = 0
             
         default:
             print("error with extra buttons")

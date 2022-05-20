@@ -30,8 +30,8 @@
             filePath = "MadDoctorTD/Game Objects/Towers/Tower.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "upgrade(upgradeType:)"
             landmarkType = "7">
          </BreakpointContent>
