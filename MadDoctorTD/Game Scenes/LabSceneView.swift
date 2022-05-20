@@ -271,7 +271,8 @@ struct MiddleArea: View {
             error = ErrorInfo(title: "Error", description: "Not enough Research point")
         }
         
-        confirmation = ErrorInfo(title: "buy this upgrade", description: "Do you really want to buy this upgrade?")
+        confirmation = ErrorInfo(title: "Do you really want to buy this upgrade?", description: "cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP")
+        
         
     }
     
