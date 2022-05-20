@@ -307,7 +307,7 @@ class GameSceneCommunicator: ObservableObject {
         GameSceneCommunicator.instance.isBuildPhase = false
         gameScene.waveManager!.shouldCreateWave = true
         GameSceneCommunicator.instance.cancelAllMenus()
-        SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
+        SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
         
         //Door animations
         gameScene.doorsAnimationCount = gameScene.doorsAnimationTime

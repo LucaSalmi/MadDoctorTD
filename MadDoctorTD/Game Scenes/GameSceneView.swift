@@ -169,6 +169,7 @@ struct GameSceneView: View {
 //                    }
 //                        .padding(.bottom, 130)
 //                }
+
             }
 
             
