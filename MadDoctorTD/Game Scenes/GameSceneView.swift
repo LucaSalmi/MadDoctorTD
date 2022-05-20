@@ -152,7 +152,7 @@ struct GameSceneView: View {
                             if !communicator.foundationEditMode {
                                 Button {
                                     AppManager.appManager.state = .labMenu
-                                    SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
+                                    SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere, bgmExtension: SoundManager.mp3Extension)
 
                                 } label: {
                                     Text("Research")
