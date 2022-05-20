@@ -665,7 +665,7 @@ class GameScene: SKScene {
         case "ResearchButton":
             if researchButton?.alpha == 1{
                 AppManager.appManager.state = .labMenu
-                SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
+                //SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
             }
             
             
