@@ -198,6 +198,12 @@ struct PlayerData{
 
 }
 
+
+struct UIData{
+    static let INACTIVE_BUTTON_ALPHA = 0.5
+}
+
+
 struct LabData{
     
     static let UPGRADE_COST_1 = 1
@@ -240,3 +246,4 @@ struct LabData{
     }
     
 }
+

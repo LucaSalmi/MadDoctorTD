@@ -80,6 +80,9 @@ class GameSceneCommunicator: ObservableObject {
         toggleFoundationGrid()
         GameScene.instance!.showTowerUI()
         GameScene.instance!.readyButton?.alpha = 1
+        GameScene.instance!.researchButton?.alpha = 1
+        GameScene.instance!.buildFoundationButton?.texture = SKTexture(imageNamed: "build_foundation_button_standard")
+        
     }
     
     private func isPathBlocked() -> Bool {
@@ -131,6 +134,7 @@ class GameSceneCommunicator: ObservableObject {
     }
     
     func repairFoundation() {
+        GameScene.instance!.displayFoundationIndicator(position: currentFoundation!.position)
         
         let missingHp: Int = currentFoundation!.maxHp - currentFoundation!.hp
         
@@ -147,13 +151,17 @@ class GameSceneCommunicator: ObservableObject {
         currentFoundation!.crackTexture!.alpha = 0
         GameScene.instance!.foundationUpgradeButton?.alpha = 1
         GameScene.instance!.foundationRepairButton?.alpha = 0.7
+        
     }
     
     func upgradeFoundation() {
         
+        
+        
         if currentFoundation!.isStartingFoundation {
             return
         }
+        GameScene.instance!.displayFoundationIndicator(position: currentFoundation!.position)
         
         if FoundationData.UPGRADE_PRICE > GameManager.instance.currentMoney {
             return
@@ -174,6 +182,7 @@ class GameSceneCommunicator: ObservableObject {
         
         currentFoundation!.hp = currentFoundation!.maxHp
         GameManager.instance.currentMoney -= FoundationData.UPGRADE_PRICE
+        
     }
     
     func cancelFoundationBuild() {
