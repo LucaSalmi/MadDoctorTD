@@ -11,7 +11,7 @@ import SwiftUI
 
 class ClickableTile: SKSpriteNode{
     
-    var containsFoundation: Bool = false
+    //var containsFoundation: Bool = false
     var containsBlueprint: FoundationPlate? = nil
     
     var gridTexture: SKSpriteNode!
@@ -40,11 +40,10 @@ class ClickableTile: SKSpriteNode{
             return
         }
         
+        //Delete blueprint
         if GameSceneCommunicator.instance.foundationDeleteMode {
             
             guard let blueprint = containsBlueprint else {return}
-            
-            print("deleting!")
             
             blueprint.warningTexture?.removeFromParent()
             blueprint.crackTexture?.removeFromParent()
@@ -60,8 +59,8 @@ class ClickableTile: SKSpriteNode{
             return
         }
         
-        if containsBlueprint == nil && !containsFoundation {
-            
+        //Create blueprint
+        if containsBlueprint == nil {
             
             FoundationPlateFactory().createFoundationPlate(position: self.position, tile: self, isStartingFoundation: false)
             let foundationBlueprint = FoundationPlateNodes.foundationPlatesNode.children[FoundationPlateNodes.foundationPlatesNode.children.count-1] as! FoundationPlate
