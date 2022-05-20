@@ -24,6 +24,8 @@ class FoundationPlate: SKSpriteNode{
     var crackTexture: SKSpriteNode?
     var warningTexture: SKSpriteNode?
     
+    var upgradeLevel: Int = 0
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -183,11 +185,17 @@ class FoundationPlate: SKSpriteNode{
         
     }
     
+    func updateUpgradeButtonTexture() {
+        
+        GameScene.instance!.foundationUpgradeButton?.texture = SKTexture(imageNamed: "foundation_hp_\(upgradeLevel)")
+        
+    }
+    
     func onClick(){
         
         
         
-        if hasTower || !GameSceneCommunicator.instance.isBuildPhase{
+        if hasTower || !GameSceneCommunicator.instance.isBuildPhase || isStartingFoundation {
             return
             
         }

@@ -582,6 +582,8 @@ class GameScene: SKScene {
         foundationUI?.alpha = 1
         let foundation = GameSceneCommunicator.instance.currentFoundation!
         
+        foundation.updateUpgradeButtonTexture()
+        
         if foundation.hp < foundation.maxHp{
            
             foundationRepairButton?.alpha = 1

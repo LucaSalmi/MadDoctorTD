@@ -81,7 +81,7 @@ class Tower: SKSpriteNode{
         communicator.showUpgradeMenuUI = true
         
         gameScene.towerImage?.texture = towerTexture.texture!
-        gameScene.damageImage?.texture = SKTexture(imageNamed: "damage_upgrade_\(self.damageUpgradeCount)")
+        gameScene.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(self.damageUpgradeCount)")
         gameScene.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(self.rangeUpgradeCount)")
         gameScene.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(self.rateOfFireUpgradeCount)")
         
@@ -89,6 +89,13 @@ class Tower: SKSpriteNode{
         
         gameScene.sellFoundationButton?.alpha = 0
         gameScene.showUpgradeUI()
+        
+        if builtUponFoundation!.isStartingFoundation {
+            gameScene.foundationMenuToggle?.alpha = 0
+        }
+        else {
+            gameScene.foundationMenuToggle?.alpha = 1
+        }
         
     }
     
@@ -152,7 +159,7 @@ class Tower: SKSpriteNode{
         case .damage:
             attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
             damageUpgradeCount += 1
-            GameScene.instance?.damageImage?.texture = SKTexture(imageNamed: "damage_upgrade_\(damageUpgradeCount)")
+            GameScene.instance?.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(damageUpgradeCount)")
         case .range:
             attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
             GameScene.instance!.displayRangeIndicator(attackRange: attackRange, position: self.position)
