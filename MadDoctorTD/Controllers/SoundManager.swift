@@ -61,6 +61,7 @@ class SoundManager {
     static let filteredMainThemeBackgroundMusic = "filtered_theme_song_no_fizz"
     static let airlockDoorsTheme = "mad_td_airlock_theme"
     static let DoorsTheme = "3_MAD_TD_Theme_Party_In_The_Basement_Deep"
+    static let simplifiedTheme = "mad_td_simplified"
     
     static var musicPlayer: AVAudioPlayer!
 
@@ -75,14 +76,6 @@ class SoundManager {
         scene.run(sfxAction)
         
     }
-
-//    static func playUpgradeSFX() {
-//
-//        let upgradeSound = "upgrade_\(Tower(coder: NSCoder)?.rangeUpgradeCount)"
-//
-//        playSFX(sfxName: upgradeSound, scene: GameScene.instance!)
-//
-//    }
 
     static func playSniperSFX() {
 
@@ -111,7 +104,7 @@ class SoundManager {
 
     }
     
-    static func playBGM(bgmString: String, bgmExtension: String = SoundManager.mp3Extension) {
+    static func playBGM(bgmString: String, bgmExtension: String) {
         
         musicPlayer?.stop()
         
