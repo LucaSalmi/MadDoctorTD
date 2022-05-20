@@ -160,17 +160,34 @@ struct GameSceneView: View {
                             }
 
                             
-//                            Spacer()
-//
-//                            if !communicator.foundationEditMode {
-//                                Button {
-//                                    startWavePhase()
-//                                } label: {
-//                                    Text("READY!")
+
+                            Button {
+                                
+//                                if communicator.foundationEditMode {
+//                                    communicator.confirmFoundationEdit()
 //                                }
-//                            }
-//
-//                            Spacer()
+//                                else {
+//                                    communicator.foundationEditMode = true
+//                                    communicator.toggleFoundationGrid()
+//                                }
+                                
+                            } label: {
+                                Text(communicator.foundationEditMode ? "Done" : "Edit")
+                            }
+                            
+                            Spacer()
+                            
+                            if !communicator.foundationEditMode {
+                                Button {
+                                    //startWavePhase()
+                                    //GameScene.instance!.showTowerUI()
+                                    
+                                } label: {
+                                    Text("READY!")
+                                }
+                            }
+                            
+                            Spacer()
 
                     }
                         .padding(.bottom, 130)
@@ -262,21 +279,5 @@ struct GameSceneView: View {
         
     }
 
-    private func startWavePhase() {
-        
-        let gameScene = GameScene.instance!
-        
-        gameScene.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
-        communicator.isBuildPhase = false
-        gameScene.waveManager!.shouldCreateWave = true
-        GameSceneCommunicator.instance.cancelAllMenus()
-        SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
-        
-        //Door animations
-        gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
-        communicator.closeDoors = true
-        
-        gameScene.moveCameraToPortal = true
-    }
-    
+
 }

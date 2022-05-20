@@ -66,20 +66,29 @@ class Tower: SKSpriteNode{
         return self.towerName
     }
     
-    func onClick() -> SKTexture{
+    func onClick() {
         
+        guard let gameScene = GameScene.instance else { return }
         
-        GameScene.instance!.displayRangeIndicator(attackRange: attackRange, position: self.position)
+        gameScene.displayRangeIndicator(attackRange: attackRange, position: self.position)
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
-        
+
         communicator.currentTower = self
-        
+        communicator.currentFoundation = self.builtUponFoundation
+
         communicator.showUpgradeMenu = true
         communicator.showUpgradeMenuUI = true
         
-        return towerTexture.texture!
+        gameScene.towerImage?.texture = towerTexture.texture!
+        gameScene.damageImage?.texture = SKTexture(imageNamed: "damage_upgrade_\(self.damageUpgradeCount)")
+        gameScene.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(self.rangeUpgradeCount)")
+        gameScene.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(self.rateOfFireUpgradeCount)")
         
+        gameScene.towerNameText?.text = self.getName()
+        
+        gameScene.sellFoundationButton?.alpha = 0
+        gameScene.showUpgradeUI()
         
     }
     
