@@ -159,35 +159,12 @@ struct GameSceneView: View {
                                 }
                             }
 
-                            
 
-                            Button {
-                                
-//                                if communicator.foundationEditMode {
-//                                    communicator.confirmFoundationEdit()
-//                                }
-//                                else {
-//                                    communicator.foundationEditMode = true
-//                                    communicator.toggleFoundationGrid()
-//                                }
-                                
-                            } label: {
-                                Text(communicator.foundationEditMode ? "Done" : "Edit")
-                            }
                             
                             Spacer()
                             
-                            if !communicator.foundationEditMode {
-                                Button {
-                                    //startWavePhase()
-                                    //GameScene.instance!.showTowerUI()
-                                    
-                                } label: {
-                                    Text("READY!")
-                                }
-                            }
                             
-                            Spacer()
+                            
 
                     }
                         .padding(.bottom, 130)
