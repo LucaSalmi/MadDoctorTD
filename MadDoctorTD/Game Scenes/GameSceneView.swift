@@ -121,13 +121,13 @@ struct GameSceneView: View {
                             
                             Button {
                                 
-                                if communicator.foundationEditMode {
-                                    communicator.confirmFoundationEdit()
-                                }
-                                else {
-                                    communicator.foundationEditMode = true
-                                    communicator.toggleFoundationGrid()
-                                }
+//                                if communicator.foundationEditMode {
+//                                    communicator.confirmFoundationEdit()
+//                                }
+//                                else {
+//                                    communicator.foundationEditMode = true
+//                                    communicator.toggleFoundationGrid()
+//                                }
                                 
                             } label: {
                                 Text(communicator.foundationEditMode ? "Done" : "Edit")

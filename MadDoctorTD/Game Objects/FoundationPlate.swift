@@ -185,16 +185,20 @@ class FoundationPlate: SKSpriteNode{
     
     func onClick(){
         
-        if hasTower {
+        if hasTower || !GameSceneCommunicator.instance.isBuildPhase{
             return
             
         }
+        
+        guard let gameScene = GameScene.instance else { return }
+        
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
-        
-        
         communicator.currentFoundation = self
-        communicator.showTowerMenu = true
+        
+        gameScene.showFoundationUI()
+        gameScene.upgradeMenuToggle?.alpha = 0
+        gameScene.sellFoundationButton?.alpha = 1
         
     }
     

@@ -321,6 +321,7 @@ class WaveManager{
             GameSceneCommunicator.instance.isBuildPhase = true
             GameScene.instance?.readyButton?.alpha = 1
             GameScene.instance?.buildFoundationButton?.alpha = 1
+            GameScene.instance?.upgradeMenuToggle?.alpha = 1
             SoundManager.stopMusic()
             
             //Door animation:

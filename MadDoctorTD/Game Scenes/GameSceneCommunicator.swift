@@ -276,6 +276,8 @@ class GameSceneCommunicator: ObservableObject {
             
         }
         
+        
+        GameScene.instance?.showTowerUI()
         cancelAllMenus()
     }
     func startWavePhase() {
