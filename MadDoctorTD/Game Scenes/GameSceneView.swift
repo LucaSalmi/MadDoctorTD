@@ -97,23 +97,23 @@ struct GameSceneView: View {
                                 .background(.black)
                                 .cornerRadius(10)
                         
-                        Button {
-                            communicator.cancelAllMenus()
-                            withAnimation{
-                                gameManager.isPaused = true
-                            }
+                            Button {
+                                communicator.cancelAllMenus()
+                                withAnimation{
+                                    gameManager.isPaused = true
+                                }
+                                
+                            } label: {
+                                Text("||")
+                                    .foregroundColor(.white)
+                                    .padding(10)
+                                    .background(.black)
+                                    .cornerRadius(10)
+                            }.disabled(communicator.foundationEditMode ? true : false)
+
                             
-                        } label: {
-                            Text("||")
-                        }.disabled(communicator.foundationEditMode ? true : false)
-                            .foregroundColor(.white)
-                            .padding(10)
-                            .background(.black)
-                            .cornerRadius(10)
-                            
-                            
-                            }
-                            .frame(minWidth: UIScreen.main.bounds.width * 0.25)
+                        }
+                        .frame(minWidth: UIScreen.main.bounds.width * 0.25)
                             
                     }
                     .padding(10)

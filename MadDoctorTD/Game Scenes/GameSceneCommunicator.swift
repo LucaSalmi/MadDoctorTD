@@ -107,7 +107,14 @@ class GameSceneCommunicator: ObservableObject {
     func editFoundationTouchMove(touchedNodes: [SKNode]) {
         
         for touchedNode in touchedNodes {
-            if touchedNode is ClickableTile {
+            
+            if touchedNode is FoundationPlate {
+                let foundation = touchedNode as! FoundationPlate
+                if foundation.alpha == 1 {
+                    break
+                }
+            }
+            else if touchedNode is ClickableTile {
                 let clickableTile = touchedNode as! ClickableTile
                 clickableTile.onClick()
                 break
@@ -347,7 +354,7 @@ class GameSceneCommunicator: ObservableObject {
             let gridTexture = node as! SKSpriteNode
             
             if foundationEditMode {
-                gridTexture.alpha = 1
+                gridTexture.alpha = 0.1
             }
             else {
                 gridTexture.alpha = 0
