@@ -30,6 +30,8 @@ class GameScene: SKScene {
     
     var towerUI: SKSpriteNode? = nil
     var upgradeUI: SKSpriteNode? = nil
+    var foundationUI: SKSpriteNode? = nil
+    var foundationMenuToggle: SKSpriteNode? = nil
     var buildButtonsUI: SKSpriteNode? = nil
     var towerImage: SKSpriteNode?
     var towerNameText: SKLabelNode?
@@ -121,6 +123,9 @@ class GameScene: SKScene {
         let uiScene = SKScene(fileNamed: "TowerMenuScene")
         towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
         towerUI!.removeFromParent()
+        foundationUI = uiScene?.childNode(withName: "FoundationMenu") as? SKSpriteNode
+        foundationUI?.removeFromParent()
+        self.camera!.addChild(foundationUI!)
         self.camera!.addChild(towerUI!)
         self.addChild(uiNode)
         
@@ -128,6 +133,7 @@ class GameScene: SKScene {
         upgradeUI?.removeFromParent()
         towerImage = upgradeUI?.childNode(withName: "TowerLogo") as? SKSpriteNode
         towerNameText = upgradeUI?.childNode(withName: "TowerText") as? SKLabelNode
+        foundationMenuToggle = upgradeUI?.childNode(withName: "FoundationMenuToggle") as? SKSpriteNode
         
         damageImage = upgradeUI?.childNode(withName: "AttackButton") as? SKSpriteNode
         rateOfFireImage = upgradeUI?.childNode(withName: "RateOfFireButton") as? SKSpriteNode
@@ -457,11 +463,20 @@ class GameScene: SKScene {
         for node in touchedNodes{
             
             if node.name == "RateOfFireButton" || node.name == "RangeButton" ||
-                node.name == "AttackButton"{
+                node.name == "AttackButton" || node.name == "FoundationMenuToggle"{
                 
                 upgradeTowerMenu(nodeName: node.name!)
                 return
                 
+            }
+        }
+        
+        for node in touchedNodes{
+            if node.name == "UpgradeMenuToggle"{
+                showUpgradeUI()
+                displayRangeIndicator(attackRange: communicator.currentTower!.attackRange, position: communicator.currentTower!.position)
+                
+                return
             }
         }
         
@@ -478,8 +493,7 @@ class GameScene: SKScene {
                 
                 towerNameText?.text = tower.getName()
                 
-                towerUI?.alpha = 0
-                upgradeUI?.alpha = 1
+                showUpgradeUI()
                 
                 return
                 
@@ -497,12 +511,33 @@ class GameScene: SKScene {
         }
         
         if upgradeUI?.alpha == 1{
-            towerUI?.alpha = 1
-            upgradeUI?.alpha = 0
+            
         }
-        
+        showTowerUI()
         
     }
+    func showTowerUI(){
+        towerUI?.alpha = 1
+        upgradeUI?.alpha = 0
+        foundationUI?.alpha = 0
+    
+    }
+    func showUpgradeUI(){
+        towerUI?.alpha = 0
+        upgradeUI?.alpha = 1
+        foundationUI?.alpha = 0
+    }
+    func showFoundationUI(){
+        towerUI?.alpha = 0
+        upgradeUI?.alpha = 0
+        foundationUI?.alpha = 1
+    }
+    func hideAllMenus(){
+        towerUI?.alpha = 0
+        upgradeUI?.alpha = 0
+        foundationUI?.alpha = 0
+    }
+    
     
     private func extraButtons(nodeName: String){
         
@@ -517,9 +552,11 @@ class GameScene: SKScene {
             
             if communicator.foundationEditMode {
                 communicator.confirmFoundationEdit()
+                showTowerUI()
             }else{
                 communicator.foundationEditMode = true
                 communicator.toggleFoundationGrid()
+                hideAllMenus()
             }
             
         case "BuildTowerButton":
@@ -548,6 +585,9 @@ class GameScene: SKScene {
             
         case "AttackButton":
             GameSceneCommunicator.instance.upgradeTower(upgradeType: .damage)
+        
+        case "FoundationMenuToggle":
+            showFoundationUI()
             
         default:
             print("error with upgrade menu")
