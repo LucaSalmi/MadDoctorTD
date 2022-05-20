@@ -857,9 +857,19 @@ class GameScene: SKScene {
             return
         }
         
+        if GameSceneCommunicator.instance.isBuildPhase {
+            showBuildButtonsUI()
+        }
+        else {
+            hideBuildButtonsUI()
+        }
+        
         if GameSceneCommunicator.instance.openDoors || GameSceneCommunicator.instance.closeDoors {
             animateDoors()
-            return
+            
+            if GameSceneCommunicator.instance.closeDoors {
+                return
+            }
         }
         
         if GameManager.instance.currentMoney < TowerData.BASE_COST{
@@ -1041,6 +1051,31 @@ class GameScene: SKScene {
         foundationIndicator!.removeFromParent()
     }
     
+    func showBuildButtonsUI() {
+        
+        guard let buildButtonsUI = buildButtonsUI else {
+            return
+        }
+
+        if buildButtonsUI.position.x <= UIData.BUILD_BUTTONS_UI_POS_X {
+            return
+        }
+        
+        buildButtonsUI.position.x -= UIData.BUILD_BUTTONS_UI_SPEED
+    }
+    
+    func hideBuildButtonsUI() {
+        
+        guard let buildButtonsUI = buildButtonsUI else {
+            return
+        }
+
+        if buildButtonsUI.position.x >= UIData.BUILD_BUTTONS_UI_POS_X*2 {
+            return
+        }
+        
+        buildButtonsUI.position.x += UIData.BUILD_BUTTONS_UI_SPEED
+    }
     
     func panForTranslation(touch: UITouch) {
         
