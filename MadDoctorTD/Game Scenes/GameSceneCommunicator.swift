@@ -29,7 +29,7 @@ class GameSceneCommunicator: ObservableObject {
     @Published var foundationEditMode: Bool = false
     var foundationDeleteMode = false
     var blueprints = [FoundationPlate]()
-    var secondIndexStart: Int = 8
+    var secondIndexStart: Int = 6
     
     @Published var newFoundationTotalCost: Int = 0
     

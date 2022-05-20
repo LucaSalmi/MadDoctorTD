@@ -55,9 +55,6 @@ class GameScene: SKScene {
     
     var clickableTileGridsNode = SKNode()
     
-    var isMovingCamera = false
-    
-    
     var doorOne: SKSpriteNode = SKSpriteNode()
     var doorTwo: SKSpriteNode = SKSpriteNode()
     let doorsAnimationTime: Int = 120
@@ -184,26 +181,30 @@ class GameScene: SKScene {
     private func setupCamera(){
         
         let myCamera = self.camera
-        let backgroundMap = (childNode(withName: "superBackground") as! SKTileMapNode)
+        let backgroundMap = (childNode(withName: "edge") as! SKTileMapNode)
+        let scaledSize = CGSize(width: size.width * myCamera!.xScale, height: size.height * myCamera!.yScale)
         
-        let xInset = min((view?.bounds.width)!/2, backgroundMap.frame.width/2)
-        let yInset = min((view?.bounds.height)!/2, backgroundMap.frame.height/2)
+        let xInset = min((scaledSize.width/2) - 100.0, backgroundMap.frame.width/2)
+        let yInset = min((scaledSize.height/2) - 100.0, backgroundMap.frame.height/2)
         
         let constrainRect = backgroundMap.frame.insetBy(dx: xInset, dy: yInset)
         
-        let yLowerLimit = constrainRect.minY/4
+        let yLowerLimit = constrainRect.minY
         
-        let xRange = SKRange(lowerLimit: constrainRect.minX/4, upperLimit: constrainRect.maxX/4)
-        let yRange = SKRange(lowerLimit: yLowerLimit, upperLimit: constrainRect.maxY/6)
+        let xRange = SKRange(lowerLimit: constrainRect.minX, upperLimit: constrainRect.maxX)
+        let yRange = SKRange(lowerLimit: yLowerLimit, upperLimit: constrainRect.maxY)
         
         let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
         edgeConstraint.referenceNode = backgroundMap
         
         myCamera!.constraints = [edgeConstraint]
         
-        let pinchGesture = UIPinchGestureRecognizer()
-        pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
-        view?.addGestureRecognizer(pinchGesture)
+        if view?.gestureRecognizers == nil{
+            
+            let pinchGesture = UIPinchGestureRecognizer()
+            pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
+            view?.addGestureRecognizer(pinchGesture)
+        }
         
         myCamera!.position = CGPoint(x: 0, y: yLowerLimit)
         
@@ -399,13 +400,14 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        if GameManager.instance.isPaused || isMovingCamera{
+        if GameManager.instance.isPaused{
             return
         }
         
         if rangeIndicator != nil{
             rangeIndicator!.removeFromParent()
         }
+        
         
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
@@ -718,8 +720,9 @@ class GameScene: SKScene {
             
             let portal = SKSpriteNode()
             portal.position = portalPosition
-            portal.size = CGSize(width: 86, height: 400)
-            if portal.contains(camera!.position) {
+            portal.size = CGSize(width: 86, height: 500)
+                        
+            if portal.contains(camera!.position) || !EnemyNodes.enemiesNode.children.isEmpty{
                 moveCameraToPortal = false
             }
         }
@@ -861,7 +864,6 @@ class GameScene: SKScene {
         let position = camera!.position
         let aNewPosition = CGPoint(x: position.x - translation.x, y: position.y - translation.y)
         camera!.position = aNewPosition
-        isMovingCamera = false
     }
     
     
@@ -877,13 +879,14 @@ class GameScene: SKScene {
         
         let newCameraScale = previousCameraScale * 1 / sender.scale
         
-        if newCameraScale < 0.5 || newCameraScale > 1.3{
+        if newCameraScale < 0.5 || newCameraScale > 2.3{
             
             return
             
         }
         
         camera.setScale(newCameraScale)
+        setupCamera()
         
     }
     
