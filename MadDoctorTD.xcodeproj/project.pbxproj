@@ -65,6 +65,7 @@
 		B35C2153282D44DC009A748E /* button_press_three.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C214F282D44DC009A748E /* button_press_three.mp3 */; };
 		B35C2155282D4546009A748E /* research_view_open.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C2154282D4545009A748E /* research_view_open.mp3 */; };
 		B35C2157282D454D009A748E /* research_interface_atmosphere.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C2156282D454D009A748E /* research_interface_atmosphere.mp3 */; };
+		C81DED212837AE8800D67B8F /* ErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81DED202837AE8800D67B8F /* ErrorInfo.swift */; };
 		C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A52821352200F66043 /* MadDoctorTDApp.swift */; };
 		C839C6A82821352200F66043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A72821352200F66043 /* ContentView.swift */; };
 		C839C6AA2821352400F66043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C839C6A92821352400F66043 /* Assets.xcassets */; };
@@ -175,6 +176,7 @@
 		B35C214F282D44DC009A748E /* button_press_three.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = button_press_three.mp3; sourceTree = "<group>"; };
 		B35C2154282D4545009A748E /* research_view_open.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = research_view_open.mp3; sourceTree = "<group>"; };
 		B35C2156282D454D009A748E /* research_interface_atmosphere.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = research_interface_atmosphere.mp3; sourceTree = "<group>"; };
+		C81DED202837AE8800D67B8F /* ErrorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInfo.swift; sourceTree = "<group>"; };
 		C839C6A22821352200F66043 /* MadDoctorTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadDoctorTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C839C6A52821352200F66043 /* MadDoctorTDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadDoctorTDApp.swift; sourceTree = "<group>"; };
 		C839C6A72821352200F66043 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -237,6 +239,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C81DED1F2837AE7800D67B8F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C81DED202837AE8800D67B8F /* ErrorInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C82C4D0B28240D8900067858 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +367,7 @@
 		C839C6A42821352200F66043 /* MadDoctorTD */ = {
 			isa = PBXGroup;
 			children = (
+				C81DED1F2837AE7800D67B8F /* Model */,
 				C82C4D1128240E6800067858 /* Controllers */,
 				C82C4D1028240E4300067858 /* Sound and Graphics */,
 				C82C4D0F28240E0600067858 /* Game Scenes */,
@@ -584,6 +595,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8A2F62A28351B6000D94CEE /* BossEnemy.swift in Sources */,
+				C81DED212837AE8800D67B8F /* ErrorInfo.swift in Sources */,
 				C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */,
 				E57BA9E9282B9885001BCD99 /* StartScene.swift in Sources */,
 				C844A739282A982800FC42C9 /* EnemiesFactory.swift in Sources */,
