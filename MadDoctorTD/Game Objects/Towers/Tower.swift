@@ -75,6 +75,7 @@ class Tower: SKSpriteNode{
         communicator.cancelAllMenus()
 
         communicator.currentTower = self
+        communicator.currentFoundation = self.builtUponFoundation
 
         communicator.showUpgradeMenu = true
         communicator.showUpgradeMenuUI = true
