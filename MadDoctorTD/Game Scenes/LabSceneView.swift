@@ -265,13 +265,40 @@ struct MiddleArea: View {
     }
     
     
+    func createTowerDescription() -> String{
+        
+        switch communicator.selectedTreeButtonId{
+            
+        case "1":
+            
+            switch communicator.selectedTowerType{
+                
+            case .gunTower:
+                return "The trusted AlienSmasher 3000, well balanced and reliable. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+            case .cannonTower:
+                return "I found this in a museum, what a shame! Powerful but very slow. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+            case .rapidFireTower:
+                return "Is there somthing better then a gatling gun? No! Very fast, but with a short range and low damage. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+            case .sniperTower:
+                return "Better then a Finnish sniper. long range, high damage shots with a long cooldown. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+            }
+            
+        default:
+            return "ERROR"
+        }
+        
+    }
+    
+    
     func checkIfBuyable(){
         
         if GameManager.instance.researchPoints <= 0 {
             error = ErrorInfo(title: "Error", description: "Not enough Research point")
+            return
         }
         
-        confirmation = ErrorInfo(title: "Do you really want to buy this upgrade?", description: "cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP")
+        let description = createTowerDescription()
+        confirmation = ErrorInfo(title: "Do you really want to buy this upgrade?", description: description)
         
         
     }
