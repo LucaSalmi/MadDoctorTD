@@ -24,6 +24,8 @@ class FoundationPlate: SKSpriteNode{
     var crackTexture: SKSpriteNode?
     var warningTexture: SKSpriteNode?
     
+    var upgradeLevel: Int = 0
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -65,6 +67,7 @@ class FoundationPlate: SKSpriteNode{
         crackTexture?.zPosition = 2
         GameScene.instance?.foundationIndicatorsNode.addChild(warningTexture!)
         GameScene.instance?.foundationIndicatorsNode.addChild(crackTexture!)
+        
         
     }
     
@@ -183,11 +186,17 @@ class FoundationPlate: SKSpriteNode{
         
     }
     
+    func updateUpgradeButtonTexture() {
+        
+        GameScene.instance!.foundationUpgradeButton?.texture = SKTexture(imageNamed: "foundation_hp_\(upgradeLevel)")
+        
+    }
+    
     func onClick(){
         
         
         
-        if hasTower || !GameSceneCommunicator.instance.isBuildPhase{
+        if hasTower || !GameSceneCommunicator.instance.isBuildPhase || isStartingFoundation {
             return
             
         }
@@ -201,6 +210,8 @@ class FoundationPlate: SKSpriteNode{
         gameScene.showFoundationUI()
         gameScene.upgradeMenuToggle?.alpha = 0
         gameScene.sellFoundationButton?.alpha = 1
+        
+        gameScene.displayFoundationIndicator(position: self.position)
         
     }
     

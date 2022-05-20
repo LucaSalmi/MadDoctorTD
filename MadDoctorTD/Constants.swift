@@ -56,6 +56,8 @@ struct FoundationData{
     static let UPGRADE_PRICE: Int = 100
     static let REPAIR_PRICE_PER_HP: Double = 0.5
     
+    static let MAX_UPGRADE: Int = 5
+    
 }
 enum UpgradeTypes: Int{
     case damage = 0, range, firerate

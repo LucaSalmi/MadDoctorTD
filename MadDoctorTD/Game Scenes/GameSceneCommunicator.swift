@@ -163,6 +163,13 @@ class GameSceneCommunicator: ObservableObject {
             return
         }
         
+        if currentFoundation!.upgradeLevel >= FoundationData.MAX_UPGRADE {
+            return
+        }
+        
+        currentFoundation!.upgradeLevel += 1
+        currentFoundation!.updateUpgradeButtonTexture()
+        
         currentFoundation!.maxHp = Int( Double(currentFoundation!.maxHp) * FoundationData.UPGRADE_HP_FACTOR )
         
         currentFoundation!.hp = currentFoundation!.maxHp
