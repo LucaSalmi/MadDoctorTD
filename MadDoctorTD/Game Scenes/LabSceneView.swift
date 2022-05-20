@@ -292,13 +292,13 @@ struct MiddleArea: View {
     
     func checkIfBuyable(){
         
-        if GameManager.instance.researchPoints <= 0 {
-            error = ErrorInfo(title: "Error", description: "Not enough Research point")
+        if checkIfUpgraded() == .unlocked{
+            error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
             return
         }
         
-        if checkIfUpgraded() == .unlocked{
-            error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
+        if GameManager.instance.researchPoints <= 0 {
+            error = ErrorInfo(title: "Error", description: "Not enough Research point")
             return
         }
         
