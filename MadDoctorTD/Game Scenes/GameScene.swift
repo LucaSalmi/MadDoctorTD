@@ -199,9 +199,12 @@ class GameScene: SKScene {
         
         myCamera!.constraints = [edgeConstraint]
         
-        let pinchGesture = UIPinchGestureRecognizer()
-        pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
-        view?.addGestureRecognizer(pinchGesture)
+        if view?.gestureRecognizers == nil{
+            
+            let pinchGesture = UIPinchGestureRecognizer()
+            pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
+            view?.addGestureRecognizer(pinchGesture)
+        }
         
         myCamera!.position = CGPoint(x: 0, y: yLowerLimit)
         
