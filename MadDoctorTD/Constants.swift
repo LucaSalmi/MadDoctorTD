@@ -28,6 +28,12 @@ enum ActionState: Int{
     
 }
 
+enum ErrorType: Int{
+    
+    case researchPoints = 0, unlocked, success, error
+    
+}
+
 struct PhysicsCategory{
     
     static let None: UInt32 = 0
