@@ -297,10 +297,51 @@ struct MiddleArea: View {
             return
         }
         
+        if checkIfUpgraded() == .unlocked{
+            error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
+            return
+        }
+        
         let description = createTowerDescription()
         confirmation = ErrorInfo(title: "Do you really want to buy this upgrade?", description: description)
         
+    }
+    
+    func checkIfUpgraded() -> ErrorType{
         
+        switch communicator.selectedTowerType{
+            
+        case .gunTower:
+            for upgrade in communicator.gunTowerResearchLevel{
+                if communicator.selectedTreeButtonId == upgrade{
+                    return .unlocked
+                }
+                return .success
+            }
+        case .rapidFireTower:
+            for upgrade in communicator.rapidTowerResearchLevel{
+                if communicator.selectedTreeButtonId == upgrade{
+                    return .unlocked
+                }
+                return .success
+            }
+        case .sniperTower:
+            for upgrade in communicator.sniperTowerResearchLevel{
+                if communicator.selectedTreeButtonId == upgrade{
+                    return .unlocked
+                }
+                return .success
+            }
+        case .cannonTower:
+            for upgrade in communicator.cannonTowerResearchLevel{
+                if communicator.selectedTreeButtonId == upgrade{
+                    return .unlocked
+                }
+                return .success
+            }
+        }
+        
+        return .error
     }
     
     func buyUpgrade(){
@@ -366,6 +407,7 @@ struct MiddleArea: View {
                 GameScene.instance!.towerUI!.childNode(withName: "SpeedTower")!.alpha = 1
                 gameManager.rapidFireTowerUnlocked = true
                 gameManager.researchPoints -= 1
+                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
             default:
                 print("not implemented")
@@ -378,6 +420,7 @@ struct MiddleArea: View {
                 GameScene.instance!.towerUI!.childNode(withName: "SniperTower")!.alpha = 1
                 gameManager.sniperTowerUnlocked = true
                 gameManager.researchPoints -= 1
+                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
             default:
                 print("not implemented")
@@ -391,6 +434,7 @@ struct MiddleArea: View {
                 GameScene.instance!.towerUI!.childNode(withName: "CannonTower")!.alpha = 1
                 gameManager.cannonTowerUnlocked = true
                 gameManager.researchPoints -= 1
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
             default:
                 print("not implemented")
