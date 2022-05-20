@@ -347,7 +347,7 @@ class GameSceneCommunicator: ObservableObject {
             let gridTexture = node as! SKSpriteNode
             
             if foundationEditMode {
-                gridTexture.alpha = 1
+                gridTexture.alpha = 0.1
             }
             else {
                 gridTexture.alpha = 0
