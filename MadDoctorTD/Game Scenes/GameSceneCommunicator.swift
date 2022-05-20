@@ -278,6 +278,23 @@ class GameSceneCommunicator: ObservableObject {
         
         cancelAllMenus()
     }
+    func startWavePhase() {
+        
+        let gameScene = GameScene.instance!
+        
+        gameScene.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
+        GameSceneCommunicator.instance.isBuildPhase = false
+        gameScene.waveManager!.shouldCreateWave = true
+        GameSceneCommunicator.instance.cancelAllMenus()
+        SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
+        
+        //Door animations
+        gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
+        GameSceneCommunicator.instance.closeDoors = true
+        
+        gameScene.moveCameraToPortal = true
+    }
+    
     
     func updateFoundationPower() {
         
