@@ -144,31 +144,31 @@ struct GameSceneView: View {
                     //TODO: DISPLAY ALERT WHEN NEW WAVE IS INCOMMING!
                     
                     
-                    if communicator.isBuildPhase && !communicator.openDoors {
-                        HStack() {
-                            
-                            Spacer()
-                            
-                            if !communicator.foundationEditMode {
-                                Button {
-                                    AppManager.appManager.state = .labMenu
-                                    SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
-
-                                } label: {
-                                    Text("Research")
-                                }
-                            }
-
-
-                            
-                            Spacer()
-                            
-                            
-                            
-
-                    }
-                        .padding(.bottom, 130)
-                }
+//                    if communicator.isBuildPhase && !communicator.openDoors {
+//                        HStack() {
+//
+//                            Spacer()
+//
+//                            if !communicator.foundationEditMode {
+//                                Button {
+//                                    AppManager.appManager.state = .labMenu
+//                                    SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
+//
+//                                } label: {
+//                                    Text("Research")
+//                                }
+//                            }
+//
+//
+//
+//                            Spacer()
+//
+//
+//
+//
+//                    }
+//                        .padding(.bottom, 130)
+//                }
             }
 
             

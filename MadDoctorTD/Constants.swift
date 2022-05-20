@@ -192,3 +192,7 @@ struct PlayerData{
 
 }
 
+struct UIData{
+    static let INACTIVE_BUTTON_ALPHA = 0.5
+}
+

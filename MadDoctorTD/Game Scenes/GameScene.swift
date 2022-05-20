@@ -40,6 +40,7 @@ class GameScene: SKScene {
     var sellFoundationButton: SKSpriteNode?
     var buildButtonsUI: SKSpriteNode? = nil
     var readyButton: SKSpriteNode?
+    var researchButton: SKSpriteNode?
     var buildFoundationButton: SKSpriteNode?
     var towerImage: SKSpriteNode?
     var towerNameText: SKLabelNode?
@@ -133,6 +134,10 @@ class GameScene: SKScene {
         towerUI!.removeFromParent()
         foundationUI = uiScene?.childNode(withName: "FoundationMenu") as? SKSpriteNode
         foundationUI?.removeFromParent()
+        
+        let mainHubBackground = uiScene!.childNode(withName: "MainHubBackground")
+        mainHubBackground?.removeFromParent()
+        self.camera!.addChild(mainHubBackground!)
         self.camera!.addChild(foundationUI!)
         self.camera!.addChild(towerUI!)
         self.addChild(uiNode)
@@ -158,11 +163,11 @@ class GameScene: SKScene {
         self.camera!.addChild(buildButtonsUI!)
         
         readyButton = buildButtonsUI?.childNode(withName: "ReadyButton") as? SKSpriteNode
-        readyButton?.removeFromParent()
-        buildButtonsUI?.addChild(readyButton!)
+        
+        researchButton = buildButtonsUI?.childNode(withName: "ResearchButton") as? SKSpriteNode
+        
         buildFoundationButton = buildButtonsUI?.childNode(withName: "BuildFoundationButton") as? SKSpriteNode
-        buildFoundationButton?.removeFromParent()
-        buildButtonsUI?.addChild(buildFoundationButton!)
+        
         self.camera!.addChild(upgradeUI!)
         
         sniperTowerPrice = towerUI?.childNode(withName: "SniperTowerPrice") as? SKLabelNode
@@ -452,7 +457,7 @@ class GameScene: SKScene {
         for node in touchedNodes {
             
             if node.name == "SellTowerButton" || node.name == "SellFoundationButton" || node.name == "BuildFoundationButton"
-                || node.name == "BuildTowerButton" || node.name == "ReadyButton"{
+                || node.name == "BuildTowerButton" || node.name == "ReadyButton" || node.name == "ResearchButton"{
                 
                 extraButtons(nodeName: node.name!)
                 return
@@ -608,7 +613,8 @@ class GameScene: SKScene {
         towerUI?.alpha = 0
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 0
-        readyButton?.alpha = 0
+        researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+        readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
     }
     
     
@@ -631,10 +637,13 @@ class GameScene: SKScene {
             if communicator.foundationEditMode {
                 communicator.confirmFoundationEdit()
                 
+                
             }else{
                 communicator.foundationEditMode = true
                 communicator.toggleFoundationGrid()
                 hideAllMenus()
+                buildFoundationButton?.texture = SKTexture(imageNamed: "done_build_foundation_button_standard")
+                
                 
             }
             
@@ -642,11 +651,23 @@ class GameScene: SKScene {
             print("Put TowerMenu here")
             
         case "ReadyButton":
-            communicator.startWavePhase()
-            showTowerUI()
-            readyButton?.alpha = 0
-            buildFoundationButton?.alpha = 0
-            upgradeMenuToggle?.alpha = 0
+            if readyButton?.alpha == 1{
+                communicator.startWavePhase()
+                showTowerUI()
+                readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+                researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+                buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+                upgradeMenuToggle?.alpha = 0
+            }
+            
+            
+            
+        case "ResearchButton":
+            if researchButton?.alpha == 1{
+                AppManager.appManager.state = .labMenu
+                SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
+            }
+            
             
         default:
             print("error with extra buttons")
