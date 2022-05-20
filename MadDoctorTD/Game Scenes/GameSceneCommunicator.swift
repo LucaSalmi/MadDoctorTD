@@ -21,7 +21,6 @@ class GameSceneCommunicator: ObservableObject {
     var showUpgradeMenuUI: Bool = false
     var showTowerMenuUI: Bool = false
     
-    
     var currentTile: ClickableTile? = nil
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil

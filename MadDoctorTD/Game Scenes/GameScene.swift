@@ -134,9 +134,7 @@ class GameScene: SKScene {
         self.camera!.addChild(foundationUI!)
         self.camera!.addChild(towerUI!)
         self.addChild(uiNode)
-        
-        
-        
+                
         upgradeUI = uiScene!.childNode(withName: "UpgradeMenu") as? SKSpriteNode
         upgradeUI?.removeFromParent()
         towerImage = upgradeUI?.childNode(withName: "TowerLogo") as? SKSpriteNode
@@ -967,6 +965,9 @@ class GameScene: SKScene {
         //Money
         moneyNode.removeAllChildren()
         moneyNode.removeFromParent()
+        
+        dialoguesNode.removeAllChildren()
+        dialoguesNode.removeFromParent()
     }
     
     
