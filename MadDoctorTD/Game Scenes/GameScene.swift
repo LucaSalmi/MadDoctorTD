@@ -658,6 +658,7 @@ class GameScene: SKScene {
                 researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
                 buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
                 upgradeMenuToggle?.alpha = 0
+                SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             }
             
             
@@ -665,7 +666,8 @@ class GameScene: SKScene {
         case "ResearchButton":
             if researchButton?.alpha == 1{
                 AppManager.appManager.state = .labMenu
-                //SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
+                SoundManager.playSFX(sfxName: SoundManager.switchToResearchRoomSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere, bgmExtension: SoundManager.mp3Extension)
             }
             
             

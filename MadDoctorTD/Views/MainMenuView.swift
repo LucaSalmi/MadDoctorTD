@@ -32,7 +32,8 @@ struct MainMenuView: View {
                             
                         }
                         appManager.state = .gameScene
-                        SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
+                        //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
+                        SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
                     } label: {
                         Label("New Game", systemImage: "play.circle")
                         

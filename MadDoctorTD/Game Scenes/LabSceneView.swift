@@ -456,7 +456,8 @@ struct BotArea: View {
             
             Button {
                 AppManager.appManager.state = .gameScene
-                SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
+                SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
+                //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
             } label: {
                 Text("Return")
                     .foregroundColor(Color.white)

@@ -23,6 +23,10 @@ class SoundManager {
     static let cannonShotFiredSFX = "cannon_shot_fired."
     static let cannonTowerImpactSFX = "cannon_tower_impact."
 
+    //In game announcer
+
+    static let announcer = "portal_located."
+
     //Research Room button SFX
 
     static let buttonOneSFX = "button_press_one."
@@ -55,7 +59,6 @@ class SoundManager {
     static let desertAmbience = "desert_custom_atmosphere"
     
     //BGMusic
-
 
     static let MainThemeBackgroundMusic = "mad_td_theme"
     static let filteredMainThemeBackgroundMusic = "filtered_theme_song_no_fizz"
