@@ -26,8 +26,10 @@ class GameScene: SKScene {
     var nodeGraph: GKObstacleGraph? = nil
     var waveManager: WaveManager? = nil
     
+    //UI Stuff
+    var foundationIndicator: SKSpriteNode?
+    var foundationIndicatorIncrease: Bool = false
     var rangeIndicator: SKShapeNode?
-    
     var towerUI: SKSpriteNode? = nil
     var upgradeUI: SKSpriteNode? = nil
     var upgradeMenuToggle: SKSpriteNode?
@@ -200,6 +202,10 @@ class GameScene: SKScene {
         
         addChild(moneyNode)
         addChild(dialoguesNode)
+        
+        foundationIndicator = SKSpriteNode(texture: nil, color: .white, size: FoundationData.SIZE)
+        foundationIndicator!.alpha = 0
+        addChild(foundationIndicator!)
     }
     
     private func setupCamera(){
@@ -433,6 +439,7 @@ class GameScene: SKScene {
             rangeIndicator!.removeFromParent()
         }
         
+        foundationIndicator!.alpha = 0
         
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
@@ -581,8 +588,8 @@ class GameScene: SKScene {
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 1
         let foundation = GameSceneCommunicator.instance.currentFoundation!
-        
         foundation.updateUpgradeButtonTexture()
+        displayFoundationIndicator(position: foundation.position)
         
         if foundation.hp < foundation.maxHp{
            
@@ -789,6 +796,24 @@ class GameScene: SKScene {
         }
     }
     
+    func displayFoundationIndicator(position: CGPoint, display: Bool = true) {
+        
+        guard let foundationIndicator = foundationIndicator else {
+            return
+        }
+        
+        if display {
+            foundationIndicator.position = position
+            foundationIndicator.alpha = 0.005
+            foundationIndicator.zPosition = 6
+            foundationIndicatorIncrease = true
+        }
+        else {
+            foundationIndicator.alpha = 0
+        }
+        
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         
         //Runs every frame
@@ -885,6 +910,27 @@ class GameScene: SKScene {
             }
         }
         
+        if foundationIndicator!.alpha != 0 {
+            
+            let increaseAmount = 0.01
+            let maxAlpha = 0.35
+            
+            if foundationIndicatorIncrease {
+                foundationIndicator!.alpha += increaseAmount
+                if foundationIndicator!.alpha >= maxAlpha {
+                    foundationIndicator!.alpha = maxAlpha - increaseAmount
+                    foundationIndicatorIncrease = false
+                }
+            }
+            else {
+                foundationIndicator!.alpha -= increaseAmount
+                if foundationIndicator!.alpha <= increaseAmount {
+                    foundationIndicator!.alpha = increaseAmount*2
+                    foundationIndicatorIncrease = true
+                }
+            }
+        }
+        
         if !GameSceneCommunicator.instance.isBuildPhase {
             
             waveManager!.update()
@@ -970,6 +1016,8 @@ class GameScene: SKScene {
         
         dialoguesNode.removeAllChildren()
         dialoguesNode.removeFromParent()
+        
+        foundationIndicator!.removeFromParent()
     }
     
     

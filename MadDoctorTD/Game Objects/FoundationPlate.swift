@@ -68,6 +68,7 @@ class FoundationPlate: SKSpriteNode{
         GameScene.instance?.foundationIndicatorsNode.addChild(warningTexture!)
         GameScene.instance?.foundationIndicatorsNode.addChild(crackTexture!)
         
+        
     }
     
     func updateFoundationsTexture() {
@@ -209,6 +210,8 @@ class FoundationPlate: SKSpriteNode{
         gameScene.showFoundationUI()
         gameScene.upgradeMenuToggle?.alpha = 0
         gameScene.sellFoundationButton?.alpha = 1
+        
+        gameScene.displayFoundationIndicator(position: self.position)
         
     }
     

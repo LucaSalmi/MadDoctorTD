@@ -60,8 +60,8 @@ class Tower: SKSpriteNode{
         noPowerTexture.alpha = 0
         GameScene.instance!.towerIndicatorsNode.addChild(noPowerTexture)
         
-        
     }
+    
     func getName() -> String{
         return self.towerName
     }
