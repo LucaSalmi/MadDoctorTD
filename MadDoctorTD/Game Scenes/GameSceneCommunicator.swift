@@ -21,7 +21,6 @@ class GameSceneCommunicator: ObservableObject {
     var showUpgradeMenuUI: Bool = false
     var showTowerMenuUI: Bool = false
     
-    
     var currentTile: ClickableTile? = nil
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil
@@ -29,7 +28,7 @@ class GameSceneCommunicator: ObservableObject {
     @Published var foundationEditMode: Bool = false
     var foundationDeleteMode = false
     var blueprints = [FoundationPlate]()
-    var secondIndexStart: Int = 8
+    var secondIndexStart: Int = 6
     
     @Published var newFoundationTotalCost: Int = 0
     
@@ -79,6 +78,11 @@ class GameSceneCommunicator: ObservableObject {
         
         foundationEditMode = false
         toggleFoundationGrid()
+        GameScene.instance!.showTowerUI()
+        GameScene.instance!.readyButton?.alpha = 1
+        GameScene.instance!.researchButton?.alpha = 1
+        GameScene.instance!.buildFoundationButton?.texture = SKTexture(imageNamed: "build_foundation_button_standard")
+        
     }
     
     private func isPathBlocked() -> Bool {
@@ -103,7 +107,14 @@ class GameSceneCommunicator: ObservableObject {
     func editFoundationTouchMove(touchedNodes: [SKNode]) {
         
         for touchedNode in touchedNodes {
-            if touchedNode is ClickableTile {
+            
+            if touchedNode is FoundationPlate {
+                let foundation = touchedNode as! FoundationPlate
+                if foundation.alpha == 1 {
+                    break
+                }
+            }
+            else if touchedNode is ClickableTile {
                 let clickableTile = touchedNode as! ClickableTile
                 clickableTile.onClick()
                 break
@@ -130,6 +141,7 @@ class GameSceneCommunicator: ObservableObject {
     }
     
     func repairFoundation() {
+        GameScene.instance!.displayFoundationIndicator(position: currentFoundation!.position)
         
         let missingHp: Int = currentFoundation!.maxHp - currentFoundation!.hp
         
@@ -144,13 +156,19 @@ class GameSceneCommunicator: ObservableObject {
         
         currentFoundation!.warningTexture!.alpha = 0
         currentFoundation!.crackTexture!.alpha = 0
+        GameScene.instance!.foundationUpgradeButton?.alpha = 1
+        GameScene.instance!.foundationRepairButton?.alpha = 0.7
+        
     }
     
     func upgradeFoundation() {
         
+        
+        
         if currentFoundation!.isStartingFoundation {
             return
         }
+        GameScene.instance!.displayFoundationIndicator(position: currentFoundation!.position)
         
         if FoundationData.UPGRADE_PRICE > GameManager.instance.currentMoney {
             return
@@ -160,10 +178,18 @@ class GameSceneCommunicator: ObservableObject {
             return
         }
         
+        if currentFoundation!.upgradeLevel >= FoundationData.MAX_UPGRADE {
+            return
+        }
+        
+        currentFoundation!.upgradeLevel += 1
+        currentFoundation!.updateUpgradeButtonTexture()
+        
         currentFoundation!.maxHp = Int( Double(currentFoundation!.maxHp) * FoundationData.UPGRADE_HP_FACTOR )
         
         currentFoundation!.hp = currentFoundation!.maxHp
         GameManager.instance.currentMoney -= FoundationData.UPGRADE_PRICE
+        
     }
     
     func cancelFoundationBuild() {
@@ -276,8 +302,27 @@ class GameSceneCommunicator: ObservableObject {
             
         }
         
+        
+        GameScene.instance?.showTowerUI()
         cancelAllMenus()
     }
+    func startWavePhase() {
+        
+        let gameScene = GameScene.instance!
+        
+        gameScene.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
+        GameSceneCommunicator.instance.isBuildPhase = false
+        gameScene.waveManager!.shouldCreateWave = true
+        GameSceneCommunicator.instance.cancelAllMenus()
+        SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
+        
+        //Door animations
+        gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
+        GameSceneCommunicator.instance.closeDoors = true
+        
+        gameScene.moveCameraToPortal = true
+    }
+    
     
     func updateFoundationPower() {
         
@@ -309,7 +354,7 @@ class GameSceneCommunicator: ObservableObject {
             let gridTexture = node as! SKSpriteNode
             
             if foundationEditMode {
-                gridTexture.alpha = 1
+                gridTexture.alpha = 0.1
             }
             else {
                 gridTexture.alpha = 0

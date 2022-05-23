@@ -11,7 +11,7 @@ import SwiftUI
 
 class ClickableTile: SKSpriteNode{
     
-    var containsFoundation: Bool = false
+    //var containsFoundation: Bool = false
     var containsBlueprint: FoundationPlate? = nil
     
     var gridTexture: SKSpriteNode!
@@ -40,11 +40,10 @@ class ClickableTile: SKSpriteNode{
             return
         }
         
+        //Delete blueprint
         if GameSceneCommunicator.instance.foundationDeleteMode {
             
             guard let blueprint = containsBlueprint else {return}
-            
-            print("deleting!")
             
             blueprint.warningTexture?.removeFromParent()
             blueprint.crackTexture?.removeFromParent()
@@ -60,8 +59,8 @@ class ClickableTile: SKSpriteNode{
             return
         }
         
-        if containsBlueprint == nil && !containsFoundation {
-            
+        //Create blueprint
+        if containsBlueprint == nil {
             
             FoundationPlateFactory().createFoundationPlate(position: self.position, tile: self, isStartingFoundation: false)
             let foundationBlueprint = FoundationPlateNodes.foundationPlatesNode.children[FoundationPlateNodes.foundationPlatesNode.children.count-1] as! FoundationPlate
@@ -72,76 +71,6 @@ class ClickableTile: SKSpriteNode{
             
             GameSceneCommunicator.instance.newFoundationTotalCost += FoundationData.BASE_COST
         }
-        
-        /*
-        
-        if FoundationData.BASE_COST > GameManager.instance.currentMoney {
-            print("Can not afford")
-            return
-        }
-        
-        if isPathBlocked() {
-            print("Cannot build at this location. Path will be blocked!")
-            return
-        }
-        
-        var adjecentFound = false
-        
-        var leftPosition = position
-        leftPosition.x -= DefaultTileData.SIZE.width
-        var rightPosition = position
-        rightPosition.x += DefaultTileData.SIZE.width
-        var topPosition = position
-        topPosition.y += DefaultTileData.SIZE.height
-        var bottomPosition = position
-        bottomPosition.y -= DefaultTileData.SIZE.height
-        
-        for node in FoundationPlateNodes.foundationPlatesNode.children {
-            let currentFoundationPlate = node as! FoundationPlate
-            
-            if !currentFoundationPlate.isPowered {
-                continue
-            }
-            
-            if currentFoundationPlate.contains(leftPosition) || currentFoundationPlate.contains(rightPosition) ||
-                currentFoundationPlate.contains(topPosition) || currentFoundationPlate.contains(bottomPosition) {
-                adjecentFound = true
-                break
-            }
-        }
-        
-        if !adjecentFound {
-            return
-        }
-        
-        //Old code:
-        /*
-        for i in 0..<ClickableTilesNodes.clickableTilesNode.children.count {
-            
-            let currentTile = ClickableTilesNodes.clickableTilesNode.children[i] as! ClickableTile
-            
-            if !currentTile.containsFoundation {
-                currentTile.color = .clear
-            }
-        }
-        
-        color = .white
-         
-        
-        let communicator = GameSceneCommunicator.instance
-        communicator.currentTile = self
-        communicator.showFoundationMenu = true
-         */
-        
-        
-        containsFoundation = true
-        FoundationPlateFactory().createFoundationPlate(position: self.position, tile: self, isStartingFoundation: false)
-        
-        updateFoundationPower()
-        updateFoundationTexture()
-        
-        GameManager.instance.currentMoney -= FoundationData.BASE_COST
-         */
 
     }
     

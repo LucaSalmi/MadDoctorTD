@@ -14,6 +14,8 @@ struct LabSceneView: View {
     
     @ObservedObject var gameManager = GameManager.instance
     
+    
+    
     static var imageWidth: CGFloat = 0
     static var imageHeight: CGFloat = 0
     
@@ -30,7 +32,7 @@ struct LabSceneView: View {
         LabSceneView.imageHeight = LabSceneView.imageWidth
         //SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
     }
-
+    
     var body: some View {
         ZStack {
             SpriteView(scene: labScene)
@@ -52,7 +54,7 @@ struct LabSceneView: View {
                 
                 BotArea()
                 
-
+                
             }
         }
     }
@@ -115,7 +117,7 @@ struct TopArea: View {
             }
             
         }.background(.black)
-        .padding()
+            .padding()
         
     }
     
@@ -124,37 +126,49 @@ struct TopArea: View {
 struct MiddleArea: View {
     
     @ObservedObject var communicator = LabSceneCommunicator.instance
+    @ObservedObject var gameManager = GameManager.instance
+    @State private var confirmation: ErrorInfo?
+    @State private var error: ErrorInfo?
     
     var body: some View {
         
         VStack {
             
             HStack {
-             
+                
                 Button(action: {
                     communicator.selectedTreeButtonId = "1"
+                    checkIfBuyable()
+                    
                 }, label: {
                     ZStack {
+                        
                         LabButtonImage("clickable_tile", "1")
                         Image(communicator.selectedTowerImage)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        Image("faded_button_layer")
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            .opacity(changeOpacity())
+                        
                     }
                 })
                 
             }
             
             HStack {
-                    
+                
                 Button {
                     communicator.selectedTreeButtonId = "2"
+                    checkIfBuyable()
                 } label: {
                     ZStack {
                         LabButtonImage("clickable_tile", "2")
                         Text("2")
                     }
                 }
-
+                
             }
             
             HStack {
@@ -200,7 +214,6 @@ struct MiddleArea: View {
                             Text("4b")
                         }
                     }
-                    
                 }
                 
                 VStack {
@@ -222,14 +235,214 @@ struct MiddleArea: View {
                             Text("5b")
                         })
                     }
-                    
                 }
-                
             }
+            
+        }
+        .alert(item: $confirmation) { confirmation in
+            
+            Alert(
+                title: Text(confirmation.title),
+                message: Text(confirmation.description),
+                primaryButton: .cancel(Text("Yes")){
+                    buyUpgrade()
+                },
+                secondaryButton: .destructive(Text("No"))
+            )}
+        VStack{
+            
+        }
+        .alert(item: $error) { error in
+            
+            Alert(
+                title: Text(error.title),
+                message: Text(error.description)
+        )}
+        
+       
+
+        
+    }
+    
+    
+    func createTowerDescription() -> String{
+        
+        switch communicator.selectedTreeButtonId{
+            
+        case "1":
+            
+            switch communicator.selectedTowerType{
+                
+            case .gunTower:
+                return "The trusted AlienSmasher 3000, well balanced and reliable. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+            case .cannonTower:
+                return "I found this in a museum, what a shame! Powerful but very slow. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+            case .rapidFireTower:
+                return "Is there somthing better then a gatling gun? No! Very fast, but with a short range and low damage. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+            case .sniperTower:
+                return "Better then a Finnish sniper. long range, high damage shots with a long cooldown. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+            }
+            
+        default:
+            return "ERROR"
+        }
+        
+    }
+    
+    
+    func checkIfBuyable(){
+        
+        if checkIfUpgraded() == .unlocked{
+            error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
+            return
+        }
+        
+        if GameManager.instance.researchPoints <= 0 {
+            error = ErrorInfo(title: "Error", description: "Not enough Research point")
+            return
+        }
+        
+        let description = createTowerDescription()
+        confirmation = ErrorInfo(title: "Do you really want to buy this upgrade?", description: description)
+        
+    }
+    
+    func checkIfUpgraded() -> ErrorType{
+        
+        switch communicator.selectedTowerType{
+            
+        case .gunTower:
+            for upgrade in communicator.gunTowerResearchLevel{
+                if communicator.selectedTreeButtonId == upgrade{
+                    return .unlocked
+                }
+                return .success
+            }
+        case .rapidFireTower:
+            for upgrade in communicator.rapidTowerResearchLevel{
+                if communicator.selectedTreeButtonId == upgrade{
+                    return .unlocked
+                }
+                return .success
+            }
+        case .sniperTower:
+            for upgrade in communicator.sniperTowerResearchLevel{
+                if communicator.selectedTreeButtonId == upgrade{
+                    return .unlocked
+                }
+                return .success
+            }
+        case .cannonTower:
+            for upgrade in communicator.cannonTowerResearchLevel{
+                if communicator.selectedTreeButtonId == upgrade{
+                    return .unlocked
+                }
+                return .success
+            }
+        }
+        
+        return .error
+    }
+    
+    func buyUpgrade(){
+        
+        let answer = applyResearch()
+        switch answer{
+            
+        case .researchPoints:
+            error = ErrorInfo(title: "Error", description: "Not enough Research point")
+        case .unlocked:
+            error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
+        case .success:
+            error = ErrorInfo(title: "Great", description: "You unlocked this upgrade for \(communicator.selectedTowerType)")
+        case .error:
+            error = ErrorInfo(title: "What?", description: "Somthing unexpected happened")
             
         }
         
     }
+    
+    func changeOpacity() -> Double{
+        
+        switch communicator.selectedTowerType{
+            
+        case .gunTower:
+            return 0.0
+        case .rapidFireTower:
+            if GameManager.instance.rapidFireTowerUnlocked{
+                return 0.0
+            }
+        case .sniperTower:
+            if GameManager.instance.sniperTowerUnlocked{
+                return 0.0
+            }
+        case .cannonTower:
+            if GameManager.instance.cannonTowerUnlocked{
+                return 0.0
+            }
+        }
+        return 1.3
+    }
+    
+    func applyResearch() -> ErrorType {
+        
+        let gameManager = GameManager.instance
+        let communicator = LabSceneCommunicator.instance
+        
+        switch communicator.selectedTowerType {
+            
+        case .gunTower:
+            switch communicator.selectedTreeButtonId {
+            case "1":
+                return .unlocked
+            default:
+                print("not implemented")
+            }
+        case .rapidFireTower:
+            switch communicator.selectedTreeButtonId {
+            case "1":
+                if gameManager.rapidFireTowerUnlocked {
+                    return .unlocked
+                }
+                GameScene.instance!.towerUI!.childNode(withName: "SpeedTower")!.alpha = 1
+                gameManager.rapidFireTowerUnlocked = true
+                gameManager.researchPoints -= 1
+                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+            default:
+                print("not implemented")
+            }
+        case .sniperTower:
+            switch communicator.selectedTreeButtonId {
+            case "1":
+                if gameManager.sniperTowerUnlocked {
+                    return .unlocked                }
+                GameScene.instance!.towerUI!.childNode(withName: "SniperTower")!.alpha = 1
+                gameManager.sniperTowerUnlocked = true
+                gameManager.researchPoints -= 1
+                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+            default:
+                print("not implemented")
+            }
+        default:
+            switch communicator.selectedTreeButtonId {
+            case "1":
+                if gameManager.cannonTowerUnlocked {
+                    return .unlocked
+                }
+                GameScene.instance!.towerUI!.childNode(withName: "CannonTower")!.alpha = 1
+                gameManager.cannonTowerUnlocked = true
+                gameManager.researchPoints -= 1
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+            default:
+                print("not implemented")
+            }
+        }
+        return .error
+    }
+    
     
 }
 
@@ -243,25 +456,13 @@ struct BotArea: View {
             
             Button {
                 AppManager.appManager.state = .gameScene
-                SoundManager.playBGM(bgmString: SoundManager.airlockDoorsTheme, bgmExtension: SoundManager.wavExtension)
+                SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
+                //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
             } label: {
                 Text("Return")
                     .foregroundColor(Color.white)
-
-
-            }
-            .frame(width: 120, height: 30)
-            .background(Color.blue)
-            .cornerRadius(15)
-            
-            Spacer()
-            
-            Button {
-                applyResearch()
-            } label: {
-                Text("Research")
-                    .foregroundColor(Color.white)
-
+                
+                
             }
             .frame(width: 120, height: 30)
             .background(Color.blue)
@@ -270,64 +471,8 @@ struct BotArea: View {
             Spacer()
             
         }
-
     }
     
-    func applyResearch() {
-        let gameManager = GameManager.instance
-        if gameManager.researchPoints <= 0 {
-            return
-        }
-        
-        let communicator = LabSceneCommunicator.instance
-        
-        switch communicator.selectedTowerType {
-            
-        case .gunTower:
-            switch communicator.selectedTreeButtonId {
-            case "1":
-                print("Already unlocked!")
-            default:
-                print("not implemented")
-            }
-        case .rapidFireTower:
-            switch communicator.selectedTreeButtonId {
-            case "1":
-                if gameManager.rapidFireTowerUnlocked {
-                    return
-                }
-                GameScene.instance!.towerUI!.childNode(withName: "SpeedTower")!.alpha = 1
-                gameManager.rapidFireTowerUnlocked = true
-                gameManager.researchPoints -= 1
-            default:
-                print("not implemented")
-            }
-        case .sniperTower:
-            switch communicator.selectedTreeButtonId {
-            case "1":
-                if gameManager.sniperTowerUnlocked {
-                    return
-                }
-                GameScene.instance!.towerUI!.childNode(withName: "SniperTower")!.alpha = 1
-                gameManager.sniperTowerUnlocked = true
-                gameManager.researchPoints -= 1
-            default:
-                print("not implemented")
-            }
-        default:
-            switch communicator.selectedTreeButtonId {
-            case "1":
-                if gameManager.cannonTowerUnlocked {
-                    return
-                }
-                GameScene.instance!.towerUI!.childNode(withName: "CannonTower")!.alpha = 1
-                gameManager.cannonTowerUnlocked = true
-                gameManager.researchPoints -= 1
-            default:
-                print("not implemented")
-            }
-        }
-    }
     
 }
 

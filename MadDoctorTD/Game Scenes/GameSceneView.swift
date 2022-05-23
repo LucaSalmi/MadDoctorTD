@@ -62,126 +62,148 @@ struct GameSceneView: View {
                 else {
                     HStack {
                         
-                        Spacer()
+                        HStack(alignment: .center){
                         
-                        VStack {
-                            Text("$ = \(gameManager.currentMoney)")
+                        
+                        
+                            Text("\(gameManager.currentMoney)$")
                                 .foregroundColor(.white)
-                            
-                            if communicator.foundationEditMode {
-                                Text("Price = \(communicator.newFoundationTotalCost)")
-                                    .foregroundColor(.white)
-                            }
+                                .padding(10)
+                                .background(.black)
+                                .cornerRadius(10)
                         }
+                        .frame(minWidth: UIScreen.main.bounds.width * 0.25)
                         
                         Spacer()
                         
-                        Button {
-                            communicator.cancelAllMenus()
-                            withAnimation{
-                                gameManager.isPaused = true
-                            }
-                            
-                        } label: {
-                            Text("Pause")
-                        }.disabled(communicator.foundationEditMode ? true : false)
+                        HStack(alignment: .center){
                         
-                        Spacer()
-                        
-                        Text("Base HP = \(gameManager.baseHp)")
+                        Text("Wave: \(gameManager.currentWave)")
                             .foregroundColor(.white)
-                        
+                            .padding(10)
+                            .background(.black)
+                            .cornerRadius(10)
+                            
+                            }
+                            .frame(minWidth: UIScreen.main.bounds.width * 0.25)
+                            
                         Spacer()
                         
-                        Text("Current wave = \(gameManager.currentWave)")
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
-                    
-                    //TODO: DISPLAY ALERT WHEN NEW WAVE IS INCOMMING!
-                    
-                    Spacer()
-                    
-                    if communicator.isBuildPhase && !communicator.openDoors {
-                        HStack {
+                        HStack(alignment: .center){
                             
-                            Spacer()
-                            
-                            if !communicator.foundationEditMode {
-                                Button {
-                                    AppManager.appManager.state = .labMenu
-                                    SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
-
-                                } label: {
-                                    Text("Research")
-                                }
-                            }
-
-                            Spacer()
-                            
+                            Text("HP: \(gameManager.baseHp)")
+                                .foregroundColor(.white)
+                                .padding(10)
+                                .background(.black)
+                                .cornerRadius(10)
+                        
                             Button {
-                                
-                                if communicator.foundationEditMode {
-                                    communicator.confirmFoundationEdit()
-                                }
-                                else {
-                                    communicator.foundationEditMode = true
-                                    communicator.toggleFoundationGrid()
+                                communicator.cancelAllMenus()
+                                withAnimation{
+                                    gameManager.isPaused = true
                                 }
                                 
                             } label: {
-                                Text(communicator.foundationEditMode ? "Done" : "Edit")
-                            }
-                            
-                            Spacer()
-                            
-                            if !communicator.foundationEditMode {
-                                Button {
-                                    startWavePhase()
-                                } label: {
-                                    Text("READY!")
-                                }
-                            }
-                            
-                            Spacer()
+                                Text("||")
+                                    .foregroundColor(.white)
+                                    .padding(10)
+                                    .background(.black)
+                                    .cornerRadius(10)
+                            }.disabled(communicator.foundationEditMode ? true : false)
 
+                            
+                        }
+                        .frame(minWidth: UIScreen.main.bounds.width * 0.25)
+                            
+                    }
+                    .padding(10)
+                    
+                    HStack{
+                    
+                    HStack(alignment: .center){
+                        
+                        if communicator.foundationEditMode {
+                            Text("total cost:\(communicator.newFoundationTotalCost)")
+                                .foregroundColor(.white)
+                                .padding(10)
+                                .background(.black)
+                                .cornerRadius(10)
                         }
                     }
-                }
+                    .frame(minWidth: UIScreen.main.bounds.width * 0.25)
+                        
+                        Spacer()
+                        
+                    }
+                    .padding(10)
+                    
+                    Spacer()
+                    
+                  
+                    
+                    //TODO: DISPLAY ALERT WHEN NEW WAVE IS INCOMMING!
+                    
+                    
+//                    if communicator.isBuildPhase && !communicator.openDoors {
+//                        HStack() {
+//
+//                            Spacer()
+//
+//                            if !communicator.foundationEditMode {
+//                                Button {
+//                                    AppManager.appManager.state = .labMenu
+//                                    SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
+//
+//                                } label: {
+//                                    Text("Research")
+//                                }
+//                            }
+//
+//
+//
+//                            Spacer()
+//
+//
+//
+//
+//                    }
+//                        .padding(.bottom, 130)
+//                }
+
             }
 
             
-            if communicator.showTowerMenu{
-                
-                VStack(spacing: 25) {
-
-                    //Foundation options:
-                    Button {
-                        communicator.repairFoundation()
-                    } label: {
-                        Text("Repair Foundation")
-                    }.disabled(communicator.isBuildPhase ? false : true)
-                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
-                    Button {
-                        communicator.upgradeFoundation()
-                    } label: {
-                        Text("Upgrade Foundation")
-                    }.disabled(communicator.isBuildPhase ? false : true)
-                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
-                    Button {
-                        communicator.sellFoundation()
-                    } label: {
-                        Text("Sell Foundation")
-                    }.disabled(communicator.isBuildPhase ? false : true)
-                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
-                    Button {
-                        communicator.cancelAllMenus()
-                    } label: {
-                        Text("Cancel")
-                    }
-
-                }.font(.title)
-                    .background(.black.opacity(0.5))
+//            if communicator.showTowerMenu{
+//
+//                VStack(spacing: 25) {
+//
+//                    //Foundation options:
+//                    Button {
+//                        communicator.repairFoundation()
+//                    } label: {
+//                        Text("Repair Foundation")
+//                    }.disabled(communicator.isBuildPhase ? false : true)
+//                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
+//                    Button {
+//                        communicator.upgradeFoundation()
+//                    } label: {
+//                        Text("Upgrade Foundation")
+//                    }.disabled(communicator.isBuildPhase ? false : true)
+//                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
+//                    Button {
+//                        communicator.sellFoundation()
+//                    } label: {
+//                        Text("Sell Foundation")
+//                    }.disabled(communicator.isBuildPhase ? false : true)
+//                        .disabled(communicator.currentFoundation!.isStartingFoundation ? true : false)
+//                    Button {
+//                        communicator.cancelAllMenus()
+//                    } label: {
+//                        Text("Cancel")
+//                    }
+//
+//                }.font(.title)
+//                    .background(.black.opacity(0.5))
 
                 
             }
@@ -235,21 +257,5 @@ struct GameSceneView: View {
         
     }
 
-    private func startWavePhase() {
-        
-        let gameScene = GameScene.instance!
-        
-        gameScene.waveManager!.waveStartCounter = WaveData.WAVE_START_TIME
-        communicator.isBuildPhase = false
-        gameScene.waveManager!.shouldCreateWave = true
-        GameSceneCommunicator.instance.cancelAllMenus()
-        SoundManager.playBGM(bgmString: SoundManager.desertAmbience)
-        
-        //Door animations
-        gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
-        communicator.closeDoors = true
-        
-        gameScene.moveCameraToPortal = true
-    }
-    
+
 }

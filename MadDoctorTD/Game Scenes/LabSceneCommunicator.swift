@@ -13,6 +13,11 @@ class LabSceneCommunicator: ObservableObject{
     @Published var selectedTowerType: TowerTypes = .gunTower
     @Published var selectedTowerImage = "blast_tower"
     
+    @Published var gunTowerResearchLevel: [String] = ["1"]
+    @Published var rapidTowerResearchLevel = [String]()
+    @Published var sniperTowerResearchLevel = [String]()
+    @Published var cannonTowerResearchLevel = [String]()
+    
     @Published var selectedTreeButtonId: String = "1"
     
     static let instance = LabSceneCommunicator()

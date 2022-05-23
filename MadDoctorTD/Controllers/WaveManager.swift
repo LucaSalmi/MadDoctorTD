@@ -300,6 +300,7 @@ class WaveManager{
             spawnCounter += 1
             if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER {
                 spawnEnemy()
+                print("Enemies left in current wave \(EnemyNodes.enemyArray.count)")
                 
                 spawnCounter = 0
             }
@@ -318,6 +319,10 @@ class WaveManager{
             print("Current level completed!")
             GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
             GameSceneCommunicator.instance.isBuildPhase = true
+            GameScene.instance?.readyButton?.alpha = 1
+            GameScene.instance?.buildFoundationButton?.alpha = 1
+            GameScene.instance?.researchButton?.alpha = 1
+            GameScene.instance?.upgradeMenuToggle?.alpha = 1
             SoundManager.stopMusic()
             
             //Door animation:

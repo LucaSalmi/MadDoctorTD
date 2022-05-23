@@ -42,7 +42,7 @@ class PhysicsUtils{
         
         //let direction = PhysicsUtils.getCameraDirection(camera: camera, targetPoint: targetPoint)
         
-        let speed: CGFloat = CGFloat(10.0)
+        let speed: CGFloat = CGFloat(15.0)
         
         camera.position.x += (speed * direction.x)
         camera.position.y += (speed * direction.y)

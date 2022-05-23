@@ -28,6 +28,12 @@ enum ActionState: Int{
     
 }
 
+enum ErrorType: Int{
+    
+    case researchPoints = 0, unlocked, success, error
+    
+}
+
 struct PhysicsCategory{
     
     static let None: UInt32 = 0
@@ -55,6 +61,8 @@ struct FoundationData{
     static let UPGRADE_HP_FACTOR: Double = 1.5
     static let UPGRADE_PRICE: Int = 100
     static let REPAIR_PRICE_PER_HP: Double = 0.5
+    
+    static let MAX_UPGRADE: Int = 5
     
 }
 enum UpgradeTypes: Int{
@@ -188,5 +196,56 @@ struct PlayerData{
     static let BASE_HP = 100 //3
     static let START_RESEARCH_POINTS = 3
 
+}
+
+
+struct UIData{
+    static let INACTIVE_BUTTON_ALPHA = 0.5
+    static let BUILD_BUTTONS_UI_POS_X: CGFloat = CGFloat(315)
+    static let BUILD_BUTTONS_UI_SPEED: CGFloat = CGFloat(15.0)
+}
+
+
+struct LabData{
+    
+    static let UPGRADE_COST_1 = 1
+    static let UPGRADE_COST_2 = 2
+    static let UPGRADE_COST_3 = 3
+    static let UPGRADE_COST_4 = 4
+    
+    static func getCost(selected: String) -> Int{
+        
+        switch selected{
+            
+        case "1":
+            return LabData.UPGRADE_COST_1
+            
+        case "2":
+            return LabData.UPGRADE_COST_2
+            
+        case "3a":
+            return LabData.UPGRADE_COST_3
+            
+        case "3b":
+            return LabData.UPGRADE_COST_4
+            
+        case "4a":
+            return LabData.UPGRADE_COST_3
+            
+        case "4b":
+            return LabData.UPGRADE_COST_4
+            
+        case "5a":
+            return LabData.UPGRADE_COST_3
+            
+        case "5b":
+            return LabData.UPGRADE_COST_4
+            
+        default:
+            return LabData.UPGRADE_COST_1
+        }
+        
+    }
+    
 }
 

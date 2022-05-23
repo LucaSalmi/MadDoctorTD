@@ -19,6 +19,7 @@ class Enemy: SKSpriteNode{
     var direction: CGPoint = CGPoint(x: 0, y: 0)
     var waveSlotSize = EnemiesData.STANDARD_ENEMY_SLOT
     var enemyType: EnemyTypes = .standard
+    var enemyRace: EnemyRaces? = nil
     var armorValue: Int = 0
     
     var isAttacker = false
@@ -240,20 +241,46 @@ class Enemy: SKSpriteNode{
         
     }
     
+    func onDestroy() {
+        
+        var moneyTarget = GameScene.instance!.camera!.position
+        moneyTarget.x -= 300
+        moneyTarget.y += 600
+        let moneyObject = MoneyObject(startPosition: self.position)
+        GameScene.instance!.moneyNode.addChild(moneyObject)
+        
+        hpBar!.removeFromParent()
+        
+        GameManager.instance.currentMoney += self.killValue
+        print("KILL VALUE = \(GameManager.instance.currentMoney)")
+        
+        if self.enemyType == .boss{
+            
+            let boss = self as! Boss
+            var materialTarget = GameScene.instance!.camera!.position
+            materialTarget.x -= 300
+            materialTarget.y += 600
+            let bossDrop = DropObject(startPoint: self.position, targetPoint: materialTarget, bossTexture: (boss.bossTexture?.texture)!, materialType: .slime)
+            let dialog = SlimeMaterialObtainedDialogue()
+            GameScene.instance?.dialoguesNode.addChild(dialog)
+            GameScene.instance!.moneyNode.addChild(bossDrop)
+            boss.bossTexture?.removeFromParent()
+            
+        }
+        
+        self.removeFromParent()
+        print("Current enemy wave count = \(EnemyNodes.enemiesNode.children.count)")
+        SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+        
+    }
+    
     func getDamage(dmgValue: Int){
         
         hp -= (dmgValue - armorValue)
         
         if hp <= 0{
             
-            hpBar!.removeFromParent()
-            
-            GameManager.instance.currentMoney += self.killValue
-            print("KILL VALUE = \(GameManager.instance.currentMoney)")
-            
-            self.removeFromParent()
-            print("Current enemy wave count = \(EnemyNodes.enemiesNode.children.count)")
-            SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+            onDestroy()
             
         }
         
