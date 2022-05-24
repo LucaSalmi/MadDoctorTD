@@ -31,7 +31,7 @@ class Projectile: SKSpriteNode {
         
         name = "Projectile"
         self.position = position
-        zPosition = 2
+        zPosition = 10
         speed = ProjectileData.speed
         
         setupPhysicsBody()

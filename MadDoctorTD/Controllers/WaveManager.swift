@@ -19,12 +19,13 @@ class WaveManager{
     var wavesCompleted = 0
     var enemyChoises = [EnemyTypes]()
     
+    var reduceSpawnTime = 0
     var spawnCounter = 0
     var waveStartCounter = 0
     
     let wavesPerLevel = 5
     
-    var bossLevel = 5
+    var bossLevel = 10
     
     var attackLevel = 6
     var unlockAttackers = false
@@ -34,8 +35,8 @@ class WaveManager{
     var shouldCreateWave = false
     
     var numberOfAttackers = 0
-    
-    init(totalSlots: Int, choises: [EnemyTypes], enemyRace: EnemyRaces){
+        
+    init(totalSlots: Int, choises: [EnemyTypes]){
         
         currentScene = GameScene.instance
         enemyChoises = choises
@@ -47,7 +48,6 @@ class WaveManager{
     
     private func createWave(choises: [EnemyTypes], enemyRace: EnemyRaces){
         
-        
         waveNumber += 1
         
         if totalSlots < 0{
@@ -56,12 +56,11 @@ class WaveManager{
         }
         
         if waveNumber >= 5 { // level 5 is first boss level
-            print("current wavenumber: \(waveNumber)")
             unlockAttackers = true
             
         }
         if waveNumber == bossLevel + 1 {
-            bossLevel += 5
+            bossLevel += 10
         }
         
         if waveNumber == attackLevel + 1{
@@ -76,9 +75,9 @@ class WaveManager{
 
         maximumAtkSpawn = waveNumber/10 // 10%
         }
-       
         
         var occupiedSlots = 0
+        
         if waveNumber == bossLevel {
             totalSlots = EnemiesData.BOSS_ENEMY_SLOT
         } else {
@@ -260,17 +259,21 @@ class WaveManager{
     
     func progressDifficulty(){
         
-        if waveNumber == 1{
+        if waveNumber == 3{
             enemyChoises.append(.fast)
-        }else if waveNumber == 2{
+        }else if waveNumber == 6{
             enemyChoises.append(.heavy)
-        }else if waveNumber == 3{
+        }else if waveNumber == 9{
             enemyChoises.append(.flying)
-        }else if waveNumber == bossLevel - 1{
-            enemyChoises = [.boss]
-        } else {
-            enemyChoises = [.standard,.heavy,.flying,.fast]
         }
+        if waveNumber >= 10 {
+            if waveNumber == bossLevel - 1{
+                enemyChoises = [.boss]
+            } else {
+                enemyChoises = [.standard,.heavy,.flying,.fast]
+            }
+        }
+        
     }
     
     /* UPDATE */
@@ -285,12 +288,16 @@ class WaveManager{
     //Timers for starting the wave and then spawn one enemy from the wave
     func timers(){
         
+        if waveNumber == attackLevel {
+            reduceSpawnTime += 5
+        }
+        
         if shouldCreateWave {
             waveStartCounter += 1
-            if waveStartCounter >= WaveData.WAVE_START_TIME {
+            if waveStartCounter >= (WaveData.WAVE_START_TIME + (waveNumber * 60)) {
                 progressDifficulty()
-                print(enemyChoises)
-                createWave(choises: enemyChoises , enemyRace: .slime)
+                let race = GameScene.instance?.enemyRaceSwitch[GameManager.instance.currentLevel-1] ?? EnemyRaces.slime
+                createWave(choises: enemyChoises , enemyRace: race)
                 
                 waveStartCounter = 0
             }
@@ -298,7 +305,7 @@ class WaveManager{
         
         if (EnemyNodes.enemyArray.count) > 0 {
             spawnCounter += 1
-            if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER {
+            if spawnCounter >= (WaveData.SPAWN_STANDARD_TIMER - reduceSpawnTime){
                 spawnEnemy()
                 print("Enemies left in current wave \(EnemyNodes.enemyArray.count)")
                 
@@ -319,10 +326,16 @@ class WaveManager{
             print("Current level completed!")
             GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
             GameSceneCommunicator.instance.isBuildPhase = true
+            
+            
+            
             GameScene.instance?.readyButton?.alpha = 1
             GameScene.instance?.buildFoundationButton?.alpha = 1
             GameScene.instance?.researchButton?.alpha = 1
             GameScene.instance?.upgradeMenuToggle?.alpha = 1
+            
+            GameScene.instance?.showSummary()
+            
             SoundManager.stopMusic()
             
             //Door animation:

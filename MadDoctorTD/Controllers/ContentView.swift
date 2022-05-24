@@ -32,6 +32,8 @@ struct ContentView: View {
                 SettingsView(title: "Settings")
             case AppState.labMenu:
                 LabSceneView()
+            case AppState.creditsScene:
+                CreditsSceneView()
             default:
                 MainMenuView()
             }

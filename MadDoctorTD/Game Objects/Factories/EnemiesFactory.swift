@@ -41,6 +41,25 @@ class SlimeFactory: EnemyFactoryProtocol{
     }
 }
 
+class SquidFactory: EnemyFactoryProtocol{
+    
+    func createBoss() -> Enemy {
+        
+        let boss = Boss(texture: SKTexture(imageNamed: "wheelie 1"))
+        boss.enemyRace = .squid
+        return boss
+    }
+    
+    
+    func createEnemy(enemyType: EnemyTypes) -> Enemy{
+        
+        let squid = SquidEnemy(enemyType: enemyType)
+        squid.enemyRace = .squid
+        return squid
+
+    }
+}
+
 protocol EnemyCreator{
     
     func createEnemy(enemyRace: EnemyRaces, enemyType: EnemyTypes) -> Enemy
@@ -58,7 +77,7 @@ class EnemyFactory: EnemyCreator{
         case .slime:
             return SlimeFactory().createBoss()
         case .squid:
-            return SlimeFactory().createBoss()
+            return SquidFactory().createBoss()
         }
         
     }
@@ -68,12 +87,11 @@ class EnemyFactory: EnemyCreator{
         
         switch enemyRace {
         case .slime:
-            
             return SlimeFactory().createEnemy(enemyType: enemyType)
             
         case .squid:
-            //TO DO replace with right factory
-            return SlimeFactory().createEnemy(enemyType: enemyType)
+            print("squid")
+            return SquidFactory().createEnemy(enemyType: enemyType)
             
         }
     }

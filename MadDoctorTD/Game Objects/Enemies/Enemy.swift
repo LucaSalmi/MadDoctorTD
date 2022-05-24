@@ -260,8 +260,9 @@ class Enemy: SKSpriteNode{
             var materialTarget = GameScene.instance!.camera!.position
             materialTarget.x -= 300
             materialTarget.y += 600
-            let bossDrop = DropObject(startPoint: self.position, targetPoint: materialTarget, bossTexture: (boss.bossTexture?.texture)!, materialType: .slime)
-            let dialog = SlimeMaterialObtainedDialogue()
+            let bossDrop = DropObject(startPoint: self.position, targetPoint: materialTarget, materialType: self.enemyRace!)
+            
+            let dialog = createDialog()
             GameScene.instance?.dialoguesNode.addChild(dialog)
             GameScene.instance!.moneyNode.addChild(bossDrop)
             boss.bossTexture?.removeFromParent()
@@ -271,6 +272,21 @@ class Enemy: SKSpriteNode{
         self.removeFromParent()
         print("Current enemy wave count = \(EnemyNodes.enemiesNode.children.count)")
         SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+        
+    }
+        
+    private func createDialog()-> Dialogue{
+        
+        switch self.enemyRace{
+            
+        case .slime:
+            return SlimeMaterialObtainedDialogue()
+        case .squid:
+            return SquidMaterialObtainedDialogue()
+        case .none:
+            return SlimeMaterialObtainedDialogue()
+        }
+        
         
     }
     

@@ -306,6 +306,8 @@ class GameSceneCommunicator: ObservableObject {
         GameScene.instance?.showTowerUI()
         cancelAllMenus()
     }
+    
+    
     func startWavePhase() {
         
         let gameScene = GameScene.instance!
