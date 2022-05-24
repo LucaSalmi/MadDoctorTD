@@ -27,6 +27,7 @@ struct GameSceneView: View {
         communicator.cancelAllMenus()
 
     }
+    
 
     var body: some View {
 

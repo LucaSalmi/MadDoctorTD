@@ -118,6 +118,9 @@
 		E5836FF9282A652D00EAF6E9 /* AoeProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */; };
 		E5836FFB282A662000EAF6E9 /* CannonProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */; };
 		E5BB6D65283CC2F0003E57D9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5BB6D64283CC2F0003E57D9 /* Launch Screen.storyboard */; };
+		E5BB6D67283CD09B003E57D9 /* CreditsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E5BB6D66283CD09B003E57D9 /* CreditsScene.sks */; };
+		E5BB6D69283CD1C0003E57D9 /* CreditsSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB6D68283CD1C0003E57D9 /* CreditsSceneView.swift */; };
+		E5BB6D6B283CD56C003E57D9 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB6D6A283CD56C003E57D9 /* CreditsScene.swift */; };
 		E5E965DE2833809700010B5A /* TowerMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E5E965DD2833809700010B5A /* TowerMenuScene.sks */; };
 /* End PBXBuildFile section */
 
@@ -235,6 +238,9 @@
 		E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoeProjectile.swift; sourceTree = "<group>"; };
 		E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonProjectile.swift; sourceTree = "<group>"; };
 		E5BB6D64283CC2F0003E57D9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		E5BB6D66283CD09B003E57D9 /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
+		E5BB6D68283CD1C0003E57D9 /* CreditsSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsSceneView.swift; sourceTree = "<group>"; };
+		E5BB6D6A283CD56C003E57D9 /* CreditsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
 		E5E965DD2833809700010B5A /* TowerMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TowerMenuScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,7 +321,9 @@
 			isa = PBXGroup;
 			children = (
 				3359CC9028214C9A00878191 /* GameScene.sks */,
+				E5BB6D66283CD09B003E57D9 /* CreditsScene.sks */,
 				3359CC9228214D8300878191 /* GameScene.swift */,
+				E5BB6D6A283CD56C003E57D9 /* CreditsScene.swift */,
 				3359CC9528214E2200878191 /* GameSceneView.swift */,
 				3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */,
 				3359CC9728214F1800878191 /* LabScene.sks */,
@@ -389,6 +397,7 @@
 				C839C6AE2821352400F66043 /* Persistence.swift */,
 				C839C6B02821352400F66043 /* MadDoctorTD.xcdatamodeld */,
 				C839C6BA2821579F00F66043 /* Constants.swift */,
+				E5BB6D68283CD1C0003E57D9 /* CreditsSceneView.swift */,
 				C839C6AB2821352400F66043 /* Preview Content */,
 			);
 			path = MadDoctorTD;
@@ -558,6 +567,7 @@
 				B34EEA942836418E00CE60C1 /* metal_tap_3.mp3 in Resources */,
 				B34EEAE42837C9DB00CE60C1 /* mad_td_simplified.wav in Resources */,
 				E5E965DE2833809700010B5A /* TowerMenuScene.sks in Resources */,
+				E5BB6D67283CD09B003E57D9 /* CreditsScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
 				B35C213D282D39DB009A748E /* cannon_shot_fired.mp3 in Resources */,
 				3311AB9128231156009DEEEC /* gun_projectile_impact.wav in Resources */,
@@ -612,6 +622,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5BB6D69283CD1C0003E57D9 /* CreditsSceneView.swift in Sources */,
 				C8A2F62A28351B6000D94CEE /* BossEnemy.swift in Sources */,
 				C81DED212837AE8800D67B8F /* ErrorInfo.swift in Sources */,
 				C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */,
@@ -648,6 +659,7 @@
 				C8E0591E2836874B00BB2F9F /* SlimeMaterialObtainedDialogue.swift in Sources */,
 				337CAE0D283CB913004B8ACB /* BouncingProjectile.swift in Sources */,
 				C8E0591828365CED00BB2F9F /* DropObject.swift in Sources */,
+				E5BB6D6B283CD56C003E57D9 /* CreditsScene.swift in Sources */,
 				E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */,
 				3398938A28363B3C006B0374 /* PriceObject.swift in Sources */,
 				3359CC9A28214F4800878191 /* LabScene.swift in Sources */,

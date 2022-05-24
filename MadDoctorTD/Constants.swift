@@ -11,7 +11,7 @@ import SpriteKit
 
 enum AppState: Int{
     
-    case startMenu = 0 , labMenu, gameScene, researchMenu, settingsMenu
+    case startMenu = 0 , labMenu, gameScene, researchMenu, settingsMenu, creditsScene
     
 }
 
