@@ -364,7 +364,6 @@ class GameScene: SKScene {
         if touchingTower != nil{
             
             
-            
             touchingTower?.position = location
             rangeIndicator?.position = location
             
@@ -401,9 +400,7 @@ class GameScene: SKScene {
         if touchingTower == nil{
             return
         }
-        
-        //move upgrade btns here?
-        
+                
         if snappedToFoundation != nil{
             priceTag?.position.x = touchingTower!.position.x
             priceTag?.position.y = touchingTower!.position.y + 50
@@ -603,7 +600,6 @@ class GameScene: SKScene {
         for node in touchedNodes {
             
             if node is Tower{
-                print("tower pressed")
                 let tower = node as! Tower
                 tower.onClick()
              
@@ -616,7 +612,6 @@ class GameScene: SKScene {
             for node in touchedNodes {
                 
                 if node is FoundationPlate {
-                    
                     
                     let foundationPlate = node as! FoundationPlate
                     foundationPlate.onClick()
@@ -654,6 +649,7 @@ class GameScene: SKScene {
     }
     
     func showTowerUI(){
+        
         towerUI?.alpha = 1
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 0
