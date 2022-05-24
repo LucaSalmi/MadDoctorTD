@@ -166,7 +166,7 @@ struct EnemiesData{
     static let BASE_ATTACK_SPEED_VALUE = 60 //in frames per second
     
     static let BASE_DAMAGE_VALUE = 1
-    static let BOSS_DAMAGE_VALUE = 3
+    static let BOSS_DAMAGE_VALUE = 5
     
 }
 
@@ -176,15 +176,15 @@ struct WaveData{
     static let LEVEL_WAVE_SIZE = 5
     //60 frames 1 second
     //3600 frames 1 minute
-    static let WAVE_STANDARD_SIZE = 5
-    static let SPAWN_STANDARD_TIMER = 40 //60 frames = 1 second
+    static let WAVE_STANDARD_SIZE = 4
+    static let SPAWN_STANDARD_TIMER = 60 //60 frames = 1 second
     static let WAVE_START_TIME = 900 //900 frames = 15 seconds
     
     static let FAST_ENEMY_LIMIT = 5
     static let HEAVY_ENEMY_LIMIT = 5
     static let FLY_ENEMY_LIMIT = 5
     
-    static let INCOME_PER_WAVE = 100
+    static let INCOME_PER_WAVE = 150
     
     static let MAX_ATTACKER_NUMBER = 1
     
@@ -194,8 +194,8 @@ struct WaveData{
 //Player + Economy
 struct PlayerData{
     
-    static let START_MONEY = 200000 //2500 //!2000
-    static let BASE_HP = 100 //3
+    static let START_MONEY = 2500 //2500 //!2000
+    static let BASE_HP = 10 //3
     static let START_RESEARCH_POINTS = 3
 
 }
