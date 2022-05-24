@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 class GameManager: ObservableObject{
     
@@ -15,7 +16,7 @@ class GameManager: ObservableObject{
     @Published var isPaused: Bool = false
     @Published var currentMoney: Int = PlayerData.START_MONEY
     @Published var slimeMaterials: Int = 0
-
+    
     @Published var nextWaveCounter: Int = 0
     @Published var currentWave: Int = 1
     
@@ -36,11 +37,25 @@ class GameManager: ObservableObject{
     
     
     func getDamage(incomingDamage: Int){
-        
+        GameScene.instance!.showDamageIndicator = true
         baseHp -= incomingDamage
         if baseHp <= 0{
             isGameOver = true
         }
+    }
+    
+    func displayDamageIndicator(){
+        
+        let dmgIndicator = GameScene.instance!.damageIndicator
+        
+        dmgIndicator?.alpha += 0.05
+        
+        if dmgIndicator!.alpha > 0.4{
+            
+            dmgIndicator?.alpha = 0
+            GameScene.instance!.showDamageIndicator = false
+        }
+        
     }
     
     
