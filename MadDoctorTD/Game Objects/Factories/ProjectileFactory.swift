@@ -37,6 +37,14 @@ class SniperProjectileFactory: ProjectileFactoryProtocol{
     
 }
 
+class BouncingProjectileFactory: ProjectileFactoryProtocol {
+    
+    func createProjectile(position: CGPoint, target: Enemy, attackDamage: Int) -> Projectile {
+        return BouncingProjectile(position: position, target: target, attackDamage: attackDamage)
+    }
+    
+}
+
 protocol ProjetileCreator{
     
     func createProjectile()
@@ -86,6 +94,12 @@ class ProjectileFactory: ProjetileCreator{
             
             let projectile = SniperProjectileFactory().createProjectile(position: firingTower.position, target: firingTower.currentTarget!, attackDamage: firingTower.attackDamage)
             ProjectileNodes.projectilesNode.addChild(projectile)
+            
+        case .bouncingProjectile:
+            
+            let projectile = BouncingProjectileFactory().createProjectile(position: firingTower.position, target: firingTower.currentTarget!, attackDamage: firingTower.attackDamage)
+            ProjectileNodes.projectilesNode.addChild(projectile)
+            
         }
         
     }

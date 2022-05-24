@@ -89,7 +89,7 @@ class SoundManager {
 
     }
 
-    static func playMetalTapSFX(scene: StartScene) {
+    static func playMetalTapSFX(scene: SKScene) {
 
         let rand = Int.random(in:1...4)
         let metalTap = "metal_tap_\(rand)."
