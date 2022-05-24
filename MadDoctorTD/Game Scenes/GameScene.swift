@@ -53,6 +53,16 @@ class GameScene: SKScene {
     var bossMaterialGained: SKLabelNode?
     var researchPointsGained: SKLabelNode?
     var summaryBackButton: SKSpriteNode?
+    //towerInfo
+    var towerInfoMenu: SKSpriteNode?
+    var attackStatLabel: SKLabelNode?
+    var fireRateStatLabel: SKLabelNode?
+    var rangeStatLabel: SKLabelNode?
+    
+    //preview
+    var statUpgradePopUp: SKSpriteNode?
+    var statUpgradePreviewText: SKLabelNode?
+    var upgradeTypePreview: UpgradeTypes?
     
     var showDamageIndicator: Bool = false
     
@@ -159,6 +169,14 @@ class GameScene: SKScene {
         
         
         mainHubBackground = uiScene!.childNode(withName: "MainHubBackground") as? SKSpriteNode
+        //towerInfoMenu
+        towerInfoMenu = uiScene?.childNode(withName: "TowerInfoNode") as? SKSpriteNode
+        towerInfoMenu?.removeFromParent()
+        statUpgradePopUp = uiScene?.childNode(withName: "UpgradeInfoPopUp") as? SKSpriteNode
+        statUpgradePopUp?.removeFromParent()
+        
+        
+        let mainHubBackground = uiScene!.childNode(withName: "MainHubBackground")
         mainHubBackground?.removeFromParent()
         self.camera!.addChild(waveSummary!)
         self.camera!.addChild(mainHubBackground!)
@@ -166,6 +184,9 @@ class GameScene: SKScene {
         self.camera!.addChild(towerUI!)
         self.camera!.addChild(damageIndicator!)
         self.addChild(uiNode)
+        
+        self.camera?.addChild(towerInfoMenu!)
+        self.camera?.addChild(statUpgradePopUp!)
                 
         upgradeUI = uiScene!.childNode(withName: "UpgradeMenu") as? SKSpriteNode
         upgradeUI?.removeFromParent()
@@ -177,7 +198,12 @@ class GameScene: SKScene {
         foundationUpgradeButton = foundationUI?.childNode(withName: "UpgradeFoundation") as? SKSpriteNode
         foundationRepairButton = foundationUI?.childNode(withName: "RepairFoundation") as? SKSpriteNode
         
+        //towerInfoMenu
+        attackStatLabel = towerInfoMenu?.childNode(withName: "TowerInfoAttack") as? SKLabelNode
+        fireRateStatLabel = towerInfoMenu?.childNode(withName: "TowerInfoFirerate") as? SKLabelNode
+        rangeStatLabel = towerInfoMenu?.childNode(withName: "TowerInfoRange") as? SKLabelNode
         
+        statUpgradePreviewText = statUpgradePopUp?.childNode(withName: "upgradePopUpText") as? SKLabelNode
         
         damageImage = upgradeUI?.childNode(withName: "AttackButton") as? SKSpriteNode
         rateOfFireImage = upgradeUI?.childNode(withName: "RateOfFireButton") as? SKSpriteNode
@@ -264,6 +290,11 @@ class GameScene: SKScene {
             let pinchGesture = UIPinchGestureRecognizer()
             pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
             view?.addGestureRecognizer(pinchGesture)
+            
+            let longTapRecognizer = UILongPressGestureRecognizer()
+            longTapRecognizer.addTarget(self, action: #selector(handleLongPress(_:)))
+            longTapRecognizer.minimumPressDuration = 0.5
+            view?.addGestureRecognizer(longTapRecognizer)
         }
         
         myCamera!.position = CGPoint(x: 0, y: yLowerLimit)
@@ -370,6 +401,9 @@ class GameScene: SKScene {
         if touchingTower == nil{
             return
         }
+        
+        //move upgrade btns here?
+        
         if snappedToFoundation != nil{
             priceTag?.position.x = touchingTower!.position.x
             priceTag?.position.y = touchingTower!.position.y + 50
@@ -390,7 +424,6 @@ class GameScene: SKScene {
         switch touchingTower!.name{
         case "GunTower":
             if snappedToFoundation != nil{
-                print("built tower woho")
                 snappedToFoundation!.hasTower = true
                 TowerFactory(towerType: TowerTypes.gunTower).createTower(currentFoundation: snappedToFoundation!)
                 GameManager.instance.currentMoney -= TowerData.BASE_COST
@@ -555,6 +588,18 @@ class GameScene: SKScene {
             }
         }
         
+        for node in touchedNodes{
+            if node.name == "TowerLogo"{
+                
+                showTowerInfo()
+                displayRangeIndicator(attackRange: communicator.currentTower!.attackRange, position: communicator.currentTower!.position)
+                
+                return
+            }
+            
+            
+        }
+        
         for node in touchedNodes {
             
             if node is Tower{
@@ -589,10 +634,30 @@ class GameScene: SKScene {
         
     }
     
+    func showTowerInfo(){
+        
+        guard let currentTower = GameSceneCommunicator.instance.currentTower else {return}
+        attackStatLabel?.text = "Attack Power: \(currentTower.attackDamage)"
+        fireRateStatLabel?.text = "Fire Rate: \(currentTower.fireRate)"
+        rangeStatLabel?.text = "Range: \(currentTower.attackRange)"
+        
+        towerInfoMenu?.alpha = 1
+        towerUI?.alpha = 0
+        upgradeUI?.alpha = 0
+        foundationUI?.alpha = 0
+        
+        if GameSceneCommunicator.instance.isBuildPhase{
+            foundationMenuToggle?.alpha = 1
+        }
+        else{foundationMenuToggle?.alpha = 0}
+        
+    }
+    
     func showTowerUI(){
         towerUI?.alpha = 1
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 0
+        towerInfoMenu?.alpha = 0
         
         if GameSceneCommunicator.instance.isBuildPhase{
             foundationMenuToggle?.alpha = 1
@@ -604,6 +669,7 @@ class GameScene: SKScene {
         towerUI?.alpha = 0
         upgradeUI?.alpha = 1
         foundationUI?.alpha = 0
+        towerInfoMenu?.alpha = 0
         
         
         if GameSceneCommunicator.instance.isBuildPhase{
@@ -614,6 +680,7 @@ class GameScene: SKScene {
         towerUI?.alpha = 0
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 1
+        towerInfoMenu?.alpha = 0
         let foundation = GameSceneCommunicator.instance.currentFoundation!
         foundation.updateUpgradeButtonTexture()
         displayFoundationIndicator(position: foundation.position)
@@ -635,6 +702,7 @@ class GameScene: SKScene {
         towerUI?.alpha = 0
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 0
+        towerInfoMenu?.alpha = 0
         researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
         readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
     }
@@ -723,12 +791,15 @@ class GameScene: SKScene {
         switch nodeName{
             
         case "RateOfFireButton":
+            upgradeTypePreview = .firerate
             GameSceneCommunicator.instance.upgradeTower(upgradeType: .firerate)
             
         case "RangeButton":
+            upgradeTypePreview = .range
             GameSceneCommunicator.instance.upgradeTower(upgradeType: .range)
             
         case "AttackButton":
+            upgradeTypePreview = .damage
             GameSceneCommunicator.instance.upgradeTower(upgradeType: .damage)
         
         case "FoundationMenuToggle":
@@ -1155,6 +1226,37 @@ class GameScene: SKScene {
         
         camera.setScale(newCameraScale)
         setupCamera()
+        
+    }
+    
+    @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
+       
+        guard let currentTower = GameSceneCommunicator.instance.currentTower else{return}
+        
+        if sender.state == .began && upgradeTypePreview != nil{
+            
+            switch upgradeTypePreview{
+                    
+            case .damage:
+                let newDmg = Double(currentTower.attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT
+                statUpgradePreviewText?.text = "Damage: \(currentTower.attackDamage) -> \(String(format: "%.0f", newDmg))"
+            case .none:
+                statUpgradePreviewText?.text = "ERROR"
+            case .range:
+                let newRange = Double(currentTower.attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT
+                statUpgradePreviewText?.text = "Range: \(String(format: "%.0f", currentTower.attackRange)) -> \(String(format: "%.0f", newRange))"
+            case .firerate:
+                let newFIreRate = Double(currentTower.fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT
+                statUpgradePreviewText?.text = "Shots per Second: \(currentTower.fireRate) -> \(String(format: "%.0f", newFIreRate))"
+            }
+            
+            statUpgradePopUp?.alpha = 1
+            
+        }else if sender.state == .ended{
+            
+            statUpgradePopUp?.alpha = 0
+            
+        }
         
     }
     
