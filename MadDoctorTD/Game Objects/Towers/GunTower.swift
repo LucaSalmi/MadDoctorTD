@@ -11,7 +11,6 @@ import SwiftUI
 
 class GunTower: Tower{
     
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -32,6 +31,12 @@ class GunTower: Tower{
         attackRange = attackRange * 1
         
         //attackRange = attackRange * 0.1
+        
+    }
+    
+    //Use this function when upgrading the tower to get bouncing projectiles
+    func activateBouncingProjectiles() {
+        projectileType = ProjectileTypes.bouncingProjectile
     }
     
 }

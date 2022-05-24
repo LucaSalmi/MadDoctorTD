@@ -122,6 +122,8 @@ struct ProjectileData {
     
     static let SNIPER_MODIFIER: CGFloat = CGFloat(13.0)
     
+    static let BOUNCING_PROJECTILE_SPEED = CGFloat(10.0)
+    
 }
 
 struct AoeProjectileData{

@@ -13,7 +13,7 @@ class BouncingProjectile: GunProjectile {
     var previuousTargets = [Enemy]()
     let numberOfBounces: Int = 2
     let dmgReductionPerBounce: CGFloat = 0.33
-    let bounceRange: CGFloat = 350
+    let bounceRange: CGFloat = 300
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -27,8 +27,9 @@ class BouncingProjectile: GunProjectile {
 
         //This projectile sub-class uses different collison logic
         physicsBody?.contactTestBitMask = 0
+        physicsBody = nil
         
-        previuousTargets.append(target)
+        speed = ProjectileData.BOUNCING_PROJECTILE_SPEED
     }
     
     private func findNewTarget() -> Enemy? {
@@ -60,6 +61,29 @@ class BouncingProjectile: GunProjectile {
         return closestEnemy
     }
     
+    private func checkCollision() -> Enemy? {
+        
+        for node in EnemyNodes.enemiesNode.children {
+            let enemy = node as! Enemy
+            
+            if enemy.contains(self.position) && !previuousTargets.contains(enemy) {
+                
+                return enemy
+                
+            }
+        }
+        
+        return nil
+    }
+    
+    override func destroy() {
+        
+        SoundManager.playMetalTapSFX(scene: GameScene.instance!)
+        
+        self.removeFromParent()
+        
+    }
+    
     override func update() {
         
         let spinPct = CGFloat.pi / 4
@@ -67,17 +91,19 @@ class BouncingProjectile: GunProjectile {
         
         super.update()
         
-        if !self.contains(targetPoint) {
+        //Check collision with enemy
+        guard let enemy = checkCollision() else {
             return
         }
         
-        let enemy = previuousTargets[previuousTargets.count-1]
         enemy.getDamage(dmgValue: self.attackDamage)
+        previuousTargets.append(enemy)
         
+        //Reduce dmg for next/future impact
         self.attackDamage -= Int(CGFloat(self.attackDamage) * dmgReductionPerBounce)
         
         //Destroy projectile if no bounces left
-        if previuousTargets.count >= numberOfBounces+1 {
+        if previuousTargets.count > numberOfBounces {
             self.destroy()
             return
         }
@@ -91,7 +117,6 @@ class BouncingProjectile: GunProjectile {
         //Set new target
         targetPoint = newTarget.position
         setDirection()
-        previuousTargets.append(newTarget)
         
     }
     
