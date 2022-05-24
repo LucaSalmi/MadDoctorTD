@@ -110,7 +110,7 @@ struct TowerData {
 
 //Bullets
 enum ProjectileTypes: Int {
-    case gunProjectile = 0, rapidFireProjectile, sniperProjectile
+    case gunProjectile = 0, rapidFireProjectile, sniperProjectile, bouncingProjectile
 }
 
 struct ProjectileData {
