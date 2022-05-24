@@ -34,8 +34,8 @@ class WaveManager{
     var shouldCreateWave = false
     
     var numberOfAttackers = 0
-    
-    init(totalSlots: Int, choises: [EnemyTypes], enemyRace: EnemyRaces){
+        
+    init(totalSlots: Int, choises: [EnemyTypes]){
         
         currentScene = GameScene.instance
         enemyChoises = choises
@@ -47,7 +47,6 @@ class WaveManager{
     
     private func createWave(choises: [EnemyTypes], enemyRace: EnemyRaces){
         
-        
         waveNumber += 1
         
         if totalSlots < 0{
@@ -56,7 +55,6 @@ class WaveManager{
         }
         
         if waveNumber >= 5 { // level 5 is first boss level
-            print("current wavenumber: \(waveNumber)")
             unlockAttackers = true
             
         }
@@ -289,8 +287,8 @@ class WaveManager{
             waveStartCounter += 1
             if waveStartCounter >= WaveData.WAVE_START_TIME {
                 progressDifficulty()
-                print(enemyChoises)
-                createWave(choises: enemyChoises , enemyRace: .slime)
+                let race = GameScene.instance?.enemyRaceSwitch[GameManager.instance.currentLevel-1] ?? EnemyRaces.slime
+                createWave(choises: enemyChoises , enemyRace: race)
                 
                 waveStartCounter = 0
             }

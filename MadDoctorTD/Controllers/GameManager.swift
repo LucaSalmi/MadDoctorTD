@@ -31,6 +31,8 @@ class GameManager: ObservableObject{
     @Published var sniperTowerUnlocked: Bool = false
     @Published var cannonTowerUnlocked: Bool = false
     
+    @Published var currentLevel = 1
+    
     //SINGLETON
     private init(){}
     
