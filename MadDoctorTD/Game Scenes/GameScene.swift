@@ -276,7 +276,7 @@ class GameScene: SKScene {
             
             let longTapRecognizer = UILongPressGestureRecognizer()
             longTapRecognizer.addTarget(self, action: #selector(handleLongPress(_:)))
-            longTapRecognizer.minimumPressDuration = 1
+            longTapRecognizer.minimumPressDuration = 0.5
             view?.addGestureRecognizer(longTapRecognizer)
         }
         
