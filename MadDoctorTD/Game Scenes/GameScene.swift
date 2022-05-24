@@ -27,6 +27,7 @@ class GameScene: SKScene {
     var waveManager: WaveManager? = nil
     
     //UI Stuff
+    var mainHubBackground: SKSpriteNode?
     var foundationIndicator: SKSpriteNode?
     var foundationIndicatorIncrease: Bool = false
     var rangeIndicator: SKShapeNode?
@@ -45,6 +46,13 @@ class GameScene: SKScene {
     var towerImage: SKSpriteNode?
     var towerNameText: SKLabelNode?
     var damageIndicator: SKSpriteNode?
+    
+    //Summary Screen
+    var waveSummary: SKSpriteNode?
+    var summaryTitle: SKLabelNode?
+    var bossMaterialGained: SKLabelNode?
+    var researchPointsGained: SKLabelNode?
+    var summaryBackButton: SKSpriteNode?
     
     var showDamageIndicator: Bool = false
     
@@ -142,9 +150,17 @@ class GameScene: SKScene {
         damageIndicator = uiScene?.childNode(withName: "DamageIndicator") as? SKSpriteNode
         damageIndicator?.removeFromParent()
         
+        waveSummary = uiScene?.childNode(withName: "WaveSummary") as? SKSpriteNode
+        summaryTitle = waveSummary?.childNode(withName: "SummaryTitle") as? SKLabelNode
+        bossMaterialGained = waveSummary?.childNode(withName: "BossMaterial") as? SKLabelNode
+        researchPointsGained = waveSummary?.childNode(withName: "ResearchPoints") as? SKLabelNode
+        summaryBackButton = waveSummary?.childNode(withName: "BackButton") as? SKSpriteNode
+        waveSummary?.removeFromParent()
         
-        let mainHubBackground = uiScene!.childNode(withName: "MainHubBackground")
+        
+        mainHubBackground = uiScene!.childNode(withName: "MainHubBackground") as? SKSpriteNode
         mainHubBackground?.removeFromParent()
+        self.camera!.addChild(waveSummary!)
         self.camera!.addChild(mainHubBackground!)
         self.camera!.addChild(foundationUI!)
         self.camera!.addChild(towerUI!)
@@ -466,7 +482,7 @@ class GameScene: SKScene {
         for node in touchedNodes {
             
             if node.name == "SellTowerButton" || node.name == "SellFoundationButton" || node.name == "BuildFoundationButton"
-                || node.name == "BuildTowerButton" || node.name == "ReadyButton" || node.name == "ResearchButton"{
+                || node.name == "BuildTowerButton" || node.name == "ReadyButton" || node.name == "ResearchButton" || node.name == "BackButton"{
                 
                 extraButtons(nodeName: node.name!)
                 return
@@ -622,6 +638,11 @@ class GameScene: SKScene {
         researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
         readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
     }
+    func showSummary(){
+        hideAllMenus()
+        mainHubBackground?.alpha = 0
+        waveSummary?.alpha = 1
+    }
     
     
     private func extraButtons(nodeName: String){
@@ -675,6 +696,10 @@ class GameScene: SKScene {
                 SoundManager.playSFX(sfxName: SoundManager.switchToResearchRoomSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere, bgmExtension: SoundManager.mp3Extension)
             }
+            
+        case "BackButton":
+            waveSummary?.alpha = 0
+            mainHubBackground?.alpha = 1
             
             
         default:
@@ -865,8 +890,9 @@ class GameScene: SKScene {
             return
         }
         
-        if GameSceneCommunicator.instance.isBuildPhase {
+        if GameSceneCommunicator.instance.isBuildPhase && waveSummary?.alpha == 0{
             showBuildButtonsUI()
+            showTowerUI()
         }
         else {
             hideBuildButtonsUI()
