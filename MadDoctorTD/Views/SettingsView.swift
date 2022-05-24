@@ -5,12 +5,14 @@
 //  Created by Calle Höglund on 2022-05-03.
 //
 import SwiftUI
+import SpriteKit
 
 struct SettingsView: View {
     
     var title: String
     @ObservedObject var appManager = AppManager.appManager
     @ObservedObject var gameManager = GameManager.instance
+    let creditsScene = SKScene(fileNamed: "CreditsScene")
     
     
     var body: some View {
@@ -42,7 +44,20 @@ struct SettingsView: View {
                         .font(.title)
                 }
 
+             
+            if appManager.state == .settingsMenu{
+                Button {
+                    appManager.state = .creditsScene
+                        
+                } label: {
+                    Text("Credits")
+                }
+            }
                 
+            
+            
+            
+
             
             
             
