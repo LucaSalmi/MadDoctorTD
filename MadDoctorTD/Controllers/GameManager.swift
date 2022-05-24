@@ -16,7 +16,7 @@ class GameManager: ObservableObject{
     @Published var isPaused: Bool = false
     @Published var currentMoney: Int = PlayerData.START_MONEY
     
-    @Published var slimeMaterials: Int = 0
+    @Published var slimeMaterials: Int = 1
     @Published var squidMaterials: Int = 0
     
     @Published var nextWaveCounter: Int = 0
@@ -30,9 +30,20 @@ class GameManager: ObservableObject{
     @Published var isGameOver: Bool = false
     @Published var baseHp: Int = PlayerData.BASE_HP
     
+    //Rapid Fire Tower Unlocks
     @Published var rapidFireTowerUnlocked: Bool = false
+    
+    //Sniper Tower Unlocks
     @Published var sniperTowerUnlocked: Bool = false
+    
+    //Cannon Tower Unlocks
     @Published var cannonTowerUnlocked: Bool = false
+    
+    //Gun Tower Unlocks
+    @Published var gunTowerDamageUnlocked: Bool = false
+    @Published var gunTowerSpeedUnlocked: Bool = false
+    @Published var gunTowerRangeUnlocked: Bool = false
+    @Published var bouncingProjectilesUnlocked: Bool = false
     
     @Published var currentLevel = 1
     

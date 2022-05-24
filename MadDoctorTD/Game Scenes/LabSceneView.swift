@@ -159,28 +159,38 @@ struct MiddleArea: View {
             
             HStack {
                 
-                Button {
-                    communicator.selectedTreeButtonId = "2"
-                    checkIfBuyable()
-                } label: {
-                    ZStack {
-                        LabButtonImage("clickable_tile", "2")
-                        Text("2")
-                    }
-                }
-                
-            }
-            
-            HStack {
-                
                 VStack {
                     
                     Button {
+                        communicator.selectedTreeButtonId = "2a"
+                        checkIfBuyable()
+                    } label: {
+                        ZStack {
+                            LabButtonImage("clickable_tile", "2a")
+                            Text("2a")
+                        }
+                    }
+                    
+                    Button {
                         communicator.selectedTreeButtonId = "3a"
+                        checkIfBuyable()
                     } label: {
                         ZStack {
                             LabButtonImage("clickable_tile", "3a")
                             Text("3a")
+                        }
+                    }
+                    
+                }
+                
+                VStack {
+                    
+                    Button {
+                        communicator.selectedTreeButtonId = "2b"
+                    } label: {
+                        ZStack {
+                            LabButtonImage("clickable_tile", "2b")
+                            Text("2b")
                         }
                     }
                     
@@ -192,49 +202,28 @@ struct MiddleArea: View {
                             Text("3b")
                         }
                     }
-                    
                 }
                 
                 VStack {
                     
                     Button {
-                        communicator.selectedTreeButtonId = "4a"
+                        communicator.selectedTreeButtonId = "2c"
                     } label: {
                         ZStack {
-                            LabButtonImage("clickable_tile", "4a")
-                            Text("4a")
+                            LabButtonImage("clickable_tile", "2c")
+                            Text("2c")
                         }
                     }
-                    
-                    Button {
-                        communicator.selectedTreeButtonId = "4b"
-                    } label: {
+                    Button(action: {
+                        communicator.selectedTreeButtonId = "3c"
+                    }, label: {
                         ZStack {
-                            LabButtonImage("clickable_tile", "4b")
-                            Text("4b")
+                            LabButtonImage("clickable_tile", "3c")
+                            Text("3c")
+                            
                         }
-                    }
-                }
-                
-                VStack {
+                    })
                     
-                    Button {
-                        communicator.selectedTreeButtonId = "5a"
-                    } label: {
-                        ZStack {
-                            LabButtonImage("clickable_tile", "5a")
-                            Text("5a")
-                        }
-                    }
-                    
-                    ZStack {
-                        LabButtonImage("clickable_tile", "5b")
-                        Button(action: {
-                            communicator.selectedTreeButtonId = "5b"
-                        }, label: {
-                            Text("5b")
-                        })
-                    }
                 }
             }
             
@@ -297,14 +286,57 @@ struct MiddleArea: View {
             return
         }
         
-        if GameManager.instance.researchPoints <= 0 {
+        if GameManager.instance.researchPoints < getPrice() {
             error = ErrorInfo(title: "Error", description: "Not enough Research point")
+            return
+        }
+        
+        if costsSlimeMaterial() && gameManager.slimeMaterials <= 0 {
+            error = ErrorInfo(title: "Error", description: "Not enough Slime materials")
+            return
+        }
+        
+        if costsSquidMaterial() && gameManager.squidMaterials <= 0 {
+            error = ErrorInfo(title: "Error", description: "Not enough Squid materials")
             return
         }
         
         let description = createTowerDescription()
         confirmation = ErrorInfo(title: "Do you really want to buy this upgrade?", description: description)
         
+    }
+    
+    private func getPrice() -> Int {
+        
+        return 1
+        
+    }
+    
+    private func costsSlimeMaterial() -> Bool {
+        
+        switch communicator.selectedTowerType {
+            
+        case .gunTower:
+            
+            switch communicator.selectedTreeButtonId {
+                
+            case "3a":
+                return true
+                
+            default:
+                return false
+                
+            }
+            
+        default:
+            return false
+            
+        }
+        
+    }
+    
+    private func costsSquidMaterial() -> Bool {
+        return false
     }
     
     func checkIfUpgraded() -> ErrorType{
@@ -395,6 +427,26 @@ struct MiddleArea: View {
             switch communicator.selectedTreeButtonId {
             case "1":
                 return .unlocked
+                
+            case "2a":
+                if gameManager.gunTowerDamageUnlocked {
+                    return .unlocked
+                }
+                gameManager.gunTowerDamageUnlocked = true
+                gameManager.researchPoints -= 1
+                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "3a":
+                if gameManager.bouncingProjectilesUnlocked {
+                    return .unlocked
+                }
+                gameManager.bouncingProjectilesUnlocked = true
+                gameManager.researchPoints -= 1
+                gameManager.slimeMaterials -= 1
+                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
             default:
                 print("not implemented")
             }
