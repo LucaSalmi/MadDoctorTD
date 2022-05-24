@@ -180,26 +180,26 @@ class Tower: SKSpriteNode{
             if self is GunTower && damageUpgradeCount == 2 && !gameManager.bouncingProjectilesUnlocked {
                 return
             }
-            else {
+            else if self is GunTower {
                 let gunTower = self as! GunTower
                 gunTower.activateBouncingProjectiles()
             }
             if self is RapidFireTower && damageUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is RapidFireTower {
                 //material upgrade goes here
             }
             if self is SniperTower && damageUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is SniperTower {
                 //material upgrade goes here
             }
             if self is CannonTower && damageUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is CannonTower {
                 //material upgrade goes here
             }
             
@@ -229,25 +229,25 @@ class Tower: SKSpriteNode{
             if self is GunTower && rangeUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is GunTower {
                 //material upgrade goes here
             }
             if self is RapidFireTower && rangeUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is RapidFireTower {
                 //material upgrade goes here
             }
             if self is SniperTower && rangeUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is SniperTower {
                 //material upgrade goes here
             }
             if self is CannonTower && rangeUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is CannonTower {
                 //material upgrade goes here
             }
             
@@ -277,25 +277,25 @@ class Tower: SKSpriteNode{
             if self is GunTower && rateOfFireUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is GunTower {
                 //material upgrade goes here
             }
             if self is RapidFireTower && rateOfFireUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is RapidFireTower {
                 //material upgrade goes here
             }
             if self is SniperTower && rateOfFireUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is SniperTower {
                 //material upgrade goes here
             }
             if self is CannonTower && rateOfFireUpgradeCount == 2 {
                 return
             }
-            else {
+            else if self is CannonTower {
                 //material upgrade goes here
             }
             

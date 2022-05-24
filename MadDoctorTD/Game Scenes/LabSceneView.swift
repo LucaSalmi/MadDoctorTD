@@ -74,6 +74,7 @@ struct TopArea: View {
             Button {
                 communicator.selectType(type: .gunTower)
                 SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                updateTreeImages()
                 print("gunTower button pressed")
             } label: {
                 Image("blast_tower")
@@ -84,6 +85,7 @@ struct TopArea: View {
             Button {
                 communicator.selectType(type: .rapidFireTower)
                 SoundManager.playSFX(sfxName: SoundManager.buttonTwoSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                updateTreeImages()
                 print("rapidFire button pressed")
             } label: {
                 Image("speed_tower")
@@ -94,6 +96,7 @@ struct TopArea: View {
             Button {
                 communicator.selectType(type: .sniperTower)
                 SoundManager.playSFX(sfxName: SoundManager.buttonThreeSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                updateTreeImages()
                 print("sniperTower button pressed")
             } label: {
                 ZStack {
@@ -109,6 +112,7 @@ struct TopArea: View {
             Button {
                 communicator.selectType(type: .cannonTower)
                 SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                updateTreeImages()
                 print("cannonTower button pressed")
             } label: {
                 Image("cannon_tower")
@@ -118,7 +122,44 @@ struct TopArea: View {
             
         }.background(.black)
             .padding()
+            .onAppear(perform: {
+                updateTreeImages()
+            })
         
+    }
+    
+    private func updateTreeImages() {
+        switch communicator.selectedTowerType {
+            
+        case .gunTower:
+            communicator.image2a = "damage_upgrade_0"
+            communicator.image3a = "bouncing_projectile"
+            communicator.image2b = "Daniel"
+            communicator.image3b = "Daniel"
+            communicator.image2c = "Daniel"
+            communicator.image3c = "Daniel"
+        case .rapidFireTower:
+            communicator.image2a = "Daniel"
+            communicator.image3a = "Daniel"
+            communicator.image2b = "Daniel"
+            communicator.image3b = "Daniel"
+            communicator.image2c = "Daniel"
+            communicator.image3c = "Daniel"
+        case .sniperTower:
+            communicator.image2a = "Daniel"
+            communicator.image3a = "Daniel"
+            communicator.image2b = "Daniel"
+            communicator.image3b = "Daniel"
+            communicator.image2c = "Daniel"
+            communicator.image3c = "Daniel"
+        case .cannonTower:
+            communicator.image2a = "Daniel"
+            communicator.image3a = "Daniel"
+            communicator.image2b = "Daniel"
+            communicator.image3b = "Daniel"
+            communicator.image2c = "Daniel"
+            communicator.image3c = "Daniel"
+        }
     }
     
 }
@@ -166,8 +207,15 @@ struct MiddleArea: View {
                         checkIfBuyable()
                     } label: {
                         ZStack {
+                            
                             LabButtonImage("clickable_tile", "2a")
-                            Text("2a")
+                            Image(communicator.image2a)
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            Image("faded_button_layer")
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                                .opacity(changeOpacity())
                         }
                     }
                     
@@ -176,8 +224,15 @@ struct MiddleArea: View {
                         checkIfBuyable()
                     } label: {
                         ZStack {
+                            
                             LabButtonImage("clickable_tile", "3a")
-                            Text("3a")
+                            Image(communicator.image3a)
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            Image("faded_button_layer")
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                                .opacity(changeOpacity())
                         }
                     }
                     
@@ -189,8 +244,15 @@ struct MiddleArea: View {
                         communicator.selectedTreeButtonId = "2b"
                     } label: {
                         ZStack {
+                            
                             LabButtonImage("clickable_tile", "2b")
-                            Text("2b")
+                            Image(communicator.image2b)
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            Image("faded_button_layer")
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                                .opacity(changeOpacity())
                         }
                     }
                     
@@ -198,8 +260,15 @@ struct MiddleArea: View {
                         communicator.selectedTreeButtonId = "3b"
                     } label: {
                         ZStack {
+                            
                             LabButtonImage("clickable_tile", "3b")
-                            Text("3b")
+                            Image(communicator.image3b)
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            Image("faded_button_layer")
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                                .opacity(changeOpacity())
                         }
                     }
                 }
@@ -210,16 +279,30 @@ struct MiddleArea: View {
                         communicator.selectedTreeButtonId = "2c"
                     } label: {
                         ZStack {
+                            
                             LabButtonImage("clickable_tile", "2c")
-                            Text("2c")
+                            Image(communicator.image2c)
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            Image("faded_button_layer")
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                                .opacity(changeOpacity())
                         }
                     }
                     Button(action: {
                         communicator.selectedTreeButtonId = "3c"
                     }, label: {
                         ZStack {
+                            
                             LabButtonImage("clickable_tile", "3c")
-                            Text("3c")
+                            Image(communicator.image3c)
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            Image("faded_button_layer")
+                                .resizable()
+                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                                .opacity(changeOpacity())
                             
                         }
                     })
@@ -438,6 +521,9 @@ struct MiddleArea: View {
                 return .success
                 
             case "3a":
+                if !gameManager.gunTowerDamageUnlocked {
+                    return .error
+                }
                 if gameManager.bouncingProjectilesUnlocked {
                     return .unlocked
                 }
