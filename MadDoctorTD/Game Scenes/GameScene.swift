@@ -603,7 +603,7 @@ class GameScene: SKScene {
         for node in touchedNodes {
             
             if node is Tower{
-                
+                print("tower pressed")
                 let tower = node as! Tower
                 tower.onClick()
              
