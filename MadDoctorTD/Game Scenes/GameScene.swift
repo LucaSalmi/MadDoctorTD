@@ -1206,15 +1206,15 @@ class GameScene: SKScene {
             switch upgradeTypePreview{
                     
             case .damage:
-                let newDmg = Int(Double(currentTower.attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
+                let newDmg = Double(currentTower.attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT
                 statUpgradePreviewText?.text = "Damage: \(currentTower.attackDamage) -> \(String(format: "%.0f", newDmg))"
             case .none:
                 statUpgradePreviewText?.text = "ERROR"
             case .range:
-                let newRange = Int(Double(currentTower.attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
+                let newRange = Double(currentTower.attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT
                 statUpgradePreviewText?.text = "Range: \(String(format: "%.0f", currentTower.attackRange)) -> \(String(format: "%.0f", newRange))"
             case .firerate:
-                let newFIreRate = Int(Double(currentTower.fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
+                let newFIreRate = Double(currentTower.fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT
                 statUpgradePreviewText?.text = "Shots per Second: \(currentTower.fireRate) -> \(String(format: "%.0f", newFIreRate))"
             }
             
