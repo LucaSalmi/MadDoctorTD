@@ -964,7 +964,7 @@ class GameScene: SKScene {
         
         if GameSceneCommunicator.instance.isBuildPhase && waveSummary?.alpha == 0{
             showBuildButtonsUI()
-            showTowerUI()
+            //showTowerUI()
         }
         else {
             hideBuildButtonsUI()
