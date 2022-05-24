@@ -32,12 +32,21 @@ class GameManager: ObservableObject{
     
     //Rapid Fire Tower Unlocks
     @Published var rapidFireTowerUnlocked: Bool = false
+    @Published var rapidFireTowerDamageUnlocked: Bool = false
+    @Published var rapidFireTowerSpeedUnlocked: Bool = false
+    @Published var rapidFireTowerRangeUnlocked: Bool = false
     
     //Sniper Tower Unlocks
     @Published var sniperTowerUnlocked: Bool = false
+    @Published var sniperTowerDamageUnlocked: Bool = false
+    @Published var sniperTowerSpeedUnlocked: Bool = false
+    @Published var sniperTowerRangeUnlocked: Bool = false
     
     //Cannon Tower Unlocks
     @Published var cannonTowerUnlocked: Bool = false
+    @Published var cannonTowerDamageUnlocked: Bool = false
+    @Published var cannonTowerSpeedUnlocked: Bool = false
+    @Published var cannonTowerRangeUnlocked: Bool = false
     
     //Gun Tower Unlocks
     @Published var gunTowerDamageUnlocked: Bool = false
