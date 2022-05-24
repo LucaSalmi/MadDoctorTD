@@ -355,6 +355,34 @@ struct MiddleArea: View {
                 return "Better then a Finnish sniper. long range, high damage shots with a long cooldown. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
             }
             
+        case "2a":
+            
+            switch communicator.selectedTowerType {
+                
+            case .gunTower:
+                return "Unlock level 2 damage for Gun Towers?"
+            case .rapidFireTower:
+                return "ERROR"
+            case .sniperTower:
+                return "ERROR"
+            case .cannonTower:
+                return "ERROR"
+            }
+            
+        case "3a":
+            
+            switch communicator.selectedTowerType {
+                
+            case .gunTower:
+                return "Unlock bouncing projectiles for Gun Towers?"
+            case .rapidFireTower:
+                return "ERROR"
+            case .sniperTower:
+                return "ERROR"
+            case .cannonTower:
+                return "ERROR"
+            }
+            
         default:
             return "ERROR"
         }
@@ -517,7 +545,7 @@ struct MiddleArea: View {
                 }
                 gameManager.gunTowerDamageUnlocked = true
                 gameManager.researchPoints -= 1
-                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "3a":
@@ -530,7 +558,7 @@ struct MiddleArea: View {
                 gameManager.bouncingProjectilesUnlocked = true
                 gameManager.researchPoints -= 1
                 gameManager.slimeMaterials -= 1
-                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             default:
