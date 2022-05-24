@@ -317,10 +317,16 @@ class WaveManager{
             print("Current level completed!")
             GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
             GameSceneCommunicator.instance.isBuildPhase = true
+            
+            
+            
             GameScene.instance?.readyButton?.alpha = 1
             GameScene.instance?.buildFoundationButton?.alpha = 1
             GameScene.instance?.researchButton?.alpha = 1
             GameScene.instance?.upgradeMenuToggle?.alpha = 1
+            
+            GameScene.instance?.showSummary()
+            
             SoundManager.stopMusic()
             
             //Door animation:
