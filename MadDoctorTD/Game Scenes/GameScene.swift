@@ -46,6 +46,12 @@ class GameScene: SKScene {
     var towerNameText: SKLabelNode?
     var damageIndicator: SKSpriteNode?
     
+    var towerInfoMenu: SKSpriteNode?
+    var attackStatLabel: SKLabelNode?
+    var fireRateStatLabel: SKLabelNode?
+    var rangeStatLabel: SKLabelNode?
+    
+    
     var showDamageIndicator: Bool = false
     
     var rateOfFireImage: SKSpriteNode?
@@ -142,6 +148,10 @@ class GameScene: SKScene {
         damageIndicator = uiScene?.childNode(withName: "DamageIndicator") as? SKSpriteNode
         damageIndicator?.removeFromParent()
         
+        //towerInfoMenu
+        towerInfoMenu = uiScene?.childNode(withName: "TowerInfoNode") as? SKSpriteNode
+        towerInfoMenu?.removeFromParent()
+        
         
         let mainHubBackground = uiScene!.childNode(withName: "MainHubBackground")
         mainHubBackground?.removeFromParent()
@@ -150,6 +160,8 @@ class GameScene: SKScene {
         self.camera!.addChild(towerUI!)
         self.camera!.addChild(damageIndicator!)
         self.addChild(uiNode)
+        
+        self.camera?.addChild(towerInfoMenu!)
                 
         upgradeUI = uiScene!.childNode(withName: "UpgradeMenu") as? SKSpriteNode
         upgradeUI?.removeFromParent()
@@ -161,6 +173,10 @@ class GameScene: SKScene {
         foundationUpgradeButton = foundationUI?.childNode(withName: "UpgradeFoundation") as? SKSpriteNode
         foundationRepairButton = foundationUI?.childNode(withName: "RepairFoundation") as? SKSpriteNode
         
+        //towerInfoMenu
+        attackStatLabel = towerInfoMenu?.childNode(withName: "TowerInfoAttack") as? SKLabelNode
+        fireRateStatLabel = towerInfoMenu?.childNode(withName: "TowerInfoFirerate") as? SKLabelNode
+        rangeStatLabel = towerInfoMenu?.childNode(withName: "TowerInfoRange") as? SKLabelNode
         
         
         damageImage = upgradeUI?.childNode(withName: "AttackButton") as? SKSpriteNode
@@ -539,6 +555,18 @@ class GameScene: SKScene {
             }
         }
         
+        for node in touchedNodes{
+            if node.name == "TowerLogo"{
+                
+                showTowerInfo()
+                displayRangeIndicator(attackRange: communicator.currentTower!.attackRange, position: communicator.currentTower!.position)
+                
+                return
+            }
+            
+            
+        }
+        
         for node in touchedNodes {
             
             if node is Tower{
@@ -573,10 +601,30 @@ class GameScene: SKScene {
         
     }
     
+    func showTowerInfo(){
+        
+        guard let currentTower = GameSceneCommunicator.instance.currentTower else {return}
+        attackStatLabel?.text = "Attack Power: \(currentTower.attackDamage)"
+        fireRateStatLabel?.text = "Fire Rate: \(currentTower.fireRate)"
+        rangeStatLabel?.text = "Range: \(currentTower.attackRange)"
+        
+        towerInfoMenu?.alpha = 1
+        towerUI?.alpha = 0
+        upgradeUI?.alpha = 0
+        foundationUI?.alpha = 0
+        
+        if GameSceneCommunicator.instance.isBuildPhase{
+            foundationMenuToggle?.alpha = 1
+        }
+        else{foundationMenuToggle?.alpha = 0}
+        
+    }
+    
     func showTowerUI(){
         towerUI?.alpha = 1
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 0
+        towerInfoMenu?.alpha = 0
         
         if GameSceneCommunicator.instance.isBuildPhase{
             foundationMenuToggle?.alpha = 1
@@ -588,6 +636,7 @@ class GameScene: SKScene {
         towerUI?.alpha = 0
         upgradeUI?.alpha = 1
         foundationUI?.alpha = 0
+        towerInfoMenu?.alpha = 0
         
         
         if GameSceneCommunicator.instance.isBuildPhase{
@@ -598,6 +647,7 @@ class GameScene: SKScene {
         towerUI?.alpha = 0
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 1
+        towerInfoMenu?.alpha = 0
         let foundation = GameSceneCommunicator.instance.currentFoundation!
         foundation.updateUpgradeButtonTexture()
         displayFoundationIndicator(position: foundation.position)
@@ -619,6 +669,7 @@ class GameScene: SKScene {
         towerUI?.alpha = 0
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 0
+        towerInfoMenu?.alpha = 0
         researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
         readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
     }
