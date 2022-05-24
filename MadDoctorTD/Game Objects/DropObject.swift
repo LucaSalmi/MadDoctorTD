@@ -13,16 +13,19 @@ class DropObject: SKSpriteNode{
     var materialType: EnemyRaces? = nil
     let targetNode = SKSpriteNode()
     var direction: CGPoint = CGPoint(x: 0, y: 0)
+    var materialTexture = SKTexture()
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
     
-    init(startPoint: CGPoint, targetPoint: CGPoint, bossTexture: SKTexture, materialType: EnemyRaces){
+    init(startPoint: CGPoint, targetPoint: CGPoint, materialType: EnemyRaces){
         
         let size = CGSize(width: FoundationData.SIZE.width/2, height: FoundationData.SIZE.height/2)
-        super.init(texture: bossTexture, color: .clear, size: size)
-        self.texture = bossTexture
+        super.init(texture: materialTexture, color: .clear, size: size)
+        
+        self.texture = getMaterialTexture(materialType: materialType)
         self.size.width /= 2
         self.size.height /= 2
         self.speed = CGFloat(10.0)
@@ -34,6 +37,17 @@ class DropObject: SKSpriteNode{
         targetNode.size = FoundationData.SIZE
         
         setDirection()
+        
+    }
+    
+    private func getMaterialTexture(materialType: EnemyRaces) -> SKTexture{
+        
+        switch materialType {
+        case .slime:
+            return SKTexture(imageNamed: "BossTexture")
+        case .squid:
+            return SKTexture(imageNamed: "wheelie 1")
+        }
         
     }
     
@@ -79,7 +93,7 @@ class DropObject: SKSpriteNode{
             GameManager.instance.slimeMaterials += 1
             
         case .squid:
-            print("Squid")
+            GameManager.instance.squidMaterials += 1
             
         case .none:
             print("none")

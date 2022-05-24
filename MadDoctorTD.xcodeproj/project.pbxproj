@@ -94,6 +94,7 @@
 		C844A739282A982800FC42C9 /* EnemiesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A738282A982800FC42C9 /* EnemiesFactory.swift */; };
 		C844A73C282AA26C00FC42C9 /* SquidEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A73B282AA26C00FC42C9 /* SquidEnemy.swift */; };
 		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
+		C8978746283CC8A4006E52A8 /* SquidMaterialDialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8978745283CC8A4006E52A8 /* SquidMaterialDialogue.swift */; };
 		C897BC1D282510380085D093 /* WaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1C282510380085D093 /* WaveManager.swift */; };
 		C897BC1F282515260085D093 /* RandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1E282515260085D093 /* RandomNumberGenerator.swift */; };
 		C89DA1DB282E857D00364AB4 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89DA1DA282E857D00364AB4 /* GameOverView.swift */; };
@@ -209,6 +210,7 @@
 		C844A738282A982800FC42C9 /* EnemiesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemiesFactory.swift; sourceTree = "<group>"; };
 		C844A73B282AA26C00FC42C9 /* SquidEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquidEnemy.swift; sourceTree = "<group>"; };
 		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		C8978745283CC8A4006E52A8 /* SquidMaterialDialogue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquidMaterialDialogue.swift; sourceTree = "<group>"; };
 		C897BC1C282510380085D093 /* WaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveManager.swift; sourceTree = "<group>"; };
 		C897BC1E282515260085D093 /* RandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNumberGenerator.swift; sourceTree = "<group>"; };
 		C89DA1DA282E857D00364AB4 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 			children = (
 				C8E0591B2836869F00BB2F9F /* Dialogue.swift */,
 				C8E0591D2836874B00BB2F9F /* SlimeMaterialObtainedDialogue.swift */,
+				C8978745283CC8A4006E52A8 /* SquidMaterialDialogue.swift */,
 			);
 			path = OnScreenText;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				E5268CD02822708600F134A5 /* GunTower.swift in Sources */,
 				C839C6BD2821586300F66043 /* GameManager.swift in Sources */,
 				C868AACE28229790003F91D0 /* Enemy.swift in Sources */,
+				C8978746283CC8A4006E52A8 /* SquidMaterialDialogue.swift in Sources */,
 				C8E693452823C38F00D0A661 /* Edge.swift in Sources */,
 				C839C6CE28216A0A00F66043 /* PhysicsExtension.swift in Sources */,
 				C839C6D028216CD400F66043 /* FoundationPlate.swift in Sources */,

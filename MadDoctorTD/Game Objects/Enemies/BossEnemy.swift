@@ -19,7 +19,7 @@ class Boss: Enemy{
     
     init(texture: SKTexture){
         
-        super.init(texture: texture, color: .clear)
+        super.init(texture: texture, color: .red)
         
         baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.BOSS_SPEED_MODIFIER
         waveSlotSize = EnemiesData.BOSS_ENEMY_SLOT
@@ -28,15 +28,15 @@ class Boss: Enemy{
         damageValue = EnemiesData.BOSS_DAMAGE_VALUE
         isAttacker = true
         self.enemyType = .boss
-        self.alpha = 0
+        self.alpha = 1
         attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 2
         attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE * 2
         baseSpeed = 1.5
         killValue *= waveSlotSize
-        size.width *= 2
-        size.height *= 2
-        bossTexture = SKSpriteNode(texture: texture, color: .clear, size: self.size)
+        let size = CGSize(width: self.size.width * 4, height: self.size.height * 4)
+        bossTexture = SKSpriteNode(texture: texture, color: .clear, size: size)
         bossTexture?.name = "BossTexture"
+        physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Foundation
         physicsBody?.categoryBitMask = PhysicsCategory.Boss
         
@@ -61,6 +61,11 @@ class Boss: Enemy{
             }else if nextMoveCount >= 120{
                 
                 nextMoveCount = 0
+                
+            }else if nextMoveCount == 61{
+                
+                PhysicsUtils.shakeCamera(duration: 1)
+                
             }
         }
     }

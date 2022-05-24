@@ -15,7 +15,9 @@ class GameManager: ObservableObject{
     //Variables
     @Published var isPaused: Bool = false
     @Published var currentMoney: Int = PlayerData.START_MONEY
+    
     @Published var slimeMaterials: Int = 0
+    @Published var squidMaterials: Int = 0
     
     @Published var nextWaveCounter: Int = 0
     @Published var currentWave: Int = 1
@@ -32,7 +34,7 @@ class GameManager: ObservableObject{
     @Published var sniperTowerUnlocked: Bool = false
     @Published var cannonTowerUnlocked: Bool = false
     
-    @Published var currentLevel = 2
+    @Published var currentLevel = 1
     
     //SINGLETON
     private init(){}

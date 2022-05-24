@@ -87,4 +87,30 @@ class PhysicsUtils{
         
     }
     
+    static func shakeCamera(duration: CGFloat) {
+        
+        guard let scene = GameScene.instance else {return}
+        
+        //if Options.options.isScreenShakeOn == false{return}
+        
+        let amplitudeX: CGFloat = 10;
+        let amplitudeY: CGFloat = 6;
+        let numberOfShakes = duration / 0.04;
+        var actionsArray = [SKAction]();
+        for _ in 1...Int(numberOfShakes) {
+            // build a new random shake and add it to the list
+            let moveX = CGFloat(arc4random_uniform(UInt32(amplitudeX))) - amplitudeX / 2;
+            let moveY = CGFloat(arc4random_uniform(UInt32(amplitudeY))) - amplitudeY / 2;
+            let shakeAction = SKAction.moveBy(x: moveX, y: moveY, duration: 0.02);
+            shakeAction.timingMode = SKActionTimingMode.easeOut;
+            actionsArray.append(shakeAction);
+            actionsArray.append(shakeAction.reversed());
+        }
+
+        let actionSeq = SKAction.sequence(actionsArray);
+        
+        scene.camera?.run(actionSeq)
+
+    }
+    
 }
