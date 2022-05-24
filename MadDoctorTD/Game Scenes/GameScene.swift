@@ -641,6 +641,11 @@ class GameScene: SKScene {
     func showSummary(){
         hideAllMenus()
         mainHubBackground?.alpha = 0
+        
+        if waveManager?.waveNumber == 10 || waveManager?.waveNumber == 20{
+            bossMaterialGained?.text = "Boss Material: +1"
+        } 
+        
         waveSummary?.alpha = 1
     }
     

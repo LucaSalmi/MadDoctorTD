@@ -24,7 +24,7 @@ class WaveManager{
     
     let wavesPerLevel = 5
     
-    var bossLevel = 5
+    var bossLevel = 10
     
     var attackLevel = 6
     var unlockAttackers = false
@@ -59,7 +59,7 @@ class WaveManager{
             
         }
         if waveNumber == bossLevel + 1 {
-            bossLevel += 5
+            bossLevel += 10
         }
         
         if waveNumber == attackLevel + 1{
