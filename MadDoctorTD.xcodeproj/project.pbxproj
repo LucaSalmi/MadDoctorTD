@@ -20,6 +20,7 @@
 		3359CC9C28214F6200878191 /* LabSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CC9B28214F6200878191 /* LabSceneView.swift */; };
 		3359CCA4282157C500878191 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CCA3282157C500878191 /* MyTileSet.sks */; };
 		3359CCA62821596700878191 /* ClickableTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CCA52821596700878191 /* ClickableTile.swift */; };
+		337CAE0D283CB913004B8ACB /* BouncingProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337CAE0C283CB913004B8ACB /* BouncingProjectile.swift */; };
 		3398938828362CAC006B0374 /* MoneyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398938728362CAC006B0374 /* MoneyObject.swift */; };
 		3398938A28363B3C006B0374 /* PriceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398938928363B3C006B0374 /* PriceObject.swift */; };
 		33B86801282D08DA004AA4D4 /* LabSceneCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */; };
@@ -132,6 +133,7 @@
 		3359CC9B28214F6200878191 /* LabSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneView.swift; sourceTree = "<group>"; };
 		3359CCA3282157C500878191 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		3359CCA52821596700878191 /* ClickableTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTile.swift; sourceTree = "<group>"; };
+		337CAE0C283CB913004B8ACB /* BouncingProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncingProjectile.swift; sourceTree = "<group>"; };
 		3398938728362CAC006B0374 /* MoneyObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyObject.swift; sourceTree = "<group>"; };
 		3398938928363B3C006B0374 /* PriceObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceObject.swift; sourceTree = "<group>"; };
 		33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneCommunicator.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			children = (
 				332033192822ABF500133BBA /* Projectile.swift */,
 				3320331C2822ACFA00133BBA /* GunProjectile.swift */,
+				337CAE0C283CB913004B8ACB /* BouncingProjectile.swift */,
 				E5268CD528253E6600F134A5 /* SniperProjectile.swift */,
 				E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */,
 				E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */,
@@ -635,6 +638,7 @@
 				C839C6C62821619200F66043 /* LabMenuView.swift in Sources */,
 				E5836FF9282A652D00EAF6E9 /* AoeProjectile.swift in Sources */,
 				C8E0591E2836874B00BB2F9F /* SlimeMaterialObtainedDialogue.swift in Sources */,
+				337CAE0D283CB913004B8ACB /* BouncingProjectile.swift in Sources */,
 				C8E0591828365CED00BB2F9F /* DropObject.swift in Sources */,
 				E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */,
 				3398938A28363B3C006B0374 /* PriceObject.swift in Sources */,
