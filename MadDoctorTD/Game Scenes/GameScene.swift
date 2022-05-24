@@ -82,6 +82,8 @@ class GameScene: SKScene {
     var dialoguesNode: SKNode = SKNode()
     var showNewMaterialMessage = false
     
+    var enemyRaceSwitch: [EnemyRaces] = [.slime, .squid]
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -285,7 +287,7 @@ class GameScene: SKScene {
         pathfindingTestEnemy!.movePoints = pathfindingTestEnemy!.getMovePoints()
         addChild(pathfindingTestEnemy!)
         
-        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard], enemyRace: .slime)
+        waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard])
         
         portalPosition = spawnPoint!.position
     }
@@ -493,9 +495,6 @@ class GameScene: SKScene {
                 
                 return
             }
-            
-            
-            
         }
         
         for node in touchedNodes {
