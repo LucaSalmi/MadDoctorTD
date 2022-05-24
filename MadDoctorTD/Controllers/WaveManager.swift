@@ -19,6 +19,7 @@ class WaveManager{
     var wavesCompleted = 0
     var enemyChoises = [EnemyTypes]()
     
+    var reduceSpawnTime = 0
     var spawnCounter = 0
     var waveStartCounter = 0
     
@@ -74,9 +75,9 @@ class WaveManager{
 
         maximumAtkSpawn = waveNumber/10 // 10%
         }
-       
         
         var occupiedSlots = 0
+        
         if waveNumber == bossLevel {
             totalSlots = EnemiesData.BOSS_ENEMY_SLOT
         } else {
@@ -258,17 +259,21 @@ class WaveManager{
     
     func progressDifficulty(){
         
-        if waveNumber == 1{
+        if waveNumber == 3{
             enemyChoises.append(.fast)
-        }else if waveNumber == 2{
+        }else if waveNumber == 6{
             enemyChoises.append(.heavy)
-        }else if waveNumber == 3{
+        }else if waveNumber == 9{
             enemyChoises.append(.flying)
-        }else if waveNumber == bossLevel - 1{
-            enemyChoises = [.boss]
-        } else {
-            enemyChoises = [.standard,.heavy,.flying,.fast]
         }
+        if waveNumber >= 10 {
+            if waveNumber == bossLevel - 1{
+                enemyChoises = [.boss]
+            } else {
+                enemyChoises = [.standard,.heavy,.flying,.fast]
+            }
+        }
+        
     }
     
     /* UPDATE */
@@ -283,9 +288,13 @@ class WaveManager{
     //Timers for starting the wave and then spawn one enemy from the wave
     func timers(){
         
+        if waveNumber == attackLevel {
+            reduceSpawnTime += 5
+        }
+        
         if shouldCreateWave {
             waveStartCounter += 1
-            if waveStartCounter >= WaveData.WAVE_START_TIME {
+            if waveStartCounter >= (WaveData.WAVE_START_TIME + (waveNumber * 60)) {
                 progressDifficulty()
                 let race = GameScene.instance?.enemyRaceSwitch[GameManager.instance.currentLevel-1] ?? EnemyRaces.slime
                 createWave(choises: enemyChoises , enemyRace: race)
@@ -296,7 +305,7 @@ class WaveManager{
         
         if (EnemyNodes.enemyArray.count) > 0 {
             spawnCounter += 1
-            if spawnCounter >= WaveData.SPAWN_STANDARD_TIMER {
+            if spawnCounter >= (WaveData.SPAWN_STANDARD_TIMER - reduceSpawnTime){
                 spawnEnemy()
                 print("Enemies left in current wave \(EnemyNodes.enemyArray.count)")
                 

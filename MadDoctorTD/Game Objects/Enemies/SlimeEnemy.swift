@@ -77,13 +77,13 @@ class SlimeEnemy: Enemy{
             
             texture = SKTexture(imageNamed: "slime_heavy_atker_animation_1")
             attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 2
-            attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE / 2
+            attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE * 2
             
         case .fast:
             
             texture = SKTexture(imageNamed: "slime_fast_atker_animation_1")
-            attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 10
-            attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE / 4
+            attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE / 2
+            attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE / 2
             
         case .boss:
             print("🤔")
