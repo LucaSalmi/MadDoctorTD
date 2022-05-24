@@ -44,6 +44,9 @@ class GameScene: SKScene {
     var buildFoundationButton: SKSpriteNode?
     var towerImage: SKSpriteNode?
     var towerNameText: SKLabelNode?
+    var damageIndicator: SKSpriteNode?
+    
+    var showDamageIndicator: Bool = false
     
     var rateOfFireImage: SKSpriteNode?
     var damageImage: SKSpriteNode?
@@ -134,12 +137,16 @@ class GameScene: SKScene {
         towerUI!.removeFromParent()
         foundationUI = uiScene?.childNode(withName: "FoundationMenu") as? SKSpriteNode
         foundationUI?.removeFromParent()
+        damageIndicator = uiScene?.childNode(withName: "DamageIndicator") as? SKSpriteNode
+        damageIndicator?.removeFromParent()
+        
         
         let mainHubBackground = uiScene!.childNode(withName: "MainHubBackground")
         mainHubBackground?.removeFromParent()
         self.camera!.addChild(mainHubBackground!)
         self.camera!.addChild(foundationUI!)
         self.camera!.addChild(towerUI!)
+        self.camera!.addChild(damageIndicator!)
         self.addChild(uiNode)
                 
         upgradeUI = uiScene!.childNode(withName: "UpgradeMenu") as? SKSpriteNode
@@ -973,6 +980,9 @@ class GameScene: SKScene {
                 let enemy = node as! Enemy
                 enemy.update()
             }
+        }
+        if showDamageIndicator{
+            GameManager.instance.displayDamageIndicator()
         }
     }
     
