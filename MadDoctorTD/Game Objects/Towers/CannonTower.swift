@@ -26,20 +26,35 @@ class CannonTower: Tower{
         
         attackDamage = Int(Double(attackDamage) * 4)
         
-        fireRate = Int(Double(fireRate) * 9)
+        fireRate = Int(Double(fireRate) * 6)
         
-        attackRange = attackRange * 0.8
+        attackRange = attackRange * 1.3
         
     }
     
     override func attackTarget(){
 
         if currentFireRateTick <= 0 {
-            let projectile = CannonProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
             
+            switch self.projectileType{
+            
+            case .mineProjectile:
+                let projectile = MineProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
+                ProjectileNodes.projectilesNode.addChild(projectile)
+                            
+            default:
+                let projectile = CannonProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
+                ProjectileNodes.projectilesNode.addChild(projectile)
+            }
+            
+            
+            
+            
+            //TODO: -V-V-V- SPAWN THIS PROJECTILE BELOW IF CANNON TOWER GETS UPGRADED -V-V-V-
+//
             //SoundManager.playMortarSwooshSFX()
             SoundManager.playSFX(sfxName: SoundManager.cannonShotFiredSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-            ProjectileNodes.projectilesNode.addChild(projectile)
+            
             currentFireRateTick = fireRate
         }
         
@@ -50,6 +65,10 @@ class CannonTower: Tower{
     func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat{
         
         return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
+    }
+    
+    func activateMineProjectiles(){
+        projectileType = ProjectileTypes.mineProjectile
     }
     
 }

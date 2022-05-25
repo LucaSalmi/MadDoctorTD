@@ -45,6 +45,8 @@ class BouncingProjectileFactory: ProjectileFactoryProtocol {
     
 }
 
+
+
 protocol ProjetileCreator{
     
     func createProjectile()
@@ -99,6 +101,9 @@ class ProjectileFactory: ProjetileCreator{
             
             let projectile = BouncingProjectileFactory().createProjectile(position: firingTower.position, target: firingTower.currentTarget!, attackDamage: firingTower.attackDamage)
             ProjectileNodes.projectilesNode.addChild(projectile)
+            
+        default: print("Error creating projectile")
+            
             
         }
         
