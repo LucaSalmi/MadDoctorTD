@@ -95,6 +95,8 @@ struct TowerData {
     static let FIRE_RATE: Int = 20
     static let ATTACK_DAMAGE: Int = 10
     
+    
+    
     static let UPGRADE_DAMAGE_BONUS_PCT: Double = 1.2
     static let UPGRADE_FIRE_RATE_REDUCTION_PCT: Double = 0.8
     static let UPGRADE_RANGE_BONUS_PCT: Double = 1.2
@@ -110,7 +112,7 @@ struct TowerData {
 
 //Bullets
 enum ProjectileTypes: Int {
-    case gunProjectile = 0, rapidFireProjectile, sniperProjectile, bouncingProjectile, mineProjectile, cannonProjectile
+    case gunProjectile = 0, rapidFireProjectile, sniperProjectile, bouncingProjectile, mineProjectile, cannonProjectile, poisonProjectile
 }
 
 struct ProjectileData {
@@ -123,6 +125,8 @@ struct ProjectileData {
     static let SNIPER_MODIFIER: CGFloat = CGFloat(13.0)
     
     static let BOUNCING_PROJECTILE_SPEED = CGFloat(10.0)
+    
+    static let POISON_DAMAGE_PERCENT = CGFloat(0.25)
     
 }
 

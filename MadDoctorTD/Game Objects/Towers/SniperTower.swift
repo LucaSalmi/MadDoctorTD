@@ -17,6 +17,7 @@ import SpriteKit
 
 class SniperTower: Tower{
     
+    
     var sniperLegs = SKSpriteNode()
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,12 +46,17 @@ class SniperTower: Tower{
         
         GameScene.instance?.addChild(sniperLegs)
         
+        
     }
     
     override func onDestroy() {
         
         self.sniperLegs.removeFromParent()
         super.onDestroy()
+    }
+    
+    func activatePosionProjectile(){
+        projectileType = ProjectileTypes.poisonProjectile
     }
     
     
