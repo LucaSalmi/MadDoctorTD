@@ -133,20 +133,20 @@ struct TopArea: View {
             
         case .gunTower:
             communicator.image3a = "bouncing_projectile"
-            communicator.image3b = "speed_upgrade_3"
-            communicator.image3c = "range_upgrade_3"
+            communicator.image3b = "Daniel"
+            communicator.image3c = "Daniel"
         case .rapidFireTower:
-            communicator.image3a = "damage_upgrade_3"
-            communicator.image3b = "speed_upgrade_3"
-            communicator.image3c = "range_upgrade_3"
+            communicator.image3a = "Daniel"
+            communicator.image3b = "Daniel"
+            communicator.image3c = "Daniel"
         case .sniperTower:
-            communicator.image3a = "damage_upgrade_3"
-            communicator.image3b = "speed_upgrade_3"
-            communicator.image3c = "range_upgrade_3"
+            communicator.image3a = "Daniel"
+            communicator.image3b = "Daniel"
+            communicator.image3c = "Daniel"
         case .cannonTower:
-            communicator.image3a = "damage_upgrade_3"
-            communicator.image3b = "speed_upgrade_3"
-            communicator.image3c = "range_upgrade_3"
+            communicator.image3a = "Daniel"
+            communicator.image3b = "Daniel"
+            communicator.image3c = "Daniel"
         }
     }
     
@@ -230,6 +230,7 @@ struct MiddleArea: View {
                     
                     Button {
                         communicator.selectedTreeButtonId = "2b"
+                        checkIfBuyable()
                     } label: {
                         ZStack {
                             
@@ -246,6 +247,7 @@ struct MiddleArea: View {
                     
                     Button {
                         communicator.selectedTreeButtonId = "3b"
+                        checkIfBuyable()
                     } label: {
                         ZStack {
                             
@@ -265,6 +267,7 @@ struct MiddleArea: View {
                     
                     Button {
                         communicator.selectedTreeButtonId = "2c"
+                        checkIfBuyable()
                     } label: {
                         ZStack {
                             
@@ -280,6 +283,7 @@ struct MiddleArea: View {
                     }
                     Button(action: {
                         communicator.selectedTreeButtonId = "3c"
+                        checkIfBuyable()
                     }, label: {
                         ZStack {
                             
