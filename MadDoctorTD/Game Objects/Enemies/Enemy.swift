@@ -375,7 +375,12 @@ class Enemy: SKSpriteNode{
             let gunProjectile = projectile as! GunProjectile
             
             if gunProjectile.isSlowUpgraded{
-                slowTick = slowDuration
+                
+                let rand = Int.random(in: 1...20)
+                if rand == 7{
+                    slowTick = slowDuration
+                }
+                
                 
             }
         }
