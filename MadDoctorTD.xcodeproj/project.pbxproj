@@ -113,6 +113,7 @@
 		C844A737282A969600FC42C9 /* CannonExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = C844A736282A969600FC42C9 /* CannonExplosion.sks */; };
 		C844A739282A982800FC42C9 /* EnemiesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A738282A982800FC42C9 /* EnemiesFactory.swift */; };
 		C844A73C282AA26C00FC42C9 /* SquidEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C844A73B282AA26C00FC42C9 /* SquidEnemy.swift */; };
+		C8647769283E497000DDBC21 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8647768283E497000DDBC21 /* Animatable.swift */; };
 		C868AACE28229790003F91D0 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868AACD28229790003F91D0 /* Enemy.swift */; };
 		C8978746283CC8A4006E52A8 /* SquidMaterialDialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8978745283CC8A4006E52A8 /* SquidMaterialDialogue.swift */; };
 		C897BC1D282510380085D093 /* WaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BC1C282510380085D093 /* WaveManager.swift */; };
@@ -254,6 +255,7 @@
 		C844A736282A969600FC42C9 /* CannonExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CannonExplosion.sks; sourceTree = "<group>"; };
 		C844A738282A982800FC42C9 /* EnemiesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemiesFactory.swift; sourceTree = "<group>"; };
 		C844A73B282AA26C00FC42C9 /* SquidEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquidEnemy.swift; sourceTree = "<group>"; };
+		C8647768283E497000DDBC21 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		C868AACD28229790003F91D0 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		C8978745283CC8A4006E52A8 /* SquidMaterialDialogue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquidMaterialDialogue.swift; sourceTree = "<group>"; };
 		C897BC1C282510380085D093 /* WaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveManager.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				C81DED202837AE8800D67B8F /* ErrorInfo.swift */,
+				C8647768283E497000DDBC21 /* Animatable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				E5BB6D69283CD1C0003E57D9 /* CreditsSceneView.swift in Sources */,
 				C8A2F62A28351B6000D94CEE /* BossEnemy.swift in Sources */,
 				C81DED212837AE8800D67B8F /* ErrorInfo.swift in Sources */,
+				C8647769283E497000DDBC21 /* Animatable.swift in Sources */,
 				C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */,
 				E57BA9E9282B9885001BCD99 /* StartScene.swift in Sources */,
 				C844A739282A982800FC42C9 /* EnemiesFactory.swift in Sources */,
