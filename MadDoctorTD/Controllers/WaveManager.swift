@@ -35,6 +35,9 @@ class WaveManager{
     var shouldCreateWave = false
     
     var numberOfAttackers = 0
+    
+    var startTime = 0
+
         
     init(totalSlots: Int, choises: [EnemyTypes]){
         
@@ -74,6 +77,10 @@ class WaveManager{
         else {
 
         maximumAtkSpawn = waveNumber/10 // 10%
+        }
+        
+        if waveNumber == attackLevel {
+            reduceSpawnTime += 5
         }
         
         var occupiedSlots = 0
@@ -291,13 +298,14 @@ class WaveManager{
         print("shoulcreateWavw \(shouldCreateWave)")
         print("enemy ARray \(EnemyNodes.enemyArray.count)")
         
-        if waveNumber == attackLevel {
-            reduceSpawnTime += 5
-        }
-        
+       
+        //+ (waveNumber * 60)
         if shouldCreateWave {
             waveStartCounter += 1
-            if waveStartCounter >= (WaveData.WAVE_START_TIME + (waveNumber * 60)) {
+            
+            startTime = WaveData.WAVE_START_TIME + (waveNumber * 60)
+            print("startTime: \(startTime)")
+            if waveStartCounter >= ( startTime ) {
                 progressDifficulty()
                 let race = GameScene.instance?.enemyRaceSwitch[GameManager.instance.currentLevel-1] ?? EnemyRaces.slime
                 createWave(choises: enemyChoises , enemyRace: race)
@@ -314,6 +322,10 @@ class WaveManager{
                 
                 spawnCounter = 0
             }
+        }
+        
+        if EnemyNodes.enemyArray.count > 0 && EnemyNodes.enemiesNode.children.isEmpty{
+            spawnEnemy()
         }
 
     }
