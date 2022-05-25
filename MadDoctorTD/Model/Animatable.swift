@@ -27,8 +27,7 @@ protocol Animatable: AnyObject{
 
 extension Animatable{
     
-    
-    func createSlimeAnimations(enemyType: EnemyTypes){
+    func createSlimeAnimations(enemyType: EnemyTypes, textureName: String){
         
         switch enemyType {
             
@@ -37,15 +36,15 @@ extension Animatable{
             for i in 1...AnimatableData.standardSlimeNOF - 1{
                 
                 let frame: SKAction = SKAction.animate(with: [
-                SKTexture(imageNamed: "slime animation \(i)"),
-                SKTexture(imageNamed: "slime animation \(i+1)")
+                SKTexture(imageNamed: "\(textureName)\(i)"),
+                SKTexture(imageNamed: "\(textureName)\(i+1)")
                 ], timePerFrame: AnimatableData.timePerFrameSlime)
                 animationFrames.append(frame)
             }
             
             let frame: SKAction = SKAction.animate(with: [
-                SKTexture(imageNamed: "slime animation \(AnimatableData.standardSlimeNOF)"),
-            SKTexture(imageNamed: "slime animation \(1)")
+                SKTexture(imageNamed: "\(textureName)\(AnimatableData.standardSlimeNOF)"),
+            SKTexture(imageNamed: "\(textureName)\(1)")
             ], timePerFrame: AnimatableData.timePerFrameSlime)
             animationFrames.append(frame)
             
@@ -54,15 +53,15 @@ extension Animatable{
             for i in 1...AnimatableData.fastSlimeNOF - 1{
                 
                 let frame: SKAction = SKAction.animate(with: [
-                SKTexture(imageNamed: "slime_fast_\(i)"),
-                SKTexture(imageNamed: "slime_fast_\(i+1)")
+                SKTexture(imageNamed: "\(textureName)\(i)"),
+                SKTexture(imageNamed: "\(textureName)\(i+1)")
                 ], timePerFrame: AnimatableData.timePerFrameSlime)
                 animationFrames.append(frame)
             }
             
             let frame: SKAction = SKAction.animate(with: [
-                SKTexture(imageNamed: "slime_fast_\(AnimatableData.fastSlimeNOF)"),
-            SKTexture(imageNamed: "slime_fast_\(1)")
+                SKTexture(imageNamed: "\(textureName)\(AnimatableData.fastSlimeNOF)"),
+            SKTexture(imageNamed: "s\(textureName)\(1)")
             ], timePerFrame: AnimatableData.timePerFrameSlime)
             animationFrames.append(frame)
             
@@ -71,15 +70,15 @@ extension Animatable{
             for i in 1...AnimatableData.heavySlimeNOF - 1{
                 
                 let frame: SKAction = SKAction.animate(with: [
-                SKTexture(imageNamed: "heavy_slime_animation_\(i)"),
-                SKTexture(imageNamed: "heavy_slime_animation_\(i+1)")
+                SKTexture(imageNamed: "\(textureName)\(i)"),
+                SKTexture(imageNamed: "\(textureName)\(i+1)")
                 ], timePerFrame: AnimatableData.timePerFrameSlime)
                 animationFrames.append(frame)
             }
             
             let frame: SKAction = SKAction.animate(with: [
-                SKTexture(imageNamed: "heavy_slime_animation_\(AnimatableData.heavySlimeNOF)"),
-            SKTexture(imageNamed: "heavy_slime_animation_\(1)")
+                SKTexture(imageNamed: "\(textureName)\(AnimatableData.heavySlimeNOF)"),
+            SKTexture(imageNamed: "\(textureName)\(1)")
             ], timePerFrame: AnimatableData.timePerFrameSlime)
             animationFrames.append(frame)
             
@@ -88,15 +87,15 @@ extension Animatable{
             for i in 1...AnimatableData.flyingSlimeNOF - 1{
                 
                 let frame: SKAction = SKAction.animate(with: [
-                SKTexture(imageNamed: "fly_slime_animation_\(i)"),
-                SKTexture(imageNamed: "fly_slime_animation_\(i+1)")
+                SKTexture(imageNamed: "\(textureName)\(i)"),
+                SKTexture(imageNamed: "\(textureName)\(i+1)")
                 ], timePerFrame: AnimatableData.timePerFrameSlime)
                 animationFrames.append(frame)
             }
             
             let frame: SKAction = SKAction.animate(with: [
-                SKTexture(imageNamed: "fly_slime_animation_\(AnimatableData.flyingSlimeNOF)"),
-            SKTexture(imageNamed: "fly_slime_animation_\(1)")
+                SKTexture(imageNamed: "\(textureName)\(AnimatableData.flyingSlimeNOF)"),
+            SKTexture(imageNamed: "\(textureName)\(1)")
             ], timePerFrame: AnimatableData.timePerFrameSlime)
             animationFrames.append(frame)
             
@@ -106,15 +105,15 @@ extension Animatable{
             for i in 1...AnimatableData.bossSlimeNOF - 1{
                 
                 let frame: SKAction = SKAction.animate(with: [
-                SKTexture(imageNamed: "boss_slime_animation_\(i)"),
-                SKTexture(imageNamed: "boss_slime_animation_\(i+1)")
+                SKTexture(imageNamed: "\(textureName)\(i)"),
+                SKTexture(imageNamed: "\(textureName)\(i+1)")
                 ], timePerFrame: AnimatableData.timePerFrameSlime)
                 animationFrames.append(frame)
             }
             
             let frame: SKAction = SKAction.animate(with: [
-                SKTexture(imageNamed: "boss_slime_animation_\(AnimatableData.bossSlimeNOF)"),
-            SKTexture(imageNamed: "boss_slime_animation_\(1)")
+                SKTexture(imageNamed: "\(textureName)\(AnimatableData.bossSlimeNOF)"),
+            SKTexture(imageNamed: "\(textureName)\(1)")
             ], timePerFrame: AnimatableData.timePerFrameSlime)
             animationFrames.append(frame)
         }

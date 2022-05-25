@@ -48,11 +48,11 @@ class Boss: Enemy{
         switch self.enemyRace{
             
         case .slime:
-            createSlimeAnimations(enemyType: .boss)
+            createSlimeAnimations(enemyType: .boss, textureName: "boss_slime_animation_")
             
         case .squid:
             //change to squid animations
-            createSlimeAnimations(enemyType: .boss)
+            createSlimeAnimations(enemyType: .boss, textureName: "boss_slime_animation_")
         case .none:
             print("🤔")
         

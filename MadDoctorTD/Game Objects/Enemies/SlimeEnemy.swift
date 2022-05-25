@@ -11,6 +11,7 @@ import SpriteKit
 class SlimeEnemy: Enemy{
     
     var placeholderTexture: SKTexture = SKTexture(imageNamed: "joystick")
+    var animationString: String?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -26,6 +27,7 @@ class SlimeEnemy: Enemy{
             
             texture = SKTexture(imageNamed: "slime animation 1")
             self.enemyType = .standard
+            self.animationString = "slime animation "
             
         case .flying:
             
@@ -34,6 +36,7 @@ class SlimeEnemy: Enemy{
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FLY_SPEED_MODIFIER
             waveSlotSize = EnemiesData.FLY_ENEMY_SLOT
             self.enemyType = .flying
+            self.animationString = "fly_slime_animation_"
             
         case .heavy:
             
@@ -43,6 +46,7 @@ class SlimeEnemy: Enemy{
             waveSlotSize = EnemiesData.HEAVY_ENEMY_SLOT
             armorValue = EnemiesData.SLIME_ARMOUR_VALUE
             self.enemyType = .heavy
+            self.animationString = "heavy_slime_animation_"
             
         case .fast:
             
@@ -51,6 +55,7 @@ class SlimeEnemy: Enemy{
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FAST_SPEED_MODIFIER
             waveSlotSize = EnemiesData.FAST_ENEMY_SLOT
             self.enemyType = .fast
+            self.animationString = "slime_fast_"
             
         default:
             print("🤔")
@@ -58,7 +63,7 @@ class SlimeEnemy: Enemy{
         }
 
         startHp = hp
-        createSlimeAnimations(enemyType: self.enemyType)
+        createSlimeAnimations(enemyType: self.enemyType, textureName: animationString!)
         
     }
     override func changeToAtkTexture() {
