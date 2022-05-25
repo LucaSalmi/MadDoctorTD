@@ -364,17 +364,19 @@ class GameSceneCommunicator: ObservableObject {
             else if currentTower! is GunTower && currentTower!.rateOfFireUpgradeCount == 2 {
                 //material upgrade goes here
             }
-            if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 2 {
+            if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 2 && !gameManager.slowProjectilesUnlocked {
                 return false
             }
             else if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 2 {
-                //material upgrade goes here
+                let rapidFireTower = currentTower! as! RapidFireTower
+                rapidFireTower.activateSlowProjectiles()
             }
-            if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 2 {
+            if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 2 && !gameManager.poisonProjectilesUnlocked {
                 return false
             }
             else if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 2 {
-                //material upgrade goes here
+                let sniperTower = currentTower! as! SniperTower
+                sniperTower.activatePosionProjectile()
             }
             if currentTower! is CannonTower && currentTower!.rateOfFireUpgradeCount == 2 {
                 return false

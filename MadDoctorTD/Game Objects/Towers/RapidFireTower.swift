@@ -33,8 +33,7 @@ class RapidFireTower: Tower{
         fireRate = Int(Double(fireRate) * 0.5)
         
         attackRange = attackRange * 0.5
-        
-        activateSlowProjectiles()
+
     }
     
     override func update() {

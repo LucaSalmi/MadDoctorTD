@@ -137,11 +137,11 @@ struct TopArea: View {
             communicator.image3c = "Daniel"
         case .rapidFireTower:
             communicator.image3a = "Daniel"
-            communicator.image3b = "Daniel"
+            communicator.image3b = "money_object"
             communicator.image3c = "Daniel"
         case .sniperTower:
             communicator.image3a = "Daniel"
-            communicator.image3b = "Daniel"
+            communicator.image3b = "money_object"
             communicator.image3c = "Daniel"
         case .cannonTower:
             communicator.image3a = "Daniel"
@@ -650,6 +650,19 @@ struct MiddleArea: View {
                 communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
+            case "3b":
+                if !gameManager.rapidFireTowerSpeedUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.slowProjectilesUnlocked {
+                    return .unlocked
+                }
+                gameManager.slowProjectilesUnlocked = true
+                gameManager.researchPoints -= 6
+                gameManager.slimeMaterials -= 1
+                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
             case "2c":
                 if !gameManager.rapidFireTowerUnlocked {
                     return .pathBlocked
@@ -697,6 +710,19 @@ struct MiddleArea: View {
                 }
                 gameManager.sniperTowerSpeedUnlocked = true
                 gameManager.researchPoints -= 4
+                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "3b":
+                if !gameManager.sniperTowerSpeedUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.poisonProjectilesUnlocked {
+                    return .unlocked
+                }
+                gameManager.poisonProjectilesUnlocked = true
+                gameManager.researchPoints -= 6
+                gameManager.slimeMaterials -= 1
                 communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
