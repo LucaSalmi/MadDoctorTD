@@ -28,7 +28,7 @@ class CannonProjectile: AoeProjectile{
         super.destroy()
         print("self removed")
         //Spawn explosion here
-        let enemies = findEnemiesInRadius()
+        let enemies = findEnemiesInRadius(radius: blastRadius)
         
         for enemy in enemies {
             enemy.getDamage(dmgValue: attackDamage)

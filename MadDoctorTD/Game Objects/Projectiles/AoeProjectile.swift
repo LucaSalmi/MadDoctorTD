@@ -44,7 +44,7 @@ class AoeProjectile: SKSpriteNode {
         
         projectileShadow.alpha = 0.8
         
-        GameScene.instance!.addChild(projectileShadow)
+        GameScene.instance!.projectileShadowNode.addChild(projectileShadow)
         
         super.init(texture: nil, color: .clear, size: ProjectileData.CANNON_BALL_SIZE)
         
@@ -52,7 +52,7 @@ class AoeProjectile: SKSpriteNode {
         
         name = "AoeProjectile"
         self.position = position
-        zPosition = 2
+        zPosition = 51
         speed = ProjectileData.speed
         
         
@@ -122,7 +122,7 @@ class AoeProjectile: SKSpriteNode {
         
     }
     
-    private func hasReachedTargetPoint() -> Bool{
+    func hasReachedTargetPoint() -> Bool{
         
         let leftSide = targetPoint.x - self.size.width/4
         let rightSide = targetPoint.x + self.size.width/4
@@ -145,7 +145,7 @@ class AoeProjectile: SKSpriteNode {
         
     }
     
-    func findEnemiesInRadius() -> [Enemy]{
+    func findEnemiesInRadius(radius: CGFloat) -> [Enemy]{
         var enemies = [Enemy]()
         
         
@@ -156,7 +156,7 @@ class AoeProjectile: SKSpriteNode {
             
             let enemyDistance = self.position.distance(point: enemy.position)
             
-            if enemyDistance <= blastRadius{
+            if enemyDistance <= radius{
                 enemies.append(enemy)
             }
             

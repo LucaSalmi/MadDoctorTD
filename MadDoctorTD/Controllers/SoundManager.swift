@@ -76,6 +76,8 @@ class SoundManager {
     //AtmosphereSound
 
     static let desertAmbience = "desert_custom_atmosphere"
+    static let ambienceOne = "atmosphere_bg_1"
+    static let ambienceTwo = "atmosphere_bg_2"
     
     //BGMusic
 
