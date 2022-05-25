@@ -132,33 +132,21 @@ struct TopArea: View {
         switch communicator.selectedTowerType {
             
         case .gunTower:
-            communicator.image2a = "damage_upgrade_0"
             communicator.image3a = "bouncing_projectile"
-            communicator.image2b = "Daniel"
-            communicator.image3b = "Daniel"
-            communicator.image2c = "Daniel"
-            communicator.image3c = "Daniel"
+            communicator.image3b = "speed_upgrade_3"
+            communicator.image3c = "range_upgrade_3"
         case .rapidFireTower:
-            communicator.image2a = "Daniel"
-            communicator.image3a = "Daniel"
-            communicator.image2b = "Daniel"
-            communicator.image3b = "Daniel"
-            communicator.image2c = "Daniel"
-            communicator.image3c = "Daniel"
+            communicator.image3a = "damage_upgrade_3"
+            communicator.image3b = "speed_upgrade_3"
+            communicator.image3c = "range_upgrade_3"
         case .sniperTower:
-            communicator.image2a = "Daniel"
-            communicator.image3a = "Daniel"
-            communicator.image2b = "Daniel"
-            communicator.image3b = "Daniel"
-            communicator.image2c = "Daniel"
-            communicator.image3c = "Daniel"
+            communicator.image3a = "damage_upgrade_3"
+            communicator.image3b = "speed_upgrade_3"
+            communicator.image3c = "range_upgrade_3"
         case .cannonTower:
-            communicator.image2a = "Daniel"
-            communicator.image3a = "Daniel"
-            communicator.image2b = "Daniel"
-            communicator.image3b = "Daniel"
-            communicator.image2c = "Daniel"
-            communicator.image3c = "Daniel"
+            communicator.image3a = "damage_upgrade_3"
+            communicator.image3b = "speed_upgrade_3"
+            communicator.image3c = "range_upgrade_3"
         }
     }
     
