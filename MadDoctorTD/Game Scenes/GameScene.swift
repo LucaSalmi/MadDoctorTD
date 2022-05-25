@@ -292,11 +292,7 @@ class GameScene: SKScene {
             let pinchGesture = UIPinchGestureRecognizer()
             pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
             view?.addGestureRecognizer(pinchGesture)
-            
-//            let longTapRecognizer = UILongPressGestureRecognizer()
-//            longTapRecognizer.addTarget(self, action: #selector(handleLongPress(_:)))
-//            longTapRecognizer.minimumPressDuration = 0.5
-//            view?.addGestureRecognizer(longTapRecognizer)
+
         }
         
         myCamera!.position = CGPoint(x: 0, y: yLowerLimit)
