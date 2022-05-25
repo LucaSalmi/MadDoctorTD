@@ -299,18 +299,17 @@ class WaveManager{
         print("enemy ARray \(EnemyNodes.enemyArray.count)")
         
        
-        //+ (waveNumber * 60)
         if shouldCreateWave {
-            waveStartCounter += 1
+            waveStartCounter -= 1
             
             startTime = WaveData.WAVE_START_TIME + (waveNumber * 60)
-            print("startTime: \(startTime)")
-            if waveStartCounter >= ( startTime ) {
+            
+            if waveStartCounter <= 0 {
                 progressDifficulty()
                 let race = GameScene.instance?.enemyRaceSwitch[GameManager.instance.currentLevel-1] ?? EnemyRaces.slime
                 createWave(choises: enemyChoises , enemyRace: race)
                 
-                waveStartCounter = 0
+                waveStartCounter = startTime
             }
         }
         

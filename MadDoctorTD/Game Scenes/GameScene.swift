@@ -771,6 +771,7 @@ class GameScene: SKScene {
         case "ReadyButton":
             if readyButton?.alpha == 1{
                 communicator.startWavePhase()
+                waveManager?.waveStartCounter = 0
                 showTowerUI()
                 readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
                 researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
