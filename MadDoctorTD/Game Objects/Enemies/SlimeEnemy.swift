@@ -58,6 +58,7 @@ class SlimeEnemy: Enemy{
         }
 
         startHp = hp
+        createSlimeAnimations(enemyType: self.enemyType)
         
     }
     override func changeToAtkTexture() {
@@ -67,7 +68,7 @@ class SlimeEnemy: Enemy{
             
         case .standard:
             
-            texture = SKTexture(imageNamed: "slime_normal_atker_animation_1")
+            texture = SKTexture(imageNamed: "slime_standard_atker_animation_1")
             
         case .flying:
             
@@ -93,8 +94,12 @@ class SlimeEnemy: Enemy{
     
     override func update() {
         
+        
         super.update()
     }
     
     
 }
+
+
+

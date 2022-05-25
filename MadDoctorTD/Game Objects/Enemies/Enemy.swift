@@ -36,6 +36,11 @@ class Enemy: SKSpriteNode{
     var hpBar: SKSpriteNode?
     var killValue = EnemiesData.BASE_KILL_VALUE
     
+    //Animations
+    var animationFrames: [SKAction] = []
+    var runningFrame = 0
+    var frameLimiter = 0
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -111,6 +116,28 @@ class Enemy: SKSpriteNode{
             }
             return
         }
+        
+        //Runs Animation
+        
+        if runningFrame > animationFrames.count-1{
+            runningFrame = 0
+        }
+        if self.enemyType != .boss{
+            self.run(animationFrames[runningFrame], withKey: "animation")
+        }else{
+            let boss = self as? Boss
+            boss?.bossTexture!.run(animationFrames[runningFrame], withKey: "animation")
+        }
+        
+        if frameLimiter >= 5{
+            runningFrame += 1
+            frameLimiter = 0
+        }else{
+            frameLimiter += 1
+        }
+        
+
+        
         
         move()
         
@@ -495,3 +522,5 @@ class Enemy: SKSpriteNode{
     
     
 }
+
+extension Enemy: Animatable{}

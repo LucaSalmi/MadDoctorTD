@@ -273,7 +273,7 @@ class WaveManager{
         }else if waveNumber == 9{
             enemyChoises.append(.flying)
         }
-        if waveNumber >= 10 {
+        if waveNumber >= 9 {
             if waveNumber == bossLevel - 1{
                 enemyChoises = [.boss]
             } else {

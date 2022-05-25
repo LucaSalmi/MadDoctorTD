@@ -29,7 +29,7 @@ class Boss: Enemy{
         damageValue = EnemiesData.BOSS_DAMAGE_VALUE
         isAttacker = true
         self.enemyType = .boss
-        self.alpha = 1
+        self.alpha = 0
         attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 2
         attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE * 2
         baseSpeed = 1.5
@@ -40,6 +40,24 @@ class Boss: Enemy{
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Foundation
         physicsBody?.categoryBitMask = PhysicsCategory.Boss
+        
+    }
+    
+    func findAnimations(){
+        
+        switch self.enemyRace{
+            
+        case .slime:
+            createSlimeAnimations(enemyType: .boss)
+            
+        case .squid:
+            //change to squid animations
+            createSlimeAnimations(enemyType: .boss)
+        case .none:
+            print("🤔")
+        
+        }
+        
         
     }
     
