@@ -61,6 +61,13 @@ class SoundManager {
 
     static let slimeDeathSFX = "slime_death4"
 
+    // Boss Giant Step SFX
+
+    //static let giant_steps_1 = "giant_step_1."
+    //static let giant_steps_2 = "giant_step_2."
+    //static let giant_steps_3 = "giant_step_3."
+    //static let giant_steps_4 = "giant_step_4."
+
     //AtmosphereSound
 
     static let desertAmbience = "desert_custom_atmosphere"
@@ -102,6 +109,15 @@ class SoundManager {
         let metalTap = "metal_tap_\(rand)."
 
         playSFX(sfxName: metalTap, scene: scene, sfxExtension: mp3Extension)
+
+    }
+
+    static func playGiantStepSFX(scene: SKScene) {
+
+        let rand = Int.random(in:1...4)
+        let giantStep = "giant_step_\(rand)."
+
+        playSFX(sfxName: giantStep, scene: scene, sfxExtension: mp3Extension)
 
     }
 

@@ -12,6 +12,7 @@ class Boss: Enemy{
     
     var bossTexture: SKSpriteNode? = nil
     var nextMoveCount: Int = 0
+    var bossSteps = 0
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -65,11 +66,9 @@ class Boss: Enemy{
             }else if nextMoveCount == 61{
                 
                 PhysicsUtils.shakeCamera(duration: 1)
-                
+                SoundManager.playGiantStepSFX(scene: GameScene.instance!)
+
             }
         }
     }
-    
-
-    
 }
