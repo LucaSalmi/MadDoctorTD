@@ -146,7 +146,7 @@ struct TopArea: View {
         case .cannonTower:
             communicator.image3a = "Daniel"
             communicator.image3b = "Daniel"
-            communicator.image3c = "Daniel"
+            communicator.image3c = "cannon_projectile"
         }
     }
     
@@ -438,8 +438,38 @@ struct MiddleArea: View {
                 
             }
             
-        default:
-            return false
+        case .rapidFireTower:
+            switch communicator.selectedTreeButtonId {
+                
+            case "3b":
+                return true
+                
+            default:
+                return false
+                
+            }
+            
+        case .sniperTower:
+            switch communicator.selectedTreeButtonId {
+                
+            case "3b":
+                return true
+                
+            default:
+                return false
+                
+            }
+            
+        case .cannonTower:
+            switch communicator.selectedTreeButtonId {
+                
+            case "3c":
+                return true
+                
+            default:
+                return false
+                
+            }
             
         }
         
@@ -730,6 +760,19 @@ struct MiddleArea: View {
                 }
                 gameManager.cannonTowerRangeUnlocked = true
                 gameManager.researchPoints -= 4
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "3c":
+                if !gameManager.cannonTowerRangeUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.mineProjectilesUnlocked {
+                    return .unlocked
+                }
+                gameManager.mineProjectilesUnlocked = true
+                gameManager.researchPoints -= 6
+                gameManager.slimeMaterials -= 1
                 communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 

@@ -333,11 +333,12 @@ class GameSceneCommunicator: ObservableObject {
             else if currentTower! is SniperTower && currentTower!.rangeUpgradeCount == 2 {
                 //material upgrade goes here
             }
-            if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 2 {
+            if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 2 && !gameManager.mineProjectilesUnlocked {
                 return false
             }
             else if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 2 {
-                //material upgrade goes here
+                let cannonTower = currentTower! as! CannonTower
+                cannonTower.activateMineProjectiles()
             }
             
         case .firerate:
