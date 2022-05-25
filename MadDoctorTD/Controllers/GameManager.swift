@@ -49,6 +49,7 @@ class GameManager: ObservableObject{
     @Published var cannonTowerRangeUnlocked: Bool = false
     
     //Gun Tower Unlocks
+    @Published var gunTowerUnlocked: Bool = true
     @Published var gunTowerDamageUnlocked: Bool = false
     @Published var gunTowerSpeedUnlocked: Bool = false
     @Published var gunTowerRangeUnlocked: Bool = false
