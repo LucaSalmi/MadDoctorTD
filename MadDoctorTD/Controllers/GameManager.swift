@@ -65,6 +65,7 @@ class GameManager: ObservableObject{
         baseHp -= incomingDamage
         if baseHp <= 0{
             isGameOver = true
+            SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_2, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
         }
     }
     

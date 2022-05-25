@@ -36,6 +36,11 @@ class SoundManager {
     static let switchToResearchRoomSFX = "research_view_open."
     static let researchViewAtmosphere = "research_interface_atmosphere"
 
+    // Lose lfe SFX (for base)
+
+    static let base_hp_loss_1 = "base_hp_loss_4."
+    static let base_hp_loss_2 = "base_hp_loss_5."
+
     //Upgrade Turret SFX
 
     static let upgrade_1 = "upg_sound_1."
