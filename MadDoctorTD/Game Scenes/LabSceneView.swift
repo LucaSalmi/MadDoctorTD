@@ -501,7 +501,7 @@ struct MiddleArea: View {
             error = ErrorInfo(title: "What?", description: "Somthing unexpected happened")
             
         case .pathBlocked:
-            error = ErrorInfo(title: "Unavailable", description: "You must first unlock previous skill")
+            error = ErrorInfo(title: "Unavailable", description: "This path is not unlocked yet")
             
         }
         
