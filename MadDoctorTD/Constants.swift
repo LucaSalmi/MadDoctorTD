@@ -110,7 +110,7 @@ struct TowerData {
 
 //Bullets
 enum ProjectileTypes: Int {
-    case gunProjectile = 0, rapidFireProjectile, sniperProjectile, bouncingProjectile, mineProjectile
+    case gunProjectile = 0, rapidFireProjectile, sniperProjectile, bouncingProjectile, mineProjectile, cannonProjectile
 }
 
 struct ProjectileData {
@@ -128,7 +128,7 @@ struct ProjectileData {
 
 struct AoeProjectileData{
     
-    static let BLAST_RADIUS: CGFloat = CGFloat(150)
+    static let BLAST_RADIUS: CGFloat = CGFloat(120)
     
     static let TRAVEL_DURATION: CGFloat = CGFloat(180)
 }

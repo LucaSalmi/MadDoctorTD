@@ -22,7 +22,7 @@ class CannonTower: Tower{
         super.init(position: position, foundation: foundation, textureName: textureName)
         
         towerName = "Cannon Tower"
-        projectileType = ProjectileTypes.sniperProjectile
+        projectileType = ProjectileTypes.cannonProjectile
         
         attackDamage = Int(Double(attackDamage) * 4)
         
@@ -40,18 +40,16 @@ class CannonTower: Tower{
             
             case .mineProjectile:
                 let projectile = MineProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
+                print("mine projectile")
                 ProjectileNodes.projectilesNode.addChild(projectile)
                             
             default:
                 let projectile = CannonProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
+                print("default projectile")
+                
                 ProjectileNodes.projectilesNode.addChild(projectile)
             }
             
-            
-            
-            
-            //TODO: -V-V-V- SPAWN THIS PROJECTILE BELOW IF CANNON TOWER GETS UPGRADED -V-V-V-
-//
             //SoundManager.playMortarSwooshSFX()
             SoundManager.playSFX(sfxName: SoundManager.cannonShotFiredSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             
