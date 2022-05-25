@@ -97,6 +97,8 @@ class Enemy: SKSpriteNode{
         if movePoints.isEmpty {
             
             GameManager.instance.getDamage(incomingDamage: self.damageValue)
+            //CHECKPOINT
+            SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_1, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             self.hp = 0
             self.removeFromParent()
             self.hpBar?.removeFromParent()
