@@ -22,6 +22,12 @@ class Enemy: SKSpriteNode{
     var enemyRace: EnemyRaces? = nil
     var armorValue: Int = 0
     
+    let poisonDuration = 240
+    let poisonDamageInterval = 60
+    var poisonTick = 0
+    var poisonDamageTick = 60
+    var poisonDamage = 0
+    
     var isAttacker = false
     var attackTarget: FoundationPlate? = nil
     var precedentTargetPosition: CGPoint? = nil
@@ -76,6 +82,19 @@ class Enemy: SKSpriteNode{
         
         if hpBar!.alpha < 1 {
             hpBar!.alpha = 1
+        }
+        
+        if poisonTick > 0{
+            poisonTick -= 1
+            poisonDamageTick -= 1
+            
+            if poisonDamageTick <= 0{
+                print("Poisondamage taken")
+                getDamage(dmgValue: poisonDamage)
+                poisonDamageTick = poisonDamageInterval
+            }
+            
+            
         }
         
         hpBar!.position.x = self.position.x
@@ -292,7 +311,13 @@ class Enemy: SKSpriteNode{
         
     }
     
-    func getDamage(dmgValue: Int){
+    func getDamage(dmgValue: Int, projectile: Projectile? = nil){
+        
+        if projectile is PoisonProjectile{
+            poisonTick = poisonDuration
+            poisonDamage = Int(CGFloat(projectile!.attackDamage) * ProjectileData.POISON_DAMAGE_PERCENT)
+            
+        }
         
         hp -= (dmgValue - armorValue)
         

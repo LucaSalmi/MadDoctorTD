@@ -45,6 +45,15 @@ class BouncingProjectileFactory: ProjectileFactoryProtocol {
     
 }
 
+class PoisonProjectileFactory: ProjectileFactoryProtocol{
+    
+    func createProjectile(position: CGPoint, target: Enemy, attackDamage: Int) -> Projectile {
+        return PoisonProjectile(position: position, target: target, attackDamage: attackDamage)
+    }
+    
+}
+
+
 
 
 
@@ -106,8 +115,10 @@ class ProjectileFactory: ProjetileCreator{
             let projectile = BouncingProjectileFactory().createProjectile(position: firingTower.position, target: firingTower.currentTarget!, attackDamage: firingTower.attackDamage)
             ProjectileNodes.projectilesNode.addChild(projectile)
             
-        
+        case .poisonProjectile:
             
+            let projectile = PoisonProjectileFactory().createProjectile(position: firingTower.position, target: firingTower.currentTarget!, attackDamage: firingTower.attackDamage)
+            ProjectileNodes.projectilesNode.addChild(projectile)
             
         default: print("Error creating projectile")
             
