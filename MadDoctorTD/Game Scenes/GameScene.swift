@@ -754,14 +754,16 @@ class GameScene: SKScene {
             
             if communicator.foundationEditMode {
                 communicator.confirmFoundationEdit()
-                
+                //Sound for finish foundationBuild
+                SoundManager.playSFX(sfxName: SoundManager.buttonSFX_three, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 
             }else{
                 communicator.foundationEditMode = true
                 communicator.toggleFoundationGrid()
                 hideAllMenus()
                 buildFoundationButton?.texture = SKTexture(imageNamed: "done_build_foundation_button_standard")
-                
+                //Sound for activate foundationBuild
+                SoundManager.playSFX(sfxName: SoundManager.buttonSFX_two, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 
             }
             
@@ -796,6 +798,7 @@ class GameScene: SKScene {
             GameScene.instance?.buildFoundationButton?.alpha = 1
             GameScene.instance?.researchButton?.alpha = 1
             GameScene.instance?.upgradeMenuToggle?.alpha = 1
+            SoundManager.playSFX(sfxName: SoundManager.buttonSFX_one, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             showTowerUI()
             
             

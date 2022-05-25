@@ -62,6 +62,10 @@ class SoundManager {
 
     static let upgradeSounds = [upgrade_1, upgrade_2, upgrade_3, upgrade_4, upgrade_5]
 
+    static let buttonSFX_one = "button_7."
+    static let buttonSFX_two = "button_2."
+    static let buttonSFX_three = "button_8."
+
     //DeathSounds
 
     static let slimeDeathSFX = "slime_death4"
