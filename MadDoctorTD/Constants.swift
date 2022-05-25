@@ -200,7 +200,7 @@ struct PlayerData{
     
     static let START_MONEY = 10000000//2500 //2500 //!2000
     static let BASE_HP = 1000//10 //3
-    static let START_RESEARCH_POINTS = 3
+    static let START_RESEARCH_POINTS = 20 //3
 
 }
 
@@ -214,38 +214,31 @@ struct UIData{
 
 struct LabData{
     
-    static let UPGRADE_COST_1 = 1
-    static let UPGRADE_COST_2 = 2
-    static let UPGRADE_COST_3 = 3
-    static let UPGRADE_COST_4 = 4
+    static let UPGRADE_COST_1 = 2
+    static let UPGRADE_COST_2 = 4
+    static let UPGRADE_COST_3 = 6
     
     static func getCost(selected: String) -> Int{
         
         switch selected{
             
-        case "1":
-            return LabData.UPGRADE_COST_1
+        case "2a":
+            return LabData.UPGRADE_COST_2
             
-        case "2":
+        case "2b":
+            return LabData.UPGRADE_COST_2
+            
+        case "2c":
             return LabData.UPGRADE_COST_2
             
         case "3a":
             return LabData.UPGRADE_COST_3
             
         case "3b":
-            return LabData.UPGRADE_COST_4
-            
-        case "4a":
             return LabData.UPGRADE_COST_3
             
-        case "4b":
-            return LabData.UPGRADE_COST_4
-            
-        case "5a":
+        case "3c":
             return LabData.UPGRADE_COST_3
-            
-        case "5b":
-            return LabData.UPGRADE_COST_4
             
         default:
             return LabData.UPGRADE_COST_1
