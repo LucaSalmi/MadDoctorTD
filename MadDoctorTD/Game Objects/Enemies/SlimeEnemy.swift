@@ -74,22 +74,28 @@ class SlimeEnemy: Enemy{
         case .standard:
             
             texture = SKTexture(imageNamed: "slime_standard_atker_animation_1")
+            self.animationFrames.removeAll()
+            createSlimeAnimations(enemyType: self.enemyType, textureName: "slime_standard_atker_animation_")
             
         case .flying:
             
-            texture = SKTexture(imageNamed: "slime_fly_animation_1")
+            print("🤔")
             
         case .heavy:
             
             texture = SKTexture(imageNamed: "slime_heavy_atker_animation_1")
             attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 2
             attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE * 2
+            self.animationFrames.removeAll()
+            createSlimeAnimations(enemyType: self.enemyType, textureName: "slime_heavy_atker_animation_")
             
         case .fast:
             
             texture = SKTexture(imageNamed: "slime_fast_atker_animation_1")
             attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE / 2
             attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE / 2
+            self.animationFrames.removeAll()
+            createSlimeAnimations(enemyType: self.enemyType, textureName: "slime_fast_atker_animation_")
             
         case .boss:
             print("🤔")
