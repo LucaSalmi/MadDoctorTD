@@ -45,6 +45,14 @@ class BouncingProjectileFactory: ProjectileFactoryProtocol {
     
 }
 
+class PoisonProjectileFactory: ProjectileFactoryProtocol{
+    
+    func createProjectile(position: CGPoint, target: Enemy, attackDamage: Int) -> Projectile {
+        return PoisonProjectile(position: position, target: target, attackDamage: attackDamage)
+    }
+    
+}
+
 protocol ProjetileCreator{
     
     func createProjectile()
@@ -75,6 +83,13 @@ class ProjectileFactory: ProjetileCreator{
             
             let projectile = GunProjectileFactory().createProjectile(position: rapidFireTower.position, target: rapidFireTower.currentTarget!, attackDamage: rapidFireTower.attackDamage)
             
+            if rapidFireTower.slowUpgraded{
+                //spawn slowbullets here
+                let slowProjectile = projectile as! GunProjectile
+                
+                slowProjectile.isSlowUpgraded = true
+            }
+            
             if rapidFireTower.fireLeft{
                 
                 rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_left_fire")
@@ -99,6 +114,14 @@ class ProjectileFactory: ProjetileCreator{
             
             let projectile = BouncingProjectileFactory().createProjectile(position: firingTower.position, target: firingTower.currentTarget!, attackDamage: firingTower.attackDamage)
             ProjectileNodes.projectilesNode.addChild(projectile)
+            
+        case .poisonProjectile:
+            
+            let projectile = PoisonProjectileFactory().createProjectile(position: firingTower.position, target: firingTower.currentTarget!, attackDamage: firingTower.attackDamage)
+            ProjectileNodes.projectilesNode.addChild(projectile)
+            
+        default: print("Error creating projectile")
+            
             
         }
         

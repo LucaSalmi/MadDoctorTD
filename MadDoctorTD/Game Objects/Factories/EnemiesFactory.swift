@@ -28,6 +28,7 @@ class SlimeFactory: EnemyFactoryProtocol{
         
         let boss = Boss(texture: SKTexture(imageNamed: "slime_boss_animation_1"))
         boss.enemyRace = .slime
+        boss.findAnimations()
         return boss
     }
     
@@ -47,6 +48,7 @@ class SquidFactory: EnemyFactoryProtocol{
         
         let boss = Boss(texture: SKTexture(imageNamed: "wheelie 1"))
         boss.enemyRace = .squid
+        boss.findAnimations()
         return boss
     }
     

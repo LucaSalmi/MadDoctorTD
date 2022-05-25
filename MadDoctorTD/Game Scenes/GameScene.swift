@@ -17,6 +17,7 @@ class GameScene: SKScene {
     
     var previousCameraScale = CGFloat()
     
+    var projectileShadowNode: SKNode = SKNode()
     var edgesTilesNode: SKNode = SKNode()
     var hpBarsNode: SKNode = SKNode()
     var towerIndicatorsNode: SKNode = SKNode()
@@ -102,6 +103,8 @@ class GameScene: SKScene {
     
     var enemyRaceSwitch: [EnemyRaces] = [.slime, .squid]
     
+    var touchStarted = true
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -131,6 +134,7 @@ class GameScene: SKScene {
         //creates and adds clickable tiles to GameScene
         let _ = ClickableTileFactory()
         addChild(ClickableTilesNodes.clickableTilesNode)
+        addChild(projectileShadowNode)
         
         setupEdges()
         addChild(edgesTilesNode)
@@ -290,11 +294,7 @@ class GameScene: SKScene {
             let pinchGesture = UIPinchGestureRecognizer()
             pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
             view?.addGestureRecognizer(pinchGesture)
-            
-            let longTapRecognizer = UILongPressGestureRecognizer()
-            longTapRecognizer.addTarget(self, action: #selector(handleLongPress(_:)))
-            longTapRecognizer.minimumPressDuration = 0.5
-            view?.addGestureRecognizer(longTapRecognizer)
+
         }
         
         myCamera!.position = CGPoint(x: 0, y: yLowerLimit)
@@ -396,10 +396,30 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         
-        
         if touchingTower == nil{
+            
+            guard let touch = touches.first else {return}
+            
+            let location = touch.location(in: self)
+            let touchedNodes = nodes(at: location)
+            
+            for node in touchedNodes{
+                
+                if node.name == "RateOfFireButton" || node.name == "RangeButton" ||
+                    node.name == "AttackButton" || node.name == "FoundationMenuToggle"{
+                    
+                    touchStarted = false
+                    upgradeTowerMenu(nodeName: node.name!)
+                    statUpgradePopUp?.alpha = 0
+                    return
+                    
+                }
+            }
+            touchStarted = false
             return
         }
+        
+        touchStarted = false
                 
         if snappedToFoundation != nil{
             priceTag?.position.x = touchingTower!.position.x
@@ -570,6 +590,7 @@ class GameScene: SKScene {
             if node.name == "RateOfFireButton" || node.name == "RangeButton" ||
                 node.name == "AttackButton" || node.name == "FoundationMenuToggle"{
                 
+                touchStarted = true
                 upgradeTowerMenu(nodeName: node.name!)
                 return
                 
@@ -699,6 +720,7 @@ class GameScene: SKScene {
         upgradeUI?.alpha = 0
         foundationUI?.alpha = 0
         towerInfoMenu?.alpha = 0
+        statUpgradePopUp?.alpha = 0
         researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
         readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
     }
@@ -732,14 +754,16 @@ class GameScene: SKScene {
             
             if communicator.foundationEditMode {
                 communicator.confirmFoundationEdit()
-                
+                //Sound for finish foundationBuild
+                SoundManager.playSFX(sfxName: SoundManager.buttonSFX_three, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 
             }else{
                 communicator.foundationEditMode = true
                 communicator.toggleFoundationGrid()
                 hideAllMenus()
                 buildFoundationButton?.texture = SKTexture(imageNamed: "done_build_foundation_button_standard")
-                
+                //Sound for activate foundationBuild
+                SoundManager.playSFX(sfxName: SoundManager.buttonSFX_two, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 
             }
             
@@ -749,6 +773,7 @@ class GameScene: SKScene {
         case "ReadyButton":
             if readyButton?.alpha == 1{
                 communicator.startWavePhase()
+                waveManager?.waveStartCounter = 0
                 showTowerUI()
                 readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
                 researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
@@ -769,6 +794,12 @@ class GameScene: SKScene {
         case "BackButton":
             waveSummary?.alpha = 0
             mainHubBackground?.alpha = 1
+            GameScene.instance?.readyButton?.alpha = 1
+            GameScene.instance?.buildFoundationButton?.alpha = 1
+            GameScene.instance?.researchButton?.alpha = 1
+            GameScene.instance?.upgradeMenuToggle?.alpha = 1
+            SoundManager.playSFX(sfxName: SoundManager.buttonSFX_one, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+            showTowerUI()
             
             
         default:
@@ -788,15 +819,15 @@ class GameScene: SKScene {
             
         case "RateOfFireButton":
             upgradeTypePreview = .firerate
-            GameSceneCommunicator.instance.upgradeTower(upgradeType: .firerate)
+            //GameSceneCommunicator.instance.upgradeTower(upgradeType: .firerate)
             
         case "RangeButton":
             upgradeTypePreview = .range
-            GameSceneCommunicator.instance.upgradeTower(upgradeType: .range)
+            //GameSceneCommunicator.instance.upgradeTower(upgradeType: .range)
             
         case "AttackButton":
             upgradeTypePreview = .damage
-            GameSceneCommunicator.instance.upgradeTower(upgradeType: .damage)
+            //GameSceneCommunicator.instance.upgradeTower(upgradeType: .damage)
         
         case "FoundationMenuToggle":
             showFoundationUI()
@@ -804,6 +835,11 @@ class GameScene: SKScene {
         default:
             print("error with upgrade menu")
             
+        }
+        
+        if touchStarted == false{
+            GameSceneCommunicator.instance.upgradeTower(upgradeType: upgradeTypePreview!)
+            upgradeTypePreview = nil
         }
     }
     
@@ -943,6 +979,12 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         
         //Runs every frame
+        
+        if touchStarted{
+            handleLongPress()
+        }else if statUpgradePopUp?.alpha == 1{
+            statUpgradePopUp?.alpha = 0
+        }
         
         if showNewMaterialMessage{
             
@@ -1104,6 +1146,10 @@ class GameScene: SKScene {
         hpBarsNode.removeAllChildren()
         hpBarsNode.removeFromParent()
         
+        //Projectile Shadows
+        projectileShadowNode.removeAllChildren()
+        projectileShadowNode.removeFromParent()
+        
         //Foundation
         FoundationPlateNodes.foundationPlatesNode.removeAllChildren()
         FoundationPlateNodes.foundationPlatesNode.removeFromParent()
@@ -1224,12 +1270,13 @@ class GameScene: SKScene {
         setupCamera()
         
     }
-    
-    @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
+
+
+    private func handleLongPress() {
        
         guard let currentTower = GameSceneCommunicator.instance.currentTower else{return}
         
-        if sender.state == .began && upgradeTypePreview != nil{
+        if touchStarted && upgradeTypePreview != nil{
             
             switch upgradeTypePreview{
                     
@@ -1247,10 +1294,6 @@ class GameScene: SKScene {
             }
             
             statUpgradePopUp?.alpha = 1
-            
-        }else if sender.state == .ended{
-            
-            statUpgradePopUp?.alpha = 0
             
         }
         

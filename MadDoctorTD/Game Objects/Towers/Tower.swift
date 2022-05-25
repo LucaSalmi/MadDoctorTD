@@ -157,153 +157,33 @@ class Tower: SKSpriteNode{
     
     func upgrade(upgradeType : UpgradeTypes){
         
-        let gameManager = GameManager.instance
-        
         switch upgradeType {
+            
         case .damage:
-            
-            //Base upgrade
-            if self is GunTower && damageUpgradeCount == 1 && !gameManager.gunTowerDamageUnlocked {
-                return
-            }
-            if self is RapidFireTower && damageUpgradeCount == 1 && !gameManager.rapidFireTowerDamageUnlocked {
-                return
-            }
-            if self is SniperTower && damageUpgradeCount == 1 && !gameManager.sniperTowerDamageUnlocked {
-                return
-            }
-            if self is CannonTower && damageUpgradeCount == 1 && !gameManager.cannonTowerDamageUnlocked {
-                return
-            }
-            
-            //Material upgrade
-            if self is GunTower && damageUpgradeCount == 2 && !gameManager.bouncingProjectilesUnlocked {
-                return
-            }
-            else if self is GunTower {
-                let gunTower = self as! GunTower
-                gunTower.activateBouncingProjectiles()
-            }
-            if self is RapidFireTower && damageUpgradeCount == 2 {
-                return
-            }
-            else if self is RapidFireTower {
-                //material upgrade goes here
-            }
-            if self is SniperTower && damageUpgradeCount == 2 {
-                return
-            }
-            else if self is SniperTower {
-                //material upgrade goes here
-            }
-            if self is CannonTower && damageUpgradeCount == 2 {
-                return
-            }
-            else if self is CannonTower {
-                //material upgrade goes here
-            }
             
             attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
             damageUpgradeCount += 1
             GameScene.instance?.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(damageUpgradeCount)")
-            SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[damageUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+            //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[damageUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+            SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+
 
             
         case .range:
-            
-            //Base upgrade
-            if self is GunTower && rangeUpgradeCount == 1 && !gameManager.gunTowerRangeUnlocked {
-                return
-            }
-            if self is RapidFireTower && rangeUpgradeCount == 1 && !gameManager.rapidFireTowerRangeUnlocked {
-                return
-            }
-            if self is SniperTower && rangeUpgradeCount == 1 && !gameManager.sniperTowerRangeUnlocked {
-                return
-            }
-            if self is CannonTower && rangeUpgradeCount == 1 && !gameManager.cannonTowerRangeUnlocked {
-                return
-            }
-            
-            //Material upgrade
-            if self is GunTower && rangeUpgradeCount == 2 {
-                return
-            }
-            else if self is GunTower {
-                //material upgrade goes here
-            }
-            if self is RapidFireTower && rangeUpgradeCount == 2 {
-                return
-            }
-            else if self is RapidFireTower {
-                //material upgrade goes here
-            }
-            if self is SniperTower && rangeUpgradeCount == 2 {
-                return
-            }
-            else if self is SniperTower {
-                //material upgrade goes here
-            }
-            if self is CannonTower && rangeUpgradeCount == 2 {
-                return
-            }
-            else if self is CannonTower {
-                //material upgrade goes here
-            }
             
             attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
             GameScene.instance!.displayRangeIndicator(attackRange: attackRange, position: self.position)
             rangeUpgradeCount += 1
             GameScene.instance?.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)")
-            SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rangeUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
-
+            //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rangeUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+            SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
         case .firerate:
-            
-            //Base upgrade
-            if self is GunTower && rateOfFireUpgradeCount == 1 && !gameManager.gunTowerSpeedUnlocked {
-                return
-            }
-            if self is RapidFireTower && rateOfFireUpgradeCount == 1 && !gameManager.rapidFireTowerSpeedUnlocked {
-                return
-            }
-            if self is SniperTower && rateOfFireUpgradeCount == 1 && !gameManager.sniperTowerSpeedUnlocked {
-                return
-            }
-            if self is CannonTower && rateOfFireUpgradeCount == 1 && !gameManager.cannonTowerSpeedUnlocked {
-                return
-            }
-            
-            //Material upgrade
-            if self is GunTower && rateOfFireUpgradeCount == 2 {
-                return
-            }
-            else if self is GunTower {
-                //material upgrade goes here
-            }
-            if self is RapidFireTower && rateOfFireUpgradeCount == 2 {
-                return
-            }
-            else if self is RapidFireTower {
-                //material upgrade goes here
-            }
-            if self is SniperTower && rateOfFireUpgradeCount == 2 {
-                return
-            }
-            else if self is SniperTower {
-                //material upgrade goes here
-            }
-            if self is CannonTower && rateOfFireUpgradeCount == 2 {
-                return
-            }
-            else if self is CannonTower {
-                //material upgrade goes here
-            }
             
             fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
             rateOfFireUpgradeCount += 1
             GameScene.instance?.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
-            SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rateOfFireUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
-
+            //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rateOfFireUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+            SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
         }
         
         upgradeCount += 1

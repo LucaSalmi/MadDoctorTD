@@ -22,25 +22,38 @@ class CannonTower: Tower{
         super.init(position: position, foundation: foundation, textureName: textureName)
         
         towerName = "Cannon Tower"
-        projectileType = ProjectileTypes.sniperProjectile
+        projectileType = ProjectileTypes.cannonProjectile
         
         attackDamage = Int(Double(attackDamage) * 4)
         
-        fireRate = Int(Double(fireRate) * 9)
+        fireRate = Int(Double(fireRate) * 6)
         
-        attackRange = attackRange * 0.8
+        attackRange = attackRange * 1.3
         
     }
     
     override func attackTarget(){
 
         if currentFireRateTick <= 0 {
-            let projectile = CannonProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
             
-            //SoundManager.playMortarSwooshSFX()
-            SoundManager.playSFX(sfxName: SoundManager.cannonShotFiredSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-            ProjectileNodes.projectilesNode.addChild(projectile)
-            currentFireRateTick = fireRate
+            switch self.projectileType {
+            
+            case .mineProjectile:
+                let projectile = MineProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
+                print("mine projectile")
+                ProjectileNodes.projectilesNode.addChild(projectile)
+                            
+            default:
+                let projectile = CannonProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
+                print("default projectile")
+                
+                ProjectileNodes.projectilesNode.addChild(projectile)
+            }
+
+            //SoundManager.playSFX(sfxName: SoundManager.cannonShotFiredSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+            currentFireRateTick = fireRate // DO NOT REMOVE UNLESS YOU WANT 3 FPS 
+            SoundManager.playCannonFireSFX()
+
         }
         
         distance = CGPointDistanceSquared(from: position, to: currentTarget!.position)
@@ -50,6 +63,10 @@ class CannonTower: Tower{
     func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat{
         
         return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
+    }
+    
+    func activateMineProjectiles(){
+        projectileType = ProjectileTypes.mineProjectile
     }
     
 }

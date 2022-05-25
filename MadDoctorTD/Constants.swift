@@ -30,7 +30,7 @@ enum ActionState: Int{
 
 enum ErrorType: Int{
     
-    case researchPoints = 0, unlocked, success, error
+    case researchPoints = 0, unlocked, success, error, pathBlocked
     
 }
 
@@ -95,6 +95,8 @@ struct TowerData {
     static let FIRE_RATE: Int = 20
     static let ATTACK_DAMAGE: Int = 10
     
+    
+    
     static let UPGRADE_DAMAGE_BONUS_PCT: Double = 1.2
     static let UPGRADE_FIRE_RATE_REDUCTION_PCT: Double = 0.8
     static let UPGRADE_RANGE_BONUS_PCT: Double = 1.2
@@ -110,7 +112,7 @@ struct TowerData {
 
 //Bullets
 enum ProjectileTypes: Int {
-    case gunProjectile = 0, rapidFireProjectile, sniperProjectile, bouncingProjectile
+    case gunProjectile = 0, rapidFireProjectile, sniperProjectile, bouncingProjectile, mineProjectile, cannonProjectile, poisonProjectile
 }
 
 struct ProjectileData {
@@ -124,13 +126,17 @@ struct ProjectileData {
     
     static let BOUNCING_PROJECTILE_SPEED = CGFloat(10.0)
     
+    static let POISON_DAMAGE_PERCENT = CGFloat(0.25)
+    
+    static let SLOW_EFFECT_PERCENT = CGFloat(0.6)
+    
 }
 
 struct AoeProjectileData{
     
-    static let BLAST_RADIUS: CGFloat = CGFloat(75)
+    static let BLAST_RADIUS: CGFloat = CGFloat(120)
     
-    static let TRAVEL_DURATION: CGFloat = CGFloat(240)
+    static let TRAVEL_DURATION: CGFloat = CGFloat(180)
 }
 
 
@@ -166,7 +172,7 @@ struct EnemiesData{
     static let BASE_ATTACK_SPEED_VALUE = 60 //in frames per second
     
     static let BASE_DAMAGE_VALUE = 1
-    static let BOSS_DAMAGE_VALUE = 5
+    static let BOSS_DAMAGE_VALUE = 10
     
 }
 
@@ -194,9 +200,9 @@ struct WaveData{
 //Player + Economy
 struct PlayerData{
     
-    static let START_MONEY = 2500 //2500 //!2000
-    static let BASE_HP = 10 //3
-    static let START_RESEARCH_POINTS = 3
+    static let START_MONEY = 10000000//2500 //2500 //!2000
+    static let BASE_HP = 1000//10 //3
+    static let START_RESEARCH_POINTS = 20 //3
 
 }
 
@@ -210,38 +216,31 @@ struct UIData{
 
 struct LabData{
     
-    static let UPGRADE_COST_1 = 1
-    static let UPGRADE_COST_2 = 2
-    static let UPGRADE_COST_3 = 3
-    static let UPGRADE_COST_4 = 4
+    static let UPGRADE_COST_1 = 2
+    static let UPGRADE_COST_2 = 4
+    static let UPGRADE_COST_3 = 6
     
     static func getCost(selected: String) -> Int{
         
         switch selected{
             
-        case "1":
-            return LabData.UPGRADE_COST_1
+        case "2a":
+            return LabData.UPGRADE_COST_2
             
-        case "2":
+        case "2b":
+            return LabData.UPGRADE_COST_2
+            
+        case "2c":
             return LabData.UPGRADE_COST_2
             
         case "3a":
             return LabData.UPGRADE_COST_3
             
         case "3b":
-            return LabData.UPGRADE_COST_4
-            
-        case "4a":
             return LabData.UPGRADE_COST_3
             
-        case "4b":
-            return LabData.UPGRADE_COST_4
-            
-        case "5a":
+        case "3c":
             return LabData.UPGRADE_COST_3
-            
-        case "5b":
-            return LabData.UPGRADE_COST_4
             
         default:
             return LabData.UPGRADE_COST_1

@@ -132,33 +132,21 @@ struct TopArea: View {
         switch communicator.selectedTowerType {
             
         case .gunTower:
-            communicator.image2a = "damage_upgrade_0"
             communicator.image3a = "bouncing_projectile"
-            communicator.image2b = "Daniel"
             communicator.image3b = "Daniel"
-            communicator.image2c = "Daniel"
             communicator.image3c = "Daniel"
         case .rapidFireTower:
-            communicator.image2a = "Daniel"
             communicator.image3a = "Daniel"
-            communicator.image2b = "Daniel"
-            communicator.image3b = "Daniel"
-            communicator.image2c = "Daniel"
+            communicator.image3b = "money_object"
             communicator.image3c = "Daniel"
         case .sniperTower:
-            communicator.image2a = "Daniel"
             communicator.image3a = "Daniel"
-            communicator.image2b = "Daniel"
-            communicator.image3b = "Daniel"
-            communicator.image2c = "Daniel"
+            communicator.image3b = "money_object"
             communicator.image3c = "Daniel"
         case .cannonTower:
-            communicator.image2a = "Daniel"
             communicator.image3a = "Daniel"
-            communicator.image2b = "Daniel"
             communicator.image3b = "Daniel"
-            communicator.image2c = "Daniel"
-            communicator.image3c = "Daniel"
+            communicator.image3c = "cannon_projectile"
         }
     }
     
@@ -242,6 +230,7 @@ struct MiddleArea: View {
                     
                     Button {
                         communicator.selectedTreeButtonId = "2b"
+                        checkIfBuyable()
                     } label: {
                         ZStack {
                             
@@ -258,6 +247,7 @@ struct MiddleArea: View {
                     
                     Button {
                         communicator.selectedTreeButtonId = "3b"
+                        checkIfBuyable()
                     } label: {
                         ZStack {
                             
@@ -277,6 +267,7 @@ struct MiddleArea: View {
                     
                     Button {
                         communicator.selectedTreeButtonId = "2c"
+                        checkIfBuyable()
                     } label: {
                         ZStack {
                             
@@ -292,6 +283,7 @@ struct MiddleArea: View {
                     }
                     Button(action: {
                         communicator.selectedTreeButtonId = "3c"
+                        checkIfBuyable()
                     }, label: {
                         ZStack {
                             
@@ -419,8 +411,15 @@ struct MiddleArea: View {
     
     private func getPrice() -> Int {
         
-        return 1
+        if communicator.selectedTreeButtonId == "1" {
+            return 2
+        }
         
+        if communicator.selectedTreeButtonId == "2a" || communicator.selectedTreeButtonId == "2b" || communicator.selectedTreeButtonId == "2c" {
+            return 4
+        }
+        
+        return 6
     }
     
     private func costsSlimeMaterial() -> Bool {
@@ -439,8 +438,38 @@ struct MiddleArea: View {
                 
             }
             
-        default:
-            return false
+        case .rapidFireTower:
+            switch communicator.selectedTreeButtonId {
+                
+            case "3b":
+                return true
+                
+            default:
+                return false
+                
+            }
+            
+        case .sniperTower:
+            switch communicator.selectedTreeButtonId {
+                
+            case "3b":
+                return true
+                
+            default:
+                return false
+                
+            }
+            
+        case .cannonTower:
+            switch communicator.selectedTreeButtonId {
+                
+            case "3c":
+                return true
+                
+            default:
+                return false
+                
+            }
             
         }
         
@@ -501,6 +530,9 @@ struct MiddleArea: View {
         case .error:
             error = ErrorInfo(title: "What?", description: "Somthing unexpected happened")
             
+        case .pathBlocked:
+            error = ErrorInfo(title: "Unavailable", description: "This path is not unlocked yet")
+            
         }
         
     }
@@ -544,20 +576,38 @@ struct MiddleArea: View {
                     return .unlocked
                 }
                 gameManager.gunTowerDamageUnlocked = true
-                gameManager.researchPoints -= 1
+                gameManager.researchPoints -= 4
                 communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "3a":
                 if !gameManager.gunTowerDamageUnlocked {
-                    return .error
+                    return .pathBlocked
                 }
                 if gameManager.bouncingProjectilesUnlocked {
                     return .unlocked
                 }
                 gameManager.bouncingProjectilesUnlocked = true
-                gameManager.researchPoints -= 1
+                gameManager.researchPoints -= 6
                 gameManager.slimeMaterials -= 1
+                communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2b":
+                if gameManager.gunTowerSpeedUnlocked {
+                    return .unlocked
+                }
+                gameManager.gunTowerSpeedUnlocked = true
+                gameManager.researchPoints -= 4
+                communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2c":
+                if gameManager.gunTowerRangeUnlocked {
+                    return .unlocked
+                }
+                gameManager.gunTowerRangeUnlocked = true
+                gameManager.researchPoints -= 4
                 communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
@@ -572,9 +622,59 @@ struct MiddleArea: View {
                 }
                 GameScene.instance!.towerUI!.childNode(withName: "SpeedTower")!.alpha = 1
                 gameManager.rapidFireTowerUnlocked = true
-                gameManager.researchPoints -= 1
+                gameManager.researchPoints -= 2
                 communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
+                
+            case "2a":
+                if !gameManager.rapidFireTowerUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.rapidFireTowerDamageUnlocked {
+                    return .unlocked
+                }
+                gameManager.rapidFireTowerDamageUnlocked = true
+                gameManager.researchPoints -= 4
+                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2b":
+                if !gameManager.rapidFireTowerUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.rapidFireTowerSpeedUnlocked {
+                    return .unlocked
+                }
+                gameManager.rapidFireTowerSpeedUnlocked = true
+                gameManager.researchPoints -= 4
+                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "3b":
+                if !gameManager.rapidFireTowerSpeedUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.slowProjectilesUnlocked {
+                    return .unlocked
+                }
+                gameManager.slowProjectilesUnlocked = true
+                gameManager.researchPoints -= 6
+                gameManager.slimeMaterials -= 1
+                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2c":
+                if !gameManager.rapidFireTowerUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.rapidFireTowerRangeUnlocked {
+                    return .unlocked
+                }
+                gameManager.rapidFireTowerRangeUnlocked = true
+                gameManager.researchPoints -= 4
+                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                           
             default:
                 print("not implemented")
             }
@@ -585,9 +685,59 @@ struct MiddleArea: View {
                     return .unlocked                }
                 GameScene.instance!.towerUI!.childNode(withName: "SniperTower")!.alpha = 1
                 gameManager.sniperTowerUnlocked = true
-                gameManager.researchPoints -= 1
+                gameManager.researchPoints -= 2
                 communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
+                
+            case "2a":
+                if !gameManager.sniperTowerUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.sniperTowerDamageUnlocked {
+                    return .unlocked
+                }
+                gameManager.sniperTowerDamageUnlocked = true
+                gameManager.researchPoints -= 4
+                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2b":
+                if !gameManager.sniperTowerUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.sniperTowerSpeedUnlocked {
+                    return .unlocked
+                }
+                gameManager.sniperTowerSpeedUnlocked = true
+                gameManager.researchPoints -= 4
+                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "3b":
+                if !gameManager.sniperTowerSpeedUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.poisonProjectilesUnlocked {
+                    return .unlocked
+                }
+                gameManager.poisonProjectilesUnlocked = true
+                gameManager.researchPoints -= 6
+                gameManager.slimeMaterials -= 1
+                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2c":
+                if !gameManager.sniperTowerUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.sniperTowerRangeUnlocked {
+                    return .unlocked
+                }
+                gameManager.sniperTowerRangeUnlocked = true
+                gameManager.researchPoints -= 4
+                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
             default:
                 print("not implemented")
             }
@@ -599,9 +749,59 @@ struct MiddleArea: View {
                 }
                 GameScene.instance!.towerUI!.childNode(withName: "CannonTower")!.alpha = 1
                 gameManager.cannonTowerUnlocked = true
-                gameManager.researchPoints -= 1
+                gameManager.researchPoints -= 2
                 communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
+                
+            case "2a":
+                if !gameManager.cannonTowerUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.cannonTowerDamageUnlocked {
+                    return .unlocked
+                }
+                gameManager.cannonTowerDamageUnlocked = true
+                gameManager.researchPoints -= 4
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2b":
+                if !gameManager.cannonTowerUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.cannonTowerSpeedUnlocked {
+                    return .unlocked
+                }
+                gameManager.cannonTowerSpeedUnlocked = true
+                gameManager.researchPoints -= 4
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2c":
+                if !gameManager.cannonTowerUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.cannonTowerRangeUnlocked {
+                    return .unlocked
+                }
+                gameManager.cannonTowerRangeUnlocked = true
+                gameManager.researchPoints -= 4
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "3c":
+                if !gameManager.cannonTowerRangeUnlocked {
+                    return .pathBlocked
+                }
+                if gameManager.mineProjectilesUnlocked {
+                    return .unlocked
+                }
+                gameManager.mineProjectilesUnlocked = true
+                gameManager.researchPoints -= 6
+                gameManager.slimeMaterials -= 1
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
             default:
                 print("not implemented")
             }
@@ -622,7 +822,7 @@ struct BotArea: View {
             
             Button {
                 AppManager.appManager.state = .gameScene
-                SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
+                SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
                 //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
             } label: {
                 Text("Return")

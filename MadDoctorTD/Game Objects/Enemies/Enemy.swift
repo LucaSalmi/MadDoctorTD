@@ -22,6 +22,16 @@ class Enemy: SKSpriteNode{
     var enemyRace: EnemyRaces? = nil
     var armorValue: Int = 0
     
+    let poisonDuration = 240
+    let poisonDamageInterval = 60
+    var poisonTick = 0
+    var poisonDamageTick = 60
+    var poisonDamage = 0
+    
+    let slowDuration = 120
+    var slowTick = 0
+    
+    
     var isAttacker = false
     var attackTarget: FoundationPlate? = nil
     var precedentTargetPosition: CGPoint? = nil
@@ -35,6 +45,11 @@ class Enemy: SKSpriteNode{
     
     var hpBar: SKSpriteNode?
     var killValue = EnemiesData.BASE_KILL_VALUE
+    
+    //Animations
+    var animationFrames: [SKAction] = []
+    var runningFrame = 0
+    var frameLimiter = 0
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -78,6 +93,21 @@ class Enemy: SKSpriteNode{
             hpBar!.alpha = 1
         }
         
+        if poisonTick > 0{
+            poisonTick -= 1
+            poisonDamageTick -= 1
+            
+            if poisonDamageTick <= 0{
+                print("Poisondamage taken")
+                getDamage(dmgValue: poisonDamage)
+                poisonDamageTick = poisonDamageInterval
+            }
+        }
+        
+        if slowTick > 0{
+            slowTick -= 1
+        }
+        
         hpBar!.position.x = self.position.x
         hpBar!.position.y = self.position.y + 35
         
@@ -97,6 +127,8 @@ class Enemy: SKSpriteNode{
         if movePoints.isEmpty {
             
             GameManager.instance.getDamage(incomingDamage: self.damageValue)
+            //CHECKPOINT
+            SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_1, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             self.hp = 0
             self.removeFromParent()
             self.hpBar?.removeFromParent()
@@ -109,6 +141,28 @@ class Enemy: SKSpriteNode{
             }
             return
         }
+        
+        //Runs Animation
+        
+        if runningFrame > animationFrames.count-1{
+            runningFrame = 0
+        }
+        if self.enemyType != .boss{
+            self.run(animationFrames[runningFrame], withKey: "animation")
+        }else{
+            let boss = self as? Boss
+            boss?.bossTexture!.run(animationFrames[runningFrame], withKey: "animation")
+        }
+        
+        if frameLimiter >= 5{
+            runningFrame += 1
+            frameLimiter = 0
+        }else{
+            frameLimiter += 1
+        }
+        
+
+        
         
         move()
         
@@ -130,8 +184,17 @@ class Enemy: SKSpriteNode{
                 if targetPosition != nil{
                     
                     setDirection(targetPoint: targetPosition!)
-                    position.x += direction.x * baseSpeed
-                    position.y += direction.y * baseSpeed
+                    if slowTick <= 0{
+                        print("CH not slowed")
+                        position.x += direction.x * baseSpeed
+                        position.y += direction.y * baseSpeed
+                    }
+                    else{
+                        print("CH slowed")
+                        position.x += direction.x * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
+                        position.y += direction.y * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
+                    }
+                    
                     return
                 }
             }
@@ -141,8 +204,18 @@ class Enemy: SKSpriteNode{
         
         setDirection(targetPoint: nextPoint)
         
-        position.x += direction.x * baseSpeed
-        position.y += direction.y * baseSpeed
+        
+        if slowTick <= 0{
+            print("CH not slowed")
+            position.x += direction.x * baseSpeed
+            position.y += direction.y * baseSpeed
+        }
+        else{
+            print("CH slowed")
+            position.x += direction.x * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
+            position.y += direction.y * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
+        }
+        
         
         if hasReachedPoint(point: nextPoint) {
             
@@ -271,7 +344,7 @@ class Enemy: SKSpriteNode{
         
         self.removeFromParent()
         print("Current enemy wave count = \(EnemyNodes.enemiesNode.children.count)")
-        SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+        SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
         
     }
         
@@ -290,7 +363,22 @@ class Enemy: SKSpriteNode{
         
     }
     
-    func getDamage(dmgValue: Int){
+    func getDamage(dmgValue: Int, projectile: Projectile? = nil){
+        
+        if projectile is PoisonProjectile{
+            poisonTick = poisonDuration
+            poisonDamage = Int(CGFloat(projectile!.attackDamage) * ProjectileData.POISON_DAMAGE_PERCENT)
+            
+        }
+        
+        if projectile is GunProjectile{
+            let gunProjectile = projectile as! GunProjectile
+            
+            if gunProjectile.isSlowUpgraded{
+                slowTick = slowDuration
+                
+            }
+        }
         
         hp -= (dmgValue - armorValue)
         
@@ -493,3 +581,5 @@ class Enemy: SKSpriteNode{
     
     
 }
+
+extension Enemy: Animatable{}

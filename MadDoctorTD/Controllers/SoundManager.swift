@@ -36,7 +36,25 @@ class SoundManager {
     static let switchToResearchRoomSFX = "research_view_open."
     static let researchViewAtmosphere = "research_interface_atmosphere"
 
+    // Lose lfe SFX (for base)
+
+    static let base_hp_loss_1 = "base_hp_loss_4."
+    static let base_hp_loss_2 = "base_hp_loss_5."
+
+    // Cannon tower shotSFX
+
     //Upgrade Turret SFX
+
+    static let wrench_upgrade_1 = "wrench_upgrade_1."
+    static let wrench_upgrade_2 = "wrench_upgrade_2."
+    static let wrench_upgrade_3 = "wrench_upgrade_3."
+    static let wrench_upgrade_4 = "wrench_upgrade_4."
+    static let wrench_upgrade_5 = "wrench_upgrade_5."
+    static let wrench_upgrade_6 = "wrench_upgrade_6."
+    static let wrench_upgrade_7 = "wrench_upgrade_7."
+    static let wrench_upgrade_8 = "wrench_upgrade_8."
+
+    static let wrench_upgradeSounds = [wrench_upgrade_1, wrench_upgrade_2, wrench_upgrade_3, wrench_upgrade_4, wrench_upgrade_5, wrench_upgrade_6, wrench_upgrade_7, wrench_upgrade_8]
 
     static let upgrade_1 = "upg_sound_1."
     static let upgrade_2 = "upg_sound_2."
@@ -46,17 +64,26 @@ class SoundManager {
 
     static let upgradeSounds = [upgrade_1, upgrade_2, upgrade_3, upgrade_4, upgrade_5]
 
-//    let rangeUpgradeCount = Tower().rangeUpgradeCount
-//    let fireRateUpgradeCount = Tower()?.rangeUpgradeCount
-//    let damageUpgradeCount = Tower()?.damageUpgradeCount
+    static let buttonSFX_one = "button_7."
+    static let buttonSFX_two = "button_2."
+    static let buttonSFX_three = "button_8."
 
     //DeathSounds
 
     static let slimeDeathSFX = "slime_death4"
 
+    // Boss Giant Step SFX
+
+    //static let giant_steps_1 = "giant_step_1."
+    //static let giant_steps_2 = "giant_step_2."
+    //static let giant_steps_3 = "giant_step_3."
+    //static let giant_steps_4 = "giant_step_4."
+
     //AtmosphereSound
 
     static let desertAmbience = "desert_custom_atmosphere"
+    static let ambienceOne = "atmosphere_bg_1"
+    static let ambienceTwo = "atmosphere_bg_2"
     
     //BGMusic
 
@@ -98,6 +125,15 @@ class SoundManager {
 
     }
 
+    static func playGiantStepSFX(scene: SKScene) {
+
+        let rand = Int.random(in:1...4)
+        let giantStep = "giant_step_\(rand)."
+
+        playSFX(sfxName: giantStep, scene: scene, sfxExtension: mp3Extension)
+
+    }
+
     static func playMortarSwooshSFX() {
 
         let rand = Int.random(in:1...7)
@@ -105,6 +141,14 @@ class SoundManager {
 
         playSFX(sfxName: mortarSwoosh, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
 
+    }
+
+    static func playCannonFireSFX() {
+
+        let rand = Int.random(in:1...3)
+        let cannonFireSFX = "cannon_fire_\(rand)."
+
+        playSFX(sfxName: cannonFireSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
     }
     
     static func playBGM(bgmString: String, bgmExtension: String) {

@@ -10,6 +10,8 @@ import SpriteKit
 
 class GunProjectile: Projectile {
     
+    var isSlowUpgraded = false
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }

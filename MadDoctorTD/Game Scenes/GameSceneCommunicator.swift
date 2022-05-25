@@ -220,7 +220,6 @@ class GameSceneCommunicator: ObservableObject {
     
     func upgradeTower(upgradeType: UpgradeTypes) {
         
-        
         GameScene.instance?.displayRangeIndicator(attackRange: currentTower!.attackRange, position: currentTower!.position)
         
         if currentTower!.upgradeCount > TowerData.MAX_UPGRADE{
@@ -233,8 +232,9 @@ class GameSceneCommunicator: ObservableObject {
         if upgradeCost > GameManager.instance.currentMoney {
             return
         }
-        else {
-            GameManager.instance.currentMoney -= upgradeCost
+        
+        if !validateTowerResearch(upgradeType: upgradeType) {
+            return
         }
         
         switch upgradeType {
@@ -246,6 +246,148 @@ class GameSceneCommunicator: ObservableObject {
             currentTower!.upgrade(upgradeType: .firerate)
         }
         
+        GameManager.instance.currentMoney -= upgradeCost
+        
+    }
+    
+    private func validateTowerResearch(upgradeType: UpgradeTypes) -> Bool {
+        
+        let gameManager = GameManager.instance
+        
+        switch upgradeType {
+        case .damage:
+            
+            //Base upgrade
+            if currentTower! is GunTower && currentTower!.damageUpgradeCount == 1 && !gameManager.gunTowerDamageUnlocked {
+                return false
+            }
+            if currentTower! is RapidFireTower && currentTower!.damageUpgradeCount == 1 && !gameManager.rapidFireTowerDamageUnlocked {
+                return false
+            }
+            if currentTower! is SniperTower && currentTower!.damageUpgradeCount == 1 && !gameManager.sniperTowerDamageUnlocked {
+                return false
+            }
+            if currentTower! is CannonTower && currentTower!.damageUpgradeCount == 1 && !gameManager.cannonTowerDamageUnlocked {
+                return false
+            }
+            
+            //Material upgrade
+            if currentTower! is GunTower && currentTower!.damageUpgradeCount == 2 && !gameManager.bouncingProjectilesUnlocked {
+                return false
+            }
+            else if currentTower! is GunTower && currentTower!.damageUpgradeCount == 2 {
+                let gunTower = currentTower! as! GunTower
+                gunTower.activateBouncingProjectiles()
+            }
+            if currentTower! is RapidFireTower && currentTower!.damageUpgradeCount == 2 {
+                return false
+            }
+            else if currentTower! is RapidFireTower && currentTower!.damageUpgradeCount == 2 {
+                //material upgrade goes here
+            }
+            if currentTower! is SniperTower && currentTower!.damageUpgradeCount == 2 {
+                return false
+            }
+            else if currentTower! is SniperTower && currentTower!.damageUpgradeCount == 2 {
+                //material upgrade goes here
+            }
+            if currentTower! is CannonTower && currentTower!.damageUpgradeCount == 2 {
+                return false
+            }
+            else if currentTower! is CannonTower && currentTower!.damageUpgradeCount == 2 {
+                //material upgrade goes here
+            }
+            
+        case .range:
+            
+            //Base upgrade
+            if currentTower! is GunTower && currentTower!.rangeUpgradeCount == 1 && !gameManager.gunTowerRangeUnlocked {
+                return false
+            }
+            if currentTower! is RapidFireTower && currentTower!.rangeUpgradeCount == 1 && !gameManager.rapidFireTowerRangeUnlocked {
+                return false
+            }
+            if currentTower! is SniperTower && currentTower!.rangeUpgradeCount == 1 && !gameManager.sniperTowerRangeUnlocked {
+                return false
+            }
+            if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 1 && !gameManager.cannonTowerRangeUnlocked {
+                return false
+            }
+            
+            //Material upgrade
+            if currentTower! is GunTower && currentTower!.rangeUpgradeCount == 2 {
+                return false
+            }
+            else if currentTower! is GunTower && currentTower!.rangeUpgradeCount == 2 {
+                //material upgrade goes here
+            }
+            if currentTower! is RapidFireTower && currentTower!.rangeUpgradeCount == 2 {
+                return false
+            }
+            else if currentTower! is RapidFireTower && currentTower!.rangeUpgradeCount == 2 {
+                //material upgrade goes here
+            }
+            if currentTower! is SniperTower && currentTower!.rangeUpgradeCount == 2 {
+                return false
+            }
+            else if currentTower! is SniperTower && currentTower!.rangeUpgradeCount == 2 {
+                //material upgrade goes here
+            }
+            if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 2 && !gameManager.mineProjectilesUnlocked {
+                return false
+            }
+            else if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 2 {
+                let cannonTower = currentTower! as! CannonTower
+                cannonTower.activateMineProjectiles()
+            }
+            
+        case .firerate:
+            
+            //Base upgrade
+            if currentTower! is GunTower && currentTower!.rateOfFireUpgradeCount == 1 && !gameManager.gunTowerSpeedUnlocked {
+                return false
+            }
+            if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 1 && !gameManager.rapidFireTowerSpeedUnlocked {
+                return false
+            }
+            if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 1 && !gameManager.sniperTowerSpeedUnlocked {
+                return false
+            }
+            if currentTower! is CannonTower && currentTower!.rateOfFireUpgradeCount == 1 && !gameManager.cannonTowerSpeedUnlocked {
+                return false
+            }
+            
+            //Material upgrade
+            if currentTower! is GunTower && currentTower!.rateOfFireUpgradeCount == 2 {
+                return false
+            }
+            else if currentTower! is GunTower && currentTower!.rateOfFireUpgradeCount == 2 {
+                //material upgrade goes here
+            }
+            if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 2 && !gameManager.slowProjectilesUnlocked {
+                return false
+            }
+            else if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 2 {
+                let rapidFireTower = currentTower! as! RapidFireTower
+                rapidFireTower.activateSlowProjectiles()
+            }
+            if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 2 && !gameManager.poisonProjectilesUnlocked {
+                return false
+            }
+            else if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 2 {
+                let sniperTower = currentTower! as! SniperTower
+                sniperTower.activatePosionProjectile()
+            }
+            if currentTower! is CannonTower && currentTower!.rateOfFireUpgradeCount == 2 {
+                return false
+            }
+            else if currentTower! is CannonTower && currentTower!.rateOfFireUpgradeCount == 2 {
+                //material upgrade goes here
+            }
+            
+        }
+        
+        return true
     }
 
     func cancelAllMenus(){
@@ -316,7 +458,7 @@ class GameSceneCommunicator: ObservableObject {
         GameSceneCommunicator.instance.isBuildPhase = false
         gameScene.waveManager!.shouldCreateWave = true
         GameSceneCommunicator.instance.cancelAllMenus()
-        SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
+        //SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
         
         //Door animations
         gameScene.doorsAnimationCount = gameScene.doorsAnimationTime

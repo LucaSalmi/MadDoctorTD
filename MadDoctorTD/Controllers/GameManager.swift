@@ -35,20 +35,24 @@ class GameManager: ObservableObject{
     @Published var rapidFireTowerDamageUnlocked: Bool = false
     @Published var rapidFireTowerSpeedUnlocked: Bool = false
     @Published var rapidFireTowerRangeUnlocked: Bool = false
+    @Published var slowProjectilesUnlocked: Bool = false
     
     //Sniper Tower Unlocks
     @Published var sniperTowerUnlocked: Bool = false
     @Published var sniperTowerDamageUnlocked: Bool = false
     @Published var sniperTowerSpeedUnlocked: Bool = false
     @Published var sniperTowerRangeUnlocked: Bool = false
+    @Published var poisonProjectilesUnlocked: Bool = false
     
     //Cannon Tower Unlocks
     @Published var cannonTowerUnlocked: Bool = false
     @Published var cannonTowerDamageUnlocked: Bool = false
     @Published var cannonTowerSpeedUnlocked: Bool = false
     @Published var cannonTowerRangeUnlocked: Bool = false
+    @Published var mineProjectilesUnlocked: Bool = false
     
     //Gun Tower Unlocks
+    @Published var gunTowerUnlocked: Bool = true
     @Published var gunTowerDamageUnlocked: Bool = false
     @Published var gunTowerSpeedUnlocked: Bool = false
     @Published var gunTowerRangeUnlocked: Bool = false
@@ -65,6 +69,7 @@ class GameManager: ObservableObject{
         baseHp -= incomingDamage
         if baseHp <= 0{
             isGameOver = true
+            SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_2, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
         }
     }
     

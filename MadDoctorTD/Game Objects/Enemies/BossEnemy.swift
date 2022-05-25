@@ -12,6 +12,7 @@ class Boss: Enemy{
     
     var bossTexture: SKSpriteNode? = nil
     var nextMoveCount: Int = 0
+    var bossSteps = 0
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -28,7 +29,7 @@ class Boss: Enemy{
         damageValue = EnemiesData.BOSS_DAMAGE_VALUE
         isAttacker = true
         self.enemyType = .boss
-        self.alpha = 1
+        self.alpha = 0
         attackPower = EnemiesData.BASE_ATTACK_POWER_VALUE * 2
         attackSpeed = EnemiesData.BASE_ATTACK_SPEED_VALUE * 2
         baseSpeed = 1.5
@@ -39,6 +40,24 @@ class Boss: Enemy{
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Foundation
         physicsBody?.categoryBitMask = PhysicsCategory.Boss
+        
+    }
+    
+    func findAnimations(){
+        
+        switch self.enemyRace{
+            
+        case .slime:
+            createSlimeAnimations(enemyType: .boss, textureName: "boss_slime_animation_")
+            
+        case .squid:
+            //change to squid animations
+            createSlimeAnimations(enemyType: .boss, textureName: "boss_slime_animation_")
+        case .none:
+            print("🤔")
+        
+        }
+        
         
     }
     
@@ -65,11 +84,9 @@ class Boss: Enemy{
             }else if nextMoveCount == 61{
                 
                 PhysicsUtils.shakeCamera(duration: 1)
-                
+                SoundManager.playGiantStepSFX(scene: GameScene.instance!)
+
             }
         }
     }
-    
-
-    
 }
