@@ -288,6 +288,9 @@ class WaveManager{
     //Timers for starting the wave and then spawn one enemy from the wave
     func timers(){
         
+        print("shoulcreateWavw \(shouldCreateWave)")
+        print("enemy ARray \(EnemyNodes.enemyArray.count)")
+        
         if waveNumber == attackLevel {
             reduceSpawnTime += 5
         }
@@ -329,10 +332,10 @@ class WaveManager{
             
             
             
-            GameScene.instance?.readyButton?.alpha = 1
-            GameScene.instance?.buildFoundationButton?.alpha = 1
-            GameScene.instance?.researchButton?.alpha = 1
-            GameScene.instance?.upgradeMenuToggle?.alpha = 1
+//            GameScene.instance?.readyButton?.alpha = 1
+//            GameScene.instance?.buildFoundationButton?.alpha = 1
+//            GameScene.instance?.researchButton?.alpha = 1
+//            GameScene.instance?.upgradeMenuToggle?.alpha = 1
             
             GameScene.instance?.showSummary()
             

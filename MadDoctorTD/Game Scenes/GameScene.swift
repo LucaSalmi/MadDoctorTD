@@ -789,6 +789,11 @@ class GameScene: SKScene {
         case "BackButton":
             waveSummary?.alpha = 0
             mainHubBackground?.alpha = 1
+            GameScene.instance?.readyButton?.alpha = 1
+            GameScene.instance?.buildFoundationButton?.alpha = 1
+            GameScene.instance?.researchButton?.alpha = 1
+            GameScene.instance?.upgradeMenuToggle?.alpha = 1
+            showTowerUI()
             
             
         default:
