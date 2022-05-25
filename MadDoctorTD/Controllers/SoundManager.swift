@@ -38,6 +38,17 @@ class SoundManager {
 
     //Upgrade Turret SFX
 
+    static let wrench_upgrade_1 = "wrench_upgrade_1."
+    static let wrench_upgrade_2 = "wrench_upgrade_2."
+    static let wrench_upgrade_3 = "wrench_upgrade_3."
+    static let wrench_upgrade_4 = "wrench_upgrade_4."
+    static let wrench_upgrade_5 = "wrench_upgrade_5."
+    static let wrench_upgrade_6 = "wrench_upgrade_6."
+    static let wrench_upgrade_7 = "wrench_upgrade_7."
+    static let wrench_upgrade_8 = "wrench_upgrade_8."
+
+    static let wrench_upgradeSounds = [wrench_upgrade_1, wrench_upgrade_2, wrench_upgrade_3, wrench_upgrade_4, wrench_upgrade_5, wrench_upgrade_6, wrench_upgrade_7, wrench_upgrade_8]
+
     static let upgrade_1 = "upg_sound_1."
     static let upgrade_2 = "upg_sound_2."
     static let upgrade_3 = "upg_sound_3."
@@ -45,10 +56,6 @@ class SoundManager {
     static let upgrade_5 = "upg_sound_5."
 
     static let upgradeSounds = [upgrade_1, upgrade_2, upgrade_3, upgrade_4, upgrade_5]
-
-//    let rangeUpgradeCount = Tower().rangeUpgradeCount
-//    let fireRateUpgradeCount = Tower()?.rangeUpgradeCount
-//    let damageUpgradeCount = Tower()?.damageUpgradeCount
 
     //DeathSounds
 

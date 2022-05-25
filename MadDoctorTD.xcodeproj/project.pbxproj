@@ -38,6 +38,14 @@
 		B34EEAE22837B01B00CE60C1 /* upg_sound_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEADC2837B01B00CE60C1 /* upg_sound_5.mp3 */; };
 		B34EEAE42837C9DB00CE60C1 /* mad_td_simplified.wav in Resources */ = {isa = PBXBuildFile; fileRef = B34EEAE32837C9DA00CE60C1 /* mad_td_simplified.wav */; };
 		B34EEAE62837D2B000CE60C1 /* portal_located.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEAE52837D2B000CE60C1 /* portal_located.mp3 */; };
+		B34EEAF1283E0C1200CE60C1 /* wrench_upgrade_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEAE9283E0C0F00CE60C1 /* wrench_upgrade_3.mp3 */; };
+		B34EEAF2283E0C1200CE60C1 /* wrench_upgrade_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEAEA283E0C1000CE60C1 /* wrench_upgrade_4.mp3 */; };
+		B34EEAF3283E0C1200CE60C1 /* wrench_upgrade_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEAEB283E0C1000CE60C1 /* wrench_upgrade_1.mp3 */; };
+		B34EEAF4283E0C1200CE60C1 /* wrench_upgrade_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEAEC283E0C1000CE60C1 /* wrench_upgrade_5.mp3 */; };
+		B34EEAF5283E0C1200CE60C1 /* wrench_upgrade_8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEAED283E0C1100CE60C1 /* wrench_upgrade_8.mp3 */; };
+		B34EEAF6283E0C1200CE60C1 /* wrench_upgrade_6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEAEE283E0C1100CE60C1 /* wrench_upgrade_6.mp3 */; };
+		B34EEAF7283E0C1200CE60C1 /* wrench_upgrade_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEAEF283E0C1100CE60C1 /* wrench_upgrade_7.mp3 */; };
+		B34EEAF8283E0C1200CE60C1 /* wrench_upgrade_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEAF0283E0C1200CE60C1 /* wrench_upgrade_2.mp3 */; };
 		B35C20FB282A45DB009A748E /* AWP_SOUND_EFFECT.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */; };
 		B35C210B282A6330009A748E /* sniper_bullet_fly_by_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */; };
 		B35C210C282A6330009A748E /* sniper_bullet_fly_by_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */; };
@@ -156,6 +164,14 @@
 		B34EEADC2837B01B00CE60C1 /* upg_sound_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = upg_sound_5.mp3; sourceTree = "<group>"; };
 		B34EEAE32837C9DA00CE60C1 /* mad_td_simplified.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mad_td_simplified.wav; sourceTree = "<group>"; };
 		B34EEAE52837D2B000CE60C1 /* portal_located.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = portal_located.mp3; sourceTree = "<group>"; };
+		B34EEAE9283E0C0F00CE60C1 /* wrench_upgrade_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrench_upgrade_3.mp3; sourceTree = "<group>"; };
+		B34EEAEA283E0C1000CE60C1 /* wrench_upgrade_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrench_upgrade_4.mp3; sourceTree = "<group>"; };
+		B34EEAEB283E0C1000CE60C1 /* wrench_upgrade_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrench_upgrade_1.mp3; sourceTree = "<group>"; };
+		B34EEAEC283E0C1000CE60C1 /* wrench_upgrade_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrench_upgrade_5.mp3; sourceTree = "<group>"; };
+		B34EEAED283E0C1100CE60C1 /* wrench_upgrade_8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrench_upgrade_8.mp3; sourceTree = "<group>"; };
+		B34EEAEE283E0C1100CE60C1 /* wrench_upgrade_6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrench_upgrade_6.mp3; sourceTree = "<group>"; };
+		B34EEAEF283E0C1100CE60C1 /* wrench_upgrade_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrench_upgrade_7.mp3; sourceTree = "<group>"; };
+		B34EEAF0283E0C1200CE60C1 /* wrench_upgrade_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrench_upgrade_2.mp3; sourceTree = "<group>"; };
 		B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AWP_SOUND_EFFECT.wav; sourceTree = "<group>"; };
 		B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_2.wav; sourceTree = "<group>"; };
 		B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_1.wav; sourceTree = "<group>"; };
@@ -441,6 +457,14 @@
 				B35C2133282CFE8F009A748E /* slime_death1.wav */,
 				B35C2132282CFE8F009A748E /* slime_death2.wav */,
 				B35C2130282CFE8E009A748E /* slime_death3.wav */,
+				B34EEAEB283E0C1000CE60C1 /* wrench_upgrade_1.mp3 */,
+				B34EEAF0283E0C1200CE60C1 /* wrench_upgrade_2.mp3 */,
+				B34EEAE9283E0C0F00CE60C1 /* wrench_upgrade_3.mp3 */,
+				B34EEAEA283E0C1000CE60C1 /* wrench_upgrade_4.mp3 */,
+				B34EEAEC283E0C1000CE60C1 /* wrench_upgrade_5.mp3 */,
+				B34EEAEE283E0C1100CE60C1 /* wrench_upgrade_6.mp3 */,
+				B34EEAEF283E0C1100CE60C1 /* wrench_upgrade_7.mp3 */,
+				B34EEAED283E0C1100CE60C1 /* wrench_upgrade_8.mp3 */,
 				B34EEAE52837D2B000CE60C1 /* portal_located.mp3 */,
 				B34EEA97283641A600CE60C1 /* 3_MAD_TD_Theme_Party_In_The_Basement_Deep.mp3 */,
 				B34EEADA2837B01A00CE60C1 /* sniper_chosen.mp3 */,
@@ -556,6 +580,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B34EEAF3283E0C1200CE60C1 /* wrench_upgrade_1.mp3 in Resources */,
 				B35C2115282B972B009A748E /* mad_td_theme.wav in Resources */,
 				B34EEADD2837B01B00CE60C1 /* upg_sound_1.mp3 in Resources */,
 				B35C2134282CFE8F009A748E /* slime_death3.wav in Resources */,
@@ -567,6 +592,7 @@
 				B34EEA942836418E00CE60C1 /* metal_tap_3.mp3 in Resources */,
 				B34EEAE42837C9DB00CE60C1 /* mad_td_simplified.wav in Resources */,
 				E5E965DE2833809700010B5A /* TowerMenuScene.sks in Resources */,
+				B34EEAF2283E0C1200CE60C1 /* wrench_upgrade_4.mp3 in Resources */,
 				E5BB6D67283CD09B003E57D9 /* CreditsScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,
 				B35C213D282D39DB009A748E /* cannon_shot_fired.mp3 in Resources */,
@@ -577,6 +603,7 @@
 				B35C210E282A6330009A748E /* sniper_bullet_fly_by_5.wav in Resources */,
 				B35C211E282BC07C009A748E /* mortar_swoosh5.mp3 in Resources */,
 				B34EEA962836418E00CE60C1 /* metal_tap_1.mp3 in Resources */,
+				B34EEAF5283E0C1200CE60C1 /* wrench_upgrade_8.mp3 in Resources */,
 				B35C211F282BC07C009A748E /* mortar_swoosh4.mp3 in Resources */,
 				B35C211D282BC07C009A748E /* mortar_swoosh3.mp3 in Resources */,
 				3359CC9128214C9A00878191 /* GameScene.sks in Resources */,
@@ -590,21 +617,26 @@
 				B35C210C282A6330009A748E /* sniper_bullet_fly_by_1.wav in Resources */,
 				B35C213B282D021B009A748E /* mad_td_airlock_theme.wav in Resources */,
 				3359CCA4282157C500878191 /* MyTileSet.sks in Resources */,
+				B34EEAF7283E0C1200CE60C1 /* wrench_upgrade_7.mp3 in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
 				B34EEA932836418E00CE60C1 /* metal_tap_2.mp3 in Resources */,
 				B34EEAE02837B01B00CE60C1 /* sniper_chosen.mp3 in Resources */,
 				B35C2155282D4546009A748E /* research_view_open.mp3 in Resources */,
+				B34EEAF6283E0C1200CE60C1 /* wrench_upgrade_6.mp3 in Resources */,
 				B35C2112282A6EEE009A748E /* finger_tap_boosted.wav in Resources */,
 				B35C2137282CFE8F009A748E /* slime_death1.wav in Resources */,
 				B34EEADE2837B01B00CE60C1 /* upg_sound_2.mp3 in Resources */,
 				B30A1E6F2833CA3B007F86E5 /* construction_sound_effect.wav in Resources */,
 				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
 				B34EEADF2837B01B00CE60C1 /* upg_sound_4.mp3 in Resources */,
+				B34EEAF8283E0C1200CE60C1 /* wrench_upgrade_2.mp3 in Resources */,
 				B35C2153282D44DC009A748E /* button_press_three.mp3 in Resources */,
 				B34EEAE22837B01B00CE60C1 /* upg_sound_5.mp3 in Resources */,
+				B34EEAF1283E0C1200CE60C1 /* wrench_upgrade_3.mp3 in Resources */,
 				B35C2120282BC07C009A748E /* mortar_swoosh1.mp3 in Resources */,
 				B35C2150282D44DC009A748E /* button_press_one.mp3 in Resources */,
 				B35C2157282D454D009A748E /* research_interface_atmosphere.mp3 in Resources */,
+				B34EEAF4283E0C1200CE60C1 /* wrench_upgrade_5.mp3 in Resources */,
 				B35C2122282BC07C009A748E /* mortar_swoosh7.mp3 in Resources */,
 				B34EEA98283641A600CE60C1 /* 3_MAD_TD_Theme_Party_In_The_Basement_Deep.mp3 in Resources */,
 				B34EEA952836418E00CE60C1 /* metal_tap_4.mp3 in Resources */,
