@@ -28,6 +28,10 @@ class Enemy: SKSpriteNode{
     var poisonDamageTick = 60
     var poisonDamage = 0
     
+    let slowDuration = 120
+    var slowTick = 0
+    
+    
     var isAttacker = false
     var attackTarget: FoundationPlate? = nil
     var precedentTargetPosition: CGPoint? = nil
@@ -93,8 +97,10 @@ class Enemy: SKSpriteNode{
                 getDamage(dmgValue: poisonDamage)
                 poisonDamageTick = poisonDamageInterval
             }
-            
-            
+        }
+        
+        if slowTick > 0{
+            slowTick -= 1
         }
         
         hpBar!.position.x = self.position.x
@@ -151,8 +157,17 @@ class Enemy: SKSpriteNode{
                 if targetPosition != nil{
                     
                     setDirection(targetPoint: targetPosition!)
-                    position.x += direction.x * baseSpeed
-                    position.y += direction.y * baseSpeed
+                    if slowTick <= 0{
+                        print("CH not slowed")
+                        position.x += direction.x * baseSpeed
+                        position.y += direction.y * baseSpeed
+                    }
+                    else{
+                        print("CH slowed")
+                        position.x += direction.x * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
+                        position.y += direction.y * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
+                    }
+                    
                     return
                 }
             }
@@ -162,8 +177,18 @@ class Enemy: SKSpriteNode{
         
         setDirection(targetPoint: nextPoint)
         
-        position.x += direction.x * baseSpeed
-        position.y += direction.y * baseSpeed
+        
+        if slowTick <= 0{
+            print("CH not slowed")
+            position.x += direction.x * baseSpeed
+            position.y += direction.y * baseSpeed
+        }
+        else{
+            print("CH slowed")
+            position.x += direction.x * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
+            position.y += direction.y * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
+        }
+        
         
         if hasReachedPoint(point: nextPoint) {
             
@@ -317,6 +342,15 @@ class Enemy: SKSpriteNode{
             poisonTick = poisonDuration
             poisonDamage = Int(CGFloat(projectile!.attackDamage) * ProjectileData.POISON_DAMAGE_PERCENT)
             
+        }
+        
+        if projectile is GunProjectile{
+            let gunProjectile = projectile as! GunProjectile
+            
+            if gunProjectile.isSlowUpgraded{
+                slowTick = slowDuration
+                
+            }
         }
         
         hp -= (dmgValue - armorValue)
