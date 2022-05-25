@@ -36,7 +36,7 @@ class CannonTower: Tower{
 
         if currentFireRateTick <= 0 {
             
-            switch self.projectileType{
+            switch self.projectileType {
             
             case .mineProjectile:
                 let projectile = MineProjectile(position: position, target: currentTarget!, attackDamage: attackDamage)
@@ -49,11 +49,11 @@ class CannonTower: Tower{
                 
                 ProjectileNodes.projectilesNode.addChild(projectile)
             }
-            
-            //SoundManager.playMortarSwooshSFX()
-            SoundManager.playSFX(sfxName: SoundManager.cannonShotFiredSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-            
-            currentFireRateTick = fireRate
+
+            //SoundManager.playSFX(sfxName: SoundManager.cannonShotFiredSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+            currentFireRateTick = fireRate // DO NOT REMOVE UNLESS YOU WANT 3 FPS 
+            SoundManager.playCannonFireSFX()
+
         }
         
         distance = CGPointDistanceSquared(from: position, to: currentTarget!.position)

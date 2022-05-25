@@ -41,6 +41,8 @@ class SoundManager {
     static let base_hp_loss_1 = "base_hp_loss_4."
     static let base_hp_loss_2 = "base_hp_loss_5."
 
+    // Cannon tower shotSFX
+
     //Upgrade Turret SFX
 
     static let wrench_upgrade_1 = "wrench_upgrade_1."
@@ -139,6 +141,14 @@ class SoundManager {
 
         playSFX(sfxName: mortarSwoosh, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
 
+    }
+
+    static func playCannonFireSFX() {
+
+        let rand = Int.random(in:1...3)
+        let cannonFireSFX = "cannon_fire_\(rand)."
+
+        playSFX(sfxName: cannonFireSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
     }
     
     static func playBGM(bgmString: String, bgmExtension: String) {
