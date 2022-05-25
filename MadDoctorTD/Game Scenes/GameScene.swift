@@ -17,6 +17,7 @@ class GameScene: SKScene {
     
     var previousCameraScale = CGFloat()
     
+    var projectileShadowNode: SKNode = SKNode()
     var edgesTilesNode: SKNode = SKNode()
     var hpBarsNode: SKNode = SKNode()
     var towerIndicatorsNode: SKNode = SKNode()
@@ -133,6 +134,7 @@ class GameScene: SKScene {
         //creates and adds clickable tiles to GameScene
         let _ = ClickableTileFactory()
         addChild(ClickableTilesNodes.clickableTilesNode)
+        addChild(projectileShadowNode)
         
         setupEdges()
         addChild(edgesTilesNode)
@@ -1139,6 +1141,10 @@ class GameScene: SKScene {
         //HP bars
         hpBarsNode.removeAllChildren()
         hpBarsNode.removeFromParent()
+        
+        //Projectile Shadows
+        projectileShadowNode.removeAllChildren()
+        projectileShadowNode.removeFromParent()
         
         //Foundation
         FoundationPlateNodes.foundationPlatesNode.removeAllChildren()

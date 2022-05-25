@@ -133,6 +133,7 @@
 		E5BB6D67283CD09B003E57D9 /* CreditsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E5BB6D66283CD09B003E57D9 /* CreditsScene.sks */; };
 		E5BB6D69283CD1C0003E57D9 /* CreditsSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB6D68283CD1C0003E57D9 /* CreditsSceneView.swift */; };
 		E5BB6D6B283CD56C003E57D9 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB6D6A283CD56C003E57D9 /* CreditsScene.swift */; };
+		E5BB6D6D283E1073003E57D9 /* MineProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB6D6C283E1073003E57D9 /* MineProjectile.swift */; };
 		E5E965DE2833809700010B5A /* TowerMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E5E965DD2833809700010B5A /* TowerMenuScene.sks */; };
 /* End PBXBuildFile section */
 
@@ -265,6 +266,7 @@
 		E5BB6D66283CD09B003E57D9 /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
 		E5BB6D68283CD1C0003E57D9 /* CreditsSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsSceneView.swift; sourceTree = "<group>"; };
 		E5BB6D6A283CD56C003E57D9 /* CreditsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
+		E5BB6D6C283E1073003E57D9 /* MineProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineProjectile.swift; sourceTree = "<group>"; };
 		E5E965DD2833809700010B5A /* TowerMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TowerMenuScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -326,6 +328,7 @@
 				E5268CD528253E6600F134A5 /* SniperProjectile.swift */,
 				E5836FF8282A652D00EAF6E9 /* AoeProjectile.swift */,
 				E5836FFA282A662000EAF6E9 /* CannonProjectile.swift */,
+				E5BB6D6C283E1073003E57D9 /* MineProjectile.swift */,
 			);
 			path = Projectiles;
 			sourceTree = "<group>";
@@ -727,6 +730,7 @@
 				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,
 				3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
+				E5BB6D6D283E1073003E57D9 /* MineProjectile.swift in Sources */,
 				C89DA1DB282E857D00364AB4 /* GameOverView.swift in Sources */,
 				C844A735282A88DA00FC42C9 /* SlimeEnemy.swift in Sources */,
 			);
