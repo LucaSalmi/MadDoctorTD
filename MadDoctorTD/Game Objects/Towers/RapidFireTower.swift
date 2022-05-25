@@ -13,6 +13,8 @@ class RapidFireTower: Tower{
     var fireLeft = false
     var resetTexture = false
     
+    var slowUpgraded = false
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -31,6 +33,8 @@ class RapidFireTower: Tower{
         fireRate = Int(Double(fireRate) * 0.5)
         
         attackRange = attackRange * 0.5
+        
+        activateSlowProjectiles()
     }
     
     override func update() {
@@ -39,6 +43,10 @@ class RapidFireTower: Tower{
             resetTexture = false
             towerTexture.texture = SKTexture(imageNamed: "speed_tower")
         }
+    }
+    
+    func activateSlowProjectiles(){
+        slowUpgraded = true
     }
     
 }

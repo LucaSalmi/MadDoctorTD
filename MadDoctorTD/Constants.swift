@@ -128,6 +128,8 @@ struct ProjectileData {
     
     static let POISON_DAMAGE_PERCENT = CGFloat(0.25)
     
+    static let SLOW_EFFECT_PERCENT = CGFloat(0.6)
+    
 }
 
 struct AoeProjectileData{

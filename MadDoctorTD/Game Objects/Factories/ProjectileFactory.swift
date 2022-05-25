@@ -53,13 +53,6 @@ class PoisonProjectileFactory: ProjectileFactoryProtocol{
     
 }
 
-
-
-
-
-
-
-
 protocol ProjetileCreator{
     
     func createProjectile()
@@ -89,6 +82,13 @@ class ProjectileFactory: ProjetileCreator{
             let rapidFireTower = firingTower as! RapidFireTower
             
             let projectile = GunProjectileFactory().createProjectile(position: rapidFireTower.position, target: rapidFireTower.currentTarget!, attackDamage: rapidFireTower.attackDamage)
+            
+            if rapidFireTower.slowUpgraded{
+                //spawn slowbullets here
+                let slowProjectile = projectile as! GunProjectile
+                
+                slowProjectile.isSlowUpgraded = true
+            }
             
             if rapidFireTower.fireLeft{
                 
