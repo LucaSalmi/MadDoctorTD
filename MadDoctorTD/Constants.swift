@@ -30,7 +30,7 @@ enum ActionState: Int{
 
 enum ErrorType: Int{
     
-    case researchPoints = 0, unlocked, success, error
+    case researchPoints = 0, unlocked, success, error, pathBlocked
     
 }
 
