@@ -159,7 +159,7 @@
 		E5BB6D6B283CD56C003E57D9 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB6D6A283CD56C003E57D9 /* CreditsScene.swift */; };
 		E5BB6D6D283E1073003E57D9 /* MineProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB6D6C283E1073003E57D9 /* MineProjectile.swift */; };
 		E5BB6D71283E4B1F003E57D9 /* PoisonProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB6D70283E4B1F003E57D9 /* PoisonProjectile.swift */; };
-		E5E965DE2833809700010B5A /* TowerMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E5E965DD2833809700010B5A /* TowerMenuScene.sks */; };
+		E5E965DE2833809700010B5A /* GameUIScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E5E965DD2833809700010B5A /* GameUIScene.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -317,7 +317,7 @@
 		E5BB6D6A283CD56C003E57D9 /* CreditsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
 		E5BB6D6C283E1073003E57D9 /* MineProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineProjectile.swift; sourceTree = "<group>"; };
 		E5BB6D70283E4B1F003E57D9 /* PoisonProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoisonProjectile.swift; sourceTree = "<group>"; };
-		E5E965DD2833809700010B5A /* TowerMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TowerMenuScene.sks; sourceTree = "<group>"; };
+		E5E965DD2833809700010B5A /* GameUIScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameUIScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,7 +413,7 @@
 				E57BA9E8282B9885001BCD99 /* StartScene.swift */,
 				E57BA9EC282B9922001BCD99 /* StartSceneView.swift */,
 				E57BA9EE282B9CD2001BCD99 /* StartSceneCommunicator.swift */,
-				E5E965DD2833809700010B5A /* TowerMenuScene.sks */,
+				E5E965DD2833809700010B5A /* GameUIScene.sks */,
 				B34EEB25283F6AD900CE60C1 /* GameSceneTwo.sks */,
 			);
 			path = "Game Scenes";
@@ -687,7 +687,7 @@
 				B34EEA942836418E00CE60C1 /* metal_tap_3.mp3 in Resources */,
 				B34EEAE42837C9DB00CE60C1 /* mad_td_simplified.wav in Resources */,
 				B3800389283FA31600C9A0C3 /* wrong_click_2.wav in Resources */,
-				E5E965DE2833809700010B5A /* TowerMenuScene.sks in Resources */,
+				E5E965DE2833809700010B5A /* GameUIScene.sks in Resources */,
 				B34EEAF2283E0C1200CE60C1 /* wrench_upgrade_4.mp3 in Resources */,
 				E5BB6D67283CD09B003E57D9 /* CreditsScene.sks in Resources */,
 				C839C6AD2821352400F66043 /* Preview Assets.xcassets in Resources */,

@@ -156,7 +156,7 @@ class GameScene: SKScene {
         addChild(EnemyNodes.enemiesNode)
         addChild(hpBarsNode)
         
-        let uiScene = SKScene(fileNamed: "TowerMenuScene")
+        let uiScene = SKScene(fileNamed: "GameUIScene")
         towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
         towerUI!.removeFromParent()
         foundationUI = uiScene?.childNode(withName: "FoundationMenu") as? SKSpriteNode
@@ -588,12 +588,20 @@ class GameScene: SKScene {
         for node in touchedNodes{
             
             if node.name == "RateOfFireButton" || node.name == "RangeButton" ||
-                node.name == "AttackButton" || node.name == "FoundationMenuToggle"{
+                node.name == "AttackButton"{
                 
                 touchStarted = true
                 upgradeTowerMenu(nodeName: node.name!)
                 return
                 
+            }
+        }
+        
+        for node in touchedNodes{
+            
+            if node.name == "FoundationMenuToggle"{
+                showFoundationUI()
+                return
             }
         }
         
@@ -693,6 +701,7 @@ class GameScene: SKScene {
             upgradeMenuToggle?.alpha = 1
         }
     }
+    
     func showFoundationUI(){
         towerUI?.alpha = 0
         upgradeUI?.alpha = 0
@@ -715,6 +724,7 @@ class GameScene: SKScene {
             foundationUpgradeButton?.alpha = 1
         }
     }
+    
     func hideAllMenus(){
         towerUI?.alpha = 0
         upgradeUI?.alpha = 0
@@ -724,6 +734,7 @@ class GameScene: SKScene {
         researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
         readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
     }
+    
     func showSummary(){
         hideAllMenus()
         mainHubBackground?.alpha = 0
@@ -828,9 +839,6 @@ class GameScene: SKScene {
         case "AttackButton":
             upgradeTypePreview = .damage
             //GameSceneCommunicator.instance.upgradeTower(upgradeType: .damage)
-        
-        case "FoundationMenuToggle":
-            showFoundationUI()
             
         default:
             print("error with upgrade menu")
@@ -838,8 +846,11 @@ class GameScene: SKScene {
         }
         
         if touchStarted == false{
-            GameSceneCommunicator.instance.upgradeTower(upgradeType: upgradeTypePreview!)
-            upgradeTypePreview = nil
+            if upgradeTypePreview != nil{
+                GameSceneCommunicator.instance.upgradeTower(upgradeType: upgradeTypePreview!)
+                upgradeTypePreview = nil
+            }
+            
         }
     }
     
