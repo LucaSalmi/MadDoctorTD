@@ -39,6 +39,8 @@ class SoundManager {
     static let upgradeUnlocked = "button_7."
     static let upgradePressed = "button_2."
 
+    static let errorSound = "wrong_click_2"
+
     // Lose lfe SFX (for base)
 
     static let base_hp_loss_1 = "base_hp_loss_4."

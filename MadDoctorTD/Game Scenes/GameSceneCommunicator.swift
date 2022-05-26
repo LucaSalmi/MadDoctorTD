@@ -24,6 +24,7 @@ class GameSceneCommunicator: ObservableObject {
     var currentTile: ClickableTile? = nil
     var currentFoundation: FoundationPlate? = nil
     var currentTower: Tower? = nil
+    var canBuild: Bool = false
     
     @Published var foundationEditMode: Bool = false
     var foundationDeleteMode = false
@@ -44,12 +45,18 @@ class GameSceneCommunicator: ObservableObject {
         //foundationsToAdd.removeAll()
         
         if newFoundationTotalCost > GameManager.instance.currentMoney {
+
             print("Too expensive")
+
+            SoundManager.playSFX(sfxName: SoundManager.errorSound, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
+
             return
         }
         
         if isPathBlocked() {
             print("Path is blocked")
+            SoundManager.playSFX(sfxName: SoundManager.errorSound, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
+
             return
         }
         
@@ -57,6 +64,7 @@ class GameSceneCommunicator: ObservableObject {
         for blueprint in blueprints {
             if !blueprint.isPowered {
                 print("Some blueprints are not connected")
+                SoundManager.playSFX(sfxName: SoundManager.errorSound, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
                 return
             }
         }
@@ -82,7 +90,8 @@ class GameSceneCommunicator: ObservableObject {
         GameScene.instance!.readyButton?.alpha = 1
         GameScene.instance!.researchButton?.alpha = 1
         GameScene.instance!.buildFoundationButton?.texture = SKTexture(imageNamed: "build_foundation_button_standard")
-        
+
+        SoundManager.playSFX(sfxName: SoundManager.buttonSFX_three, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
     }
     
     private func isPathBlocked() -> Bool {
