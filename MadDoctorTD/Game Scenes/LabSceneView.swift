@@ -469,6 +469,10 @@ struct MiddleArea: View {
     
     func checkIfBuyable(){
         
+        if let labScene = LabScene.instance {
+            SoundManager.playSFX(sfxName: SoundManager.upgradePressed, scene: labScene, sfxExtension: SoundManager.mp3Extension)
+        }
+        
         if checkIfUpgraded() == .unlocked{
             error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
             return
@@ -612,6 +616,9 @@ struct MiddleArea: View {
             error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
         case .success:
             error = ErrorInfo(title: "Great", description: "You unlocked this upgrade for \(communicator.selectedTowerType)")
+            if let labScene = LabScene.instance {
+                SoundManager.playSFX(sfxName: SoundManager.upgradeUnlocked, scene: labScene, sfxExtension: SoundManager.mp3Extension)
+            }
         case .error:
             error = ErrorInfo(title: "What?", description: "Somthing unexpected happened")
             
