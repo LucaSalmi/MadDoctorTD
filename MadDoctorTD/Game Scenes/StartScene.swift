@@ -18,7 +18,6 @@ class StartScene: SKScene{
     
     var levelButton: SKSpriteNode? = nil
     var settingsButton: SKSpriteNode? = nil
-    var closeButton: SKSpriteNode? = nil
     
     var settingsMenu: SKSpriteNode? = nil
     var levelMenu: SKSpriteNode? = nil
@@ -41,8 +40,6 @@ class StartScene: SKScene{
         
         settingsMenu = self.childNode(withName: "SettingsMenu") as? SKSpriteNode
         levelMenu = self.childNode(withName: "LevelMenu") as? SKSpriteNode
-        
-        closeButton = settingsMenu?.childNode(withName: "CloseSettingsButton") as? SKSpriteNode
 
     }
     
@@ -66,23 +63,44 @@ class StartScene: SKScene{
             print("Play metal tap sound")
         }
         
+        
+        
         if node.name == "CloseSettingsButton"{
             print("SettingsMenu closed")
             hideExtraMenus()
         }
         
+        if node.name == "LevelOneButton"{
+            
+            print("level 1 pressed")
+            
+            if GameScene.instance != nil{
+                
+                GameManager.instance.isGameOver = true
+                GameManager.instance.isPaused = false
+                GameScene.instance!.resetGameScene()
+                
+            }
+            appManager.state = .gameScene
+            SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
+            return
+    
+            
+        }
+        
         if node.name == "CloseLevelButton"{
             print("LevelMenu closed")
             hideExtraMenus()
+            return
         }
         
-        if node.name == "SettingsButton"{
+        if node.name == "SettingsButton" && levelMenu?.alpha == 0{
             
             print("settingButton Pressed")
             showSettingsMenu()
         }
         
-        if node.name == "LevelButton"{
+        if node.name == "LevelButton" && settingsMenu?.alpha == 0{
             
             print("levelButton Pressed")
             showLevelMenu()
