@@ -95,6 +95,8 @@
 		B35C2153282D44DC009A748E /* button_press_three.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C214F282D44DC009A748E /* button_press_three.mp3 */; };
 		B35C2155282D4546009A748E /* research_view_open.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C2154282D4545009A748E /* research_view_open.mp3 */; };
 		B35C2157282D454D009A748E /* research_interface_atmosphere.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B35C2156282D454D009A748E /* research_interface_atmosphere.mp3 */; };
+		B380037F283F89AE00C9A0C3 /* airlock_SFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B380037D283F89AD00C9A0C3 /* airlock_SFX.mp3 */; };
+		B3800380283F89AE00C9A0C3 /* mad_td_menu_theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B380037E283F89AE00C9A0C3 /* mad_td_menu_theme.mp3 */; };
 		C81DED212837AE8800D67B8F /* ErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81DED202837AE8800D67B8F /* ErrorInfo.swift */; };
 		C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A52821352200F66043 /* MadDoctorTDApp.swift */; };
 		C839C6A82821352200F66043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A72821352200F66043 /* ContentView.swift */; };
@@ -244,6 +246,8 @@
 		B35C214F282D44DC009A748E /* button_press_three.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = button_press_three.mp3; sourceTree = "<group>"; };
 		B35C2154282D4545009A748E /* research_view_open.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = research_view_open.mp3; sourceTree = "<group>"; };
 		B35C2156282D454D009A748E /* research_interface_atmosphere.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = research_interface_atmosphere.mp3; sourceTree = "<group>"; };
+		B380037D283F89AD00C9A0C3 /* airlock_SFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = airlock_SFX.mp3; sourceTree = "<group>"; };
+		B380037E283F89AE00C9A0C3 /* mad_td_menu_theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mad_td_menu_theme.mp3; sourceTree = "<group>"; };
 		C81DED202837AE8800D67B8F /* ErrorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInfo.swift; sourceTree = "<group>"; };
 		C839C6A22821352200F66043 /* MadDoctorTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadDoctorTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C839C6A52821352200F66043 /* MadDoctorTDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadDoctorTDApp.swift; sourceTree = "<group>"; };
@@ -504,6 +508,8 @@
 			children = (
 				B35C2133282CFE8F009A748E /* slime_death1.wav */,
 				B34EEB05283E33D700CE60C1 /* atmosphere_bg_1.mp3 */,
+				B380037D283F89AD00C9A0C3 /* airlock_SFX.mp3 */,
+				B380037E283F89AE00C9A0C3 /* mad_td_menu_theme.mp3 */,
 				B34EEB1F283E65DC00CE60C1 /* cannon_fire_1.mp3 */,
 				B34EEB20283E65DC00CE60C1 /* cannon_fire_2.mp3 */,
 				B34EEB21283E65DC00CE60C1 /* cannon_fire_3.mp3 */,
@@ -697,7 +703,9 @@
 				B34EEB24283E65DD00CE60C1 /* cannon_fire_3.mp3 in Resources */,
 				B34EEB04283E19A500CE60C1 /* giant_step_4.mp3 in Resources */,
 				B34EEB1E283E4F8B00CE60C1 /* button_8.mp3 in Resources */,
+				B380037F283F89AE00C9A0C3 /* airlock_SFX.mp3 in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
+				B3800380283F89AE00C9A0C3 /* mad_td_menu_theme.mp3 in Resources */,
 				B34EEA932836418E00CE60C1 /* metal_tap_2.mp3 in Resources */,
 				B34EEAE02837B01B00CE60C1 /* sniper_chosen.mp3 in Resources */,
 				B35C2155282D4546009A748E /* research_view_open.mp3 in Resources */,

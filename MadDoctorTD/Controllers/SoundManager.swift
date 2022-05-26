@@ -35,6 +35,9 @@ class SoundManager {
     static let buttonFourSFX = "button_press_four."
     static let switchToResearchRoomSFX = "research_view_open."
     static let researchViewAtmosphere = "research_interface_atmosphere"
+    
+    static let upgradeUnlocked = "button_7."
+    static let upgradePressed = "button_2."
 
     // Lose lfe SFX (for base)
 
@@ -44,6 +47,9 @@ class SoundManager {
     // Rapid Fire Turret SFX
 
     static let stoppedFiringSFX = "rapidStoppedFiringSFX."
+    // Airlock SFX
+
+    static let airlockSFX = "airlock_SFX."
 
     //Upgrade Turret SFX
 
@@ -94,6 +100,7 @@ class SoundManager {
     static let airlockDoorsTheme = "mad_td_airlock_theme"
     static let DoorsTheme = "3_MAD_TD_Theme_Party_In_The_Basement_Deep"
     static let simplifiedTheme = "mad_td_simplified"
+    static let mainMenuTheme = "mad_td_menu_theme"
     
     static var musicPlayer: AVAudioPlayer!
 

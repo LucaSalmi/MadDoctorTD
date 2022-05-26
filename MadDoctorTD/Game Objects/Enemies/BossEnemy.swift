@@ -37,7 +37,7 @@ class Boss: Enemy{
         let size = CGSize(width: self.size.width * 4, height: self.size.height * 4)
         bossTexture = SKSpriteNode(texture: texture, color: .clear, size: size)
         bossTexture?.name = "BossTexture"
-        physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
+        physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Foundation
         physicsBody?.categoryBitMask = PhysicsCategory.Boss
         
@@ -51,8 +51,7 @@ class Boss: Enemy{
             createSlimeAnimations(enemyType: .boss, textureName: "boss_slime_animation_")
             
         case .squid:
-            //change to squid animations
-            createSlimeAnimations(enemyType: .boss, textureName: "boss_slime_animation_")
+            createSquidAnimations(enemyType: .boss, textureName: "squid_boss_animation_")
         case .none:
             print("🤔")
         
@@ -65,23 +64,23 @@ class Boss: Enemy{
         
         bossTexture?.position = self.position
         
-        if attackTarget != nil{
+        if attackTarget != nil {
             
             super.attack()
             
-        }else{
+        } else {
             
             nextMoveCount += 1
             
-            if nextMoveCount <= 60{
+            if nextMoveCount <= 60 {
             
                 super.update()
                 
-            }else if nextMoveCount >= 120{
+            } else if nextMoveCount >= 120 {
                 
                 nextMoveCount = 0
                 
-            }else if nextMoveCount == 61{
+            } else if nextMoveCount == 61 {
                 
                 PhysicsUtils.shakeCamera(duration: 1)
                 SoundManager.playGiantStepSFX(scene: GameScene.instance!)

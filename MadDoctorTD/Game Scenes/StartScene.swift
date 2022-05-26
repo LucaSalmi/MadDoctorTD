@@ -22,6 +22,7 @@ class StartScene: SKScene{
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         SoundManager.playBGM(bgmString: SoundManager.DoorsTheme, bgmExtension: SoundManager.mp3Extension)
+
     }
     
     override func didMove(to view: SKView) {
@@ -64,7 +65,9 @@ class StartScene: SKScene{
         }
         
         if !musicStarted {
-            SoundManager.playBGM(bgmString: SoundManager.airlockDoorsTheme, bgmExtension: SoundManager.wavExtension)
+            //SoundManager.playBGM(bgmString: SoundManager.airlockDoorsTheme, bgmExtension: SoundManager.wavExtension)
+            SoundManager.playBGM(bgmString: SoundManager.mainMenuTheme, bgmExtension: SoundManager.mp3Extension)
+            SoundManager.playSFX(sfxName: SoundManager.airlockSFX, scene: self, sfxExtension: SoundManager.mp3Extension)
             musicStarted = true
         }
         

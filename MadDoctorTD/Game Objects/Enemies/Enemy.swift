@@ -30,6 +30,7 @@ class Enemy: SKSpriteNode{
     
     let slowDuration = 120
     var slowTick = 0
+    var textureOffset = CGFloat(10)
     
     
     var isAttacker = false
@@ -40,10 +41,12 @@ class Enemy: SKSpriteNode{
     var attackCounter: Int = 0
     
     var damageValue = EnemiesData.BASE_DAMAGE_VALUE
-
+    
     var startHp = 0
     
     var hpBar: SKSpriteNode?
+    var isSlowedTexture: SKSpriteNode?
+    var isPoisonedTexture: SKSpriteNode?
     var killValue = EnemiesData.BASE_KILL_VALUE
     
     //Animations
@@ -77,9 +80,24 @@ class Enemy: SKSpriteNode{
         hpBar!.position = self.position
         hpBar!.alpha = 0
         hpBar!.zPosition = 50
+        
+        isSlowedTexture = SKSpriteNode(texture: SKTexture(imageNamed: "slow_icon1"))
+        isSlowedTexture!.size.width = 20
+        isSlowedTexture!.size.height = 20
+        isSlowedTexture!.alpha = 0
+        isSlowedTexture!.zPosition = 50
+        
+        isPoisonedTexture = SKSpriteNode(texture: SKTexture(imageNamed: "poison_icon1"))
+        isPoisonedTexture!.size.width = 20
+        isPoisonedTexture!.size.height = 20
+        isPoisonedTexture!.alpha = 0
+        isPoisonedTexture!.zPosition = 50
+        
         GameScene.instance!.hpBarsNode.addChild(hpBar!)
+        GameScene.instance!.hpBarsNode.addChild(isSlowedTexture!)
+        GameScene.instance!.hpBarsNode.addChild(isPoisonedTexture!)
         self.name = "Enemy"
-
+        
     }
     
     func changeToAtkTexture() {
@@ -98,24 +116,40 @@ class Enemy: SKSpriteNode{
             poisonDamageTick -= 1
             
             if poisonDamageTick <= 0{
-                print("Poisondamage taken")
                 getDamage(dmgValue: poisonDamage)
+                
                 poisonDamageTick = poisonDamageInterval
+            }
+        }
+        else{
+            if isPoisonedTexture!.alpha != 0{
+                isPoisonedTexture?.alpha = 0
             }
         }
         
         if slowTick > 0{
             slowTick -= 1
         }
+        else{
+            if isSlowedTexture!.alpha != 0{
+                isSlowedTexture!.alpha = 0
+            }
+        }
         
         hpBar!.position.x = self.position.x
         hpBar!.position.y = self.position.y + 35
+        
+        isSlowedTexture!.position.x = hpBar!.position.x + ((hpBar?.size.width)!/2) + textureOffset
+        isSlowedTexture!.position.y = hpBar!.position.y
+        
+        isPoisonedTexture!.position.x = hpBar!.position.x + ((hpBar?.size.width)!/2) + textureOffset
+        isPoisonedTexture!.position.y = hpBar!.position.y
         
         if !isMoving {
             movePoints = GameScene.instance!.pathfindingTestEnemy!.movePoints
             isMoving = true
         }
-                
+        
         if self.enemyType == .flying || self.enemyType == .boss{
             
             if movePoints.count > 1 {
@@ -130,6 +164,8 @@ class Enemy: SKSpriteNode{
             //CHECKPOINT
             SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_1, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             self.hp = 0
+            isSlowedTexture!.removeFromParent()
+            isPoisonedTexture!.removeFromParent()
             self.removeFromParent()
             self.hpBar?.removeFromParent()
             
@@ -141,6 +177,7 @@ class Enemy: SKSpriteNode{
             }
             return
         }
+        
         
         //Runs Animation
         
@@ -161,9 +198,6 @@ class Enemy: SKSpriteNode{
             frameLimiter += 1
         }
         
-
-        
-        
         move()
         
     }
@@ -175,6 +209,8 @@ class Enemy: SKSpriteNode{
             
             if attackTarget != nil{
                 
+                let lookAtConstraint = SKConstraint.orient(to: attackTarget!, offset: SKRange(constantValue: -CGFloat.pi / 2))
+                self.constraints = [ lookAtConstraint ]
                 attack()
                 return
                 
@@ -183,14 +219,15 @@ class Enemy: SKSpriteNode{
                 let targetPosition = seekAndDestroy()
                 if targetPosition != nil{
                     
+                    let lookAtConstraint = SKConstraint.orient(to: targetPosition!, offset: SKRange(constantValue: -CGFloat.pi / 2))
+                    self.constraints = [ lookAtConstraint ]
+                    
                     setDirection(targetPoint: targetPosition!)
                     if slowTick <= 0{
-                        print("CH not slowed")
                         position.x += direction.x * baseSpeed
                         position.y += direction.y * baseSpeed
                     }
                     else{
-                        print("CH slowed")
                         position.x += direction.x * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
                         position.y += direction.y * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
                     }
@@ -203,6 +240,10 @@ class Enemy: SKSpriteNode{
         let nextPoint = movePoints[0]
         
         setDirection(targetPoint: nextPoint)
+        
+        
+        let lookAtConstraint = SKConstraint.orient(to: nextPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
+        self.constraints = [ lookAtConstraint ]
         
         
         if slowTick <= 0{
@@ -323,6 +364,8 @@ class Enemy: SKSpriteNode{
         GameScene.instance!.moneyNode.addChild(moneyObject)
         
         hpBar!.removeFromParent()
+        isSlowedTexture!.removeFromParent()
+        isPoisonedTexture!.removeFromParent()
         
         GameManager.instance.currentMoney += self.killValue
         print("KILL VALUE = \(GameManager.instance.currentMoney)")
@@ -347,7 +390,7 @@ class Enemy: SKSpriteNode{
         SoundManager.playSFX(sfxName: SoundManager.slimeDeathSFX, scene: GameScene.instance!, sfxExtension: SoundManager.wavExtension)
         
     }
-        
+    
     private func createDialog()-> Dialogue{
         
         switch self.enemyRace{
@@ -367,8 +410,8 @@ class Enemy: SKSpriteNode{
         
         if projectile is PoisonProjectile{
             poisonTick = poisonDuration
+            isPoisonedTexture?.alpha = 1
             poisonDamage = Int(CGFloat(projectile!.attackDamage) * ProjectileData.POISON_DAMAGE_PERCENT)
-            
         }
         
         if projectile is GunProjectile{
@@ -379,6 +422,7 @@ class Enemy: SKSpriteNode{
                 let rand = Int.random(in: 1...20)
                 if rand == 7{
                     slowTick = slowDuration
+                    isSlowedTexture!.alpha = 1
                 }
                 
                 
@@ -405,42 +449,42 @@ class Enemy: SKSpriteNode{
         }
         hpBar!.texture = SKTexture(imageNamed: "hp_bar_\(hpLeft)0")
         
-//        if hp <= Int(Double(startHp) * 0.1) {
-//            //TODO: 10% HERE
-//            hpBar!.texture = SKTexture(imageNamed: "hp_bar_10")
-//        }
-//        else if hp <= Int(Double(startHp) * 0.2) {
-//            //TODO: 20% HERE
-//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_20")
-//        }
-//        else if hp <= Int(Double(startHp) * 0.3){
-//            //TODO: 30% HERE
-//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_30")
-//        }
-//        else if hp <= Int(Double(startHp) * 0.4){
-//            //TODO: 40% HERE
-//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_40")
-//        }
-//        else if hp <= Int(Double(startHp) * 0.5){
-//            //TODO: 50% HERE
-//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_50")
-//        }
-//        else if hp <= Int(Double(startHp) * 0.6){
-//            //TODO: 60% HERE
-//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_60")
-//        }
-//        else if hp <= Int(Double(startHp) * 0.7){
-//            //TODO: 70% HERE
-//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_70")
-//        }
-//        else if hp <= Int(Double(startHp) * 0.8){
-//            //TODO: 80% HERE
-//            hpBar?.texture = SKTexture(imageNamed: "hp_bar_80")
-//        }
-//        else if hp <= Int(Double(startHp) * 0.9){
-//            //TODO: 90% HERE
-//            hpBar!.texture = SKTexture(imageNamed: "hp_bar_90")
-//        }
+        //        if hp <= Int(Double(startHp) * 0.1) {
+        //            //TODO: 10% HERE
+        //            hpBar!.texture = SKTexture(imageNamed: "hp_bar_10")
+        //        }
+        //        else if hp <= Int(Double(startHp) * 0.2) {
+        //            //TODO: 20% HERE
+        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_20")
+        //        }
+        //        else if hp <= Int(Double(startHp) * 0.3){
+        //            //TODO: 30% HERE
+        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_30")
+        //        }
+        //        else if hp <= Int(Double(startHp) * 0.4){
+        //            //TODO: 40% HERE
+        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_40")
+        //        }
+        //        else if hp <= Int(Double(startHp) * 0.5){
+        //            //TODO: 50% HERE
+        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_50")
+        //        }
+        //        else if hp <= Int(Double(startHp) * 0.6){
+        //            //TODO: 60% HERE
+        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_60")
+        //        }
+        //        else if hp <= Int(Double(startHp) * 0.7){
+        //            //TODO: 70% HERE
+        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_70")
+        //        }
+        //        else if hp <= Int(Double(startHp) * 0.8){
+        //            //TODO: 80% HERE
+        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_80")
+        //        }
+        //        else if hp <= Int(Double(startHp) * 0.9){
+        //            //TODO: 90% HERE
+        //            hpBar!.texture = SKTexture(imageNamed: "hp_bar_90")
+        //        }
     }
     
     private func hasReachedPoint(point: CGPoint) -> Bool {
@@ -528,7 +572,7 @@ class Enemy: SKSpriteNode{
         
         return newMovePoints
     }
-
+    
     func updatePathfinding() {
         
         //Store old move points
@@ -551,7 +595,7 @@ class Enemy: SKSpriteNode{
             else {
                 break
             }
-                
+            
         }
         
         for node in EnemyNodes.enemiesNode.children {
@@ -573,7 +617,7 @@ class Enemy: SKSpriteNode{
                         break
                     }
                     if enemy.oldMovePoints[i].x == enemy.movePoints[i].x &&
-                            enemy.oldMovePoints[i].y == enemy.movePoints[i].y {
+                        enemy.oldMovePoints[i].y == enemy.movePoints[i].y {
                         
                         enemy.movePoints.remove(at: i)
                         
