@@ -151,8 +151,6 @@ class Tower: SKSpriteNode{
             //                }
             currentFireRateTick = fireRate
         }
-        
-        
     }
     
     func upgrade(upgradeType : UpgradeTypes){
@@ -212,6 +210,8 @@ class Tower: SKSpriteNode{
                 
                 if !rapidFireTower.resetTexture{
                     rapidFireTower.resetTexture = true
+                    //SoundManager.playSFX(sfxName: SoundManager.stoppedFiringSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                    //print("inuti IF satsen")
                 }
             }
             findNewTarget()

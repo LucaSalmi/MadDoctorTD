@@ -60,6 +60,11 @@
 		B34EEB22283E65DD00CE60C1 /* cannon_fire_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEB1F283E65DC00CE60C1 /* cannon_fire_1.mp3 */; };
 		B34EEB23283E65DD00CE60C1 /* cannon_fire_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEB20283E65DC00CE60C1 /* cannon_fire_2.mp3 */; };
 		B34EEB24283E65DD00CE60C1 /* cannon_fire_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEB21283E65DC00CE60C1 /* cannon_fire_3.mp3 */; };
+		B34EEB26283F6AD900CE60C1 /* GameSceneTwo.sks in Resources */ = {isa = PBXBuildFile; fileRef = B34EEB25283F6AD900CE60C1 /* GameSceneTwo.sks */; };
+		B34EEB2B283F716800CE60C1 /* rapidStoppedFiringSFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEB27283F716700CE60C1 /* rapidStoppedFiringSFX.mp3 */; };
+		B34EEB2C283F716800CE60C1 /* gunShot_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEB28283F716800CE60C1 /* gunShot_3.mp3 */; };
+		B34EEB2D283F716800CE60C1 /* gunShot_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEB29283F716800CE60C1 /* gunShot_2.mp3 */; };
+		B34EEB2E283F716800CE60C1 /* gunShot_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B34EEB2A283F716800CE60C1 /* gunShot_1.mp3 */; };
 		B35C20FB282A45DB009A748E /* AWP_SOUND_EFFECT.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */; };
 		B35C210B282A6330009A748E /* sniper_bullet_fly_by_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */; };
 		B35C210C282A6330009A748E /* sniper_bullet_fly_by_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */; };
@@ -205,6 +210,11 @@
 		B34EEB1F283E65DC00CE60C1 /* cannon_fire_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cannon_fire_1.mp3; sourceTree = "<group>"; };
 		B34EEB20283E65DC00CE60C1 /* cannon_fire_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cannon_fire_2.mp3; sourceTree = "<group>"; };
 		B34EEB21283E65DC00CE60C1 /* cannon_fire_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cannon_fire_3.mp3; sourceTree = "<group>"; };
+		B34EEB25283F6AD900CE60C1 /* GameSceneTwo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameSceneTwo.sks; sourceTree = "<group>"; };
+		B34EEB27283F716700CE60C1 /* rapidStoppedFiringSFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rapidStoppedFiringSFX.mp3; sourceTree = "<group>"; };
+		B34EEB28283F716800CE60C1 /* gunShot_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gunShot_3.mp3; sourceTree = "<group>"; };
+		B34EEB29283F716800CE60C1 /* gunShot_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gunShot_2.mp3; sourceTree = "<group>"; };
+		B34EEB2A283F716800CE60C1 /* gunShot_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gunShot_1.mp3; sourceTree = "<group>"; };
 		B35C20FA282A45DA009A748E /* AWP_SOUND_EFFECT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AWP_SOUND_EFFECT.wav; sourceTree = "<group>"; };
 		B35C2106282A632F009A748E /* sniper_bullet_fly_by_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_2.wav; sourceTree = "<group>"; };
 		B35C2107282A632F009A748E /* sniper_bullet_fly_by_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_bullet_fly_by_1.wav; sourceTree = "<group>"; };
@@ -392,6 +402,7 @@
 				E57BA9EC282B9922001BCD99 /* StartSceneView.swift */,
 				E57BA9EE282B9CD2001BCD99 /* StartSceneCommunicator.swift */,
 				E5E965DD2833809700010B5A /* TowerMenuScene.sks */,
+				B34EEB25283F6AD900CE60C1 /* GameSceneTwo.sks */,
 			);
 			path = "Game Scenes";
 			sourceTree = "<group>";
@@ -504,6 +515,10 @@
 				B34EEB21283E65DC00CE60C1 /* cannon_fire_3.mp3 */,
 				B34EEB06283E33D800CE60C1 /* atmosphere_bg_2.mp3 */,
 				B35C2132282CFE8F009A748E /* slime_death2.wav */,
+				B34EEB2A283F716800CE60C1 /* gunShot_1.mp3 */,
+				B34EEB29283F716800CE60C1 /* gunShot_2.mp3 */,
+				B34EEB28283F716800CE60C1 /* gunShot_3.mp3 */,
+				B34EEB27283F716700CE60C1 /* rapidStoppedFiringSFX.mp3 */,
 				B34EEB1D283E4F8B00CE60C1 /* button_8.mp3 */,
 				B34EEB19283E498A00CE60C1 /* button_7.mp3 */,
 				B34EEB1B283E4F6F00CE60C1 /* button_2.mp3 */,
@@ -638,10 +653,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B34EEAF3283E0C1200CE60C1 /* wrench_upgrade_1.mp3 in Resources */,
+				B34EEB26283F6AD900CE60C1 /* GameSceneTwo.sks in Resources */,
 				B35C2115282B972B009A748E /* mad_td_theme.wav in Resources */,
 				B34EEB01283E19A500CE60C1 /* giant_step_3.mp3 in Resources */,
 				B34EEADD2837B01B00CE60C1 /* upg_sound_1.mp3 in Resources */,
 				B35C2134282CFE8F009A748E /* slime_death3.wav in Resources */,
+				B34EEB2B283F716800CE60C1 /* rapidStoppedFiringSFX.mp3 in Resources */,
 				B35C2152282D44DC009A748E /* button_press_two.mp3 in Resources */,
 				B34EEAE12837B01B00CE60C1 /* upg_sound_3.mp3 in Resources */,
 				B34EEB08283E33D800CE60C1 /* atmosphere_bg_2.mp3 in Resources */,
@@ -671,6 +688,7 @@
 				B34EEB07283E33D800CE60C1 /* atmosphere_bg_1.mp3 in Resources */,
 				3359CC9128214C9A00878191 /* GameScene.sks in Resources */,
 				B35C210D282A6330009A748E /* sniper_bullet_fly_by_4.wav in Resources */,
+				B34EEB2D283F716800CE60C1 /* gunShot_2.mp3 in Resources */,
 				E57BA9E7282B9819001BCD99 /* StartScene.sks in Resources */,
 				B34EEAFC283E102F00CE60C1 /* base_hp_loss_4.mp3 in Resources */,
 				B35C213F282D3DA7009A748E /* cannon_tower_impact.mp3 in Resources */,
@@ -695,6 +713,7 @@
 				B35C2112282A6EEE009A748E /* finger_tap_boosted.wav in Resources */,
 				B35C2137282CFE8F009A748E /* slime_death1.wav in Resources */,
 				B34EEB02283E19A500CE60C1 /* giant_step_1.mp3 in Resources */,
+				B34EEB2E283F716800CE60C1 /* gunShot_1.mp3 in Resources */,
 				B34EEADE2837B01B00CE60C1 /* upg_sound_2.mp3 in Resources */,
 				B30A1E6F2833CA3B007F86E5 /* construction_sound_effect.wav in Resources */,
 				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
@@ -703,6 +722,7 @@
 				B35C2153282D44DC009A748E /* button_press_three.mp3 in Resources */,
 				B34EEAE22837B01B00CE60C1 /* upg_sound_5.mp3 in Resources */,
 				B34EEAF1283E0C1200CE60C1 /* wrench_upgrade_3.mp3 in Resources */,
+				B34EEB2C283F716800CE60C1 /* gunShot_3.mp3 in Resources */,
 				B34EEB03283E19A500CE60C1 /* giant_step_2.mp3 in Resources */,
 				B34EEB1A283E498A00CE60C1 /* button_7.mp3 in Resources */,
 				B35C2120282BC07C009A748E /* mortar_swoosh1.mp3 in Resources */,
