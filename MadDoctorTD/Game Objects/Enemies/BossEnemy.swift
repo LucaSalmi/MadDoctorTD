@@ -65,23 +65,23 @@ class Boss: Enemy{
         
         bossTexture?.position = self.position
         
-        if attackTarget != nil{
+        if attackTarget != nil {
             
             super.attack()
             
-        }else{
+        } else {
             
             nextMoveCount += 1
             
-            if nextMoveCount <= 60{
+            if nextMoveCount <= 60 {
             
                 super.update()
                 
-            }else if nextMoveCount >= 120{
+            } else if nextMoveCount >= 120 {
                 
                 nextMoveCount = 0
                 
-            }else if nextMoveCount == 61{
+            } else if nextMoveCount == 61 {
                 
                 PhysicsUtils.shakeCamera(duration: 1)
                 SoundManager.playGiantStepSFX(scene: GameScene.instance!)
