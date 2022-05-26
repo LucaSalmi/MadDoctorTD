@@ -30,6 +30,7 @@ class Enemy: SKSpriteNode{
     
     let slowDuration = 120
     var slowTick = 0
+    var textureOffset = CGFloat(10)
     
     
     var isAttacker = false
@@ -44,6 +45,8 @@ class Enemy: SKSpriteNode{
     var startHp = 0
     
     var hpBar: SKSpriteNode?
+    var isSlowedTexture: SKSpriteNode?
+    var isPoisonedTexture: SKSpriteNode?
     var killValue = EnemiesData.BASE_KILL_VALUE
     
     //Animations
@@ -77,7 +80,22 @@ class Enemy: SKSpriteNode{
         hpBar!.position = self.position
         hpBar!.alpha = 0
         hpBar!.zPosition = 50
+        
+        isSlowedTexture = SKSpriteNode(texture: SKTexture(imageNamed: "slow_icon1"))
+        isSlowedTexture!.size.width = 20
+        isSlowedTexture!.size.height = 20
+        isSlowedTexture!.alpha = 0
+        isSlowedTexture!.zPosition = 50
+        
+        isPoisonedTexture = SKSpriteNode(texture: SKTexture(imageNamed: "poison_icon1"))
+        isPoisonedTexture!.size.width = 20
+        isPoisonedTexture!.size.height = 20
+        isPoisonedTexture!.alpha = 0
+        isPoisonedTexture!.zPosition = 50
+        
         GameScene.instance!.hpBarsNode.addChild(hpBar!)
+        GameScene.instance!.hpBarsNode.addChild(isSlowedTexture!)
+        GameScene.instance!.hpBarsNode.addChild(isPoisonedTexture!)
         self.name = "Enemy"
 
     }
@@ -100,16 +118,34 @@ class Enemy: SKSpriteNode{
             if poisonDamageTick <= 0{
                 print("Poisondamage taken")
                 getDamage(dmgValue: poisonDamage)
+                
                 poisonDamageTick = poisonDamageInterval
+                
+            }
+        }
+        else{
+            if isPoisonedTexture!.alpha != 0{
+                isPoisonedTexture?.alpha = 0
             }
         }
         
         if slowTick > 0{
             slowTick -= 1
         }
+        else{
+            if isSlowedTexture!.alpha != 0{
+                isSlowedTexture!.alpha = 0
+            }
+        }
         
         hpBar!.position.x = self.position.x
         hpBar!.position.y = self.position.y + 35
+        
+        isSlowedTexture!.position.x = hpBar!.position.x + ((hpBar?.size.width)!/2) + textureOffset
+        isSlowedTexture!.position.y = hpBar!.position.y
+        
+        isPoisonedTexture!.position.x = hpBar!.position.x + ((hpBar?.size.width)!/2) + textureOffset
+        isPoisonedTexture!.position.y = hpBar!.position.y
         
         if !isMoving {
             movePoints = GameScene.instance!.pathfindingTestEnemy!.movePoints
@@ -130,6 +166,8 @@ class Enemy: SKSpriteNode{
             //CHECKPOINT
             SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_1, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             self.hp = 0
+            isSlowedTexture!.removeFromParent()
+            isPoisonedTexture!.removeFromParent()
             self.removeFromParent()
             self.hpBar?.removeFromParent()
             
@@ -323,6 +361,8 @@ class Enemy: SKSpriteNode{
         GameScene.instance!.moneyNode.addChild(moneyObject)
         
         hpBar!.removeFromParent()
+        isSlowedTexture!.removeFromParent()
+        isPoisonedTexture!.removeFromParent()
         
         GameManager.instance.currentMoney += self.killValue
         print("KILL VALUE = \(GameManager.instance.currentMoney)")
@@ -367,7 +407,10 @@ class Enemy: SKSpriteNode{
         
         if projectile is PoisonProjectile{
             poisonTick = poisonDuration
+            isPoisonedTexture?.alpha = 1
             poisonDamage = Int(CGFloat(projectile!.attackDamage) * ProjectileData.POISON_DAMAGE_PERCENT)
+            
+            //PoisonTexture here
             
         }
         
@@ -379,6 +422,9 @@ class Enemy: SKSpriteNode{
                 let rand = Int.random(in: 1...20)
                 if rand == 7{
                     slowTick = slowDuration
+                    isSlowedTexture!.alpha = 1
+                    
+                    //slow icon here
                 }
                 
                 

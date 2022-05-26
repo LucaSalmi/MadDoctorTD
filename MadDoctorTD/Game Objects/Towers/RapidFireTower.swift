@@ -35,6 +35,7 @@ class RapidFireTower: Tower{
         attackRange = attackRange * 0.5
         
 
+        
     }
     
     override func update() {
