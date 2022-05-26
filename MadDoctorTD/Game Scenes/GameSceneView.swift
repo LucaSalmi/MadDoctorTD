@@ -100,6 +100,7 @@ struct GameSceneView: View {
                         
                             Button {
                                 communicator.cancelAllMenus()
+                                SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                                 withAnimation{
                                     gameManager.isPaused = true
                                 }
