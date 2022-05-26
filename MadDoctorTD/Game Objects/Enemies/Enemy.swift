@@ -160,10 +160,7 @@ class Enemy: SKSpriteNode{
         }else{
             frameLimiter += 1
         }
-        
 
-        
-        
         move()
         
     }
