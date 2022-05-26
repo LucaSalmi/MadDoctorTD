@@ -35,6 +35,9 @@ class SoundManager {
     static let buttonFourSFX = "button_press_four."
     static let switchToResearchRoomSFX = "research_view_open."
     static let researchViewAtmosphere = "research_interface_atmosphere"
+    
+    static let upgradeUnlocked = "button_7."
+    static let upgradePressed = "button_2."
 
     // Lose lfe SFX (for base)
 

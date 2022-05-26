@@ -12,10 +12,6 @@ struct LabSceneView: View {
     
     var labScene: SKScene
     
-    @ObservedObject var gameManager = GameManager.instance
-    
-    
-    
     static var imageWidth: CGFloat = 0
     static var imageHeight: CGFloat = 0
     
@@ -28,7 +24,7 @@ struct LabSceneView: View {
         }
         labScene.scaleMode = .fill
         
-        LabSceneView.imageWidth = UIScreen.main.bounds.width * 0.15
+        LabSceneView.imageWidth = UIScreen.main.bounds.width * 0.175
         LabSceneView.imageHeight = LabSceneView.imageWidth
         //SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
     }
@@ -39,10 +35,6 @@ struct LabSceneView: View {
                 .ignoresSafeArea()
             
             VStack {
-                
-                Text("Research Points: \(gameManager.researchPoints)")
-                    .foregroundColor(Color.white)
-                    .font(.title)
                 
                 TopArea()
                 
@@ -63,68 +55,112 @@ struct LabSceneView: View {
 struct TopArea: View {
     
     @ObservedObject var communicator = LabSceneCommunicator.instance
+    @ObservedObject var gameManager = GameManager.instance
     
     let imageHeight = LabSceneView.imageHeight
     let imageWidth = LabSceneView.imageWidth
     
     var body: some View {
         
-        HStack {
+        VStack {
             
-            Button {
-                communicator.selectType(type: .gunTower)
-                SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                updateTreeImages()
-                print("gunTower button pressed")
-            } label: {
-                Image("blast_tower")
-                    .resizable()
-                    .frame(width: imageWidth , height: imageHeight)
-            }
+            Text("Research Points: \(gameManager.researchPoints)")
+                .foregroundColor(Color.white)
+                .font(.title)
             
-            Button {
-                communicator.selectType(type: .rapidFireTower)
-                SoundManager.playSFX(sfxName: SoundManager.buttonTwoSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                updateTreeImages()
-                print("rapidFire button pressed")
-            } label: {
-                Image("speed_tower")
-                    .resizable()
-                    .frame(width: imageWidth , height: imageHeight)
-            }
+            Text("Slime materials: \(gameManager.slimeMaterials)")
+                .foregroundColor(Color.white)
+                .font(.title3)
             
-            Button {
-                communicator.selectType(type: .sniperTower)
-                SoundManager.playSFX(sfxName: SoundManager.buttonThreeSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                updateTreeImages()
-                print("sniperTower button pressed")
-            } label: {
-                ZStack {
-                    Image("sniper_tower_static_legs")
-                        .resizable()
-                        .frame(width: imageWidth , height: imageHeight)
-                    Image("sniper_tower_rotate")
-                        .resizable()
-                        .frame(width: imageWidth , height: imageHeight)
-                }
-            }
+            Text("Squid materials: \(gameManager.squidMaterials)")
+                .foregroundColor(Color.white)
+                .font(.title3)
             
-            Button {
-                communicator.selectType(type: .cannonTower)
-                SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                updateTreeImages()
-                print("cannonTower button pressed")
-            } label: {
-                Image("cannon_tower")
-                    .resizable()
-                    .frame(width: imageWidth , height: imageHeight)
-            }
+            HStack {
+                
+                Button {
+                    communicator.selectType(type: .gunTower)
+                    SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                    updateTreeImages()
+                    print("gunTower button pressed")
+                } label: {
+                    
+                    ZStack {
+                        Image(communicator.selectedTowerType == .gunTower ? "item_frame_research_tower_select" : "item_frame_research_tower_not_selected")
+                            .resizable()
+                            .frame(width: imageWidth , height: imageHeight)
+                        Image("blast_tower")
+                            .resizable()
+                            .frame(width: imageWidth , height: imageHeight)
+                    }
+                    
+                    
+                }.padding(16)
+                
+                Button {
+                    communicator.selectType(type: .rapidFireTower)
+                    SoundManager.playSFX(sfxName: SoundManager.buttonTwoSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                    updateTreeImages()
+                    print("rapidFire button pressed")
+                } label: {
+                    
+                    ZStack {
+                        Image(communicator.selectedTowerType == .rapidFireTower ? "item_frame_research_tower_select" : "item_frame_research_tower_not_selected")
+                            .resizable()
+                            .frame(width: imageWidth , height: imageHeight)
+                        Image("speed_tower")
+                            .resizable()
+                            .frame(width: imageWidth , height: imageHeight)
+                    }
+                    
+                    
+                }.padding([.top, .bottom, .trailing], 16)
+                
+                Button {
+                    communicator.selectType(type: .cannonTower)
+                    SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                    updateTreeImages()
+                    print("cannonTower button pressed")
+                } label: {
+                    
+                    ZStack {
+                        Image(communicator.selectedTowerType == .cannonTower ? "item_frame_research_tower_select" : "item_frame_research_tower_not_selected")
+                            .resizable()
+                            .frame(width: imageWidth , height: imageHeight)
+                        Image("cannon_tower")
+                            .resizable()
+                            .frame(width: imageWidth , height: imageHeight)
+                    }
+                    
+                }.padding([.top, .bottom, .trailing], 16)
+                
+                Button {
+                    communicator.selectType(type: .sniperTower)
+                    SoundManager.playSFX(sfxName: SoundManager.buttonThreeSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                    updateTreeImages()
+                    print("sniperTower button pressed")
+                } label: {
+                    ZStack {
+                        
+                        Image(communicator.selectedTowerType == .sniperTower ? "item_frame_research_tower_select" : "item_frame_research_tower_not_selected")
+                            .resizable()
+                            .frame(width: imageWidth , height: imageHeight)
+                        Image("sniper_tower_static_legs")
+                            .resizable()
+                            .frame(width: imageWidth , height: imageHeight)
+                        Image("sniper_tower_rotate")
+                            .resizable()
+                            .frame(width: imageWidth , height: imageHeight)
+                    }
+                }.padding([.top, .bottom, .trailing], 16)
+                
+            }.background(.black)
+                .padding()
+                .onAppear(perform: {
+                    updateTreeImages()
+                })
             
-        }.background(.black)
-            .padding()
-            .onAppear(perform: {
-                updateTreeImages()
-            })
+        }
         
     }
     
@@ -163,7 +199,7 @@ struct MiddleArea: View {
         
         VStack {
             
-            HStack {
+            VStack {
                 
                 Button(action: {
                     communicator.selectedTreeButtonId = "1"
@@ -172,14 +208,14 @@ struct MiddleArea: View {
                 }, label: {
                     ZStack {
                         
-                        LabButtonImage("clickable_tile", "1")
+                        LabButtonImage("1")
                         Image(communicator.selectedTowerImage)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                         Image("faded_button_layer")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            .opacity(changeOpacity())
+                            .opacity(changeOpacity(buttonId: "1"))
                         
                     }
                 })
@@ -188,118 +224,155 @@ struct MiddleArea: View {
             
             HStack {
                 
-                VStack {
-                    
-                    Button {
-                        communicator.selectedTreeButtonId = "2a"
-                        checkIfBuyable()
-                    } label: {
-                        ZStack {
-                            
-                            LabButtonImage("clickable_tile", "2a")
-                            Image(communicator.image2a)
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            Image("faded_button_layer")
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                                .opacity(changeOpacity())
-                        }
-                    }
-                    
-                    Button {
-                        communicator.selectedTreeButtonId = "3a"
-                        checkIfBuyable()
-                    } label: {
-                        ZStack {
-                            
-                            LabButtonImage("clickable_tile", "3a")
-                            Image(communicator.image3a)
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            Image("faded_button_layer")
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                                .opacity(changeOpacity())
-                        }
-                    }
-                    
-                }
+                Image("skill_tree_connector")
+                    .resizable()
+                    .frame(width: LabSceneView.imageWidth/8, height: LabSceneView.imageHeight/2)
                 
-                VStack {
-                    
-                    Button {
-                        communicator.selectedTreeButtonId = "2b"
-                        checkIfBuyable()
-                    } label: {
-                        ZStack {
-                            
-                            LabButtonImage("clickable_tile", "2b")
-                            Image(communicator.image2b)
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            Image("faded_button_layer")
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                                .opacity(changeOpacity())
-                        }
-                    }
-                    
-                    Button {
-                        communicator.selectedTreeButtonId = "3b"
-                        checkIfBuyable()
-                    } label: {
-                        ZStack {
-                            
-                            LabButtonImage("clickable_tile", "3b")
-                            Image(communicator.image3b)
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            Image("faded_button_layer")
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                                .opacity(changeOpacity())
-                        }
+            }
+            
+            HStack {
+                
+                Button {
+                    communicator.selectedTreeButtonId = "2a"
+                    checkIfBuyable()
+                } label: {
+                    ZStack {
+                        
+                        LabButtonImage("2a")
+                        Image(communicator.image2a)
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        Image("faded_button_layer")
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            .opacity(changeOpacity(buttonId: "2a"))
                     }
                 }
                 
-                VStack {
-                    
-                    Button {
-                        communicator.selectedTreeButtonId = "2c"
-                        checkIfBuyable()
-                    } label: {
-                        ZStack {
-                            
-                            LabButtonImage("clickable_tile", "2c")
-                            Image(communicator.image2c)
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            Image("faded_button_layer")
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                                .opacity(changeOpacity())
-                        }
+                Image("skill_tree_connector")
+                    .resizable()
+                    .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
+                
+                Button {
+                    communicator.selectedTreeButtonId = "2b"
+                    checkIfBuyable()
+                } label: {
+                    ZStack {
+                        
+                        LabButtonImage("2b")
+                        Image(communicator.image2b)
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        Image("faded_button_layer")
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            .opacity(changeOpacity(buttonId: "2b"))
                     }
-                    Button(action: {
-                        communicator.selectedTreeButtonId = "3c"
-                        checkIfBuyable()
-                    }, label: {
-                        ZStack {
-                            
-                            LabButtonImage("clickable_tile", "3c")
-                            Image(communicator.image3c)
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            Image("faded_button_layer")
-                                .resizable()
-                                .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                                .opacity(changeOpacity())
-                            
-                        }
-                    })
-                    
                 }
+                
+                Image("skill_tree_connector")
+                    .resizable()
+                    .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
+                
+                Button {
+                    communicator.selectedTreeButtonId = "2c"
+                    checkIfBuyable()
+                } label: {
+                    ZStack {
+                        
+                        LabButtonImage("2c")
+                        Image(communicator.image2c)
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        Image("faded_button_layer")
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            .opacity(changeOpacity(buttonId: "2c"))
+                    }
+                }
+            }
+            
+            HStack {
+                
+                Image("skill_tree_connector")
+                    .resizable()
+                    .frame(width: LabSceneView.imageWidth/8, height: LabSceneView.imageHeight/2)
+                
+                Image("skill_tree_connector")
+                    .resizable()
+                    .frame(width: LabSceneView.imageWidth/8, height: LabSceneView.imageHeight/2)
+                    .padding([.leading, .trailing], 115)
+                
+                Image("skill_tree_connector")
+                    .resizable()
+                    .frame(width: LabSceneView.imageWidth/8, height: LabSceneView.imageHeight/2)
+                
+            }
+            
+            HStack {
+                
+                Button {
+                    communicator.selectedTreeButtonId = "3a"
+                    checkIfBuyable()
+                } label: {
+                    ZStack {
+                        
+                        LabButtonImage("3a")
+                        Image(communicator.image3a)
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        Image("faded_button_layer")
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            .opacity(changeOpacity(buttonId: "3a"))
+                    }
+                }
+                
+                Image("skill_tree_connector")
+                    .resizable()
+                    .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
+                    .opacity(0)
+                
+                Button {
+                    communicator.selectedTreeButtonId = "3b"
+                    checkIfBuyable()
+                } label: {
+                    ZStack {
+                        
+                        LabButtonImage("3b")
+                        Image(communicator.image3b)
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        Image("faded_button_layer")
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            .opacity(changeOpacity(buttonId: "3b"))
+                    }
+                }
+                
+                Image("skill_tree_connector")
+                    .resizable()
+                    .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
+                    .opacity(0)
+                
+                Button(action: {
+                    communicator.selectedTreeButtonId = "3c"
+                    checkIfBuyable()
+                }, label: {
+                    ZStack {
+                        
+                        LabButtonImage("3c")
+                        Image(communicator.image3c)
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        Image("faded_button_layer")
+                            .resizable()
+                            .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                            .opacity(changeOpacity(buttonId: "3c"))
+                        
+                    }
+                })
+                
             }
             
         }
@@ -354,11 +427,39 @@ struct MiddleArea: View {
             case .gunTower:
                 return "Unlock level 2 damage for Gun Towers?"
             case .rapidFireTower:
-                return "ERROR"
+                return "Unlock level 2 damage for Rapid Fire Towers?"
             case .sniperTower:
-                return "ERROR"
+                return "Unlock level 2 damage for Sniper Towers?"
             case .cannonTower:
-                return "ERROR"
+                return "Unlock level 2 damage for Cannon Towers?"
+            }
+            
+        case "2b":
+            
+            switch communicator.selectedTowerType {
+                
+            case .gunTower:
+                return "Unlock level 2 attack speed for Gun Towers?"
+            case .rapidFireTower:
+                return "Unlock level 2 attack speed for Rapid Fire Towers?"
+            case .sniperTower:
+                return "Unlock level 2 attack speed for Sniper Towers?"
+            case .cannonTower:
+                return "Unlock level 2 attack speed for Cannon Towers?"
+            }
+            
+        case "2c":
+            
+            switch communicator.selectedTowerType {
+                
+            case .gunTower:
+                return "Unlock level 2 range for Gun Towers?"
+            case .rapidFireTower:
+                return "Unlock level 2 range for Rapid Fire Towers?"
+            case .sniperTower:
+                return "Unlock level 2 range for Sniper Towers?"
+            case .cannonTower:
+                return "Unlock level 2 range for Cannon Towers?"
             }
             
         case "3a":
@@ -375,14 +476,48 @@ struct MiddleArea: View {
                 return "ERROR"
             }
             
+        case "3b":
+            
+            switch communicator.selectedTowerType {
+                
+            case .gunTower:
+                return "ERROR"
+            case .rapidFireTower:
+                return "Unlock slowing projectiles for Rapid Fire Towers?"
+            case .sniperTower:
+                return "Unlock poison projectiles for Sniper Towers?"
+            case .cannonTower:
+                return "ERROR"
+            }
+            
+        case "3c":
+            
+            switch communicator.selectedTowerType {
+                
+            case .gunTower:
+                return "ERROR"
+            case .rapidFireTower:
+                return "ERROR"
+            case .sniperTower:
+                return "ERROR"
+            case .cannonTower:
+                return "Unlock mine projectiles for Cannon Towers?"
+            }
+            
         default:
             return "ERROR"
         }
+        
+        
         
     }
     
     
     func checkIfBuyable(){
+        
+        if let labScene = LabScene.instance {
+            SoundManager.playSFX(sfxName: SoundManager.upgradePressed, scene: labScene, sfxExtension: SoundManager.mp3Extension)
+        }
         
         if checkIfUpgraded() == .unlocked{
             error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
@@ -527,6 +662,9 @@ struct MiddleArea: View {
             error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
         case .success:
             error = ErrorInfo(title: "Great", description: "You unlocked this upgrade for \(communicator.selectedTowerType)")
+            if let labScene = LabScene.instance {
+                SoundManager.playSFX(sfxName: SoundManager.upgradeUnlocked, scene: labScene, sfxExtension: SoundManager.mp3Extension)
+            }
         case .error:
             error = ErrorInfo(title: "What?", description: "Somthing unexpected happened")
             
@@ -537,26 +675,30 @@ struct MiddleArea: View {
         
     }
     
-    func changeOpacity() -> Double{
+    func changeOpacity(buttonId: String) -> Double{
         
-        switch communicator.selectedTowerType{
+        switch communicator.selectedTowerType {
             
         case .gunTower:
-            return 0.0
+            if communicator.gunTowerResearchLevel.contains(buttonId) {
+                return 0.0
+            }
         case .rapidFireTower:
-            if GameManager.instance.rapidFireTowerUnlocked{
+            if communicator.rapidTowerResearchLevel.contains(buttonId) {
                 return 0.0
             }
         case .sniperTower:
-            if GameManager.instance.sniperTowerUnlocked{
+            if communicator.sniperTowerResearchLevel.contains(buttonId) {
                 return 0.0
             }
         case .cannonTower:
-            if GameManager.instance.cannonTowerUnlocked{
+            if communicator.cannonTowerResearchLevel.contains(buttonId) {
                 return 0.0
             }
         }
-        return 1.3
+        
+        return 1.0
+        
     }
     
     func applyResearch() -> ErrorType {
@@ -846,17 +988,15 @@ struct LabButtonImage: View {
     
     @ObservedObject var communicator = LabSceneCommunicator.instance
     
-    let imageString: String
     let id: String
     
-    init(_ _imageString: String, _ _id: String) {
+    init(_ _id: String) {
         id = _id
-        imageString = _imageString
     }
     
     var body: some View {
         
-        Image(imageString)
+        Image("item_frame_research_bg")
             .resizable()
             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
             .background(communicator.selectedTreeButtonId == id ? .white : .black)
