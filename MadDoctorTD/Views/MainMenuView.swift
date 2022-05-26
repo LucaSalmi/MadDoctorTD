@@ -42,7 +42,7 @@ struct MainMenuView: View {
                     
                     Button {
                         appManager.state = .gameScene
-                        //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
+                        SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
                     } label: {
                         Label("Load Game", systemImage: "opticaldisc")
                         
@@ -51,6 +51,7 @@ struct MainMenuView: View {
                     Button {
                         //TODO: GO TO SETTINGS HERE.
                         appManager.state = .settingsMenu
+
                     } label: {
                         Label("Settings", systemImage: "gearshape.circle")
                     }.padding()
@@ -60,12 +61,6 @@ struct MainMenuView: View {
                 .font(.title)
                 .shadow(color: .black, radius: 5, x: 0, y: 0)
             }
-        
-            
-        
-        
         }
-        
-
     }
 }
