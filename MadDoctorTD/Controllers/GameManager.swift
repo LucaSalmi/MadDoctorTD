@@ -58,7 +58,7 @@ class GameManager: ObservableObject{
     @Published var gunTowerRangeUnlocked: Bool = false
     @Published var bouncingProjectilesUnlocked: Bool = false
     
-    @Published var currentLevel = 1
+    @Published var currentLevel = 2
     
     //SINGLETON
     private init(){}

@@ -37,7 +37,7 @@ class Boss: Enemy{
         let size = CGSize(width: self.size.width * 4, height: self.size.height * 4)
         bossTexture = SKSpriteNode(texture: texture, color: .clear, size: size)
         bossTexture?.name = "BossTexture"
-        physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
+        physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Foundation
         physicsBody?.categoryBitMask = PhysicsCategory.Boss
         
@@ -51,8 +51,7 @@ class Boss: Enemy{
             createSlimeAnimations(enemyType: .boss, textureName: "boss_slime_animation_")
             
         case .squid:
-            //change to squid animations
-            createSlimeAnimations(enemyType: .boss, textureName: "boss_slime_animation_")
+            createSquidAnimations(enemyType: .boss, textureName: "squid_boss_animation_")
         case .none:
             print("🤔")
         

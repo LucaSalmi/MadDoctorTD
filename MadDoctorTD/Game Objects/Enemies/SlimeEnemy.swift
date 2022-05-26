@@ -20,13 +20,13 @@ class SlimeEnemy: Enemy{
     init(enemyType: EnemyTypes){
         
         super.init(texture: placeholderTexture, color: .clear)
+        self.enemyType = enemyType
         
         switch enemyType{
             
         case .standard:
             
             texture = SKTexture(imageNamed: "slime animation 1")
-            self.enemyType = .standard
             self.animationString = "slime animation "
             
         case .flying:
@@ -35,7 +35,6 @@ class SlimeEnemy: Enemy{
             hp = Int(Double(EnemiesData.BASE_HP) * (EnemiesData.FLY_HP_MODIFIER))
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FLY_SPEED_MODIFIER
             waveSlotSize = EnemiesData.FLY_ENEMY_SLOT
-            self.enemyType = .flying
             self.animationString = "fly_slime_animation_"
             
         case .heavy:
@@ -45,7 +44,6 @@ class SlimeEnemy: Enemy{
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.HEAVY_SPEED_MODIFIER
             waveSlotSize = EnemiesData.HEAVY_ENEMY_SLOT
             armorValue = EnemiesData.SLIME_ARMOUR_VALUE
-            self.enemyType = .heavy
             self.animationString = "heavy_slime_animation_"
             
         case .fast:
@@ -54,7 +52,6 @@ class SlimeEnemy: Enemy{
             hp = Int(Double(EnemiesData.BASE_HP) * (EnemiesData.FAST_HP_MODIFIER))
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FAST_SPEED_MODIFIER
             waveSlotSize = EnemiesData.FAST_ENEMY_SLOT
-            self.enemyType = .fast
             self.animationString = "slime_fast_"
             
         default:
@@ -77,10 +74,6 @@ class SlimeEnemy: Enemy{
             self.animationFrames.removeAll()
             createSlimeAnimations(enemyType: self.enemyType, textureName: "slime_standard_atker_animation_")
             
-        case .flying:
-            
-            print("🤔")
-            
         case .heavy:
             
             texture = SKTexture(imageNamed: "heavy_slime_atker_animation_1")
@@ -97,7 +90,7 @@ class SlimeEnemy: Enemy{
             self.animationFrames.removeAll()
             createSlimeAnimations(enemyType: self.enemyType, textureName: "slime_fast atker_")
             
-        case .boss:
+        default:
             print("🤔")
         }
     }
