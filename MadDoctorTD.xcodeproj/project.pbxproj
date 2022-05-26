@@ -343,12 +343,8 @@
 		C82C4D0B28240D8900067858 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
-				C839C6CF28216CD400F66043 /* FoundationPlate.swift */,
-				3359CCA52821596700878191 /* ClickableTile.swift */,
-				C8E693442823C38F00D0A661 /* Edge.swift */,
-				3398938728362CAC006B0374 /* MoneyObject.swift */,
-				3398938928363B3C006B0374 /* PriceObject.swift */,
-				C8E0591728365CED00BB2F9F /* DropObject.swift */,
+				C8F8B1C5283FC0CC00349A28 /* Background */,
+				C8F8B1C6283FC0E000349A28 /* Drops */,
 				C844A72B282A468E00FC42C9 /* Factories */,
 				C82C4D0C28240DBA00067858 /* Towers */,
 				C82C4D0D28240DD100067858 /* Projectiles */,
@@ -399,22 +395,10 @@
 		C82C4D0F28240E0600067858 /* Game Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				3359CC9028214C9A00878191 /* GameScene.sks */,
-				E5BB6D66283CD09B003E57D9 /* CreditsScene.sks */,
-				3359CC9228214D8300878191 /* GameScene.swift */,
-				E5BB6D6A283CD56C003E57D9 /* CreditsScene.swift */,
-				3359CC9528214E2200878191 /* GameSceneView.swift */,
-				3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */,
-				3359CC9728214F1800878191 /* LabScene.sks */,
-				3359CC9928214F4800878191 /* LabScene.swift */,
-				3359CC9B28214F6200878191 /* LabSceneView.swift */,
-				33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */,
-				E57BA9E6282B9819001BCD99 /* StartScene.sks */,
-				E57BA9E8282B9885001BCD99 /* StartScene.swift */,
-				E57BA9EC282B9922001BCD99 /* StartSceneView.swift */,
-				E57BA9EE282B9CD2001BCD99 /* StartSceneCommunicator.swift */,
-				E5E965DD2833809700010B5A /* GameUIScene.sks */,
-				B34EEB25283F6AD900CE60C1 /* GameSceneTwo.sks */,
+				C8F8B1C1283FC04F00349A28 /* sks Files */,
+				C8F8B1C2283FC06D00349A28 /* SceneControllers */,
+				C8F8B1C3283FC08900349A28 /* SceneViews */,
+				C8F8B1C4283FC0A900349A28 /* Scene Communicators */,
 			);
 			path = "Game Scenes";
 			sourceTree = "<group>";
@@ -467,17 +451,15 @@
 		C839C6A42821352200F66043 /* MadDoctorTD */ = {
 			isa = PBXGroup;
 			children = (
+				C839C6BA2821579F00F66043 /* Constants.swift */,
 				C81DED1F2837AE7800D67B8F /* Model */,
 				C82C4D1128240E6800067858 /* Controllers */,
 				C82C4D1028240E4300067858 /* Sound and Graphics */,
 				C82C4D0F28240E0600067858 /* Game Scenes */,
 				C82C4D0B28240D8900067858 /* Game Objects */,
-				C839C6C42821617F00F66043 /* Views */,
 				C839C6A52821352200F66043 /* MadDoctorTDApp.swift */,
 				C839C6AE2821352400F66043 /* Persistence.swift */,
 				C839C6B02821352400F66043 /* MadDoctorTD.xcdatamodeld */,
-				C839C6BA2821579F00F66043 /* Constants.swift */,
-				E5BB6D68283CD1C0003E57D9 /* CreditsSceneView.swift */,
 				C839C6AB2821352400F66043 /* Preview Content */,
 			);
 			path = MadDoctorTD;
@@ -489,18 +471,6 @@
 				C839C6AC2821352400F66043 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		C839C6C42821617F00F66043 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				C839C6C52821619200F66043 /* LabMenuView.swift */,
-				C839C6C7282161BA00F66043 /* MainMenuView.swift */,
-				C839C6C9282161DF00F66043 /* ResearchView.swift */,
-				C839C6CB2821621400F66043 /* SettingsView.swift */,
-				C89DA1DA282E857D00364AB4 /* GameOverView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		C844A72B282A468E00FC42C9 /* Factories */ = {
@@ -610,6 +580,76 @@
 				C8978745283CC8A4006E52A8 /* SquidMaterialDialogue.swift */,
 			);
 			path = OnScreenText;
+			sourceTree = "<group>";
+		};
+		C8F8B1C1283FC04F00349A28 /* sks Files */ = {
+			isa = PBXGroup;
+			children = (
+				3359CC9028214C9A00878191 /* GameScene.sks */,
+				E5BB6D66283CD09B003E57D9 /* CreditsScene.sks */,
+				3359CC9728214F1800878191 /* LabScene.sks */,
+				E57BA9E6282B9819001BCD99 /* StartScene.sks */,
+				E5E965DD2833809700010B5A /* GameUIScene.sks */,
+				B34EEB25283F6AD900CE60C1 /* GameSceneTwo.sks */,
+			);
+			path = "sks Files";
+			sourceTree = "<group>";
+		};
+		C8F8B1C2283FC06D00349A28 /* SceneControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3359CC9228214D8300878191 /* GameScene.swift */,
+				E5BB6D6A283CD56C003E57D9 /* CreditsScene.swift */,
+				3359CC9928214F4800878191 /* LabScene.swift */,
+				E57BA9E8282B9885001BCD99 /* StartScene.swift */,
+			);
+			path = SceneControllers;
+			sourceTree = "<group>";
+		};
+		C8F8B1C3283FC08900349A28 /* SceneViews */ = {
+			isa = PBXGroup;
+			children = (
+				3359CC9528214E2200878191 /* GameSceneView.swift */,
+				3359CC9B28214F6200878191 /* LabSceneView.swift */,
+				E57BA9EC282B9922001BCD99 /* StartSceneView.swift */,
+				E5BB6D68283CD1C0003E57D9 /* CreditsSceneView.swift */,
+				C839C6C52821619200F66043 /* LabMenuView.swift */,
+				C839C6C7282161BA00F66043 /* MainMenuView.swift */,
+				C839C6C9282161DF00F66043 /* ResearchView.swift */,
+				C839C6CB2821621400F66043 /* SettingsView.swift */,
+				C89DA1DA282E857D00364AB4 /* GameOverView.swift */,
+			);
+			path = SceneViews;
+			sourceTree = "<group>";
+		};
+		C8F8B1C4283FC0A900349A28 /* Scene Communicators */ = {
+			isa = PBXGroup;
+			children = (
+				3314684B282165F0003EA0CC /* GameSceneCommunicator.swift */,
+				33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */,
+				E57BA9EE282B9CD2001BCD99 /* StartSceneCommunicator.swift */,
+			);
+			path = "Scene Communicators";
+			sourceTree = "<group>";
+		};
+		C8F8B1C5283FC0CC00349A28 /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				C839C6CF28216CD400F66043 /* FoundationPlate.swift */,
+				3359CCA52821596700878191 /* ClickableTile.swift */,
+				C8E693442823C38F00D0A661 /* Edge.swift */,
+			);
+			path = Background;
+			sourceTree = "<group>";
+		};
+		C8F8B1C6283FC0E000349A28 /* Drops */ = {
+			isa = PBXGroup;
+			children = (
+				3398938728362CAC006B0374 /* MoneyObject.swift */,
+				3398938928363B3C006B0374 /* PriceObject.swift */,
+				C8E0591728365CED00BB2F9F /* DropObject.swift */,
+			);
+			path = Drops;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
