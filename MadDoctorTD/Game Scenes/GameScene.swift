@@ -1296,7 +1296,6 @@ class GameScene: SKScene {
             statUpgradePopUp?.alpha = 1
             
         }
-        
     }
     
     
