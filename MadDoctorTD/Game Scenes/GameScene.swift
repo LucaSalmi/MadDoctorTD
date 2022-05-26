@@ -755,7 +755,7 @@ class GameScene: SKScene {
             if communicator.foundationEditMode {
                 communicator.confirmFoundationEdit()
                 //Sound for finish foundationBuild
-                SoundManager.playSFX(sfxName: SoundManager.buttonSFX_three, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                //SoundManager.playSFX(sfxName: SoundManager.buttonSFX_three, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 
             }else{
                 communicator.foundationEditMode = true
