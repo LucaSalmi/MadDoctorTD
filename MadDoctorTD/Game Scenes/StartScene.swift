@@ -16,6 +16,12 @@ class StartScene: SKScene{
     var doorOne: SKNode? = nil
     var doorTwo: SKNode? = nil
     
+    var levelButton: SKSpriteNode? = nil
+    var settingsButton: SKSpriteNode? = nil
+    
+    var settingsMenu: SKSpriteNode? = nil
+    var levelMenu: SKSpriteNode? = nil
+    
     var startAnimationCount: Int = 60000
     var musicStarted: Bool = false
     
@@ -29,6 +35,12 @@ class StartScene: SKScene{
         
         doorOne = self.childNode(withName: "DoorOne")
         doorTwo = self.childNode(withName: "DoorTwo")
+        
+        levelButton = self.childNode(withName: "LevelButton") as? SKSpriteNode
+        settingsButton = self.childNode(withName: "LevelButton") as? SKSpriteNode
+        
+        settingsMenu = self.childNode(withName: "SettingsMenu") as? SKSpriteNode
+        levelMenu = self.childNode(withName: "LevelMenu") as? SKSpriteNode
 
     }
     
@@ -51,7 +63,72 @@ class StartScene: SKScene{
             SoundManager.playMetalTapSFX(scene: self)
             print("Play metal tap sound")
         }
+        
+        
+        
+        if node.name == "CloseSettingsButton"{
+            print("SettingsMenu closed")
+            hideExtraMenus()
+        }
+        
+        if node.name == "LevelOneButton"{
+            
+            print("level 1 pressed")
+            
+            if GameScene.instance != nil{
+                
+                GameManager.instance.isGameOver = true
+                GameManager.instance.isPaused = false
+                GameScene.instance!.resetGameScene()
+                
+            }
+            appManager.state = .gameScene
+            SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
+            return
+    
+            
+        }
+        
+        if node.name == "CloseLevelButton"{
+            print("LevelMenu closed")
+            hideExtraMenus()
+            return
+        }
+        
+        if node.name == "SettingsButton" && levelMenu?.alpha == 0{
+            
+            print("settingButton Pressed")
+            showSettingsMenu()
+        }
+        
+        if node.name == "LevelButton" && settingsMenu?.alpha == 0{
+            
+            print("levelButton Pressed")
+            showLevelMenu()
+        }
+        
     }
+    
+    func showSettingsMenu() {
+        
+        settingsMenu?.alpha = 1
+        levelMenu?.alpha = 0
+        
+    }
+    
+    func showLevelMenu() {
+        
+        settingsMenu?.alpha = 0
+        levelMenu?.alpha = 1
+        
+    }
+    func hideExtraMenus() {
+        
+        settingsMenu?.alpha = 0
+        levelMenu?.alpha = 0
+        
+    }
+    
     
     override func update(_ currentTime: TimeInterval) {
        
