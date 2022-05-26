@@ -160,26 +160,13 @@ class Enemy: SKSpriteNode{
         
         if movePoints.isEmpty {
             
-            GameManager.instance.getDamage(incomingDamage: self.damageValue)
-            //CHECKPOINT
-            SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_1, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-            self.hp = 0
-            isSlowedTexture!.removeFromParent()
-            isPoisonedTexture!.removeFromParent()
-            self.removeFromParent()
-            self.hpBar?.removeFromParent()
-            
-            if self.enemyType == .boss{
-                
-                let boss = self as! Boss
-                boss.bossTexture?.removeFromParent()
-                
-            }
+            hasReachedBase()
             return
         }
         
-        
         //Runs Animation
+        //runnigFrame: what frame in the array should run now
+        //frameLimiter: how many frames in game should pass before we should switch to another animation frame
         
         if runningFrame > animationFrames.count-1{
             runningFrame = 0
@@ -202,6 +189,24 @@ class Enemy: SKSpriteNode{
         
     }
     
+    private func hasReachedBase(){
+        
+        GameManager.instance.getDamage(incomingDamage: self.damageValue)
+        //CHECKPOINT
+        SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_1, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+        self.hp = 0
+        isSlowedTexture!.removeFromParent()
+        isPoisonedTexture!.removeFromParent()
+        self.removeFromParent()
+        self.hpBar?.removeFromParent()
+        
+        if self.enemyType == .boss{
+            
+            let boss = self as! Boss
+            boss.bossTexture?.removeFromParent()
+            
+        }
+    }
     
     private func move() {
         
