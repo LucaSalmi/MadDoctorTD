@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 
 class StartScene: SKScene{
-
+    
     let appManager = AppManager.appManager
     let communicator = StartSceneCommunicator.instance
     
@@ -28,7 +28,7 @@ class StartScene: SKScene{
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         SoundManager.playBGM(bgmString: SoundManager.DoorsTheme, bgmExtension: SoundManager.mp3Extension)
-
+        
     }
     
     override func didMove(to view: SKView) {
@@ -41,18 +41,18 @@ class StartScene: SKScene{
         
         settingsMenu = self.childNode(withName: "SettingsMenu") as? SKSpriteNode
         levelMenu = self.childNode(withName: "LevelMenu") as? SKSpriteNode
-
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        
         guard let touch = touches.first else {
             return
         }
-
+        
         let location = touch.location(in: self)
         guard let node = nodes(at: location).first else {return}
-
+        
         if node.name == "DoorButton"{
             // start menu scene
             print("Start Menu Scene")
@@ -75,6 +75,8 @@ class StartScene: SKScene{
             
             print("level 1 pressed")
             
+            GameManager.instance.currentLevel = 1
+            
             if GameScene.instance != nil{
                 
                 GameManager.instance.isGameOver = true
@@ -82,10 +84,32 @@ class StartScene: SKScene{
                 GameScene.instance!.resetGameScene()
                 
             }
+            
             appManager.state = .gameScene
             SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
             return
-    
+            
+            
+        }
+        if node.name == "LevelTwoButton"{
+            
+            print("level 2 pressed")
+            
+            GameManager.instance.currentLevel = 2
+            
+            
+            if GameScene.instance != nil{
+                
+                GameManager.instance.isGameOver = true
+                GameManager.instance.isPaused = false
+                GameScene.instance!.resetGameScene()
+                
+            }
+            
+            appManager.state = .gameScene
+            SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
+            return
+            
             
         }
         
@@ -131,7 +155,7 @@ class StartScene: SKScene{
     
     
     override func update(_ currentTime: TimeInterval) {
-       
+        
         if !communicator.animateDoors{
             return
         }
@@ -154,9 +178,9 @@ class StartScene: SKScene{
         if doorOne!.position.x + doorOne!.frame.size.width/2 < -self.size.width/2{
             communicator.animateDoors = false
         }
-       
+        
         
     }
     
-
+    
 }

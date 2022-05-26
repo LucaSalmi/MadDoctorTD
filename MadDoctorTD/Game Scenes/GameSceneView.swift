@@ -18,7 +18,19 @@ struct GameSceneView: View {
     init() {
         
         if GameScene.instance == nil {
-            gameScene = SKScene(fileNamed: "GameScene")!
+            
+            switch GameManager.instance.currentLevel {
+                
+            case 1:
+                gameScene = SKScene(fileNamed: "GameScene")!
+                
+            case 2:
+                gameScene = SKScene(fileNamed: "GameSceneTwo")!
+                
+            default:
+                gameScene = SKScene(fileNamed: "GameScene")!
+            }
+            
         }
         else {
             gameScene = GameScene.instance!
