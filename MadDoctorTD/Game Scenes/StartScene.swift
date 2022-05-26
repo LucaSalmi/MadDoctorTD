@@ -177,6 +177,7 @@ class StartScene: SKScene{
         
         if doorOne!.position.x + doorOne!.frame.size.width/2 < -self.size.width/2{
             communicator.animateDoors = false
+            self.childNode(withName: "DoorButton")?.alpha = 0
         }
         
         
