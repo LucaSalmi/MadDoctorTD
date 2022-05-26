@@ -215,7 +215,7 @@ struct MiddleArea: View {
                         Image("faded_button_layer")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            .opacity(changeOpacity())
+                            .opacity(changeOpacity(buttonId: "1"))
                         
                     }
                 })
@@ -245,7 +245,7 @@ struct MiddleArea: View {
                         Image("faded_button_layer")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            .opacity(changeOpacity())
+                            .opacity(changeOpacity(buttonId: "2a"))
                     }
                 }
                 
@@ -266,7 +266,7 @@ struct MiddleArea: View {
                         Image("faded_button_layer")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            .opacity(changeOpacity())
+                            .opacity(changeOpacity(buttonId: "2b"))
                     }
                 }
                 
@@ -287,7 +287,7 @@ struct MiddleArea: View {
                         Image("faded_button_layer")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            .opacity(changeOpacity())
+                            .opacity(changeOpacity(buttonId: "2c"))
                     }
                 }
             }
@@ -324,7 +324,7 @@ struct MiddleArea: View {
                         Image("faded_button_layer")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            .opacity(changeOpacity())
+                            .opacity(changeOpacity(buttonId: "3a"))
                     }
                 }
                 
@@ -346,7 +346,7 @@ struct MiddleArea: View {
                         Image("faded_button_layer")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            .opacity(changeOpacity())
+                            .opacity(changeOpacity(buttonId: "3b"))
                     }
                 }
                 
@@ -368,7 +368,7 @@ struct MiddleArea: View {
                         Image("faded_button_layer")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                            .opacity(changeOpacity())
+                            .opacity(changeOpacity(buttonId: "3c"))
                         
                     }
                 })
@@ -675,26 +675,30 @@ struct MiddleArea: View {
         
     }
     
-    func changeOpacity() -> Double{
+    func changeOpacity(buttonId: String) -> Double{
         
-        switch communicator.selectedTowerType{
+        switch communicator.selectedTowerType {
             
         case .gunTower:
-            return 0.0
+            if communicator.gunTowerResearchLevel.contains(buttonId) {
+                return 0.0
+            }
         case .rapidFireTower:
-            if GameManager.instance.rapidFireTowerUnlocked{
+            if communicator.rapidTowerResearchLevel.contains(buttonId) {
                 return 0.0
             }
         case .sniperTower:
-            if GameManager.instance.sniperTowerUnlocked{
+            if communicator.sniperTowerResearchLevel.contains(buttonId) {
                 return 0.0
             }
         case .cannonTower:
-            if GameManager.instance.cannonTowerUnlocked{
+            if communicator.cannonTowerResearchLevel.contains(buttonId) {
                 return 0.0
             }
         }
-        return 1.3
+        
+        return 1.0
+        
     }
     
     func applyResearch() -> ErrorType {
