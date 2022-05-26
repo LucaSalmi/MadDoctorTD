@@ -24,11 +24,11 @@ class SquidEnemy: Enemy{
             
         case .standard:
             
-            texture = SKTexture(imageNamed: "squid_standard_animation_1")
+            texture = SKTexture(imageNamed: "squid_normal_animation_1")
             
         case .flying:
             
-            texture = SKTexture(imageNamed: "flying_squid_animation_1")
+            texture = SKTexture(imageNamed: "squid_fly_animation_1")
             hp = Int(Double(EnemiesData.BASE_HP) * (EnemiesData.FLY_HP_MODIFIER))
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FLY_SPEED_MODIFIER
             waveSlotSize = EnemiesData.FLY_ENEMY_SLOT
@@ -67,11 +67,11 @@ class SquidEnemy: Enemy{
             
         case .standard:
             
-            texture = SKTexture(imageNamed: "squid_standard_atker_animation_1")
+            texture = SKTexture(imageNamed: "squid_normal_atker_animation_1")
             
         case .flying:
             
-            texture = SKTexture(imageNamed: "flying_squid_animation_1")
+            texture = SKTexture(imageNamed: "squid_fly_animation_1")
             
         case .heavy:
             
