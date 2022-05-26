@@ -46,7 +46,7 @@ class SquidFactory: EnemyFactoryProtocol{
     
     func createBoss() -> Enemy {
         
-        let boss = Boss(texture: SKTexture(imageNamed: "wheelie 1"))
+        let boss = Boss(texture: SKTexture(imageNamed: "squid_boss_animation_1"))
         boss.enemyRace = .squid
         boss.findAnimations()
         return boss
@@ -92,7 +92,6 @@ class EnemyFactory: EnemyCreator{
             return SlimeFactory().createEnemy(enemyType: enemyType)
             
         case .squid:
-            print("squid")
             return SquidFactory().createEnemy(enemyType: enemyType)
             
         }

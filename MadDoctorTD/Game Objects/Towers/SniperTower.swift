@@ -47,6 +47,8 @@ class SniperTower: Tower{
         GameScene.instance?.addChild(sniperLegs)
         
         
+        
+        
     }
     
     override func onDestroy() {

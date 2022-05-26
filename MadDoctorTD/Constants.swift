@@ -209,7 +209,7 @@ struct PlayerData{
 
 struct UIData{
     static let INACTIVE_BUTTON_ALPHA = 0.5
-    static let BUILD_BUTTONS_UI_POS_X: CGFloat = CGFloat(315)
+    static let BUILD_BUTTONS_UI_POS_X: CGFloat = CGFloat(340)
     static let BUILD_BUTTONS_UI_SPEED: CGFloat = CGFloat(15.0)
 }
 
