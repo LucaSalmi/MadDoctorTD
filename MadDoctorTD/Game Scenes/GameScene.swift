@@ -1234,7 +1234,7 @@ class GameScene: SKScene {
     
     func panForTranslation(touch: UITouch) {
         
-        if moveCameraToPortal {
+        if moveCameraToPortal || touchStarted{
             return
         }
         
