@@ -44,7 +44,12 @@ class SoundManager {
     static let base_hp_loss_1 = "base_hp_loss_4."
     static let base_hp_loss_2 = "base_hp_loss_5."
 
-    // Cannon tower shotSFX
+    // Rapid Fire Turret SFX
+
+    static let stoppedFiringSFX = "rapidStoppedFiringSFX."
+    // Airlock SFX
+
+    static let airlockSFX = "airlock_SFX."
 
     //Upgrade Turret SFX
 
@@ -95,6 +100,7 @@ class SoundManager {
     static let airlockDoorsTheme = "mad_td_airlock_theme"
     static let DoorsTheme = "3_MAD_TD_Theme_Party_In_The_Basement_Deep"
     static let simplifiedTheme = "mad_td_simplified"
+    static let mainMenuTheme = "mad_td_menu_theme"
     
     static var musicPlayer: AVAudioPlayer!
 
@@ -118,6 +124,15 @@ class SoundManager {
         playSFX(sfxName: sniperSound, scene: GameScene.instance!)
 
     }
+
+//    static func playRapidFireShotsSFX() {
+//
+//        let rand = Int.random(in:1...3)
+//        let rapidFireShot = "gunShot_\(rand)."
+//
+//        playSFX(sfxName: rapidFireShot, scene: GameScene.instance!, sfxExtension: mp3Extension)
+//
+//    }
 
     static func playMetalTapSFX(scene: SKScene) {
 

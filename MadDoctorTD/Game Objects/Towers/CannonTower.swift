@@ -50,7 +50,6 @@ class CannonTower: Tower{
                 ProjectileNodes.projectilesNode.addChild(projectile)
             }
 
-            //SoundManager.playSFX(sfxName: SoundManager.cannonShotFiredSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             currentFireRateTick = fireRate // DO NOT REMOVE UNLESS YOU WANT 3 FPS 
             SoundManager.playCannonFireSFX()
 

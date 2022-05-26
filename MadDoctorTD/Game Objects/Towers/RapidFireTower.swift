@@ -14,8 +14,7 @@ class RapidFireTower: Tower{
     var resetTexture = false
     
     var slowUpgraded = false
-    
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -37,12 +36,21 @@ class RapidFireTower: Tower{
 
         
     }
+
+//    override func attackTarget() {
+//
+//        super.attackTarget()
+//        SoundManager.playRapidFireShotsSFX()
+//
+//    }
     
     override func update() {
         super.update()
         if resetTexture{
             resetTexture = false
             towerTexture.texture = SKTexture(imageNamed: "speed_tower")
+            // bullet drop SFX
+
         }
     }
     
