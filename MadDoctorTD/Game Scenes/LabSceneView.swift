@@ -381,11 +381,39 @@ struct MiddleArea: View {
             case .gunTower:
                 return "Unlock level 2 damage for Gun Towers?"
             case .rapidFireTower:
-                return "ERROR"
+                return "Unlock level 2 damage for Rapid Fire Towers?"
             case .sniperTower:
-                return "ERROR"
+                return "Unlock level 2 damage for Sniper Towers?"
             case .cannonTower:
-                return "ERROR"
+                return "Unlock level 2 damage for Cannon Towers?"
+            }
+            
+        case "2b":
+            
+            switch communicator.selectedTowerType {
+                
+            case .gunTower:
+                return "Unlock level 2 attack speed for Gun Towers?"
+            case .rapidFireTower:
+                return "Unlock level 2 attack speed for Rapid Fire Towers?"
+            case .sniperTower:
+                return "Unlock level 2 attack speed for Sniper Towers?"
+            case .cannonTower:
+                return "Unlock level 2 attack speed for Cannon Towers?"
+            }
+            
+        case "2c":
+            
+            switch communicator.selectedTowerType {
+                
+            case .gunTower:
+                return "Unlock level 2 range for Gun Towers?"
+            case .rapidFireTower:
+                return "Unlock level 2 range for Rapid Fire Towers?"
+            case .sniperTower:
+                return "Unlock level 2 range for Sniper Towers?"
+            case .cannonTower:
+                return "Unlock level 2 range for Cannon Towers?"
             }
             
         case "3a":
@@ -402,9 +430,39 @@ struct MiddleArea: View {
                 return "ERROR"
             }
             
+        case "3b":
+            
+            switch communicator.selectedTowerType {
+                
+            case .gunTower:
+                return "ERROR"
+            case .rapidFireTower:
+                return "Unlock slowing projectiles for Rapid Fire Towers?"
+            case .sniperTower:
+                return "Unlock poison projectiles for Sniper Towers?"
+            case .cannonTower:
+                return "ERROR"
+            }
+            
+        case "3c":
+            
+            switch communicator.selectedTowerType {
+                
+            case .gunTower:
+                return "ERROR"
+            case .rapidFireTower:
+                return "ERROR"
+            case .sniperTower:
+                return "ERROR"
+            case .cannonTower:
+                return "Unlock mine projectiles for Cannon Towers?"
+            }
+            
         default:
             return "ERROR"
         }
+        
+        
         
     }
     
