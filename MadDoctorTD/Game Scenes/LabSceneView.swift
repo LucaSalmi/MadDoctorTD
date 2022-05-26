@@ -28,7 +28,7 @@ struct LabSceneView: View {
         }
         labScene.scaleMode = .fill
         
-        LabSceneView.imageWidth = UIScreen.main.bounds.width * 0.15
+        LabSceneView.imageWidth = UIScreen.main.bounds.width * 0.175
         LabSceneView.imageHeight = LabSceneView.imageWidth
         //SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
     }
@@ -77,10 +77,18 @@ struct TopArea: View {
                 updateTreeImages()
                 print("gunTower button pressed")
             } label: {
-                Image("blast_tower")
-                    .resizable()
-                    .frame(width: imageWidth , height: imageHeight)
-            }
+                
+                ZStack {
+                    Image(communicator.selectedTowerType == .gunTower ? "item_frame_research_tower_select" : "item_frame_research_tower_not_selected")
+                        .resizable()
+                        .frame(width: imageWidth , height: imageHeight)
+                    Image("blast_tower")
+                        .resizable()
+                        .frame(width: imageWidth , height: imageHeight)
+                }
+                
+                
+            }.padding(16)
             
             Button {
                 communicator.selectType(type: .rapidFireTower)
@@ -88,10 +96,36 @@ struct TopArea: View {
                 updateTreeImages()
                 print("rapidFire button pressed")
             } label: {
-                Image("speed_tower")
-                    .resizable()
-                    .frame(width: imageWidth , height: imageHeight)
-            }
+                
+                ZStack {
+                    Image(communicator.selectedTowerType == .rapidFireTower ? "item_frame_research_tower_select" : "item_frame_research_tower_not_selected")
+                        .resizable()
+                        .frame(width: imageWidth , height: imageHeight)
+                    Image("speed_tower")
+                        .resizable()
+                        .frame(width: imageWidth , height: imageHeight)
+                }
+                
+                
+            }.padding([.top, .bottom, .trailing], 16)
+            
+            Button {
+                communicator.selectType(type: .cannonTower)
+                SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                updateTreeImages()
+                print("cannonTower button pressed")
+            } label: {
+                
+                ZStack {
+                    Image(communicator.selectedTowerType == .cannonTower ? "item_frame_research_tower_select" : "item_frame_research_tower_not_selected")
+                        .resizable()
+                        .frame(width: imageWidth , height: imageHeight)
+                    Image("cannon_tower")
+                        .resizable()
+                        .frame(width: imageWidth , height: imageHeight)
+                }
+                
+            }.padding([.top, .bottom, .trailing], 16)
             
             Button {
                 communicator.selectType(type: .sniperTower)
@@ -100,6 +134,10 @@ struct TopArea: View {
                 print("sniperTower button pressed")
             } label: {
                 ZStack {
+                    
+                    Image(communicator.selectedTowerType == .sniperTower ? "item_frame_research_tower_select" : "item_frame_research_tower_not_selected")
+                        .resizable()
+                        .frame(width: imageWidth , height: imageHeight)
                     Image("sniper_tower_static_legs")
                         .resizable()
                         .frame(width: imageWidth , height: imageHeight)
@@ -107,18 +145,7 @@ struct TopArea: View {
                         .resizable()
                         .frame(width: imageWidth , height: imageHeight)
                 }
-            }
-            
-            Button {
-                communicator.selectType(type: .cannonTower)
-                SoundManager.playSFX(sfxName: SoundManager.buttonFourSFX, scene: LabScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                updateTreeImages()
-                print("cannonTower button pressed")
-            } label: {
-                Image("cannon_tower")
-                    .resizable()
-                    .frame(width: imageWidth , height: imageHeight)
-            }
+            }.padding([.top, .bottom, .trailing], 16)
             
         }.background(.black)
             .padding()
@@ -172,7 +199,7 @@ struct MiddleArea: View {
                 }, label: {
                     ZStack {
                         
-                        LabButtonImage("clickable_tile", "1")
+                        LabButtonImage("1")
                         Image(communicator.selectedTowerImage)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
@@ -196,7 +223,7 @@ struct MiddleArea: View {
                     } label: {
                         ZStack {
                             
-                            LabButtonImage("clickable_tile", "2a")
+                            LabButtonImage("2a")
                             Image(communicator.image2a)
                                 .resizable()
                                 .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
@@ -213,7 +240,7 @@ struct MiddleArea: View {
                     } label: {
                         ZStack {
                             
-                            LabButtonImage("clickable_tile", "3a")
+                            LabButtonImage("3a")
                             Image(communicator.image3a)
                                 .resizable()
                                 .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
@@ -234,7 +261,7 @@ struct MiddleArea: View {
                     } label: {
                         ZStack {
                             
-                            LabButtonImage("clickable_tile", "2b")
+                            LabButtonImage("2b")
                             Image(communicator.image2b)
                                 .resizable()
                                 .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
@@ -251,7 +278,7 @@ struct MiddleArea: View {
                     } label: {
                         ZStack {
                             
-                            LabButtonImage("clickable_tile", "3b")
+                            LabButtonImage("3b")
                             Image(communicator.image3b)
                                 .resizable()
                                 .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
@@ -271,7 +298,7 @@ struct MiddleArea: View {
                     } label: {
                         ZStack {
                             
-                            LabButtonImage("clickable_tile", "2c")
+                            LabButtonImage("2c")
                             Image(communicator.image2c)
                                 .resizable()
                                 .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
@@ -287,7 +314,7 @@ struct MiddleArea: View {
                     }, label: {
                         ZStack {
                             
-                            LabButtonImage("clickable_tile", "3c")
+                            LabButtonImage("3c")
                             Image(communicator.image3c)
                                 .resizable()
                                 .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
@@ -846,17 +873,15 @@ struct LabButtonImage: View {
     
     @ObservedObject var communicator = LabSceneCommunicator.instance
     
-    let imageString: String
     let id: String
     
-    init(_ _imageString: String, _ _id: String) {
+    init(_ _id: String) {
         id = _id
-        imageString = _imageString
     }
     
     var body: some View {
         
-        Image(imageString)
+        Image("item_frame_research_bg")
             .resizable()
             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
             .background(communicator.selectedTreeButtonId == id ? .white : .black)
