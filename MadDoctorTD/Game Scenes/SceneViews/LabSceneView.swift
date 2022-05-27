@@ -261,6 +261,8 @@ struct MiddleArea: View {
                     .frame(width: LabSceneView.imageWidth/8, height: LabSceneView.imageHeight/2)
                 
             }
+            .padding(.top, -10)
+            .padding(.bottom, -8)
             
             HStack {
                 
@@ -284,6 +286,8 @@ struct MiddleArea: View {
                 Image("skill_tree_connector")
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
+                    .padding(.leading, -8)
+                    .padding(.trailing, -9)
                 
                 Button {
                     communicator.selectedTreeButtonId = "2b"
@@ -305,6 +309,8 @@ struct MiddleArea: View {
                 Image("skill_tree_connector")
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
+                    .padding(.leading, -8)
+                    .padding(.trailing, -9)
                 
                 Button {
                     communicator.selectedTreeButtonId = "2c"
@@ -333,13 +339,15 @@ struct MiddleArea: View {
                 Image("skill_tree_connector")
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/8, height: LabSceneView.imageHeight/2)
-                    .padding([.leading, .trailing], 115)
+                    .padding([.leading, .trailing], 94)
                 
                 Image("skill_tree_connector")
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/8, height: LabSceneView.imageHeight/2)
                 
             }
+            .padding(.top, -8)
+            .padding(.bottom, -8)
             
             HStack {
                 
@@ -364,6 +372,8 @@ struct MiddleArea: View {
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
                     .opacity(0)
+                    .padding(.leading, -9)
+                    .padding(.trailing, -8)
                 
                 Button {
                     communicator.selectedTreeButtonId = "3b"
@@ -386,6 +396,8 @@ struct MiddleArea: View {
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
                     .opacity(0)
+                    .padding(.leading, -9)
+                    .padding(.trailing, -8)
                 
                 Button(action: {
                     communicator.selectedTreeButtonId = "3c"
