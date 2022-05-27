@@ -40,6 +40,7 @@ struct ContentView: View {
                 MainMenuView()
             }
             
+            //Transition/animation overlay for Research Lab
             if appManager.transitionOpacity > 0 {
                 Color.black.opacity(appManager.transitionOpacity)
                     .ignoresSafeArea()
