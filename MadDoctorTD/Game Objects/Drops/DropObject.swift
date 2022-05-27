@@ -44,9 +44,9 @@ class DropObject: SKSpriteNode{
         
         switch materialType {
         case .slime:
-            return SKTexture(imageNamed: "BossTexture")
+            return SKTexture(imageNamed: "boss_slime_animation_1")
         case .squid:
-            return SKTexture(imageNamed: "wheelie 1")
+            return SKTexture(imageNamed: "squid_boss_animation_1")
         }
         
     }
