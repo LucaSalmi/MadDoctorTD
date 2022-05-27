@@ -70,7 +70,7 @@ struct LabSceneView: View {
                     .foregroundColor(Color.white)
                     .background(Color.black.opacity(0.75))
                     .cornerRadius(8)
-                    .frame(width: UIScreen.main.bounds.width*0.8)
+                    .frame(width: UIScreen.main.bounds.width*0.9)
                     .opacity((communicator.showInfoView || communicator.showConfirmView) ? 1.0 : 0.0)
                     
                 }
@@ -453,52 +453,60 @@ struct MiddleArea: View {
             
         case "2a":
             
+            let cost = LabData.UPGRADE_COST_2
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 damage for Gun Towers?"
+                return "Unlock level 2 damage for Gun Towers? cost: \(cost) RP"
             case .rapidFireTower:
-                return "Unlock level 2 damage for Rapid Fire Towers?"
+                return "Unlock level 2 damage for Rapid Fire Towers? cost: \(cost) RP"
             case .sniperTower:
-                return "Unlock level 2 damage for Sniper Towers?"
+                return "Unlock level 2 damage for Sniper Towers? cost: \(cost) RP"
             case .cannonTower:
-                return "Unlock level 2 damage for Cannon Towers?"
+                return "Unlock level 2 damage for Cannon Towers? cost: \(cost) RP"
             }
             
         case "2b":
             
+            let cost = LabData.UPGRADE_COST_2
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 attack speed for Gun Towers?"
+                return "Unlock level 2 attack speed for Gun Towers? cost: \(cost) RP"
             case .rapidFireTower:
-                return "Unlock level 2 attack speed for Rapid Fire Towers?"
+                return "Unlock level 2 attack speed for Rapid Fire Towers? cost: \(cost) RP"
             case .sniperTower:
-                return "Unlock level 2 attack speed for Sniper Towers?"
+                return "Unlock level 2 attack speed for Sniper Towers? cost: \(cost) RP"
             case .cannonTower:
-                return "Unlock level 2 attack speed for Cannon Towers?"
+                return "Unlock level 2 attack speed for Cannon Towers? cost: \(cost) RP"
             }
             
         case "2c":
             
+            let cost = LabData.UPGRADE_COST_2
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 range for Gun Towers?"
+                return "Unlock level 2 range for Gun Towers? cost: \(cost) RP"
             case .rapidFireTower:
-                return "Unlock level 2 range for Rapid Fire Towers?"
+                return "Unlock level 2 range for Rapid Fire Towers? cost: \(cost) RP"
             case .sniperTower:
-                return "Unlock level 2 range for Sniper Towers?"
+                return "Unlock level 2 range for Sniper Towers? cost: \(cost) RP"
             case .cannonTower:
-                return "Unlock level 2 range for Cannon Towers?"
+                return "Unlock level 2 range for Cannon Towers? cost: \(cost) RP"
             }
             
         case "3a":
             
+            let cost = LabData.UPGRADE_COST_3
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock bouncing projectiles for Gun Towers?"
+                return "Unlock bouncing projectiles for Gun Towers?  cost: \(cost) RP and 1 Slime Material"
             case .rapidFireTower:
                 return "ERROR"
             case .sniperTower:
@@ -509,20 +517,24 @@ struct MiddleArea: View {
             
         case "3b":
             
+            let cost = LabData.UPGRADE_COST_3
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
                 return "ERROR"
             case .rapidFireTower:
-                return "Unlock slowing projectiles for Rapid Fire Towers?"
+                return "Unlock slowing projectiles for Rapid Fire Towers? cost: \(cost) RP and 1 Slime Material"
             case .sniperTower:
-                return "Unlock poison projectiles for Sniper Towers?"
+                return "Unlock poison projectiles for Sniper Towers? cost: \(cost) RP and 1 Slime Material"
             case .cannonTower:
                 return "ERROR"
             }
             
         case "3c":
             
+            let cost = LabData.UPGRADE_COST_3
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
@@ -532,7 +544,7 @@ struct MiddleArea: View {
             case .sniperTower:
                 return "ERROR"
             case .cannonTower:
-                return "Unlock mine projectiles for Cannon Towers?"
+                return "Unlock mine projectiles for Cannon Towers? cost: \(cost) RP and 1 Slime Material"
             }
             
         default:
@@ -791,11 +803,10 @@ struct InfoView: View {
         VStack {
             
             Text(communicator.infoViewHeader)
-                .font(.title)
+                .font(.title2)
             
             Text(communicator.infoViewText)
-                .font(.title2)
-                .padding(.top, 20)
+                .padding(.top, 10)
             
             //Buttons
             HStack {
@@ -805,11 +816,11 @@ struct InfoView: View {
                 } label: {
                     Image("done_build_foundation_button_standard")
                         .resizable()
-                        .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        .frame(width: LabSceneView.imageWidth*0.75, height: LabSceneView.imageHeight*0.75)
                 }
                 
             }
-            .padding(.top, 40)
+            .padding(.top, 20)
             
         }
         
@@ -826,11 +837,10 @@ struct ConfirmView: View {
         VStack {
             
             Text(communicator.confirmViewHeader)
-                .font(.title)
+                .font(.title2)
             
             Text(communicator.confirmViewText)
-                .font(.title2)
-                .padding(.top, 20)
+                .padding(.top, 10)
             
             //Buttons
             HStack {
@@ -843,7 +853,7 @@ struct ConfirmView: View {
                 } label: {
                     Image("done_build_foundation_button_standard")
                         .resizable()
-                        .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        .frame(width: LabSceneView.imageWidth*0.75, height: LabSceneView.imageHeight*0.75)
                 }
                 
                 Spacer()
@@ -853,13 +863,13 @@ struct ConfirmView: View {
                 } label: {
                     Image("sniper_tower_static_legs")
                         .resizable()
-                        .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+                        .frame(width: LabSceneView.imageWidth*0.75, height: LabSceneView.imageHeight*0.75)
                 }
                 
                 Spacer()
                 
             }
-            .padding(.top, 40)
+            .padding(.top, 20)
             
         }
         
