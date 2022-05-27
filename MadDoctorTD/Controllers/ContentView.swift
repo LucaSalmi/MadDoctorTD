@@ -25,7 +25,8 @@ struct ContentView: View {
             
             switch (appManager.state) {
             case AppState.startMenu:
-                 StartSceneView()//MainMenuView()
+                 StartSceneView()
+                    .transition(.opacity)
             case AppState.gameScene:
                 GameSceneView()
                     .transition(.opacity)

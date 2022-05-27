@@ -126,11 +126,18 @@ class GameScene: SKScene {
     
     var touchStarted = true
     
+    var fadeInScene = false
+    var fadeOutScene = false
+    var transitionAmount: Double = 0.02
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     override func didMove(to view: SKView) {
+        
+        AppManager.appManager.transitionOpacity = 1
+        fadeInScene = true
         
         if GameManager.instance.isGameOver{
             gameSetup()
@@ -1048,6 +1055,26 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         
         //Runs every frame
+        
+        if fadeInScene {
+            AppManager.appManager.transitionOpacity -= transitionAmount
+            if AppManager.appManager.transitionOpacity <= 0 {
+                fadeInScene = false
+            }
+        }
+        
+        if fadeOutScene {
+            
+            AppManager.appManager.transitionOpacity += transitionAmount
+            
+            if AppManager.appManager.transitionOpacity >= 1 {
+                fadeOutScene = false
+                AppManager.appManager.transitionOpacity = 0
+                AppManager.appManager.state = .gameScene
+                SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
+            }
+            
+        }
         
         if touchStarted{
             handleLongPress()
