@@ -58,19 +58,23 @@ class GameScene: SKScene {
     var summaryBackButton: SKSpriteNode?
 
     var summary: SKLabelNode?
-    var enemiesDefeated: SKLabelNode?
+    //var enemiesDefeated: SKLabelNode?
     var enemiesDefeatedNumber: SKLabelNode?
-    var researchPointsGainedTwo: SKLabelNode?
+    //var researchPointsGainedTwo: SKLabelNode?
     var researchPointsGainedNumber: SKLabelNode?
-    var creditsGained: SKLabelNode?
+    //var creditsGained: SKLabelNode?
     var creditsGainedNumber: SKLabelNode?
-    var baseHPLost: SKLabelNode?
+    //var baseHPLost: SKLabelNode?
     var baseHPLostNumber: SKLabelNode?
-    var ratingGained: SKLabelNode?
-    var ratingGainedNumber: SKLabelNode?
+    //var ratingGained: SKLabelNode?
+    //var ratingGainedNumber: SKLabelNode?
     
     //portal
     var portal: SKTileMapNode?
+    //var ratingGained: SKLabelNode?
+    //var ratingGainedNumber: SKLabelNode?
+    //var survivalBonus: SKLabelNode?
+    var survivalBonusNumber: SKLabelNode?
 
     //towerInfo
     var towerInfoMenu: SKSpriteNode?
@@ -202,38 +206,36 @@ class GameScene: SKScene {
 
         // new adds
         summary = waveSummary?.childNode(withName: "Summary") as? SKLabelNode
-        enemiesDefeated = waveSummary?.childNode(withName: "EnemiesDefeated") as? SKLabelNode
+        //enemiesDefeated = waveSummary?.childNode(withName: "EnemiesDefeated") as? SKLabelNode
         enemiesDefeatedNumber = waveSummary?.childNode(withName: "EnemiesDefeatedNumber") as? SKLabelNode
-        researchPointsGainedTwo = waveSummary?.childNode(withName: "ResearchPointsGained") as? SKLabelNode
+        //researchPointsGainedTwo = waveSummary?.childNode(withName: "ResearchPointsGained") as? SKLabelNode
         researchPointsGainedNumber = waveSummary?.childNode(withName: "ResearchPointsGainedNumber") as? SKLabelNode
-        creditsGained = waveSummary?.childNode(withName: "CreditsGained") as? SKLabelNode
+        //creditsGained = waveSummary?.childNode(withName: "CreditsGained") as? SKLabelNode
         creditsGainedNumber = waveSummary?.childNode(withName: "CreditsGainedNumber") as? SKLabelNode
-        baseHPLost = waveSummary?.childNode(withName: "BaseHpLost") as? SKLabelNode
+        //baseHPLost = waveSummary?.childNode(withName: "BaseHpLost") as? SKLabelNode
         baseHPLostNumber = waveSummary?.childNode(withName: "BaseHpLostNumber") as? SKLabelNode
-        ratingGained = waveSummary?.childNode(withName: "Rating") as? SKLabelNode
-        ratingGainedNumber = waveSummary?.childNode(withName: "RatingNumber") as? SKLabelNode
+//        ratingGained = waveSummary?.childNode(withName: "Rating") as? SKLabelNode
+//        ratingGainedNumber = waveSummary?.childNode(withName: "RatingNumber") as? SKLabelNode
+        //survivalBonus = waveSummary?.childNode(withName: "SurvivalBonus") as? SKLabelNode
+        survivalBonusNumber = waveSummary?.childNode(withName: "SurvivalBonus") as? SKLabelNode
+        //creditsGainedNumber?.text = ("$\(gameManager.moneyEarned)")
+        //researchPointsGained?.text = ("\(gameManager.researchPoints)")
 
-        summaryTitle?.text = ("Wave \(gameManager.currentWave) completed!")
-        creditsGainedNumber?.text = ("$\(gameManager.currentMoney)")
-        researchPointsGained?.text = ("\(gameManager.researchPoints)")
-        baseHPLostNumber?.text = ("\(gameManager.baseHp)") //add variable that tracks HP lost everytime an enemy enters zone
-        ratingGainedNumber?.text = ("S+") //add logic for rating (enemiesDefeated = totalNumerOfEnemies && baseHPLost == 0 or something along those lines..)
-
+        //baseHPLostNumber?.text = ("\(gameManager.baseHPLost)") //add variable that tracks HP lost everytime an enemy enters zone
+        //ratingGainedNumber?.text = ("S+") //add logic for rating (enemiesDefeated = totalNumerOfEnemies && baseHPLost == 0 or something along those lines..)
 
         bossMaterialGained = waveSummary?.childNode(withName: "BossMaterial") as? SKLabelNode
         researchPointsGained = waveSummary?.childNode(withName: "ResearchPoints") as? SKLabelNode
         summaryBackButton = waveSummary?.childNode(withName: "BackButton") as? SKSpriteNode
         waveSummary?.removeFromParent()
-        
-        
+
         mainHubBackground = uiScene!.childNode(withName: "MainHubBackground") as? SKSpriteNode
         //towerInfoMenu
         towerInfoMenu = uiScene?.childNode(withName: "TowerInfoNode") as? SKSpriteNode
         towerInfoMenu?.removeFromParent()
         statUpgradePopUp = uiScene?.childNode(withName: "UpgradeInfoPopUp") as? SKSpriteNode
         statUpgradePopUp?.removeFromParent()
-        
-        
+
         let mainHubBackground = uiScene!.childNode(withName: "MainHubBackground")
         mainHubBackground?.removeFromParent()
         self.camera!.addChild(waveSummary!)
@@ -293,8 +295,7 @@ class GameScene: SKScene {
         cannonTowerPrice?.text = "$\(TowerData.BASE_COST)"
         sniperTowerPrice?.text = "$\(TowerData.BASE_COST)"
         priceTag?.text = "$\(TowerData.BASE_COST)"
-        
-        
+
         towerPriceTags.append(gunTowerPrice!)
         towerPriceTags.append(rapidTowerPrice!)
         towerPriceTags.append(cannonTowerPrice!)
@@ -445,8 +446,7 @@ class GameScene: SKScene {
         
         
         panForTranslation(touch: touch)
-        
-        
+
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -623,6 +623,7 @@ class GameScene: SKScene {
             
             if node.name == "GunTower" || node.name == "SpeedTower" ||
                 node.name == "CannonTower" || node.name == "SniperTower"{
+                //SoundManager.playSFX(sfxName: SoundManager.buttonSFX_two, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 
                 //call function that takes in name of node
                 if dragAndDropBuild(node: node, location: location){
@@ -795,9 +796,15 @@ class GameScene: SKScene {
     func showSummary(){
         hideAllMenus()
         mainHubBackground?.alpha = 0
+        baseHPLostNumber?.text = ("\(gameManager.baseHPLost)")
+        creditsGainedNumber?.text = ("$\(gameManager.moneyEarned)")
+        summaryTitle?.text = ("Wave \(gameManager.currentWave) completed!")
+        researchPointsGained?.text = ("\(gameManager.researchPoints)")
+        survivalBonusNumber?.text = ("\(gameManager.survivalBonusNumber)")
         
         if waveManager?.waveNumber == 10 || waveManager?.waveNumber == 20{
             bossMaterialGained?.text = "Boss Material: +1"
+
         } 
         
         waveSummary?.alpha = 1
@@ -849,6 +856,8 @@ class GameScene: SKScene {
                 buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
                 upgradeMenuToggle?.alpha = 0
                 SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                GameManager.instance.moneyEarned = 0
+                GameManager.instance.baseHPLost = 0
             }
             
             

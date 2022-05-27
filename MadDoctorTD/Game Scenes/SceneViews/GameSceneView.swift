@@ -77,8 +77,6 @@ struct GameSceneView: View {
                         
                         HStack(alignment: .center){
                         
-                        
-                        
                             Text("\(gameManager.currentMoney)$")
                                 .foregroundColor(.white)
                                 .padding(10)
