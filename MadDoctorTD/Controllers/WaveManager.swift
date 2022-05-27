@@ -349,6 +349,7 @@ class WaveManager{
 //            GameScene.instance?.upgradeMenuToggle?.alpha = 1
             
             GameScene.instance?.showSummary()
+            GameScene.instance?.fadeOutPortal = true
             
             SoundManager.stopMusic()
             

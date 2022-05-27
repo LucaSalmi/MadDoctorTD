@@ -68,6 +68,9 @@ class GameScene: SKScene {
     var baseHPLostNumber: SKLabelNode?
     var ratingGained: SKLabelNode?
     var ratingGainedNumber: SKLabelNode?
+    
+    //portal
+    var portal: SKTileMapNode?
 
     //towerInfo
     var towerInfoMenu: SKSpriteNode?
@@ -82,6 +85,8 @@ class GameScene: SKScene {
     var upgradeTypePreview: UpgradeTypes?
     
     var showDamageIndicator: Bool = false
+    var fadeInPortal = false
+    var fadeOutPortal = false
     
     var rateOfFireImage: SKSpriteNode?
     var damageImage: SKSpriteNode?
@@ -171,6 +176,11 @@ class GameScene: SKScene {
         setupEnemies()
         addChild(EnemyNodes.enemiesNode)
         addChild(hpBarsNode)
+        
+        portal = self.childNode(withName: "Tile Map Node") as? SKTileMapNode
+        portal?.xScale = 0
+        portal?.yScale = 0
+        
         
         let uiScene = SKScene(fileNamed: "GameUIScene")
         towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
@@ -824,6 +834,7 @@ class GameScene: SKScene {
         case "ReadyButton":
             if readyButton?.alpha == 1{
                 communicator.startWavePhase()
+                fadeInPortal = true
                 waveManager?.waveStartCounter = 0
                 showTowerUI()
                 readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
@@ -1062,8 +1073,16 @@ class GameScene: SKScene {
             return
         }
         
+        if fadeInPortal{
+            fadePortal(fadeIn: true)
+        }
+        if fadeOutPortal{
+            fadePortal(fadeIn: false)
+        }
+        
         if GameSceneCommunicator.instance.isBuildPhase && waveSummary?.alpha == 0{
             showBuildButtonsUI()
+            //FadeoutPortal()
             //showTowerUI()
         }
         else {
@@ -1105,6 +1124,7 @@ class GameScene: SKScene {
                         
             if portal.contains(camera!.position) || !EnemyNodes.enemiesNode.children.isEmpty{
                 moveCameraToPortal = false
+                print("Im at portal with camera")
             }
         }
         
@@ -1183,6 +1203,42 @@ class GameScene: SKScene {
         }
     }
     
+    func fadePortal(fadeIn: Bool){
+        
+        let sizeDifference = CGFloat(0.01)
+        
+        
+        if !fadeIn{
+            
+            if portal!.xScale >= 0{
+                
+                portal?.xScale -= sizeDifference
+                portal?.yScale -= sizeDifference
+                
+                
+            }
+            else{
+                portal!.alpha = 0
+                fadeOutPortal = false
+                return
+            }
+        }
+        else{
+            if portal!.alpha < 1{
+                portal!.alpha = 1
+            }
+            
+            if portal!.xScale <= 1{
+                
+                portal!.xScale += sizeDifference
+                portal!.yScale += sizeDifference
+            }
+            else{
+                fadeInPortal = false
+                return
+            }
+        }
+    }
     
     func resetGameScene(){
         
