@@ -12,6 +12,8 @@ import SwiftUI
 import UIKit
 
 class GameScene: SKScene {
+
+    @ObservedObject var gameManager = GameManager.instance
     
     static var instance: GameScene? = nil
     
@@ -193,6 +195,12 @@ class GameScene: SKScene {
         baseHPLostNumber = waveSummary?.childNode(withName: "BaseHpLostNumber") as? SKLabelNode
         ratingGained = waveSummary?.childNode(withName: "Rating") as? SKLabelNode
         ratingGainedNumber = waveSummary?.childNode(withName: "RatingNumber") as? SKLabelNode
+
+        summaryTitle?.text = ("Wave \(gameManager.currentWave) completed!")
+        creditsGainedNumber?.text = ("$\(gameManager.currentMoney)")
+        researchPointsGained?.text = ("\(gameManager.researchPoints)")
+        baseHPLostNumber?.text = ("\(gameManager.baseHp)") //add variable that tracks HP lost everytime an enemy enters zone
+        ratingGainedNumber?.text = ("S+") //add logic for rating (enemiesDefeated = totalNumerOfEnemies && baseHPLost == 0 or something along those lines..)
 
 
         bossMaterialGained = waveSummary?.childNode(withName: "BossMaterial") as? SKLabelNode
