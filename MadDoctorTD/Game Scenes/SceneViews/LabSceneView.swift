@@ -742,8 +742,11 @@ struct BotArea: View {
             Spacer()
             
             Button {
-                AppManager.appManager.state = .gameScene
-                SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
+                
+                guard let labScene = LabScene.instance else { return }
+                labScene.fadeOutScene = true
+                
+                
                 //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
             } label: {
                 Image("play_button")

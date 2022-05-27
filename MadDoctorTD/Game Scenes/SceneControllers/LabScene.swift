@@ -12,6 +12,13 @@ class LabScene: SKScene {
     
     static var instance: LabScene?
     
+    let communicator = LabSceneCommunicator.instance
+    
+    var fadeInScene: Bool = false
+    var fadeOutScene: Bool = false
+    
+    var transitionAmount: Double = 0.02
+    
     var fadeInToast: Bool = false
     var fadeOutToast: Bool = false
     
@@ -31,11 +38,32 @@ class LabScene: SKScene {
         
         LabScene.instance = self
         
+        AppManager.appManager.transitionOpacity = 1
+        fadeInScene = true
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
         
-        let communicator = LabSceneCommunicator.instance
+        if fadeInScene {
+            AppManager.appManager.transitionOpacity -= transitionAmount
+            if AppManager.appManager.transitionOpacity <= 0 {
+                fadeInScene = false
+            }
+        }
+        
+        if fadeOutScene {
+            
+            AppManager.appManager.transitionOpacity += transitionAmount
+            
+            if AppManager.appManager.transitionOpacity >= 1 {
+                fadeOutScene = false
+                AppManager.appManager.transitionOpacity = 0
+                AppManager.appManager.state = .gameScene
+                SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
+            }
+            
+        }
         
         if fadeInToast {
             
