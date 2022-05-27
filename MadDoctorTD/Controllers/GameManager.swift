@@ -15,6 +15,8 @@ class GameManager: ObservableObject{
     //Variables
     @Published var isPaused: Bool = false
     @Published var currentMoney: Int = PlayerData.START_MONEY
+    @Published var moneyEarned: Int = 0
+    @Published var survivalBonusNumber: Int = 0
     
     @Published var slimeMaterials: Int = 1
     @Published var squidMaterials: Int = 0
