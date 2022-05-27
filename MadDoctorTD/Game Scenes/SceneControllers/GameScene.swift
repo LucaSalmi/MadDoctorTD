@@ -1231,9 +1231,7 @@ class GameScene: SKScene {
         GameManager.instance.currentMoney = PlayerData.START_MONEY
         GameManager.instance.researchPoints = PlayerData.START_RESEARCH_POINTS
         GameManager.instance.baseHp = PlayerData.BASE_HP
-        GameManager.instance.cannonTowerUnlocked = false
-        GameManager.instance.rapidFireTowerUnlocked = false
-        GameManager.instance.sniperTowerUnlocked = false
+        gameManager.resetAllSkills()
         
         //Wave
         GameManager.instance.currentWave = 0

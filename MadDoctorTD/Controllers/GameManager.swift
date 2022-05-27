@@ -89,5 +89,39 @@ class GameManager: ObservableObject{
         
     }
     
+    func resetAllSkills() {
+        
+        LabSceneCommunicator.instance.gunTowerResearchLevel.removeAll()
+        LabSceneCommunicator.instance.gunTowerResearchLevel.append("1")
+        LabSceneCommunicator.instance.rapidTowerResearchLevel.removeAll()
+        LabSceneCommunicator.instance.cannonTowerResearchLevel.removeAll()
+        LabSceneCommunicator.instance.sniperTowerResearchLevel.removeAll()
+        
+        gunTowerUnlocked = true
+        gunTowerDamageUnlocked = false
+        gunTowerSpeedUnlocked = false
+        gunTowerRangeUnlocked = false
+        bouncingProjectilesUnlocked = false
+        
+        rapidFireTowerUnlocked = false
+        rapidFireTowerDamageUnlocked = false
+        rapidFireTowerSpeedUnlocked = false
+        rapidFireTowerRangeUnlocked = false
+        slowProjectilesUnlocked = false
+        
+        cannonTowerUnlocked = false
+        cannonTowerDamageUnlocked = false
+        cannonTowerSpeedUnlocked = false
+        cannonTowerRangeUnlocked = false
+        mineProjectilesUnlocked = false
+        
+        sniperTowerUnlocked = false
+        sniperTowerDamageUnlocked = false
+        sniperTowerSpeedUnlocked = false
+        sniperTowerRangeUnlocked = false
+        poisonProjectilesUnlocked = false
+        
+    }
+    
     
 }
