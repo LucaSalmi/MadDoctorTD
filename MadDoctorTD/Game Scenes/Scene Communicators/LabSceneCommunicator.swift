@@ -35,6 +35,12 @@ class LabSceneCommunicator: ObservableObject{
     @Published var confirmViewHeader: String = "Confirm View"
     @Published var confirmViewText: String = "This is the confirm view"
     
+    @Published var toastOpacity: Double = Double(0.0)
+    let defaultToastPositionY: Double = Double((UIScreen.main.bounds.height - UIScreen.main.bounds.height/8))
+    @Published var toastPositionY: Double = Double(0.0)
+    @Published var toastViewHeader: String = "Toast View"
+    @Published var toastViewText: String = "This is the toast view"
+    
     static let instance = LabSceneCommunicator()
     
     private init() {}
@@ -68,7 +74,8 @@ class LabSceneCommunicator: ObservableObject{
         case .unlocked:
             displayInfoView(title: "Info", description: "Upgrade already unlocked")
         case .success:
-            displayInfoView(title: "Success", description: "You unlocked this upgrade for \(selectedTowerType)")
+            //displayInfoView(title: "Success", description: "You unlocked this upgrade for \(selectedTowerType)")
+            displayToastView(title: "Success", description: "You unlocked this upgrade for \(selectedTowerType)")
             if let labScene = LabScene.instance {
                 SoundManager.playSFX(sfxName: SoundManager.upgradeUnlocked, scene: labScene, sfxExtension: SoundManager.mp3Extension)
             }
@@ -78,6 +85,19 @@ class LabSceneCommunicator: ObservableObject{
             displayInfoView(title: "Unavailable", description: "This path is not unlocked yet")
             
         }
+        
+    }
+    
+    private func displayToastView(title: String, description: String) {
+        
+        guard let labScene = LabScene.instance else { return }
+        
+        toastViewHeader = title
+        toastViewText = description
+        toastPositionY = UIScreen.main.bounds.height
+        toastOpacity = 0.0
+        labScene.fadeOutToast = false
+        labScene.fadeInToast = true
         
     }
     

@@ -55,7 +55,7 @@ struct LabSceneView: View {
                         
                     }
                     
-                    //Pop-up content
+                    //Info and Confirm View
                     ZStack {
                         //Info View
                         if communicator.showInfoView {
@@ -72,6 +72,9 @@ struct LabSceneView: View {
                     .cornerRadius(8)
                     .frame(width: UIScreen.main.bounds.width*0.9)
                     .opacity((communicator.showInfoView || communicator.showConfirmView) ? 1.0 : 0.0)
+                    
+                    //Toast View
+                    ToastView()
                     
                 }
                 
@@ -877,3 +880,29 @@ struct ConfirmView: View {
     
 }
 
+struct ToastView: View {
+    
+    @ObservedObject var communicator = LabSceneCommunicator.instance
+    
+    var body: some View {
+        
+        VStack {
+            
+            VStack {
+                Text(communicator.toastViewHeader)
+                    .font(.title2)
+                
+                Text(communicator.toastViewText)
+                    .padding(.top, 10)
+            }.padding()
+                .foregroundColor(Color.white)
+                .background(Color.black.opacity(0.75))
+                .cornerRadius(8)
+                .opacity(communicator.toastOpacity)
+                .position(x: UIScreen.main.bounds.width/2, y: communicator.toastPositionY)
+            
+        }
+        
+    }
+    
+}
