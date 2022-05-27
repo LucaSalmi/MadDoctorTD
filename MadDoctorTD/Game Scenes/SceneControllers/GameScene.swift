@@ -59,6 +59,7 @@ class GameScene: SKScene {
     var attackStatLabel: SKLabelNode?
     var fireRateStatLabel: SKLabelNode?
     var rangeStatLabel: SKLabelNode?
+    var towerLogoInfo: SKSpriteNode?
     
     //preview
     var statUpgradePopUp: SKSpriteNode?
@@ -208,6 +209,7 @@ class GameScene: SKScene {
         rangeStatLabel = towerInfoMenu?.childNode(withName: "TowerInfoRange") as? SKLabelNode
         
         statUpgradePreviewText = statUpgradePopUp?.childNode(withName: "upgradePopUpText") as? SKLabelNode
+        towerLogoInfo = towerInfoMenu?.childNode(withName: "TowerLogoInfoUI") as? SKSpriteNode
         
         damageImage = upgradeUI?.childNode(withName: "AttackButton") as? SKSpriteNode
         rateOfFireImage = upgradeUI?.childNode(withName: "RateOfFireButton") as? SKSpriteNode
@@ -663,7 +665,8 @@ class GameScene: SKScene {
         guard let currentTower = GameSceneCommunicator.instance.currentTower else {return}
         attackStatLabel?.text = "Attack Power: \(currentTower.attackDamage)"
         fireRateStatLabel?.text = "Fire Rate: \(currentTower.fireRate)"
-        rangeStatLabel?.text = "Range: \(currentTower.attackRange)"
+        rangeStatLabel?.text = "Range: \(Int(currentTower.attackRange))"
+        towerLogoInfo?.texture = currentTower.towerTexture.texture
         
         towerInfoMenu?.alpha = 1
         towerUI?.alpha = 0
@@ -755,6 +758,8 @@ class GameScene: SKScene {
             
         case "SellTowerButton":
             GameSceneCommunicator.instance.sellTower()
+            
+            
             
         case "SellFoundationButton":
             
