@@ -25,6 +25,9 @@ class StartScene: SKScene{
     var startAnimationCount: Int = 60000
     var musicStarted: Bool = false
     
+    let fadeIn = SKAction.fadeAlpha(to: 1, duration: 1)
+    let fadeOut = SKAction.fadeAlpha(to: 0, duration: 1)
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         SoundManager.playBGM(bgmString: SoundManager.DoorsTheme, bgmExtension: SoundManager.mp3Extension)
@@ -192,22 +195,28 @@ class StartScene: SKScene{
     }
     
     func showSettingsMenu() {
-        
-        settingsMenu?.alpha = 1
-        levelMenu?.alpha = 0
+  
+        settingsMenu?.run(fadeIn)
+        levelMenu?.run(fadeOut)
+//        settingsMenu?.alpha = 1
+//        levelMenu?.alpha = 0
         
     }
     
     func showLevelMenu() {
         
-        settingsMenu?.alpha = 0
-        levelMenu?.alpha = 1
+        settingsMenu?.run(fadeOut)
+        levelMenu?.run(fadeIn)
+//        settingsMenu?.alpha = 0
+//        levelMenu?.alpha = 1
         
     }
     func hideExtraMenus() {
         
-        settingsMenu?.alpha = 0
-        levelMenu?.alpha = 0
+        settingsMenu?.run(fadeOut)
+        levelMenu?.run(fadeOut)
+//        settingsMenu?.alpha = 0
+//        levelMenu?.alpha = 0
         
     }
     
