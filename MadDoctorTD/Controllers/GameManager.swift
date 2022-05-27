@@ -15,6 +15,8 @@ class GameManager: ObservableObject{
     //Variables
     @Published var isPaused: Bool = false
     @Published var currentMoney: Int = PlayerData.START_MONEY
+    @Published var moneyEarned: Int = 0
+    @Published var survivalBonusNumber: Int = 0
     
     @Published var slimeMaterials: Int = 1
     @Published var squidMaterials: Int = 0
@@ -29,6 +31,14 @@ class GameManager: ObservableObject{
     
     @Published var isGameOver: Bool = false
     @Published var baseHp: Int = PlayerData.BASE_HP
+    @Published var baseHPLost: Int = 0
+    
+    //Gun Tower Unlocks
+    @Published var gunTowerUnlocked: Bool = true
+    @Published var gunTowerDamageUnlocked: Bool = false
+    @Published var gunTowerSpeedUnlocked: Bool = false
+    @Published var gunTowerRangeUnlocked: Bool = false
+    @Published var bouncingProjectilesUnlocked: Bool = false
     
     //Rapid Fire Tower Unlocks
     @Published var rapidFireTowerUnlocked: Bool = false
@@ -37,13 +47,6 @@ class GameManager: ObservableObject{
     @Published var rapidFireTowerRangeUnlocked: Bool = false
     @Published var slowProjectilesUnlocked: Bool = false
     
-    //Sniper Tower Unlocks
-    @Published var sniperTowerUnlocked: Bool = false
-    @Published var sniperTowerDamageUnlocked: Bool = false
-    @Published var sniperTowerSpeedUnlocked: Bool = false
-    @Published var sniperTowerRangeUnlocked: Bool = false
-    @Published var poisonProjectilesUnlocked: Bool = false
-    
     //Cannon Tower Unlocks
     @Published var cannonTowerUnlocked: Bool = false
     @Published var cannonTowerDamageUnlocked: Bool = false
@@ -51,12 +54,12 @@ class GameManager: ObservableObject{
     @Published var cannonTowerRangeUnlocked: Bool = false
     @Published var mineProjectilesUnlocked: Bool = false
     
-    //Gun Tower Unlocks
-    @Published var gunTowerUnlocked: Bool = true
-    @Published var gunTowerDamageUnlocked: Bool = false
-    @Published var gunTowerSpeedUnlocked: Bool = false
-    @Published var gunTowerRangeUnlocked: Bool = false
-    @Published var bouncingProjectilesUnlocked: Bool = false
+    //Sniper Tower Unlocks
+    @Published var sniperTowerUnlocked: Bool = false
+    @Published var sniperTowerDamageUnlocked: Bool = false
+    @Published var sniperTowerSpeedUnlocked: Bool = false
+    @Published var sniperTowerRangeUnlocked: Bool = false
+    @Published var poisonProjectilesUnlocked: Bool = false
     
     @Published var currentLevel = 2
     
@@ -67,6 +70,7 @@ class GameManager: ObservableObject{
     func getDamage(incomingDamage: Int){
         GameScene.instance!.showDamageIndicator = true
         baseHp -= incomingDamage
+        baseHPLost += 1 
         if baseHp <= 0{
             isGameOver = true
             SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_2, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
@@ -84,6 +88,40 @@ class GameManager: ObservableObject{
             dmgIndicator?.alpha = 0
             GameScene.instance!.showDamageIndicator = false
         }
+        
+    }
+    
+    func resetAllSkills() {
+        
+        LabSceneCommunicator.instance.gunTowerResearchLevel.removeAll()
+        LabSceneCommunicator.instance.gunTowerResearchLevel.append("1")
+        LabSceneCommunicator.instance.rapidTowerResearchLevel.removeAll()
+        LabSceneCommunicator.instance.cannonTowerResearchLevel.removeAll()
+        LabSceneCommunicator.instance.sniperTowerResearchLevel.removeAll()
+        
+        gunTowerUnlocked = true
+        gunTowerDamageUnlocked = false
+        gunTowerSpeedUnlocked = false
+        gunTowerRangeUnlocked = false
+        bouncingProjectilesUnlocked = false
+        
+        rapidFireTowerUnlocked = false
+        rapidFireTowerDamageUnlocked = false
+        rapidFireTowerSpeedUnlocked = false
+        rapidFireTowerRangeUnlocked = false
+        slowProjectilesUnlocked = false
+        
+        cannonTowerUnlocked = false
+        cannonTowerDamageUnlocked = false
+        cannonTowerSpeedUnlocked = false
+        cannonTowerRangeUnlocked = false
+        mineProjectilesUnlocked = false
+        
+        sniperTowerUnlocked = false
+        sniperTowerDamageUnlocked = false
+        sniperTowerSpeedUnlocked = false
+        sniperTowerRangeUnlocked = false
+        poisonProjectilesUnlocked = false
         
     }
     

@@ -339,6 +339,8 @@ class WaveManager{
                 (EnemyNodes.enemyArray.isEmpty && EnemyNodes.enemiesNode.children.isEmpty) {
             print("Current level completed!")
             GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
+            //GameManager.instance.moneyEarned += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
+            GameManager.instance.survivalBonusNumber += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
             GameSceneCommunicator.instance.isBuildPhase = true
             
             
@@ -349,6 +351,7 @@ class WaveManager{
 //            GameScene.instance?.upgradeMenuToggle?.alpha = 1
             
             GameScene.instance?.showSummary()
+            GameScene.instance?.fadeOutPortal = true
             
             SoundManager.stopMusic()
             

@@ -246,6 +246,9 @@ class GameSceneCommunicator: ObservableObject {
             return
         }
         
+        currentTower!.upgrade(upgradeType: upgradeType)
+        
+        /*
         switch upgradeType {
         case .damage:
             currentTower!.upgrade(upgradeType: .damage)
@@ -254,6 +257,7 @@ class GameSceneCommunicator: ObservableObject {
         case .firerate:
             currentTower!.upgrade(upgradeType: .firerate)
         }
+         */
         
         GameManager.instance.currentMoney -= upgradeCost
         
@@ -265,6 +269,11 @@ class GameSceneCommunicator: ObservableObject {
         
         switch upgradeType {
         case .damage:
+            
+            //Towers are currently capped at level 3 on individual upgrades
+            if currentTower!.damageUpgradeCount >= 3 {
+                return false
+            }
             
             //Base upgrade
             if currentTower! is GunTower && currentTower!.damageUpgradeCount == 1 && !gameManager.gunTowerDamageUnlocked {
@@ -309,6 +318,11 @@ class GameSceneCommunicator: ObservableObject {
             
         case .range:
             
+            //Towers are currently capped at level 3 on individual upgrades
+            if currentTower!.rangeUpgradeCount >= 3 {
+                return false
+            }
+            
             //Base upgrade
             if currentTower! is GunTower && currentTower!.rangeUpgradeCount == 1 && !gameManager.gunTowerRangeUnlocked {
                 return false
@@ -351,6 +365,11 @@ class GameSceneCommunicator: ObservableObject {
             }
             
         case .firerate:
+            
+            //Towers are currently capped at level 3 on individual upgrades
+            if currentTower!.rateOfFireUpgradeCount >= 3 {
+                return false
+            }
             
             //Base upgrade
             if currentTower! is GunTower && currentTower!.rateOfFireUpgradeCount == 1 && !gameManager.gunTowerSpeedUnlocked {

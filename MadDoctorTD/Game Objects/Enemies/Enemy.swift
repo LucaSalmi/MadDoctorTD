@@ -32,7 +32,6 @@ class Enemy: SKSpriteNode{
     var slowTick = 0
     var textureOffset = CGFloat(10)
     
-    
     var isAttacker = false
     var attackTarget: FoundationPlate? = nil
     var precedentTargetPosition: CGPoint? = nil
@@ -378,6 +377,8 @@ class Enemy: SKSpriteNode{
         isPoisonedTexture!.removeFromParent()
         
         GameManager.instance.currentMoney += self.killValue
+        GameManager.instance.moneyEarned += self.killValue //variabel that tracks income earned
+        print("current moneyEarned = \(GameManager.instance.moneyEarned)")
         print("KILL VALUE = \(GameManager.instance.currentMoney)")
         
         if self.enemyType == .boss{

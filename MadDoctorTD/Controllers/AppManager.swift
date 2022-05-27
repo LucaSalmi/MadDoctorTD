@@ -12,6 +12,8 @@ class AppManager: ObservableObject{
     static var appManager = AppManager()
     @Published var state = AppState.startMenu
     
+    @Published var transitionOpacity: Double = 0.0
+    
     //SINGLETON
     private init(){}
     

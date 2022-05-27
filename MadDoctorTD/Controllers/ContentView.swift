@@ -25,41 +25,27 @@ struct ContentView: View {
             
             switch (appManager.state) {
             case AppState.startMenu:
-                 StartSceneView()//MainMenuView()
+                 StartSceneView()
+                    .transition(.opacity)
             case AppState.gameScene:
                 GameSceneView()
+                    .transition(.opacity)
             case AppState.settingsMenu:
                 SettingsView(title: "Settings")
             case AppState.labMenu:
                 LabSceneView()
+                    .transition(.opacity)
             case AppState.creditsScene:
                 CreditsSceneView()
             default:
                 MainMenuView()
             }
             
-            /*
-            VStack {
-                HStack {
-                    Button(action: {
-                        appManager.state = AppState.startMenu
-                    }, label: {
-                        Text("Start Menu")
-                    })
-                    Button(action: {
-                        appManager.state = AppState.gameScene
-                    }, label: {
-                        Text("Game")
-                    })
-                    Button(action: {
-                        appManager.state = AppState.labMenu
-                    }, label: {
-                        Text("Lab")
-                    })
-                }
-                Spacer()
+            //Transition/animation overlay for Research Lab
+            if appManager.transitionOpacity > 0 {
+                Color.black.opacity(appManager.transitionOpacity)
+                    .ignoresSafeArea()
             }
-             */
             
         }
         .statusBar(hidden: true)

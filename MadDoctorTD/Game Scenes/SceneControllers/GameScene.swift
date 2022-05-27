@@ -12,6 +12,8 @@ import SwiftUI
 import UIKit
 
 class GameScene: SKScene {
+
+    @ObservedObject var gameManager = GameManager.instance
     
     static var instance: GameScene? = nil
     
@@ -54,11 +56,32 @@ class GameScene: SKScene {
     var bossMaterialGained: SKLabelNode?
     var researchPointsGained: SKLabelNode?
     var summaryBackButton: SKSpriteNode?
+
+    var summary: SKLabelNode?
+    //var enemiesDefeated: SKLabelNode?
+    var enemiesDefeatedNumber: SKLabelNode?
+    //var researchPointsGainedTwo: SKLabelNode?
+    var researchPointsGainedNumber: SKLabelNode?
+    //var creditsGained: SKLabelNode?
+    var creditsGainedNumber: SKLabelNode?
+    //var baseHPLost: SKLabelNode?
+    var baseHPLostNumber: SKLabelNode?
+    //var ratingGained: SKLabelNode?
+    //var ratingGainedNumber: SKLabelNode?
+    
+    //portal
+    var portal: SKTileMapNode?
+    //var ratingGained: SKLabelNode?
+    //var ratingGainedNumber: SKLabelNode?
+    //var survivalBonus: SKLabelNode?
+    var survivalBonusNumber: SKLabelNode?
+
     //towerInfo
     var towerInfoMenu: SKSpriteNode?
     var attackStatLabel: SKLabelNode?
     var fireRateStatLabel: SKLabelNode?
     var rangeStatLabel: SKLabelNode?
+    var towerLogoInfo: SKSpriteNode?
     
     //preview
     var statUpgradePopUp: SKSpriteNode?
@@ -66,6 +89,8 @@ class GameScene: SKScene {
     var upgradeTypePreview: UpgradeTypes?
     
     var showDamageIndicator: Bool = false
+    var fadeInPortal = false
+    var fadeOutPortal = false
     
     var rateOfFireImage: SKSpriteNode?
     var damageImage: SKSpriteNode?
@@ -105,11 +130,18 @@ class GameScene: SKScene {
     
     var touchStarted = true
     
+    var fadeInScene = false
+    var fadeOutScene = false
+    var transitionAmount: Double = 0.02
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     override func didMove(to view: SKView) {
+        
+        AppManager.appManager.transitionOpacity = 1
+        fadeInScene = true
         
         if GameManager.instance.isGameOver{
             gameSetup()
@@ -156,6 +188,11 @@ class GameScene: SKScene {
         addChild(EnemyNodes.enemiesNode)
         addChild(hpBarsNode)
         
+        portal = self.childNode(withName: "Tile Map Node") as? SKTileMapNode
+        portal?.xScale = 0
+        portal?.yScale = 0
+        
+        
         let uiScene = SKScene(fileNamed: "GameUIScene")
         towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
         towerUI!.removeFromParent()
@@ -166,20 +203,39 @@ class GameScene: SKScene {
         
         waveSummary = uiScene?.childNode(withName: "WaveSummary") as? SKSpriteNode
         summaryTitle = waveSummary?.childNode(withName: "SummaryTitle") as? SKLabelNode
+
+        // new adds
+        summary = waveSummary?.childNode(withName: "Summary") as? SKLabelNode
+        //enemiesDefeated = waveSummary?.childNode(withName: "EnemiesDefeated") as? SKLabelNode
+        enemiesDefeatedNumber = waveSummary?.childNode(withName: "EnemiesDefeatedNumber") as? SKLabelNode
+        //researchPointsGainedTwo = waveSummary?.childNode(withName: "ResearchPointsGained") as? SKLabelNode
+        researchPointsGainedNumber = waveSummary?.childNode(withName: "ResearchPointsGainedNumber") as? SKLabelNode
+        //creditsGained = waveSummary?.childNode(withName: "CreditsGained") as? SKLabelNode
+        creditsGainedNumber = waveSummary?.childNode(withName: "CreditsGainedNumber") as? SKLabelNode
+        //baseHPLost = waveSummary?.childNode(withName: "BaseHpLost") as? SKLabelNode
+        baseHPLostNumber = waveSummary?.childNode(withName: "BaseHpLostNumber") as? SKLabelNode
+//        ratingGained = waveSummary?.childNode(withName: "Rating") as? SKLabelNode
+//        ratingGainedNumber = waveSummary?.childNode(withName: "RatingNumber") as? SKLabelNode
+        //survivalBonus = waveSummary?.childNode(withName: "SurvivalBonus") as? SKLabelNode
+        survivalBonusNumber = waveSummary?.childNode(withName: "SurvivalBonus") as? SKLabelNode
+        //creditsGainedNumber?.text = ("$\(gameManager.moneyEarned)")
+        //researchPointsGained?.text = ("\(gameManager.researchPoints)")
+
+        //baseHPLostNumber?.text = ("\(gameManager.baseHPLost)") //add variable that tracks HP lost everytime an enemy enters zone
+        //ratingGainedNumber?.text = ("S+") //add logic for rating (enemiesDefeated = totalNumerOfEnemies && baseHPLost == 0 or something along those lines..)
+
         bossMaterialGained = waveSummary?.childNode(withName: "BossMaterial") as? SKLabelNode
         researchPointsGained = waveSummary?.childNode(withName: "ResearchPoints") as? SKLabelNode
         summaryBackButton = waveSummary?.childNode(withName: "BackButton") as? SKSpriteNode
         waveSummary?.removeFromParent()
-        
-        
+
         mainHubBackground = uiScene!.childNode(withName: "MainHubBackground") as? SKSpriteNode
         //towerInfoMenu
         towerInfoMenu = uiScene?.childNode(withName: "TowerInfoNode") as? SKSpriteNode
         towerInfoMenu?.removeFromParent()
         statUpgradePopUp = uiScene?.childNode(withName: "UpgradeInfoPopUp") as? SKSpriteNode
         statUpgradePopUp?.removeFromParent()
-        
-        
+
         let mainHubBackground = uiScene!.childNode(withName: "MainHubBackground")
         mainHubBackground?.removeFromParent()
         self.camera!.addChild(waveSummary!)
@@ -208,6 +264,7 @@ class GameScene: SKScene {
         rangeStatLabel = towerInfoMenu?.childNode(withName: "TowerInfoRange") as? SKLabelNode
         
         statUpgradePreviewText = statUpgradePopUp?.childNode(withName: "upgradePopUpText") as? SKLabelNode
+        towerLogoInfo = towerInfoMenu?.childNode(withName: "TowerLogoInfoUI") as? SKSpriteNode
         
         damageImage = upgradeUI?.childNode(withName: "AttackButton") as? SKSpriteNode
         rateOfFireImage = upgradeUI?.childNode(withName: "RateOfFireButton") as? SKSpriteNode
@@ -238,8 +295,7 @@ class GameScene: SKScene {
         cannonTowerPrice?.text = "$\(TowerData.BASE_COST)"
         sniperTowerPrice?.text = "$\(TowerData.BASE_COST)"
         priceTag?.text = "$\(TowerData.BASE_COST)"
-        
-        
+
         towerPriceTags.append(gunTowerPrice!)
         towerPriceTags.append(rapidTowerPrice!)
         towerPriceTags.append(cannonTowerPrice!)
@@ -390,8 +446,7 @@ class GameScene: SKScene {
         
         
         panForTranslation(touch: touch)
-        
-        
+
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -568,6 +623,7 @@ class GameScene: SKScene {
             
             if node.name == "GunTower" || node.name == "SpeedTower" ||
                 node.name == "CannonTower" || node.name == "SniperTower"{
+                //SoundManager.playSFX(sfxName: SoundManager.buttonSFX_two, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 
                 //call function that takes in name of node
                 if dragAndDropBuild(node: node, location: location){
@@ -663,7 +719,9 @@ class GameScene: SKScene {
         guard let currentTower = GameSceneCommunicator.instance.currentTower else {return}
         attackStatLabel?.text = "Attack Power: \(currentTower.attackDamage)"
         fireRateStatLabel?.text = "Fire Rate: \(currentTower.fireRate)"
-        rangeStatLabel?.text = "Range: \(currentTower.attackRange)"
+        rangeStatLabel?.text = "Range: \(Int(currentTower.attackRange))"
+        towerLogoInfo?.texture = currentTower.towerTexture.texture
+        
         
         towerInfoMenu?.alpha = 1
         towerUI?.alpha = 0
@@ -738,9 +796,15 @@ class GameScene: SKScene {
     func showSummary(){
         hideAllMenus()
         mainHubBackground?.alpha = 0
+        baseHPLostNumber?.text = ("\(gameManager.baseHPLost)")
+        creditsGainedNumber?.text = ("$\(gameManager.moneyEarned)")
+        summaryTitle?.text = ("Wave \(gameManager.currentWave) completed!")
+        researchPointsGained?.text = ("\(gameManager.researchPoints)")
+        survivalBonusNumber?.text = ("\(gameManager.survivalBonusNumber)")
         
         if waveManager?.waveNumber == 10 || waveManager?.waveNumber == 20{
             bossMaterialGained?.text = "Boss Material: +1"
+
         } 
         
         waveSummary?.alpha = 1
@@ -784,6 +848,7 @@ class GameScene: SKScene {
         case "ReadyButton":
             if readyButton?.alpha == 1{
                 communicator.startWavePhase()
+                fadeInPortal = true
                 waveManager?.waveStartCounter = 0
                 showTowerUI()
                 readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
@@ -791,6 +856,8 @@ class GameScene: SKScene {
                 buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
                 upgradeMenuToggle?.alpha = 0
                 SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                GameManager.instance.moneyEarned = 0
+                GameManager.instance.baseHPLost = 0
             }
             
             
@@ -800,6 +867,13 @@ class GameScene: SKScene {
                 AppManager.appManager.state = .labMenu
                 SoundManager.playSFX(sfxName: SoundManager.switchToResearchRoomSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere, bgmExtension: SoundManager.mp3Extension)
+                
+                AppManager.appManager.transitionOpacity = 1
+                
+                if let labScene = LabScene.instance {
+                    labScene.fadeInScene = true
+                }
+                
             }
             
         case "BackButton":
@@ -991,6 +1065,26 @@ class GameScene: SKScene {
         
         //Runs every frame
         
+        if fadeInScene {
+            AppManager.appManager.transitionOpacity -= transitionAmount
+            if AppManager.appManager.transitionOpacity <= 0 {
+                fadeInScene = false
+            }
+        }
+        
+        if fadeOutScene {
+            
+            AppManager.appManager.transitionOpacity += transitionAmount
+            
+            if AppManager.appManager.transitionOpacity >= 1 {
+                fadeOutScene = false
+                AppManager.appManager.transitionOpacity = 0
+                AppManager.appManager.state = .gameScene
+                SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
+            }
+            
+        }
+        
         if touchStarted{
             handleLongPress()
         }else if statUpgradePopUp?.alpha == 1{
@@ -1015,8 +1109,16 @@ class GameScene: SKScene {
             return
         }
         
+        if fadeInPortal{
+            fadePortal(fadeIn: true)
+        }
+        if fadeOutPortal{
+            fadePortal(fadeIn: false)
+        }
+        
         if GameSceneCommunicator.instance.isBuildPhase && waveSummary?.alpha == 0{
             showBuildButtonsUI()
+            //FadeoutPortal()
             //showTowerUI()
         }
         else {
@@ -1058,6 +1160,7 @@ class GameScene: SKScene {
                         
             if portal.contains(camera!.position) || !EnemyNodes.enemiesNode.children.isEmpty{
                 moveCameraToPortal = false
+                print("Im at portal with camera")
             }
         }
         
@@ -1136,6 +1239,42 @@ class GameScene: SKScene {
         }
     }
     
+    func fadePortal(fadeIn: Bool){
+        
+        let sizeDifference = CGFloat(0.01)
+        
+        
+        if !fadeIn{
+            
+            if portal!.xScale >= 0{
+                
+                portal?.xScale -= sizeDifference
+                portal?.yScale -= sizeDifference
+                
+                
+            }
+            else{
+                portal!.alpha = 0
+                fadeOutPortal = false
+                return
+            }
+        }
+        else{
+            if portal!.alpha < 1{
+                portal!.alpha = 1
+            }
+            
+            if portal!.xScale <= 1{
+                
+                portal!.xScale += sizeDifference
+                portal!.yScale += sizeDifference
+            }
+            else{
+                fadeInPortal = false
+                return
+            }
+        }
+    }
     
     func resetGameScene(){
         
@@ -1184,9 +1323,7 @@ class GameScene: SKScene {
         GameManager.instance.currentMoney = PlayerData.START_MONEY
         GameManager.instance.researchPoints = PlayerData.START_RESEARCH_POINTS
         GameManager.instance.baseHp = PlayerData.BASE_HP
-        GameManager.instance.cannonTowerUnlocked = false
-        GameManager.instance.rapidFireTowerUnlocked = false
-        GameManager.instance.sniperTowerUnlocked = false
+        gameManager.resetAllSkills()
         
         //Wave
         GameManager.instance.currentWave = 0

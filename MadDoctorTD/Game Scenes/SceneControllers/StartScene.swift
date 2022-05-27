@@ -25,6 +25,9 @@ class StartScene: SKScene{
     var startAnimationCount: Int = 60000
     var musicStarted: Bool = false
     
+    let fadeIn = SKAction.fadeAlpha(to: 1, duration: 1)
+    let fadeOut = SKAction.fadeAlpha(to: 0, duration: 1)
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         SoundManager.playBGM(bgmString: SoundManager.DoorsTheme, bgmExtension: SoundManager.mp3Extension)
@@ -125,31 +128,95 @@ class StartScene: SKScene{
             showSettingsMenu()
         }
         
+        if node.name == "musicCheckY" || node.name == "musicCheckX"{
+            musicSwitch()
+            return
+        }
+        
+        if node.name == "sfxCheckY" || node.name == "sfxCheckX"{
+            sfxSwitch()
+            return
+        }
+        
         if node.name == "LevelButton" && settingsMenu?.alpha == 0{
             
             print("levelButton Pressed")
             showLevelMenu()
         }
         
+        if node.name == "creditsButton"{
+            
+            AppManager.appManager.state = .creditsScene
+        }
+        
+    }
+    
+    func musicSwitch(){
+    
+        guard let musicOn = settingsMenu?.childNode(withName: "musicCheckY") else {return}
+        guard let musicOff = settingsMenu?.childNode(withName: "musicCheckX") else {return}
+        
+        if musicOn.alpha > 0{
+            
+            musicOn.alpha = 0
+            musicOff.alpha = 1
+            GameManager.instance.isMusicOn = false
+            SoundManager.stopMusic()
+            
+        }else{
+            
+            musicOn.alpha = 1
+            musicOff.alpha = 0
+            GameManager.instance.isMusicOn = true
+            SoundManager.playBGM(bgmString: SoundManager.mainMenuTheme, bgmExtension: SoundManager.mp3Extension)
+        }
+        
+    }
+    
+    func sfxSwitch(){
+        
+        guard let sfxOn = settingsMenu?.childNode(withName: "sfxCheckY") else {return}
+        guard let sfxOff = settingsMenu?.childNode(withName: "sfxCheckX") else {return}
+        
+        if sfxOn.alpha > 0{
+            
+            sfxOn.alpha = 0
+            sfxOff.alpha = 1
+            GameManager.instance.isSfxOn = false
+            
+        }else{
+            
+            sfxOn.alpha = 1
+            sfxOff.alpha = 0
+            GameManager.instance.isSfxOn = true
+            
+        }
+        
     }
     
     func showSettingsMenu() {
-        
-        settingsMenu?.alpha = 1
-        levelMenu?.alpha = 0
+  
+        settingsMenu?.run(fadeIn)
+        levelMenu?.run(fadeOut)
+//        settingsMenu?.alpha = 1
+//        levelMenu?.alpha = 0
         
     }
     
     func showLevelMenu() {
         
-        settingsMenu?.alpha = 0
-        levelMenu?.alpha = 1
+        settingsMenu?.run(fadeOut)
+        levelMenu?.run(fadeIn)
+//        settingsMenu?.alpha = 0
+//        levelMenu?.alpha = 1
         
     }
     func hideExtraMenus() {
         
-        settingsMenu?.alpha = 0
-        levelMenu?.alpha = 0
+        settingsMenu?.run(fadeOut)
+        levelMenu?.run(fadeOut)
+//        settingsMenu?.alpha = 0
+//        levelMenu?.alpha = 0
         
     }
     
