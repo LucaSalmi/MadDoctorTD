@@ -119,6 +119,10 @@ class SoundManager {
     }
 
     static func playSniperSFX() {
+        
+        if !GameManager.instance.isSfxOn {
+            return
+        }
 
         let rand = Int.random(in:1...5)
         let sniperSound = "sniper_bullet_fly_by_\(rand)"
@@ -138,6 +142,10 @@ class SoundManager {
 
     static func playMetalTapSFX(scene: SKScene) {
 
+        if !GameManager.instance.isSfxOn {
+            return
+        }
+        
         let rand = Int.random(in:1...4)
         let metalTap = "metal_tap_\(rand)."
 
@@ -147,6 +155,10 @@ class SoundManager {
 
     static func playGiantStepSFX(scene: SKScene) {
 
+        if !GameManager.instance.isSfxOn {
+            return
+        }
+        
         let rand = Int.random(in:1...4)
         let giantStep = "giant_step_\(rand)."
 
@@ -164,6 +176,10 @@ class SoundManager {
     }
 
     static func playCannonFireSFX() {
+        
+        if !GameManager.instance.isSfxOn {
+            return
+        }
 
         let rand = Int.random(in:1...3)
         let cannonFireSFX = "cannon_fire_\(rand)."
