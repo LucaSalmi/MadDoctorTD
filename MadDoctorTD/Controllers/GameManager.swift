@@ -29,6 +29,7 @@ class GameManager: ObservableObject{
     
     @Published var isGameOver: Bool = false
     @Published var baseHp: Int = PlayerData.BASE_HP
+    @Published var baseHPLost: Int = 0
     
     //Rapid Fire Tower Unlocks
     @Published var rapidFireTowerUnlocked: Bool = false
@@ -67,6 +68,7 @@ class GameManager: ObservableObject{
     func getDamage(incomingDamage: Int){
         GameScene.instance!.showDamageIndicator = true
         baseHp -= incomingDamage
+        baseHPLost += 1 
         if baseHp <= 0{
             isGameOver = true
             SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_2, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
