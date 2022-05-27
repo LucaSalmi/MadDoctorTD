@@ -54,6 +54,19 @@ class GameScene: SKScene {
     var bossMaterialGained: SKLabelNode?
     var researchPointsGained: SKLabelNode?
     var summaryBackButton: SKSpriteNode?
+
+    var summary: SKLabelNode?
+    var enemiesDefeated: SKLabelNode?
+    var enemiesDefeatedNumber: SKLabelNode?
+    var researchPointsGainedTwo: SKLabelNode?
+    var researchPointsGainedNumber: SKLabelNode?
+    var creditsGained: SKLabelNode?
+    var creditsGainedNumber: SKLabelNode?
+    var baseHPLost: SKLabelNode?
+    var baseHPLostNumber: SKLabelNode?
+    var ratingGained: SKLabelNode?
+    var ratingGainedNumber: SKLabelNode?
+
     //towerInfo
     var towerInfoMenu: SKSpriteNode?
     var attackStatLabel: SKLabelNode?
@@ -166,6 +179,21 @@ class GameScene: SKScene {
         
         waveSummary = uiScene?.childNode(withName: "WaveSummary") as? SKSpriteNode
         summaryTitle = waveSummary?.childNode(withName: "SummaryTitle") as? SKLabelNode
+
+        // new adds
+        summary = waveSummary?.childNode(withName: "Summary") as? SKLabelNode
+        enemiesDefeated = waveSummary?.childNode(withName: "EnemiesDefeated") as? SKLabelNode
+        enemiesDefeatedNumber = waveSummary?.childNode(withName: "EnemiesDefeatedNumber") as? SKLabelNode
+        researchPointsGainedTwo = waveSummary?.childNode(withName: "ResearchPointsGained") as? SKLabelNode
+        researchPointsGainedNumber = waveSummary?.childNode(withName: "ResearchPointsGainedNumber") as? SKLabelNode
+        creditsGained = waveSummary?.childNode(withName: "CreditsGained") as? SKLabelNode
+        creditsGainedNumber = waveSummary?.childNode(withName: "CreditsGainedNumber") as? SKLabelNode
+        baseHPLost = waveSummary?.childNode(withName: "BaseHpLost") as? SKLabelNode
+        baseHPLostNumber = waveSummary?.childNode(withName: "BaseHpLostNumber") as? SKLabelNode
+        ratingGained = waveSummary?.childNode(withName: "Rating") as? SKLabelNode
+        ratingGainedNumber = waveSummary?.childNode(withName: "RatingNumber") as? SKLabelNode
+
+
         bossMaterialGained = waveSummary?.childNode(withName: "BossMaterial") as? SKLabelNode
         researchPointsGained = waveSummary?.childNode(withName: "ResearchPoints") as? SKLabelNode
         summaryBackButton = waveSummary?.childNode(withName: "BackButton") as? SKSpriteNode
