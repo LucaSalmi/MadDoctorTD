@@ -20,7 +20,7 @@ class LabSceneCommunicator: ObservableObject{
     
     @Published var selectedTreeButtonId: String = "1"
     
-    @Published var image2a = "damage_upgrade_2"
+    @Published var image2a = "power_upgrade_2"
     @Published var image3a = "Daniel"
     @Published var image2b = "speed_upgrade_2"
     @Published var image3b = "Daniel"
