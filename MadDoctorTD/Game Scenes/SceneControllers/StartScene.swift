@@ -127,15 +127,23 @@ class StartScene: SKScene{
         
         if node.name == "musicCheckY" || node.name == "musicCheckX"{
             musicSwitch()
+            return
         }
+        
         if node.name == "sfxCheckY" || node.name == "sfxCheckX"{
             sfxSwitch()
+            return
         }
         
         if node.name == "LevelButton" && settingsMenu?.alpha == 0{
             
             print("levelButton Pressed")
             showLevelMenu()
+        }
+        
+        if node.name == "creditsButton"{
+            
+            AppManager.appManager.state = .creditsScene
         }
         
     }
