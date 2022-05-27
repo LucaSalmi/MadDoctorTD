@@ -12,6 +12,8 @@ struct LabSceneView: View {
     
     var labScene: SKScene
     
+    @ObservedObject var communicator = LabSceneCommunicator.instance
+    
     static var imageWidth: CGFloat = 0
     static var imageHeight: CGFloat = 0
     
@@ -36,15 +38,45 @@ struct LabSceneView: View {
             
             VStack {
                 
-                TopArea()
-                
-                Spacer()
-                
-                MiddleArea()
-                
-                Spacer()
-                
-                BotArea()
+                ZStack {
+                    
+                    //Main content
+                    VStack {
+                        
+                        TopArea()
+                        
+                        Spacer()
+                        
+                        MiddleArea()
+                        
+                        Spacer()
+                        
+                        BotArea()
+                        
+                    }
+                    
+                    //Info and Confirm View
+                    ZStack {
+                        //Info View
+                        if communicator.showInfoView {
+                            InfoView()
+                        }
+                        //Confirm View
+                        else if communicator.showConfirmView {
+                            ConfirmView()
+                        }
+                    }
+                    .padding(50)
+                    .foregroundColor(Color.white)
+                    .background(Color.black.opacity(0.75))
+                    .cornerRadius(8)
+                    .frame(width: UIScreen.main.bounds.width*0.9)
+                    .opacity((communicator.showInfoView || communicator.showConfirmView) ? 1.0 : 0.0)
+                    
+                    //Toast View
+                    ToastView()
+                    
+                }
                 
                 
             }
@@ -192,8 +224,8 @@ struct MiddleArea: View {
     
     @ObservedObject var communicator = LabSceneCommunicator.instance
     @ObservedObject var gameManager = GameManager.instance
-    @State private var confirmation: ErrorInfo?
-    @State private var error: ErrorInfo?
+    //@State private var confirmation: ErrorInfo?
+    //@State private var error: ErrorInfo?
     
     var body: some View {
         
@@ -212,7 +244,7 @@ struct MiddleArea: View {
                         Image(communicator.selectedTowerImage)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("faded_button_layer")
+                        Image("padlock_temporary")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "1"))
@@ -229,6 +261,8 @@ struct MiddleArea: View {
                     .frame(width: LabSceneView.imageWidth/8, height: LabSceneView.imageHeight/2)
                 
             }
+            .padding(.top, -10)
+            .padding(.bottom, -8)
             
             HStack {
                 
@@ -242,7 +276,7 @@ struct MiddleArea: View {
                         Image(communicator.image2a)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("faded_button_layer")
+                        Image("padlock_temporary")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "2a"))
@@ -252,6 +286,8 @@ struct MiddleArea: View {
                 Image("skill_tree_connector")
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
+                    .padding(.leading, -8)
+                    .padding(.trailing, -9)
                 
                 Button {
                     communicator.selectedTreeButtonId = "2b"
@@ -263,7 +299,7 @@ struct MiddleArea: View {
                         Image(communicator.image2b)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("faded_button_layer")
+                        Image("padlock_temporary")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "2b"))
@@ -273,6 +309,8 @@ struct MiddleArea: View {
                 Image("skill_tree_connector")
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
+                    .padding(.leading, -8)
+                    .padding(.trailing, -9)
                 
                 Button {
                     communicator.selectedTreeButtonId = "2c"
@@ -284,7 +322,7 @@ struct MiddleArea: View {
                         Image(communicator.image2c)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("faded_button_layer")
+                        Image("padlock_temporary")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "2c"))
@@ -301,13 +339,15 @@ struct MiddleArea: View {
                 Image("skill_tree_connector")
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/8, height: LabSceneView.imageHeight/2)
-                    .padding([.leading, .trailing], 115)
+                    .padding([.leading, .trailing], 94)
                 
                 Image("skill_tree_connector")
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/8, height: LabSceneView.imageHeight/2)
                 
             }
+            .padding(.top, -8)
+            .padding(.bottom, -8)
             
             HStack {
                 
@@ -321,7 +361,7 @@ struct MiddleArea: View {
                         Image(communicator.image3a)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("faded_button_layer")
+                        Image("padlock_temporary")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "3a"))
@@ -332,6 +372,8 @@ struct MiddleArea: View {
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
                     .opacity(0)
+                    .padding(.leading, -9)
+                    .padding(.trailing, -8)
                 
                 Button {
                     communicator.selectedTreeButtonId = "3b"
@@ -343,7 +385,7 @@ struct MiddleArea: View {
                         Image(communicator.image3b)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("faded_button_layer")
+                        Image("padlock_temporary")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "3b"))
@@ -354,6 +396,8 @@ struct MiddleArea: View {
                     .resizable()
                     .frame(width: LabSceneView.imageWidth/2, height: LabSceneView.imageHeight/8)
                     .opacity(0)
+                    .padding(.leading, -9)
+                    .padding(.trailing, -8)
                 
                 Button(action: {
                     communicator.selectedTreeButtonId = "3c"
@@ -365,7 +409,7 @@ struct MiddleArea: View {
                         Image(communicator.image3c)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("faded_button_layer")
+                        Image("padlock_temporary")
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "3c"))
@@ -376,6 +420,7 @@ struct MiddleArea: View {
             }
             
         }
+        /*
         .alert(item: $confirmation) { confirmation in
             
             Alert(
@@ -395,6 +440,7 @@ struct MiddleArea: View {
                 title: Text(error.title),
                 message: Text(error.description)
         )}
+         */
         
        
 
@@ -422,52 +468,60 @@ struct MiddleArea: View {
             
         case "2a":
             
+            let cost = LabData.UPGRADE_COST_2
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 damage for Gun Towers?"
+                return "Unlock level 2 damage for Gun Towers? cost: \(cost) RP"
             case .rapidFireTower:
-                return "Unlock level 2 damage for Rapid Fire Towers?"
+                return "Unlock level 2 damage for Rapid Fire Towers? cost: \(cost) RP"
             case .sniperTower:
-                return "Unlock level 2 damage for Sniper Towers?"
+                return "Unlock level 2 damage for Sniper Towers? cost: \(cost) RP"
             case .cannonTower:
-                return "Unlock level 2 damage for Cannon Towers?"
+                return "Unlock level 2 damage for Cannon Towers? cost: \(cost) RP"
             }
             
         case "2b":
             
+            let cost = LabData.UPGRADE_COST_2
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 attack speed for Gun Towers?"
+                return "Unlock level 2 attack speed for Gun Towers? cost: \(cost) RP"
             case .rapidFireTower:
-                return "Unlock level 2 attack speed for Rapid Fire Towers?"
+                return "Unlock level 2 attack speed for Rapid Fire Towers? cost: \(cost) RP"
             case .sniperTower:
-                return "Unlock level 2 attack speed for Sniper Towers?"
+                return "Unlock level 2 attack speed for Sniper Towers? cost: \(cost) RP"
             case .cannonTower:
-                return "Unlock level 2 attack speed for Cannon Towers?"
+                return "Unlock level 2 attack speed for Cannon Towers? cost: \(cost) RP"
             }
             
         case "2c":
             
+            let cost = LabData.UPGRADE_COST_2
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 range for Gun Towers?"
+                return "Unlock level 2 range for Gun Towers? cost: \(cost) RP"
             case .rapidFireTower:
-                return "Unlock level 2 range for Rapid Fire Towers?"
+                return "Unlock level 2 range for Rapid Fire Towers? cost: \(cost) RP"
             case .sniperTower:
-                return "Unlock level 2 range for Sniper Towers?"
+                return "Unlock level 2 range for Sniper Towers? cost: \(cost) RP"
             case .cannonTower:
-                return "Unlock level 2 range for Cannon Towers?"
+                return "Unlock level 2 range for Cannon Towers? cost: \(cost) RP"
             }
             
         case "3a":
             
+            let cost = LabData.UPGRADE_COST_3
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock bouncing projectiles for Gun Towers?"
+                return "Unlock bouncing projectiles for Gun Towers?  cost: \(cost) RP and 1 Slime Material"
             case .rapidFireTower:
                 return "ERROR"
             case .sniperTower:
@@ -478,20 +532,24 @@ struct MiddleArea: View {
             
         case "3b":
             
+            let cost = LabData.UPGRADE_COST_3
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
                 return "ERROR"
             case .rapidFireTower:
-                return "Unlock slowing projectiles for Rapid Fire Towers?"
+                return "Unlock slowing projectiles for Rapid Fire Towers? cost: \(cost) RP and 1 Slime Material"
             case .sniperTower:
-                return "Unlock poison projectiles for Sniper Towers?"
+                return "Unlock poison projectiles for Sniper Towers? cost: \(cost) RP and 1 Slime Material"
             case .cannonTower:
                 return "ERROR"
             }
             
         case "3c":
             
+            let cost = LabData.UPGRADE_COST_3
+            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
@@ -501,7 +559,7 @@ struct MiddleArea: View {
             case .sniperTower:
                 return "ERROR"
             case .cannonTower:
-                return "Unlock mine projectiles for Cannon Towers?"
+                return "Unlock mine projectiles for Cannon Towers? cost: \(cost) RP and 1 Slime Material"
             }
             
         default:
@@ -520,29 +578,32 @@ struct MiddleArea: View {
         }
         
         if checkIfUpgraded() == .unlocked{
-            error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
+            communicator.displayInfoView(title: "Info", description: "Upgrade already unlocked")
             return
         }
         
         if GameManager.instance.researchPoints < getPrice() {
-            error = ErrorInfo(title: "Error", description: "Not enough Research point")
+            communicator.displayInfoView(title: "Insufficient Funds", description: "Not enough Research point")
             return
         }
         
         if costsSlimeMaterial() && gameManager.slimeMaterials <= 0 {
-            error = ErrorInfo(title: "Error", description: "Not enough Slime materials")
+            communicator.displayInfoView(title: "Insufficient Funds", description: "Not enough Slime materials")
             return
         }
         
         if costsSquidMaterial() && gameManager.squidMaterials <= 0 {
-            error = ErrorInfo(title: "Error", description: "Not enough Squid materials")
+            communicator.displayInfoView(title: "Insufficient Funds", description: "Not enough Squid materials")
             return
         }
         
-        let description = createTowerDescription()
-        confirmation = ErrorInfo(title: "Do you really want to buy this upgrade?", description: description)
+        communicator.confirmViewHeader = "Do you really want to buy this upgrade?"
+        communicator.confirmViewText = createTowerDescription()
+        communicator.showConfirmView = true
         
     }
+    
+    
     
     private func getPrice() -> Int {
         
@@ -651,29 +712,7 @@ struct MiddleArea: View {
         return .error
     }
     
-    func buyUpgrade(){
-        
-        let answer = applyResearch()
-        switch answer{
-            
-        case .researchPoints:
-            error = ErrorInfo(title: "Error", description: "Not enough Research point")
-        case .unlocked:
-            error = ErrorInfo(title: "Error", description: "Upgrade already unlocked")
-        case .success:
-            error = ErrorInfo(title: "Great", description: "You unlocked this upgrade for \(communicator.selectedTowerType)")
-            if let labScene = LabScene.instance {
-                SoundManager.playSFX(sfxName: SoundManager.upgradeUnlocked, scene: labScene, sfxExtension: SoundManager.mp3Extension)
-            }
-        case .error:
-            error = ErrorInfo(title: "What?", description: "Somthing unexpected happened")
-            
-        case .pathBlocked:
-            error = ErrorInfo(title: "Unavailable", description: "This path is not unlocked yet")
-            
-        }
-        
-    }
+    
     
     func changeOpacity(buttonId: String) -> Double{
         
@@ -701,255 +740,7 @@ struct MiddleArea: View {
         
     }
     
-    func applyResearch() -> ErrorType {
-        
-        let gameManager = GameManager.instance
-        let communicator = LabSceneCommunicator.instance
-        
-        switch communicator.selectedTowerType {
-            
-        case .gunTower:
-            switch communicator.selectedTreeButtonId {
-            case "1":
-                return .unlocked
-                
-            case "2a":
-                if gameManager.gunTowerDamageUnlocked {
-                    return .unlocked
-                }
-                gameManager.gunTowerDamageUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "3a":
-                if !gameManager.gunTowerDamageUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.bouncingProjectilesUnlocked {
-                    return .unlocked
-                }
-                gameManager.bouncingProjectilesUnlocked = true
-                gameManager.researchPoints -= 6
-                gameManager.slimeMaterials -= 1
-                communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2b":
-                if gameManager.gunTowerSpeedUnlocked {
-                    return .unlocked
-                }
-                gameManager.gunTowerSpeedUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2c":
-                if gameManager.gunTowerRangeUnlocked {
-                    return .unlocked
-                }
-                gameManager.gunTowerRangeUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            default:
-                print("not implemented")
-            }
-        case .rapidFireTower:
-            switch communicator.selectedTreeButtonId {
-            case "1":
-                if gameManager.rapidFireTowerUnlocked {
-                    return .unlocked
-                }
-                GameScene.instance!.towerUI!.childNode(withName: "SpeedTower")!.alpha = 1
-                gameManager.rapidFireTowerUnlocked = true
-                gameManager.researchPoints -= 2
-                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2a":
-                if !gameManager.rapidFireTowerUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.rapidFireTowerDamageUnlocked {
-                    return .unlocked
-                }
-                gameManager.rapidFireTowerDamageUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2b":
-                if !gameManager.rapidFireTowerUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.rapidFireTowerSpeedUnlocked {
-                    return .unlocked
-                }
-                gameManager.rapidFireTowerSpeedUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "3b":
-                if !gameManager.rapidFireTowerSpeedUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.slowProjectilesUnlocked {
-                    return .unlocked
-                }
-                gameManager.slowProjectilesUnlocked = true
-                gameManager.researchPoints -= 6
-                gameManager.slimeMaterials -= 1
-                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2c":
-                if !gameManager.rapidFireTowerUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.rapidFireTowerRangeUnlocked {
-                    return .unlocked
-                }
-                gameManager.rapidFireTowerRangeUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                           
-            default:
-                print("not implemented")
-            }
-        case .sniperTower:
-            switch communicator.selectedTreeButtonId {
-            case "1":
-                if gameManager.sniperTowerUnlocked {
-                    return .unlocked                }
-                GameScene.instance!.towerUI!.childNode(withName: "SniperTower")!.alpha = 1
-                gameManager.sniperTowerUnlocked = true
-                gameManager.researchPoints -= 2
-                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2a":
-                if !gameManager.sniperTowerUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.sniperTowerDamageUnlocked {
-                    return .unlocked
-                }
-                gameManager.sniperTowerDamageUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2b":
-                if !gameManager.sniperTowerUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.sniperTowerSpeedUnlocked {
-                    return .unlocked
-                }
-                gameManager.sniperTowerSpeedUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "3b":
-                if !gameManager.sniperTowerSpeedUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.poisonProjectilesUnlocked {
-                    return .unlocked
-                }
-                gameManager.poisonProjectilesUnlocked = true
-                gameManager.researchPoints -= 6
-                gameManager.slimeMaterials -= 1
-                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2c":
-                if !gameManager.sniperTowerUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.sniperTowerRangeUnlocked {
-                    return .unlocked
-                }
-                gameManager.sniperTowerRangeUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            default:
-                print("not implemented")
-            }
-        default:
-            switch communicator.selectedTreeButtonId {
-            case "1":
-                if gameManager.cannonTowerUnlocked {
-                    return .unlocked
-                }
-                GameScene.instance!.towerUI!.childNode(withName: "CannonTower")!.alpha = 1
-                gameManager.cannonTowerUnlocked = true
-                gameManager.researchPoints -= 2
-                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2a":
-                if !gameManager.cannonTowerUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.cannonTowerDamageUnlocked {
-                    return .unlocked
-                }
-                gameManager.cannonTowerDamageUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2b":
-                if !gameManager.cannonTowerUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.cannonTowerSpeedUnlocked {
-                    return .unlocked
-                }
-                gameManager.cannonTowerSpeedUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "2c":
-                if !gameManager.cannonTowerUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.cannonTowerRangeUnlocked {
-                    return .unlocked
-                }
-                gameManager.cannonTowerRangeUnlocked = true
-                gameManager.researchPoints -= 4
-                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "3c":
-                if !gameManager.cannonTowerRangeUnlocked {
-                    return .pathBlocked
-                }
-                if gameManager.mineProjectilesUnlocked {
-                    return .unlocked
-                }
-                gameManager.mineProjectilesUnlocked = true
-                gameManager.researchPoints -= 6
-                gameManager.slimeMaterials -= 1
-                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            default:
-                print("not implemented")
-            }
-        }
-        return .error
-    }
+    
     
     
 }
@@ -963,6 +754,21 @@ struct BotArea: View {
             Spacer()
             
             Button {
+                
+                guard let labScene = LabScene.instance else { return }
+                labScene.fadeOutScene = true
+                
+                
+                //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
+            } label: {
+                Image("play_button")
+                    .resizable()
+                    .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
+            }
+
+            
+            /*
+            Button {
                 AppManager.appManager.state = .gameScene
                 SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
                 //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
@@ -974,7 +780,8 @@ struct BotArea: View {
             }
             .frame(width: 120, height: 30)
             .background(Color.blue)
-            .cornerRadius(15)
+            .cornerRadius(1)
+             */
             
             Spacer()
             
@@ -1001,6 +808,116 @@ struct LabButtonImage: View {
             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
             .background(communicator.selectedTreeButtonId == id ? .white : .black)
             .opacity(communicator.selectedTreeButtonId == id ? 1.0 : 0.5)
+    }
+    
+}
+
+struct InfoView: View {
+    
+    @ObservedObject var communicator = LabSceneCommunicator.instance
+    
+    var body: some View {
+        
+        VStack {
+            
+            Text(communicator.infoViewHeader)
+                .font(.title2)
+            
+            Text(communicator.infoViewText)
+                .padding(.top, 10)
+            
+            //Buttons
+            HStack {
+                
+                Button {
+                    communicator.showInfoView = false
+                } label: {
+                    Image("done_build_foundation_button_standard")
+                        .resizable()
+                        .frame(width: LabSceneView.imageWidth*0.75, height: LabSceneView.imageHeight*0.75)
+                }
+                
+            }
+            .padding(.top, 20)
+            
+        }
+        
+    }
+    
+}
+
+struct ConfirmView: View {
+    
+    @ObservedObject var communicator = LabSceneCommunicator.instance
+    
+    var body: some View {
+        
+        VStack {
+            
+            Text(communicator.confirmViewHeader)
+                .font(.title2)
+            
+            Text(communicator.confirmViewText)
+                .padding(.top, 10)
+            
+            //Buttons
+            HStack {
+                
+                Spacer()
+                
+                Button {
+                    communicator.buyUpgrade()
+                    communicator.showConfirmView = false
+                } label: {
+                    Image("done_build_foundation_button_standard")
+                        .resizable()
+                        .frame(width: LabSceneView.imageWidth*0.75, height: LabSceneView.imageHeight*0.75)
+                }
+                
+                Spacer()
+                
+                Button {
+                    communicator.showConfirmView = false
+                } label: {
+                    Image("sniper_tower_static_legs")
+                        .resizable()
+                        .frame(width: LabSceneView.imageWidth*0.75, height: LabSceneView.imageHeight*0.75)
+                }
+                
+                Spacer()
+                
+            }
+            .padding(.top, 20)
+            
+        }
+        
+    }
+    
+}
+
+struct ToastView: View {
+    
+    @ObservedObject var communicator = LabSceneCommunicator.instance
+    
+    var body: some View {
+        
+        VStack {
+            
+            VStack {
+                Text(communicator.toastViewHeader)
+                    .font(.title2)
+                
+                Text(communicator.toastViewText)
+                    .padding(.top, 10)
+            }.padding()
+                .foregroundColor(Color.white)
+                .background(Color.black.opacity(0.75))
+                .cornerRadius(8)
+                .opacity(communicator.toastOpacity)
+                .position(x: UIScreen.main.bounds.width/2, y: communicator.toastPositionY)
+            
+        }
+        
     }
     
 }

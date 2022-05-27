@@ -840,6 +840,13 @@ class GameScene: SKScene {
                 AppManager.appManager.state = .labMenu
                 SoundManager.playSFX(sfxName: SoundManager.switchToResearchRoomSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere, bgmExtension: SoundManager.mp3Extension)
+                
+                AppManager.appManager.transitionOpacity = 1
+                
+                if let labScene = LabScene.instance {
+                    labScene.fadeInScene = true
+                }
+                
             }
             
         case "BackButton":
