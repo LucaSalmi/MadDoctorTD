@@ -830,16 +830,17 @@ class UIManager {
     
     func performMoveCameraToDoors() {
         
-        print("Moving camera to doors!")
+        let targetNode = SKSpriteNode(texture: nil, color: .red, size: FoundationData.SIZE)
+        targetNode.alpha = 0
+        targetNode.zPosition = 1000
+        targetNode.position = doorOne.position
+        targetNode.position.x += (doorOne.size.width + (doorOne.size.width/2) )
+        targetNode.position.y += gameScene!.size.height * 0.4
         
-        let doorOne = doorOne
-        var targetPosition = doorOne.position
-        targetPosition.x += doorOne.size.width/2
-        
-        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetPosition)
+        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetNode.position)
         PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
         
-        if gameScene!.camera!.contains(targetPosition) {
+        if targetNode.contains(gameScene!.camera!.position) {
             
             //Door animations
             doorsAnimationCount = doorsAnimationTime
@@ -855,12 +856,17 @@ class UIManager {
     func performMoveCameraToPortal() {
         
         let spawnPoint = gameScene!.childNode(withName: "SpawnPoint") as! SKSpriteNode
-        let targetPosition = spawnPoint.position
         
-        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetPosition)
+        let targetNode = SKSpriteNode(texture: nil, color: .red, size: FoundationData.SIZE)
+        targetNode.alpha = 0
+        targetNode.zPosition = 1000
+        targetNode.position = spawnPoint.position
+        targetNode.position.y -= gameScene!.size.height * 0.4
+        
+        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetNode.position)
         PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
                     
-        if gameScene!.camera!.contains(targetPosition) { //|| !EnemyNodes.enemiesNode.children.isEmpty {
+        if targetNode.contains(gameScene!.camera!.position) {
             moveCameraToPortal = false
             print("Im at portal with camera")
             
