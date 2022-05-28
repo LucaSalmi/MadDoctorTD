@@ -30,7 +30,7 @@ class ClickableTile: SKSpriteNode{
         gridTexture.alpha = 0
         gridTexture.zPosition = self.zPosition + 1
         gridTexture.position = position
-        GameScene.instance!.clickableTileGridsNode.addChild(gridTexture)
+        GameScene.instance!.uiManager!.clickableTileGridsNode.addChild(gridTexture)
         
     }
     

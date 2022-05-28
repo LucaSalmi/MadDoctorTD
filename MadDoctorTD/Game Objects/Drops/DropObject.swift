@@ -111,7 +111,7 @@ class DropObject: SKSpriteNode{
         if self.contains(targetNode.position) {
             //onDestroy()
             if GameManager.instance.slimeMaterials <= 0{
-                GameScene.instance?.showNewMaterialMessage = true
+                GameScene.instance!.uiManager!.showNewMaterialMessage = true
             }
         }
     }

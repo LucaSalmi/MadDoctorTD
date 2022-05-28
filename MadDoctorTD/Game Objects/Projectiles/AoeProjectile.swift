@@ -44,7 +44,7 @@ class AoeProjectile: SKSpriteNode {
         
         projectileShadow.alpha = 0.8
         
-        GameScene.instance!.projectileShadowNode.addChild(projectileShadow)
+        GameScene.instance!.uiManager!.projectileShadowNode.addChild(projectileShadow)
         
         super.init(texture: nil, color: .clear, size: ProjectileData.CANNON_BALL_SIZE)
         
