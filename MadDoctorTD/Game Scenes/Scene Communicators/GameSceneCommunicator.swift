@@ -29,7 +29,7 @@ class GameSceneCommunicator: ObservableObject {
     @Published var foundationEditMode: Bool = false
     var foundationDeleteMode = false
     var blueprints = [FoundationPlate]()
-    var secondIndexStart: Int = 6
+    var secondIndexStart: Int = 0 //This variable is set at Start Foundation Setup (in FoundationPlatesFactory.setupStartPlates()-method)
     
     @Published var newFoundationTotalCost: Int = 0
     
