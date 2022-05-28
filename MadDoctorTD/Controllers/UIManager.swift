@@ -500,4 +500,100 @@ class UIManager {
         
     }
     
+    func showTowerInfo(){
+        
+        guard let currentTower = GameSceneCommunicator.instance.currentTower else {return}
+        attackStatLabel?.text = "Attack Power: \(currentTower.attackDamage)"
+        fireRateStatLabel?.text = "Fire Rate: \(currentTower.fireRate)"
+        rangeStatLabel?.text = "Range: \(Int(currentTower.attackRange))"
+        towerLogoInfo?.texture = currentTower.towerTexture.texture
+        
+        
+        towerInfoMenu?.alpha = 1
+        towerUI?.alpha = 0
+        upgradeUI?.alpha = 0
+        foundationUI?.alpha = 0
+        
+        if GameSceneCommunicator.instance.isBuildPhase{
+            foundationMenuToggle?.alpha = 1
+        }
+        else{foundationMenuToggle?.alpha = 0}
+        
+    }
+    
+    func showTowerUI(){
+        
+        towerUI?.alpha = 1
+        upgradeUI?.alpha = 0
+        foundationUI?.alpha = 0
+        towerInfoMenu?.alpha = 0
+        
+        if GameSceneCommunicator.instance.isBuildPhase{
+            foundationMenuToggle?.alpha = 1
+        }
+        else{foundationMenuToggle?.alpha = 0}
+    
+    }
+    func showUpgradeUI(){
+        towerUI?.alpha = 0
+        upgradeUI?.alpha = 1
+        foundationUI?.alpha = 0
+        towerInfoMenu?.alpha = 0
+        
+        
+        if GameSceneCommunicator.instance.isBuildPhase{
+            upgradeMenuToggle?.alpha = 1
+        }
+    }
+    
+    func showFoundationUI(){
+        towerUI?.alpha = 0
+        upgradeUI?.alpha = 0
+        foundationUI?.alpha = 1
+        towerInfoMenu?.alpha = 0
+        let foundation = GameSceneCommunicator.instance.currentFoundation!
+        foundation.updateUpgradeButtonTexture()
+        displayFoundationIndicator(position: foundation.position)
+        
+        if foundation.hp < foundation.maxHp{
+           
+            foundationRepairButton?.alpha = 1
+            
+            foundationUpgradeButton?.alpha = 0.7
+        }
+        else{
+            
+            foundationRepairButton?.alpha = 0.7
+            
+            foundationUpgradeButton?.alpha = 1
+        }
+    }
+    
+    func hideAllMenus(){
+        towerUI?.alpha = 0
+        upgradeUI?.alpha = 0
+        foundationUI?.alpha = 0
+        towerInfoMenu?.alpha = 0
+        statUpgradePopUp?.alpha = 0
+        researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+        readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+    }
+    
+    func showSummary(){
+        hideAllMenus()
+        mainHubBackground?.alpha = 0
+        baseHPLostNumber?.text = ("\(gameManager.baseHPLost)")
+        creditsGainedNumber?.text = ("$\(gameManager.moneyEarned)")
+        summaryTitle?.text = ("Wave \(gameManager.currentWave) completed!")
+        researchPointsGained?.text = ("\(gameManager.researchPoints)")
+        survivalBonusNumber?.text = ("\(gameManager.survivalBonusNumber)")
+        
+        if waveManager?.waveNumber == 10 || waveManager?.waveNumber == 20{
+            bossMaterialGained?.text = "Boss Material: +1"
+
+        }
+        
+        waveSummary?.alpha = 1
+    }
+    
 }
