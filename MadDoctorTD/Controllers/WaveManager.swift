@@ -331,7 +331,7 @@ class WaveManager{
     
     func checkWinCondition(){
         
-        if waveNumber <= 0 {
+        if waveNumber <= 1 {
             return
         }
         
