@@ -833,13 +833,13 @@ class UIManager {
         print("Moving camera to doors!")
         
         let doorOne = doorOne
-        var doorsPosition = doorOne.position
-        doorsPosition.x += doorOne.size.width/2
+        var targetPosition = doorOne.position
+        targetPosition.x += doorOne.size.width/2
         
-        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: doorsPosition)
+        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetPosition)
         PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
         
-        if gameScene!.camera!.contains(doorsPosition) {
+        if gameScene!.camera!.contains(targetPosition) {
             
             //Door animations
             doorsAnimationCount = doorsAnimationTime
@@ -855,12 +855,12 @@ class UIManager {
     func performMoveCameraToPortal() {
         
         let spawnPoint = gameScene!.childNode(withName: "SpawnPoint") as! SKSpriteNode
-        let portalPosition = spawnPoint.position
+        let targetPosition = spawnPoint.position
         
-        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: portalPosition)
+        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetPosition)
         PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
                     
-        if gameScene!.camera!.contains(portalPosition) { //|| !EnemyNodes.enemiesNode.children.isEmpty {
+        if gameScene!.camera!.contains(targetPosition) { //|| !EnemyNodes.enemiesNode.children.isEmpty {
             moveCameraToPortal = false
             print("Im at portal with camera")
             

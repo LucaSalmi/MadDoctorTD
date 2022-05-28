@@ -346,7 +346,7 @@ extension GameScene {
         }
         
         camera.setScale(newCameraScale)
-        setupCamera()
+        uiManager!.setupCamera()
         
     }
 
