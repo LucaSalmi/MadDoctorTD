@@ -269,6 +269,7 @@ extension GameScene {
         case "ReadyButton":
             if uiManager!.readyButton?.alpha == 1{
                 
+                /*
                 if camera!.xScale > 1.29 && camera!.xScale < 1.31 {
                     uiManager!.lockCamera = true
                     uiManager!.moveCameraToDoors = true
@@ -276,6 +277,9 @@ extension GameScene {
                 else {
                     uiManager!.onCameraReachedPortal()
                 }
+                */
+                
+                uiManager!.onCameraReachedPortal()
                 
             }
             
