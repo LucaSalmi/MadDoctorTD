@@ -269,7 +269,13 @@ extension GameScene {
         case "ReadyButton":
             if uiManager!.readyButton?.alpha == 1{
                 
-                uiManager!.moveCameraToDoors = true
+                if camera!.xScale > 1.29 && camera!.xScale < 1.31 {
+                    uiManager!.lockCamera = true
+                    uiManager!.moveCameraToDoors = true
+                }
+                else {
+                    uiManager!.onCameraReachedPortal()
+                }
                 
             }
             
@@ -313,7 +319,7 @@ extension GameScene {
     
     func panForTranslation(touch: UITouch) {
         
-        if uiManager!.moveCameraToPortal || touchStarted{
+        if touchStarted || uiManager!.lockCamera {
             return
         }
         

@@ -115,6 +115,7 @@ class UIManager {
     
     var moveCameraToPortal: Bool = false
     var moveCameraToDoors: Bool = false
+    var lockCamera: Bool = false
     
     var moneyNode: SKNode = SKNode()
     
@@ -867,21 +868,34 @@ class UIManager {
         PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
                     
         if targetNode.contains(gameScene!.camera!.position) {
-            moveCameraToPortal = false
-            print("Im at portal with camera")
             
-            GameSceneCommunicator.instance.startWavePhase()
-            fadeInPortal = true
-            gameScene!.waveManager!.waveStartCounter = 0
-            showTowerUI()
-            readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-            researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-            buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-            upgradeMenuToggle?.alpha = 0
-            SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-            GameManager.instance.moneyEarned = 0
-            GameManager.instance.baseHPLost = 0
+            onCameraReachedPortal()
+            
         }
+        
+    }
+    
+    func onCameraReachedPortal() {
+        
+        moveCameraToPortal = false
+        print("Im at portal with camera")
+        
+        GameSceneCommunicator.instance.startWavePhase()
+        fadeInPortal = true
+        gameScene!.waveManager!.waveStartCounter = 0
+        showTowerUI()
+        readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+        researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+        buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+        upgradeMenuToggle?.alpha = 0
+        SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+        GameManager.instance.moneyEarned = 0
+        GameManager.instance.baseHPLost = 0
+        
+        lockCamera = false
+        
+        doorOne.position.x = 0 - doorOne.size.width/2
+        doorTwo.position.x = 0 + doorTwo.size.width/2
         
     }
     
