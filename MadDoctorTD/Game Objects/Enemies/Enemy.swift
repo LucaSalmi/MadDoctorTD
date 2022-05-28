@@ -212,11 +212,12 @@ class Enemy: SKSpriteNode{
         if isAttacker && enemyType != .boss {
             
             if attackTarget != nil{
-                
+                /*
                 if isAttacker{
                     let lookAtConstraint = SKConstraint.orient(to: attackTarget!, offset: SKRange(constantValue: -CGFloat.pi / 2))
                     self.constraints = [ lookAtConstraint ]
                 }
+                */
                 
                 attack()
                 return
@@ -226,10 +227,12 @@ class Enemy: SKSpriteNode{
                 let targetPosition = seekAndDestroy()
                 if targetPosition != nil{
                     
+                    /*
                     if isAttacker{
                         let lookAtConstraint = SKConstraint.orient(to: targetPosition!, offset: SKRange(constantValue: -CGFloat.pi / 2))
                         self.constraints = [ lookAtConstraint ]
                     }
+                     */
                     
                     setDirection(targetPoint: targetPosition!)
                     if slowTick <= 0{
@@ -250,10 +253,10 @@ class Enemy: SKSpriteNode{
         
         setDirection(targetPoint: nextPoint)
         
-        
+        /*
         let lookAtConstraint = SKConstraint.orient(to: nextPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
         self.constraints = [ lookAtConstraint ]
-        
+        */
         
         if slowTick <= 0{
             position.x += direction.x * baseSpeed
