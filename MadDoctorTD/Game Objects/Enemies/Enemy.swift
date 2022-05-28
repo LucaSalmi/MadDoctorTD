@@ -272,6 +272,14 @@ class Enemy: SKSpriteNode{
             
             oldMovePoints.append(movePoints[0])
             movePoints.remove(at: 0)
+            
+            if movePoints.count >= 1 {
+                
+                let upcommingPoint = movePoints[0]
+                
+                let lookAtConstraint = SKConstraint.orient(to: upcommingPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
+                self.constraints = [ lookAtConstraint ]
+            }
         }
     }
     
