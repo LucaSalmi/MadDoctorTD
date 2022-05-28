@@ -114,7 +114,7 @@ class UIManager {
     var doorsAnimationCount: Int = 0
     
     var moveCameraToPortal: Bool = false
-    
+    var moveCameraToDoors: Bool = false
     
     var moneyNode: SKNode = SKNode()
     
@@ -125,17 +125,26 @@ class UIManager {
     
     init() {
         
+        
+        
+    }
+    
+    func setupUI() {
+        
         gameScene = GameScene.instance!
         
-        gameScene!.addChild(hpBarsNode)
-        gameScene!.addChild(projectileShadowNode)
-        gameScene!.addChild(edgesTilesNode)
+        gameScene!.addChild(uiNode)
+        
+        uiNode.addChild(hpBarsNode)
+        uiNode.addChild(projectileShadowNode)
+        uiNode.addChild(edgesTilesNode)
         
         portal = gameScene!.childNode(withName: "Tile Map Node") as? SKTileMapNode
         portal?.xScale = 0
         portal?.yScale = 0
         
         let uiScene = SKScene(fileNamed: "GameUIScene")
+    
         towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
         towerUI!.removeFromParent()
         foundationUI = uiScene?.childNode(withName: "FoundationMenu") as? SKSpriteNode
@@ -187,7 +196,6 @@ class UIManager {
         gameScene!.camera!.addChild(foundationUI!)
         gameScene!.camera!.addChild(towerUI!)
         gameScene!.camera!.addChild(damageIndicator!)
-        gameScene!.addChild(uiNode)
         
         gameScene!.camera?.addChild(towerInfoMenu!)
         gameScene!.camera?.addChild(statUpgradePopUp!)
@@ -245,10 +253,10 @@ class UIManager {
         towerPriceTags.append(cannonTowerPrice!)
         towerPriceTags.append(sniperTowerPrice!)
         
-        gameScene!.addChild(clickableTileGridsNode)
+        uiNode.addChild(clickableTileGridsNode)
         
-        gameScene!.addChild(towerIndicatorsNode)
-        gameScene!.addChild(foundationIndicatorsNode)
+        uiNode.addChild(towerIndicatorsNode)
+        uiNode.addChild(foundationIndicatorsNode)
         
         doorOne = gameScene!.childNode(withName: "doorOne") as! SKSpriteNode
         doorOne.position.x = gameScene!.position.x - (doorOne.size.width/2)
@@ -260,12 +268,48 @@ class UIManager {
         
         moveCameraToPortal = false
         
-        gameScene!.addChild(moneyNode)
-        gameScene!.addChild(dialoguesNode)
+        uiNode.addChild(moneyNode)
+        uiNode.addChild(dialoguesNode)
         
         foundationIndicator = SKSpriteNode(texture: nil, color: .white, size: FoundationData.SIZE)
         foundationIndicator!.alpha = 0
-        gameScene!.addChild(foundationIndicator!)
+        uiNode.addChild(foundationIndicator!)
+        
+    }
+    
+    func resetUI() {
+        
+        gameScene!.camera!.removeAllChildren()
+        
+        towerIndicatorsNode.removeAllChildren()
+        towerIndicatorsNode.removeFromParent()
+        
+        hpBarsNode.removeAllChildren()
+        hpBarsNode.removeFromParent()
+        
+        projectileShadowNode.removeAllChildren()
+        projectileShadowNode.removeFromParent()
+        
+        foundationIndicatorsNode.removeAllChildren()
+        foundationIndicatorsNode.removeFromParent()
+        
+        edgesTilesNode.removeAllChildren()
+        edgesTilesNode.removeFromParent()
+        
+        //Foundation edit mode
+        clickableTileGridsNode.removeFromParent()
+        
+        //Money
+        moneyNode.removeAllChildren()
+        moneyNode.removeFromParent()
+        
+        dialoguesNode.removeAllChildren()
+        dialoguesNode.removeFromParent()
+        
+        foundationIndicator!.removeFromParent()
+        
+        uiNode.removeAllChildren()
+        uiNode.removeFromParent()
         
     }
     
@@ -498,7 +542,7 @@ class UIManager {
         rangeIndicator!.zPosition = 2
         rangeIndicator!.position = position
         
-        gameScene!.addChild(rangeIndicator!)
+        uiNode.addChild(rangeIndicator!)
         
     }
     
@@ -612,6 +656,10 @@ class UIManager {
         
         doorsAnimationCount -= 1
         if doorsAnimationCount <= 0 {
+            
+            if GameSceneCommunicator.instance.closeDoors {
+                GameScene.instance!.uiManager!.moveCameraToPortal = true
+            }
             
             //fail safe to reset doors position to orginal position
             if GameSceneCommunicator.instance.closeDoors {

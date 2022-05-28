@@ -268,17 +268,9 @@ extension GameScene {
             
         case "ReadyButton":
             if uiManager!.readyButton?.alpha == 1{
-                communicator.startWavePhase()
-                uiManager!.fadeInPortal = true
-                waveManager?.waveStartCounter = 0
-                uiManager!.showTowerUI()
-                uiManager!.readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                uiManager!.researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                uiManager!.buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                uiManager!.upgradeMenuToggle?.alpha = 0
-                SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                GameManager.instance.moneyEarned = 0
-                GameManager.instance.baseHPLost = 0
+                
+                uiManager!.moveCameraToDoors = true
+                
             }
             
             

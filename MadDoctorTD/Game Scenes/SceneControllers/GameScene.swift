@@ -31,8 +31,6 @@ class GameScene: SKScene {
     var fadeOutScene = false
     var transitionAmount: Double = 0.02
     
-    var portalPosition: CGPoint = CGPoint(x: 0, y: 0)
-    
     //user input stuff
     var touchStarted = true
     
@@ -66,6 +64,7 @@ class GameScene: SKScene {
         GameSceneCommunicator.instance.isBuildPhase = true
         
         uiManager = UIManager()
+        uiManager!.setupUI()
         
         //creates and adds clickable tiles to GameScene
         let _ = ClickableTileFactory()
@@ -161,7 +160,6 @@ class GameScene: SKScene {
         
         waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard])
         
-        portalPosition = spawnPoint!.position
     }
     
     func tile(in tileMap: SKTileMapNode, at coordinates: tileCoordinates) -> SKTileDefinition?{
@@ -256,18 +254,53 @@ class GameScene: SKScene {
             uiManager!.priceTag!.position.y += 1.5
         }
         
-        
-        if uiManager!.moveCameraToPortal {
-            let cameraDirection = PhysicsUtils.getCameraDirection(camera: self.camera!, targetPoint: portalPosition)
+        if uiManager!.moveCameraToDoors {
+            
+            print("Moving camera to doors!")
+            
+            let doorOne = uiManager!.doorOne
+            var doorsPosition = doorOne.position
+            doorsPosition.x += doorOne.size.width/2
+            
+            let cameraDirection = PhysicsUtils.getCameraDirection(camera: self.camera!, targetPoint: doorsPosition)
             PhysicsUtils.moveCameraToTargetPoint(camera: self.camera!, direction: cameraDirection)
             
-            let portal = SKSpriteNode()
-            portal.position = portalPosition
-            portal.size = CGSize(width: 86, height: 500)
+            if camera!.contains(doorsPosition) {
+                
+                //Door animations
+                uiManager!.doorsAnimationCount = uiManager!.doorsAnimationTime
+                GameSceneCommunicator.instance.closeDoors = true
+                
+                
+                uiManager!.moveCameraToDoors = false
+                
+            }
+            
+        }
+        
+        if uiManager!.moveCameraToPortal {
+            
+            let spawnPoint = self.childNode(withName: "SpawnPoint") as! SKSpriteNode
+            let portalPosition = spawnPoint.position
+            
+            let cameraDirection = PhysicsUtils.getCameraDirection(camera: self.camera!, targetPoint: portalPosition)
+            PhysicsUtils.moveCameraToTargetPoint(camera: self.camera!, direction: cameraDirection)
                         
-            if portal.contains(camera!.position) || !EnemyNodes.enemiesNode.children.isEmpty{
+            if camera!.contains(portalPosition) { //|| !EnemyNodes.enemiesNode.children.isEmpty {
                 uiManager!.moveCameraToPortal = false
                 print("Im at portal with camera")
+                
+                GameSceneCommunicator.instance.startWavePhase()
+                uiManager!.fadeInPortal = true
+                waveManager?.waveStartCounter = 0
+                uiManager!.showTowerUI()
+                uiManager!.readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+                uiManager!.researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+                uiManager!.buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+                uiManager!.upgradeMenuToggle?.alpha = 0
+                SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+                GameManager.instance.moneyEarned = 0
+                GameManager.instance.baseHPLost = 0
             }
         }
         
@@ -334,33 +367,24 @@ class GameScene: SKScene {
     
     func resetGameScene(){
         
+        //UI
+        uiManager!.resetUI()
+        
         //Tower
         TowerNode.towerArray.removeAll()
         TowerNode.towersNode.removeAllChildren()
         TowerNode.towersNode.removeFromParent()
         TowerNode.towerTextureNode.removeAllChildren()
         TowerNode.towerTextureNode.removeFromParent()
-        uiManager!.towerIndicatorsNode.removeAllChildren()
-        uiManager!.towerIndicatorsNode.removeFromParent()
         
         //Enemies
         EnemyNodes.enemiesNode.removeAllChildren()
         EnemyNodes.enemiesNode.removeFromParent()
         EnemyNodes.enemyArray.removeAll()
         
-        //HP bars
-        uiManager!.hpBarsNode.removeAllChildren()
-        uiManager!.hpBarsNode.removeFromParent()
-        
-        //Projectile Shadows
-        uiManager!.projectileShadowNode.removeAllChildren()
-        uiManager!.projectileShadowNode.removeFromParent()
-        
         //Foundation
         FoundationPlateNodes.foundationPlatesNode.removeAllChildren()
         FoundationPlateNodes.foundationPlatesNode.removeFromParent()
-        uiManager!.foundationIndicatorsNode.removeAllChildren()
-        uiManager!.foundationIndicatorsNode.removeFromParent()
         
         //ClickableTiles
         ClickableTilesNodes.clickableTilesNode.removeAllChildren()
@@ -370,10 +394,6 @@ class GameScene: SKScene {
         ProjectileNodes.projectilesNode.removeAllChildren()
         ProjectileNodes.projectilesNode.removeFromParent()
         ProjectileNodes.gunProjectilesPool.removeAll()
-        
-        //Edge
-        uiManager!.edgesTilesNode.removeAllChildren()
-        uiManager!.edgesTilesNode.removeFromParent()
         
         //Economy
         GameManager.instance.currentMoney = PlayerData.START_MONEY
@@ -392,22 +412,7 @@ class GameScene: SKScene {
                 child.removeFromParent()
             }
         }
-        
-        //UI
-        self.camera!.removeAllChildren()
-        uiManager!.uiNode.removeFromParent()
-        
-        //Foundation edit mode
-        uiManager!.clickableTileGridsNode.removeFromParent()
-        
-        //Money
-        uiManager!.moneyNode.removeAllChildren()
-        uiManager!.moneyNode.removeFromParent()
-        
-        uiManager!.dialoguesNode.removeAllChildren()
-        uiManager!.dialoguesNode.removeFromParent()
-        
-        uiManager!.foundationIndicator!.removeFromParent()
+
     }
     
     
