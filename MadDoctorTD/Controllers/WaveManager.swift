@@ -350,15 +350,15 @@ class WaveManager{
 //            GameScene.instance?.researchButton?.alpha = 1
 //            GameScene.instance?.upgradeMenuToggle?.alpha = 1
             
-            GameScene.instance?.showSummary()
-            GameScene.instance?.fadeOutPortal = true
+            GameScene.instance?.uiManager!.showSummary()
+            GameScene.instance?.uiManager!.fadeOutPortal = true
             
             SoundManager.stopMusic()
             
             //Door animation:
             if let gameScene = currentScene {
                 GameSceneCommunicator.instance.openDoors = true
-                gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
+                gameScene.uiManager!.doorsAnimationCount = gameScene.uiManager!.doorsAnimationTime
             }
         }
 

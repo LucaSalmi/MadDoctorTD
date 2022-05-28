@@ -327,14 +327,14 @@ class GameScene: SKScene {
         for node in touchedNodes{
             
             if node.name == "FoundationMenuToggle"{
-                showFoundationUI()
+                uiManager!.showFoundationUI()
                 return
             }
         }
         
         for node in touchedNodes{
             if node.name == "UpgradeMenuToggle"{
-                showUpgradeUI()
+                uiManager!.showUpgradeUI()
                 uiManager!.displayRangeIndicator(attackRange: communicator.currentTower!.attackRange, position: communicator.currentTower!.position)
                 
                 return
@@ -344,7 +344,7 @@ class GameScene: SKScene {
         for node in touchedNodes{
             if node.name == "TowerLogo"{
                 
-                showTowerInfo()
+                uiManager!.showTowerInfo()
                 uiManager!.displayRangeIndicator(attackRange: communicator.currentTower!.attackRange, position: communicator.currentTower!.position)
                 
                 return
@@ -410,8 +410,8 @@ class GameScene: SKScene {
             }else{
                 communicator.foundationEditMode = true
                 communicator.toggleFoundationGrid()
-                hideAllMenus()
-                buildFoundationButton?.texture = SKTexture(imageNamed: "done_build_foundation_button_standard")
+                uiManager!.hideAllMenus()
+                uiManager!.buildFoundationButton?.texture = SKTexture(imageNamed: "done_build_foundation_button_standard")
                 //Sound for activate foundationBuild
                 SoundManager.playSFX(sfxName: SoundManager.buttonSFX_two, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 
@@ -421,15 +421,15 @@ class GameScene: SKScene {
             print("Put TowerMenu here")
             
         case "ReadyButton":
-            if readyButton?.alpha == 1{
+            if uiManager!.readyButton?.alpha == 1{
                 communicator.startWavePhase()
-                fadeInPortal = true
+                uiManager!.fadeInPortal = true
                 waveManager?.waveStartCounter = 0
-                showTowerUI()
-                readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                upgradeMenuToggle?.alpha = 0
+                uiManager!.showTowerUI()
+                uiManager!.readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+                uiManager!.researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+                uiManager!.buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+                uiManager!.upgradeMenuToggle?.alpha = 0
                 SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 GameManager.instance.moneyEarned = 0
                 GameManager.instance.baseHPLost = 0
@@ -438,7 +438,7 @@ class GameScene: SKScene {
             
             
         case "ResearchButton":
-            if researchButton?.alpha == 1{
+            if uiManager!.researchButton?.alpha == 1{
                 AppManager.appManager.state = .labMenu
                 SoundManager.playSFX(sfxName: SoundManager.switchToResearchRoomSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere, bgmExtension: SoundManager.mp3Extension)
@@ -452,75 +452,29 @@ class GameScene: SKScene {
             }
             
         case "BackButton":
-            waveSummary?.alpha = 0
-            mainHubBackground?.alpha = 1
-            GameScene.instance?.readyButton?.alpha = 1
-            GameScene.instance?.buildFoundationButton?.alpha = 1
-            GameScene.instance?.researchButton?.alpha = 1
-            GameScene.instance?.upgradeMenuToggle?.alpha = 1
+            uiManager!.waveSummary?.alpha = 0
+            uiManager!.mainHubBackground?.alpha = 1
+            uiManager!.readyButton?.alpha = 1
+            uiManager!.buildFoundationButton?.alpha = 1
+            uiManager!.researchButton?.alpha = 1
+            uiManager!.upgradeMenuToggle?.alpha = 1
             SoundManager.playSFX(sfxName: SoundManager.buttonSFX_one, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-            showTowerUI()
+            uiManager!.showTowerUI()
             
             
         default:
             print("error with extra buttons")
         }
         
-        if upgradeUI?.alpha == 1{
-            towerUI?.alpha = 1
-            upgradeUI?.alpha = 0
+        if uiManager!.upgradeUI?.alpha == 1{
+            uiManager!.towerUI?.alpha = 1
+            uiManager!.upgradeUI?.alpha = 0
         }
         
     }
     
     func tile(in tileMap: SKTileMapNode, at coordinates: tileCoordinates) -> SKTileDefinition?{
         return tileMap.tileDefinition(atColumn: coordinates.column, row: coordinates.row)
-    }
-    
-    
-    
-    private func animateDoors() {
-        
-        if GameSceneCommunicator.instance.openDoors {
-            doorOne.position.x -= 1
-            doorTwo.position.x += 1
-        }
-        
-        if GameSceneCommunicator.instance.closeDoors {
-            doorOne.position.x += 1
-            doorTwo.position.x -= 1
-        }
-        
-        doorsAnimationCount -= 1
-        if doorsAnimationCount <= 0 {
-            
-            //fail safe to reset doors position to orginal position
-            if GameSceneCommunicator.instance.closeDoors {
-                doorOne.position.x = self.position.x - (doorOne.size.width/2)
-                doorTwo.position.x = self.position.x + (doorTwo.size.width/2)
-            }
-            
-            GameSceneCommunicator.instance.closeDoors = false
-            GameSceneCommunicator.instance.openDoors = false
-        }
-    }
-    
-    func displayFoundationIndicator(position: CGPoint, display: Bool = true) {
-        
-        guard let foundationIndicator = foundationIndicator else {
-            return
-        }
-        
-        if display {
-            foundationIndicator.position = position
-            foundationIndicator.alpha = 0.005
-            foundationIndicator.zPosition = 6
-            foundationIndicatorIncrease = true
-        }
-        else {
-            foundationIndicator.alpha = 0
-        }
-        
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -549,21 +503,21 @@ class GameScene: SKScene {
         
         if touchStarted{
             handleLongPress()
-        }else if statUpgradePopUp?.alpha == 1{
-            statUpgradePopUp?.alpha = 0
+        }else if uiManager!.statUpgradePopUp?.alpha == 1{
+            uiManager!.statUpgradePopUp?.alpha = 0
         }
         
-        if showNewMaterialMessage{
+        if uiManager!.showNewMaterialMessage{
             
-            for node in dialoguesNode.children{
+            for node in uiManager!.dialoguesNode.children{
                 
                 let dialog = node as! Dialogue
                 dialog.update()
                 
             }
             
-            if dialoguesNode.children.count == 0{
-                showNewMaterialMessage = false
+            if uiManager!.dialoguesNode.children.count == 0{
+                uiManager!.showNewMaterialMessage = false
             }
         }
         
@@ -571,24 +525,24 @@ class GameScene: SKScene {
             return
         }
         
-        if fadeInPortal{
-            fadePortal(fadeIn: true)
+        if uiManager!.fadeInPortal{
+            uiManager!.fadePortal(fadeIn: true)
         }
-        if fadeOutPortal{
-            fadePortal(fadeIn: false)
+        if uiManager!.fadeOutPortal{
+            uiManager!.fadePortal(fadeIn: false)
         }
         
-        if GameSceneCommunicator.instance.isBuildPhase && waveSummary?.alpha == 0{
-            showBuildButtonsUI()
+        if GameSceneCommunicator.instance.isBuildPhase && uiManager!.waveSummary?.alpha == 0{
+            uiManager!.showBuildButtonsUI()
             //FadeoutPortal()
             //showTowerUI()
         }
         else {
-            hideBuildButtonsUI()
+            uiManager!.hideBuildButtonsUI()
         }
         
         if GameSceneCommunicator.instance.openDoors || GameSceneCommunicator.instance.closeDoors {
-            animateDoors()
+            uiManager!.animateDoors()
             
             if GameSceneCommunicator.instance.closeDoors {
                 return
@@ -596,23 +550,23 @@ class GameScene: SKScene {
         }
         
         if GameManager.instance.currentMoney < TowerData.BASE_COST{
-            for node in towerUI!.children{
+            for node in uiManager!.towerUI!.children{
                 if node.alpha != 0.5{
                     node.alpha = 0.5
-                    for tag in towerPriceTags {
+                    for tag in uiManager!.towerPriceTags {
                         tag.fontColor = UIColor(Color.red)
                     }
                 }
             }
         }
         
-        if priceTag!.alpha > 0 && touchingTower == nil{
-            priceTag!.alpha -= 0.03
-            priceTag!.position.y += 1.5
+        if uiManager!.priceTag!.alpha > 0 && uiManager!.touchingTower == nil{
+            uiManager!.priceTag!.alpha -= 0.03
+            uiManager!.priceTag!.position.y += 1.5
         }
         
         
-        if moveCameraToPortal {
+        if uiManager!.moveCameraToPortal {
             let cameraDirection = PhysicsUtils.getCameraDirection(camera: self.camera!, targetPoint: portalPosition)
             PhysicsUtils.moveCameraToTargetPoint(camera: self.camera!, direction: cameraDirection)
             
@@ -621,7 +575,7 @@ class GameScene: SKScene {
             portal.size = CGSize(width: 86, height: 500)
                         
             if portal.contains(camera!.position) || !EnemyNodes.enemiesNode.children.isEmpty{
-                moveCameraToPortal = false
+                uiManager!.moveCameraToPortal = false
                 print("Im at portal with camera")
             }
         }
@@ -633,7 +587,7 @@ class GameScene: SKScene {
         }
         
         if GameManager.instance.currentMoney < TowerData.BASE_COST{
-            for node in towerUI!.children{
+            for node in uiManager!.towerUI!.children{
                 if node.alpha != 0.5{
                     node.alpha = 0.5
                 }
@@ -651,7 +605,7 @@ class GameScene: SKScene {
             }
         }
         
-        for node in moneyNode.children {
+        for node in uiManager!.moneyNode.children {
             
             if node is MoneyObject{
                 
@@ -665,25 +619,9 @@ class GameScene: SKScene {
             }
         }
         
-        if foundationIndicator!.alpha != 0 {
+        if uiManager!.foundationIndicator!.alpha != 0 {
             
-            let increaseAmount = 0.01
-            let maxAlpha = 0.35
-            
-            if foundationIndicatorIncrease {
-                foundationIndicator!.alpha += increaseAmount
-                if foundationIndicator!.alpha >= maxAlpha {
-                    foundationIndicator!.alpha = maxAlpha - increaseAmount
-                    foundationIndicatorIncrease = false
-                }
-            }
-            else {
-                foundationIndicator!.alpha -= increaseAmount
-                if foundationIndicator!.alpha <= increaseAmount {
-                    foundationIndicator!.alpha = increaseAmount*2
-                    foundationIndicatorIncrease = true
-                }
-            }
+            uiManager!.updateRangeIndicatorAlpha()
         }
         
         if !GameSceneCommunicator.instance.isBuildPhase {
@@ -696,47 +634,12 @@ class GameScene: SKScene {
                 enemy.update()
             }
         }
-        if showDamageIndicator{
+        if uiManager!.showDamageIndicator{
             GameManager.instance.displayDamageIndicator()
         }
     }
     
-    func fadePortal(fadeIn: Bool){
-        
-        let sizeDifference = CGFloat(0.01)
-        
-        
-        if !fadeIn{
-            
-            if portal!.xScale >= 0{
-                
-                portal?.xScale -= sizeDifference
-                portal?.yScale -= sizeDifference
-                
-                
-            }
-            else{
-                portal!.alpha = 0
-                fadeOutPortal = false
-                return
-            }
-        }
-        else{
-            if portal!.alpha < 1{
-                portal!.alpha = 1
-            }
-            
-            if portal!.xScale <= 1{
-                
-                portal!.xScale += sizeDifference
-                portal!.yScale += sizeDifference
-            }
-            else{
-                fadeInPortal = false
-                return
-            }
-        }
-    }
+    
     
     func resetGameScene(){
         
@@ -746,8 +649,8 @@ class GameScene: SKScene {
         TowerNode.towersNode.removeFromParent()
         TowerNode.towerTextureNode.removeAllChildren()
         TowerNode.towerTextureNode.removeFromParent()
-        towerIndicatorsNode.removeAllChildren()
-        towerIndicatorsNode.removeFromParent()
+        uiManager!.towerIndicatorsNode.removeAllChildren()
+        uiManager!.towerIndicatorsNode.removeFromParent()
         
         //Enemies
         EnemyNodes.enemiesNode.removeAllChildren()
@@ -755,18 +658,18 @@ class GameScene: SKScene {
         EnemyNodes.enemyArray.removeAll()
         
         //HP bars
-        hpBarsNode.removeAllChildren()
-        hpBarsNode.removeFromParent()
+        uiManager!.hpBarsNode.removeAllChildren()
+        uiManager!.hpBarsNode.removeFromParent()
         
         //Projectile Shadows
-        projectileShadowNode.removeAllChildren()
-        projectileShadowNode.removeFromParent()
+        uiManager!.projectileShadowNode.removeAllChildren()
+        uiManager!.projectileShadowNode.removeFromParent()
         
         //Foundation
         FoundationPlateNodes.foundationPlatesNode.removeAllChildren()
         FoundationPlateNodes.foundationPlatesNode.removeFromParent()
-        foundationIndicatorsNode.removeAllChildren()
-        foundationIndicatorsNode.removeFromParent()
+        uiManager!.foundationIndicatorsNode.removeAllChildren()
+        uiManager!.foundationIndicatorsNode.removeFromParent()
         
         //ClickableTiles
         ClickableTilesNodes.clickableTilesNode.removeAllChildren()
@@ -778,8 +681,8 @@ class GameScene: SKScene {
         ProjectileNodes.gunProjectilesPool.removeAll()
         
         //Edge
-        edgesTilesNode.removeAllChildren()
-        edgesTilesNode.removeFromParent()
+        uiManager!.edgesTilesNode.removeAllChildren()
+        uiManager!.edgesTilesNode.removeFromParent()
         
         //Economy
         GameManager.instance.currentMoney = PlayerData.START_MONEY
@@ -801,50 +704,24 @@ class GameScene: SKScene {
         
         //UI
         self.camera!.removeAllChildren()
-        self.uiNode.removeFromParent()
+        uiManager!.uiNode.removeFromParent()
         
         //Foundation edit mode
-        clickableTileGridsNode.removeFromParent()
+        uiManager!.clickableTileGridsNode.removeFromParent()
         
         //Money
-        moneyNode.removeAllChildren()
-        moneyNode.removeFromParent()
+        uiManager!.moneyNode.removeAllChildren()
+        uiManager!.moneyNode.removeFromParent()
         
-        dialoguesNode.removeAllChildren()
-        dialoguesNode.removeFromParent()
+        uiManager!.dialoguesNode.removeAllChildren()
+        uiManager!.dialoguesNode.removeFromParent()
         
-        foundationIndicator!.removeFromParent()
-    }
-    
-    func showBuildButtonsUI() {
-        
-        guard let buildButtonsUI = buildButtonsUI else {
-            return
-        }
-
-        if buildButtonsUI.position.x <= UIData.BUILD_BUTTONS_UI_POS_X {
-            return
-        }
-        
-        buildButtonsUI.position.x -= UIData.BUILD_BUTTONS_UI_SPEED
-    }
-    
-    func hideBuildButtonsUI() {
-        
-        guard let buildButtonsUI = buildButtonsUI else {
-            return
-        }
-
-        if buildButtonsUI.position.x >= UIData.BUILD_BUTTONS_UI_POS_X*2 {
-            return
-        }
-        
-        buildButtonsUI.position.x += UIData.BUILD_BUTTONS_UI_SPEED
+        uiManager!.foundationIndicator!.removeFromParent()
     }
     
     func panForTranslation(touch: UITouch) {
         
-        if moveCameraToPortal || touchStarted{
+        if uiManager!.moveCameraToPortal || touchStarted{
             return
         }
         
@@ -865,10 +742,10 @@ class GameScene: SKScene {
         
         if sender.state == .began {
             
-            previousCameraScale = camera.xScale
+            uiManager!.previousCameraScale = camera.xScale
         }
         
-        let newCameraScale = previousCameraScale * 1 / sender.scale
+        let newCameraScale = uiManager!.previousCameraScale * 1 / sender.scale
         
         if newCameraScale < 0.5 || newCameraScale > 2.3{
             
@@ -886,24 +763,9 @@ class GameScene: SKScene {
        
         guard let currentTower = GameSceneCommunicator.instance.currentTower else{return}
         
-        if touchStarted && upgradeTypePreview != nil{
+        if touchStarted && uiManager!.upgradeTypePreview != nil{
             
-            switch upgradeTypePreview{
-                    
-            case .damage:
-                let newDmg = Double(currentTower.attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT
-                statUpgradePreviewText?.text = "Damage: \(currentTower.attackDamage) -> \(String(format: "%.0f", newDmg))"
-            case .none:
-                statUpgradePreviewText?.text = "ERROR"
-            case .range:
-                let newRange = Double(currentTower.attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT
-                statUpgradePreviewText?.text = "Range: \(String(format: "%.0f", currentTower.attackRange)) -> \(String(format: "%.0f", newRange))"
-            case .firerate:
-                let newFIreRate = Double(currentTower.fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT
-                statUpgradePreviewText?.text = "Shots per Second: \(currentTower.fireRate) -> \(String(format: "%.0f", newFIreRate))"
-            }
-            
-            statUpgradePopUp?.alpha = 1
+            uiManager!.upgradeTypePreviewUI(currentTower: currentTower)
             
         }
     }

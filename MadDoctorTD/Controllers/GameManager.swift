@@ -40,7 +40,7 @@ class GameManager: ObservableObject{
     
     
     func getDamage(incomingDamage: Int){
-        GameScene.instance!.showDamageIndicator = true
+        GameScene.instance!.uiManager!.showDamageIndicator = true
         baseHp -= incomingDamage
         baseHPLost += 1 
         if baseHp <= 0{
@@ -51,14 +51,14 @@ class GameManager: ObservableObject{
     
     func displayDamageIndicator(){
         
-        let dmgIndicator = GameScene.instance!.damageIndicator
+        let dmgIndicator = GameScene.instance!.uiManager!.damageIndicator
         
         dmgIndicator?.alpha += 0.05
         
         if dmgIndicator!.alpha > 0.4{
             
             dmgIndicator?.alpha = 0
-            GameScene.instance!.showDamageIndicator = false
+            GameScene.instance!.uiManager!.showDamageIndicator = false
         }
         
     }

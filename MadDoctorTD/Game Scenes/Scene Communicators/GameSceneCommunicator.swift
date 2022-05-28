@@ -86,10 +86,10 @@ class GameSceneCommunicator: ObservableObject {
         
         foundationEditMode = false
         toggleFoundationGrid()
-        GameScene.instance!.showTowerUI()
-        GameScene.instance!.readyButton?.alpha = 1
-        GameScene.instance!.researchButton?.alpha = 1
-        GameScene.instance!.buildFoundationButton?.texture = SKTexture(imageNamed: "build_foundation_button_standard")
+        GameScene.instance!.uiManager!.showTowerUI()
+        GameScene.instance!.uiManager!.readyButton?.alpha = 1
+        GameScene.instance!.uiManager!.researchButton?.alpha = 1
+        GameScene.instance!.uiManager!.buildFoundationButton?.texture = SKTexture(imageNamed: "build_foundation_button_standard")
 
         SoundManager.playSFX(sfxName: SoundManager.buttonSFX_three, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
     }
@@ -150,7 +150,7 @@ class GameSceneCommunicator: ObservableObject {
     }
     
     func repairFoundation() {
-        GameScene.instance!.displayFoundationIndicator(position: currentFoundation!.position)
+        GameScene.instance!.uiManager!.displayFoundationIndicator(position: currentFoundation!.position)
         
         let missingHp: Int = currentFoundation!.maxHp - currentFoundation!.hp
         
@@ -165,8 +165,8 @@ class GameSceneCommunicator: ObservableObject {
         
         currentFoundation!.warningTexture!.alpha = 0
         currentFoundation!.crackTexture!.alpha = 0
-        GameScene.instance!.foundationUpgradeButton?.alpha = 1
-        GameScene.instance!.foundationRepairButton?.alpha = 0.7
+        GameScene.instance!.uiManager!.foundationUpgradeButton?.alpha = 1
+        GameScene.instance!.uiManager!.foundationRepairButton?.alpha = 0.7
         
     }
     
@@ -177,7 +177,7 @@ class GameSceneCommunicator: ObservableObject {
         if currentFoundation!.isStartingFoundation {
             return
         }
-        GameScene.instance!.displayFoundationIndicator(position: currentFoundation!.position)
+        GameScene.instance!.uiManager!.displayFoundationIndicator(position: currentFoundation!.position)
         
         if FoundationData.UPGRADE_PRICE > GameManager.instance.currentMoney {
             return
@@ -229,7 +229,7 @@ class GameSceneCommunicator: ObservableObject {
     
     func upgradeTower(upgradeType: UpgradeTypes) {
         
-        GameScene.instance?.displayRangeIndicator(attackRange: currentTower!.attackRange, position: currentTower!.position)
+        GameScene.instance?.uiManager!.displayRangeIndicator(attackRange: currentTower!.attackRange, position: currentTower!.position)
         
         if currentTower!.upgradeCount > TowerData.MAX_UPGRADE{
             return
@@ -453,7 +453,7 @@ class GameSceneCommunicator: ObservableObject {
             sniperTower.sniperLegs.removeFromParent()
         }
         
-        GameScene.instance!.rangeIndicator?.removeFromParent()
+        GameScene.instance!.uiManager!.rangeIndicator?.removeFromParent()
         
         cancelAllMenus()
         
@@ -471,7 +471,7 @@ class GameSceneCommunicator: ObservableObject {
         }
         
         
-        GameScene.instance?.showTowerUI()
+        GameScene.instance?.uiManager!.showTowerUI()
         cancelAllMenus()
     }
     
@@ -487,10 +487,10 @@ class GameSceneCommunicator: ObservableObject {
         //SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
         
         //Door animations
-        gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
+        gameScene.uiManager!.doorsAnimationCount = gameScene.uiManager!.doorsAnimationTime
         GameSceneCommunicator.instance.closeDoors = true
         
-        gameScene.moveCameraToPortal = true
+        gameScene.uiManager!.moveCameraToPortal = true
     }
     
     
@@ -519,7 +519,7 @@ class GameSceneCommunicator: ObservableObject {
     
     func toggleFoundationGrid() {
         
-        for node in GameScene.instance!.clickableTileGridsNode.children {
+        for node in GameScene.instance!.uiManager!.clickableTileGridsNode.children {
 
             let gridTexture = node as! SKSpriteNode
             

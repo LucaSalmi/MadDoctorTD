@@ -65,8 +65,8 @@ class FoundationPlate: SKSpriteNode{
         crackTexture?.size = self.size
 
         crackTexture?.zPosition = 2
-        GameScene.instance?.foundationIndicatorsNode.addChild(warningTexture!)
-        GameScene.instance?.foundationIndicatorsNode.addChild(crackTexture!)
+        GameScene.instance?.uiManager!.foundationIndicatorsNode.addChild(warningTexture!)
+        GameScene.instance?.uiManager!.foundationIndicatorsNode.addChild(crackTexture!)
         
         
     }
@@ -188,7 +188,7 @@ class FoundationPlate: SKSpriteNode{
     
     func updateUpgradeButtonTexture() {
         
-        GameScene.instance!.foundationUpgradeButton?.texture = SKTexture(imageNamed: "foundation_hp_\(upgradeLevel)")
+        GameScene.instance!.uiManager!.foundationUpgradeButton?.texture = SKTexture(imageNamed: "foundation_hp_\(upgradeLevel)")
         
     }
     
@@ -207,11 +207,11 @@ class FoundationPlate: SKSpriteNode{
         communicator.cancelAllMenus()
         communicator.currentFoundation = self
         
-        gameScene.showFoundationUI()
-        gameScene.upgradeMenuToggle?.alpha = 0
-        gameScene.sellFoundationButton?.alpha = 1
+        gameScene.uiManager!.showFoundationUI()
+        gameScene.uiManager!.upgradeMenuToggle?.alpha = 0
+        gameScene.uiManager!.sellFoundationButton?.alpha = 1
         
-        gameScene.displayFoundationIndicator(position: self.position)
+        gameScene.uiManager!.displayFoundationIndicator(position: self.position)
         
     }
     

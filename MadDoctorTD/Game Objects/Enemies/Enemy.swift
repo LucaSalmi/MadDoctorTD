@@ -92,9 +92,9 @@ class Enemy: SKSpriteNode{
         isPoisonedTexture!.alpha = 0
         isPoisonedTexture!.zPosition = 50
         
-        GameScene.instance!.hpBarsNode.addChild(hpBar!)
-        GameScene.instance!.hpBarsNode.addChild(isSlowedTexture!)
-        GameScene.instance!.hpBarsNode.addChild(isPoisonedTexture!)
+        GameScene.instance!.uiManager!.hpBarsNode.addChild(hpBar!)
+        GameScene.instance!.uiManager!.hpBarsNode.addChild(isSlowedTexture!)
+        GameScene.instance!.uiManager!.hpBarsNode.addChild(isPoisonedTexture!)
         self.name = "Enemy"
         
     }
@@ -370,7 +370,7 @@ class Enemy: SKSpriteNode{
         moneyTarget.x -= 300
         moneyTarget.y += 600
         let moneyObject = MoneyObject(startPosition: self.position)
-        GameScene.instance!.moneyNode.addChild(moneyObject)
+        GameScene.instance!.uiManager!.moneyNode.addChild(moneyObject)
         
         hpBar!.removeFromParent()
         isSlowedTexture!.removeFromParent()
@@ -390,8 +390,8 @@ class Enemy: SKSpriteNode{
             let bossDrop = DropObject(startPoint: self.position, targetPoint: materialTarget, materialType: self.enemyRace!)
             
             let dialog = createDialog()
-            GameScene.instance?.dialoguesNode.addChild(dialog)
-            GameScene.instance!.moneyNode.addChild(bossDrop)
+            GameScene.instance?.uiManager!.dialoguesNode.addChild(dialog)
+            GameScene.instance!.uiManager!.moneyNode.addChild(bossDrop)
             boss.bossTexture?.removeFromParent()
             
         }
@@ -531,7 +531,7 @@ class Enemy: SKSpriteNode{
         var obstacles = SKNode.obstacles(fromNodeBounds: FoundationPlateNodes.foundationPlatesNode.children.filter({ (element ) -> Bool in
             return element != player
         }))
-        let edges = SKNode.obstacles(fromNodeBounds: gameScene.edgesTilesNode.children)
+        let edges = SKNode.obstacles(fromNodeBounds: gameScene.uiManager!.edgesTilesNode.children)
         obstacles.append(contentsOf: edges)
         
         // Assemble a graph based on the obstacles. Provide a buffer radius so there is a bit of space between the

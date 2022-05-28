@@ -173,7 +173,7 @@ class LabSceneCommunicator: ObservableObject{
             switch communicator.selectedTreeButtonId {
             case "1":
 
-                GameScene.instance!.towerUI!.childNode(withName: "SpeedTower")!.alpha = 1
+                GameScene.instance!.uiManager!.towerUI!.childNode(withName: "SpeedTower")!.alpha = 1
                 LabSceneCommunicator.instance.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 gameManager.researchPoints -= 2
                 communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -233,7 +233,7 @@ class LabSceneCommunicator: ObservableObject{
             switch communicator.selectedTreeButtonId {
             case "1":
 
-                GameScene.instance!.towerUI!.childNode(withName: "SniperTower")!.alpha = 1
+                GameScene.instance!.uiManager!.towerUI!.childNode(withName: "SniperTower")!.alpha = 1
                 LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 gameManager.researchPoints -= 2
                 communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -293,7 +293,7 @@ class LabSceneCommunicator: ObservableObject{
             switch communicator.selectedTreeButtonId {
             case "1":
 
-                GameScene.instance!.towerUI!.childNode(withName: "CannonTower")!.alpha = 1
+                GameScene.instance!.uiManager!.towerUI!.childNode(withName: "CannonTower")!.alpha = 1
                 LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 gameManager.researchPoints -= 2
                 communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)

@@ -15,6 +15,8 @@ class UIManager {
     
     var gameScene: GameScene? = nil
     
+    let gameManager = GameManager.instance
+    
     var previousCameraScale = CGFloat()
     
     var projectileShadowNode: SKNode = SKNode()
@@ -588,12 +590,161 @@ class UIManager {
         researchPointsGained?.text = ("\(gameManager.researchPoints)")
         survivalBonusNumber?.text = ("\(gameManager.survivalBonusNumber)")
         
-        if waveManager?.waveNumber == 10 || waveManager?.waveNumber == 20{
+        if gameScene!.waveManager?.waveNumber == 10 || gameScene!.waveManager?.waveNumber == 20{
             bossMaterialGained?.text = "Boss Material: +1"
 
         }
         
         waveSummary?.alpha = 1
+    }
+    
+    func animateDoors() {
+        
+        if GameSceneCommunicator.instance.openDoors {
+            doorOne.position.x -= 1
+            doorTwo.position.x += 1
+        }
+        
+        if GameSceneCommunicator.instance.closeDoors {
+            doorOne.position.x += 1
+            doorTwo.position.x -= 1
+        }
+        
+        doorsAnimationCount -= 1
+        if doorsAnimationCount <= 0 {
+            
+            //fail safe to reset doors position to orginal position
+            if GameSceneCommunicator.instance.closeDoors {
+                doorOne.position.x = gameScene!.position.x - (doorOne.size.width/2)
+                doorTwo.position.x = gameScene!.position.x + (doorTwo.size.width/2)
+            }
+            
+            GameSceneCommunicator.instance.closeDoors = false
+            GameSceneCommunicator.instance.openDoors = false
+        }
+    }
+    
+    func displayFoundationIndicator(position: CGPoint, display: Bool = true) {
+        
+        guard let foundationIndicator = foundationIndicator else {
+            return
+        }
+        
+        if display {
+            foundationIndicator.position = position
+            foundationIndicator.alpha = 0.005
+            foundationIndicator.zPosition = 6
+            foundationIndicatorIncrease = true
+        }
+        else {
+            foundationIndicator.alpha = 0
+        }
+        
+    }
+    
+    func updateRangeIndicatorAlpha() {
+        
+        let increaseAmount = 0.01
+        let maxAlpha = 0.35
+        
+        if foundationIndicatorIncrease {
+            foundationIndicator!.alpha += increaseAmount
+            if foundationIndicator!.alpha >= maxAlpha {
+                foundationIndicator!.alpha = maxAlpha - increaseAmount
+                foundationIndicatorIncrease = false
+            }
+        }
+        else {
+            foundationIndicator!.alpha -= increaseAmount
+            if foundationIndicator!.alpha <= increaseAmount {
+                foundationIndicator!.alpha = increaseAmount*2
+                foundationIndicatorIncrease = true
+            }
+        }
+        
+    }
+    
+    func fadePortal(fadeIn: Bool){
+        
+        let sizeDifference = CGFloat(0.01)
+        
+        
+        if !fadeIn{
+            
+            if portal!.xScale >= 0{
+                
+                portal?.xScale -= sizeDifference
+                portal?.yScale -= sizeDifference
+                
+                
+            }
+            else{
+                portal!.alpha = 0
+                fadeOutPortal = false
+                return
+            }
+        }
+        else{
+            if portal!.alpha < 1{
+                portal!.alpha = 1
+            }
+            
+            if portal!.xScale <= 1{
+                
+                portal!.xScale += sizeDifference
+                portal!.yScale += sizeDifference
+            }
+            else{
+                fadeInPortal = false
+                return
+            }
+        }
+    }
+    func upgradeTypePreviewUI(currentTower: Tower) {
+        
+        switch upgradeTypePreview{
+                
+        case .damage:
+            let newDmg = Double(currentTower.attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT
+            statUpgradePreviewText?.text = "Damage: \(currentTower.attackDamage) -> \(String(format: "%.0f", newDmg))"
+        case .none:
+            statUpgradePreviewText?.text = "ERROR"
+        case .range:
+            let newRange = Double(currentTower.attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT
+            statUpgradePreviewText?.text = "Range: \(String(format: "%.0f", currentTower.attackRange)) -> \(String(format: "%.0f", newRange))"
+        case .firerate:
+            let newFIreRate = Double(currentTower.fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT
+            statUpgradePreviewText?.text = "Shots per Second: \(currentTower.fireRate) -> \(String(format: "%.0f", newFIreRate))"
+        }
+        
+        statUpgradePopUp?.alpha = 1
+        
+    }
+    
+    func showBuildButtonsUI() {
+        
+        guard let buildButtonsUI = buildButtonsUI else {
+            return
+        }
+
+        if buildButtonsUI.position.x <= UIData.BUILD_BUTTONS_UI_POS_X {
+            return
+        }
+        
+        buildButtonsUI.position.x -= UIData.BUILD_BUTTONS_UI_SPEED
+    }
+    
+    func hideBuildButtonsUI() {
+        
+        guard let buildButtonsUI = buildButtonsUI else {
+            return
+        }
+
+        if buildButtonsUI.position.x >= UIData.BUILD_BUTTONS_UI_POS_X*2 {
+            return
+        }
+        
+        buildButtonsUI.position.x += UIData.BUILD_BUTTONS_UI_SPEED
     }
     
 }
