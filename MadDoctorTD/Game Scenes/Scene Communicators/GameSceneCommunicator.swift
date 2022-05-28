@@ -265,8 +265,6 @@ class GameSceneCommunicator: ObservableObject {
     
     private func validateTowerResearch(upgradeType: UpgradeTypes) -> Bool {
         
-        let gameManager = GameManager.instance
-        
         switch upgradeType {
         case .damage:
             
@@ -276,21 +274,21 @@ class GameSceneCommunicator: ObservableObject {
             }
             
             //Base upgrade
-            if currentTower! is GunTower && currentTower!.damageUpgradeCount == 1 && !gameManager.gunTowerDamageUnlocked {
+            if currentTower! is GunTower && currentTower!.damageUpgradeCount == 1 && !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("2a") {
                 return false
             }
-            if currentTower! is RapidFireTower && currentTower!.damageUpgradeCount == 1 && !gameManager.rapidFireTowerDamageUnlocked {
+            if currentTower! is RapidFireTower && currentTower!.damageUpgradeCount == 1 && !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("2a") {
                 return false
             }
-            if currentTower! is SniperTower && currentTower!.damageUpgradeCount == 1 && !gameManager.sniperTowerDamageUnlocked {
+            if currentTower! is SniperTower && currentTower!.damageUpgradeCount == 1 && !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("2a") {
                 return false
             }
-            if currentTower! is CannonTower && currentTower!.damageUpgradeCount == 1 && !gameManager.cannonTowerDamageUnlocked {
+            if currentTower! is CannonTower && currentTower!.damageUpgradeCount == 1 && !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("2a") {
                 return false
             }
             
             //Material upgrade
-            if currentTower! is GunTower && currentTower!.damageUpgradeCount == 2 && !gameManager.bouncingProjectilesUnlocked {
+            if currentTower! is GunTower && currentTower!.damageUpgradeCount == 2 && !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("3a") {
                 return false
             }
             else if currentTower! is GunTower && currentTower!.damageUpgradeCount == 2 {
@@ -324,16 +322,16 @@ class GameSceneCommunicator: ObservableObject {
             }
             
             //Base upgrade
-            if currentTower! is GunTower && currentTower!.rangeUpgradeCount == 1 && !gameManager.gunTowerRangeUnlocked {
+            if currentTower! is GunTower && currentTower!.rangeUpgradeCount == 1 && !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("2c") {
                 return false
             }
-            if currentTower! is RapidFireTower && currentTower!.rangeUpgradeCount == 1 && !gameManager.rapidFireTowerRangeUnlocked {
+            if currentTower! is RapidFireTower && currentTower!.rangeUpgradeCount == 1 && !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("2c") {
                 return false
             }
-            if currentTower! is SniperTower && currentTower!.rangeUpgradeCount == 1 && !gameManager.sniperTowerRangeUnlocked {
+            if currentTower! is SniperTower && currentTower!.rangeUpgradeCount == 1 && !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("2c") {
                 return false
             }
-            if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 1 && !gameManager.cannonTowerRangeUnlocked {
+            if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 1 && !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("2c") {
                 return false
             }
             
@@ -356,7 +354,7 @@ class GameSceneCommunicator: ObservableObject {
             else if currentTower! is SniperTower && currentTower!.rangeUpgradeCount == 2 {
                 //material upgrade goes here
             }
-            if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 2 && !gameManager.mineProjectilesUnlocked {
+            if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 2 && !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("3c") {
                 return false
             }
             else if currentTower! is CannonTower && currentTower!.rangeUpgradeCount == 2 {
@@ -372,16 +370,16 @@ class GameSceneCommunicator: ObservableObject {
             }
             
             //Base upgrade
-            if currentTower! is GunTower && currentTower!.rateOfFireUpgradeCount == 1 && !gameManager.gunTowerSpeedUnlocked {
+            if currentTower! is GunTower && currentTower!.rateOfFireUpgradeCount == 1 && !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("2b") {
                 return false
             }
-            if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 1 && !gameManager.rapidFireTowerSpeedUnlocked {
+            if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 1 && !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("2b") {
                 return false
             }
-            if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 1 && !gameManager.sniperTowerSpeedUnlocked {
+            if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 1 && !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("2b") {
                 return false
             }
-            if currentTower! is CannonTower && currentTower!.rateOfFireUpgradeCount == 1 && !gameManager.cannonTowerSpeedUnlocked {
+            if currentTower! is CannonTower && currentTower!.rateOfFireUpgradeCount == 1 && !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("2b") {
                 return false
             }
             
@@ -392,14 +390,14 @@ class GameSceneCommunicator: ObservableObject {
             else if currentTower! is GunTower && currentTower!.rateOfFireUpgradeCount == 2 {
                 //material upgrade goes here
             }
-            if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 2 && !gameManager.slowProjectilesUnlocked {
+            if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 2 && !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("3b") {
                 return false
             }
             else if currentTower! is RapidFireTower && currentTower!.rateOfFireUpgradeCount == 2 {
                 let rapidFireTower = currentTower! as! RapidFireTower
                 rapidFireTower.activateSlowProjectiles()
             }
-            if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 2 && !gameManager.poisonProjectilesUnlocked {
+            if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 2 && !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("3b") {
                 return false
             }
             else if currentTower! is SniperTower && currentTower!.rateOfFireUpgradeCount == 2 {

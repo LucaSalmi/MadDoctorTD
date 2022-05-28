@@ -937,7 +937,7 @@ class GameScene: SKScene {
             
         case "GunTower":
             
-            if TowerData.BASE_COST > GameManager.instance.currentMoney{
+            if TowerData.BASE_COST > GameManager.instance.currentMoney || !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("1"){
                 return false
             }
             gunTowerPrice?.alpha = 0
@@ -947,7 +947,7 @@ class GameScene: SKScene {
             SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
             
         case "SpeedTower":
-            if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.rapidFireTowerUnlocked{
+            if TowerData.BASE_COST > GameManager.instance.currentMoney || !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("1"){
                 return false
             }
             rapidTowerPrice?.alpha = 0
@@ -959,7 +959,7 @@ class GameScene: SKScene {
             
         case "CannonTower":
             
-            if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.cannonTowerUnlocked{
+            if TowerData.BASE_COST > GameManager.instance.currentMoney || !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("1"){
                 return false
             }
             cannonTowerPrice?.alpha = 0
@@ -971,7 +971,7 @@ class GameScene: SKScene {
             
         case "SniperTower":
             
-            if TowerData.BASE_COST > GameManager.instance.currentMoney || !GameManager.instance.sniperTowerUnlocked{
+            if TowerData.BASE_COST > GameManager.instance.currentMoney || !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("1"){
                 return false
             }
             sniperTowerPrice?.alpha = 0
