@@ -146,15 +146,26 @@ class Enemy: SKSpriteNode{
         
         if !isMoving {
             movePoints = GameScene.instance!.pathfindingTestEnemy!.movePoints
-            isMoving = true
-        }
-        
-        if self.enemyType == .flying || self.enemyType == .boss{
             
-            if movePoints.count > 1 {
-                let finalPoint = movePoints[movePoints.count-1]
-                movePoints = [finalPoint]
+            if movePoints.isEmpty {
+                return
             }
+            
+            if self.enemyType == .flying || self.enemyType == .boss{
+                
+                if movePoints.count > 1 {
+                    let finalPoint = movePoints[movePoints.count-1]
+                    movePoints = [finalPoint]
+                }
+            }
+            
+            let upcommingPoint = movePoints[0]
+            
+            let lookAtConstraint = SKConstraint.orient(to: upcommingPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
+            self.constraints = [ lookAtConstraint ]
+            
+            isMoving = true
+            
         }
         
         if movePoints.isEmpty {
