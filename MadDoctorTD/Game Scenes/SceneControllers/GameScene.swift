@@ -73,8 +73,7 @@ class GameScene: SKScene {
         
         setupEdges()
         
-        
-        setupCamera()
+        uiManager!.setupCamera()
         
         //creates start foundations and adds the node to the GameScene
         FoundationPlateFactory().setupStartPlates()
@@ -89,39 +88,6 @@ class GameScene: SKScene {
         
         setupEnemies()
         addChild(EnemyNodes.enemiesNode)
-        
-    }
-    
-    func setupCamera(){
-        
-        let myCamera = self.camera
-        let backgroundMap = (childNode(withName: "edge") as! SKTileMapNode)
-        let scaledSize = CGSize(width: size.width * myCamera!.xScale, height: size.height * myCamera!.yScale)
-        
-        let xInset = min((scaledSize.width/2) - 100.0, backgroundMap.frame.width/2)
-        let yInset = min((scaledSize.height/2) - 100.0, backgroundMap.frame.height/2)
-        
-        let constrainRect = backgroundMap.frame.insetBy(dx: xInset, dy: yInset)
-        
-        let yLowerLimit = constrainRect.minY
-        
-        let xRange = SKRange(lowerLimit: constrainRect.minX, upperLimit: constrainRect.maxX)
-        let yRange = SKRange(lowerLimit: yLowerLimit, upperLimit: constrainRect.maxY)
-        
-        let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
-        edgeConstraint.referenceNode = backgroundMap
-        
-        myCamera!.constraints = [edgeConstraint]
-        
-        if view?.gestureRecognizers == nil{
-            
-            let pinchGesture = UIPinchGestureRecognizer()
-            pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
-            view?.addGestureRecognizer(pinchGesture)
-
-        }
-        
-        myCamera!.position = CGPoint(x: 0, y: yLowerLimit)
         
     }
     
@@ -256,52 +222,13 @@ class GameScene: SKScene {
         
         if uiManager!.moveCameraToDoors {
             
-            print("Moving camera to doors!")
-            
-            let doorOne = uiManager!.doorOne
-            var doorsPosition = doorOne.position
-            doorsPosition.x += doorOne.size.width/2
-            
-            let cameraDirection = PhysicsUtils.getCameraDirection(camera: self.camera!, targetPoint: doorsPosition)
-            PhysicsUtils.moveCameraToTargetPoint(camera: self.camera!, direction: cameraDirection)
-            
-            if camera!.contains(doorsPosition) {
-                
-                //Door animations
-                uiManager!.doorsAnimationCount = uiManager!.doorsAnimationTime
-                GameSceneCommunicator.instance.closeDoors = true
-                
-                
-                uiManager!.moveCameraToDoors = false
-                
-            }
+            uiManager!.performMoveCameraToDoors()
             
         }
         
         if uiManager!.moveCameraToPortal {
             
-            let spawnPoint = self.childNode(withName: "SpawnPoint") as! SKSpriteNode
-            let portalPosition = spawnPoint.position
-            
-            let cameraDirection = PhysicsUtils.getCameraDirection(camera: self.camera!, targetPoint: portalPosition)
-            PhysicsUtils.moveCameraToTargetPoint(camera: self.camera!, direction: cameraDirection)
-                        
-            if camera!.contains(portalPosition) { //|| !EnemyNodes.enemiesNode.children.isEmpty {
-                uiManager!.moveCameraToPortal = false
-                print("Im at portal with camera")
-                
-                GameSceneCommunicator.instance.startWavePhase()
-                uiManager!.fadeInPortal = true
-                waveManager?.waveStartCounter = 0
-                uiManager!.showTowerUI()
-                uiManager!.readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                uiManager!.researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                uiManager!.buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                uiManager!.upgradeMenuToggle?.alpha = 0
-                SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                GameManager.instance.moneyEarned = 0
-                GameManager.instance.baseHPLost = 0
-            }
+            uiManager!.performMoveCameraToPortal()
         }
         
         for node in TowerNode.towersNode.children {

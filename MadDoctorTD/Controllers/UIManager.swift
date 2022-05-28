@@ -277,6 +277,39 @@ class UIManager {
         
     }
     
+    func setupCamera(){
+        
+        let myCamera = gameScene!.camera
+        let backgroundMap = (gameScene!.childNode(withName: "edge") as! SKTileMapNode)
+        let scaledSize = CGSize(width: gameScene!.size.width * myCamera!.xScale, height: gameScene!.size.height * myCamera!.yScale)
+        
+        let xInset = min((scaledSize.width/2) - 100.0, backgroundMap.frame.width/2)
+        let yInset = min((scaledSize.height/2) - 100.0, backgroundMap.frame.height/2)
+        
+        let constrainRect = backgroundMap.frame.insetBy(dx: xInset, dy: yInset)
+        
+        let yLowerLimit = constrainRect.minY
+        
+        let xRange = SKRange(lowerLimit: constrainRect.minX, upperLimit: constrainRect.maxX)
+        let yRange = SKRange(lowerLimit: yLowerLimit, upperLimit: constrainRect.maxY)
+        
+        let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
+        edgeConstraint.referenceNode = backgroundMap
+        
+        myCamera!.constraints = [edgeConstraint]
+        
+        if gameScene!.view?.gestureRecognizers == nil{
+            
+            let pinchGesture = UIPinchGestureRecognizer()
+            pinchGesture.addTarget(gameScene!, action: #selector(gameScene!.pinchGestureAction(_:)))
+            gameScene!.view?.addGestureRecognizer(pinchGesture)
+
+        }
+        
+        myCamera!.position = CGPoint(x: 0, y: yLowerLimit)
+        
+    }
+    
     func resetUI() {
         
         gameScene!.camera!.removeAllChildren()
@@ -793,6 +826,57 @@ class UIManager {
         }
         
         buildButtonsUI.position.x += UIData.BUILD_BUTTONS_UI_SPEED
+    }
+    
+    func performMoveCameraToDoors() {
+        
+        print("Moving camera to doors!")
+        
+        let doorOne = doorOne
+        var doorsPosition = doorOne.position
+        doorsPosition.x += doorOne.size.width/2
+        
+        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: doorsPosition)
+        PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
+        
+        if gameScene!.camera!.contains(doorsPosition) {
+            
+            //Door animations
+            doorsAnimationCount = doorsAnimationTime
+            GameSceneCommunicator.instance.closeDoors = true
+            
+            
+            moveCameraToDoors = false
+            
+        }
+        
+    }
+    
+    func performMoveCameraToPortal() {
+        
+        let spawnPoint = gameScene!.childNode(withName: "SpawnPoint") as! SKSpriteNode
+        let portalPosition = spawnPoint.position
+        
+        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: portalPosition)
+        PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
+                    
+        if gameScene!.camera!.contains(portalPosition) { //|| !EnemyNodes.enemiesNode.children.isEmpty {
+            moveCameraToPortal = false
+            print("Im at portal with camera")
+            
+            GameSceneCommunicator.instance.startWavePhase()
+            fadeInPortal = true
+            gameScene!.waveManager!.waveStartCounter = 0
+            showTowerUI()
+            readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+            researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+            buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+            upgradeMenuToggle?.alpha = 0
+            SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+            GameManager.instance.moneyEarned = 0
+            GameManager.instance.baseHPLost = 0
+        }
+        
     }
     
 }
