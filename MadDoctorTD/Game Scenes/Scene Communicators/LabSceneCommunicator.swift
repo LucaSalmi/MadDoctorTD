@@ -191,7 +191,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "2b":
                 
-                if !gameManager.rapidFireTowerUnlocked {
+                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -201,7 +201,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "3b":
                 
-                if !gameManager.rapidFireTowerSpeedUnlocked {
+                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("2b") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -212,7 +212,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "2c":
                 
-                if !gameManager.rapidFireTowerUnlocked {
+                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -241,7 +241,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "2a":
                 
-                if !gameManager.sniperTowerUnlocked {
+                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -251,7 +251,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "2b":
                 
-                if !gameManager.sniperTowerUnlocked {
+                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -261,7 +261,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "3b":
                 
-                if !gameManager.sniperTowerSpeedUnlocked {
+                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("2b") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -272,7 +272,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "2c":
                 
-                if !gameManager.sniperTowerUnlocked {
+                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -301,7 +301,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "2a":
                 
-                if !gameManager.cannonTowerUnlocked {
+                if !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -311,7 +311,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "2b":
                 
-                if !gameManager.cannonTowerUnlocked {
+                if !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -321,7 +321,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "2c":
                 
-                if !gameManager.cannonTowerUnlocked {
+                if !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
@@ -331,7 +331,7 @@ class LabSceneCommunicator: ObservableObject{
                 
             case "3c":
                 
-                if !gameManager.cannonTowerRangeUnlocked {
+                if !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("2c") {
                     return .pathBlocked
                 }
                 LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)

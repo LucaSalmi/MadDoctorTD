@@ -18,7 +18,7 @@ class GameManager: ObservableObject{
     @Published var moneyEarned: Int = 0
     @Published var survivalBonusNumber: Int = 0
     
-    @Published var slimeMaterials: Int = 1
+    @Published var slimeMaterials: Int = 4 //0
     @Published var squidMaterials: Int = 0
     
     @Published var nextWaveCounter: Int = 0
