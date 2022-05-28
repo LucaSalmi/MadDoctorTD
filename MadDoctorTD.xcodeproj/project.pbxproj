@@ -115,7 +115,7 @@
 		C839C6BB2821579F00F66043 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BA2821579F00F66043 /* Constants.swift */; };
 		C839C6BD2821586300F66043 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BC2821586300F66043 /* GameManager.swift */; };
 		C839C6BF282158C100F66043 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BE282158C100F66043 /* SoundManager.swift */; };
-		C839C6C128215B4800F66043 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C028215B4800F66043 /* InputManager.swift */; };
+		C839C6C128215B4800F66043 /* TouchesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C028215B4800F66043 /* TouchesExtension.swift */; };
 		C839C6C62821619200F66043 /* LabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C52821619200F66043 /* LabMenuView.swift */; };
 		C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C7282161BA00F66043 /* MainMenuView.swift */; };
 		C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C9282161DF00F66043 /* ResearchView.swift */; };
@@ -274,7 +274,7 @@
 		C839C6BA2821579F00F66043 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C839C6BC2821586300F66043 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		C839C6BE282158C100F66043 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
-		C839C6C028215B4800F66043 /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
+		C839C6C028215B4800F66043 /* TouchesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchesExtension.swift; sourceTree = "<group>"; };
 		C839C6C52821619200F66043 /* LabMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabMenuView.swift; sourceTree = "<group>"; };
 		C839C6C7282161BA00F66043 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		C839C6C9282161DF00F66043 /* ResearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchView.swift; sourceTree = "<group>"; };
@@ -425,7 +425,7 @@
 				C839C6BE282158C100F66043 /* SoundManager.swift */,
 				C839C6A72821352200F66043 /* ContentView.swift */,
 				C839C6BC2821586300F66043 /* GameManager.swift */,
-				C839C6C028215B4800F66043 /* InputManager.swift */,
+				C839C6C028215B4800F66043 /* TouchesExtension.swift */,
 				C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */,
 				C897BC1C282510380085D093 /* WaveManager.swift */,
 				C897BC1E282515260085D093 /* RandomNumberGenerator.swift */,
@@ -840,7 +840,7 @@
 				C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */,
 				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
 				C839C6BF282158C100F66043 /* SoundManager.swift in Sources */,
-				C839C6C128215B4800F66043 /* InputManager.swift in Sources */,
+				C839C6C128215B4800F66043 /* TouchesExtension.swift in Sources */,
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
 				C839C6BB2821579F00F66043 /* Constants.swift in Sources */,
 				3320331A2822ABF500133BBA /* Projectile.swift in Sources */,
