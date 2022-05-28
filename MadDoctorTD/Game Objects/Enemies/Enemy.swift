@@ -256,12 +256,10 @@ class Enemy: SKSpriteNode{
         
         
         if slowTick <= 0{
-            print("CH not slowed")
             position.x += direction.x * baseSpeed
             position.y += direction.y * baseSpeed
         }
         else{
-            print("CH slowed")
             position.x += direction.x * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
             position.y += direction.y * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
         }

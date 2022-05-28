@@ -294,10 +294,6 @@ class WaveManager{
     
     //Timers for starting the wave and then spawn one enemy from the wave
     func timers(){
-        
-        print("shoulcreateWavw \(shouldCreateWave)")
-        print("enemy ARray \(EnemyNodes.enemyArray.count)")
-        
        
         if shouldCreateWave {
             waveStartCounter -= 1
@@ -331,7 +327,7 @@ class WaveManager{
     
     func checkWinCondition(){
         
-        if waveNumber <= 0 {
+        if waveNumber < wavesPerLevel {
             return
         }
         

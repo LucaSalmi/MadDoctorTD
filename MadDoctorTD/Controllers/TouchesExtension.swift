@@ -268,17 +268,15 @@ extension GameScene {
             
         case "ReadyButton":
             if uiManager!.readyButton?.alpha == 1{
-                communicator.startWavePhase()
-                uiManager!.fadeInPortal = true
-                waveManager?.waveStartCounter = 0
-                uiManager!.showTowerUI()
-                uiManager!.readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                uiManager!.researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                uiManager!.buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
-                uiManager!.upgradeMenuToggle?.alpha = 0
-                SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                GameManager.instance.moneyEarned = 0
-                GameManager.instance.baseHPLost = 0
+                
+                if camera!.xScale > 1.29 && camera!.xScale < 1.31 {
+                    uiManager!.lockCamera = true
+                    uiManager!.moveCameraToDoors = true
+                }
+                else {
+                    uiManager!.onCameraReachedPortal()
+                }
+                
             }
             
             
@@ -321,7 +319,7 @@ extension GameScene {
     
     func panForTranslation(touch: UITouch) {
         
-        if uiManager!.moveCameraToPortal || touchStarted{
+        if touchStarted || uiManager!.lockCamera {
             return
         }
         
@@ -354,7 +352,7 @@ extension GameScene {
         }
         
         camera.setScale(newCameraScale)
-        setupCamera()
+        uiManager!.setupCamera()
         
     }
 

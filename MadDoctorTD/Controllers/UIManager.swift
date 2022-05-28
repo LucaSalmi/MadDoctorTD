@@ -114,7 +114,8 @@ class UIManager {
     var doorsAnimationCount: Int = 0
     
     var moveCameraToPortal: Bool = false
-    
+    var moveCameraToDoors: Bool = false
+    var lockCamera: Bool = false
     
     var moneyNode: SKNode = SKNode()
     
@@ -125,17 +126,26 @@ class UIManager {
     
     init() {
         
+        
+        
+    }
+    
+    func setupUI() {
+        
         gameScene = GameScene.instance!
         
-        gameScene!.addChild(hpBarsNode)
-        gameScene!.addChild(projectileShadowNode)
-        gameScene!.addChild(edgesTilesNode)
+        gameScene!.addChild(uiNode)
+        
+        uiNode.addChild(hpBarsNode)
+        uiNode.addChild(projectileShadowNode)
+        uiNode.addChild(edgesTilesNode)
         
         portal = gameScene!.childNode(withName: "Tile Map Node") as? SKTileMapNode
         portal?.xScale = 0
         portal?.yScale = 0
         
         let uiScene = SKScene(fileNamed: "GameUIScene")
+    
         towerUI = uiScene!.childNode(withName: "TowerMenu") as? SKSpriteNode
         towerUI!.removeFromParent()
         foundationUI = uiScene?.childNode(withName: "FoundationMenu") as? SKSpriteNode
@@ -187,7 +197,6 @@ class UIManager {
         gameScene!.camera!.addChild(foundationUI!)
         gameScene!.camera!.addChild(towerUI!)
         gameScene!.camera!.addChild(damageIndicator!)
-        gameScene!.addChild(uiNode)
         
         gameScene!.camera?.addChild(towerInfoMenu!)
         gameScene!.camera?.addChild(statUpgradePopUp!)
@@ -245,10 +254,10 @@ class UIManager {
         towerPriceTags.append(cannonTowerPrice!)
         towerPriceTags.append(sniperTowerPrice!)
         
-        gameScene!.addChild(clickableTileGridsNode)
+        uiNode.addChild(clickableTileGridsNode)
         
-        gameScene!.addChild(towerIndicatorsNode)
-        gameScene!.addChild(foundationIndicatorsNode)
+        uiNode.addChild(towerIndicatorsNode)
+        uiNode.addChild(foundationIndicatorsNode)
         
         doorOne = gameScene!.childNode(withName: "doorOne") as! SKSpriteNode
         doorOne.position.x = gameScene!.position.x - (doorOne.size.width/2)
@@ -260,12 +269,81 @@ class UIManager {
         
         moveCameraToPortal = false
         
-        gameScene!.addChild(moneyNode)
-        gameScene!.addChild(dialoguesNode)
+        uiNode.addChild(moneyNode)
+        uiNode.addChild(dialoguesNode)
         
         foundationIndicator = SKSpriteNode(texture: nil, color: .white, size: FoundationData.SIZE)
         foundationIndicator!.alpha = 0
-        gameScene!.addChild(foundationIndicator!)
+        uiNode.addChild(foundationIndicator!)
+        
+    }
+    
+    func setupCamera(){
+        
+        let myCamera = gameScene!.camera
+        let backgroundMap = (gameScene!.childNode(withName: "edge") as! SKTileMapNode)
+        let scaledSize = CGSize(width: gameScene!.size.width * myCamera!.xScale, height: gameScene!.size.height * myCamera!.yScale)
+        
+        let xInset = min((scaledSize.width/2) - 100.0, backgroundMap.frame.width/2)
+        let yInset = min((scaledSize.height/2) - 100.0, backgroundMap.frame.height/2)
+        
+        let constrainRect = backgroundMap.frame.insetBy(dx: xInset, dy: yInset)
+        
+        let yLowerLimit = constrainRect.minY
+        
+        let xRange = SKRange(lowerLimit: constrainRect.minX, upperLimit: constrainRect.maxX)
+        let yRange = SKRange(lowerLimit: yLowerLimit, upperLimit: constrainRect.maxY)
+        
+        let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
+        edgeConstraint.referenceNode = backgroundMap
+        
+        myCamera!.constraints = [edgeConstraint]
+        
+        if gameScene!.view?.gestureRecognizers == nil{
+            
+            let pinchGesture = UIPinchGestureRecognizer()
+            pinchGesture.addTarget(gameScene!, action: #selector(gameScene!.pinchGestureAction(_:)))
+            gameScene!.view?.addGestureRecognizer(pinchGesture)
+
+        }
+        
+        myCamera!.position = CGPoint(x: 0, y: yLowerLimit)
+        
+    }
+    
+    func resetUI() {
+        
+        gameScene!.camera!.removeAllChildren()
+        
+        towerIndicatorsNode.removeAllChildren()
+        towerIndicatorsNode.removeFromParent()
+        
+        hpBarsNode.removeAllChildren()
+        hpBarsNode.removeFromParent()
+        
+        projectileShadowNode.removeAllChildren()
+        projectileShadowNode.removeFromParent()
+        
+        foundationIndicatorsNode.removeAllChildren()
+        foundationIndicatorsNode.removeFromParent()
+        
+        edgesTilesNode.removeAllChildren()
+        edgesTilesNode.removeFromParent()
+        
+        //Foundation edit mode
+        clickableTileGridsNode.removeFromParent()
+        
+        //Money
+        moneyNode.removeAllChildren()
+        moneyNode.removeFromParent()
+        
+        dialoguesNode.removeAllChildren()
+        dialoguesNode.removeFromParent()
+        
+        foundationIndicator!.removeFromParent()
+        
+        uiNode.removeAllChildren()
+        uiNode.removeFromParent()
         
     }
     
@@ -498,7 +576,7 @@ class UIManager {
         rangeIndicator!.zPosition = 2
         rangeIndicator!.position = position
         
-        gameScene!.addChild(rangeIndicator!)
+        uiNode.addChild(rangeIndicator!)
         
     }
     
@@ -612,6 +690,10 @@ class UIManager {
         
         doorsAnimationCount -= 1
         if doorsAnimationCount <= 0 {
+            
+            if GameSceneCommunicator.instance.closeDoors {
+                GameScene.instance!.uiManager!.moveCameraToPortal = true
+            }
             
             //fail safe to reset doors position to orginal position
             if GameSceneCommunicator.instance.closeDoors {
@@ -745,6 +827,76 @@ class UIManager {
         }
         
         buildButtonsUI.position.x += UIData.BUILD_BUTTONS_UI_SPEED
+    }
+    
+    func performMoveCameraToDoors() {
+        
+        let targetNode = SKSpriteNode(texture: nil, color: .red, size: FoundationData.SIZE)
+        targetNode.alpha = 0
+        targetNode.zPosition = 1000
+        targetNode.position = doorOne.position
+        targetNode.position.x += (doorOne.size.width + (doorOne.size.width/2) )
+        targetNode.position.y += gameScene!.size.height * 0.4
+        
+        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetNode.position)
+        PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
+        
+        if targetNode.contains(gameScene!.camera!.position) {
+            
+            //Door animations
+            doorsAnimationCount = doorsAnimationTime
+            GameSceneCommunicator.instance.closeDoors = true
+            
+            
+            moveCameraToDoors = false
+            
+        }
+        
+    }
+    
+    func performMoveCameraToPortal() {
+        
+        let spawnPoint = gameScene!.childNode(withName: "SpawnPoint") as! SKSpriteNode
+        
+        let targetNode = SKSpriteNode(texture: nil, color: .red, size: FoundationData.SIZE)
+        targetNode.alpha = 0
+        targetNode.zPosition = 1000
+        targetNode.position = spawnPoint.position
+        targetNode.position.y -= gameScene!.size.height * 0.4
+        
+        let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetNode.position)
+        PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
+                    
+        if targetNode.contains(gameScene!.camera!.position) {
+            
+            onCameraReachedPortal()
+            
+        }
+        
+    }
+    
+    func onCameraReachedPortal() {
+        
+        moveCameraToPortal = false
+        print("Im at portal with camera")
+        
+        GameSceneCommunicator.instance.startWavePhase()
+        fadeInPortal = true
+        gameScene!.waveManager!.waveStartCounter = 0
+        showTowerUI()
+        readyButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+        researchButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+        buildFoundationButton?.alpha = UIData.INACTIVE_BUTTON_ALPHA
+        upgradeMenuToggle?.alpha = 0
+        SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+        GameManager.instance.moneyEarned = 0
+        GameManager.instance.baseHPLost = 0
+        
+        lockCamera = false
+        
+        doorOne.position.x = 0 - doorOne.size.width/2
+        doorTwo.position.x = 0 + doorTwo.size.width/2
+        
     }
     
 }

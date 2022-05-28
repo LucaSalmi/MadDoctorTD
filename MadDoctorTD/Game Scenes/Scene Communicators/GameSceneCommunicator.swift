@@ -486,11 +486,6 @@ class GameSceneCommunicator: ObservableObject {
         GameSceneCommunicator.instance.cancelAllMenus()
         //SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
         
-        //Door animations
-        gameScene.uiManager!.doorsAnimationCount = gameScene.uiManager!.doorsAnimationTime
-        GameSceneCommunicator.instance.closeDoors = true
-        
-        gameScene.uiManager!.moveCameraToPortal = true
     }
     
     

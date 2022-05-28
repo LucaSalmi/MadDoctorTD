@@ -31,8 +31,6 @@ class GameScene: SKScene {
     var fadeOutScene = false
     var transitionAmount: Double = 0.02
     
-    var portalPosition: CGPoint = CGPoint(x: 0, y: 0)
-    
     //user input stuff
     var touchStarted = true
     
@@ -66,6 +64,7 @@ class GameScene: SKScene {
         GameSceneCommunicator.instance.isBuildPhase = true
         
         uiManager = UIManager()
+        uiManager!.setupUI()
         
         //creates and adds clickable tiles to GameScene
         let _ = ClickableTileFactory()
@@ -74,8 +73,7 @@ class GameScene: SKScene {
         
         setupEdges()
         
-        
-        setupCamera()
+        uiManager!.setupCamera()
         
         //creates start foundations and adds the node to the GameScene
         FoundationPlateFactory().setupStartPlates()
@@ -90,39 +88,6 @@ class GameScene: SKScene {
         
         setupEnemies()
         addChild(EnemyNodes.enemiesNode)
-        
-    }
-    
-    func setupCamera(){
-        
-        let myCamera = self.camera
-        let backgroundMap = (childNode(withName: "edge") as! SKTileMapNode)
-        let scaledSize = CGSize(width: size.width * myCamera!.xScale, height: size.height * myCamera!.yScale)
-        
-        let xInset = min((scaledSize.width/2) - 100.0, backgroundMap.frame.width/2)
-        let yInset = min((scaledSize.height/2) - 100.0, backgroundMap.frame.height/2)
-        
-        let constrainRect = backgroundMap.frame.insetBy(dx: xInset, dy: yInset)
-        
-        let yLowerLimit = constrainRect.minY
-        
-        let xRange = SKRange(lowerLimit: constrainRect.minX, upperLimit: constrainRect.maxX)
-        let yRange = SKRange(lowerLimit: yLowerLimit, upperLimit: constrainRect.maxY)
-        
-        let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
-        edgeConstraint.referenceNode = backgroundMap
-        
-        myCamera!.constraints = [edgeConstraint]
-        
-        if view?.gestureRecognizers == nil{
-            
-            let pinchGesture = UIPinchGestureRecognizer()
-            pinchGesture.addTarget(self, action: #selector(pinchGestureAction(_:)))
-            view?.addGestureRecognizer(pinchGesture)
-
-        }
-        
-        myCamera!.position = CGPoint(x: 0, y: yLowerLimit)
         
     }
     
@@ -161,7 +126,6 @@ class GameScene: SKScene {
         
         waveManager = WaveManager(totalSlots: WaveData.WAVE_STANDARD_SIZE, choises: [.standard])
         
-        portalPosition = spawnPoint!.position
     }
     
     func tile(in tileMap: SKTileMapNode, at coordinates: tileCoordinates) -> SKTileDefinition?{
@@ -256,19 +220,15 @@ class GameScene: SKScene {
             uiManager!.priceTag!.position.y += 1.5
         }
         
+        if uiManager!.moveCameraToDoors {
+            
+            uiManager!.performMoveCameraToDoors()
+            
+        }
         
         if uiManager!.moveCameraToPortal {
-            let cameraDirection = PhysicsUtils.getCameraDirection(camera: self.camera!, targetPoint: portalPosition)
-            PhysicsUtils.moveCameraToTargetPoint(camera: self.camera!, direction: cameraDirection)
             
-            let portal = SKSpriteNode()
-            portal.position = portalPosition
-            portal.size = CGSize(width: 86, height: 500)
-                        
-            if portal.contains(camera!.position) || !EnemyNodes.enemiesNode.children.isEmpty{
-                uiManager!.moveCameraToPortal = false
-                print("Im at portal with camera")
-            }
+            uiManager!.performMoveCameraToPortal()
         }
         
         for node in TowerNode.towersNode.children {
@@ -334,33 +294,24 @@ class GameScene: SKScene {
     
     func resetGameScene(){
         
+        //UI
+        uiManager!.resetUI()
+        
         //Tower
         TowerNode.towerArray.removeAll()
         TowerNode.towersNode.removeAllChildren()
         TowerNode.towersNode.removeFromParent()
         TowerNode.towerTextureNode.removeAllChildren()
         TowerNode.towerTextureNode.removeFromParent()
-        uiManager!.towerIndicatorsNode.removeAllChildren()
-        uiManager!.towerIndicatorsNode.removeFromParent()
         
         //Enemies
         EnemyNodes.enemiesNode.removeAllChildren()
         EnemyNodes.enemiesNode.removeFromParent()
         EnemyNodes.enemyArray.removeAll()
         
-        //HP bars
-        uiManager!.hpBarsNode.removeAllChildren()
-        uiManager!.hpBarsNode.removeFromParent()
-        
-        //Projectile Shadows
-        uiManager!.projectileShadowNode.removeAllChildren()
-        uiManager!.projectileShadowNode.removeFromParent()
-        
         //Foundation
         FoundationPlateNodes.foundationPlatesNode.removeAllChildren()
         FoundationPlateNodes.foundationPlatesNode.removeFromParent()
-        uiManager!.foundationIndicatorsNode.removeAllChildren()
-        uiManager!.foundationIndicatorsNode.removeFromParent()
         
         //ClickableTiles
         ClickableTilesNodes.clickableTilesNode.removeAllChildren()
@@ -370,10 +321,6 @@ class GameScene: SKScene {
         ProjectileNodes.projectilesNode.removeAllChildren()
         ProjectileNodes.projectilesNode.removeFromParent()
         ProjectileNodes.gunProjectilesPool.removeAll()
-        
-        //Edge
-        uiManager!.edgesTilesNode.removeAllChildren()
-        uiManager!.edgesTilesNode.removeFromParent()
         
         //Economy
         GameManager.instance.currentMoney = PlayerData.START_MONEY
@@ -392,22 +339,7 @@ class GameScene: SKScene {
                 child.removeFromParent()
             }
         }
-        
-        //UI
-        self.camera!.removeAllChildren()
-        uiManager!.uiNode.removeFromParent()
-        
-        //Foundation edit mode
-        uiManager!.clickableTileGridsNode.removeFromParent()
-        
-        //Money
-        uiManager!.moneyNode.removeAllChildren()
-        uiManager!.moneyNode.removeFromParent()
-        
-        uiManager!.dialoguesNode.removeAllChildren()
-        uiManager!.dialoguesNode.removeFromParent()
-        
-        uiManager!.foundationIndicator!.removeFromParent()
+
     }
     
     
