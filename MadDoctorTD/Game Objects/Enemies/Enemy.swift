@@ -146,15 +146,26 @@ class Enemy: SKSpriteNode{
         
         if !isMoving {
             movePoints = GameScene.instance!.pathfindingTestEnemy!.movePoints
-            isMoving = true
-        }
-        
-        if self.enemyType == .flying || self.enemyType == .boss{
             
-            if movePoints.count > 1 {
-                let finalPoint = movePoints[movePoints.count-1]
-                movePoints = [finalPoint]
+            if movePoints.isEmpty {
+                return
             }
+            
+            if self.enemyType == .flying || self.enemyType == .boss{
+                
+                if movePoints.count > 1 {
+                    let finalPoint = movePoints[movePoints.count-1]
+                    movePoints = [finalPoint]
+                }
+            }
+            
+            let upcommingPoint = movePoints[0]
+            
+            let lookAtConstraint = SKConstraint.orient(to: upcommingPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
+            self.constraints = [ lookAtConstraint ]
+            
+            isMoving = true
+            
         }
         
         if movePoints.isEmpty {
@@ -212,11 +223,12 @@ class Enemy: SKSpriteNode{
         if isAttacker && enemyType != .boss {
             
             if attackTarget != nil{
-                
+                /*
                 if isAttacker{
                     let lookAtConstraint = SKConstraint.orient(to: attackTarget!, offset: SKRange(constantValue: -CGFloat.pi / 2))
                     self.constraints = [ lookAtConstraint ]
                 }
+                */
                 
                 attack()
                 return
@@ -226,10 +238,12 @@ class Enemy: SKSpriteNode{
                 let targetPosition = seekAndDestroy()
                 if targetPosition != nil{
                     
+                    /*
                     if isAttacker{
                         let lookAtConstraint = SKConstraint.orient(to: targetPosition!, offset: SKRange(constantValue: -CGFloat.pi / 2))
                         self.constraints = [ lookAtConstraint ]
                     }
+                     */
                     
                     setDirection(targetPoint: targetPosition!)
                     if slowTick <= 0{
@@ -250,10 +264,10 @@ class Enemy: SKSpriteNode{
         
         setDirection(targetPoint: nextPoint)
         
-        
+        /*
         let lookAtConstraint = SKConstraint.orient(to: nextPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
         self.constraints = [ lookAtConstraint ]
-        
+        */
         
         if slowTick <= 0{
             position.x += direction.x * baseSpeed
@@ -269,6 +283,14 @@ class Enemy: SKSpriteNode{
             
             oldMovePoints.append(movePoints[0])
             movePoints.remove(at: 0)
+            
+            if movePoints.count >= 1 {
+                
+                let upcommingPoint = movePoints[0]
+                
+                let lookAtConstraint = SKConstraint.orient(to: upcommingPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
+                self.constraints = [ lookAtConstraint ]
+            }
         }
     }
     
