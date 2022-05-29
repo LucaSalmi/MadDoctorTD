@@ -269,18 +269,17 @@ extension GameScene {
         case "ReadyButton":
             if uiManager!.readyButton?.alpha == 1{
                 
+                //TODO: Fix cut scene!
                 /*
-                if camera!.xScale > 1.29 && camera!.xScale < 1.31 {
-                    uiManager!.lockCamera = true
-                    uiManager!.moveCameraToDoors = true
-                }
-                else {
-                    uiManager!.onCameraReachedPortal()
-                }
-                */
+                let newCameraScale = 0.5
+                self.camera!.setScale(newCameraScale)
+                uiManager!.setupCamera()
                 
+                uiManager!.lockCamera = true
+                uiManager!.moveCameraToDoors = true
+                 */
+
                 uiManager!.onCameraReachedPortal()
-                
             }
             
             
