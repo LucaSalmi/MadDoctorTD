@@ -35,6 +35,8 @@ class WaveManager{
     
     var numberOfAttackers = 0
 
+    var gainSlimeMaterial = false
+    var gainSquidMaterial = false
         
     init(totalSlots: Int, choises: [EnemyTypes]){
         
@@ -105,6 +107,14 @@ class WaveManager{
             
             if chosen == .boss{
                 enemy = EnemyFactory().createBoss(enemyRace: enemyRace)
+                
+                switch enemyRace {
+                case .slime:
+                    gainSlimeMaterial = true
+                case .squid:
+                    gainSquidMaterial = true
+                }
+                
             }else{
                 enemy = EnemyFactory().createEnemy(enemyRace: enemyRace, enemyType: chosen!)
             }
@@ -329,9 +339,20 @@ class WaveManager{
             GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * WaveData.WAVES_PER_LEVEL) //Actually money gain
             GameManager.instance.researchPoints += WaveData.RP_PER_WAVE
             GameManager.instance.survivalBonusNumber += (WaveData.INCOME_PER_WAVE * WaveData.WAVES_PER_LEVEL)
+            
+            if gainSlimeMaterial {
+                GameManager.instance.slimeMaterialGained = 1
+                GameManager.instance.slimeMaterials += 1
+            }
+            else if gainSquidMaterial {
+                GameManager.instance.squidMaterialGained = 1
+                GameManager.instance.squidMaterials += 1
+            }
+            
+            gainSlimeMaterial = false
+            gainSquidMaterial = false
+            
             GameSceneCommunicator.instance.isBuildPhase = true
-            
-            
             
 //            GameScene.instance?.readyButton?.alpha = 1
 //            GameScene.instance?.buildFoundationButton?.alpha = 1

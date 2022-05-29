@@ -668,9 +668,11 @@ class UIManager {
         researchPointsGained?.text = ("\(WaveData.RP_PER_WAVE)")
         survivalBonusNumber?.text = ("\(gameManager.survivalBonusNumber)")
         
-        if gameScene!.waveManager?.waveNumber == 10 || gameScene!.waveManager?.waveNumber == 20{
-            bossMaterialGained?.text = "Boss Material: +1"
-
+        if gameManager.slimeMaterialGained > 0 {
+            bossMaterialGained?.text = "Slime Material: +1"
+        }
+        else if gameManager.squidMaterialGained > 0 {
+            bossMaterialGained?.text = "Squid Material: +1"
         }
         
         waveSummary?.alpha = 1
