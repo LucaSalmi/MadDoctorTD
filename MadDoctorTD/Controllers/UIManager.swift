@@ -838,7 +838,7 @@ class UIManager {
         targetNode.zPosition = 1000
         targetNode.position = doorOne.position
         targetNode.position.x += (doorOne.size.width + (doorOne.size.width/2) )
-        targetNode.position.y += gameScene!.size.height * 0.4
+        targetNode.position.y += gameScene!.size.height * 0.05
         
         let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetNode.position)
         PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
@@ -864,7 +864,7 @@ class UIManager {
         targetNode.alpha = 0
         targetNode.zPosition = 1000
         targetNode.position = spawnPoint.position
-        targetNode.position.y -= gameScene!.size.height * 0.4
+        targetNode.position.y -= gameScene!.size.height * 0.05
         
         let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetNode.position)
         PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
