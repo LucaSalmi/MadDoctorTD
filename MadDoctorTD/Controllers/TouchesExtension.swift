@@ -272,9 +272,9 @@ extension GameScene {
         case "ReadyButton":
             if uiManager!.readyButton?.alpha == 1{
                 
-                
                 let newCameraScale = 0.5
-                self.camera!.setScale(newCameraScale)
+                self.camera!.xScale = newCameraScale
+                self.camera!.yScale = newCameraScale
                 
                 let cameraPosition = self.camera!.position
                 uiManager!.setupCamera()
@@ -364,9 +364,10 @@ extension GameScene {
             
         }
         
+        let cameraPosition = self.camera!.position
         camera.setScale(newCameraScale)
         uiManager!.setupCamera()
-        
+        self.camera!.position = cameraPosition
     }
 
 

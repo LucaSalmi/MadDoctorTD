@@ -282,7 +282,10 @@ class UIManager {
         
         let myCamera = gameScene!.camera
         let backgroundMap = (gameScene!.childNode(withName: "edge") as! SKTileMapNode)
-        let scaledSize = CGSize(width: gameScene!.size.width * myCamera!.xScale, height: gameScene!.size.height * myCamera!.yScale)
+        let scaledSize = CGSize(
+            width: gameScene!.size.width * gameScene!.camera!.xScale,
+            height: gameScene!.size.height * gameScene!.camera!.yScale
+        )
         
         let xInset = min((scaledSize.width/2) - 100.0, backgroundMap.frame.width/2)
         let yInset = min((scaledSize.height/2) - 100.0, backgroundMap.frame.height/2)
@@ -878,6 +881,10 @@ class UIManager {
     }
     
     func onCameraReachedPortal() {
+        
+        let cameraPosition = GameScene.instance!.camera!.position
+        setupCamera()
+        GameScene.instance!.camera!.position = cameraPosition
         
         moveCameraToPortal = false
         print("Im at portal with camera")
