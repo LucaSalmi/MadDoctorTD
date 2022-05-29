@@ -180,6 +180,10 @@ class GameScene: SKScene {
             return
         }
         
+        if uiManager!.zoomOutCamera {
+            uiManager!.performZoomOut()
+        }
+        
         if uiManager!.fadeInPortal{
             uiManager!.fadePortal(fadeIn: true)
         }

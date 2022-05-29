@@ -116,6 +116,7 @@ class UIManager {
     var moveCameraToPortal: Bool = false
     var moveCameraToDoors: Bool = false
     var lockCamera: Bool = false
+    var zoomOutCamera: Bool = false
     
     var moneyNode: SKNode = SKNode()
     
@@ -861,6 +862,11 @@ class UIManager {
     
     func performMoveCameraToPortal() {
         
+        if zoomOutCamera {
+            performZoomOut()
+            return
+        }
+
         let spawnPoint = gameScene!.childNode(withName: "SpawnPoint") as! SKSpriteNode
         
         let targetNode = SKSpriteNode(texture: nil, color: .red, size: FoundationData.SIZE)
@@ -871,23 +877,42 @@ class UIManager {
         
         let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetNode.position)
         PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
-                    
+        
         if targetNode.contains(gameScene!.camera!.position) {
             
-            onCameraReachedPortal()
+            zoomOutCamera = true
+            onCutsceneCompleted()
             
         }
         
     }
     
-    func onCameraReachedPortal() {
+    func performZoomOut() {
         
-        let cameraPosition = GameScene.instance!.camera!.position
-        setupCamera()
-        GameScene.instance!.camera!.position = cameraPosition
+        if gameScene!.camera!.xScale < 1.3 {
+            
+            let scaleIncrease = 0.01
+            
+            gameScene!.camera!.xScale += scaleIncrease
+            gameScene!.camera!.yScale += scaleIncrease
+            
+            let cameraPosition = GameScene.instance!.camera!.position
+            setupCamera()
+            GameScene.instance!.camera!.position = cameraPosition
+            
+        }
+        else {
+            zoomOutCamera = false
+            lockCamera = false
+        }
+        
+    }
+    
+    func onCutsceneCompleted() {
+        
+        print("Cut scene completed!")
         
         moveCameraToPortal = false
-        print("Im at portal with camera")
         
         GameSceneCommunicator.instance.startWavePhase()
         fadeInPortal = true
@@ -900,8 +925,6 @@ class UIManager {
         SoundManager.playSFX(sfxName: SoundManager.announcer, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
         GameManager.instance.moneyEarned = 0
         GameManager.instance.baseHPLost = 0
-        
-        lockCamera = false
         
         doorOne.position.x = 0 - doorOne.size.width/2
         doorTwo.position.x = 0 + doorTwo.size.width/2
