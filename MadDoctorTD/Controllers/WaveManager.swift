@@ -22,9 +22,9 @@ class WaveManager{
     var spawnCounter = 0
     var waveStartCounter = 0
     
-    let wavesPerLevel = 5
+    //let wavesPerLevel = 5
     
-    var bossLevel = 10
+    var currentBossLevel = WaveData.BOSS_LEVEL
     
     var attackLevel = 6
     var unlockAttackers = false
@@ -59,8 +59,8 @@ class WaveManager{
             unlockAttackers = true
             
         }
-        if waveNumber == bossLevel + 1 {
-            bossLevel += 10
+        if waveNumber == currentBossLevel + 1 {
+            currentBossLevel += WaveData.BOSS_LEVEL
         }
         
         if waveNumber == attackLevel + 1{
@@ -78,7 +78,7 @@ class WaveManager{
         
         var occupiedSlots = 0
         
-        if waveNumber == bossLevel {
+        if waveNumber == currentBossLevel {
             totalSlots = EnemiesData.BOSS_ENEMY_SLOT
         } else {
             totalSlots = WaveData.LEVEL_WAVE_SIZE + waveNumber
@@ -125,7 +125,7 @@ class WaveManager{
                         attackSpawnChance = 7 // 70%
                     }
                     
-                } else if waveNumber == bossLevel {
+                } else if waveNumber == currentBossLevel {
                     attackSpawnChance = 10
                     
                 } else {
@@ -156,7 +156,7 @@ class WaveManager{
         print("Wavenumber:\(waveNumber)")
         GameManager.instance.currentWave = waveNumber
         
-        if waveNumber % wavesPerLevel == 0 {
+        if waveNumber % WaveData.WAVES_PER_LEVEL == 0 {
             shouldCreateWave = false
         }
         
@@ -267,7 +267,7 @@ class WaveManager{
             enemyChoises.append(.flying)
         }
         if waveNumber >= 9 {
-            if waveNumber == bossLevel - 1{
+            if waveNumber == currentBossLevel - 1{
                 enemyChoises = [.boss]
             } else {
                 enemyChoises = [.standard,.heavy,.flying,.fast]
@@ -318,16 +318,17 @@ class WaveManager{
     
     func checkWinCondition(){
         
-        if waveNumber < wavesPerLevel {
+        if waveNumber < WaveData.WAVES_PER_LEVEL {
             return
         }
         
-        if (waveNumber % wavesPerLevel == 0) &&
+        if (waveNumber % WaveData.WAVES_PER_LEVEL == 0) &&
                 (EnemyNodes.enemyArray.isEmpty && EnemyNodes.enemiesNode.children.isEmpty) {
             print("Current level completed!")
-            GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
-            //GameManager.instance.moneyEarned += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
-            GameManager.instance.survivalBonusNumber += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
+            GameManager.instance.moneyEarned += (WaveData.INCOME_PER_WAVE * WaveData.WAVES_PER_LEVEL) //For UI only
+            GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * WaveData.WAVES_PER_LEVEL) //Actually money gain
+            GameManager.instance.researchPoints += WaveData.RP_PER_WAVE
+            GameManager.instance.survivalBonusNumber += (WaveData.INCOME_PER_WAVE * WaveData.WAVES_PER_LEVEL)
             GameSceneCommunicator.instance.isBuildPhase = true
             
             

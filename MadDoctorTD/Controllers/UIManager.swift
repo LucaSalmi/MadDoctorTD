@@ -665,7 +665,7 @@ class UIManager {
         baseHPLostNumber?.text = ("\(gameManager.baseHPLost)")
         creditsGainedNumber?.text = ("$\(gameManager.moneyEarned)")
         summaryTitle?.text = ("Wave \(gameManager.currentWave) completed!")
-        researchPointsGained?.text = ("\(gameManager.researchPoints)")
+        researchPointsGained?.text = ("\(WaveData.RP_PER_WAVE)")
         survivalBonusNumber?.text = ("\(gameManager.survivalBonusNumber)")
         
         if gameScene!.waveManager?.waveNumber == 10 || gameScene!.waveManager?.waveNumber == 20{
