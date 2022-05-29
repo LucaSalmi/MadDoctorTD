@@ -13,7 +13,7 @@ extension GameScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        if GameManager.instance.isPaused{
+        if GameManager.instance.isPaused || uiManager!.lockCamera {
             return
         }
         
@@ -157,7 +157,7 @@ extension GameScene {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        if GameManager.instance.isPaused {
+        if GameManager.instance.isPaused || uiManager!.lockCamera {
             return
         }
         
@@ -191,6 +191,9 @@ extension GameScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        if uiManager!.lockCamera {
+            return
+        }
         
         if uiManager!.touchingTower == nil{
             
@@ -269,17 +272,19 @@ extension GameScene {
         case "ReadyButton":
             if uiManager!.readyButton?.alpha == 1{
                 
-                //TODO: Fix cut scene!
-                /*
+                
                 let newCameraScale = 0.5
                 self.camera!.setScale(newCameraScale)
+                
+                let cameraPosition = self.camera!.position
                 uiManager!.setupCamera()
+                self.camera!.position = cameraPosition
                 
                 uiManager!.lockCamera = true
                 uiManager!.moveCameraToDoors = true
-                 */
+                 
 
-                uiManager!.onCameraReachedPortal()
+                //uiManager!.onCameraReachedPortal()
             }
             
             
@@ -337,6 +342,11 @@ extension GameScene {
     
     
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
+        
+        if uiManager!.lockCamera {
+            return
+        }
+        
         guard let camera = self.camera else {
             return
         }
@@ -361,6 +371,10 @@ extension GameScene {
 
 
     func handleLongPress() {
+        
+        if uiManager!.lockCamera {
+            return
+        }
        
         guard let currentTower = GameSceneCommunicator.instance.currentTower else{return}
         
