@@ -282,6 +282,10 @@ extension GameScene {
                 
                 uiManager!.lockCamera = true
                 uiManager!.moveCameraToDoors = true
+                
+                //hide build menu
+                uiManager!.hideBuildMenu = true
+                
                  
 
                 //uiManager!.onCameraReachedPortal()

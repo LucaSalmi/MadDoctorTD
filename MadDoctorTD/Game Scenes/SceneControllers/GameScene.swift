@@ -176,16 +176,7 @@ class GameScene: SKScene {
         if uiManager!.fadeOutPortal{
             uiManager!.fadePortal(fadeIn: false)
         }
-        
-        if GameSceneCommunicator.instance.isBuildPhase && uiManager!.waveSummary?.alpha == 0{
-            uiManager!.showBuildButtonsUI()
-            //FadeoutPortal()
-            //showTowerUI()
-        }
-        else {
-            uiManager!.hideBuildButtonsUI()
-        }
-        
+    
         if GameSceneCommunicator.instance.openDoors || GameSceneCommunicator.instance.closeDoors {
             uiManager!.animateDoors()
             
@@ -213,12 +204,20 @@ class GameScene: SKScene {
         if uiManager!.moveCameraToDoors {
             
             uiManager!.performMoveCameraToDoors()
+           
             
         }
         
         if uiManager!.moveCameraToPortal {
             
             uiManager!.performMoveCameraToPortal()
+            
+        }
+        if uiManager!.hideBuildMenu{
+            uiManager!.hideBuildButtonsUI()
+        }
+        else{
+            uiManager!.showBuildButtonsUI()
         }
         
         for node in TowerNode.towersNode.children {
