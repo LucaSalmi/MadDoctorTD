@@ -40,13 +40,14 @@ struct GameSceneView: View {
 
     }
     
-    
+
     var body: some View {
-        
+
         ZStack {
             SpriteView(scene: gameScene, debugOptions: [.showsFPS, .showsNodeCount])
                 .ignoresSafeArea()
                 .blur(radius: gameManager.isPaused ? 5 : 0)
+                
             
             VStack {
                 
@@ -61,11 +62,11 @@ struct GameSceneView: View {
                             Text("Main Menu")
                         }
                         
-                        
+
                     }.padding(50)
                         .background(Color.white.opacity(0.5))
                     
-                    
+                        
                 }else if GameManager.instance.isGameOver{
                     
                     GameOverView()
@@ -75,7 +76,7 @@ struct GameSceneView: View {
                     HStack {
                         
                         HStack(alignment: .center){
-                            
+                        
                             Text("\(gameManager.currentMoney)$")
                                 .foregroundColor(.white)
                                 .padding(10)
@@ -87,16 +88,16 @@ struct GameSceneView: View {
                         Spacer()
                         
                         HStack(alignment: .center){
-                            
-                            Text("Wave: \(gameManager.currentWave)")
-                                .foregroundColor(.white)
-                                .padding(10)
-                                .background(.black)
-                                .cornerRadius(10)
-                            
-                        }
-                        .frame(minWidth: UIScreen.main.bounds.width * 0.25)
                         
+                        Text("Wave: \(gameManager.currentWave)")
+                            .foregroundColor(.white)
+                            .padding(10)
+                            .background(.black)
+                            .cornerRadius(10)
+                            
+                            }
+                            .frame(minWidth: UIScreen.main.bounds.width * 0.25)
+                            
                         Spacer()
                         
                         HStack(alignment: .center){
@@ -106,7 +107,7 @@ struct GameSceneView: View {
                                 .padding(10)
                                 .background(.black)
                                 .cornerRadius(10)
-                            
+                        
                             Button {
                                 communicator.cancelAllMenus()
                                 SoundManager.playSFX(sfxName: SoundManager.buttonOneSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
@@ -121,27 +122,27 @@ struct GameSceneView: View {
                                     .background(.black)
                                     .cornerRadius(10)
                             }.disabled(communicator.foundationEditMode ? true : false)
-                            
+
                             
                         }
                         .frame(minWidth: UIScreen.main.bounds.width * 0.25)
-                        
+                            
                     }
                     .padding(10)
                     
                     HStack{
+                    
+                    HStack(alignment: .center){
                         
-                        HStack(alignment: .center){
-                            
-                            if communicator.foundationEditMode {
-                                Text("total cost:\(communicator.newFoundationTotalCost)")
-                                    .foregroundColor(.white)
-                                    .padding(10)
-                                    .background(.black)
-                                    .cornerRadius(10)
-                            }
+                        if communicator.foundationEditMode {
+                            Text("total cost:\(communicator.newFoundationTotalCost)")
+                                .foregroundColor(.white)
+                                .padding(10)
+                                .background(.black)
+                                .cornerRadius(10)
                         }
-                        .frame(minWidth: UIScreen.main.bounds.width * 0.25)
+                    }
+                    .frame(minWidth: UIScreen.main.bounds.width * 0.25)
                         
                         Spacer()
                         
@@ -150,11 +151,17 @@ struct GameSceneView: View {
                     
                     Spacer()
                     
+
                 }
+
+
+                
             }
+
         }
         
     }
-    
-    
+
+
 }
+
