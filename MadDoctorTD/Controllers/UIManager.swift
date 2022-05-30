@@ -120,16 +120,9 @@ class UIManager {
     
     var moneyNode: SKNode = SKNode()
     
-    var dialoguesNode: SKNode = SKNode()
-    var showNewMaterialMessage = false
     
     
-    
-    init() {
-        
-        
-        
-    }
+    init() {}
     
     func setupUI() {
         
@@ -271,7 +264,6 @@ class UIManager {
         moveCameraToPortal = false
         
         uiNode.addChild(moneyNode)
-        uiNode.addChild(dialoguesNode)
         
         foundationIndicator = SKSpriteNode(texture: nil, color: .white, size: FoundationData.SIZE)
         foundationIndicator!.alpha = 0
@@ -340,9 +332,6 @@ class UIManager {
         //Money
         moneyNode.removeAllChildren()
         moneyNode.removeFromParent()
-        
-        dialoguesNode.removeAllChildren()
-        dialoguesNode.removeFromParent()
         
         foundationIndicator!.removeFromParent()
         

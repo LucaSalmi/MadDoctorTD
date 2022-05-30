@@ -162,20 +162,6 @@ class GameScene: SKScene {
             uiManager!.statUpgradePopUp?.alpha = 0
         }
         
-        if uiManager!.showNewMaterialMessage{
-            
-            for node in uiManager!.dialoguesNode.children{
-                
-                let dialog = node as! Dialogue
-                dialog.update()
-                
-            }
-            
-            if uiManager!.dialoguesNode.children.count == 0{
-                uiManager!.showNewMaterialMessage = false
-            }
-        }
-        
         if GameManager.instance.isPaused || GameManager.instance.isGameOver{
             return
         }

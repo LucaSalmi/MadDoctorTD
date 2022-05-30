@@ -404,9 +404,6 @@ class Enemy: SKSpriteNode{
             materialTarget.x -= 300
             materialTarget.y += 600
             let bossDrop = DropObject(startPoint: self.position, targetPoint: materialTarget, materialType: self.enemyRace!)
-            
-            let dialog = createDialog()
-            GameScene.instance?.uiManager!.dialoguesNode.addChild(dialog)
             GameScene.instance!.uiManager!.moneyNode.addChild(bossDrop)
             boss.bossTexture?.removeFromParent()
             
