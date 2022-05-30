@@ -24,7 +24,7 @@ class MineProjectile: AoeProjectile{
         
         super.init(position: position, target: target, attackDamage: attackDamage)
         
-        texture = SKTexture(imageNamed: "cannon_projectile")
+        texture = SKTexture(imageNamed: "cannon_projectile_slime")
         
         
         

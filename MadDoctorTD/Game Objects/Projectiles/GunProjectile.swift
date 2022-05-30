@@ -20,7 +20,7 @@ class GunProjectile: Projectile {
         
         super.init(position: position, target: target, attackDamage: attackDamage)
         
-        texture = SKTexture(imageNamed: "test_projectile")
+        texture = SKTexture(imageNamed: "blast_projectile")
 
         
     }

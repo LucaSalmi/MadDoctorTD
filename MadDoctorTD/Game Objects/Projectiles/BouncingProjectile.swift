@@ -23,7 +23,7 @@ class BouncingProjectile: GunProjectile {
         
         super.init(position: position, target: target, attackDamage: attackDamage)
         
-        texture = SKTexture(imageNamed: "bouncing_projectile")
+        texture = SKTexture(imageNamed: "bounce_projectile")
 
         //This projectile sub-class uses different collison logic
         physicsBody?.contactTestBitMask = 0
@@ -86,8 +86,8 @@ class BouncingProjectile: GunProjectile {
     
     override func update() {
         
-        let spinPct = CGFloat.pi / 4
-        zRotation += spinPct
+//        let spinPct = CGFloat.pi / 4
+//        zRotation += spinPct
         
         super.update()
         

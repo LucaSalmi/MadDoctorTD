@@ -200,21 +200,21 @@ struct TopArea: View {
         switch communicator.selectedTowerType {
             
         case .gunTower:
-            communicator.image3a = "bouncing_projectile"
+            communicator.image3a = "blast_tower_slime"
             communicator.image3b = "Daniel"
             communicator.image3c = "Daniel"
         case .rapidFireTower:
             communicator.image3a = "Daniel"
-            communicator.image3b = "money_object"
+            communicator.image3b = "speed_tower_slime"
             communicator.image3c = "Daniel"
         case .sniperTower:
             communicator.image3a = "Daniel"
-            communicator.image3b = "money_object"
+            communicator.image3b = "sniper_tower_rotate_slime"
             communicator.image3c = "Daniel"
         case .cannonTower:
             communicator.image3a = "Daniel"
             communicator.image3b = "Daniel"
-            communicator.image3c = "cannon_projectile"
+            communicator.image3c = "slime_cannon"
         }
     }
     
