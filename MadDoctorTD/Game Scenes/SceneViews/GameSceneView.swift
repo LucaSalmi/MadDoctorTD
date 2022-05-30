@@ -10,26 +10,43 @@ import SpriteKit
 
 struct GameSceneView: View {
     
-    @State var gameScene: SKScene? = nil
+    var gameScene: SKScene
     
     @ObservedObject var communicator = GameSceneCommunicator.instance
     @ObservedObject var gameManager = GameManager.instance
     
     init() {
         
-        
-        
+        if GameScene.instance == nil {
+            
+            switch GameManager.instance.currentLevel {
+                
+            case 1:
+                gameScene = SKScene(fileNamed: "GameScene")!
+                
+            case 2:
+                gameScene = SKScene(fileNamed: "GameSceneTwo")!
+                
+            default:
+                gameScene = SKScene(fileNamed: "GameScene")!
+            }
+            
+        }
+        else {
+            gameScene = GameScene.instance!
+        }
+        gameScene.scaleMode = .aspectFill
+        communicator.cancelAllMenus()
+
     }
     
     
     var body: some View {
         
         ZStack {
-            if self.gameScene != nil {
-                SpriteView(scene: self.gameScene!, debugOptions: [.showsFPS, .showsNodeCount])
-                    .ignoresSafeArea()
-                    .blur(radius: gameManager.isPaused ? 5 : 0)
-            }
+            SpriteView(scene: gameScene, debugOptions: [.showsFPS, .showsNodeCount])
+                .ignoresSafeArea()
+                .blur(radius: gameManager.isPaused ? 5 : 0)
             
             VStack {
                 
@@ -44,7 +61,6 @@ struct GameSceneView: View {
                             AppManager.appManager.state = .startMenu
                             GameScene.instance!.resetGameScene()
                             GameScene.instance = nil
-                            communicator.isGameSceneNil = true
                             gameManager.isPaused = false
                             
                         } label: {
@@ -142,35 +158,8 @@ struct GameSceneView: View {
                     
                 }
             }
-        }.onAppear(perform: {
-            
-            print("DANNE: On Appear")
-            
-            if communicator.isGameSceneNil {
-                
-                switch GameManager.instance.currentLevel {
-                    
-                case 1:
-                    gameScene = SKScene(fileNamed: "GameScene")!
-                    
-                case 2:
-                    gameScene = SKScene(fileNamed: "GameSceneTwo")!
-                    
-                default:
-                    gameScene = SKScene(fileNamed: "GameScene")!
-                }
-                
-                communicator.isGameSceneNil = false
-                
-            }
-            else {
-                gameScene = GameScene.instance!
-            }
-            
-            gameScene!.scaleMode = .aspectFill
-            communicator.cancelAllMenus()
-            
-        })
+        }
+        
     }
     
     
