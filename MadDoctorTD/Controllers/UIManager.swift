@@ -118,6 +118,8 @@ class UIManager {
     var lockCamera: Bool = false
     var zoomOutCamera: Bool = false
     
+    var hideBuildMenu: Bool = false
+    
     var moneyNode: SKNode = SKNode()
     
     

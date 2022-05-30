@@ -360,7 +360,7 @@ class WaveManager{
             
             GameScene.instance?.uiManager!.showSummary()
             GameScene.instance?.uiManager!.fadeOutPortal = true
-            
+            GameScene.instance?.uiManager?.hideBuildMenu = false
             //SoundManager.stopMusic()
             
             //Door animation:
