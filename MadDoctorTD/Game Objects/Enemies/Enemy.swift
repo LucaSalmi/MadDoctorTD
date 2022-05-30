@@ -232,14 +232,6 @@ class Enemy: SKSpriteNode{
                 let targetPosition = seekAndDestroy()
                 if targetPosition != nil{
                     
-                    if let constraints = self.constraints{
-                        if constraints.isEmpty{
-                            
-                            let lookAtConstraint = SKConstraint.orient(to: targetPosition!, offset: SKRange(constantValue: -CGFloat.pi / 2))
-                            self.constraints = [ lookAtConstraint ]
-                        }
-                    }
-                    
                     setDirection(targetPoint: targetPosition!)
                     if slowTick <= 0{
                         position.x += direction.x * baseSpeed
@@ -331,6 +323,11 @@ class Enemy: SKSpriteNode{
                 if plateDistance <= self.size.width * 4 {
                     
                     if !plate.isStartingFoundation{
+                        
+                        let lookAtConstraint = SKConstraint.orient(to: plate.position, offset: SKRange(constantValue: -CGFloat.pi / 2))
+                        if self.constraints != [lookAtConstraint]{
+                            self.constraints = [ lookAtConstraint ]
+                        }
                         return plate.position
                     }
                 }
