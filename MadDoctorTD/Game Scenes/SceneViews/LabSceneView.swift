@@ -244,11 +244,20 @@ struct MiddleArea: View {
                         Image(communicator.selectedTowerImage)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "1"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "1"))
                         
+                        Text("2 RP")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "1"))
+                           
                     }
                 })
                 
@@ -276,10 +285,19 @@ struct MiddleArea: View {
                         Image(communicator.image2a)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "2a"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "2a"))
+                        
+                        Text("4 RP")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "2a"))
                     }
                 }
                 
@@ -299,10 +317,19 @@ struct MiddleArea: View {
                         Image(communicator.image2b)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "2b"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "2b"))
+                        
+                        Text("4 RP")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "2b"))
                     }
                 }
                 
@@ -322,10 +349,19 @@ struct MiddleArea: View {
                         Image(communicator.image2c)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "2c"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "2c"))
+                        
+                        Text("4 RP")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "2c"))
                     }
                 }
             }
@@ -361,10 +397,19 @@ struct MiddleArea: View {
                         Image(communicator.image3a)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "3a"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "3a"))
+                        
+                        Text("6 RP..")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "3a"))
                     }
                 }
                 
@@ -385,10 +430,19 @@ struct MiddleArea: View {
                         Image(communicator.image3b)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "3b"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "3b"))
+                        
+                        Text("6 RP..")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "3b"))
                     }
                 }
                 
@@ -409,10 +463,19 @@ struct MiddleArea: View {
                         Image(communicator.image3c)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "3c"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "3c"))
+                        
+                        Text("6 RP..")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "3c"))
                         
                     }
                 })
@@ -712,6 +775,127 @@ struct MiddleArea: View {
         return .error
     }
     
+    func checkIfPriceIsNeeded(buttonId: String) -> Double{
+        
+        var towerResearchLevel = [String]()
+        
+        switch communicator.selectedTowerType {
+        
+        case .gunTower:
+            towerResearchLevel = communicator.gunTowerResearchLevel
+        case .rapidFireTower:
+            towerResearchLevel = communicator.rapidTowerResearchLevel
+        case .sniperTower:
+            towerResearchLevel = communicator.sniperTowerResearchLevel
+        case .cannonTower:
+            towerResearchLevel = communicator.cannonTowerResearchLevel
+            
+        }
+        
+            switch buttonId{
+                
+            case "1":
+                if !towerResearchLevel.contains("1") {
+                return 1.0
+                }
+                
+                // 2
+                
+            case "2a":
+                if towerResearchLevel.contains("1") && !towerResearchLevel.contains("2a") && !towerResearchLevel.contains("3a") {
+                    return 1.0
+                }
+            case "2b":
+                if towerResearchLevel.contains("1") && !towerResearchLevel.contains("2b") && !towerResearchLevel.contains("3b") {
+                    return 1.0
+                }
+            case "2c":
+                if towerResearchLevel.contains("1") && !towerResearchLevel.contains("2c") && !towerResearchLevel.contains("3c") {
+                    return 1.0
+                }
+                
+                // 3
+                
+            case "3a":
+                if towerResearchLevel.contains("2a") && !towerResearchLevel.contains("3a"){
+                    return 1.0
+                }
+            case "3b":
+                if towerResearchLevel.contains("2b") && !towerResearchLevel.contains("3b"){
+                    return 1.0
+                }
+            case "3c":
+                if towerResearchLevel.contains("2c") && !towerResearchLevel.contains("3c"){
+                    return 1.0
+                }
+            default:
+                return 0.0
+            }
+        
+        return 0.0
+        
+    }
+    
+    func checkAvailable(buttonId: String) -> String{
+        
+        var towerResearchLevel = [String]()
+        
+        switch communicator.selectedTowerType {
+        
+        case .gunTower:
+            towerResearchLevel = communicator.gunTowerResearchLevel
+        case .rapidFireTower:
+            towerResearchLevel = communicator.rapidTowerResearchLevel
+        case .sniperTower:
+            towerResearchLevel = communicator.sniperTowerResearchLevel
+        case .cannonTower:
+            towerResearchLevel = communicator.cannonTowerResearchLevel
+            
+        }
+        
+            switch buttonId{
+                
+            case "1":
+                return "locked_frame_ready"
+                
+                // 2
+                
+            case "2a":
+                if towerResearchLevel.contains("1") {
+                        return "locked_frame_ready"
+                }
+            case "2b":
+                if towerResearchLevel.contains("1") {
+                        return "locked_frame_ready"
+                }
+            case "2c":
+                if towerResearchLevel.contains("1") {
+                        return "locked_frame_ready"
+                }
+                
+                // 3
+                
+            case "3a":
+                if towerResearchLevel.contains("2a") {
+                        return "locked_frame_ready"
+                }
+            case "3b":
+                if towerResearchLevel.contains("2b") {
+                        return "locked_frame_ready"
+                }
+            case "3c":
+                if towerResearchLevel.contains("2c") {
+                        return "locked_frame_ready"
+                }
+            default:
+                return "locked_frame"
+            }
+        
+        return "locked_frame"
+        
+    }
+    
+    
     
     
     func changeOpacity(buttonId: String) -> Double{
@@ -739,9 +923,6 @@ struct MiddleArea: View {
         return 1.0
         
     }
-    
-    
-    
     
 }
 
@@ -806,8 +987,8 @@ struct LabButtonImage: View {
         Image("item_frame_research_bg")
             .resizable()
             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-            .background(communicator.selectedTreeButtonId == id ? .white : .black)
-            .opacity(communicator.selectedTreeButtonId == id ? 1.0 : 0.5)
+//            .background(communicator.selectedTreeButtonId == id ? .white : .black)
+//            .opacity(communicator.selectedTreeButtonId == id ? 1.0 : 0.5)
     }
     
 }
