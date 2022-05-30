@@ -235,7 +235,7 @@ class Enemy: SKSpriteNode{
                     if let constraints = self.constraints{
                         if constraints.isEmpty{
                             
-                            let lookAtConstraint = SKConstraint.orient(to: attackTarget!, offset: SKRange(constantValue: -CGFloat.pi / 2))
+                            let lookAtConstraint = SKConstraint.orient(to: targetPosition!, offset: SKRange(constantValue: -CGFloat.pi / 2))
                             self.constraints = [ lookAtConstraint ]
                         }
                     }
