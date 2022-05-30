@@ -150,8 +150,8 @@ class GameScene: SKScene {
             if AppManager.appManager.transitionOpacity >= 1 {
                 fadeOutScene = false
                 AppManager.appManager.transitionOpacity = 0
-                AppManager.appManager.state = .gameScene
-                SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
+                AppManager.appManager.state = .startMenu
+                //SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
             }
             
         }
