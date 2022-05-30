@@ -26,7 +26,7 @@ struct GameSceneView: View {
         
         ZStack {
             if self.gameScene != nil {
-                SpriteView(scene: self.gameScene!, options: [.ignoresSiblingOrder], debugOptions: [.showsFPS, .showsNodeCount])
+                SpriteView(scene: self.gameScene!, debugOptions: [.showsFPS, .showsNodeCount])
                     .ignoresSafeArea()
                     .blur(radius: gameManager.isPaused ? 5 : 0)
             }
