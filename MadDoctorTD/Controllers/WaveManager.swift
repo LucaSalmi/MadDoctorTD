@@ -362,7 +362,7 @@ class WaveManager{
             GameScene.instance?.uiManager!.showSummary()
             GameScene.instance?.uiManager!.fadeOutPortal = true
             
-            SoundManager.stopMusic()
+            //SoundManager.stopMusic()
             
             //Door animation:
             if let gameScene = currentScene {

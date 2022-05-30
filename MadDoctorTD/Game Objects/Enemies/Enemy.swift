@@ -259,11 +259,6 @@ class Enemy: SKSpriteNode{
         
         setDirection(targetPoint: nextPoint)
         
-        /*
-        let lookAtConstraint = SKConstraint.orient(to: nextPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
-        self.constraints = [ lookAtConstraint ]
-        */
-        
         if slowTick <= 0{
             position.x += direction.x * baseSpeed
             position.y += direction.y * baseSpeed
