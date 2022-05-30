@@ -52,6 +52,8 @@ class Enemy: SKSpriteNode{
     var animationFrames: [SKAction] = []
     var runningFrame = 0
     var frameLimiter = 0
+    var isStepOne = true
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -302,8 +304,18 @@ class Enemy: SKSpriteNode{
         }else{
             
             attackCounter += 1
-            
         }
+        
+        if isStepOne{
+            self.position.x += 5
+            self.position.y += 5
+        }else{
+            self.position.x -= 5
+            self.position.y -= 5
+        }
+        
+        isStepOne.toggle()
+        
     }
     
     private func seekAndDestroy() -> CGPoint?{
@@ -464,43 +476,6 @@ class Enemy: SKSpriteNode{
             hpLeft = 1
         }
         hpBar!.texture = SKTexture(imageNamed: "hp_bar_\(hpLeft)0")
-        
-        //        if hp <= Int(Double(startHp) * 0.1) {
-        //            //TODO: 10% HERE
-        //            hpBar!.texture = SKTexture(imageNamed: "hp_bar_10")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.2) {
-        //            //TODO: 20% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_20")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.3){
-        //            //TODO: 30% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_30")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.4){
-        //            //TODO: 40% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_40")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.5){
-        //            //TODO: 50% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_50")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.6){
-        //            //TODO: 60% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_60")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.7){
-        //            //TODO: 70% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_70")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.8){
-        //            //TODO: 80% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_80")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.9){
-        //            //TODO: 90% HERE
-        //            hpBar!.texture = SKTexture(imageNamed: "hp_bar_90")
-        //        }
     }
     
     private func hasReachedPoint(point: CGPoint) -> Bool {
