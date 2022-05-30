@@ -99,15 +99,20 @@ class MineProjectile: AoeProjectile{
         let gameScene = GameScene.instance!
         
        // SoundManager.playMortarSwooshSFX()
-        SoundManager.playSFX(sfxName: SoundManager.cannonTowerImpactSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                let particle = SKEmitterNode(fileNamed: "CannonExplosion")
-                particle!.position = position
-                particle!.zPosition = 5
-                gameScene.addChild(particle!)
+        SoundManager.playSFX(
+            sfxName: SoundManager.cannonTowerImpactSFX,
+            scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension
+        )
+        if let particle = SKEmitterNode(fileNamed: "CannonExplosion") {
+            particle.position = position
+            particle.zPosition = 5
+            gameScene.addChild(particle)
 
-                gameScene.run(SKAction.wait(forDuration: 1)) {
-                    particle!.removeFromParent()
-                }
+            gameScene.run(SKAction.wait(forDuration: 1)) {
+                particle.removeFromParent()
+            }
+        }
+                
         
         self.removeFromParent()
         
