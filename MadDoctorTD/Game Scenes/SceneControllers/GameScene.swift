@@ -329,7 +329,6 @@ class GameScene: SKScene {
                 child.removeFromParent()
             }
         }
-
     }
     
     
