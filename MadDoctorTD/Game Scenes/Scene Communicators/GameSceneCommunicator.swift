@@ -13,6 +13,8 @@ class GameSceneCommunicator: ObservableObject {
     
     static let instance = GameSceneCommunicator()
     
+    @Published var isGameSceneNil: Bool = true
+    
     @Published var showFoundationMenu: Bool = false
     @Published var showTowerMenu: Bool = false
     @Published var showUpgradeMenu: Bool = false
