@@ -536,13 +536,13 @@ struct MiddleArea: View {
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 damage for Gun Towers? cost: \(cost) RP"
+                return "More damage = More Fun!! Unlock level 2 damage for Gun Towers? cost: \(cost) RP"
             case .rapidFireTower:
-                return "Unlock level 2 damage for Rapid Fire Towers? cost: \(cost) RP"
+                return "More damage = More Fun!! Unlock level 2 damage for Rapid Fire Towers? cost: \(cost) RP"
             case .sniperTower:
-                return "Unlock level 2 damage for Sniper Towers? cost: \(cost) RP"
+                return "More damage = More Fun!! Unlock level 2 damage for Sniper Towers? cost: \(cost) RP"
             case .cannonTower:
-                return "Unlock level 2 damage for Cannon Towers? cost: \(cost) RP"
+                return "More damage = More Fun!! Unlock level 2 damage for Cannon Towers? cost: \(cost) RP"
             }
             
         case "2b":
@@ -552,13 +552,13 @@ struct MiddleArea: View {
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 attack speed for Gun Towers? cost: \(cost) RP"
+                return "Gotta go Fast!! Unlock level 2 attack speed for Gun Towers? cost: \(cost) RP"
             case .rapidFireTower:
-                return "Unlock level 2 attack speed for Rapid Fire Towers? cost: \(cost) RP"
+                return "Gotta go Fast!! Unlock level 2 attack speed for Rapid Fire Towers? cost: \(cost) RP"
             case .sniperTower:
-                return "Unlock level 2 attack speed for Sniper Towers? cost: \(cost) RP"
+                return "Gotta go Fast!! Unlock level 2 attack speed for Sniper Towers? cost: \(cost) RP"
             case .cannonTower:
-                return "Unlock level 2 attack speed for Cannon Towers? cost: \(cost) RP"
+                return "Gotta go Fast!! Unlock level 2 attack speed for Cannon Towers? cost: \(cost) RP"
             }
             
         case "2c":
@@ -568,13 +568,13 @@ struct MiddleArea: View {
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 range for Gun Towers? cost: \(cost) RP"
+                return "You Stink! Stay away! Unlock level 2 range for Gun Towers? cost: \(cost) RP"
             case .rapidFireTower:
-                return "Unlock level 2 range for Rapid Fire Towers? cost: \(cost) RP"
+                return "You Stink! Stay away! Unlock level 2 range for Rapid Fire Towers? cost: \(cost) RP"
             case .sniperTower:
-                return "Unlock level 2 range for Sniper Towers? cost: \(cost) RP"
+                return "You Stink! Stay away! Unlock level 2 range for Sniper Towers? cost: \(cost) RP"
             case .cannonTower:
-                return "Unlock level 2 range for Cannon Towers? cost: \(cost) RP"
+                return "You Stink! Stay away! Unlock level 2 range for Cannon Towers? cost: \(cost) RP"
             }
             
         case "3a":
@@ -584,7 +584,7 @@ struct MiddleArea: View {
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock bouncing projectiles for Gun Towers?  cost: \(cost) RP and 1 Slime Material"
+                return "Amaizingly hypnotic to watch!! Unlock bouncing projectiles for Gun Towers?  cost: \(cost) RP and 1 Slime Material"
             case .rapidFireTower:
                 return "ERROR"
             case .sniperTower:
@@ -602,9 +602,9 @@ struct MiddleArea: View {
             case .gunTower:
                 return "ERROR"
             case .rapidFireTower:
-                return "Unlock slowing projectiles for Rapid Fire Towers? cost: \(cost) RP and 1 Slime Material"
+                return "Chill Duuuuude!! Unlock slowing projectiles for Rapid Fire Towers? cost: \(cost) RP and 1 Slime Material"
             case .sniperTower:
-                return "Unlock poison projectiles for Sniper Towers? cost: \(cost) RP and 1 Slime Material"
+                return "Only natural ingredients!! Unlock poison projectiles for Sniper Towers? cost: \(cost) RP and 1 Slime Material"
             case .cannonTower:
                 return "ERROR"
             }
@@ -622,7 +622,7 @@ struct MiddleArea: View {
             case .sniperTower:
                 return "ERROR"
             case .cannonTower:
-                return "Unlock mine projectiles for Cannon Towers? cost: \(cost) RP and 1 Slime Material"
+                return "Bad aim? No problem!!! Unlock mine projectiles for Cannon Towers? cost: \(cost) RP and 1 Slime Material"
             }
             
         default:
