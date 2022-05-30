@@ -1050,7 +1050,7 @@ struct ConfirmView: View {
                     communicator.buyUpgrade()
                     communicator.showConfirmView = false
                 } label: {
-                    Image("done_build_foundation_button_standard")
+                    Image("check_symbol")
                         .resizable()
                         .frame(width: LabSceneView.imageWidth*0.75, height: LabSceneView.imageHeight*0.75)
                 }
@@ -1060,7 +1060,7 @@ struct ConfirmView: View {
                 Button {
                     communicator.showConfirmView = false
                 } label: {
-                    Image("sniper_tower_static_legs")
+                    Image("cancel_symbol")
                         .resizable()
                         .frame(width: LabSceneView.imageWidth*0.75, height: LabSceneView.imageHeight*0.75)
                 }
