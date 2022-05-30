@@ -164,7 +164,7 @@ class UIManager {
 //        ratingGained = waveSummary?.childNode(withName: "Rating") as? SKLabelNode
 //        ratingGainedNumber = waveSummary?.childNode(withName: "RatingNumber") as? SKLabelNode
         //survivalBonus = waveSummary?.childNode(withName: "SurvivalBonus") as? SKLabelNode
-        survivalBonusNumber = waveSummary?.childNode(withName: "SurvivalBonus") as? SKLabelNode
+        survivalBonusNumber = waveSummary?.childNode(withName: "SurvivalBonusNumber") as? SKLabelNode
         //creditsGainedNumber?.text = ("$\(gameManager.moneyEarned)")
         //researchPointsGained?.text = ("\(gameManager.researchPoints)")
 
