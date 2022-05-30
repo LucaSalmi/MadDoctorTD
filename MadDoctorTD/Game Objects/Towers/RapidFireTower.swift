@@ -46,9 +46,15 @@ class RapidFireTower: Tower{
     
     override func update() {
         super.update()
+        
         if resetTexture{
             resetTexture = false
-            towerTexture.texture = SKTexture(imageNamed: "speed_tower")
+            if slowUpgraded{
+                towerTexture.texture = SKTexture(imageNamed: "speed_tower_slime")
+            }else{
+                towerTexture.texture = SKTexture(imageNamed: "speed_tower")
+            }
+            
             // bullet drop SFX
 
         }
