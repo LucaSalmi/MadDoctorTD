@@ -56,13 +56,7 @@ struct GameSceneView: View {
                         SettingsView(title: "Paused")
                         
                         Button {
-                            GameScene.instance?.fadeOutScene = true
-                            
                             AppManager.appManager.state = .startMenu
-                            GameScene.instance!.resetGameScene()
-                            GameScene.instance = nil
-                            gameManager.isPaused = false
-                            
                         } label: {
                             Text("Main Menu")
                         }
