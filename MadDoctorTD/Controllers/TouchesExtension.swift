@@ -305,6 +305,11 @@ extension GameScene {
             
         case "BackButton":
             uiManager!.waveSummary?.alpha = 0
+            if uiManager!.bossMaterialGained != nil{
+                if uiManager!.bossMaterialGained!.alpha == 1{
+                    uiManager!.bossMaterialGained?.alpha = 0
+                }
+            }
             uiManager!.mainHubBackground?.alpha = 1
             uiManager!.readyButton?.alpha = 1
             uiManager!.buildFoundationButton?.alpha = 1

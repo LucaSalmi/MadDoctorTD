@@ -172,7 +172,7 @@ class UIManager {
         //ratingGainedNumber?.text = ("S+") //add logic for rating (enemiesDefeated = totalNumerOfEnemies && baseHPLost == 0 or something along those lines..)
 
         bossMaterialGained = waveSummary?.childNode(withName: "BossMaterial") as? SKLabelNode
-        researchPointsGained = waveSummary?.childNode(withName: "ResearchPoints") as? SKLabelNode
+        researchPointsGained = waveSummary?.childNode(withName: "ResearchPointsGainedNumber") as? SKLabelNode
         summaryBackButton = waveSummary?.childNode(withName: "BackButton") as? SKSpriteNode
         waveSummary?.removeFromParent()
 
@@ -663,9 +663,11 @@ class UIManager {
         
         if gameManager.slimeMaterialGained > 0 {
             bossMaterialGained?.text = "Slime Material: +1"
+            bossMaterialGained?.alpha = 1
         }
         else if gameManager.squidMaterialGained > 0 {
             bossMaterialGained?.text = "Squid Material: +1"
+            bossMaterialGained?.alpha = 1
         }
         
         waveSummary?.alpha = 1
