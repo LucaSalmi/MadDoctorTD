@@ -66,6 +66,7 @@ class CannonTower: Tower{
     
     func activateMineProjectiles(){
         projectileType = ProjectileTypes.mineProjectile
+        towerTexture.texture = SKTexture(imageNamed: "slime_cannon")
     }
     
 }

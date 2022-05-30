@@ -132,28 +132,7 @@ class Tower: SKSpriteNode{
         
         if currentFireRateTick <= 0 {
             
-            
             ProjectileFactory(firingTower: self).createProjectile()
-            
-            
-            //                let gameScene = GameScene.instance!
-            //                if gameScene.gunProjectilesPool.isEmpty {
-            //
-            //
-            //                }
-            //                else {
-            //
-            //                    let index = gameScene.gunProjectilesPool.count-1
-            //                    //let projectile = GunProjectile(position: self.position, target: currentTarget!)
-            //                    let projectile = gameScene.gunProjectilesPool[index]
-            //                    gameScene.gunProjectilesPool.remove(at: index)
-            //                    projectile.reuseFromPool(position: self.position, target: currentTarget!, attackDamage: attackDamage)
-            //
-            //                    if projectile.parent == nil{
-            //                        gameScene.projectilesNode.addChild(projectile)
-            //
-            //                    }
-            //                }
             currentFireRateTick = fireRate
         }
     }

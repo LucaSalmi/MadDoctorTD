@@ -37,6 +37,7 @@ class GunTower: Tower{
     //Use this function when upgrading the tower to get bouncing projectiles
     func activateBouncingProjectiles() {
         projectileType = ProjectileTypes.bouncingProjectile
+        towerTexture.texture = SKTexture(imageNamed: "blast_tower_slime")
     }
     
 }

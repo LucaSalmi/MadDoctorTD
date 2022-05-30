@@ -92,12 +92,21 @@ class ProjectileFactory: ProjetileCreator{
             
             if rapidFireTower.fireLeft{
                 
-                rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_left_fire")
+                if rapidFireTower.slowUpgraded{
+                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_left_fire_slime")
+                }else{
+                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_left_fire")
+                }
+                
                 projectile.texture = SKTexture(imageNamed: "speed_projectile_left")
                 
             }else{
                 
-                rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_right_fire")
+                if rapidFireTower.slowUpgraded{
+                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_right_fire_slime")
+                }else{
+                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_right_fire")
+                }
                 projectile.texture = SKTexture(imageNamed: "speed_projectile_right")
                 
             }
