@@ -117,6 +117,11 @@ class Tower: SKSpriteNode{
                 closestDistance = enemyDistance
                 if enemyDistance <= attackRange {
                     currentTarget = enemy
+                    let lookAtConstraint = SKConstraint.orient(
+                        to: currentTarget!,
+                        offset: SKRange(constantValue: -CGFloat.pi / 2)
+                    )
+                    self.towerTexture.constraints = [ lookAtConstraint ]
                     print("Target found!")
                 }
             }
@@ -224,9 +229,6 @@ class Tower: SKSpriteNode{
                 print("Target out of sight.")
             }
             else {
-                let lookAtConstraint = SKConstraint.orient(to: currentTarget!,
-                                                           offset: SKRange(constantValue: -CGFloat.pi / 2))
-                self.towerTexture.constraints = [ lookAtConstraint ]
                 attackTarget()
             }
         }
