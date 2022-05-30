@@ -36,6 +36,9 @@ class SlimeEnemy: Enemy{
             baseSpeed = EnemiesData.BASE_SPEED * EnemiesData.FLY_SPEED_MODIFIER
             waveSlotSize = EnemiesData.FLY_ENEMY_SLOT
             self.animationString = "fly_slime_animation_"
+            self.zPosition = 6
+            self.enemyShadow?.zPosition = 5
+            
             
         case .heavy:
             

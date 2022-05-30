@@ -48,6 +48,10 @@ class Enemy: SKSpriteNode{
     var isPoisonedTexture: SKSpriteNode?
     var killValue = EnemiesData.BASE_KILL_VALUE
     
+    var enemyShadow: SKSpriteNode?
+    let shadowSizeDifference = CGFloat(1)
+    let yAxisOffset: CGFloat = 10
+    
     //Animations
     var animationFrames: [SKAction] = []
     var runningFrame = 0
@@ -74,6 +78,15 @@ class Enemy: SKSpriteNode{
             hp += GameScene.instance!.waveManager!.waveNumber * 5
         }
         
+        self.zPosition = 2
+        
+        enemyShadow = SKSpriteNode(texture: SKTexture(imageNamed: "enemy_shadow"))
+        enemyShadow?.size.width = self.size.width + shadowSizeDifference
+        enemyShadow?.size.height = self.size.height + shadowSizeDifference
+        enemyShadow?.alpha = 0
+        enemyShadow?.zPosition = self.zPosition - 1
+        
+        
         hpBar = SKSpriteNode(texture: SKTexture(imageNamed: "hp_bar_100"))
         
         hpBar!.size.width = 70
@@ -94,6 +107,7 @@ class Enemy: SKSpriteNode{
         isPoisonedTexture!.alpha = 0
         isPoisonedTexture!.zPosition = 50
         
+        GameScene.instance!.uiManager!.hpBarsNode.addChild(enemyShadow!)
         GameScene.instance!.uiManager!.hpBarsNode.addChild(hpBar!)
         GameScene.instance!.uiManager!.hpBarsNode.addChild(isSlowedTexture!)
         GameScene.instance!.uiManager!.hpBarsNode.addChild(isPoisonedTexture!)
@@ -140,6 +154,9 @@ class Enemy: SKSpriteNode{
         hpBar!.position.x = self.position.x
         hpBar!.position.y = self.position.y + 35
         
+        enemyShadow!.position.x = self.position.x
+        enemyShadow!.position.y = self.position.y - yAxisOffset
+        
         isSlowedTexture!.position.x = hpBar!.position.x + ((hpBar?.size.width)!/2) + textureOffset
         isSlowedTexture!.position.y = hpBar!.position.y
         
@@ -167,6 +184,7 @@ class Enemy: SKSpriteNode{
             self.constraints = [ lookAtConstraint ]
             
             isMoving = true
+            enemyShadow?.alpha = 0.2
             
         }
         
@@ -207,6 +225,7 @@ class Enemy: SKSpriteNode{
         //CHECKPOINT
         SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_1, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
         self.hp = 0
+        enemyShadow!.removeFromParent()
         isSlowedTexture!.removeFromParent()
         isPoisonedTexture!.removeFromParent()
         self.removeFromParent()
@@ -392,6 +411,7 @@ class Enemy: SKSpriteNode{
         let moneyObject = MoneyObject(startPosition: self.position)
         GameScene.instance!.uiManager!.moneyNode.addChild(moneyObject)
         
+        enemyShadow!.removeFromParent()
         hpBar!.removeFromParent()
         isSlowedTexture!.removeFromParent()
         isPoisonedTexture!.removeFromParent()

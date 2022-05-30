@@ -121,9 +121,8 @@ class WaveManager{
             
             if enemy == nil{return}
             enemy!.position = spawnPoint!
-            enemy!.zPosition = 2
-            EnemyNodes.enemyArray.append(enemy!)
             
+            EnemyNodes.enemyArray.append(enemy!)
             
             if numberOfAttackers < maximumAtkSpawn && unlockAttackers && enemy!.enemyType != .flying{
                 
