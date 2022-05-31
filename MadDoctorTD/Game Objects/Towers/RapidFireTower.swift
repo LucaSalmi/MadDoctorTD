@@ -32,17 +32,38 @@ class RapidFireTower: Tower{
         fireRate = Int(Double(fireRate) * 0.5)
         
         attackRange = attackRange * 0.5
-        
 
-        
     }
 
-//    override func attackTarget() {
-//
-//        super.attackTarget()
-//        SoundManager.playRapidFireShotsSFX()
-//
-//    }
+    override func upgradeParticle() {
+
+        guard let gameScene = GameScene.instance else { return }
+
+        if rateOfFireUpgradeCount >= 3 {
+
+            let particleTwo = SKEmitterNode(fileNamed: "sparkle_emitter_upgrade_full")
+
+            particleTwo!.position = position
+            particleTwo!.zPosition = 5
+            gameScene.addChild(particleTwo!)
+
+            gameScene.run(SKAction.wait(forDuration: 0.5)) {
+                    particleTwo!.removeFromParent()
+                }
+
+        } else {
+
+            let particle = SKEmitterNode(fileNamed: "sparkle_emitter")
+
+            particle!.position = position
+            particle!.zPosition = 5
+            gameScene.addChild(particle!)
+
+            gameScene.run(SKAction.wait(forDuration: 0.5)) {
+                    particle!.removeFromParent()
+                }
+        }
+    }
     
     override func update() {
         super.update()
