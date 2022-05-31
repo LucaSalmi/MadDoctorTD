@@ -11,6 +11,8 @@ import SpriteKit
 class GunProjectile: Projectile {
     
     var isSlowUpgraded = false
+    var invisDuration = 6
+    var tick = 0
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -21,8 +23,20 @@ class GunProjectile: Projectile {
         super.init(position: position, target: target, attackDamage: attackDamage)
         
         texture = SKTexture(imageNamed: "blast_projectile")
+        self.alpha = 0
 
         
+    }
+    override func update() {
+        super.update()
+        if tick < invisDuration{
+            tick += 1
+        }
+        else{
+            if self.alpha != 1{
+                self.alpha = 1
+            }
+        }
     }
     
     override func destroy() {
