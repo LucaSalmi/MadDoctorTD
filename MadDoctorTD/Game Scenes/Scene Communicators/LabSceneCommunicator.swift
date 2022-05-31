@@ -65,27 +65,31 @@ class LabSceneCommunicator: ObservableObject{
     }
     
     func buyUpgrade(){
-        
+
         let answer = applyResearch()
+
         switch answer{
-            
+
+
+        case .error:
+            displayInfoView(title: "Error", description: "Not implemented yet")
+
+        case .pathBlocked:
+            displayInfoView(title: "Unavailable", description: "This path is not unlocked yet")
+
         case .researchPoints:
             displayInfoView(title: "Insufficient Funds", description: "Not enough Research point")
+
         case .unlocked:
             displayInfoView(title: "Info", description: "Upgrade already unlocked")
+
         case .success:
-            //displayInfoView(title: "Success", description: "You unlocked this upgrade for \(selectedTowerType)")
             displayToastView(title: "Success", description: "You unlocked this upgrade for \(selectedTowerType)")
             if let labScene = LabScene.instance {
                 SoundManager.playSFX(sfxName: SoundManager.upgradeUnlocked, scene: labScene, sfxExtension: SoundManager.mp3Extension)
             }
-        case .error:
-            displayInfoView(title: "Error", description: "Not implemented yet")
-        case .pathBlocked:
-            displayInfoView(title: "Unavailable", description: "This path is not unlocked yet")
-            
+
         }
-        
     }
     
     private func displayToastView(title: String, description: String) {
@@ -109,56 +113,41 @@ class LabSceneCommunicator: ObservableObject{
         switch communicator.selectedTowerType {
             
         case .gunTower:
-            
-            if LabSceneCommunicator.instance.gunTowerResearchLevel.contains(communicator.selectedTreeButtonId) {
-                return .unlocked
-            }
-            
             switch communicator.selectedTreeButtonId {
-            case "1":
                 
+            case "1":
                 return .unlocked
                 
             case "2a":
-                
-                if !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("1") {
-                    return .pathBlocked
-                }
                 LabSceneCommunicator.instance.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
-                communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "3a":
-                
-                if !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("2a") {
-                    return .pathBlocked
-                }
-                LabSceneCommunicator.instance.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 6
-                gameManager.slimeMaterials -= 1
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
                 communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2b":
-                
-                if !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("1") {
-                    return .pathBlocked
-                }
                 LabSceneCommunicator.instance.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
                 communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2c":
-                
-                if !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("1") {
-                    return .pathBlocked
-                }
                 LabSceneCommunicator.instance.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
                 communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
+                
+            case "3a":
+                LabSceneCommunicator.instance.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                gameManager.researchPoints -= LabData.UPGRADE_COST_3
+                gameManager.slimeMaterials -= LabData.SLIME_COST_1
+                communicator.gunTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "3b":
+                return .error
+                
+            case "3c":
+                return .error
                 
             default:
                 print("not implemented")
@@ -166,119 +155,91 @@ class LabSceneCommunicator: ObservableObject{
             
         case .rapidFireTower:
             
-            if LabSceneCommunicator.instance.rapidTowerResearchLevel.contains(communicator.selectedTreeButtonId) {
-                return .unlocked
-            }
-            
             switch communicator.selectedTreeButtonId {
+                
             case "1":
-
                 GameScene.instance!.uiManager!.towerUI!.childNode(withName: "SpeedTower")!.alpha = 1
                 LabSceneCommunicator.instance.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 2
+                gameManager.researchPoints -= LabData.UPGRADE_COST_1
                 communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2a":
-                
-                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("1") {
-                    return .pathBlocked
-                }
                 LabSceneCommunicator.instance.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
                 communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2b":
-                
-                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("1") {
-                    return .pathBlocked
-                }
                 LabSceneCommunicator.instance.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
-                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "3b":
-                
-                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("2b") {
-                    return .pathBlocked
-                }
-                LabSceneCommunicator.instance.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 6
-                gameManager.slimeMaterials -= 1
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
                 communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2c":
-                
-                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("1") {
-                    return .pathBlocked
-                }
                 LabSceneCommunicator.instance.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
                 communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
-                           
+                
+            case "3a":
+                return .error
+                
+            case "3b":
+                LabSceneCommunicator.instance.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                gameManager.researchPoints -= LabData.UPGRADE_COST_3
+                gameManager.slimeMaterials -= LabData.SLIME_COST_1
+                communicator.rapidTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "3c":
+                return .error
+                
             default:
                 print("not implemented")
             }
             
         case .sniperTower:
             
-            if LabSceneCommunicator.instance.sniperTowerResearchLevel.contains(communicator.selectedTreeButtonId) {
-                return .unlocked
-            }
-            
             switch communicator.selectedTreeButtonId {
+                
             case "1":
-
                 GameScene.instance!.uiManager!.towerUI!.childNode(withName: "SniperTower")!.alpha = 1
                 LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 2
+                gameManager.researchPoints -= LabData.UPGRADE_COST_1
                 communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2a":
-                
-                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("1") {
-                    return .pathBlocked
-                }
                 LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
                 communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2b":
-                
-                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("1") {
-                    return .pathBlocked
-                }
                 LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
-                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                return .success
-                
-            case "3b":
-                
-                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("2b") {
-                    return .pathBlocked
-                }
-                LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 6
-                gameManager.slimeMaterials -= 1
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
                 communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2c":
-                
-                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("1") {
-                    return .pathBlocked
-                }
                 LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
                 communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
+                
+            case "3a":
+                return .error
+                
+            case "3b":
+                LabSceneCommunicator.instance.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                gameManager.researchPoints -= LabData.UPGRADE_COST_3
+                gameManager.slimeMaterials -= LabData.SLIME_COST_1
+                communicator.sniperTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "3c":
+                return .error
                 
             default:
                 print("not implemented")
@@ -286,58 +247,237 @@ class LabSceneCommunicator: ObservableObject{
             
         default:
             
+            switch communicator.selectedTreeButtonId {
+                
+            case "1":
+                GameScene.instance!.uiManager!.towerUI!.childNode(withName: "CannonTower")!.alpha = 1
+                LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                gameManager.researchPoints -= LabData.UPGRADE_COST_1
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2a":
+                LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2b":
+                LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "2c":
+                LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                gameManager.researchPoints -= LabData.UPGRADE_COST_2
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            case "3a":
+                return .error
+                
+            case "3b":
+                return .error
+                
+            case "3c":
+                LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                gameManager.researchPoints -= LabData.UPGRADE_COST_3
+                gameManager.slimeMaterials -= LabData.SLIME_COST_1
+                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
+                return .success
+                
+            default:
+                print("not implemented")
+            }
+        }
+        return .error
+    }
+    
+    func checkResearch() -> ErrorType {
+        
+        let communicator = LabSceneCommunicator.instance
+        
+        switch communicator.selectedTowerType {
+            
+        case .gunTower:
+            
+            if LabSceneCommunicator.instance.gunTowerResearchLevel.contains(communicator.selectedTreeButtonId) {
+                return .unlocked
+            }
+            
+            switch communicator.selectedTreeButtonId {
+                
+            case "1":
+                return .unlocked
+                
+            case "2a":
+                if !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("1") {
+                    return .pathBlocked
+                }
+                if LabSceneCommunicator.instance.gunTowerResearchLevel.contains("2a") {
+                    return .unlocked
+                }
+                return .success
+                
+            case "2b":
+                if !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("1") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "2c":
+                if !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("1") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "3a":
+                if !LabSceneCommunicator.instance.gunTowerResearchLevel.contains("2a") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "3b":
+                return .error
+                
+            case "3c":
+                return .error
+                
+            default:
+                print("not implemented")
+            }
+            
+        case .rapidFireTower:
+            if LabSceneCommunicator.instance.rapidTowerResearchLevel.contains(communicator.selectedTreeButtonId) {
+                return .unlocked
+            }
+            
+            switch communicator.selectedTreeButtonId {
+                
+            case "1":
+                GameScene.instance!.uiManager!.towerUI!.childNode(withName: "SpeedTower")!.alpha = 1
+                return .success
+                
+            case "2a":
+                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("1") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "2b":
+                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("1") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "2c":
+                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("1") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "3a":
+                return .error
+                
+            case "3b":
+                if !LabSceneCommunicator.instance.rapidTowerResearchLevel.contains("2b") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "3c":
+                return .error
+                
+            default:
+                print("not implemented")
+            }
+            return .success
+            
+        case .sniperTower:
+            if LabSceneCommunicator.instance.sniperTowerResearchLevel.contains(communicator.selectedTreeButtonId) {
+                return .unlocked
+            }
+            
+            switch communicator.selectedTreeButtonId {
+                
+            case "1":
+                GameScene.instance!.uiManager!.towerUI!.childNode(withName: "SniperTower")!.alpha = 1
+                return .success
+                
+            case "2a":
+                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("1") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "2b":
+                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("1") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "2c":
+                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("1") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "3a":
+                return .error
+                
+            case "3b":
+                if !LabSceneCommunicator.instance.sniperTowerResearchLevel.contains("2b") {
+                    return .pathBlocked
+                }
+                return .success
+                
+            case "3c":
+                return .error
+                
+            default:
+                print("not implemented")
+            }
+            
+        default:
             if LabSceneCommunicator.instance.cannonTowerResearchLevel.contains(communicator.selectedTreeButtonId) {
                 return .unlocked
             }
             
             switch communicator.selectedTreeButtonId {
+                
             case "1":
-
                 GameScene.instance!.uiManager!.towerUI!.childNode(withName: "CannonTower")!.alpha = 1
-                LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 2
-                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2a":
-                
                 if !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
-                LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
-                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2b":
-                
                 if !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
-                LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
-                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             case "2c":
-                
                 if !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("1") {
                     return .pathBlocked
                 }
-                LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 4
-                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
-            case "3c":
+            case "3a":
+                return .error
                 
+            case "3b":
+                return .error
+                
+            case "3c":
                 if !LabSceneCommunicator.instance.cannonTowerResearchLevel.contains("2c") {
                     return .pathBlocked
                 }
-                LabSceneCommunicator.instance.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
-                gameManager.researchPoints -= 6
-                gameManager.slimeMaterials -= 1
-                communicator.cannonTowerResearchLevel.append(communicator.selectedTreeButtonId)
                 return .success
                 
             default:

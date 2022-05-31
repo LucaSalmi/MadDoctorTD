@@ -221,6 +221,8 @@ struct UIData{
 
 struct LabData{
     
+    static let SLIME_COST_1 = 1
+    static let SQUID_COST_1 = 1
     static let UPGRADE_COST_1 = 2
     static let UPGRADE_COST_2 = 4
     static let UPGRADE_COST_3 = 6
