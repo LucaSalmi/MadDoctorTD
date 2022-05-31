@@ -156,11 +156,11 @@ class GameScene: SKScene {
             
         }
         
-        if touchStarted{
-            handleLongPress()
-        }else if uiManager!.statUpgradePopUp?.alpha == 1{
-            uiManager!.statUpgradePopUp?.alpha = 0
-        }
+//        if touchStarted{
+//            handleLongPress()
+//        }else if uiManager!.statUpgradePopUp?.alpha == 1{
+//            uiManager!.statUpgradePopUp?.alpha = 0
+//        }
         
         if GameManager.instance.isPaused || GameManager.instance.isGameOver{
             return
@@ -204,10 +204,7 @@ class GameScene: SKScene {
         if uiManager!.moveCameraToDoors {
             
             uiManager!.performMoveCameraToDoors()
-           
-            
         }
-        
         if uiManager!.moveCameraToPortal {
             
             uiManager!.performMoveCameraToPortal()
