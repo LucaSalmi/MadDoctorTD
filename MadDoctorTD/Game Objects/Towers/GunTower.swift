@@ -40,7 +40,7 @@ class GunTower: Tower{
 
         if damageUpgradeCount >= 3 {
 
-            let particleTwo = SKEmitterNode(fileNamed: "sparkle_emitter_upgrade_3")
+            let particleTwo = SKEmitterNode(fileNamed: "sparkle_emitter_upgrade_full")
 
             particleTwo!.position = position
             particleTwo!.zPosition = 5
@@ -57,7 +57,6 @@ class GunTower: Tower{
             particle!.position = position
             particle!.zPosition = 5
             gameScene.addChild(particle!)
-
 
             gameScene.run(SKAction.wait(forDuration: 0.5)) {
                     particle!.removeFromParent()
