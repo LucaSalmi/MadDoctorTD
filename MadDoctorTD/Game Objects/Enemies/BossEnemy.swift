@@ -37,9 +37,15 @@ class Boss: Enemy{
         let size = CGSize(width: self.size.width * 4, height: self.size.height * 4)
         bossTexture = SKSpriteNode(texture: texture, color: .clear, size: size)
         bossTexture?.name = "BossTexture"
+        bossTexture?.zPosition = self.zPosition
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2.5)
         physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Foundation
         physicsBody?.categoryBitMask = PhysicsCategory.Boss
+        
+        hpBar?.position = bossTexture!.position
+        enemyShadow?.size.width = bossTexture!.size.width + shadowSizeDifference
+        enemyShadow?.size.height = bossTexture!.size.height + shadowSizeDifference
+        enemyShadow?.zPosition = bossTexture!.zPosition - 1
         
     }
     
