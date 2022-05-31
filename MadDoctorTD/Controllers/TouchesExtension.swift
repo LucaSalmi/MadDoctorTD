@@ -272,7 +272,7 @@ extension GameScene {
         case "ReadyButton":
             if uiManager!.readyButton?.alpha == 1{
                 
-                let newCameraScale = 0.5
+                let newCameraScale = CGFloat(1.3)
                 self.camera!.xScale = newCameraScale
                 self.camera!.yScale = newCameraScale
                 

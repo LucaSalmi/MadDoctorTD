@@ -829,13 +829,14 @@ class UIManager {
     }
     
     func performMoveCameraToDoors() {
+        let size = CGSize(width: FoundationData.SIZE.width/6, height: FoundationData.SIZE.height/6)
         
-        let targetNode = SKSpriteNode(texture: nil, color: .red, size: FoundationData.SIZE)
+        let targetNode = SKSpriteNode(texture: nil, color: .red, size: size)
         targetNode.alpha = 0
         targetNode.zPosition = 1000
         targetNode.position = doorOne.position
         targetNode.position.x += (doorOne.size.width + (doorOne.size.width/2) )
-        targetNode.position.y += gameScene!.size.height * 0.05
+        targetNode.position.y += gameScene!.size.height * 0.45
         
         let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetNode.position)
         PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
@@ -861,12 +862,15 @@ class UIManager {
         }
 
         let spawnPoint = gameScene!.childNode(withName: "SpawnPoint") as! SKSpriteNode
+        let size = CGSize(width: FoundationData.SIZE.width/6, height: FoundationData.SIZE.height/6)
         
-        let targetNode = SKSpriteNode(texture: nil, color: .red, size: FoundationData.SIZE)
+        let targetNode = SKSpriteNode(texture: nil, color: .red, size: size)
         targetNode.alpha = 0
         targetNode.zPosition = 1000
         targetNode.position = spawnPoint.position
-        targetNode.position.y -= gameScene!.size.height * 0.05
+        targetNode.position.y -= gameScene!.size.height * 0.2
+        
+        performZoomIn()
         
         let cameraDirection = PhysicsUtils.getCameraDirection(camera: gameScene!.camera!, targetPoint: targetNode.position)
         PhysicsUtils.moveCameraToTargetPoint(camera: gameScene!.camera!, direction: cameraDirection)
@@ -879,12 +883,27 @@ class UIManager {
         }
         
     }
+    func performZoomIn(){
+        if gameScene!.camera!.xScale > 0.6 {
+            
+            let scaleDecrease = 0.015
+            
+            gameScene!.camera!.xScale -= scaleDecrease
+            gameScene!.camera!.yScale -= scaleDecrease
+            
+            let cameraPosition = GameScene.instance!.camera!.position
+            
+            setupCamera()
+            GameScene.instance!.camera!.position = cameraPosition
+            
+        }
+    }
     
     func performZoomOut() {
         
         if gameScene!.camera!.xScale < 1.3 {
             
-            let scaleIncrease = 0.01
+            let scaleIncrease = 0.005
             
             gameScene!.camera!.xScale += scaleIncrease
             gameScene!.camera!.yScale += scaleIncrease
