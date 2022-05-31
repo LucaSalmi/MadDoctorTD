@@ -73,43 +73,40 @@ class Tower: SKSpriteNode{
         gameScene.uiManager!.displayRangeIndicator(attackRange: attackRange, position: self.position)
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
-
+        
         communicator.currentTower = self
         communicator.currentFoundation = self.builtUponFoundation
-
+        
         communicator.showUpgradeMenu = true
         communicator.showUpgradeMenuUI = true
         
         gameScene.uiManager!.towerImage?.texture = towerTexture.texture!
+        
         if self is GunTower && damageUpgradeCount == 3{
             
             gameScene.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(self.damageUpgradeCount)_bounce")
         }else {
-        gameScene.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(self.damageUpgradeCount)")
+            gameScene.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(self.damageUpgradeCount)")
         }
         
         if self is CannonTower && rangeUpgradeCount == 3{
-        gameScene.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(self.rangeUpgradeCount)_cannon_mine")
+            gameScene.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(self.rangeUpgradeCount)_cannon_mine")
         } else {
             gameScene.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(self.rangeUpgradeCount)")
-            }
+        }
         
-        if self is SniperTower && rateOfFireUpgradeCount >= 3{
-        gameScene.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed:
-            "speed_upgrade_\(self.rateOfFireUpgradeCount)_poison")
-            print("sniper good 3")
-            print(rateOfFireUpgradeCount)
+        if self is SniperTower && rateOfFireUpgradeCount == 3{
+            gameScene.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed:"speed_upgrade_\(self.rateOfFireUpgradeCount)_poison")
+
+        }else if self is RapidFireTower && rateOfFireUpgradeCount == 3{
+            
+            gameScene.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(self.rateOfFireUpgradeCount)_slow")
+            
         }else {
             gameScene.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(self.rateOfFireUpgradeCount)")
-            print("sniper wrong 3")
-            }
+        }
         
         
-        if self is RapidFireTower && rateOfFireUpgradeCount == 3{
-            gameScene.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(self.rateOfFireUpgradeCount)_slow")
-            }else {
-                gameScene.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(self.rateOfFireUpgradeCount)")
-                }
         
         gameScene.uiManager!.towerNameText?.text = self.getName()
         
@@ -126,7 +123,7 @@ class Tower: SKSpriteNode{
     }
     
     private func findNewTarget() {
-
+        
         let enemies = EnemyNodes.enemiesNode.children
         
         var closestDistance = CGFloat(attackRange+1)
@@ -172,12 +169,12 @@ class Tower: SKSpriteNode{
             attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
             damageUpgradeCount += 1
             if damageUpgradeCount < 3 {
-            GameScene.instance?.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(damageUpgradeCount)")
+                GameScene.instance?.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(damageUpgradeCount)")
             }
             //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[damageUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
             SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
-
-
+            
+            
             
         case .range:
             
@@ -195,7 +192,7 @@ class Tower: SKSpriteNode{
             fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
             rateOfFireUpgradeCount += 1
             if rateOfFireUpgradeCount < 3 {
-            GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
+                GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
             }
             //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rateOfFireUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
             SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
@@ -203,7 +200,7 @@ class Tower: SKSpriteNode{
         
         upgradeCount += 1
     }
-
+    
     func update() {
         
         if !builtUponFoundation!.isPowered {
@@ -245,7 +242,7 @@ class Tower: SKSpriteNode{
             }
         }
     }
-
+    
     func onDestroy(){
         
         self.removeFromParent()
