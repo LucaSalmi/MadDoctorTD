@@ -227,6 +227,19 @@ class GameSceneCommunicator: ObservableObject {
         
     }
     
+    func getUpgradeTowerCost() -> Int {
+        
+        var upgradeCostMultipler = Double(1) * TowerData.COST_MULTIPLIER_PER_LEVEL
+        
+        if let currentTower = currentTower {
+            upgradeCostMultipler = Double(currentTower.upgradeCount) * TowerData.COST_MULTIPLIER_PER_LEVEL
+        }
+        
+        let upgradeCost = Int(Double(TowerData.BASE_UPGRADE_COST) * upgradeCostMultipler)
+        
+        return upgradeCost
+    }
+    
     func upgradeTower(upgradeType: UpgradeTypes) {
         
         GameScene.instance?.uiManager!.displayRangeIndicator(attackRange: currentTower!.attackRange, position: currentTower!.position)
@@ -234,9 +247,7 @@ class GameSceneCommunicator: ObservableObject {
         if currentTower!.upgradeCount > TowerData.MAX_UPGRADE{
             return
         }
-        
-        let upgradeCostMultipler = Double(currentTower!.upgradeCount) * TowerData.COST_MULTIPLIER_PER_LEVEL
-        let upgradeCost = Int(Double(TowerData.BASE_UPGRADE_COST) * upgradeCostMultipler)
+        let upgradeCost = getUpgradeTowerCost()
         
         if upgradeCost > GameManager.instance.currentMoney {
             return
