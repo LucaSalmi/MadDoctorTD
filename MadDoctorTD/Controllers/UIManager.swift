@@ -98,6 +98,10 @@ class UIManager {
     var sniperTowerPrice: SKLabelNode?
     var priceTag: SKLabelNode?
     
+    var upgradeDamagePrice: SKLabelNode?
+    var upgradeSpeedPrice: SKLabelNode?
+    var upgradeRangePrice: SKLabelNode?
+    
     var towerPriceTags = [SKLabelNode]()
     
     var touchingTower: SKSpriteNode? = nil
@@ -249,6 +253,13 @@ class UIManager {
         towerPriceTags.append(rapidTowerPrice!)
         towerPriceTags.append(cannonTowerPrice!)
         towerPriceTags.append(sniperTowerPrice!)
+        
+        upgradeDamagePrice = upgradeUI?.childNode(withName: "UpgradeDamagePrice") as? SKLabelNode
+        upgradeDamagePrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+        upgradeSpeedPrice = upgradeUI?.childNode(withName: "UpgradeSpeedPrice") as? SKLabelNode
+        upgradeSpeedPrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+        upgradeRangePrice = upgradeUI?.childNode(withName: "UpgradeRangePrice") as? SKLabelNode
+        upgradeRangePrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
         
         uiNode.addChild(clickableTileGridsNode)
         

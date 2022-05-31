@@ -169,6 +169,17 @@ class Tower: SKSpriteNode{
         }
         
         upgradeCount += 1
+        
+        if upgradeCount >= 6 {
+            GameScene.instance?.uiManager!.upgradeDamagePrice?.text = ""
+            GameScene.instance?.uiManager!.upgradeSpeedPrice?.text = "Max Level"
+            GameScene.instance?.uiManager!.upgradeRangePrice?.text = ""
+        }
+        else {
+            GameScene.instance?.uiManager!.upgradeDamagePrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+            GameScene.instance?.uiManager!.upgradeSpeedPrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+            GameScene.instance?.uiManager!.upgradeRangePrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+        }
     }
 
     func update() {
