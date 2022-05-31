@@ -104,6 +104,9 @@
 		B380038A283FA31600C9A0C3 /* wrong_click_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3800384283FA31500C9A0C3 /* wrong_click_1.wav */; };
 		B380038B283FA31600C9A0C3 /* wrong_click_4.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3800385283FA31600C9A0C3 /* wrong_click_4.wav */; };
 		B380038C283FA31600C9A0C3 /* wrong_click_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3800386283FA31600C9A0C3 /* wrong_click_3.wav */; };
+		B380038F2846167200C9A0C3 /* sparkle_emitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = B380038D2846167200C9A0C3 /* sparkle_emitter.sks */; };
+		B38003902846167200C9A0C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B380038E2846167200C9A0C3 /* Assets.xcassets */; };
+		B38003942846353400C9A0C3 /* sparkle_emitter_upgrade_full.sks in Resources */ = {isa = PBXBuildFile; fileRef = B38003932846353400C9A0C3 /* sparkle_emitter_upgrade_full.sks */; };
 		C81DED212837AE8800D67B8F /* ErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81DED202837AE8800D67B8F /* ErrorInfo.swift */; };
 		C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A52821352200F66043 /* MadDoctorTDApp.swift */; };
 		C839C6A82821352200F66043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A72821352200F66043 /* ContentView.swift */; };
@@ -262,6 +265,9 @@
 		B3800384283FA31500C9A0C3 /* wrong_click_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong_click_1.wav; sourceTree = "<group>"; };
 		B3800385283FA31600C9A0C3 /* wrong_click_4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong_click_4.wav; sourceTree = "<group>"; };
 		B3800386283FA31600C9A0C3 /* wrong_click_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong_click_3.wav; sourceTree = "<group>"; };
+		B380038D2846167200C9A0C3 /* sparkle_emitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = sparkle_emitter.sks; sourceTree = "<group>"; };
+		B380038E2846167200C9A0C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B38003932846353400C9A0C3 /* sparkle_emitter_upgrade_full.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = sparkle_emitter_upgrade_full.sks; sourceTree = "<group>"; };
 		C81DED202837AE8800D67B8F /* ErrorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInfo.swift; sourceTree = "<group>"; };
 		C839C6A22821352200F66043 /* MadDoctorTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadDoctorTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C839C6A52821352200F66043 /* MadDoctorTDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadDoctorTDApp.swift; sourceTree = "<group>"; };
@@ -414,6 +420,8 @@
 				3359CCA3282157C500878191 /* MyTileSet.sks */,
 				3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */,
 				C844A736282A969600FC42C9 /* CannonExplosion.sks */,
+				B380038D2846167200C9A0C3 /* sparkle_emitter.sks */,
+				B38003932846353400C9A0C3 /* sparkle_emitter_upgrade_full.sks */,
 			);
 			path = "Sound and Graphics";
 			sourceTree = "<group>";
@@ -438,6 +446,7 @@
 		C839C6992821352200F66043 = {
 			isa = PBXGroup;
 			children = (
+				B380038E2846167200C9A0C3 /* Assets.xcassets */,
 				C839C6A42821352200F66043 /* MadDoctorTD */,
 				C839C6A32821352200F66043 /* Products */,
 			);
@@ -768,12 +777,14 @@
 				B34EEB04283E19A500CE60C1 /* giant_step_4.mp3 in Resources */,
 				B34EEB1E283E4F8B00CE60C1 /* button_8.mp3 in Resources */,
 				B380037F283F89AE00C9A0C3 /* airlock_SFX.mp3 in Resources */,
+				B38003902846167200C9A0C3 /* Assets.xcassets in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
 				B3800380283F89AE00C9A0C3 /* mad_td_menu_theme.mp3 in Resources */,
 				B34EEA932836418E00CE60C1 /* metal_tap_2.mp3 in Resources */,
 				B34EEAE02837B01B00CE60C1 /* sniper_chosen.mp3 in Resources */,
 				B35C2155282D4546009A748E /* research_view_open.mp3 in Resources */,
 				B34EEAF6283E0C1200CE60C1 /* wrench_upgrade_6.mp3 in Resources */,
+				B38003942846353400C9A0C3 /* sparkle_emitter_upgrade_full.sks in Resources */,
 				B35C2112282A6EEE009A748E /* finger_tap_boosted.wav in Resources */,
 				B35C2137282CFE8F009A748E /* slime_death1.wav in Resources */,
 				B34EEB02283E19A500CE60C1 /* giant_step_1.mp3 in Resources */,
@@ -782,6 +793,7 @@
 				B30A1E6F2833CA3B007F86E5 /* construction_sound_effect.wav in Resources */,
 				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
 				B34EEADF2837B01B00CE60C1 /* upg_sound_4.mp3 in Resources */,
+				B380038F2846167200C9A0C3 /* sparkle_emitter.sks in Resources */,
 				B34EEAF8283E0C1200CE60C1 /* wrench_upgrade_2.mp3 in Resources */,
 				B35C2153282D44DC009A748E /* button_press_three.mp3 in Resources */,
 				B34EEAE22837B01B00CE60C1 /* upg_sound_5.mp3 in Resources */,

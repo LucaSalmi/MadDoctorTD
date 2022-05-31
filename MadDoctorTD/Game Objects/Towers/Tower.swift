@@ -28,6 +28,7 @@ class Tower: SKSpriteNode{
     var noPowerTexture = SKSpriteNode()
     
     var upgradeCount: Int = 1
+    //var placeboCount: Int = 1
     
     var damageUpgradeCount: Int = 0
     var rangeUpgradeCount: Int = 0
@@ -157,11 +158,13 @@ class Tower: SKSpriteNode{
             currentFireRateTick = fireRate
         }
     }
+
+    func upgradeParticle() {
+
+    }
     
     func upgrade(upgradeType : UpgradeTypes){
-        
-        
-        
+
         switch upgradeType {
             
         case .damage:
@@ -176,6 +179,9 @@ class Tower: SKSpriteNode{
             
             
             
+            GameScene.instance?.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(damageUpgradeCount)")
+            SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+
         case .range:
             
             attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
@@ -186,6 +192,7 @@ class Tower: SKSpriteNode{
                 GameScene.instance?.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)")
             }
             //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rangeUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+            GameScene.instance?.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)")
             SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
         case .firerate:
             
@@ -195,10 +202,24 @@ class Tower: SKSpriteNode{
                 GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
             }
             //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rateOfFireUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+            GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
             SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
         }
         
         upgradeCount += 1
+        upgradeParticle()
+        
+        if upgradeCount >= 6 {
+            GameScene.instance?.uiManager!.upgradeDamagePrice?.text = ""
+            GameScene.instance?.uiManager!.upgradeSpeedPrice?.text = "Max Level"
+            GameScene.instance?.uiManager!.upgradeRangePrice?.text = ""
+        }
+        else {
+            GameScene.instance?.uiManager!.upgradeDamagePrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+            GameScene.instance?.uiManager!.upgradeSpeedPrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+            GameScene.instance?.uiManager!.upgradeRangePrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+        }
+
     }
     
     func update() {

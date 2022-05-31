@@ -28,6 +28,8 @@ class StartScene: SKScene{
     let fadeIn = SKAction.fadeAlpha(to: 1, duration: 1)
     let fadeOut = SKAction.fadeAlpha(to: 0, duration: 1)
     
+    var enableMetalTapSound = true
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         SoundManager.playBGM(bgmString: SoundManager.DoorsTheme, bgmExtension: SoundManager.mp3Extension)
@@ -63,8 +65,11 @@ class StartScene: SKScene{
                 startAnimationCount = 0
             }
         } else {
-            SoundManager.playMetalTapSFX(scene: self)
-            print("Play metal tap sound")
+            if enableMetalTapSound{
+                SoundManager.playMetalTapSFX(scene: self)
+                print("Play metal tap sound")
+            }
+            
         }
         
         
@@ -244,6 +249,7 @@ class StartScene: SKScene{
         
         if doorOne!.position.x + doorOne!.frame.size.width/2 < -self.size.width/2{
             communicator.animateDoors = false
+            enableMetalTapSound = false
             self.childNode(withName: "DoorButton")?.alpha = 0
         }
         

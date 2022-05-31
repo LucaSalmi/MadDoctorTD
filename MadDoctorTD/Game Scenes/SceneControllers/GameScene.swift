@@ -186,12 +186,17 @@ class GameScene: SKScene {
         }
         
         if GameManager.instance.currentMoney < TowerData.BASE_COST{
-            for node in uiManager!.towerUI!.children{
-                if node.alpha != 0.5{
-                    node.alpha = 0.5
-                    for tag in uiManager!.towerPriceTags {
-                        tag.fontColor = UIColor(Color.red)
-                    }
+            if uiManager!.towerPriceTags.first!.fontColor != UIColor(Color.red){
+                for tag in uiManager!.towerPriceTags {
+                    tag.fontColor = UIColor(Color.red)
+                }
+            }
+        }
+        else{
+
+            if uiManager!.towerPriceTags.first!.fontColor != UIColor(Color.green){
+                for tag in uiManager!.towerPriceTags{
+                    tag.fontColor = UIColor(Color.green)
                 }
             }
         }
@@ -223,13 +228,7 @@ class GameScene: SKScene {
             
         }
         
-        if GameManager.instance.currentMoney < TowerData.BASE_COST{
-            for node in uiManager!.towerUI!.children{
-                if node.alpha != 0.5{
-                    node.alpha = 0.5
-                }
-            }
-        }
+        
 
         for node in ProjectileNodes.projectilesNode.children {
             if node is Projectile{
