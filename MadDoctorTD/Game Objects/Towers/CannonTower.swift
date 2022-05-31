@@ -99,4 +99,14 @@ class CannonTower: Tower{
         towerTexture.texture = SKTexture(imageNamed: "slime_cannon")
     }
     
+    override func upgrade(upgradeType: UpgradeTypes) {
+        super.upgrade(upgradeType: upgradeType)
+
+        if rangeUpgradeCount == 3 {
+            
+            GameScene.instance?.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)_cannon_mine")
+        }
+        
+    }
+    
 }

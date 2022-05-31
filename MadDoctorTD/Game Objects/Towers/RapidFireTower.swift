@@ -85,4 +85,13 @@ class RapidFireTower: Tower{
         slowUpgraded = true
     }
     
+    override func upgrade(upgradeType: UpgradeTypes) {
+        super.upgrade(upgradeType: upgradeType)
+
+        if rateOfFireUpgradeCount == 3 {
+            
+            GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)_slow")
+        }
+        
+    }
 }

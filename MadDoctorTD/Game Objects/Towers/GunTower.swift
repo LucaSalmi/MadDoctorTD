@@ -70,4 +70,13 @@ class GunTower: Tower{
         towerTexture.texture = SKTexture(imageNamed: "blast_tower_slime")
     }
     
+    override func upgrade(upgradeType: UpgradeTypes) {
+        super.upgrade(upgradeType: upgradeType)
+
+        if damageUpgradeCount == 3 {
+            
+            GameScene.instance?.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(damageUpgradeCount)_bounce")
+        }
+        
+    }
 }

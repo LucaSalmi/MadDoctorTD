@@ -82,5 +82,13 @@ class SniperTower: Tower{
         sniperLegs.texture = SKTexture(imageNamed: "sniper_tower_static_legs_slime")
     }
     
-    
+    override func upgrade(upgradeType: UpgradeTypes) {
+        super.upgrade(upgradeType: upgradeType)
+
+        if rateOfFireUpgradeCount == 3 {
+            
+            GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)_poison")
+        }
+        
+    }
 }

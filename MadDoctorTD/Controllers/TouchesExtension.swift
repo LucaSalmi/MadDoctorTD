@@ -209,7 +209,7 @@ extension GameScene {
                     
                     touchStarted = false
                     uiManager!.upgradeTowerMenu(nodeName: node.name!)
-                    uiManager!.statUpgradePopUp?.alpha = 0
+                    //uiManager!.statUpgradePopUp?.alpha = 0
                     return
                     
                 }
