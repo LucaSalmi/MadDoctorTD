@@ -1,10 +1,3 @@
-//
-//  SniperTurret.swift
-//  MadDoctorTD
-//
-//  Created by Calle Höglund on 2022-05-06.
-//
-
 import Foundation
 //
 //  RapidFireTower.swift
@@ -32,7 +25,6 @@ class SniperTower: Tower{
                 
         projectileType = ProjectileTypes.sniperProjectile
     
-        
         attackDamage = Int(Double(attackDamage) * 5)
         
         fireRate = Int(Double(fireRate) * 15)
@@ -46,9 +38,36 @@ class SniperTower: Tower{
         
         GameScene.instance?.addChild(sniperLegs)
         
-        
-        
-        
+    }
+
+    override func upgradeParticle() {
+
+        guard let gameScene = GameScene.instance else { return }
+
+        if rateOfFireUpgradeCount >= 3 {
+
+            let particleTwo = SKEmitterNode(fileNamed: "sparkle_emitter_upgrade_full")
+
+            particleTwo!.position = position
+            particleTwo!.zPosition = 5
+            gameScene.addChild(particleTwo!)
+
+            gameScene.run(SKAction.wait(forDuration: 0.5)) {
+                    particleTwo!.removeFromParent()
+                }
+
+        } else {
+
+            let particle = SKEmitterNode(fileNamed: "sparkle_emitter")
+
+            particle!.position = position
+            particle!.zPosition = 5
+            gameScene.addChild(particle!)
+
+            gameScene.run(SKAction.wait(forDuration: 0.5)) {
+                    particle!.removeFromParent()
+                }
+        }
     }
     
     override func onDestroy() {
@@ -59,7 +78,17 @@ class SniperTower: Tower{
     
     func activatePosionProjectile(){
         projectileType = ProjectileTypes.poisonProjectile
+        towerTexture.texture = SKTexture(imageNamed: "sniper_tower_rotate_slime")
+        sniperLegs.texture = SKTexture(imageNamed: "sniper_tower_static_legs_slime")
     }
     
-    
+    override func upgrade(upgradeType: UpgradeTypes) {
+        super.upgrade(upgradeType: upgradeType)
+
+        if rateOfFireUpgradeCount == 3 {
+            
+            GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)_poison")
+        }
+        
+    }
 }

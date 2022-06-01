@@ -31,6 +31,36 @@ class CannonTower: Tower{
         attackRange = attackRange * 1.3
         
     }
+
+    override func upgradeParticle() {
+
+        guard let gameScene = GameScene.instance else { return }
+
+        if rangeUpgradeCount >= 3 {
+
+            let particleTwo = SKEmitterNode(fileNamed: "sparkle_emitter_upgrade_full")
+
+            particleTwo!.position = position
+            particleTwo!.zPosition = 5
+            gameScene.addChild(particleTwo!)
+
+            gameScene.run(SKAction.wait(forDuration: 0.5)) {
+                    particleTwo!.removeFromParent()
+                }
+
+        } else {
+
+            let particle = SKEmitterNode(fileNamed: "sparkle_emitter")
+
+            particle!.position = position
+            particle!.zPosition = 5
+            gameScene.addChild(particle!)
+
+            gameScene.run(SKAction.wait(forDuration: 0.5)) {
+                    particle!.removeFromParent()
+                }
+        }
+    }
     
     override func attackTarget(){
 
@@ -66,6 +96,17 @@ class CannonTower: Tower{
     
     func activateMineProjectiles(){
         projectileType = ProjectileTypes.mineProjectile
+        towerTexture.texture = SKTexture(imageNamed: "slime_cannon")
+    }
+    
+    override func upgrade(upgradeType: UpgradeTypes) {
+        super.upgrade(upgradeType: upgradeType)
+
+        if rangeUpgradeCount == 3 {
+            
+            GameScene.instance?.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)_cannon_mine")
+        }
+        
     }
     
 }

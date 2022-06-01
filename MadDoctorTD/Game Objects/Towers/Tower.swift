@@ -28,6 +28,7 @@ class Tower: SKSpriteNode{
     var noPowerTexture = SKSpriteNode()
     
     var upgradeCount: Int = 1
+    //var placeboCount: Int = 1
     
     var damageUpgradeCount: Int = 0
     var rangeUpgradeCount: Int = 0
@@ -58,7 +59,7 @@ class Tower: SKSpriteNode{
         noPowerTexture.zPosition = self.zPosition + 1
         noPowerTexture.position = self.position
         noPowerTexture.alpha = 0
-        GameScene.instance!.towerIndicatorsNode.addChild(noPowerTexture)
+        GameScene.instance!.uiManager!.towerIndicatorsNode.addChild(noPowerTexture)
         
     }
     
@@ -70,39 +71,60 @@ class Tower: SKSpriteNode{
         
         guard let gameScene = GameScene.instance else { return }
         
-        gameScene.displayRangeIndicator(attackRange: attackRange, position: self.position)
+        gameScene.uiManager!.displayRangeIndicator(attackRange: attackRange, position: self.position)
         let communicator = GameSceneCommunicator.instance
         communicator.cancelAllMenus()
-
+        
         communicator.currentTower = self
         communicator.currentFoundation = self.builtUponFoundation
-
+        
         communicator.showUpgradeMenu = true
         communicator.showUpgradeMenuUI = true
         
-        gameScene.towerImage?.texture = towerTexture.texture!
-        gameScene.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(self.damageUpgradeCount)")
-
-        gameScene.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(self.rangeUpgradeCount)")
-
-        gameScene.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(self.rateOfFireUpgradeCount)")
+        gameScene.uiManager!.towerImage?.texture = towerTexture.texture!
         
-        gameScene.towerNameText?.text = self.getName()
+        if self is GunTower && damageUpgradeCount == 3{
+            
+            gameScene.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(self.damageUpgradeCount)_bounce")
+        }else {
+            gameScene.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(self.damageUpgradeCount)")
+        }
         
-        gameScene.sellFoundationButton?.alpha = 0
-        gameScene.showUpgradeUI()
+        if self is CannonTower && rangeUpgradeCount == 3{
+            gameScene.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(self.rangeUpgradeCount)_cannon_mine")
+        } else {
+            gameScene.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(self.rangeUpgradeCount)")
+        }
+        
+        if self is SniperTower && rateOfFireUpgradeCount == 3{
+            gameScene.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed:"speed_upgrade_\(self.rateOfFireUpgradeCount)_poison")
+
+        }else if self is RapidFireTower && rateOfFireUpgradeCount == 3{
+            
+            gameScene.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(self.rateOfFireUpgradeCount)_slow")
+            
+        }else {
+            gameScene.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(self.rateOfFireUpgradeCount)")
+        }
+        
+        
+        
+        gameScene.uiManager!.towerNameText?.text = self.getName()
+        
+        gameScene.uiManager!.sellFoundationButton?.alpha = 0
+        gameScene.uiManager!.showUpgradeUI()
         
         if builtUponFoundation!.isStartingFoundation {
-            gameScene.foundationMenuToggle?.alpha = 0
+            gameScene.uiManager!.foundationMenuToggle?.alpha = 0
         }
         else {
-            gameScene.foundationMenuToggle?.alpha = 1
+            gameScene.uiManager!.foundationMenuToggle?.alpha = 1
         }
         
     }
     
     private func findNewTarget() {
-
+        
         let enemies = EnemyNodes.enemiesNode.children
         
         var closestDistance = CGFloat(attackRange+1)
@@ -117,6 +139,11 @@ class Tower: SKSpriteNode{
                 closestDistance = enemyDistance
                 if enemyDistance <= attackRange {
                     currentTarget = enemy
+                    let lookAtConstraint = SKConstraint.orient(
+                        to: currentTarget!,
+                        offset: SKRange(constantValue: -CGFloat.pi / 2)
+                    )
+                    self.towerTexture.constraints = [ lookAtConstraint ]
                     print("Target found!")
                 }
             }
@@ -127,66 +154,74 @@ class Tower: SKSpriteNode{
         
         if currentFireRateTick <= 0 {
             
-            
             ProjectileFactory(firingTower: self).createProjectile()
-            
-            
-            //                let gameScene = GameScene.instance!
-            //                if gameScene.gunProjectilesPool.isEmpty {
-            //
-            //
-            //                }
-            //                else {
-            //
-            //                    let index = gameScene.gunProjectilesPool.count-1
-            //                    //let projectile = GunProjectile(position: self.position, target: currentTarget!)
-            //                    let projectile = gameScene.gunProjectilesPool[index]
-            //                    gameScene.gunProjectilesPool.remove(at: index)
-            //                    projectile.reuseFromPool(position: self.position, target: currentTarget!, attackDamage: attackDamage)
-            //
-            //                    if projectile.parent == nil{
-            //                        gameScene.projectilesNode.addChild(projectile)
-            //
-            //                    }
-            //                }
             currentFireRateTick = fireRate
         }
     }
+
+    func upgradeParticle() {
+
+    }
     
     func upgrade(upgradeType : UpgradeTypes){
-        
+
         switch upgradeType {
             
         case .damage:
             
             attackDamage = Int(Double(attackDamage) * TowerData.UPGRADE_DAMAGE_BONUS_PCT)
             damageUpgradeCount += 1
-            GameScene.instance?.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(damageUpgradeCount)")
+            if damageUpgradeCount < 3 {
+                GameScene.instance?.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(damageUpgradeCount)")
+            }
             //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[damageUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
             SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
-
-
             
+            
+            
+            GameScene.instance?.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(damageUpgradeCount)")
+            SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+
         case .range:
             
             attackRange = CGFloat(Double(attackRange) * TowerData.UPGRADE_RANGE_BONUS_PCT)
-            GameScene.instance!.displayRangeIndicator(attackRange: attackRange, position: self.position)
+            GameScene.instance!.uiManager!.displayRangeIndicator(attackRange: attackRange, position: self.position)
             rangeUpgradeCount += 1
-            GameScene.instance?.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)")
+            if rangeUpgradeCount < 3 {
+                
+                GameScene.instance?.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)")
+            }
             //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rangeUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+            GameScene.instance?.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)")
             SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
         case .firerate:
             
             fireRate = Int(Double(fireRate) * TowerData.UPGRADE_FIRE_RATE_REDUCTION_PCT)
             rateOfFireUpgradeCount += 1
-            GameScene.instance?.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
+            if rateOfFireUpgradeCount < 3 {
+                GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
+            }
             //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rateOfFireUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
+            GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
             SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
         }
         
         upgradeCount += 1
-    }
+        upgradeParticle()
+        
+        if upgradeCount >= 6 {
+            GameScene.instance?.uiManager!.upgradeDamagePrice?.text = ""
+            GameScene.instance?.uiManager!.upgradeSpeedPrice?.text = "Max Level"
+            GameScene.instance?.uiManager!.upgradeRangePrice?.text = ""
+        }
+        else {
+            GameScene.instance?.uiManager!.upgradeDamagePrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+            GameScene.instance?.uiManager!.upgradeSpeedPrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+            GameScene.instance?.uiManager!.upgradeRangePrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
+        }
 
+    }
+    
     func update() {
         
         if !builtUponFoundation!.isPowered {
@@ -224,14 +259,11 @@ class Tower: SKSpriteNode{
                 print("Target out of sight.")
             }
             else {
-                let lookAtConstraint = SKConstraint.orient(to: currentTarget!,
-                                                           offset: SKRange(constantValue: -CGFloat.pi / 2))
-                self.towerTexture.constraints = [ lookAtConstraint ]
                 attackTarget()
             }
         }
     }
-
+    
     func onDestroy(){
         
         self.removeFromParent()

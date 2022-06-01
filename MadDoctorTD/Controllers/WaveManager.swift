@@ -19,13 +19,12 @@ class WaveManager{
     var wavesCompleted = 0
     var enemyChoises = [EnemyTypes]()
     
-    var reduceSpawnTime = 0
     var spawnCounter = 0
     var waveStartCounter = 0
     
-    let wavesPerLevel = 5
+    //let wavesPerLevel = 5
     
-    var bossLevel = 10
+    var currentBossLevel = WaveData.BOSS_LEVEL
     
     var attackLevel = 6
     var unlockAttackers = false
@@ -35,9 +34,9 @@ class WaveManager{
     var shouldCreateWave = false
     
     var numberOfAttackers = 0
-    
-    var startTime = 0
 
+    var gainSlimeMaterial = false
+    var gainSquidMaterial = false
         
     init(totalSlots: Int, choises: [EnemyTypes]){
         
@@ -62,8 +61,8 @@ class WaveManager{
             unlockAttackers = true
             
         }
-        if waveNumber == bossLevel + 1 {
-            bossLevel += 10
+        if waveNumber == currentBossLevel + 1 {
+            currentBossLevel += WaveData.BOSS_LEVEL
         }
         
         if waveNumber == attackLevel + 1{
@@ -79,13 +78,9 @@ class WaveManager{
         maximumAtkSpawn = waveNumber/10 // 10%
         }
         
-        if waveNumber == attackLevel {
-            reduceSpawnTime += 5
-        }
-        
         var occupiedSlots = 0
         
-        if waveNumber == bossLevel {
+        if waveNumber == currentBossLevel {
             totalSlots = EnemiesData.BOSS_ENEMY_SLOT
         } else {
             totalSlots = WaveData.LEVEL_WAVE_SIZE + waveNumber
@@ -112,15 +107,22 @@ class WaveManager{
             
             if chosen == .boss{
                 enemy = EnemyFactory().createBoss(enemyRace: enemyRace)
+                
+                switch enemyRace {
+                case .slime:
+                    gainSlimeMaterial = true
+                case .squid:
+                    gainSquidMaterial = true
+                }
+                
             }else{
                 enemy = EnemyFactory().createEnemy(enemyRace: enemyRace, enemyType: chosen!)
             }
             
             if enemy == nil{return}
             enemy!.position = spawnPoint!
-            enemy!.zPosition = 2
-            EnemyNodes.enemyArray.append(enemy!)
             
+            EnemyNodes.enemyArray.append(enemy!)
             
             if numberOfAttackers < maximumAtkSpawn && unlockAttackers && enemy!.enemyType != .flying{
                 
@@ -132,7 +134,7 @@ class WaveManager{
                         attackSpawnChance = 7 // 70%
                     }
                     
-                } else if waveNumber == bossLevel {
+                } else if waveNumber == currentBossLevel {
                     attackSpawnChance = 10
                     
                 } else {
@@ -163,7 +165,7 @@ class WaveManager{
         print("Wavenumber:\(waveNumber)")
         GameManager.instance.currentWave = waveNumber
         
-        if waveNumber % wavesPerLevel == 0 {
+        if waveNumber % WaveData.WAVES_PER_LEVEL == 0 {
             shouldCreateWave = false
         }
         
@@ -274,7 +276,7 @@ class WaveManager{
             enemyChoises.append(.flying)
         }
         if waveNumber >= 9 {
-            if waveNumber == bossLevel - 1{
+            if waveNumber == currentBossLevel - 1{
                 enemyChoises = [.boss]
             } else {
                 enemyChoises = [.standard,.heavy,.flying,.fast]
@@ -294,28 +296,22 @@ class WaveManager{
     
     //Timers for starting the wave and then spawn one enemy from the wave
     func timers(){
-        
-        print("shoulcreateWavw \(shouldCreateWave)")
-        print("enemy ARray \(EnemyNodes.enemyArray.count)")
-        
        
         if shouldCreateWave {
             waveStartCounter -= 1
-            
-            startTime = WaveData.WAVE_START_TIME + (waveNumber * 60)
             
             if waveStartCounter <= 0 {
                 progressDifficulty()
                 let race = GameScene.instance?.enemyRaceSwitch[GameManager.instance.currentLevel-1] ?? EnemyRaces.slime
                 createWave(choises: enemyChoises , enemyRace: race)
                 
-                waveStartCounter = startTime
+                waveStartCounter = WaveData.WAVE_START_TIME + (totalSlots * WaveData.SPAWN_STANDARD_TIMER)
             }
         }
         
         if (EnemyNodes.enemyArray.count) > 0 {
             spawnCounter += 1
-            if spawnCounter >= (WaveData.SPAWN_STANDARD_TIMER - reduceSpawnTime){
+            if spawnCounter >= (WaveData.SPAWN_STANDARD_TIMER){
                 spawnEnemy()
                 print("Enemies left in current wave \(EnemyNodes.enemyArray.count)")
                 
@@ -331,34 +327,46 @@ class WaveManager{
     
     func checkWinCondition(){
         
-        if waveNumber <= 0 {
+        if waveNumber < WaveData.WAVES_PER_LEVEL {
             return
         }
         
-        if (waveNumber % wavesPerLevel == 0) &&
+        if (waveNumber % WaveData.WAVES_PER_LEVEL == 0) &&
                 (EnemyNodes.enemyArray.isEmpty && EnemyNodes.enemiesNode.children.isEmpty) {
             print("Current level completed!")
-            GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
-            //GameManager.instance.moneyEarned += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
-            GameManager.instance.survivalBonusNumber += (WaveData.INCOME_PER_WAVE * wavesPerLevel)
+            GameManager.instance.moneyEarned += (WaveData.INCOME_PER_WAVE * WaveData.WAVES_PER_LEVEL) //For UI only
+            GameManager.instance.currentMoney += (WaveData.INCOME_PER_WAVE * WaveData.WAVES_PER_LEVEL) //Actually money gain
+            GameManager.instance.researchPoints += WaveData.RP_PER_WAVE
+            GameManager.instance.survivalBonusNumber += (WaveData.INCOME_PER_WAVE * WaveData.WAVES_PER_LEVEL)
+            
+            if gainSlimeMaterial {
+                GameManager.instance.slimeMaterialGained = 1
+                GameManager.instance.slimeMaterials += 1
+            }
+            else if gainSquidMaterial {
+                GameManager.instance.squidMaterialGained = 1
+                GameManager.instance.squidMaterials += 1
+            }
+            
+            gainSlimeMaterial = false
+            gainSquidMaterial = false
+            
             GameSceneCommunicator.instance.isBuildPhase = true
-            
-            
             
 //            GameScene.instance?.readyButton?.alpha = 1
 //            GameScene.instance?.buildFoundationButton?.alpha = 1
 //            GameScene.instance?.researchButton?.alpha = 1
 //            GameScene.instance?.upgradeMenuToggle?.alpha = 1
             
-            GameScene.instance?.showSummary()
-            GameScene.instance?.fadeOutPortal = true
-            
-            SoundManager.stopMusic()
+            GameScene.instance?.uiManager!.showSummary()
+            GameScene.instance?.uiManager!.fadeOutPortal = true
+            GameScene.instance?.uiManager?.hideBuildMenu = false
+            //SoundManager.stopMusic()
             
             //Door animation:
             if let gameScene = currentScene {
                 GameSceneCommunicator.instance.openDoors = true
-                gameScene.doorsAnimationCount = gameScene.doorsAnimationTime
+                gameScene.uiManager!.doorsAnimationCount = gameScene.uiManager!.doorsAnimationTime
             }
         }
 

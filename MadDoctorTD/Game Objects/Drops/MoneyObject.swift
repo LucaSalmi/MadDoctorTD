@@ -16,9 +16,9 @@ class MoneyObject: SKSpriteNode {
     
     init(startPosition: CGPoint) {
         
-        let size = CGSize(width: FoundationData.SIZE.width/2, height: FoundationData.SIZE.height/2)
+        let size = CGSize(width: FoundationData.SIZE.width/6, height: FoundationData.SIZE.height/6)
         
-        super.init(texture: SKTexture(imageNamed: "money_object"), color: .clear, size: size)
+        super.init(texture: SKTexture(imageNamed: "cash_symbol-1"), color: .clear, size: size)
         self.position = startPosition
         self.zPosition = 5
     }

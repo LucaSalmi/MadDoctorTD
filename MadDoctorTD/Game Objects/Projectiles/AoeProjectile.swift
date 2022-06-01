@@ -27,6 +27,11 @@ class AoeProjectile: SKSpriteNode {
     var projectileShadow: SKSpriteNode
     
     var sizeDifference: CGFloat = 30.0
+    
+    var invisDuration = 20
+    var invisTick = 0
+    
+    
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -42,9 +47,9 @@ class AoeProjectile: SKSpriteNode {
         projectileShadow.size.width += sizeDifference
         projectileShadow.size.height += sizeDifference
         
-        projectileShadow.alpha = 0.8
+        projectileShadow.alpha = 0
         
-        GameScene.instance!.projectileShadowNode.addChild(projectileShadow)
+        GameScene.instance!.uiManager!.projectileShadowNode.addChild(projectileShadow)
         
         super.init(texture: nil, color: .clear, size: ProjectileData.CANNON_BALL_SIZE)
         
@@ -63,6 +68,8 @@ class AoeProjectile: SKSpriteNode {
         currentTick = maxTick
         
         speed = self.position.distance(point: targetPoint) / travelDuration
+        
+        self.alpha = 0
         
         
         
@@ -167,8 +174,19 @@ class AoeProjectile: SKSpriteNode {
         return enemies
         
     }
+    
 
     func update() {
+        
+        if invisTick < invisDuration{
+            invisTick += 1
+        }
+        else{
+            if self.alpha != 1{
+                self.alpha = 1
+                projectileShadow.alpha = 0.8
+            }
+        }
         
         if currentTick > 0 {
             currentTick -= 1
@@ -184,6 +202,8 @@ class AoeProjectile: SKSpriteNode {
         
         
         currentDuration += 1
+        
+        
         
         if currentDuration < (travelDuration/2){
             self.size.width += 0.5

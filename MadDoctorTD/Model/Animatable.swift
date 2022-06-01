@@ -70,7 +70,7 @@ extension Animatable{
             
             let frame: SKAction = SKAction.animate(with: [
                 SKTexture(imageNamed: "\(textureName)\(AnimatableData.fastSlimeNOF)"),
-            SKTexture(imageNamed: "s\(textureName)\(1)")
+            SKTexture(imageNamed: "\(textureName)\(1)")
             ], timePerFrame: AnimatableData.timePerFrameSlime)
             animationFrames.append(frame)
             

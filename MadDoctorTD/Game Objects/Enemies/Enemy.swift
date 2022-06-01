@@ -48,10 +48,16 @@ class Enemy: SKSpriteNode{
     var isPoisonedTexture: SKSpriteNode?
     var killValue = EnemiesData.BASE_KILL_VALUE
     
+    var enemyShadow: SKSpriteNode?
+    let shadowSizeDifference = CGFloat(1)
+    let yAxisOffset: CGFloat = 10
+    
     //Animations
     var animationFrames: [SKAction] = []
     var runningFrame = 0
     var frameLimiter = 0
+    var isStepOne = true
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
@@ -71,6 +77,15 @@ class Enemy: SKSpriteNode{
         if GameScene.instance!.waveManager != nil{
             hp += GameScene.instance!.waveManager!.waveNumber * 5
         }
+        
+        self.zPosition = 2
+        
+        enemyShadow = SKSpriteNode(texture: SKTexture(imageNamed: "enemy_shadow"))
+        enemyShadow?.size.width = self.size.width + shadowSizeDifference
+        enemyShadow?.size.height = self.size.height + shadowSizeDifference
+        enemyShadow?.alpha = 0
+        enemyShadow?.zPosition = self.zPosition - 1
+        
         
         hpBar = SKSpriteNode(texture: SKTexture(imageNamed: "hp_bar_100"))
         
@@ -92,9 +107,10 @@ class Enemy: SKSpriteNode{
         isPoisonedTexture!.alpha = 0
         isPoisonedTexture!.zPosition = 50
         
-        GameScene.instance!.hpBarsNode.addChild(hpBar!)
-        GameScene.instance!.hpBarsNode.addChild(isSlowedTexture!)
-        GameScene.instance!.hpBarsNode.addChild(isPoisonedTexture!)
+        GameScene.instance!.uiManager!.hpBarsNode.addChild(enemyShadow!)
+        GameScene.instance!.uiManager!.hpBarsNode.addChild(hpBar!)
+        GameScene.instance!.uiManager!.hpBarsNode.addChild(isSlowedTexture!)
+        GameScene.instance!.uiManager!.hpBarsNode.addChild(isPoisonedTexture!)
         self.name = "Enemy"
         
     }
@@ -138,6 +154,9 @@ class Enemy: SKSpriteNode{
         hpBar!.position.x = self.position.x
         hpBar!.position.y = self.position.y + 35
         
+        enemyShadow!.position.x = self.position.x
+        enemyShadow!.position.y = self.position.y - yAxisOffset
+        
         isSlowedTexture!.position.x = hpBar!.position.x + ((hpBar?.size.width)!/2) + textureOffset
         isSlowedTexture!.position.y = hpBar!.position.y
         
@@ -146,15 +165,27 @@ class Enemy: SKSpriteNode{
         
         if !isMoving {
             movePoints = GameScene.instance!.pathfindingTestEnemy!.movePoints
-            isMoving = true
-        }
-        
-        if self.enemyType == .flying || self.enemyType == .boss{
             
-            if movePoints.count > 1 {
-                let finalPoint = movePoints[movePoints.count-1]
-                movePoints = [finalPoint]
+            if movePoints.isEmpty {
+                return
             }
+            
+            if self.enemyType == .flying || self.enemyType == .boss{
+                
+                if movePoints.count > 1 {
+                    let finalPoint = movePoints[movePoints.count-1]
+                    movePoints = [finalPoint]
+                }
+            }
+            
+            let upcommingPoint = movePoints[0]
+            
+            let lookAtConstraint = SKConstraint.orient(to: upcommingPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
+            self.constraints = [ lookAtConstraint ]
+            
+            isMoving = true
+            enemyShadow?.alpha = 0.2
+            
         }
         
         if movePoints.isEmpty {
@@ -194,6 +225,7 @@ class Enemy: SKSpriteNode{
         //CHECKPOINT
         SoundManager.playSFX(sfxName: SoundManager.base_hp_loss_1, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
         self.hp = 0
+        enemyShadow!.removeFromParent()
         isSlowedTexture!.removeFromParent()
         isPoisonedTexture!.removeFromParent()
         self.removeFromParent()
@@ -213,11 +245,6 @@ class Enemy: SKSpriteNode{
             
             if attackTarget != nil{
                 
-                if isAttacker{
-                    let lookAtConstraint = SKConstraint.orient(to: attackTarget!, offset: SKRange(constantValue: -CGFloat.pi / 2))
-                    self.constraints = [ lookAtConstraint ]
-                }
-                
                 attack()
                 return
                 
@@ -225,11 +252,6 @@ class Enemy: SKSpriteNode{
                 
                 let targetPosition = seekAndDestroy()
                 if targetPosition != nil{
-                    
-                    if isAttacker{
-                        let lookAtConstraint = SKConstraint.orient(to: targetPosition!, offset: SKRange(constantValue: -CGFloat.pi / 2))
-                        self.constraints = [ lookAtConstraint ]
-                    }
                     
                     setDirection(targetPoint: targetPosition!)
                     if slowTick <= 0{
@@ -250,18 +272,11 @@ class Enemy: SKSpriteNode{
         
         setDirection(targetPoint: nextPoint)
         
-        
-        let lookAtConstraint = SKConstraint.orient(to: nextPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
-        self.constraints = [ lookAtConstraint ]
-        
-        
         if slowTick <= 0{
-            print("CH not slowed")
             position.x += direction.x * baseSpeed
             position.y += direction.y * baseSpeed
         }
         else{
-            print("CH slowed")
             position.x += direction.x * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
             position.y += direction.y * (baseSpeed * ProjectileData.SLOW_EFFECT_PERCENT)
         }
@@ -271,6 +286,14 @@ class Enemy: SKSpriteNode{
             
             oldMovePoints.append(movePoints[0])
             movePoints.remove(at: 0)
+            
+            if movePoints.count >= 1 {
+                
+                let upcommingPoint = movePoints[0]
+                
+                let lookAtConstraint = SKConstraint.orient(to: upcommingPoint, offset: SKRange(constantValue: -CGFloat.pi / 2))
+                self.constraints = [ lookAtConstraint ]
+            }
         }
     }
     
@@ -293,14 +316,25 @@ class Enemy: SKSpriteNode{
             if attackTarget!.getDamage(damageIn: self.attackPower){
                 
                 attackTarget = nil
+                self.constraints = nil
                 
             }
             
         }else{
             
             attackCounter += 1
-            
         }
+        
+        if isStepOne{
+            self.position.x += 5
+            self.position.y += 5
+        }else{
+            self.position.x -= 5
+            self.position.y -= 5
+        }
+        
+        isStepOne.toggle()
+        
     }
     
     private func seekAndDestroy() -> CGPoint?{
@@ -320,6 +354,11 @@ class Enemy: SKSpriteNode{
                 if plateDistance <= self.size.width * 4 {
                     
                     if !plate.isStartingFoundation{
+                        
+                        let lookAtConstraint = SKConstraint.orient(to: plate.position, offset: SKRange(constantValue: -CGFloat.pi / 2))
+                        if self.constraints != [lookAtConstraint]{
+                            self.constraints = [ lookAtConstraint ]
+                        }
                         return plate.position
                     }
                 }
@@ -370,14 +409,15 @@ class Enemy: SKSpriteNode{
         moneyTarget.x -= 300
         moneyTarget.y += 600
         let moneyObject = MoneyObject(startPosition: self.position)
-        GameScene.instance!.moneyNode.addChild(moneyObject)
+        GameScene.instance!.uiManager!.moneyNode.addChild(moneyObject)
         
+        enemyShadow!.removeFromParent()
         hpBar!.removeFromParent()
         isSlowedTexture!.removeFromParent()
         isPoisonedTexture!.removeFromParent()
         
         GameManager.instance.currentMoney += self.killValue
-        GameManager.instance.moneyEarned += self.killValue //variabel that tracks income earned
+        GameManager.instance.moneyEarned += self.killValue //variabel that tracks income earned (for UI)
         print("current moneyEarned = \(GameManager.instance.moneyEarned)")
         print("KILL VALUE = \(GameManager.instance.currentMoney)")
         
@@ -388,10 +428,7 @@ class Enemy: SKSpriteNode{
             materialTarget.x -= 300
             materialTarget.y += 600
             let bossDrop = DropObject(startPoint: self.position, targetPoint: materialTarget, materialType: self.enemyRace!)
-            
-            let dialog = createDialog()
-            GameScene.instance?.dialoguesNode.addChild(dialog)
-            GameScene.instance!.moneyNode.addChild(bossDrop)
+            GameScene.instance!.uiManager!.moneyNode.addChild(bossDrop)
             boss.bossTexture?.removeFromParent()
             
         }
@@ -459,43 +496,6 @@ class Enemy: SKSpriteNode{
             hpLeft = 1
         }
         hpBar!.texture = SKTexture(imageNamed: "hp_bar_\(hpLeft)0")
-        
-        //        if hp <= Int(Double(startHp) * 0.1) {
-        //            //TODO: 10% HERE
-        //            hpBar!.texture = SKTexture(imageNamed: "hp_bar_10")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.2) {
-        //            //TODO: 20% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_20")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.3){
-        //            //TODO: 30% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_30")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.4){
-        //            //TODO: 40% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_40")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.5){
-        //            //TODO: 50% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_50")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.6){
-        //            //TODO: 60% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_60")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.7){
-        //            //TODO: 70% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_70")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.8){
-        //            //TODO: 80% HERE
-        //            hpBar?.texture = SKTexture(imageNamed: "hp_bar_80")
-        //        }
-        //        else if hp <= Int(Double(startHp) * 0.9){
-        //            //TODO: 90% HERE
-        //            hpBar!.texture = SKTexture(imageNamed: "hp_bar_90")
-        //        }
     }
     
     private func hasReachedPoint(point: CGPoint) -> Bool {
@@ -531,7 +531,7 @@ class Enemy: SKSpriteNode{
         var obstacles = SKNode.obstacles(fromNodeBounds: FoundationPlateNodes.foundationPlatesNode.children.filter({ (element ) -> Bool in
             return element != player
         }))
-        let edges = SKNode.obstacles(fromNodeBounds: gameScene.edgesTilesNode.children)
+        let edges = SKNode.obstacles(fromNodeBounds: gameScene.uiManager!.edgesTilesNode.children)
         obstacles.append(contentsOf: edges)
         
         // Assemble a graph based on the obstacles. Provide a buffer radius so there is a bit of space between the

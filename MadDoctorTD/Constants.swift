@@ -190,7 +190,12 @@ struct WaveData{
     static let HEAVY_ENEMY_LIMIT = 5
     static let FLY_ENEMY_LIMIT = 5
     
+    static let BOSS_LEVEL = 10
+    
+    static let WAVES_PER_LEVEL = 5
+    
     static let INCOME_PER_WAVE = 100
+    static let RP_PER_WAVE = 5
     
     static let MAX_ATTACKER_NUMBER = 1
     
@@ -200,9 +205,9 @@ struct WaveData{
 //Player + Economy
 struct PlayerData{
     
-    static let START_MONEY = 10000000//2500 //2500 //!2000
-    static let BASE_HP = 1000//10 //3
-    static let START_RESEARCH_POINTS = 20 //3
+    static let START_MONEY = 2500 //2000
+    static let BASE_HP = 10
+    static let START_RESEARCH_POINTS = 2
 
 }
 
@@ -216,6 +221,8 @@ struct UIData{
 
 struct LabData{
     
+    static let SLIME_COST_1 = 1
+    static let SQUID_COST_1 = 1
     static let UPGRADE_COST_1 = 2
     static let UPGRADE_COST_2 = 4
     static let UPGRADE_COST_3 = 6

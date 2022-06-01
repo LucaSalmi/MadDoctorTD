@@ -200,21 +200,21 @@ struct TopArea: View {
         switch communicator.selectedTowerType {
             
         case .gunTower:
-            communicator.image3a = "bouncing_projectile"
+            communicator.image3a = "blast_tower_slime"
             communicator.image3b = "Daniel"
             communicator.image3c = "Daniel"
         case .rapidFireTower:
             communicator.image3a = "Daniel"
-            communicator.image3b = "money_object"
+            communicator.image3b = "speed_tower_slime"
             communicator.image3c = "Daniel"
         case .sniperTower:
             communicator.image3a = "Daniel"
-            communicator.image3b = "money_object"
+            communicator.image3b = "sniper_tower_rotate_slime"
             communicator.image3c = "Daniel"
         case .cannonTower:
             communicator.image3a = "Daniel"
             communicator.image3b = "Daniel"
-            communicator.image3c = "cannon_projectile"
+            communicator.image3c = "slime_cannon"
         }
     }
     
@@ -244,10 +244,19 @@ struct MiddleArea: View {
                         Image(communicator.selectedTowerImage)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "1"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "1"))
+                        
+                        Text("2 RP")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "1"))
                         
                     }
                 })
@@ -276,10 +285,19 @@ struct MiddleArea: View {
                         Image(communicator.image2a)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "2a"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "2a"))
+                        
+                        Text("4 RP")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "2a"))
                     }
                 }
                 
@@ -299,10 +317,19 @@ struct MiddleArea: View {
                         Image(communicator.image2b)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "2b"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "2b"))
+                        
+                        Text("4 RP")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "2b"))
                     }
                 }
                 
@@ -322,10 +349,19 @@ struct MiddleArea: View {
                         Image(communicator.image2c)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "2c"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "2c"))
+                        
+                        Text("4 RP")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "2c"))
                     }
                 }
             }
@@ -361,10 +397,19 @@ struct MiddleArea: View {
                         Image(communicator.image3a)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "3a"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "3a"))
+                        
+                        Text("6 RP..")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "3a"))
                     }
                 }
                 
@@ -385,10 +430,19 @@ struct MiddleArea: View {
                         Image(communicator.image3b)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "3b"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "3b"))
+                        
+                        Text("\(LabData.UPGRADE_COST_3) RP..")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "3b"))
                     }
                 }
                 
@@ -409,42 +463,25 @@ struct MiddleArea: View {
                         Image(communicator.image3c)
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-                        Image("padlock_temporary")
+                        Image(checkAvailable(buttonId: "3c"))
                             .resizable()
                             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
                             .opacity(changeOpacity(buttonId: "3c"))
+                        
+                        Text("6 RP..")
+                            .foregroundColor(.white)
+                            .padding([.leading,.trailing], 5)
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(5)
+                            .padding(5)
+                            .offset(y: -LabSceneView.imageHeight/3)
+                            .opacity(checkIfPriceIsNeeded(buttonId: "3c"))
                         
                     }
                 })
                 
             }
-            
         }
-        /*
-        .alert(item: $confirmation) { confirmation in
-            
-            Alert(
-                title: Text(confirmation.title),
-                message: Text(confirmation.description),
-                primaryButton: .cancel(Text("Yes")){
-                    buyUpgrade()
-                },
-                secondaryButton: .destructive(Text("No"))
-            )}
-        VStack{
-            
-        }
-        .alert(item: $error) { error in
-            
-            Alert(
-                title: Text(error.title),
-                message: Text(error.description)
-        )}
-         */
-        
-       
-
-        
     }
     
     
@@ -457,71 +494,63 @@ struct MiddleArea: View {
             switch communicator.selectedTowerType{
                 
             case .gunTower:
-                return "The trusted AlienSmasher 3000, well balanced and reliable. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+                return "The trusted AlienSmasher 3000, well balanced and reliable.\n\nDo you really want to buy this upgrade?"
             case .cannonTower:
-                return "I found this in a museum, what a shame! Powerful but very slow. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+                return "I found this in a museum, what a shame! Powerful but very slow.\n\nDo you really want to buy this upgrade?"
             case .rapidFireTower:
-                return "Is there somthing better then a gatling gun? No! Very fast, but with a short range and low damage. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+                return "Is there somthing better then a gatling gun? No! Very fast, but with a short range and low damage.\n\nDo you really want to buy this upgrade?"
             case .sniperTower:
-                return "Better then a Finnish sniper. long range, high damage shots with a long cooldown. cost: \(LabData.getCost(selected: communicator.selectedTreeButtonId)) RP"
+                return "Better then a Finnish sniper. long range, high damage shots with a long cooldown.\n\nDo you really want to buy this upgrade?"
             }
             
         case "2a":
             
-            let cost = LabData.UPGRADE_COST_2
-            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 damage for Gun Towers? cost: \(cost) RP"
+                return "More damage = More Fun!! Unlock level 2 damage for Gun Towers?\n\nDo you really want to buy this upgrade?"
             case .rapidFireTower:
-                return "Unlock level 2 damage for Rapid Fire Towers? cost: \(cost) RP"
+                return "More damage = More Fun!! Unlock level 2 damage for Rapid Fire Towers?\n\nDo you really want to buy this upgrade?"
             case .sniperTower:
-                return "Unlock level 2 damage for Sniper Towers? cost: \(cost) RP"
+                return "More damage = More Fun!! Unlock level 2 damage for Sniper Towers?\n\nDo you really want to buy this upgrade?"
             case .cannonTower:
-                return "Unlock level 2 damage for Cannon Towers? cost: \(cost) RP"
+                return "More damage = More Fun!! Unlock level 2 damage for Cannon Towers?\n\nDo you really want to buy this upgrade?"
             }
             
         case "2b":
             
-            let cost = LabData.UPGRADE_COST_2
-            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 attack speed for Gun Towers? cost: \(cost) RP"
+                return "Gotta go Fast!! Unlock level 2 attack speed for Gun Towers?\n\nDo you really want to buy this upgrade?"
             case .rapidFireTower:
-                return "Unlock level 2 attack speed for Rapid Fire Towers? cost: \(cost) RP"
+                return "Gotta go Fast!! Unlock level 2 attack speed for Rapid Fire Towers?\n\nDo you really want to buy this upgrade?"
             case .sniperTower:
-                return "Unlock level 2 attack speed for Sniper Towers? cost: \(cost) RP"
+                return "Gotta go Fast!! Unlock level 2 attack speed for Sniper Towers?\n\nDo you really want to buy this upgrade?"
             case .cannonTower:
-                return "Unlock level 2 attack speed for Cannon Towers? cost: \(cost) RP"
+                return "Gotta go Fast!! Unlock level 2 attack speed for Cannon Towers?\n\nDo you really want to buy this upgrade?"
             }
             
         case "2c":
             
-            let cost = LabData.UPGRADE_COST_2
-            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock level 2 range for Gun Towers? cost: \(cost) RP"
+                return "You Stink! Stay away! Unlock level 2 range for Gun Towers?\n\nDo you really want to buy this upgrade?"
             case .rapidFireTower:
-                return "Unlock level 2 range for Rapid Fire Towers? cost: \(cost) RP"
+                return "You Stink! Stay away! Unlock level 2 range for Rapid Fire Towers?\n\nDo you really want to buy this upgrade?"
             case .sniperTower:
-                return "Unlock level 2 range for Sniper Towers? cost: \(cost) RP"
+                return "You Stink! Stay away! Unlock level 2 range for Sniper Towers?\n\nDo you really want to buy this upgrade?"
             case .cannonTower:
-                return "Unlock level 2 range for Cannon Towers? cost: \(cost) RP"
+                return "You Stink! Stay away! Unlock level 2 range for Cannon Towers?\n\nDo you really want to buy this upgrade?"
             }
             
         case "3a":
             
-            let cost = LabData.UPGRADE_COST_3
-            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
-                return "Unlock bouncing projectiles for Gun Towers?  cost: \(cost) RP and 1 Slime Material"
+                return "Amaizingly hypnotic to watch!! Unlock bouncing projectiles for Gun Towers?\n\nDo you really want to buy this upgrade?"
             case .rapidFireTower:
                 return "ERROR"
             case .sniperTower:
@@ -532,24 +561,20 @@ struct MiddleArea: View {
             
         case "3b":
             
-            let cost = LabData.UPGRADE_COST_3
-            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
                 return "ERROR"
             case .rapidFireTower:
-                return "Unlock slowing projectiles for Rapid Fire Towers? cost: \(cost) RP and 1 Slime Material"
+                return "Chill Duuuuude!! Unlock slowing projectiles for Rapid Fire Towers?\n\nDo you really want to buy this upgrade?"
             case .sniperTower:
-                return "Unlock poison projectiles for Sniper Towers? cost: \(cost) RP and 1 Slime Material"
+                return "Only natural ingredients!! Unlock poison projectiles for Sniper Towers?\n\nDo you really want to buy this upgrade?"
             case .cannonTower:
                 return "ERROR"
             }
             
         case "3c":
             
-            let cost = LabData.UPGRADE_COST_3
-            
             switch communicator.selectedTowerType {
                 
             case .gunTower:
@@ -559,15 +584,48 @@ struct MiddleArea: View {
             case .sniperTower:
                 return "ERROR"
             case .cannonTower:
-                return "Unlock mine projectiles for Cannon Towers? cost: \(cost) RP and 1 Slime Material"
+                return "Bad aim? No problem!!! Unlock mine projectiles for Cannon Towers?\n\nDo you really want to buy this upgrade?"
             }
             
         default:
             return "ERROR"
         }
         
+    }
+    
+    func showPrice() -> String{
         
-        
+        switch communicator.selectedTreeButtonId{
+            
+        case "1":
+            return "Cost: \(LabData.UPGRADE_COST_1) RP"
+            
+            //2
+            
+        case "2a":
+            return "Cost: \(LabData.UPGRADE_COST_2) RP"
+            
+        case "2b":
+            return "Cost: \(LabData.UPGRADE_COST_2) RP"
+            
+        case "2c":
+            return "Cost: \(LabData.UPGRADE_COST_2) RP"
+            
+            //3
+            
+        case "3a":
+            return "Cost: \(LabData.UPGRADE_COST_3) RP + \(LabData.SLIME_COST_1) Slime material"
+            
+        case "3b":
+            return "Cost: \(LabData.UPGRADE_COST_3) RP + \(LabData.SLIME_COST_1) Slime material"
+            
+        case "3c":
+            return "Cost: \(LabData.UPGRADE_COST_3) RP + \(LabData.SLIME_COST_1) Slime material"
+            
+        default:
+            return "Cost: \(LabData.UPGRADE_COST_2) RP"
+            
+        }
     }
     
     
@@ -597,13 +655,29 @@ struct MiddleArea: View {
             return
         }
         
-        communicator.confirmViewHeader = "Do you really want to buy this upgrade?"
-        communicator.confirmViewText = createTowerDescription()
-        communicator.showConfirmView = true
+        let answer = LabSceneCommunicator.instance.checkResearch()
+        
+        switch answer{
+            
+        case .error:
+            communicator.displayInfoView(title: "Error", description: "Not implemented yet")
+            
+        case .pathBlocked:
+            communicator.displayInfoView(title: "Unavailable", description: "This path is not unlocked yet")
+            
+        case .researchPoints:
+            communicator.displayInfoView(title: "Insufficient Funds", description: "Not enough Research point")
+            
+        case .unlocked:
+            communicator.displayInfoView(title: "Info", description: "Upgrade already unlocked")
+            
+        default:
+            communicator.confirmViewHeader = showPrice()
+            communicator.confirmViewText = createTowerDescription()
+            communicator.showConfirmView = true
+        }
         
     }
-    
-    
     
     private func getPrice() -> Int {
         
@@ -712,6 +786,127 @@ struct MiddleArea: View {
         return .error
     }
     
+    func checkIfPriceIsNeeded(buttonId: String) -> Double{
+        
+        var towerResearchLevel = [String]()
+        
+        switch communicator.selectedTowerType {
+            
+        case .gunTower:
+            towerResearchLevel = communicator.gunTowerResearchLevel
+        case .rapidFireTower:
+            towerResearchLevel = communicator.rapidTowerResearchLevel
+        case .sniperTower:
+            towerResearchLevel = communicator.sniperTowerResearchLevel
+        case .cannonTower:
+            towerResearchLevel = communicator.cannonTowerResearchLevel
+            
+        }
+        
+        switch buttonId{
+            
+        case "1":
+            if !towerResearchLevel.contains("1") {
+                return 1.0
+            }
+            
+            // 2
+            
+        case "2a":
+            if towerResearchLevel.contains("1") && !towerResearchLevel.contains("2a") && !towerResearchLevel.contains("3a") {
+                return 1.0
+            }
+        case "2b":
+            if towerResearchLevel.contains("1") && !towerResearchLevel.contains("2b") && !towerResearchLevel.contains("3b") {
+                return 1.0
+            }
+        case "2c":
+            if towerResearchLevel.contains("1") && !towerResearchLevel.contains("2c") && !towerResearchLevel.contains("3c") {
+                return 1.0
+            }
+            
+            // 3
+            
+        case "3a":
+            if towerResearchLevel.contains("2a") && !towerResearchLevel.contains("3a"){
+                return 1.0
+            }
+        case "3b":
+            if towerResearchLevel.contains("2b") && !towerResearchLevel.contains("3b"){
+                return 1.0
+            }
+        case "3c":
+            if towerResearchLevel.contains("2c") && !towerResearchLevel.contains("3c"){
+                return 1.0
+            }
+        default:
+            return 0.0
+        }
+        
+        return 0.0
+        
+    }
+    
+    func checkAvailable(buttonId: String) -> String{
+        
+        var towerResearchLevel = [String]()
+        
+        switch communicator.selectedTowerType {
+            
+        case .gunTower:
+            towerResearchLevel = communicator.gunTowerResearchLevel
+        case .rapidFireTower:
+            towerResearchLevel = communicator.rapidTowerResearchLevel
+        case .sniperTower:
+            towerResearchLevel = communicator.sniperTowerResearchLevel
+        case .cannonTower:
+            towerResearchLevel = communicator.cannonTowerResearchLevel
+            
+        }
+        
+        switch buttonId{
+            
+        case "1":
+            return "locked_frame_ready"
+            
+            // 2
+            
+        case "2a":
+            if towerResearchLevel.contains("1") {
+                return "locked_frame_ready"
+            }
+        case "2b":
+            if towerResearchLevel.contains("1") {
+                return "locked_frame_ready"
+            }
+        case "2c":
+            if towerResearchLevel.contains("1") {
+                return "locked_frame_ready"
+            }
+            
+            // 3
+            
+        case "3a":
+            if towerResearchLevel.contains("2a") {
+                return "locked_frame_ready"
+            }
+        case "3b":
+            if towerResearchLevel.contains("2b") {
+                return "locked_frame_ready"
+            }
+        case "3c":
+            if towerResearchLevel.contains("2c") {
+                return "locked_frame_ready"
+            }
+        default:
+            return "locked_frame"
+        }
+        
+        return "locked_frame"
+        
+    }
+    
+    
     
     
     func changeOpacity(buttonId: String) -> Double{
@@ -740,9 +935,6 @@ struct MiddleArea: View {
         
     }
     
-    
-    
-    
 }
 
 struct BotArea: View {
@@ -765,22 +957,22 @@ struct BotArea: View {
                     .resizable()
                     .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
             }
-
+            
             
             /*
-            Button {
-                AppManager.appManager.state = .gameScene
-                SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
-                //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
-            } label: {
-                Text("Return")
-                    .foregroundColor(Color.white)
-                
-                
-            }
-            .frame(width: 120, height: 30)
-            .background(Color.blue)
-            .cornerRadius(1)
+             Button {
+             AppManager.appManager.state = .gameScene
+             SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
+             //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
+             } label: {
+             Text("Return")
+             .foregroundColor(Color.white)
+             
+             
+             }
+             .frame(width: 120, height: 30)
+             .background(Color.blue)
+             .cornerRadius(1)
              */
             
             Spacer()
@@ -806,8 +998,8 @@ struct LabButtonImage: View {
         Image("item_frame_research_bg")
             .resizable()
             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-            .background(communicator.selectedTreeButtonId == id ? .white : .black)
-            .opacity(communicator.selectedTreeButtonId == id ? 1.0 : 0.5)
+        //            .background(communicator.selectedTreeButtonId == id ? .white : .black)
+        //            .opacity(communicator.selectedTreeButtonId == id ? 1.0 : 0.5)
     }
     
 }
@@ -869,7 +1061,7 @@ struct ConfirmView: View {
                     communicator.buyUpgrade()
                     communicator.showConfirmView = false
                 } label: {
-                    Image("done_build_foundation_button_standard")
+                    Image("check_symbol")
                         .resizable()
                         .frame(width: LabSceneView.imageWidth*0.75, height: LabSceneView.imageHeight*0.75)
                 }
@@ -879,7 +1071,7 @@ struct ConfirmView: View {
                 Button {
                     communicator.showConfirmView = false
                 } label: {
-                    Image("sniper_tower_static_legs")
+                    Image("cancel_symbol")
                         .resizable()
                         .frame(width: LabSceneView.imageWidth*0.75, height: LabSceneView.imageHeight*0.75)
                 }

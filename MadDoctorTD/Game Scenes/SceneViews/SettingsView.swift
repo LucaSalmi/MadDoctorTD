@@ -30,8 +30,6 @@ struct SettingsView: View {
             
             Toggle("SFX", isOn: $gameManager.isSfxOn)
             
-            
-                
                 Button {
                     if !gameManager.isPaused{
                         appManager.state = .startMenu
@@ -43,33 +41,10 @@ struct SettingsView: View {
                     Text("Return")
                         .font(.title)
                 }
-
-             
-            if appManager.state == .settingsMenu{
-                Button {
-                    appManager.state = .creditsScene
-                        
-                } label: {
-                    Text("Credits")
-                }
-            }
-                
-            
-            
-            
-
-            
-            
-            
-
         }
         .toggleStyle(.button)
         .tint(.cyan)
         .font(.title)
-        
-        
-        
-        
     }
 }
 

@@ -21,6 +21,7 @@
 		3359CCA4282157C500878191 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3359CCA3282157C500878191 /* MyTileSet.sks */; };
 		3359CCA62821596700878191 /* ClickableTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3359CCA52821596700878191 /* ClickableTile.swift */; };
 		337CAE0D283CB913004B8ACB /* BouncingProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337CAE0C283CB913004B8ACB /* BouncingProjectile.swift */; };
+		339795D12842174D005A505D /* UIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339795D02842174D005A505D /* UIManager.swift */; };
 		3398938828362CAC006B0374 /* MoneyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398938728362CAC006B0374 /* MoneyObject.swift */; };
 		3398938A28363B3C006B0374 /* PriceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398938928363B3C006B0374 /* PriceObject.swift */; };
 		33B86801282D08DA004AA4D4 /* LabSceneCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */; };
@@ -103,6 +104,9 @@
 		B380038A283FA31600C9A0C3 /* wrong_click_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3800384283FA31500C9A0C3 /* wrong_click_1.wav */; };
 		B380038B283FA31600C9A0C3 /* wrong_click_4.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3800385283FA31600C9A0C3 /* wrong_click_4.wav */; };
 		B380038C283FA31600C9A0C3 /* wrong_click_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = B3800386283FA31600C9A0C3 /* wrong_click_3.wav */; };
+		B380038F2846167200C9A0C3 /* sparkle_emitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = B380038D2846167200C9A0C3 /* sparkle_emitter.sks */; };
+		B38003902846167200C9A0C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B380038E2846167200C9A0C3 /* Assets.xcassets */; };
+		B38003942846353400C9A0C3 /* sparkle_emitter_upgrade_full.sks in Resources */ = {isa = PBXBuildFile; fileRef = B38003932846353400C9A0C3 /* sparkle_emitter_upgrade_full.sks */; };
 		C81DED212837AE8800D67B8F /* ErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81DED202837AE8800D67B8F /* ErrorInfo.swift */; };
 		C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A52821352200F66043 /* MadDoctorTDApp.swift */; };
 		C839C6A82821352200F66043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6A72821352200F66043 /* ContentView.swift */; };
@@ -114,7 +118,7 @@
 		C839C6BB2821579F00F66043 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BA2821579F00F66043 /* Constants.swift */; };
 		C839C6BD2821586300F66043 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BC2821586300F66043 /* GameManager.swift */; };
 		C839C6BF282158C100F66043 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6BE282158C100F66043 /* SoundManager.swift */; };
-		C839C6C128215B4800F66043 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C028215B4800F66043 /* InputManager.swift */; };
+		C839C6C128215B4800F66043 /* TouchesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C028215B4800F66043 /* TouchesExtension.swift */; };
 		C839C6C62821619200F66043 /* LabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C52821619200F66043 /* LabMenuView.swift */; };
 		C839C6C8282161BA00F66043 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C7282161BA00F66043 /* MainMenuView.swift */; };
 		C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C839C6C9282161DF00F66043 /* ResearchView.swift */; };
@@ -177,6 +181,7 @@
 		3359CCA3282157C500878191 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		3359CCA52821596700878191 /* ClickableTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTile.swift; sourceTree = "<group>"; };
 		337CAE0C283CB913004B8ACB /* BouncingProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncingProjectile.swift; sourceTree = "<group>"; };
+		339795D02842174D005A505D /* UIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManager.swift; sourceTree = "<group>"; };
 		3398938728362CAC006B0374 /* MoneyObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyObject.swift; sourceTree = "<group>"; };
 		3398938928363B3C006B0374 /* PriceObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceObject.swift; sourceTree = "<group>"; };
 		33B86800282D08DA004AA4D4 /* LabSceneCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabSceneCommunicator.swift; sourceTree = "<group>"; };
@@ -260,6 +265,9 @@
 		B3800384283FA31500C9A0C3 /* wrong_click_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong_click_1.wav; sourceTree = "<group>"; };
 		B3800385283FA31600C9A0C3 /* wrong_click_4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong_click_4.wav; sourceTree = "<group>"; };
 		B3800386283FA31600C9A0C3 /* wrong_click_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong_click_3.wav; sourceTree = "<group>"; };
+		B380038D2846167200C9A0C3 /* sparkle_emitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = sparkle_emitter.sks; sourceTree = "<group>"; };
+		B380038E2846167200C9A0C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B38003932846353400C9A0C3 /* sparkle_emitter_upgrade_full.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = sparkle_emitter_upgrade_full.sks; sourceTree = "<group>"; };
 		C81DED202837AE8800D67B8F /* ErrorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInfo.swift; sourceTree = "<group>"; };
 		C839C6A22821352200F66043 /* MadDoctorTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadDoctorTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C839C6A52821352200F66043 /* MadDoctorTDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadDoctorTDApp.swift; sourceTree = "<group>"; };
@@ -272,7 +280,7 @@
 		C839C6BA2821579F00F66043 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C839C6BC2821586300F66043 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		C839C6BE282158C100F66043 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
-		C839C6C028215B4800F66043 /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
+		C839C6C028215B4800F66043 /* TouchesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchesExtension.swift; sourceTree = "<group>"; };
 		C839C6C52821619200F66043 /* LabMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabMenuView.swift; sourceTree = "<group>"; };
 		C839C6C7282161BA00F66043 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		C839C6C9282161DF00F66043 /* ResearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchView.swift; sourceTree = "<group>"; };
@@ -412,6 +420,8 @@
 				3359CCA3282157C500878191 /* MyTileSet.sks */,
 				3311AB8E28230D05009DEEEC /* GunProjectileImpact.sks */,
 				C844A736282A969600FC42C9 /* CannonExplosion.sks */,
+				B380038D2846167200C9A0C3 /* sparkle_emitter.sks */,
+				B38003932846353400C9A0C3 /* sparkle_emitter_upgrade_full.sks */,
 			);
 			path = "Sound and Graphics";
 			sourceTree = "<group>";
@@ -423,11 +433,12 @@
 				C839C6BE282158C100F66043 /* SoundManager.swift */,
 				C839C6A72821352200F66043 /* ContentView.swift */,
 				C839C6BC2821586300F66043 /* GameManager.swift */,
-				C839C6C028215B4800F66043 /* InputManager.swift */,
+				C839C6C028215B4800F66043 /* TouchesExtension.swift */,
 				C839C6CD28216A0A00F66043 /* PhysicsExtension.swift */,
 				C897BC1C282510380085D093 /* WaveManager.swift */,
 				C897BC1E282515260085D093 /* RandomNumberGenerator.swift */,
 				C8A23075282D4FFD00A4B8DA /* PhysicsUtils.swift */,
+				339795D02842174D005A505D /* UIManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -435,6 +446,7 @@
 		C839C6992821352200F66043 = {
 			isa = PBXGroup;
 			children = (
+				B380038E2846167200C9A0C3 /* Assets.xcassets */,
 				C839C6A42821352200F66043 /* MadDoctorTD */,
 				C839C6A32821352200F66043 /* Products */,
 			);
@@ -765,12 +777,14 @@
 				B34EEB04283E19A500CE60C1 /* giant_step_4.mp3 in Resources */,
 				B34EEB1E283E4F8B00CE60C1 /* button_8.mp3 in Resources */,
 				B380037F283F89AE00C9A0C3 /* airlock_SFX.mp3 in Resources */,
+				B38003902846167200C9A0C3 /* Assets.xcassets in Resources */,
 				C839C6AA2821352400F66043 /* Assets.xcassets in Resources */,
 				B3800380283F89AE00C9A0C3 /* mad_td_menu_theme.mp3 in Resources */,
 				B34EEA932836418E00CE60C1 /* metal_tap_2.mp3 in Resources */,
 				B34EEAE02837B01B00CE60C1 /* sniper_chosen.mp3 in Resources */,
 				B35C2155282D4546009A748E /* research_view_open.mp3 in Resources */,
 				B34EEAF6283E0C1200CE60C1 /* wrench_upgrade_6.mp3 in Resources */,
+				B38003942846353400C9A0C3 /* sparkle_emitter_upgrade_full.sks in Resources */,
 				B35C2112282A6EEE009A748E /* finger_tap_boosted.wav in Resources */,
 				B35C2137282CFE8F009A748E /* slime_death1.wav in Resources */,
 				B34EEB02283E19A500CE60C1 /* giant_step_1.mp3 in Resources */,
@@ -779,6 +793,7 @@
 				B30A1E6F2833CA3B007F86E5 /* construction_sound_effect.wav in Resources */,
 				3311AB8F28230D05009DEEEC /* GunProjectileImpact.sks in Resources */,
 				B34EEADF2837B01B00CE60C1 /* upg_sound_4.mp3 in Resources */,
+				B380038F2846167200C9A0C3 /* sparkle_emitter.sks in Resources */,
 				B34EEAF8283E0C1200CE60C1 /* wrench_upgrade_2.mp3 in Resources */,
 				B35C2153282D44DC009A748E /* button_press_three.mp3 in Resources */,
 				B34EEAE22837B01B00CE60C1 /* upg_sound_5.mp3 in Resources */,
@@ -837,7 +852,7 @@
 				C839C6CA282161DF00F66043 /* ResearchView.swift in Sources */,
 				C839C6B928214DC900F66043 /* AppManager.swift in Sources */,
 				C839C6BF282158C100F66043 /* SoundManager.swift in Sources */,
-				C839C6C128215B4800F66043 /* InputManager.swift in Sources */,
+				C839C6C128215B4800F66043 /* TouchesExtension.swift in Sources */,
 				C839C6B22821352400F66043 /* MadDoctorTD.xcdatamodeld in Sources */,
 				C839C6BB2821579F00F66043 /* Constants.swift in Sources */,
 				3320331A2822ABF500133BBA /* Projectile.swift in Sources */,
@@ -867,6 +882,7 @@
 				3314684C282165F1003EA0CC /* GameSceneCommunicator.swift in Sources */,
 				C844A72F282A582800FC42C9 /* ProjectileFactory.swift in Sources */,
 				3359CCA62821596700878191 /* ClickableTile.swift in Sources */,
+				339795D12842174D005A505D /* UIManager.swift in Sources */,
 				3320331D2822ACFA00133BBA /* GunProjectile.swift in Sources */,
 				C839C6A62821352200F66043 /* MadDoctorTDApp.swift in Sources */,
 				E5BB6D6D283E1073003E57D9 /* MineProjectile.swift in Sources */,

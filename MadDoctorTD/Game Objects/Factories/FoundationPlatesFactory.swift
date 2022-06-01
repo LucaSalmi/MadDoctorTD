@@ -55,6 +55,8 @@ class FoundationPlateFactory: FoundationPlateCreator{
         
         print("map found")
         
+        var currentFoundationIndex = -1
+        
         for row in 0..<startFoundationMap.numberOfRows{
             for column in 0..<startFoundationMap.numberOfColumns{
                 
@@ -64,6 +66,7 @@ class FoundationPlateFactory: FoundationPlateCreator{
                 let position = startFoundationMap.centerOfTile(atColumn: column, row: row)
                 
                 for node in ClickableTilesNodes.clickableTilesNode.children {
+                    
                     let clickableTile = node as! ClickableTile
                     if clickableTile.contains(position) {
                         
@@ -71,6 +74,12 @@ class FoundationPlateFactory: FoundationPlateCreator{
                         plate.updateFoundationsTexture()
                         FoundationPlateNodes.foundationPlatesNode.addChild(plate)
                         clickableTile.position.y = -10000
+                        
+                        currentFoundationIndex += 1
+                        if position.x > 0 {
+                            GameSceneCommunicator.instance.secondIndexStart = currentFoundationIndex
+                        }
+                            
                     }
                 }
             }
@@ -80,8 +89,7 @@ class FoundationPlateFactory: FoundationPlateCreator{
             let foundationPlate = node as! FoundationPlate
             foundationPlate.updateFoundationsTexture()
         }
-        GameSceneCommunicator.instance.secondIndexStart = FoundationPlateNodes.foundationPlatesNode.children.count/2
-        //startFoundationMap.removeFromParent()
         
+        //startFoundationMap.removeFromParent()
     }
 }
