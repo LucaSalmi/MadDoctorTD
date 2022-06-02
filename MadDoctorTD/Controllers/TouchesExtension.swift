@@ -70,8 +70,6 @@ extension GameScene {
             
             if node.name == "GunTower" || node.name == "SpeedTower" ||
                 node.name == "CannonTower" || node.name == "SniperTower"{
-                //SoundManager.playSFX(sfxName: SoundManager.buttonSFX_two, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                
                 //call function that takes in name of node
                 if uiManager!.dragAndDropBuild(node: node, location: location){
                     uiManager!.startTouchingTower(location: location)
