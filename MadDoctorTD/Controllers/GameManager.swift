@@ -20,7 +20,7 @@ class GameManager: ObservableObject{
     @Published var slimeMaterialGained: Int = 0
     @Published var squidMaterialGained: Int = 0
     
-    @Published var slimeMaterials: Int = 0
+    @Published var slimeMaterials: Int = 20
     @Published var squidMaterials: Int = 0
     
     @Published var nextWaveCounter: Int = 0

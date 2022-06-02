@@ -208,7 +208,7 @@ class Tower: SKSpriteNode{
         }
         
         upgradeCount += 1
-        upgradeParticle()
+        //upgradeParticle()
         updateUpgradePrice()
 
 

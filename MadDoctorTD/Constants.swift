@@ -205,9 +205,9 @@ struct WaveData{
 //Player + Economy
 struct PlayerData{
     
-    static let START_MONEY = 2500 //2000
+    static let START_MONEY = 250000 //2000
     static let BASE_HP = 10
-    static let START_RESEARCH_POINTS = 2
+    static let START_RESEARCH_POINTS = 200
 
 }
 
