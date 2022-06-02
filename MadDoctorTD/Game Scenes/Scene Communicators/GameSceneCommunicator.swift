@@ -257,17 +257,6 @@ class GameSceneCommunicator: ObservableObject {
         
         currentTower!.upgrade(upgradeType: upgradeType)
         
-        /*
-        switch upgradeType {
-        case .damage:
-            currentTower!.upgrade(upgradeType: .damage)
-        case .range:
-            currentTower!.upgrade(upgradeType: .range)
-        case .firerate:
-            currentTower!.upgrade(upgradeType: .firerate)
-        }
-         */
-        
         GameManager.instance.currentMoney -= upgradeCost
         
     }
@@ -426,13 +415,10 @@ class GameSceneCommunicator: ObservableObject {
     }
 
     func cancelAllMenus(){
-        //currentFoundation = nil
         showTowerMenu = false
         currentTile?.color = .clear
-        //currentTile = nil
         showFoundationMenu = false
         showUpgradeMenu = false
-        //currentTower = nil
     }
     
     func sellTower(){
@@ -493,10 +479,8 @@ class GameSceneCommunicator: ObservableObject {
         GameSceneCommunicator.instance.isBuildPhase = false
         gameScene.waveManager!.shouldCreateWave = true
         GameSceneCommunicator.instance.cancelAllMenus()
-        //SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
         
     }
-    
     
     func updateFoundationPower() {
         
