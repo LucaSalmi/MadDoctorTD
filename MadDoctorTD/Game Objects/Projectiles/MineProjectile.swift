@@ -99,7 +99,6 @@ class MineProjectile: AoeProjectile{
         
         let gameScene = GameScene.instance!
         
-       // SoundManager.playMortarSwooshSFX()
         SoundManager.playSFX(
             sfxName: SoundManager.cannonTowerImpactSFX,
             scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension

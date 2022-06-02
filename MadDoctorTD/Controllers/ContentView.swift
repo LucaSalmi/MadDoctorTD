@@ -17,6 +17,7 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
     
+    //based on a variable (appManager.state) changes which view to show
     @ObservedObject var appManager = AppManager.appManager
 
     var body: some View {
@@ -51,7 +52,8 @@ struct ContentView: View {
         .statusBar(hidden: true)
 
     }
-
+    
+//unused, automaticly created by CoreData
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
@@ -67,7 +69,7 @@ struct ContentView: View {
             }
         }
     }
-
+    //unused, automaticly created by CoreData
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)

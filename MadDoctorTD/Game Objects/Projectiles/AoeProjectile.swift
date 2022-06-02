@@ -7,7 +7,7 @@
 
 import Foundation
 import SpriteKit
-
+//Parent class for cannon/mine bullet, creates an Area Of Effect when it hits the ground or an enemy that damages around itself
 class AoeProjectile: SKSpriteNode {
     
     let maxTick = 5

@@ -19,9 +19,6 @@ class CannonProjectile: AoeProjectile{
         super.init(position: position, target: target, attackDamage: attackDamage)
         
         texture = SKTexture(imageNamed: "cannon_projectile")
-        
-
-        
     }
     
     override func destroy() {
@@ -36,23 +33,20 @@ class CannonProjectile: AoeProjectile{
         
         let gameScene = GameScene.instance!
         
-       // SoundManager.playMortarSwooshSFX()
         SoundManager.playSFX(sfxName: SoundManager.cannonTowerImpactSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
         if let particle = SKEmitterNode(fileNamed: "CannonExplosion") {
             
             particle.position = position
             particle.zPosition = 5
             gameScene.addChild(particle)
-
+            
             gameScene.run(SKAction.wait(forDuration: 1)) {
                 particle.removeFromParent()
             }
             
         }
-                
         
         self.removeFromParent()
-        
         
     }
     

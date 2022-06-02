@@ -53,11 +53,6 @@ class GunProjectile: Projectile {
                 particle.removeFromParent()
             }
         }
-        
-        
-        //TODO: TAKE THIS BACK FOR OBJECTPOOLING AND SOLVE BUG
-        //TODO: bullets not spawning correctly
-        //GameScene.instance!.gunProjectilesPool.append(self)
         self.removeFromParent()
         
     }
