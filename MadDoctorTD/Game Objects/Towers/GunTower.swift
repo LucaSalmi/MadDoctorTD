@@ -30,8 +30,6 @@ class GunTower: Tower{
         
         attackRange = attackRange * 1
         
-        //attackRange = attackRange * 0.1
-        
     }
 
     override func upgradeParticle() {

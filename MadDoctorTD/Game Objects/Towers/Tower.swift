@@ -175,7 +175,6 @@ class Tower: SKSpriteNode{
             if damageUpgradeCount < 3 {
                 GameScene.instance?.uiManager!.damageImage?.texture = SKTexture(imageNamed: "power_upgrade_\(damageUpgradeCount)")
             }
-            //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[damageUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
             SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
             
             
@@ -192,7 +191,6 @@ class Tower: SKSpriteNode{
                 
                 GameScene.instance?.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)")
             }
-            //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rangeUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
             GameScene.instance?.uiManager!.rangeImage?.texture = SKTexture(imageNamed: "range_upgrade_\(rangeUpgradeCount)")
             SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
         case .firerate:
@@ -202,13 +200,11 @@ class Tower: SKSpriteNode{
             if rateOfFireUpgradeCount < 3 {
                 GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
             }
-            //SoundManager.playSFX(sfxName: SoundManager.upgradeSounds[rateOfFireUpgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
             GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)")
             SoundManager.playSFX(sfxName: SoundManager.wrench_upgradeSounds[upgradeCount - 1], scene: scene!, sfxExtension: SoundManager.mp3Extension)
         }
         
         upgradeCount += 1
-        //upgradeParticle()
         updateUpgradePrice()
 
 
@@ -252,8 +248,6 @@ class Tower: SKSpriteNode{
                 
                 if !rapidFireTower.resetTexture{
                     rapidFireTower.resetTexture = true
-                    //SoundManager.playSFX(sfxName: SoundManager.stoppedFiringSFX, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
-                    //print("inuti IF satsen")
                 }
             }
             findNewTarget()
