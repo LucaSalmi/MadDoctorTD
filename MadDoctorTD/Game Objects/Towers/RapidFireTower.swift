@@ -65,22 +65,6 @@ class RapidFireTower: Tower{
         }
     }
     
-    override func update() {
-        super.update()
-        
-//        if resetTexture{
-//            resetTexture = false
-//            if slowUpgraded{
-//
-//            }else{
-//                towerTexture.texture = SKTexture(imageNamed: "speed_tower")
-//            }
-            
-            // bullet drop SFX
-
-//          }
-    }
-    
     func activateSlowProjectiles(){
         
     }

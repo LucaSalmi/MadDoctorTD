@@ -151,6 +151,7 @@
 		E5268CD228250E5F00F134A5 /* RapidFireTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD128250E5F00F134A5 /* RapidFireTower.swift */; };
 		E5268CD4282537BD00F134A5 /* SniperTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD3282537BC00F134A5 /* SniperTower.swift */; };
 		E5268CD628253E6600F134A5 /* SniperProjectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5268CD528253E6600F134A5 /* SniperProjectile.swift */; };
+		E54DAB652848B63400523C08 /* TowersReadMe.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E54DAB642848B63400523C08 /* TowersReadMe.rtf */; };
 		E57BA9E7282B9819001BCD99 /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E57BA9E6282B9819001BCD99 /* StartScene.sks */; };
 		E57BA9E9282B9885001BCD99 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57BA9E8282B9885001BCD99 /* StartScene.swift */; };
 		E57BA9ED282B9922001BCD99 /* StartSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57BA9EC282B9922001BCD99 /* StartSceneView.swift */; };
@@ -314,6 +315,7 @@
 		E5268CD128250E5F00F134A5 /* RapidFireTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidFireTower.swift; sourceTree = "<group>"; };
 		E5268CD3282537BC00F134A5 /* SniperTower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SniperTower.swift; sourceTree = "<group>"; };
 		E5268CD528253E6600F134A5 /* SniperProjectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SniperProjectile.swift; sourceTree = "<group>"; };
+		E54DAB642848B63400523C08 /* TowersReadMe.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TowersReadMe.rtf; sourceTree = "<group>"; };
 		E57BA9E6282B9819001BCD99 /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
 		E57BA9E8282B9885001BCD99 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		E57BA9EC282B9922001BCD99 /* StartSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneView.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 		C82C4D0C28240DBA00067858 /* Towers */ = {
 			isa = PBXGroup;
 			children = (
+				E54DAB642848B63400523C08 /* TowersReadMe.rtf */,
 				E5268CCB28226EF000F134A5 /* Tower.swift */,
 				E5268CCF2822708600F134A5 /* GunTower.swift */,
 				E5268CD128250E5F00F134A5 /* RapidFireTower.swift */,
@@ -753,6 +756,7 @@
 				B34EEAE62837D2B000CE60C1 /* portal_located.mp3 in Resources */,
 				C87936E62848B151000DC2E4 /* FactoriesReadMe.rtf in Resources */,
 				B35C2121282BC07C009A748E /* mortar_swoosh6.mp3 in Resources */,
+				E54DAB652848B63400523C08 /* TowersReadMe.rtf in Resources */,
 				B35C2136282CFE8F009A748E /* slime_death2.wav in Resources */,
 				B35C210E282A6330009A748E /* sniper_bullet_fly_by_5.wav in Resources */,
 				B35C211E282BC07C009A748E /* mortar_swoosh5.mp3 in Resources */,
