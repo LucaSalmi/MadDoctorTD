@@ -40,8 +40,6 @@ class PhysicsUtils{
     
     static func moveCameraToTargetPoint(camera: SKCameraNode, direction: CGPoint) {
         
-        //let direction = PhysicsUtils.getCameraDirection(camera: camera, targetPoint: targetPoint)
-        
         let speed: CGFloat = CGFloat(15.0)
         
         camera.position.x += (speed * direction.x)
@@ -90,8 +88,6 @@ class PhysicsUtils{
     static func shakeCamera(duration: CGFloat) {
         
         guard let scene = GameScene.instance else {return}
-        
-        //if Options.options.isScreenShakeOn == false{return}
         
         let amplitudeX: CGFloat = 10;
         let amplitudeY: CGFloat = 6;

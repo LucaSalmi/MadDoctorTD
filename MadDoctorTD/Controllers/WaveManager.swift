@@ -12,6 +12,7 @@ class WaveManager{
     
     var currentScene: GameScene? = nil
     var totalSlots: Int = 0
+    
     var waveNumber: Int = 0
     var spawnPoint: CGPoint? = nil
     

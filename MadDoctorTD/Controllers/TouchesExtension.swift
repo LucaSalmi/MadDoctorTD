@@ -70,6 +70,7 @@ extension GameScene {
             
             if node.name == "GunTower" || node.name == "SpeedTower" ||
                 node.name == "CannonTower" || node.name == "SniperTower"{
+                
                 //call function that takes in name of node
                 if uiManager!.dragAndDropBuild(node: node, location: location){
                     uiManager!.startTouchingTower(location: location)
@@ -207,7 +208,6 @@ extension GameScene {
                     
                     touchStarted = false
                     uiManager!.upgradeTowerMenu(nodeName: node.name!)
-                    //uiManager!.statUpgradePopUp?.alpha = 0
                     return
                     
                 }
@@ -258,6 +258,7 @@ extension GameScene {
                 communicator.toggleFoundationGrid()
                 uiManager!.hideAllMenus()
                 uiManager!.buildFoundationButton?.texture = SKTexture(imageNamed: "done_build_foundation_button_standard")
+                
                 //Sound for activate foundationBuild
                 SoundManager.playSFX(sfxName: SoundManager.buttonSFX_two, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
                 
