@@ -253,8 +253,7 @@ extension GameScene {
             
             if communicator.foundationEditMode {
                 communicator.confirmFoundationEdit()
-                //Sound for finish foundationBuild
-                //SoundManager.playSFX(sfxName: SoundManager.buttonSFX_three, scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension)
+
                 
             }else{
                 communicator.foundationEditMode = true
@@ -286,9 +285,6 @@ extension GameScene {
                 //hide build menu
                 uiManager!.hideBuildMenu = true
                 
-                 
-
-                //uiManager!.onCameraReachedPortal()
             }
             
             
