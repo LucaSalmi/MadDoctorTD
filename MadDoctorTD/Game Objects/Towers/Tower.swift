@@ -113,6 +113,7 @@ class Tower: SKSpriteNode{
         
         gameScene.uiManager!.sellFoundationButton?.alpha = 0
         gameScene.uiManager!.showUpgradeUI()
+        updateUpgradePrice()
         
         if builtUponFoundation!.isStartingFoundation {
             gameScene.uiManager!.foundationMenuToggle?.alpha = 0
@@ -208,6 +209,12 @@ class Tower: SKSpriteNode{
         
         upgradeCount += 1
         upgradeParticle()
+        updateUpgradePrice()
+
+
+    }
+    
+    func updateUpgradePrice(){
         
         if upgradeCount >= 6 {
             GameScene.instance?.uiManager!.upgradeDamagePrice?.text = ""
@@ -219,7 +226,7 @@ class Tower: SKSpriteNode{
             GameScene.instance?.uiManager!.upgradeSpeedPrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
             GameScene.instance?.uiManager!.upgradeRangePrice?.text = "$\(GameSceneCommunicator.instance.getUpgradeTowerCost())"
         }
-
+        
     }
     
     func update() {
