@@ -55,21 +55,22 @@ class WaveManager{
             totalSlots = 5
         }
         
-        if waveNumber >= 5 { // level 5 is first boss level
+        if waveNumber >= 5 { // level 6 is first attack level
             unlockAttackers = true
             
         }
+         // update varible to update next boss level
         if waveNumber == currentBossLevel + 1 {
             currentBossLevel += WaveData.BOSS_LEVEL
         }
-        
+        // update varible to update next attack level
         if waveNumber == attackLevel + 1{
             attackLevel += 5
         }
         
         if waveNumber == attackLevel {
           
-            maximumAtkSpawn = waveNumber / 2 // 50 %
+            maximumAtkSpawn = waveNumber / 2 // increese atk spawnchance by 50 %
         }
         else {
 
@@ -77,7 +78,7 @@ class WaveManager{
         }
         
         var occupiedSlots = 0
-        
+        // makes boss take all waveslot so only boss spawn, or that many enemies can spawn
         if waveNumber == currentBossLevel {
             totalSlots = EnemiesData.BOSS_ENEMY_SLOT
         } else {
@@ -133,13 +134,13 @@ class WaveManager{
                     }
                     
                 } else if waveNumber == currentBossLevel {
-                    attackSpawnChance = 10
+                    attackSpawnChance = 10 // 100% boss is atker
                     
                 } else {
                     attackSpawnChance = 1
                     
                     if waveNumber > 16 {
-                        attackSpawnChance = 2 // 20
+                        attackSpawnChance = 2 // 20 %
                     }
                 }
                 
@@ -162,7 +163,7 @@ class WaveManager{
         
         print("Wavenumber:\(waveNumber)")
         GameManager.instance.currentWave = waveNumber
-        
+        // makes a pause every 5 levels --> enable buildphase
         if waveNumber % WaveData.WAVES_PER_LEVEL == 0 {
             shouldCreateWave = false
         }
@@ -187,7 +188,7 @@ class WaveManager{
         
     }
     
-    
+    // this func sets limits to how many fast, fly, heavy units that can spawn / wave (ballance)
     func checkLimits() -> Bool{
         
         var flyCount = 0
@@ -263,7 +264,7 @@ class WaveManager{
         
         return hasDeleted
     }
-    
+     //enables diffrent types to spawn when creating a wave (ballance purpose)
     func progressDifficulty(){
         
         if waveNumber == 3{
