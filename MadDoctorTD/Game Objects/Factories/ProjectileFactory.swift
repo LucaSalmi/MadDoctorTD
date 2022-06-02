@@ -7,14 +7,14 @@
 
 import Foundation
 import SpriteKit
-
+//Constant data for projectiles
 struct ProjectileNodes{
     
     static var projectilesNode: SKNode = SKNode()
     static var gunProjectilesPool = [GunProjectile]()
 
 }
-
+//protocol for projectile factory
 protocol ProjectileFactoryProtocol{
     
     func createProjectile(position: CGPoint, target: Enemy, attackDamage: Int) -> Projectile
@@ -59,7 +59,7 @@ protocol ProjetileCreator{
     
 }
 
-
+//this class takes in a type, calls the correct projectile factory and places it in the node.
 class ProjectileFactory: ProjetileCreator{
     
     var firingTower: Tower
