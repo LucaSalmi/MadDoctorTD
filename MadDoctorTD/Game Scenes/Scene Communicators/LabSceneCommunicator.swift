@@ -104,6 +104,7 @@ class LabSceneCommunicator: ObservableObject{
         labScene.fadeInToast = true
         
     }
+    //we have a switch for all towers with a switch with individual upgrades
     
     func applyResearch() -> ErrorType {
         
@@ -293,6 +294,8 @@ class LabSceneCommunicator: ObservableObject{
         }
         return .error
     }
+    
+    //we have a switch for all towers with a switch with individual acessability
     
     func checkResearch() -> ErrorType {
         

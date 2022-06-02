@@ -29,7 +29,8 @@ class GameSceneCommunicator: ObservableObject {
     @Published var foundationEditMode: Bool = false
     var foundationDeleteMode = false
     var blueprints = [FoundationPlate]()
-    var secondIndexStart: Int = 0 //This variable is set at Start Foundation Setup (in FoundationPlatesFactory.setupStartPlates()-method)
+    var secondIndexStart: Int = 0 //This variable is set at Start Foundation Setup
+    //(in FoundationPlatesFactory.setupStartPlates()-method)
     
     @Published var newFoundationTotalCost: Int = 0
     
@@ -40,9 +41,6 @@ class GameSceneCommunicator: ObservableObject {
     
     func confirmFoundationEdit() {
         
-        //let totalPrice = foundationsToAdd.count * FoundationData.BASE_COST
-        //GameManager.instance.currentMoney -= totalPrice
-        //foundationsToAdd.removeAll()
         
         if newFoundationTotalCost > GameManager.instance.currentMoney {
 
