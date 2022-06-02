@@ -78,7 +78,7 @@ class RapidFireTower: Tower{
             
             // bullet drop SFX
 
-        //}
+//          }
     }
     
     func activateSlowProjectiles(){
