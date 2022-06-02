@@ -8,6 +8,7 @@
 import Foundation
 import SpriteKit
 
+//creates a boss of a specific race, it handles all the stats change and special behaviour that differs from every other enemy
 class Boss: Enemy{
     
     var bossTexture: SKSpriteNode? = nil
