@@ -8,6 +8,7 @@
 import Foundation
 import SpriteKit
 
+//creates enemies of the slime race and changes the texture and their stats (HP, attack, armour, osv.) based on enemyType and if they are attackers or not
 class SlimeEnemy: Enemy{
     
     var placeholderTexture: SKTexture = SKTexture(imageNamed: "joystick")
