@@ -12,7 +12,7 @@ class WaveManager{
     
     var currentScene: GameScene? = nil
     var totalSlots: Int = 0
-    //var totalEnemiesOfWave: Int = 0
+    
     var waveNumber: Int = 0
     var spawnPoint: CGPoint? = nil
     
@@ -21,8 +21,6 @@ class WaveManager{
     
     var spawnCounter = 0
     var waveStartCounter = 0
-    
-    //let wavesPerLevel = 5
     
     var currentBossLevel = WaveData.BOSS_LEVEL
     
@@ -353,15 +351,9 @@ class WaveManager{
             
             GameSceneCommunicator.instance.isBuildPhase = true
             
-//            GameScene.instance?.readyButton?.alpha = 1
-//            GameScene.instance?.buildFoundationButton?.alpha = 1
-//            GameScene.instance?.researchButton?.alpha = 1
-//            GameScene.instance?.upgradeMenuToggle?.alpha = 1
-            
             GameScene.instance?.uiManager!.showSummary()
             GameScene.instance?.uiManager!.fadeOutPortal = true
             GameScene.instance?.uiManager?.hideBuildMenu = false
-            //SoundManager.stopMusic()
             
             //Door animation:
             if let gameScene = currentScene {
