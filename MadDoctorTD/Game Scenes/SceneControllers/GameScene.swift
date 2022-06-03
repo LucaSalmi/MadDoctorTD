@@ -151,16 +151,9 @@ class GameScene: SKScene {
                 fadeOutScene = false
                 AppManager.appManager.transitionOpacity = 0
                 AppManager.appManager.state = .startMenu
-                //SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
             }
             
         }
-        
-//        if touchStarted{
-//            handleLongPress()
-//        }else if uiManager!.statUpgradePopUp?.alpha == 1{
-//            uiManager!.statUpgradePopUp?.alpha = 0
-//        }
         
         if GameManager.instance.isPaused || GameManager.instance.isGameOver{
             return

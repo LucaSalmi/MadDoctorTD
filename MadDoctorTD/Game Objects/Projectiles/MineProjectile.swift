@@ -23,7 +23,7 @@ class MineProjectile: AoeProjectile{
     override init(position: CGPoint, target: Enemy, attackDamage: Int){
         
         super.init(position: position, target: target, attackDamage: attackDamage)
-        
+        self.alpha = 1
         texture = SKTexture(imageNamed: "cannon_projectile_slime")
         
         
@@ -87,6 +87,7 @@ class MineProjectile: AoeProjectile{
     }
     
     override func destroy() {
+        
         super.destroy()
         print("self removed")
         //Spawn explosion here
@@ -98,7 +99,6 @@ class MineProjectile: AoeProjectile{
         
         let gameScene = GameScene.instance!
         
-       // SoundManager.playMortarSwooshSFX()
         SoundManager.playSFX(
             sfxName: SoundManager.cannonTowerImpactSFX,
             scene: GameScene.instance!, sfxExtension: SoundManager.mp3Extension

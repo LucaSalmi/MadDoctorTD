@@ -8,6 +8,8 @@
 import Foundation
 import SpriteKit
 
+//Parent Class for all normal projectiles, they are assign to a tower obj when created and then manage themself in the respective sub-classes
+//All bullets de-spawn when they hit an enemy or go outside the boundaries of the level
 class Projectile: SKSpriteNode {
     
     let maxTick = 5
@@ -44,16 +46,6 @@ class Projectile: SKSpriteNode {
         
     }
     
-    func reuseFromPool(position: CGPoint, target: Enemy, attackDamage: Int) {
-        self.attackDamage = attackDamage
-        targetPoint = target.position
-        self.position = position
-        lookAtTarget(target: target)
-        setDirection()
-        currentTick = maxTick
-        
-    }
-    
     private func setupPhysicsBody() {
         
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
@@ -74,8 +66,6 @@ class Projectile: SKSpriteNode {
     }
     
     func setDirection() {
-        
-        
         
         var differenceX = targetPoint.x - self.position.x
         var differenceY = targetPoint.y - self.position.y

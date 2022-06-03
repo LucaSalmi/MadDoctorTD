@@ -28,7 +28,6 @@ struct LabSceneView: View {
         
         LabSceneView.imageWidth = UIScreen.main.bounds.width * 0.175
         LabSceneView.imageHeight = LabSceneView.imageWidth
-        //SoundManager.playBGM(bgmString: SoundManager.researchViewAtmosphere)
     }
     
     var body: some View {
@@ -949,31 +948,12 @@ struct BotArea: View {
                 
                 guard let labScene = LabScene.instance else { return }
                 labScene.fadeOutScene = true
-                
-                
-                //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
+                                
             } label: {
                 Image("play_button")
                     .resizable()
                     .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
             }
-            
-            
-            /*
-             Button {
-             AppManager.appManager.state = .gameScene
-             SoundManager.playBGM(bgmString: SoundManager.ambienceOne, bgmExtension: SoundManager.mp3Extension)
-             //SoundManager.playBGM(bgmString: SoundManager.simplifiedTheme, bgmExtension: SoundManager.wavExtension)
-             } label: {
-             Text("Return")
-             .foregroundColor(Color.white)
-             
-             
-             }
-             .frame(width: 120, height: 30)
-             .background(Color.blue)
-             .cornerRadius(1)
-             */
             
             Spacer()
             
@@ -998,8 +978,6 @@ struct LabButtonImage: View {
         Image("item_frame_research_bg")
             .resizable()
             .frame(width: LabSceneView.imageWidth, height: LabSceneView.imageHeight)
-        //            .background(communicator.selectedTreeButtonId == id ? .white : .black)
-        //            .opacity(communicator.selectedTreeButtonId == id ? 1.0 : 0.5)
     }
     
 }

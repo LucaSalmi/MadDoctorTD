@@ -82,13 +82,6 @@ class SoundManager {
 
     static let slimeDeathSFX = "slime_death4"
 
-    // Boss Giant Step SFX
-
-    //static let giant_steps_1 = "giant_step_1."
-    //static let giant_steps_2 = "giant_step_2."
-    //static let giant_steps_3 = "giant_step_3."
-    //static let giant_steps_4 = "giant_step_4."
-
     //AtmosphereSound
 
     static let desertAmbience = "desert_custom_atmosphere"
@@ -130,15 +123,6 @@ class SoundManager {
         playSFX(sfxName: sniperSound, scene: GameScene.instance!)
 
     }
-
-//    static func playRapidFireShotsSFX() {
-//
-//        let rand = Int.random(in:1...3)
-//        let rapidFireShot = "gunShot_\(rand)."
-//
-//        playSFX(sfxName: rapidFireShot, scene: GameScene.instance!, sfxExtension: mp3Extension)
-//
-//    }
 
     static func playMetalTapSFX(scene: SKScene) {
 

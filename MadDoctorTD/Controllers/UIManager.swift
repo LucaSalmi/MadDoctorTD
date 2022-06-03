@@ -53,22 +53,18 @@ class UIManager {
     var summaryBackButton: SKSpriteNode?
 
     var summary: SKLabelNode?
-    //var enemiesDefeated: SKLabelNode?
+    
     var enemiesDefeatedNumber: SKLabelNode?
-    //var researchPointsGainedTwo: SKLabelNode?
+    
     var researchPointsGainedNumber: SKLabelNode?
-    //var creditsGained: SKLabelNode?
+    
     var creditsGainedNumber: SKLabelNode?
-    //var baseHPLost: SKLabelNode?
+    
     var baseHPLostNumber: SKLabelNode?
-    //var ratingGained: SKLabelNode?
-    //var ratingGainedNumber: SKLabelNode?
+    
     
     //portal
     var portal: SKTileMapNode?
-    //var ratingGained: SKLabelNode?
-    //var ratingGainedNumber: SKLabelNode?
-    //var survivalBonus: SKLabelNode?
     var survivalBonusNumber: SKLabelNode?
 
     //towerInfo
@@ -159,23 +155,16 @@ class UIManager {
         
         // new adds
         summary = waveSummary?.childNode(withName: "Summary") as? SKLabelNode
-        //enemiesDefeated = waveSummary?.childNode(withName: "EnemiesDefeated") as? SKLabelNode
+        
         enemiesDefeatedNumber = waveSummary?.childNode(withName: "EnemiesDefeatedNumber") as? SKLabelNode
-        //researchPointsGainedTwo = waveSummary?.childNode(withName: "ResearchPointsGained") as? SKLabelNode
+        
         researchPointsGainedNumber = waveSummary?.childNode(withName: "ResearchPointsGainedNumber") as? SKLabelNode
-        //creditsGained = waveSummary?.childNode(withName: "CreditsGained") as? SKLabelNode
         creditsGainedNumber = waveSummary?.childNode(withName: "CreditsGainedNumber") as? SKLabelNode
-        //baseHPLost = waveSummary?.childNode(withName: "BaseHpLost") as? SKLabelNode
-        baseHPLostNumber = waveSummary?.childNode(withName: "BaseHpLostNumber") as? SKLabelNode
-//        ratingGained = waveSummary?.childNode(withName: "Rating") as? SKLabelNode
-//        ratingGainedNumber = waveSummary?.childNode(withName: "RatingNumber") as? SKLabelNode
-        //survivalBonus = waveSummary?.childNode(withName: "SurvivalBonus") as? SKLabelNode
-        survivalBonusNumber = waveSummary?.childNode(withName: "SurvivalBonusNumber") as? SKLabelNode
-        //creditsGainedNumber?.text = ("$\(gameManager.moneyEarned)")
-        //researchPointsGained?.text = ("\(gameManager.researchPoints)")
 
-        //baseHPLostNumber?.text = ("\(gameManager.baseHPLost)") //add variable that tracks HP lost everytime an enemy enters zone
-        //ratingGainedNumber?.text = ("S+") //add logic for rating (enemiesDefeated = totalNumerOfEnemies && baseHPLost == 0 or something along those lines..)
+        baseHPLostNumber = waveSummary?.childNode(withName: "BaseHpLostNumber") as? SKLabelNode
+
+        survivalBonusNumber = waveSummary?.childNode(withName: "SurvivalBonusNumber") as? SKLabelNode
+        
 
         bossMaterialGained = waveSummary?.childNode(withName: "BossMaterial") as? SKLabelNode
         researchPointsGained = waveSummary?.childNode(withName: "ResearchPointsGainedNumber") as? SKLabelNode
@@ -385,15 +374,12 @@ class UIManager {
             
         case "RateOfFireButton":
             upgradeTypePreview = .firerate
-            //GameSceneCommunicator.instance.upgradeTower(upgradeType: .firerate)
             
         case "RangeButton":
             upgradeTypePreview = .range
-            //GameSceneCommunicator.instance.upgradeTower(upgradeType: .range)
             
         case "AttackButton":
             upgradeTypePreview = .damage
-            //GameSceneCommunicator.instance.upgradeTower(upgradeType: .damage)
             
         default:
             print("error with upgrade menu")
@@ -705,7 +691,7 @@ class UIManager {
                 GameScene.instance!.uiManager!.moveCameraToPortal = true
             }
             
-            //fail safe to reset doors position to orginal position
+            //failsafe to reset doors position to orginal position
             if GameSceneCommunicator.instance.closeDoors {
                 doorOne.position.x = gameScene!.position.x - (doorOne.size.width/2)
                 doorTwo.position.x = gameScene!.position.x + (doorTwo.size.width/2)
@@ -767,7 +753,6 @@ class UIManager {
                 
                 portal?.xScale -= sizeDifference
                 portal?.yScale -= sizeDifference
-                
                 
             }
             else{

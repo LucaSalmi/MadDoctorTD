@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-
+//Constant data for towers
 struct TowerNode {
     
     static var towersNode: SKNode = SKNode()
@@ -16,7 +16,7 @@ struct TowerNode {
     static var towerArray = [Tower]()
     
 }
-
+//protocol for tower creation
 protocol TowerFactoryProtocol{
     
     func createTower(currentFoundation: FoundationPlate) -> Tower
@@ -62,7 +62,7 @@ protocol TowerCreator{
     func createTower(currentFoundation: FoundationPlate)
     
 }
-    
+    //this class takes in a type, calls the correct tower factory and places it in the node.
     class TowerFactory: TowerCreator{
         
         var type : TowerTypes

@@ -69,7 +69,7 @@ protocol EnemyCreator{
     func createBoss(enemyRace: EnemyRaces) -> Enemy
     
 }
-
+//this class takes in a type, calls the correct enemy/boss factory and places it in the node.
 class EnemyFactory: EnemyCreator{
     
     func createBoss(enemyRace: EnemyRaces) -> Enemy {

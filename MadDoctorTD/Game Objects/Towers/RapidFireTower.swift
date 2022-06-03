@@ -65,24 +65,8 @@ class RapidFireTower: Tower{
         }
     }
     
-    override func update() {
-        super.update()
-        
-        if resetTexture{
-            resetTexture = false
-            if slowUpgraded{
-                towerTexture.texture = SKTexture(imageNamed: "speed_tower_slime")
-            }else{
-                towerTexture.texture = SKTexture(imageNamed: "speed_tower")
-            }
-            
-            // bullet drop SFX
-
-        }
-    }
-    
     func activateSlowProjectiles(){
-        slowUpgraded = true
+        
     }
     
     override func upgrade(upgradeType: UpgradeTypes) {
@@ -91,6 +75,7 @@ class RapidFireTower: Tower{
         if rateOfFireUpgradeCount == 3 {
             
             GameScene.instance?.uiManager!.rateOfFireImage?.texture = SKTexture(imageNamed: "speed_upgrade_\(rateOfFireUpgradeCount)_slow")
+            towerTexture.texture = SKTexture(imageNamed: "speed_tower_slime")
         }
         
     }

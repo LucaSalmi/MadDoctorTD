@@ -7,14 +7,14 @@
 
 import Foundation
 import SpriteKit
-
+//Constant data for projectiles
 struct ProjectileNodes{
     
     static var projectilesNode: SKNode = SKNode()
     static var gunProjectilesPool = [GunProjectile]()
 
 }
-
+//protocol for projectile factory
 protocol ProjectileFactoryProtocol{
     
     func createProjectile(position: CGPoint, target: Enemy, attackDamage: Int) -> Projectile
@@ -59,7 +59,7 @@ protocol ProjetileCreator{
     
 }
 
-
+//this class takes in a type, calls the correct projectile factory and places it in the node.
 class ProjectileFactory: ProjetileCreator{
     
     var firingTower: Tower
@@ -92,21 +92,21 @@ class ProjectileFactory: ProjetileCreator{
             
             if rapidFireTower.fireLeft{
                 
-                if rapidFireTower.slowUpgraded{
-                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_left_fire_slime")
-                }else{
-                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_left_fire")
-                }
+//                if rapidFireTower.slowUpgraded{
+//                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_left_fire_slime")
+//                }else{
+//                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_left_fire")
+//                }
                 
                 projectile.texture = SKTexture(imageNamed: "speed_projectile_left")
                 
             }else{
                 
-                if rapidFireTower.slowUpgraded{
-                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_right_fire_slime")
-                }else{
-                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_right_fire")
-                }
+//                if rapidFireTower.slowUpgraded{
+//                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_right_fire_slime")
+//                }else{
+//                    rapidFireTower.towerTexture.texture = SKTexture(imageNamed: "speed_tower_right_fire")
+//                }
                 projectile.texture = SKTexture(imageNamed: "speed_projectile_right")
                 
             }

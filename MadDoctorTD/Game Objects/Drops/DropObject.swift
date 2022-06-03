@@ -85,31 +85,13 @@ class DropObject: SKSpriteNode{
         
     }
     
-    func onDestroy() {
-        
-        switch materialType{
-            
-        case .slime:
-            GameManager.instance.slimeMaterials += 1
-            
-        case .squid:
-            GameManager.instance.squidMaterials += 1
-            
-        case .none:
-            print("none")
-    
-        }
-        
-        self.removeFromParent()
-    }
-    
     func update() {
         
         self.position.x += (speed * direction.x)
         self.position.y += (speed * direction.y)
         
         if self.contains(targetNode.position) {
-            //onDestroy()
+            self.removeFromParent()
         }
     }
     

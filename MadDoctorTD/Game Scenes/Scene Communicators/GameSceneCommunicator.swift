@@ -29,7 +29,8 @@ class GameSceneCommunicator: ObservableObject {
     @Published var foundationEditMode: Bool = false
     var foundationDeleteMode = false
     var blueprints = [FoundationPlate]()
-    var secondIndexStart: Int = 0 //This variable is set at Start Foundation Setup (in FoundationPlatesFactory.setupStartPlates()-method)
+    var secondIndexStart: Int = 0 //This variable is set at Start Foundation Setup
+    //(in FoundationPlatesFactory.setupStartPlates()-method)
     
     @Published var newFoundationTotalCost: Int = 0
     
@@ -40,9 +41,6 @@ class GameSceneCommunicator: ObservableObject {
     
     func confirmFoundationEdit() {
         
-        //let totalPrice = foundationsToAdd.count * FoundationData.BASE_COST
-        //GameManager.instance.currentMoney -= totalPrice
-        //foundationsToAdd.removeAll()
         
         if newFoundationTotalCost > GameManager.instance.currentMoney {
 
@@ -259,17 +257,6 @@ class GameSceneCommunicator: ObservableObject {
         
         currentTower!.upgrade(upgradeType: upgradeType)
         
-        /*
-        switch upgradeType {
-        case .damage:
-            currentTower!.upgrade(upgradeType: .damage)
-        case .range:
-            currentTower!.upgrade(upgradeType: .range)
-        case .firerate:
-            currentTower!.upgrade(upgradeType: .firerate)
-        }
-         */
-        
         GameManager.instance.currentMoney -= upgradeCost
         
     }
@@ -428,13 +415,10 @@ class GameSceneCommunicator: ObservableObject {
     }
 
     func cancelAllMenus(){
-        //currentFoundation = nil
         showTowerMenu = false
         currentTile?.color = .clear
-        //currentTile = nil
         showFoundationMenu = false
         showUpgradeMenu = false
-        //currentTower = nil
     }
     
     func sellTower(){
@@ -495,10 +479,8 @@ class GameSceneCommunicator: ObservableObject {
         GameSceneCommunicator.instance.isBuildPhase = false
         gameScene.waveManager!.shouldCreateWave = true
         GameSceneCommunicator.instance.cancelAllMenus()
-        //SoundManager.playBGM(bgmString: SoundManager.desertAmbience, bgmExtension: SoundManager.mp3Extension)
         
     }
-    
     
     func updateFoundationPower() {
         

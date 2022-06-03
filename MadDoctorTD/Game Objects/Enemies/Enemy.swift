@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class Enemy: SKSpriteNode{
-    
+    //Enemy Stats
     var baseSpeed = EnemiesData.BASE_SPEED
     var isMoving: Bool = false
     var hp = EnemiesData.BASE_HP
@@ -21,17 +21,17 @@ class Enemy: SKSpriteNode{
     var enemyType: EnemyTypes = .standard
     var enemyRace: EnemyRaces? = nil
     var armorValue: Int = 0
-    
+    //Poison DOT
     let poisonDuration = 240
     let poisonDamageInterval = 60
     var poisonTick = 0
     var poisonDamageTick = 60
     var poisonDamage = 0
-    
+    //Slow DOT
     let slowDuration = 120
     var slowTick = 0
     var textureOffset = CGFloat(10)
-    
+    //Attacker specific variables
     var isAttacker = false
     var attackTarget: FoundationPlate? = nil
     var precedentTargetPosition: CGPoint? = nil
@@ -42,7 +42,7 @@ class Enemy: SKSpriteNode{
     var damageValue = EnemiesData.BASE_DAMAGE_VALUE
     
     var startHp = 0
-    
+    //extra indicators
     var hpBar: SKSpriteNode?
     var isSlowedTexture: SKSpriteNode?
     var isPoisonedTexture: SKSpriteNode?
@@ -58,7 +58,7 @@ class Enemy: SKSpriteNode{
     var frameLimiter = 0
     var isStepOne = true
     
-    
+    //never used, specific for SKSpriteNode objects
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init()")
     }
@@ -67,26 +67,27 @@ class Enemy: SKSpriteNode{
         
         let tempColor = UIColor(.indigo)
         super.init(texture: texture, color: tempColor, size: EnemiesData.SIZE)
+        //physics body declaration and setup
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         physicsBody?.collisionBitMask = 0
         physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
-        
+        //Hp modifier based on wave number
         if GameScene.instance!.waveManager != nil{
             hp += GameScene.instance!.waveManager!.waveNumber * 5
         }
         
         self.zPosition = 2
-        
+        //shadow setup
         enemyShadow = SKSpriteNode(texture: SKTexture(imageNamed: "enemy_shadow"))
         enemyShadow?.size.width = self.size.width + shadowSizeDifference
         enemyShadow?.size.height = self.size.height + shadowSizeDifference
         enemyShadow?.alpha = 0
         enemyShadow?.zPosition = self.zPosition - 1
         
-        
+        //hp bar setup
         hpBar = SKSpriteNode(texture: SKTexture(imageNamed: "hp_bar_100"))
         
         hpBar!.size.width = 70
@@ -94,13 +95,13 @@ class Enemy: SKSpriteNode{
         hpBar!.position = self.position
         hpBar!.alpha = 0
         hpBar!.zPosition = 50
-        
+        //slowed symbol setup
         isSlowedTexture = SKSpriteNode(texture: SKTexture(imageNamed: "slow_icon1"))
         isSlowedTexture!.size.width = 20
         isSlowedTexture!.size.height = 20
         isSlowedTexture!.alpha = 0
         isSlowedTexture!.zPosition = 50
-        
+        //poison symbol setup
         isPoisonedTexture = SKSpriteNode(texture: SKTexture(imageNamed: "poison_icon1"))
         isPoisonedTexture!.size.width = 20
         isPoisonedTexture!.size.height = 20
@@ -119,7 +120,7 @@ class Enemy: SKSpriteNode{
         // overiding in subclasses for specific texrures (ex. slime_fast_atker...))
     }
     
-    
+    //runs every frame
     func update(){
         
         if hpBar!.alpha < 1 {
@@ -150,7 +151,7 @@ class Enemy: SKSpriteNode{
                 isSlowedTexture!.alpha = 0
             }
         }
-        
+        //moves extra indicators
         hpBar!.position.x = self.position.x
         hpBar!.position.y = self.position.y + 35
         
@@ -162,7 +163,7 @@ class Enemy: SKSpriteNode{
         
         isPoisonedTexture!.position.x = hpBar!.position.x + ((hpBar?.size.width)!/2) + textureOffset
         isPoisonedTexture!.position.y = hpBar!.position.y
-        
+        //checks if the enemy needs a new point to move towards adn rotates the texture based on the new point position
         if !isMoving {
             movePoints = GameScene.instance!.pathfindingTestEnemy!.movePoints
             
@@ -240,7 +241,7 @@ class Enemy: SKSpriteNode{
     }
     
     private func move() {
-        
+        //if attackers or bosses have a target they attack instead of moving
         if isAttacker && enemyType != .boss {
             
             if attackTarget != nil{
@@ -249,7 +250,7 @@ class Enemy: SKSpriteNode{
                 return
                 
             }else{
-                
+                //the attackers/bosses search for a possible attack target in a range around them
                 let targetPosition = seekAndDestroy()
                 if targetPosition != nil{
                     
@@ -267,7 +268,7 @@ class Enemy: SKSpriteNode{
                 }
             }
         }
-        
+        //moves to the next point in the array created by the pathfinding object, if there movePoints left
         let nextPoint = movePoints[0]
         
         setDirection(targetPoint: nextPoint)
@@ -336,7 +337,7 @@ class Enemy: SKSpriteNode{
         isStepOne.toggle()
         
     }
-    
+    //searches for a foundation plate around itself that is not a starting plate and, if found, orient itself to face it
     private func seekAndDestroy() -> CGPoint?{
         
         let foundationPlates = FoundationPlateNodes.foundationPlatesNode.children
@@ -368,7 +369,7 @@ class Enemy: SKSpriteNode{
         return nil
         
     }
-    
+    //finds the direction the enemy should move towards based on the pathfind point position
     private func setDirection(targetPoint: CGPoint) {
         
         var differenceX = targetPoint.x - self.position.x
@@ -402,7 +403,7 @@ class Enemy: SKSpriteNode{
         direction.y = differenceY
         
     }
-    
+    // runs when the enemy is killed, removes the enemy and all the extra objects from the scene and awards the player with money.
     func onDestroy() {
         
         var moneyTarget = GameScene.instance!.camera!.position
@@ -439,21 +440,7 @@ class Enemy: SKSpriteNode{
         
     }
     
-    private func createDialog()-> Dialogue{
-        
-        switch self.enemyRace{
-            
-        case .slime:
-            return SlimeMaterialObtainedDialogue()
-        case .squid:
-            return SquidMaterialObtainedDialogue()
-        case .none:
-            return SlimeMaterialObtainedDialogue()
-        }
-        
-        
-    }
-    
+    //calculates the damage the enemy recieves when hit by a player´s bullets and, if necessary, calls onDestroy()
     func getDamage(dmgValue: Int, projectile: Projectile? = nil){
         
         if projectile is PoisonProjectile{
@@ -553,7 +540,6 @@ class Enemy: SKSpriteNode{
         guard path.count > 0 else { print("Error: Path array is empty. No clear path found!"); return newMovePoints }
         
         // Create an array of actions that the player node can use to follow the path.
-        //var actions = [SKAction]()
         
         for node:GKGraphNode in path {
             if let point2d = node as? GKGraphNode2D {
@@ -562,24 +548,10 @@ class Enemy: SKSpriteNode{
                 if player.position == nextPoint {
                     continue
                 }
-                //                var duration = getDuration(pointA: player.position, pointB: nextPoint, speed: baseSpeed)
-                //                if duration <= 0.0 {
-                //                    duration = 0.1
-                //                }
-                //                print("Duration = \(duration)")
-                //                let action = SKAction.move(to: nextPoint, duration: duration)
-                //                actions.append(action)
                 
                 newMovePoints.append(nextPoint)
             }
         }
-        
-        //        // Convert those actions into a sequence action, then run it on the player node.
-        //        let sequence = SKAction.sequence(actions)
-        //        player.run(sequence, completion: { () -> Void in
-        //            // When the action completes, allow the player to move again.
-        //            self.moving = false
-        //        })
         
         return newMovePoints
     }
